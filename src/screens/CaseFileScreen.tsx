@@ -11,7 +11,7 @@ function DocumentCard({ clue, pinned, dragging }: { clue: Clue; pinned: boolean;
   return (
     <div
       className={cn(
-        'w-48 rounded-sm bg-paper p-3 text-paper-ink shadow-md',
+        'document w-48 p-3 shadow-md',
         dragging && 'rotate-2 shadow-xl',
       )}
     >
@@ -106,9 +106,10 @@ export default function CaseFileScreen() {
         <aside className="grid grid-rows-[2fr_1fr] gap-4">
           <DropZone id="reading-desk" title="Bàn đọc" hint="Kéo giấy tờ vào đây để đọc kỹ.">
             {reading ? (
-              <div className="rounded-sm bg-paper p-4 text-paper-ink">
+              <div className="document p-4">
                 <p className="text-xs font-semibold opacity-60">{reading.id}</p>
                 <h3 className="text-lg font-semibold">{reading.title}</h3>
+                <div className="my-2 h-px bg-paper-ink/30" />
                 <p className="mt-2 text-sm">{reading.description}</p>
               </div>
             ) : null}

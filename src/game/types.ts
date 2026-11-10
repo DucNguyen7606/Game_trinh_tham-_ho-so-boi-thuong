@@ -1,3 +1,5 @@
+import type { PortraitSpec } from '@/art/Portrait'
+
 // Data shapes for a case. A new case is a new folder of JSON + .ink files;
 // nothing in the engine should need to change.
 
@@ -60,6 +62,7 @@ export interface Suspect {
   role: string
   /** Key of the ink script in the case's thamvan folder, if the player can question them. */
   interrogation?: string
+  portrait?: PortraitSpec
 }
 
 export interface VerdictSlot {
@@ -79,7 +82,7 @@ export interface CaseData {
   id: string
   title: string
   intro: string
-  player: { name: string; role: string }
+  player: { name: string; role: string; portrait?: PortraitSpec }
   days: number
   actionsPerDay: number
   suspects: Suspect[]

@@ -3,6 +3,7 @@ import { Compiler, Story } from 'inkjs/full'
 import { useGame } from '@/game/store'
 import { getInkSource } from '@/game/caseLoader'
 import { Button } from '@/components/ui/button'
+import { Portrait } from '@/art/Portrait'
 
 interface Line {
   text: string
@@ -52,9 +53,13 @@ export default function InterrogationScreen() {
   }
 
   return (
-    <div className="mx-auto flex h-full max-w-3xl flex-col p-6">
-      <h2 className="text-xl font-semibold">{suspect.name}</h2>
-      <p className="text-sm text-muted-foreground">{suspect.role}</p>
+    <div className="mx-auto grid h-full max-w-5xl grid-cols-[280px_1fr] gap-8 p-6">
+      <div>
+        {suspect.portrait && <Portrait spec={suspect.portrait} size={280} />}
+        <h2 className="display mt-3 text-2xl text-amber">{suspect.name}</h2>
+        <p className="text-sm text-muted-foreground">{suspect.role}</p>
+      </div>
+      <div className="flex min-h-0 flex-col">
       <div className="mt-4 flex-1 space-y-3 overflow-auto">
         {lines.map((l, i) => (
           <p key={i} className={l.fromPlayer ? 'text-right text-primary' : ''}>
@@ -77,6 +82,7 @@ export default function InterrogationScreen() {
           </Button>
         ))}
         {choices.length === 0 && <Button onClick={() => go('desk')}>Về bàn làm việc</Button>}
+      </div>
       </div>
     </div>
   )

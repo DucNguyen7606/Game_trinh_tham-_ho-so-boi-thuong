@@ -1,4 +1,4 @@
-import { Briefcase, FolderOpen, Network, Search, Gavel } from 'lucide-react'
+import { Briefcase, FolderOpen, Network, Search, Gavel, Palette } from 'lucide-react'
 import { useGame, type Screen } from '@/game/store'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -9,6 +9,7 @@ import CaseFileScreen from '@/screens/CaseFileScreen'
 import BoardScreen from '@/screens/BoardScreen'
 import InterrogationScreen from '@/screens/InterrogationScreen'
 import VerdictScreen from '@/screens/VerdictScreen'
+import GalleryScreen from '@/screens/GalleryScreen'
 
 const nav: { screen: Screen; label: string; icon: typeof Briefcase }[] = [
   { screen: 'desk', label: 'Bàn làm việc', icon: Briefcase },
@@ -16,6 +17,7 @@ const nav: { screen: Screen; label: string; icon: typeof Briefcase }[] = [
   { screen: 'casefile', label: 'Hồ sơ', icon: FolderOpen },
   { screen: 'board', label: 'Bàn suy luận', icon: Network },
   { screen: 'verdict', label: 'Kết luận', icon: Gavel },
+  { screen: 'gallery', label: 'Thư viện hình', icon: Palette },
 ]
 
 export default function App() {
@@ -24,7 +26,7 @@ export default function App() {
   return (
     <div className="flex h-full flex-col">
       <header className="flex items-center gap-4 border-b border-border px-4 py-2">
-        <span className="font-semibold text-primary">{data.title}</span>
+        <span className="display text-lg text-amber">{data.title}</span>
         <nav className="flex gap-1">
           {nav.map(({ screen: s, label, icon: Icon }) => (
             <Button
@@ -32,7 +34,7 @@ export default function App() {
               size="sm"
               variant={screen === s ? 'secondary' : 'ghost'}
               onClick={() => go(s)}
-              className={cn(screen === s && 'text-primary')}
+              className={cn('display text-sm', screen === s && 'text-amber')}
             >
               <Icon /> {label}
             </Button>
@@ -54,6 +56,7 @@ export default function App() {
         {screen === 'board' && <BoardScreen />}
         {screen === 'interrogation' && <InterrogationScreen />}
         {screen === 'verdict' && <VerdictScreen />}
+        {screen === 'gallery' && <GalleryScreen />}
       </main>
     </div>
   )

@@ -4,6 +4,7 @@ import { useGame } from '@/game/store'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
+import { getSceneArt } from '@/game/caseLoader'
 
 export default function SceneScreen() {
   const { data, visitedZones, visitZone, inspectHotspot, inspectedHotspots, actionsLeft } = useGame()
@@ -13,6 +14,7 @@ export default function SceneScreen() {
   const zone = data.zones.find((z) => z.id === zoneId)!
   const visited = visitedZones.includes(zone.id)
   const hotspot = zone.hotspots.find((h) => h.id === selected)
+  const Art = getSceneArt(data.id, zone.id)
 
   return (
     <div className="grid h-full grid-cols-[1fr_320px]">
@@ -34,9 +36,11 @@ export default function SceneScreen() {
           ))}
         </div>
 
-        {/* Placeholder for the zone artwork; hotspots are positioned in percent so art can be dropped in later. */}
-        <div className="relative m-4 flex-1 overflow-hidden rounded-lg border border-border bg-gradient-to-b from-stone-800 to-stone-950">
-          <p className="absolute left-4 top-4 max-w-md text-sm text-muted-foreground">{zone.description}</p>
+        {/* Zone backdrop drawn in code (src/cases/<case>/scenes.tsx); hotspots are positioned in percent on top. */}
+        <div className="relative m-4 flex-1 overflow-hidden border border-border bg-background">
+          {Art && <Art />}
+          {!visited && <div className="absolute inset-0 bg-background/70" />}
+          <p className="absolute left-4 top-4 max-w-md bg-background/80 px-2 py-1 text-sm text-muted-foreground">{zone.description}</p>
           {!visited ? (
             <div className="absolute inset-0 flex items-center justify-center">
               <Button disabled={actionsLeft <= 0} onClick={() => visitZone(zone.id)}>
@@ -53,10 +57,10 @@ export default function SceneScreen() {
                   inspectHotspot(h.id, h.clueId)
                 }}
                 className={cn(
-                  'absolute -translate-x-1/2 -translate-y-1/2 rounded-full border px-3 py-1 text-xs transition',
+                  'display absolute -translate-x-1/2 -translate-y-1/2 border px-3 py-1 text-xs transition',
                   inspectedHotspots.includes(h.id)
-                    ? 'border-border bg-stone-900/80 text-muted-foreground'
-                    : 'border-primary/60 bg-stone-900/80 text-primary hover:bg-primary/20',
+                    ? 'border-border bg-background/80 text-muted-foreground'
+                    : 'border-amber bg-background/80 text-amber hover:bg-amber/20',
                 )}
               >
                 {h.label}

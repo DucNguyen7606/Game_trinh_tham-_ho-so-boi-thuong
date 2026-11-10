@@ -2,6 +2,7 @@ import { MessageSquare } from 'lucide-react'
 import { useGame } from '@/game/store'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Portrait } from '@/art/Portrait'
 
 export default function DeskScreen() {
   const { data, startInterrogation, endDay, actionsLeft, day, log } = useGame()
@@ -9,9 +10,11 @@ export default function DeskScreen() {
   return (
     <div className="grid h-full grid-cols-[2fr_1fr] gap-4 overflow-auto p-6">
       <section className="flex flex-col gap-4">
-        <Card>
+        <Card className="flex items-center gap-2 overflow-hidden">
+          {data.player.portrait && <Portrait spec={data.player.portrait} size={120} className="shrink-0" />}
+          <div>
           <CardHeader>
-            <CardTitle className="text-xl">{data.title}</CardTitle>
+            <CardTitle className="display text-2xl text-amber">{data.title}</CardTitle>
             <CardDescription>
               {data.player.name} · {data.player.role}
             </CardDescription>
@@ -19,12 +22,15 @@ export default function DeskScreen() {
           <CardContent>
             <p>{data.intro}</p>
           </CardContent>
+          </div>
         </Card>
 
-        <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">Những người liên quan</h2>
+        <h2 className="display text-muted-foreground">Những người liên quan</h2>
         <div className="grid grid-cols-2 gap-3">
           {data.suspects.map((s) => (
-            <Card key={s.id}>
+            <Card key={s.id} className="flex overflow-hidden">
+              {s.portrait && <Portrait spec={s.portrait} size={110} className="shrink-0" />}
+              <div className="min-w-0">
               <CardHeader>
                 <CardTitle>
                   {s.name}, {s.age}
@@ -40,6 +46,7 @@ export default function DeskScreen() {
                   <span className="text-xs text-muted-foreground">Chưa hỏi được ở bản khung này</span>
                 )}
               </CardContent>
+              </div>
             </Card>
           ))}
         </div>

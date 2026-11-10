@@ -49,6 +49,18 @@ src/
       thamvan/*.ink  Kịch bản hỏi chuyện từng người
 ```
 
+## Hình ảnh
+
+Toàn bộ hình được vẽ bằng code (SVG), theo một phong cách chung: đồ họa phẳng, góc cạnh, nhân vật nhận ra bằng dáng, tóc, quần áo và một món đồ; bảng màu Sài Gòn đêm mưa với màu ấm dành cho ánh đèn, lửa và vật chứng.
+
+- `src/art/palette.ts`: bảng màu dùng chung (giữ khớp với biến màu trong `src/index.css`).
+- `src/art/Portrait.tsx`: chân dung nhân vật theo tham số (màu da, kiểu tóc, dáng người, trang phục, phụ kiện, tuổi, nền).
+- `src/art/primitives.tsx`: khối dựng cảnh (mưa, quầng đèn, mái tôn, vết cháy, vũng nước).
+- `src/cases/<vụ>/scenes.tsx`: hình nền từng khu hiện trường, khung 1600 x 900; điểm bấm trong `case.json` tính theo phần trăm của khung này.
+- Màn hình **Thư viện hình** trong game: xem mọi nhân vật, hiện trường, giấy tờ, bảng màu; có bộ tạo nhân vật, chọn xong bấm "Chép JSON" rồi dán vào trường `portrait` của nhân vật trong `case.json`.
+
+Font đi kèm game (không cần mạng): Barlow Condensed cho tiêu đề, Be Vietnam Pro cho nội dung, IBM Plex Mono cho giấy tờ.
+
 ## Thêm hoặc sửa vụ án
 
 Mọi nội dung nằm trong `src/cases/<tên-vụ>/case.json`: khu hiện trường và các điểm bấm, manh mối, phong bì, câu hỏi trên bàn suy luận, ô kết luận và các kết thúc. Sửa JSON là đủ, không cần đụng code.
@@ -59,7 +71,6 @@ Thêm component shadcn/ui khác: `npx shadcn@latest add <tên>` (cấu hình n�
 
 ## Còn thiếu ở bản khung
 
-- Ảnh hiện trường và chân dung nhân vật (đang là nền màu, điểm bấm đặt theo phần trăm để thay ảnh vào sau).
 - Lưu và tải game.
 - Hỏi chuyện Ngân và Huy, cảnh ép Huy đưa camera.
 - Âm thanh, menu chính, Steam.

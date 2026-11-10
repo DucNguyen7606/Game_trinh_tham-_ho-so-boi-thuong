@@ -26,11 +26,11 @@ function ClueNode({ data }: NodeProps<Node<ClueNodeData>>) {
   const clue = clueById(caseData, data.clueId)
   if (!clue) return null
   return (
-    <div className="w-52 rounded-sm bg-paper p-2 text-paper-ink shadow-md">
+    <div className="document w-52 p-2 shadow-md">
       <p className="text-[10px] font-semibold uppercase opacity-60">{clue.id}</p>
       <p className="text-sm font-semibold leading-tight">{clue.title}</p>
       <p className="mt-1 text-xs opacity-80">{clue.description}</p>
-      <Handle type="source" position={Position.Right} className="!size-3 !bg-red-700" />
+      <Handle type="source" position={Position.Right} className="!size-3 !bg-string" />
     </div>
   )
 }
@@ -55,9 +55,9 @@ function QuestionNode({ data }: NodeProps<Node<QuestionNodeData>>) {
 
   return (
     <div className={cn('w-72 rounded-lg border bg-card p-3 shadow-lg', solved ? 'border-primary' : 'border-border')}>
-      <Handle type="target" position={Position.Left} className="!size-3 !bg-red-700" />
+      <Handle type="target" position={Position.Left} className="!size-3 !bg-string" />
       <p className="text-xs text-muted-foreground">Câu {q.number}</p>
-      <p className="font-semibold">{q.prompt}</p>
+      <p className="display text-lg leading-tight">{q.prompt}</p>
       <div className="nodrag mt-2 flex flex-col gap-1">
         {q.options.map((o) => (
           <button
@@ -135,7 +135,7 @@ export default function BoardScreen() {
           id: `${c}->${qId}`,
           source: `clue-${c}`,
           target: `q-${qId}`,
-          style: { stroke: '#b91c1c', strokeWidth: 2 },
+          style: { stroke: 'var(--string)', strokeWidth: 2.5 },
         })),
       ),
     [answers],

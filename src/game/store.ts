@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import type { CaseData } from './types'
 import { cases } from './caseLoader'
 
-export type Screen = 'desk' | 'scene' | 'casefile' | 'board' | 'interrogation' | 'verdict'
+export type Screen = 'desk' | 'scene' | 'casefile' | 'board' | 'interrogation' | 'verdict' | 'gallery'
 
 export interface BoardAnswer {
   optionId?: string

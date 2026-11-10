@@ -2,23 +2,27 @@
 
 /* shadcn/ui tokens. The game uses one dark "night office" theme. */
 :root {
-  --background: oklch(0.2 0.01 60);
-  --foreground: oklch(0.94 0.01 80);
-  --card: oklch(0.25 0.012 60);
-  --card-foreground: oklch(0.94 0.01 80);
-  --primary: oklch(0.78 0.12 75);
-  --primary-foreground: oklch(0.2 0.01 60);
-  --secondary: oklch(0.32 0.012 60);
-  --secondary-foreground: oklch(0.94 0.01 80);
-  --muted: oklch(0.3 0.01 60);
-  --muted-foreground: oklch(0.72 0.01 80);
-  --accent: oklch(0.34 0.015 60);
-  --accent-foreground: oklch(0.96 0.01 80);
-  --destructive: oklch(0.6 0.2 25);
-  --border: oklch(0.38 0.01 60);
-  --ring: oklch(0.78 0.12 75);
-  --paper: oklch(0.93 0.02 85);
-  --paper-ink: oklch(0.25 0.02 60);
+  /* Saigon night palette; keep in sync with src/art/palette.ts */
+  --background: #12151c;
+  --foreground: #e6dcc6;
+  --card: #1b202b;
+  --card-foreground: #e6dcc6;
+  --primary: #b4552e;
+  --primary-foreground: #f3ece0;
+  --secondary: #222836;
+  --secondary-foreground: #e6dcc6;
+  --muted: #222836;
+  --muted-foreground: #8a93a6;
+  --accent: #2b3242;
+  --accent-foreground: #f3ece0;
+  --destructive: #a3302a;
+  --border: #363e50;
+  --ring: #d9a03f;
+  --paper: #d9cdb2;
+  --paper-ink: #2a2620;
+  --amber: #d9a03f;
+  --teal: #3e7e84;
+  --string: #a3302a;
 }
 
 @theme inline {
@@ -39,6 +43,12 @@
   --color-ring: var(--ring);
   --color-paper: var(--paper);
   --color-paper-ink: var(--paper-ink);
+  --color-amber: var(--amber);
+  --color-teal: var(--teal);
+  --color-string: var(--string);
+  --font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --font-sans: 'Be Vietnam Pro', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', Consolas, monospace;
 }
 
 html, body, #root {
@@ -48,6 +58,25 @@ html, body, #root {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-family: var(--font-sans);
   user-select: none;
+}
+
+/* Display type: condensed caps for headings and labels, like stencilled case files. */
+.display {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Paper documents: aged paper, typewriter text, a clipped corner. */
+.document {
+  background: var(--paper);
+  color: var(--paper-ink);
+  font-family: var(--font-mono);
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
 }
