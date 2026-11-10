@@ -26,16 +26,16 @@ export default function App() {
 
   return (
     <div className="flex h-full flex-col">
-      <header className="flex items-center gap-4 border-b-2 border-brass/50 bg-background/80 px-4 py-2 shadow-lg">
-        <span className="title text-lg text-amber">{data.title}</span>
-        <nav className="flex gap-1">
+      <header className="flex items-center gap-3 border-b-2 border-brass/50 bg-background/80 px-4 py-2 shadow-lg">
+        <span className="title shrink-0 whitespace-nowrap text-lg text-amber">{data.title}</span>
+        <nav className="flex gap-0.5">
           {nav.map(({ screen: s, label, icon: Icon }) => (
             <Button
               key={s}
               size="sm"
               variant={screen === s ? 'secondary' : 'ghost'}
               onClick={() => go(s)}
-              className={cn('display text-sm', screen === s && 'text-amber')}
+              className={cn('display px-2.5 text-sm', screen === s && 'text-amber')}
             >
               <Icon /> {label}
             </Button>
