@@ -3,7 +3,7 @@ import hoSoBoiThuong from '@/cases/ho-so-boi-thuong/case.json'
 import { sceneArt as hoSoBoiThuongScenes } from '@/cases/ho-so-boi-thuong/scenes'
 import { closeups as hoSoBoiThuongCloseups } from '@/cases/ho-so-boi-thuong/closeups'
 import { documents as hoSoBoiThuongDocuments } from '@/cases/ho-so-boi-thuong/documents'
-import { reconstruction as hoSoBoiThuongReconstruction } from '@/cases/ho-so-boi-thuong/reconstruction'
+import { reconstruction as hoSoBoiThuongReconstruction, theoryPanels as hoSoBoiThuongTheory } from '@/cases/ho-so-boi-thuong/reconstruction'
 import type { ReconstructionPanel } from './types'
 
 // Interrogation scripts are plain .ink text, compiled at runtime by inkjs.
@@ -47,8 +47,13 @@ const reconstructions: Record<string, ReconstructionPanel[]> = {
   'ho-so-boi-thuong': hoSoBoiThuongReconstruction,
 }
 
-export function getReconstruction(caseId: string) {
-  return reconstructions[caseId] ?? []
+const theories: Record<string, (picks: Record<string, string>) => ReconstructionPanel[]> = {
+  'ho-so-boi-thuong': hoSoBoiThuongTheory,
+}
+
+/** The player's verdict as a story, the evidence against wrong picks, then the truth. */
+export function getReconstruction(caseId: string, picks: Record<string, string> = {}) {
+  return [...(theories[caseId]?.(picks) ?? []), ...(reconstructions[caseId] ?? [])]
 }
 
 export function getInkSource(caseId: string, key: string): string | undefined {

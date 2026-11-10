@@ -111,6 +111,8 @@ export type DayLimits = Record<ActionKind, number>
 
 /** One step of the reconstruction shown after the verdict. */
 export interface ReconstructionPanel {
+  /** theory = the player's own verdict told as a story; refute = evidence against a wrong pick; truth = what happened. */
+  kind?: 'theory' | 'refute' | 'truth'
   time: string
   title: string
   text: string

@@ -24,12 +24,12 @@ export default function VerdictScreen() {
   const allSolved = solvedQuestions.length === data.questions.length
   const complete = data.verdict.every((v) => picks[v.id])
   const ending = data.endings.find((e) => e.id === endingId)
-  const panels = getReconstruction(data.id)
+  const panels = getReconstruction(data.id, picks)
   // After signing, the case is replayed panel by panel; null = show the ending card.
   const [step, setStep] = useState<number | null>(null)
 
   if (ending && step !== null && panels[step]) {
-    return <Reconstruction step={step} setStep={setStep} />
+    return <Reconstruction step={step} setStep={setStep} picks={picks} />
   }
 
   if (ending) {
@@ -96,14 +96,16 @@ export default function VerdictScreen() {
 }
 
 /** "Dựng lại vụ án": the true events, one illustrated panel at a time, like a case being read back. */
-function Reconstruction({ step, setStep }: { step: number; setStep: (n: number | null) => void }) {
+function Reconstruction({ step, setStep, picks }: { step: number; setStep: (n: number | null) => void; picks: Record<string, string> }) {
   const { data, solvedQuestions } = useGame()
-  const panels = getReconstruction(data.id)
+  const panels = getReconstruction(data.id, picks)
   const panel = panels[step]
   const last = step === panels.length - 1
   const next = () => setStep(last ? null : step + 1)
   const prev = () => setStep(Math.max(0, step - 1))
   const order = questionOrder(data, solvedQuestions)
+  const truthNo = panels.slice(0, step + 1).filter((p) => p.kind === 'truth').length
+  const kindLabel = panel.kind === 'theory' ? 'Giả thuyết của bạn' : panel.kind === 'refute' ? 'Lật lại hồ sơ' : `Sự thật · diễn biến ${truthNo}`
   const solved = panel.questionId ? solvedQuestions.includes(panel.questionId) : undefined
   const qNo = panel.questionId ? order.indexOf(panel.questionId) + 1 : 0
 
@@ -126,7 +128,13 @@ function Reconstruction({ step, setStep }: { step: number; setStep: (n: number |
       </div>
 
       <div className="grid grid-cols-[minmax(0,2.7fr)_minmax(280px,1fr)] items-start gap-6">
-        <figure key={step} className="relative aspect-video overflow-hidden border-[6px] border-[#f3e4c4] shadow-[0_14px_40px_rgb(0_0_0/0.55)] [animation:fadeIn_.4s_ease]">
+        <figure
+          key={step}
+          className={cn(
+            'relative aspect-video overflow-hidden border-[6px] shadow-[0_14px_40px_rgb(0_0_0/0.55)] [animation:fadeIn_.4s_ease]',
+            panel.kind === 'theory' ? 'border-dashed border-[#9fb4c8]' : panel.kind === 'refute' ? 'border-[#b23a2e]' : 'border-[#f3e4c4]',
+          )}
+        >
           <div className="absolute inset-0" style={{ filter: 'sepia(0.25) contrast(1.05)' }}>
             <panel.Art />
           </div>
@@ -134,7 +142,7 @@ function Reconstruction({ step, setStep }: { step: number; setStep: (n: number |
         </figure>
 
         <div className="document space-y-3 p-5">
-          <p className="text-[10px] uppercase tracking-widest opacity-60">Diễn biến {step + 1}</p>
+          <p className="text-[10px] uppercase tracking-widest opacity-60">{kindLabel}</p>
           <h3 className="title text-2xl">{panel.title}</h3>
           <p className="text-sm leading-relaxed">{panel.text}</p>
           {solved !== undefined && (

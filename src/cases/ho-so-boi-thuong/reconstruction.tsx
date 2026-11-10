@@ -1,5 +1,7 @@
 import { P } from '@/art/primitives'
-import { accent, ink, shade } from '@/art/palette'
+import { accent, clothColors, ink, shade } from '@/art/palette'
+import { Portrait, type PortraitSpec } from '@/art/Portrait'
+import caseData from './case.json'
 import { sceneArt } from './scenes'
 import { documents } from './documents'
 import type { ReconstructionPanel } from '@/game/types'
@@ -126,7 +128,8 @@ const THINH = '#8a2f2a'
 const BAO = '#e8e2d4'
 const RO = '#5d6b3a'
 
-export const reconstruction: ReconstructionPanel[] = [
+export const reconstruction: ReconstructionPanel[] = (
+  [
   {
     time: 'Tháng 6/2025',
     title: 'Kho đầy vải giả',
@@ -229,4 +232,178 @@ export const reconstruction: ReconstructionPanel[] = [
     questionId: 'q5',
     Art: () => <OnDesk ids={['P10', 'P12']} />,
   },
-]
+  ] as ReconstructionPanel[]
+).map((p) => ({ ...p, kind: 'truth' as const }))
+
+// ---------------------------------------------------------------------------
+// The player's verdict told as a story first, then each wrong pick taken apart
+// with the documents that disprove it. Truth panels follow.
+
+type Picks = Record<string, string>
+const suspect = (id: string) => caseData.suspects.find((s) => s.id === id)!
+const colorOf = (id: string) => clothColors[suspect(id).portrait.outfitColor as keyof typeof clothColors]
+
+/** A suspect's portrait pinned beside the documents the theory leans on. */
+function Pinned({ who, ids }: { who: string; ids: string[] }) {
+  return (
+    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[radial-gradient(circle_at_40%_30%,#3b4250,#15161b_75%)] p-6">
+      <div className="shrink-0 bg-[#f3e4c4] p-1.5 shadow-lg" style={{ rotate: '-3deg' }}>
+        <Portrait spec={suspect(who).portrait as PortraitSpec} size={190} />
+        <p className="pt-1 text-center font-mono text-xs text-[#2d1f18]">{suspect(who).name}</p>
+      </div>
+      {ids.map((id, i) => {
+        const Doc = documents[id]
+        return (
+          <div key={id} className="w-[290px] shrink-0" style={{ rotate: `${i % 2 ? -2 : 2}deg` }}>
+            <Doc />
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
+/** Big stamp across a panel. */
+const PanelStamp = ({ text, color }: { text: string; color: string }) => (
+  <div
+    className="display pointer-events-none absolute right-6 top-6 border-4 px-4 py-1 text-3xl opacity-85"
+    style={{ color, borderColor: color, rotate: '-8deg' }}
+  >
+    {text}
+  </div>
+)
+
+const arsonTheory: Record<string, { text: string; place: string; x: number; y: number }> = {
+  thinh: {
+    text: 'Theo bạn, chính ông Thịnh đốt kho. Kho đã mua bảo hiểm 4 tỷ, ngân hàng đòi kiểm kê, nên ông lẻn vào lúc nửa đêm và châm lửa ở văn phòng để lấy tiền bồi thường.',
+    place: 'van-phong', x: 600, y: 790,
+  },
+  bao: {
+    text: 'Theo bạn, Bảo là người châm lửa. Anh có chìa, quen ông Rô, và có lý do để sổ sách biến mất trước buổi kiểm kê.',
+    place: 'van-phong', x: 600, y: 790,
+  },
+  ngan: {
+    text: 'Theo bạn, Ngân đốt kho để trả thù vì bị đuổi việc. Cô từng viết "cái kho đó cháy cho rồi", và chiếc Wave đứng tên cô xuất hiện trong hẻm đêm đó.',
+    place: 'san-sau', x: 620, y: 760,
+  },
+  huy: {
+    text: 'Theo bạn, anh Huy đốt kho để ép ông Thịnh bán đất. Anh muốn mua mảnh đất 9 tỷ và bị từ chối, tiệm của anh lại sát vách.',
+    place: 'san-sau', x: 620, y: 760,
+  },
+}
+
+const fraudTheory: Record<string, { text: string; docs: string[] }> = {
+  thinh: { text: 'Theo bạn, ông Thịnh là người khai khống: nâng mức bảo hiểm lên 4 tỷ rồi kê 412 cuộn vải không có thật.', docs: ['P1', 'P2'] },
+  bao: { text: 'Theo bạn, Bảo tự mình khai khống. Anh lập bảng kê hàng hóa và giữ toàn bộ sổ sách.', docs: ['P2'] },
+  ngan: { text: 'Theo bạn, Ngân dựng hồ sơ khống trước khi nghỉ việc để hại ông chủ cũ.', docs: ['X1'] },
+  huy: { text: 'Theo bạn, anh Huy đứng sau hồ sơ khống để làm kho mất giá rồi mua lại đất.', docs: ['X2'] },
+}
+
+const arsonRefute: Record<string, { text: string; docs: string[] }> = {
+  thinh: { text: 'Ông Thịnh đã nhắn hủy "vụ 20" từ tối 13/7 và muốn chở hàng thật về cho ngân hàng kiểm kê. Đêm cháy, chính anh Huy gọi báo ông mới biết, lúc 02:45.', docs: ['P9', 'P13'] },
+  ngan: { text: 'Từ 00:58 đến 03:05 Ngân đang phát trực tiếp với hơn 200 người xem. Chiếc Wave đứng tên cô đã bán cho "anh Bảo" từ tháng 6, chưa sang tên.', docs: ['X1', 'P11'] },
+  huy: { text: 'Anh Huy không có chìa, mà ổ khóa không bị phá. Camera của chính tiệm anh ghi lại chiếc Wave che biển số, và anh là người gọi báo ông Thịnh.', docs: ['P6', 'P13'] },
+}
+
+const fraudRefute: Record<string, { text: string; docs: string[] }> = {
+  bao: { text: 'Người ký phụ lục nâng mức bảo hiểm là ông Thịnh, và tin nhắn "vụ 20" cho thấy ông chỉ đạo. Bảo làm theo, nhưng phần anh giấu là 620 triệu rút qua Hưng Long.', docs: ['P1', 'P9'] },
+  ngan: { text: 'Ngân nghỉ việc từ cuối tháng 5. Phụ lục bảo hiểm ký ngày 03/6 do ông Thịnh đứng tên, cô không chạm được vào giấy tờ nào.', docs: ['P1'] },
+  huy: { text: 'Anh Huy không dính gì tới hợp đồng bảo hiểm. Thư hỏi mua đất của anh đến trước vụ cháy và bị từ chối thẳng.', docs: ['P1', 'X2'] },
+}
+
+export function theoryPanels(picks: Picks): ReconstructionPanel[] {
+  const panels: ReconstructionPanel[] = []
+  const fraud = fraudTheory[picks.fraud]
+  const arson = arsonTheory[picks.arson]
+  const pay = picks.decision === 'pay'
+
+  if (fraud)
+    panels.push({
+      kind: 'theory',
+      time: 'Giả thuyết của bạn',
+      title: `Kẻ khai khống: ${suspect(picks.fraud).name}`,
+      text: fraud.text,
+      Art: () => (
+        <>
+          <Pinned who={picks.fraud} ids={fraud.docs} />
+          <PanelStamp text="Giả thuyết" color="#9fb4c8" />
+        </>
+      ),
+    })
+  if (arson)
+    panels.push({
+      kind: 'theory',
+      time: 'Giả thuyết của bạn',
+      title: `Người châm lửa: ${suspect(picks.arson).name}`,
+      text: arson.text,
+      Art: () => (
+        <>
+          <Staged zone={arson.place}>
+            <rect width="1600" height="900" fill="#3b4a66" opacity="0.35" style={{ mixBlendMode: 'color' }} />
+            <Person x={arson.x} y={arson.y} h={360} color={colorOf(picks.arson)} pose="crouch" hold="can" />
+            <text x={arson.x + 200} y={arson.y - 360} textAnchor="middle" fontSize="120" fontWeight="700" fill="#9fb4c8" opacity="0.5" fontFamily="Bitter, serif">?</text>
+          </Staged>
+          <PanelStamp text="Giả thuyết" color="#9fb4c8" />
+        </>
+      ),
+    })
+  panels.push({
+    kind: 'theory',
+    time: 'Đề xuất của bạn',
+    title: pay ? 'Chi trả 4 tỷ' : 'Từ chối và chuyển hồ sơ cho công an',
+    text: pay
+      ? 'Bạn đề xuất công ty chi trả. Theo bạn, kho cháy thật, hàng mất thật, và người chủ xứng đáng được bồi thường.'
+      : 'Bạn từ chối chi trả và chuyển toàn bộ hồ sơ cho công an điều tra.',
+    Art: () => (
+      <>
+        <OnDesk ids={pay ? ['P2', 'P4'] : ['P1', 'P3']} />
+        <PanelStamp text={pay ? 'Chi trả' : 'Từ chối'} color={pay ? '#3f8a7e' : '#b23a2e'} />
+      </>
+    ),
+  })
+
+  // Take apart each wrong pick with the evidence that disproves it.
+  const wrong: ReconstructionPanel[] = []
+  const fr = fraudRefute[picks.fraud]
+  if (fr)
+    wrong.push({
+      kind: 'refute',
+      time: 'Lật lại',
+      title: `${suspect(picks.fraud).name} không phải kẻ khai khống`,
+      text: fr.text,
+      Art: () => (
+        <>
+          <OnDesk ids={fr.docs} />
+          <PanelStamp text="Không khớp" color="#b23a2e" />
+        </>
+      ),
+    })
+  const ar = arsonRefute[picks.arson]
+  if (ar)
+    wrong.push({
+      kind: 'refute',
+      time: 'Lật lại',
+      title: `${suspect(picks.arson).name} không châm lửa`,
+      text: ar.text,
+      Art: () => (
+        <>
+          <OnDesk ids={ar.docs} />
+          <PanelStamp text="Không khớp" color="#b23a2e" />
+        </>
+      ),
+    })
+  if (pay)
+    wrong.push({
+      kind: 'refute',
+      time: 'Lật lại',
+      title: 'Hàng hóa không hề mất',
+      text: 'Vải thật đã được chở sang kho Long An từ cuối tháng 6. Thứ cháy ở Bình Tân phần lớn là lõi giấy bọc vải. Chi 4 tỷ là trả tiền cho một vụ gian lận.',
+      Art: () => (
+        <>
+          <OnDesk ids={['P5', 'P2']} />
+          <PanelStamp text="Không khớp" color="#b23a2e" />
+        </>
+      ),
+    })
+  return [...panels, ...wrong]
+}
