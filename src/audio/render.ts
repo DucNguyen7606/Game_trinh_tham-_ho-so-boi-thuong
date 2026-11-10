@@ -10,10 +10,8 @@ export async function renderTheme(id: ThemeId, seconds: number, seed = 1) {
   const out = mixer.out(mixer.music, id === 'interrogation' ? 0.18 : 0.32)
   const theme = THEMES[id]
   const r = rng(seed)
-  const stop = theme.ambience?.(out, 0)
   const barLen = (60 / theme.bpm) * theme.beats
   for (let bar = 0, t = 0.05; t < seconds; bar++, t += barLen) theme.bar(out, t, bar, r)
-  stop?.(seconds - 0.5)
   // Fade the end of the preview.
   for (const f of out.faders) {
     f.gain.setValueAtTime(theme.level ?? 1, 0)

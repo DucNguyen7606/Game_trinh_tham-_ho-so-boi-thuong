@@ -64,14 +64,14 @@ Toàn bộ nhạc và hiệu ứng được tổng hợp bằng Web Audio API ng
 
 | Màn hình | Chủ đề nhạc |
 | --- | --- |
-| Bàn làm việc, Hồ sơ, Bàn suy luận | Jazz noir: bass đi bộ, chổi trống, Rhodes, sax khói thuốc, thỉnh thoảng đàn tranh đáp lại, mưa nhỏ ngoài cửa sổ |
-| Hiện trường | Mưa đêm Sài Gòn: tiếng mưa, xe máy xa xa, pad tối, đàn tranh rải và nhấn, đàn bầu luyến |
+| Bàn làm việc, Hồ sơ, Bàn suy luận | Lo-fi hip-hop: Rhodes, sub bass, trống nhẹ, đàn tranh điểm xuyết |
+| Hiện trường | Lo-fi trầm hơn, thưa hơn: Rhodes, pad tối, trống nhẹ, đàn tranh và đàn bầu luyến |
 | Thẩm vấn | Căng thẳng hiện đại: ostinato synth, nhịp tim, đồng hồ tích tắc, đàn bầu trượt xuống |
 | Kết luận | Màu Việt: đàn bầu hát giai điệu ngũ cung, đàn tranh rải, pad ấm |
 
 Hiệu ứng gắn tự động theo trạng thái game (không phải sửa từng màn hình): chụp ảnh khi tìm manh mối ở hiện trường, nhặt và thả giấy khi kéo hồ sơ, ghim, lật trang, kéo và nối dây đỏ, cắt dây, xé phong bì khi mở khoá, suy luận đúng / sai / thiếu chứng cứ, bước chân khi vào khu, đóng dấu khi qua ngày, gõ phím khi chọn lời thoại.
 
-- `themes.ts`: 4 chủ đề nhạc. `instruments.ts`: đàn tranh, đàn bầu, bass, Rhodes, sax, pad, trống. `sfx.ts`: hiệu ứng.
+- `themes.ts`: 4 chủ đề nhạc. `instruments.ts`: đàn tranh, đàn bầu, bass, Rhodes, pad, trống. `sfx.ts`: hiệu ứng.
 - `bindings.ts`: nối âm thanh với store của game. `AudioControls.tsx`: nút loa trên thanh trên cùng (âm lượng nhạc, hiệu ứng, tắt tiếng; tự nhớ giữa các lần chơi).
 - Phòng thu: khi `npm run dev` đang chạy, mở `http://localhost:5173/audio-lab.html` trong trình duyệt để nghe thử từng bản nhạc, từng hiệu ứng và tải về dạng WAV.
 

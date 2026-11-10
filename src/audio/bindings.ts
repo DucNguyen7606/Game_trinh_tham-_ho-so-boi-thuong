@@ -9,10 +9,10 @@ import './settings'
 import type { ThemeId } from './themes'
 
 const THEME_FOR: Record<Screen, ThemeId> = {
-  desk: 'noir',
-  casefile: 'noir',
-  board: 'noir',
-  scene: 'rain',
+  desk: 'desk',
+  casefile: 'desk',
+  board: 'desk',
+  scene: 'scene',
   interrogation: 'interrogation',
   verdict: 'verdict',
 }

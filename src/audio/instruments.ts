@@ -245,44 +245,6 @@ export function pad(o: Out, t: number, midis: number[], dur: number, gain = 0.05
   toOut(g, o, 0)
 }
 
-/** Breathy, smoky saxophone-ish lead for the noir theme. */
-export function sax(o: Out, t: number, midi: number, dur: number, gain = 0.07, scoop = true) {
-  const { ctx } = o
-  const f = midiToFreq(midi)
-  const osc = ctx.createOscillator()
-  osc.type = 'sawtooth'
-  osc.frequency.setValueAtTime(scoop ? f * 0.97 : f, t)
-  osc.frequency.exponentialRampToValueAtTime(f, t + 0.08)
-  const lfo = ctx.createOscillator()
-  lfo.frequency.value = 5
-  const ld = ctx.createGain()
-  ld.gain.setValueAtTime(0, t)
-  ld.gain.linearRampToValueAtTime(dur > 0.6 ? 18 : 0, t + Math.min(dur, 0.9))
-  lfo.connect(ld).connect(osc.detune)
-  const lp = filter(ctx, 'lowpass', 1400, 1)
-  lp.frequency.setValueAtTime(700, t)
-  lp.frequency.linearRampToValueAtTime(2000, t + 0.1)
-  lp.frequency.exponentialRampToValueAtTime(1100, t + dur)
-  const formant = filter(ctx, 'peaking', 1100, 1.5)
-  formant.gain.value = 6
-  const g = ctx.createGain()
-  g.gain.setValueAtTime(0.0001, t)
-  g.gain.linearRampToValueAtTime(gain, t + 0.05)
-  g.gain.setValueAtTime(gain * 0.85, t + dur - 0.05)
-  g.gain.exponentialRampToValueAtTime(0.0001, t + dur + 0.15)
-  // Breath noise riding along with the tone.
-  const br = noise(ctx, t, dur + 0.2)
-  const bg = ctx.createGain()
-  bg.gain.value = 0.08
-  br.connect(filter(ctx, 'bandpass', 2500, 1)).connect(bg).connect(g)
-  osc.connect(lp).connect(formant).connect(g)
-  toOut(g, o, 0.15)
-  for (const s of [osc, lfo]) {
-    s.start(t)
-    s.stop(t + dur + 0.2)
-  }
-}
-
 /** Filtered saw pulse for tense ostinatos. */
 export function pulseSynth(o: Out, t: number, midi: number, dur: number, gain = 0.1, open = 1) {
   const { ctx } = o
@@ -326,28 +288,57 @@ export function bell(o: Out, t: number, midi: number, gain = 0.08, decay = 2.5, 
 
 // ---------------------------------------------------------------- percussion
 
-export function brush(o: Out, t: number, gain = 0.05, len = 0.18) {
+/** Round sine sub bass with a soft attack. */
+export function subBass(o: Out, t: number, midi: number, dur: number, gain = 0.2) {
   const { ctx } = o
-  const src = noise(ctx, t, len + 0.1)
-  const bp = filter(ctx, 'bandpass', 3500, 0.6)
+  const osc = ctx.createOscillator()
+  osc.frequency.value = midiToFreq(midi)
   const g = ctx.createGain()
   g.gain.setValueAtTime(0.0001, t)
-  g.gain.linearRampToValueAtTime(gain, t + len * 0.35)
-  g.gain.exponentialRampToValueAtTime(0.0001, t + len)
-  src.connect(bp).connect(g)
-  toOut(g, o, -0.2)
+  g.gain.linearRampToValueAtTime(gain, t + 0.02)
+  g.gain.setValueAtTime(gain, t + dur * 0.7)
+  g.gain.exponentialRampToValueAtTime(0.0001, t + dur)
+  osc.connect(g)
+  toOut(g, o, 0)
+  osc.start(t)
+  osc.stop(t + dur + 0.05)
 }
 
-export function ride(o: Out, t: number, gain = 0.035) {
+/** Dusty, soft snare: noise body plus a short tone. */
+export function snare(o: Out, t: number, gain = 0.15) {
   const { ctx } = o
-  const src = noise(ctx, t, 0.5)
-  const hp = filter(ctx, 'highpass', 6500)
-  const pk = filter(ctx, 'peaking', 9000, 3)
-  pk.gain.value = 8
-  const g = env(ctx, t, gain, 0.002, 0.45)
-  src.connect(hp).connect(pk).connect(g)
-  toOut(g, o, 0.3)
+  const src = noise(ctx, t, 0.25)
+  const g = env(ctx, t, gain, 0.002, 0.18)
+  src.connect(filter(ctx, 'bandpass', 1800, 0.7)).connect(filter(ctx, 'lowpass', 5000)).connect(g)
+  toOut(g, o, 0.05)
+  const osc = ctx.createOscillator()
+  osc.frequency.setValueAtTime(220, t)
+  osc.frequency.exponentialRampToValueAtTime(160, t + 0.08)
+  const og = env(ctx, t, gain * 0.6, 0.002, 0.09)
+  osc.connect(og)
+  toOut(og, o, 0)
+  osc.start(t)
+  osc.stop(t + 0.15)
 }
+
+/** Side-stick click. */
+export function rim(o: Out, t: number, gain = 0.06) {
+  const { ctx } = o
+  const src = noise(ctx, t, 0.05)
+  const g = env(ctx, t, gain, 0.001, 0.04)
+  src.connect(filter(ctx, 'bandpass', 2400, 5)).connect(g)
+  toOut(g, o, 0.1)
+}
+
+/** Closed hi-hat, kept dark so it sits back in the mix. */
+export function hat(o: Out, t: number, gain = 0.03) {
+  const { ctx } = o
+  const src = noise(ctx, t, 0.08)
+  const g = env(ctx, t, gain, 0.001, 0.05)
+  src.connect(filter(ctx, 'highpass', 6000)).connect(filter(ctx, 'lowpass', 9000)).connect(g)
+  toOut(g, o, 0.25)
+}
+
 
 export function kick(o: Out, t: number, gain = 0.4, low = 42) {
   const { ctx } = o
@@ -369,20 +360,6 @@ export function tick(o: Out, t: number, tock = false, gain = 0.05) {
   const g = env(ctx, t, gain, 0.001, 0.025)
   src.connect(bp).connect(g)
   toOut(g, o, tock ? -0.3 : 0.3)
-}
-
-/** Low distant rumble, used for thunder over the city. */
-export function rumble(o: Out, t: number, dur = 4, gain = 0.25) {
-  const { ctx } = o
-  const src = noise(ctx, t, dur)
-  const lp = filter(ctx, 'lowpass', 140, 0.8)
-  const g = ctx.createGain()
-  g.gain.setValueAtTime(0.0001, t)
-  g.gain.linearRampToValueAtTime(gain, t + 0.4)
-  g.gain.linearRampToValueAtTime(gain * 0.5, t + dur * 0.4)
-  g.gain.exponentialRampToValueAtTime(0.0001, t + dur)
-  src.connect(lp).connect(g)
-  toOut(g, o, -0.4)
 }
 
 /** Rising noise swell, for tension before a phrase turns. */

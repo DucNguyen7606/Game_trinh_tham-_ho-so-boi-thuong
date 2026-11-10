@@ -15,7 +15,6 @@ interface Running {
   nextBar: number
   bar: number
   rnd: () => number
-  stopAmbience?: (at: number) => void
 }
 
 export interface AudioSettings {
@@ -93,7 +92,6 @@ class GameAudio {
       nextBar: t + 0.1,
       bar: 0,
       rnd: rng(Date.now() & 0xffff),
-      stopAmbience: theme.ambience?.(out, t),
     }
     this.pump()
   }
@@ -112,7 +110,6 @@ class GameAudio {
       f.gain.setValueAtTime(f.gain.value, t)
       f.gain.linearRampToValueAtTime(0.0001, t + FADE)
     }
-    old.stopAmbience?.(t)
     // Notes already scheduled keep playing into silent nodes; drop them later.
     window.setTimeout(() => old.out.faders.forEach((f) => f.disconnect()), (FADE + 6) * 1000)
   }
