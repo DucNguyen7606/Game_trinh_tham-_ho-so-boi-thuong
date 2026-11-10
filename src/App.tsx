@@ -9,6 +9,7 @@ import CaseFileScreen from '@/screens/CaseFileScreen'
 import BoardScreen from '@/screens/BoardScreen'
 import InterrogationScreen from '@/screens/InterrogationScreen'
 import VerdictScreen from '@/screens/VerdictScreen'
+import AudioControls from '@/audio/AudioControls'
 
 const nav: { screen: Screen; label: string; icon: typeof Briefcase }[] = [
   { screen: 'desk', label: 'Bàn làm việc', icon: Briefcase },
@@ -39,6 +40,7 @@ export default function App() {
           ))}
         </nav>
         <div className="ml-auto flex items-center gap-2 text-sm">
+          <AudioControls />
           <Badge variant="outline">Ngày {day}/{data.days}</Badge>
           <Badge variant="outline">Lượt còn lại: {actionsLeft}</Badge>
           <Badge variant="outline">Uy tín: {reputation}</Badge>
