@@ -1,6 +1,8 @@
 import type { CaseData } from './types'
 import hoSoBoiThuong from '@/cases/ho-so-boi-thuong/case.json'
 import { sceneArt as hoSoBoiThuongScenes } from '@/cases/ho-so-boi-thuong/scenes'
+import { closeups as hoSoBoiThuongCloseups } from '@/cases/ho-so-boi-thuong/closeups'
+import { documents as hoSoBoiThuongDocuments } from '@/cases/ho-so-boi-thuong/documents'
 
 // Interrogation scripts are plain .ink text, compiled at runtime by inkjs.
 const inkFiles = import.meta.glob('/src/cases/*/thamvan/*.ink', {
@@ -18,6 +20,24 @@ const sceneArt: Record<string, Record<string, () => JSX.Element>> = {
 
 export function getSceneArt(caseId: string, zoneId: string) {
   return sceneArt[caseId]?.[zoneId]
+}
+
+// Close-up photos shown when the player inspects a hotspot.
+const closeupArt: Record<string, Record<string, () => JSX.Element>> = {
+  'ho-so-boi-thuong': hoSoBoiThuongCloseups,
+}
+
+export function getCloseup(caseId: string, hotspotId: string) {
+  return closeupArt[caseId]?.[hotspotId]
+}
+
+// What each case-file document looks like, keyed by clue id.
+const documentArt: Record<string, Record<string, () => JSX.Element>> = {
+  'ho-so-boi-thuong': hoSoBoiThuongDocuments,
+}
+
+export function getDocumentArt(caseId: string, clueId: string) {
+  return documentArt[caseId]?.[clueId]
 }
 
 export function getInkSource(caseId: string, key: string): string | undefined {

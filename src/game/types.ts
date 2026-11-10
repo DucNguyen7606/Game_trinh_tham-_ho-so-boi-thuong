@@ -63,6 +63,16 @@ export interface Suspect {
   /** Key of the ink script in the case's thamvan folder, if the player can question them. */
   interrogation?: string
   portrait?: PortraitSpec
+  profile?: SuspectProfile
+}
+
+export interface SuspectProfile {
+  traits: string[]
+  habit: string
+  relation: string
+  quote: string
+  /** The investigator's own note: why this person matters to the case. */
+  note: string
 }
 
 export interface VerdictSlot {

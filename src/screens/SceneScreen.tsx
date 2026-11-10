@@ -4,7 +4,8 @@ import { useGame } from '@/game/store'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
-import { getSceneArt } from '@/game/caseLoader'
+import { getCloseup, getSceneArt } from '@/game/caseLoader'
+import { EvidencePhoto } from '@/art/EvidencePhoto'
 
 export default function SceneScreen() {
   const { data, visitedZones, visitZone, inspectHotspot, inspectedHotspots, actionsLeft } = useGame()
@@ -15,9 +16,13 @@ export default function SceneScreen() {
   const visited = visitedZones.includes(zone.id)
   const hotspot = zone.hotspots.find((h) => h.id === selected)
   const Art = getSceneArt(data.id, zone.id)
+  const Closeup = hotspot ? getCloseup(data.id, hotspot.id) : undefined
+  // Photo number = order of the hotspot within the zone; evidence gets a numbered tent.
+  const photoNo = hotspot ? zone.hotspots.indexOf(hotspot) + 1 : 0
+  const zoneNo = data.zones.indexOf(zone) + 1
 
   return (
-    <div className="grid h-full grid-cols-[1fr_320px]">
+    <div className="grid h-full grid-cols-[1fr_360px]">
       <section className="flex min-h-0 flex-col">
         <div className="flex gap-1 border-b border-border p-2">
           {data.zones.map((z) => (
@@ -70,7 +75,7 @@ export default function SceneScreen() {
         </div>
       </section>
 
-      <aside className="border-l border-border p-4">
+      <aside className="overflow-auto border-l border-border p-4">
         {hotspot ? (
           <div className="space-y-3">
             <h3 className="font-semibold">{hotspot.label}</h3>
@@ -79,6 +84,20 @@ export default function SceneScreen() {
               <Badge>
                 <Camera className="mr-1 size-3" /> Đã chụp ảnh, thêm thẻ {hotspot.clueId} lên bàn suy luận
               </Badge>
+            )}
+            {Closeup && (
+              <div className="pt-2">
+                <EvidencePhoto
+                  key={hotspot.id}
+                  marker={hotspot.clueId ? String(photoNo) : undefined}
+                  showRuler={Boolean(hotspot.clueId)}
+                  stamp={`15 07 '25  09:${String(10 + zoneNo * 7 + photoNo).padStart(2, '0')}`}
+                  caption={`Ảnh ${zoneNo}.${photoNo} · ${hotspot.label}${hotspot.clueId ? ` · ${hotspot.clueId}` : ''}`}
+                  tilt={photoNo % 2 ? -1.5 : 1.2}
+                >
+                  <Closeup />
+                </EvidencePhoto>
+              </div>
             )}
           </div>
         ) : (

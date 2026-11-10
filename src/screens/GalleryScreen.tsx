@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import { Copy, Shuffle } from 'lucide-react'
 import { useGame } from '@/game/store'
-import { getSceneArt } from '@/game/caseLoader'
+import { clueById, getDocumentArt, getSceneArt } from '@/game/caseLoader'
 import { Portrait, type PortraitSpec } from '@/art/Portrait'
 import { accent, clothColors, hairColors, ink } from '@/art/palette'
 import { rng } from '@/art/primitives'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import { CharacterProfile } from '@/components/CharacterProfile'
 
 // Developer screen: everything the art library can draw, plus a portrait
 // builder whose output is pasted into a suspect's "portrait" field in case.json.
@@ -65,6 +66,8 @@ export default function GalleryScreen() {
   const [spec, setSpec] = useState<PortraitSpec>(data.suspects[0].portrait ?? randomSpec(1))
   const [seed, setSeed] = useState(1)
   const [copied, setCopied] = useState(false)
+  const [profileId, setProfileId] = useState<string | null>(null)
+  const profile = data.suspects.find((s) => s.id === profileId)
   const json = JSON.stringify(spec)
 
   const set = (key: string, value: string) =>
@@ -85,7 +88,7 @@ export default function GalleryScreen() {
       <Section title="Nhân vật trong vụ">
         <div className="flex flex-wrap gap-4">
           {[{ id: 'player', name: data.player.name, portrait: data.player.portrait }, ...data.suspects].map((s) => (
-            <figure key={s.id} className="w-40">
+            <figure key={s.id} className="w-40 cursor-pointer" onClick={() => setProfileId(s.id)}>
               {s.portrait && <Portrait spec={s.portrait} size={160} />}
               <figcaption className="display mt-1 text-sm">{s.name}</figcaption>
             </figure>
@@ -172,6 +175,23 @@ export default function GalleryScreen() {
         </div>
       </Section>
 
+      <Section title="Giấy tờ trong phong bì">
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] items-start gap-6">
+          {data.envelopes.flatMap((e) => e.documents).map((id) => {
+            const Doc = getDocumentArt(data.id, id)
+            if (!Doc) return null
+            return (
+              <figure key={id} className="min-w-0">
+                <Doc />
+                <figcaption className="display mt-2 text-sm">
+                  {id} · {clueById(data, id)?.title}
+                </figcaption>
+              </figure>
+            )
+          })}
+        </div>
+      </Section>
+
       <Section title="Giấy tờ và giao diện">
         <div className="flex flex-wrap items-start gap-6">
           <div className="document w-56 p-3 shadow-md">
@@ -209,6 +229,7 @@ export default function GalleryScreen() {
           <p className="font-mono text-sm">IBM Plex Mono: giấy tờ, hóa đơn, sao kê 01:34</p>
         </div>
       </Section>
+      {profile && <CharacterProfile suspect={profile} onClose={() => setProfileId(null)} />}
     </div>
   )
 }

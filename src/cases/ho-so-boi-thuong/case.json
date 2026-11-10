@@ -37,6 +37,17 @@
         ],
         "age": "old",
         "backdrop": "amber"
+      },
+      "profile": {
+        "traits": [
+          "Nóng tính",
+          "Sĩ diện",
+          "Liều khi bị dồn"
+        ],
+        "habit": "Gõ ngón tay lên bàn khi sốt ruột. Luôn đeo đồng hồ vàng, kể cả đi kiểm kho.",
+        "relation": "Chú dượng của Bảo. Giao hết sổ sách cho Bảo vì \"người nhà, tin được\".",
+        "quote": "\"Hợp đồng ghi rõ ràng. Bao giờ công ty trả tiền?\"",
+        "note": "Nợ ngân hàng 2,1 tỷ, vừa nâng mức bảo hiểm. Có lý do để lừa, nhưng đêm cháy ở Vũng Tàu."
       }
     },
     {
@@ -58,6 +69,17 @@
         ],
         "age": "young",
         "backdrop": "teal"
+      },
+      "profile": {
+        "traits": [
+          "Lễ phép",
+          "Chu đáo quá mức",
+          "Né tránh khi bị hỏi dồn"
+        ],
+        "habit": "Lúc nào cũng mang sẵn tập giấy photo. Trả lời trước khi bị hỏi xong.",
+        "relation": "Cháu vợ ông Thịnh. Quen ông Rô từ hồi mới vào làm, hay mang đồ quê lên biếu.",
+        "quote": "\"Chị cần giấy tờ gì em đưa liền.\"",
+        "note": "Giữ chìa khóa và toàn bộ sổ sách. Người duy nhất ngoài ông Thịnh biết chuyện kho Long An."
       }
     },
     {
@@ -77,6 +99,17 @@
         ],
         "age": "young",
         "backdrop": "rust"
+      },
+      "profile": {
+        "traits": [
+          "Thẳng tính",
+          "Hay bức xúc",
+          "Không giấu được cảm xúc"
+        ],
+        "habit": "Livestream bán quần áo mỗi đêm từ khuya tới gần sáng.",
+        "relation": "Bị đuổi việc tháng 5 sau khi tố Bảo sửa sổ chấm công.",
+        "quote": "\"Tui ghét cái kho đó thiệt. Nhưng tui đâu có ngu.\"",
+        "note": "Từng đăng bài \"cái kho đó cháy cho rồi\". Động cơ rõ nhất, nhưng nói chuyện như người không có gì phải giấu."
       }
     },
     {
@@ -93,6 +126,17 @@
         "outfitColor": "charcoal",
         "age": "mid",
         "backdrop": "night"
+      },
+      "profile": {
+        "traits": [
+          "Thực dụng",
+          "Kín đáo",
+          "Sợ phiền phức"
+        ],
+        "habit": "Ngủ trên gác tiệm, gắn camera khắp nơi vì từng bị trộm.",
+        "relation": "Hàng xóm sát vách. Muốn mua đất kho để mở rộng tiệm, bị ông Thịnh từ chối.",
+        "quote": "\"Tui ngủ trên lầu, nghe la mới dậy.\"",
+        "note": "Có camera nhìn ra hẻm nhưng chưa chịu đưa. Giấu vì sợ bị nghi, hay vì có gì khác?"
       }
     },
     {
@@ -113,6 +157,17 @@
         ],
         "age": "old",
         "backdrop": "night"
+      },
+      "profile": {
+        "traits": [
+          "Hiền lành",
+          "Sợ mất việc",
+          "Thích nhậu một mình"
+        ],
+        "habit": "Đêm nào 22h cũng cúp cầu dao tổng cho đỡ tiền điện, rồi ghi vào sổ trực.",
+        "relation": "Làm bảo vệ cho ông Thịnh 9 năm. Quý Bảo vì Bảo hay ghé chơi, biếu rượu.",
+        "quote": "\"Tui trực tỉnh táo. Không ai vô hết.\"",
+        "note": "Bị ngạt khói nhẹ. Khai là trực một mình, nhưng trong chòi có hai cái ly."
       }
     }
   ],

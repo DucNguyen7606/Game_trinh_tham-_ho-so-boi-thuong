@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { DndContext, DragOverlay, useDraggable, useDroppable, type DragEndEvent } from '@dnd-kit/core'
 import { Lock, Mail, MailOpen, Pin } from 'lucide-react'
 import { useGame } from '@/game/store'
-import { clueById } from '@/game/caseLoader'
+import { clueById, getDocumentArt } from '@/game/caseLoader'
 import type { Clue } from '@/game/types'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
@@ -39,7 +39,7 @@ function DropZone({ id, title, hint, children }: { id: string; title: string; hi
     <div
       ref={setNodeRef}
       className={cn(
-        'flex flex-col rounded-lg border-2 border-dashed border-border p-4 transition',
+        'flex min-h-0 flex-col overflow-auto rounded-lg border-2 border-dashed border-border p-4 transition',
         isOver && 'border-primary bg-primary/10',
       )}
     >
@@ -69,6 +69,7 @@ export default function CaseFileScreen() {
   }
 
   const dragged = dragId ? clueById(data, dragId) : undefined
+  const ReadingArt = reading ? getDocumentArt(data.id, reading.id) : undefined
 
   return (
     <DndContext onDragStart={(e) => setDragId(String(e.active.id))} onDragEnd={onDragEnd} onDragCancel={() => setDragId(null)}>
@@ -103,7 +104,7 @@ export default function CaseFileScreen() {
           })}
         </section>
 
-        <aside className="grid grid-rows-[2fr_1fr] gap-4">
+        <aside className="grid min-h-0 grid-rows-[minmax(0,3fr)_minmax(140px,1fr)] gap-4">
           <DropZone id="reading-desk" title="Bàn đọc" hint="Kéo giấy tờ vào đây để đọc kỹ.">
             {reading ? (
               <div className="document p-4">
@@ -111,6 +112,11 @@ export default function CaseFileScreen() {
                 <h3 className="text-lg font-semibold">{reading.title}</h3>
                 <div className="my-2 h-px bg-paper-ink/30" />
                 <p className="mt-2 text-sm">{reading.description}</p>
+              </div>
+            ) : null}
+            {reading && ReadingArt ? (
+              <div className="mt-4 px-2 pb-2">
+                <ReadingArt />
               </div>
             ) : null}
           </DropZone>
