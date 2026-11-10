@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom/client'
 import '@xyflow/react/dist/style.css'
 import './index.css'
 import App from './App'
+import { bindGameAudio } from './audio/bindings'
+
+bindGameAudio()
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
