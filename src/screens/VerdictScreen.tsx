@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
-import { ChevronLeft, ChevronRight, CheckCircle2, CircleHelp } from 'lucide-react'
+import { ChevronLeft, ChevronRight, CheckCircle2, CircleHelp, RotateCcw } from 'lucide-react'
 import { questionOrder, useGame } from '@/game/store'
 import { getReconstruction } from '@/game/caseLoader'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
-import type { CaseData } from '@/game/types'
+import type { CaseData, ReconstructionPanel } from '@/game/types'
 
 // Ending rules for this case. When there are more cases, move this into the case JSON.
 function pickEnding(data: CaseData, picks: Record<string, string>) {
@@ -47,7 +47,7 @@ export default function VerdictScreen() {
               Xem lại vụ án
             </Button>
           )}
-          <Button onClick={reset}>Chơi lại</Button>
+          <Button onClick={reset}>{ending.id === 'full' ? 'Chơi lại' : 'Điều tra lại từ đầu'}</Button>
         </div>
       </div>
     )
@@ -97,8 +97,11 @@ export default function VerdictScreen() {
 
 /** "Dựng lại vụ án": the true events, one illustrated panel at a time, like a case being read back. */
 function Reconstruction({ step, setStep, picks }: { step: number; setStep: (n: number | null) => void; picks: Record<string, string> }) {
-  const { data, solvedQuestions } = useGame()
+  const { data, solvedQuestions, reset } = useGame()
   const panels = getReconstruction(data.id, picks)
+  // After the evidence against a wrong verdict, the player may go back and investigate
+  // again instead of having the truth spoiled.
+  const atCrossroads = isLastRefute(panels, step)
   const panel = panels[step]
   const last = step === panels.length - 1
   const next = () => setStep(last ? null : step + 1)
@@ -141,6 +144,7 @@ function Reconstruction({ step, setStep, picks }: { step: number; setStep: (n: n
           <span className="display absolute left-0 top-0 bg-amber px-3 py-1 text-lg text-[#1c130f]">{panel.time}</span>
         </figure>
 
+        <div className="space-y-4">
         <div className="document space-y-3 p-5">
           <p className="text-[10px] uppercase tracking-widest opacity-60">{kindLabel}</p>
           <h3 className="title text-2xl">{panel.title}</h3>
@@ -151,6 +155,15 @@ function Reconstruction({ step, setStep, picks }: { step: number; setStep: (n: n
               {solved ? `Bạn đã suy ra điều này ở câu ${qNo}.` : 'Bạn chưa suy ra được điều này.'}
             </p>
           )}
+        </div>
+        {atCrossroads && (
+          <div className="panel rounded-md p-4 text-sm">
+            <p className="font-semibold text-amber">Lập luận của bạn chưa đứng vững.</p>
+            <p className="mt-1 text-muted-foreground">
+              Bạn có thể điều tra lại vụ án từ đầu mà không xem lời giải, hoặc xem sự thật ngay bây giờ.
+            </p>
+          </div>
+        )}
         </div>
       </div>
 
@@ -168,10 +181,26 @@ function Reconstruction({ step, setStep, picks }: { step: number; setStep: (n: n
             />
           ))}
         </div>
-        <Button onClick={next}>
-          {last ? 'Xem kết cục' : 'Tiếp'} <ChevronRight />
-        </Button>
+        {atCrossroads ? (
+          <div className="flex gap-2">
+            <Button variant="outline" onClick={reset}>
+              <RotateCcw /> Điều tra lại từ đầu
+            </Button>
+            <Button onClick={next}>
+              Xem sự thật <ChevronRight />
+            </Button>
+          </div>
+        ) : (
+          <Button onClick={next}>
+            {last ? 'Xem kết cục' : 'Tiếp'} <ChevronRight />
+          </Button>
+        )}
       </div>
     </div>
   )
+}
+
+/** True on the last "lật lại" panel, right before the truth begins. */
+function isLastRefute(panels: ReconstructionPanel[], step: number) {
+  return panels[step]?.kind === 'refute' && panels[step + 1]?.kind !== 'refute'
 }
