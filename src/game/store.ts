@@ -39,6 +39,11 @@ interface GameState {
   checkAnswer: (questionId: string) => 'solved' | 'wrong' | 'missing-clues'
   startInterrogation: (suspectId: string) => boolean
   isEnvelopeOpen: (envelopeId: string) => boolean
+  /**
+   * A question appears on the board only once every document it needs is reachable,
+   * i.e. the envelopes holding its required clues are open. Scene clues are always reachable.
+   */
+  isQuestionOpen: (questionId: string) => boolean
   reset: () => void
 }
 
@@ -149,6 +154,16 @@ export const useGame = create<GameState>((set, get) => ({
     const env = get().data.envelopes.find((e) => e.id === envelopeId)
     if (!env) return false
     return env.unlockedBy === null || get().solvedQuestions.includes(env.unlockedBy)
+  },
+
+  isQuestionOpen: (questionId) => {
+    const { data, isEnvelopeOpen } = get()
+    const q = data.questions.find((x) => x.id === questionId)
+    if (!q) return false
+    return q.requiredClues.every((c) => {
+      const env = data.envelopes.find((e) => e.documents.includes(c))
+      return !env || isEnvelopeOpen(env.id)
+    })
   },
 
   reset: () => set(initial(get().data)),

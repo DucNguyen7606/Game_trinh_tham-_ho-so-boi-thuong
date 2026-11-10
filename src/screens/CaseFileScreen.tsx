@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { DndContext, DragOverlay, useDraggable, useDroppable, type DragEndEvent } from '@dnd-kit/core'
-import { Lock, Mail, MailOpen, Pin } from 'lucide-react'
+import { Lock, Mail, MailOpen, Maximize2, Pin } from 'lucide-react'
+import { Lightbox } from '@/components/Lightbox'
 import { useGame } from '@/game/store'
 import { clueById, getDocumentArt } from '@/game/caseLoader'
 import type { Clue } from '@/game/types'
@@ -70,6 +71,7 @@ export default function CaseFileScreen() {
 
   const dragged = dragId ? clueById(data, dragId) : undefined
   const ReadingArt = reading ? getDocumentArt(data.id, reading.id) : undefined
+  const [zoomed, setZoomed] = useState(false)
 
   return (
     <DndContext onDragStart={(e) => setDragId(String(e.active.id))} onDragEnd={onDragEnd} onDragCancel={() => setDragId(null)}>
@@ -115,14 +117,45 @@ export default function CaseFileScreen() {
               </div>
             ) : null}
             {reading && ReadingArt ? (
-              <div className="mt-4 px-2 pb-2">
-                <ReadingArt />
-              </div>
+              <button
+                className="group relative mt-4 block w-full px-2 pb-2 text-left"
+                onClick={() => setZoomed(true)}
+                aria-label={`Phóng to ${reading.title}`}
+              >
+                <div className="transition duration-200 group-hover:-translate-y-1 group-hover:brightness-110">
+                  <ReadingArt />
+                </div>
+                <span className="display absolute right-3 top-1 flex items-center gap-1 rounded bg-background/80 px-2 py-0.5 text-xs text-amber opacity-0 transition group-hover:opacity-100">
+                  <Maximize2 className="size-3" /> Phóng to
+                </span>
+              </button>
             ) : null}
           </DropZone>
           <DropZone id="pin-board" title="Ghim lên bàn suy luận" hint="Kéo giấy tờ vào đây để thêm thành thẻ manh mối." />
         </aside>
       </div>
+      {zoomed && reading && ReadingArt && (
+        <Lightbox
+          label={reading.title}
+          onClose={() => setZoomed(false)}
+          note={
+            <>
+              <p className="text-[10px] uppercase tracking-widest opacity-60">Giấy tờ {reading.id}</p>
+              <h3 className="title text-xl">{reading.title}</h3>
+              <p className="text-sm">{reading.description}</p>
+              <p className="text-xs opacity-70">
+                {data.envelopes.find((e) => e.documents.includes(reading.id))?.title ?? ''}
+              </p>
+              <p className="text-xs opacity-70">Chỗ tô vàng là chi tiết giám định viên đánh dấu.</p>
+            </>
+          }
+        >
+          {/* Documents are drawn in HTML at card size, so zoom scales text and layout together. */}
+          <div className="w-[360px] py-4" style={{ zoom: 1.7 }}>
+            <ReadingArt />
+          </div>
+        </Lightbox>
+      )}
       <DragOverlay>{dragged ? <DocumentCard clue={dragged} pinned={false} dragging /> : null}</DragOverlay>
     </DndContext>
   )

@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react'
-import { Camera, Maximize2, X } from 'lucide-react'
+import { useState } from 'react'
+import { Camera, Maximize2 } from 'lucide-react'
+import { Lightbox } from '@/components/Lightbox'
 import { useGame } from '@/game/store'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -13,13 +14,6 @@ export default function SceneScreen() {
   const [selected, setSelected] = useState<string | null>(null)
   const [zoomed, setZoomed] = useState(false)
 
-  // Esc closes the enlarged photo.
-  useEffect(() => {
-    if (!zoomed) return
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setZoomed(false)
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [zoomed])
 
   const zone = data.zones.find((z) => z.id === zoneId)!
   const visited = visitedZones.includes(zone.id)
@@ -130,37 +124,27 @@ export default function SceneScreen() {
       </aside>
 
       {zoomed && hotspot && Closeup && photoProps && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-8 backdrop-blur-sm"
-          onClick={() => setZoomed(false)}
-          role="dialog"
-          aria-modal="true"
-          aria-label={photoProps.caption}
-        >
-          <div className="relative flex max-h-full w-[min(1100px,92vw)] items-center gap-8" onClick={(e) => e.stopPropagation()}>
-            <div className="min-w-0 flex-[3]">
-              <EvidencePhoto {...photoProps} tilt={-0.6}>
-                <Closeup />
-              </EvidencePhoto>
-            </div>
-            <div className="document flex-[1.2] space-y-2 p-5">
-              <p className="text-[10px] uppercase tracking-widest opacity-60">Ghi chú ảnh {photoProps.caption.split(' · ')[0].replace('Ảnh ', '')}</p>
+        <Lightbox
+          label={photoProps.caption}
+          onClose={() => setZoomed(false)}
+          note={
+            <>
+              <p className="text-[10px] uppercase tracking-widest opacity-60">Ghi chú ảnh {zoneNo}.{photoNo}</p>
               <h3 className="title text-xl">{hotspot.label}</h3>
               <p className="text-sm">{hotspot.note}</p>
               <p className="text-xs opacity-70">Khu: {zone.name}</p>
               {hotspot.clueId && (
                 <p className="text-xs font-semibold text-[#b23a2e]">Tang vật số {photoProps.marker} · thẻ {hotspot.clueId} đã lên bàn suy luận</p>
               )}
-            </div>
-            <button
-              className="absolute -right-3 -top-10 rounded-full bg-background/90 p-1.5 text-foreground hover:text-amber"
-              onClick={() => setZoomed(false)}
-              aria-label="Đóng"
-            >
-              <X className="size-5" />
-            </button>
+            </>
+          }
+        >
+          <div className="w-full">
+            <EvidencePhoto {...photoProps} tilt={-0.6}>
+              <Closeup />
+            </EvidencePhoto>
           </div>
-        </div>
+        </Lightbox>
       )}
     </div>
   )

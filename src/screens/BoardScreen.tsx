@@ -99,19 +99,25 @@ const clueNode = (clueId: string, index: number): Node => ({
   data: { clueId },
 })
 
+const questionNode = (q: { id: string }, index: number): Node => ({
+  id: `q-${q.id}`,
+  type: 'question',
+  position: { x: 860, y: index * 230 },
+  data: { questionId: q.id },
+})
+
 export default function BoardScreen() {
-  const { data, foundClues, answers, linkClue, unlinkClue } = useGame()
+  const { data, foundClues, answers, linkClue, unlinkClue, solvedQuestions, isQuestionOpen } = useGame()
+  // Recomputed when a question is solved, since that can open an envelope.
+  const openQuestions = useMemo(
+    () => data.questions.filter((q) => isQuestionOpen(q.id)),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [data, solvedQuestions],
+  )
+  const lockedCount = data.questions.length - openQuestions.length
 
   const initialNodes = useMemo<Node[]>(
-    () => [
-      ...foundClues.map(clueNode),
-      ...data.questions.map((q, i) => ({
-        id: `q-${q.id}`,
-        type: 'question',
-        position: { x: 860, y: i * 230 },
-        data: { questionId: q.id },
-      })),
-    ],
+    () => [...foundClues.map(clueNode), ...openQuestions.map(questionNode)],
     // Positions are only laid out once; the player moves cards freely after that.
     [],
   )
@@ -126,6 +132,16 @@ export default function BoardScreen() {
       return [...current, ...missing.map((c, i) => clueNode(c, clueCount + i))]
     })
   }, [foundClues, setNodes])
+
+  // Questions join the board when a new envelope makes them answerable.
+  useEffect(() => {
+    setNodes((current) => {
+      const have = new Set(current.map((n) => n.id))
+      const missing = openQuestions.filter((q) => !have.has(`q-${q.id}`))
+      const qCount = current.filter((n) => n.type === 'question').length
+      return [...current, ...missing.map((q, i) => questionNode(q, qCount + i))]
+    })
+  }, [openQuestions, setNodes])
 
   // The red strings are derived from the store, so they survive leaving the screen.
   const edges = useMemo<Edge[]>(
@@ -165,6 +181,11 @@ export default function BoardScreen() {
       {foundClues.length === 0 && (
         <p className="absolute left-4 top-4 z-10 text-sm text-muted-foreground">
           Chưa có thẻ manh mối. Khám hiện trường hoặc ghim giấy tờ từ hồ sơ.
+        </p>
+      )}
+      {lockedCount > 0 && (
+        <p className="display absolute right-4 top-4 z-10 rounded bg-background/85 px-3 py-1.5 text-sm text-muted-foreground">
+          Còn {lockedCount} câu hỏi sẽ hiện khi mở được phong bì tiếp theo
         </p>
       )}
       <ReactFlow
