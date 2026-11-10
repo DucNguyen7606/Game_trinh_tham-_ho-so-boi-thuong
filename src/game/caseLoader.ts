@@ -3,6 +3,8 @@ import hoSoBoiThuong from '@/cases/ho-so-boi-thuong/case.json'
 import { sceneArt as hoSoBoiThuongScenes } from '@/cases/ho-so-boi-thuong/scenes'
 import { closeups as hoSoBoiThuongCloseups } from '@/cases/ho-so-boi-thuong/closeups'
 import { documents as hoSoBoiThuongDocuments } from '@/cases/ho-so-boi-thuong/documents'
+import { reconstruction as hoSoBoiThuongReconstruction } from '@/cases/ho-so-boi-thuong/reconstruction'
+import type { ReconstructionPanel } from './types'
 
 // Interrogation scripts are plain .ink text, compiled at runtime by inkjs.
 const inkFiles = import.meta.glob('/src/cases/*/thamvan/*.ink', {
@@ -38,6 +40,15 @@ const documentArt: Record<string, Record<string, () => JSX.Element>> = {
 
 export function getDocumentArt(caseId: string, clueId: string) {
   return documentArt[caseId]?.[clueId]
+}
+
+// The true sequence of events, shown after the verdict.
+const reconstructions: Record<string, ReconstructionPanel[]> = {
+  'ho-so-boi-thuong': hoSoBoiThuongReconstruction,
+}
+
+export function getReconstruction(caseId: string) {
+  return reconstructions[caseId] ?? []
 }
 
 export function getInkSource(caseId: string, key: string): string | undefined {

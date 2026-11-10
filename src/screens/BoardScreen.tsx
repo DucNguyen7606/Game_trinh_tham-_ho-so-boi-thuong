@@ -13,7 +13,7 @@ import {
   type NodeProps,
 } from '@xyflow/react'
 import { CheckCircle2 } from 'lucide-react'
-import { useGame } from '@/game/store'
+import { questionOrder, useGame } from '@/game/store'
 import { clueById } from '@/game/caseLoader'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
@@ -56,7 +56,7 @@ function QuestionNode({ data }: NodeProps<Node<QuestionNodeData>>) {
   return (
     <div className={cn('w-72 rounded-lg border bg-card p-3 shadow-lg', solved ? 'border-primary' : 'border-border')}>
       <Handle type="target" position={Position.Left} className="!size-3 !bg-string" />
-      <p className="text-xs text-muted-foreground">Câu {q.number}</p>
+      <p className="text-xs text-muted-foreground">Câu {questionOrder(caseData, solvedQuestions).indexOf(q.id) + 1}</p>
       <p className="display text-lg leading-tight">{q.prompt}</p>
       <div className="nodrag mt-2 flex flex-col gap-1">
         {q.options.map((o) => (
@@ -74,7 +74,18 @@ function QuestionNode({ data }: NodeProps<Node<QuestionNodeData>>) {
         ))}
       </div>
       <div className="mt-2 flex items-center justify-between text-xs text-muted-foreground">
-        <span>{answer?.clueIds.length ?? 0} thẻ đã nối</span>
+        {/* How many cards the proof needs, so the player can rule cards out. */}
+        <span className="flex items-center gap-1.5" title={`Câu này cần ${q.requiredClues.length} thẻ manh mối`}>
+          <span className="flex gap-0.5">
+            {q.requiredClues.map((_, i) => (
+              <span
+                key={i}
+                className={cn('size-2.5 rounded-sm border border-string', i < (answer?.clueIds.length ?? 0) ? 'bg-string' : 'bg-transparent')}
+              />
+            ))}
+          </span>
+          Nối {answer?.clueIds.length ?? 0}/{q.requiredClues.length} thẻ
+        </span>
         {solved ? (
           <span className="flex items-center gap-1 text-primary">
             <CheckCircle2 className="size-4" /> Đã giải
@@ -110,7 +121,7 @@ export default function BoardScreen() {
   const { data, foundClues, answers, linkClue, unlinkClue, solvedQuestions, isQuestionOpen } = useGame()
   // Recomputed when a question is solved, since that can open an envelope.
   const openQuestions = useMemo(
-    () => data.questions.filter((q) => isQuestionOpen(q.id)),
+    () => questionOrder(data, solvedQuestions).map((id) => data.questions.find((q) => q.id === id)!).filter((q) => isQuestionOpen(q.id)),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [data, solvedQuestions],
   )

@@ -63,6 +63,35 @@ const initial = (data: CaseData) => ({
   log: [] as string[],
 })
 
+/** Pure version of the envelope/question gates, for a given set of solved questions. */
+function envelopeOpen(data: CaseData, envelopeId: string, solved: string[]) {
+  const env = data.envelopes.find((e) => e.id === envelopeId)
+  return Boolean(env && (env.unlockedBy === null || solved.includes(env.unlockedBy)))
+}
+
+function questionOpen(data: CaseData, questionId: string, solved: string[]) {
+  const q = data.questions.find((x) => x.id === questionId)
+  if (!q) return false
+  return q.requiredClues.every((c) => {
+    const env = data.envelopes.find((e) => e.documents.includes(c))
+    return !env || envelopeOpen(data, env.id, solved)
+  })
+}
+
+/**
+ * Question ids in the order the player sees them appear on the board. The displayed
+ * question number is the position in this list, so numbers always run 1, 2, 3…
+ * whichever envelope the player opens first.
+ */
+export function questionOrder(data: CaseData, solvedInOrder: string[]) {
+  const order = data.questions.filter((q) => questionOpen(data, q.id, [])).map((q) => q.id)
+  solvedInOrder.forEach((_, i) => {
+    const solved = solvedInOrder.slice(0, i + 1)
+    for (const q of data.questions) if (!order.includes(q.id) && questionOpen(data, q.id, solved)) order.push(q.id)
+  })
+  return order
+}
+
 const addUnique = (list: string[], id: string) => (list.includes(id) ? list : [...list, id])
 
 export const useGame = create<GameState>((set, get) => ({
@@ -150,21 +179,9 @@ export const useGame = create<GameState>((set, get) => ({
     return true
   },
 
-  isEnvelopeOpen: (envelopeId) => {
-    const env = get().data.envelopes.find((e) => e.id === envelopeId)
-    if (!env) return false
-    return env.unlockedBy === null || get().solvedQuestions.includes(env.unlockedBy)
-  },
+  isEnvelopeOpen: (envelopeId) => envelopeOpen(get().data, envelopeId, get().solvedQuestions),
 
-  isQuestionOpen: (questionId) => {
-    const { data, isEnvelopeOpen } = get()
-    const q = data.questions.find((x) => x.id === questionId)
-    if (!q) return false
-    return q.requiredClues.every((c) => {
-      const env = data.envelopes.find((e) => e.documents.includes(c))
-      return !env || isEnvelopeOpen(env.id)
-    })
-  },
+  isQuestionOpen: (questionId) => questionOpen(get().data, questionId, get().solvedQuestions),
 
   reset: () => set(initial(get().data)),
 }))

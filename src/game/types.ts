@@ -47,6 +47,7 @@ export interface QuestionOption {
 
 export interface Question {
   id: string
+  /** Author's order in the case file. The board shows numbers in the order questions appear (see questionOrder). */
   number: number
   prompt: string
   options: QuestionOption[]
@@ -107,3 +108,13 @@ export interface CaseData {
 
 export type ActionKind = 'talk' | 'explore'
 export type DayLimits = Record<ActionKind, number>
+
+/** One step of the reconstruction shown after the verdict. */
+export interface ReconstructionPanel {
+  time: string
+  title: string
+  text: string
+  /** The board question that proves this step; used to show whether the player worked it out. */
+  questionId?: string
+  Art: () => JSX.Element
+}

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { DndContext, DragOverlay, useDraggable, useDroppable, type DragEndEvent } from '@dnd-kit/core'
 import { Lock, Mail, MailOpen, Maximize2, Pin } from 'lucide-react'
 import { Lightbox } from '@/components/Lightbox'
-import { useGame } from '@/game/store'
+import { questionOrder, useGame } from '@/game/store'
 import { clueById, getDocumentArt } from '@/game/caseLoader'
 import type { Clue } from '@/game/types'
 import { Badge } from '@/components/ui/badge'
@@ -53,6 +53,7 @@ function DropZone({ id, title, hint, children }: { id: string; title: string; hi
 
 export default function CaseFileScreen() {
   const { data, isEnvelopeOpen, foundClues, pinClue, markRead, solvedQuestions } = useGame()
+  const order = questionOrder(data, solvedQuestions)
   const [reading, setReading] = useState<Clue | null>(null)
   const [dragId, setDragId] = useState<string | null>(null)
   // Subscribe to solvedQuestions so envelopes re-render when one unlocks.
@@ -89,7 +90,8 @@ export default function CaseFileScreen() {
                   </h2>
                   {!open && (
                     <Badge variant="outline">
-                      <Lock className="mr-1 size-3" /> Mở khi giải được câu {unlockQ?.number}
+                      <Lock className="mr-1 size-3" />{' '}
+                      {unlockQ && order.includes(unlockQ.id) ? `Mở khi giải được câu ${order.indexOf(unlockQ.id) + 1}` : 'Mở khi giải thêm câu hỏi'}
                     </Badge>
                   )}
                 </div>
