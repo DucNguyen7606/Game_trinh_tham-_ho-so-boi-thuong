@@ -42,6 +42,7 @@ src/
     BoardScreen      Bàn suy luận: nối thẻ manh mối vào 7 câu hỏi bằng dây đỏ
     InterrogationScreen  Hỏi chuyện theo kịch bản ink
     VerdictScreen    Ký đề xuất và xem kết thúc
+  audio/             Nhạc và hiệu ứng tự tổng hợp (xem mục Âm thanh)
   components/ui/     Button, Card, Badge theo kiểu shadcn/ui
   cases/
     ho-so-boi-thuong/
@@ -69,8 +70,25 @@ Kịch bản hỏi chuyện là file `.ink`. Muốn một câu hỏi chỉ hiệ
 
 Thêm component shadcn/ui khác: `npx shadcn@latest add <tên>` (cấu hình nằm ở `components.json`).
 
+## Âm thanh
+
+Toàn bộ nhạc và hiệu ứng được tổng hợp bằng Web Audio API ngay lúc chạy (`src/audio/`), không dùng file thu âm nào nên không vướng bản quyền. Nhạc là dạng sinh tự động: mỗi ô nhịp được soạn lại từ một bộ quy tắc nên không bao giờ lặp y hệt.
+
+| Màn hình | Chủ đề nhạc |
+| --- | --- |
+| Bàn làm việc, Hồ sơ, Bàn suy luận | Lo-fi hip-hop: Rhodes, sub bass, trống nhẹ, đàn tranh điểm xuyết |
+| Hiện trường | Lo-fi trầm hơn, thưa hơn: Rhodes, pad tối, trống nhẹ, đàn tranh và đàn bầu luyến |
+| Thẩm vấn | Căng thẳng hiện đại: ostinato synth, nhịp tim, đồng hồ tích tắc, đàn bầu trượt xuống |
+| Kết luận | Màu Việt: đàn bầu hát giai điệu ngũ cung, đàn tranh rải, pad ấm |
+
+Hiệu ứng gắn tự động theo trạng thái game (không phải sửa từng màn hình): chụp ảnh khi tìm manh mối ở hiện trường, nhặt và thả giấy khi kéo hồ sơ, ghim, lật trang, kéo và nối dây đỏ, cắt dây, xé phong bì khi mở khoá, suy luận đúng / sai / thiếu chứng cứ, bước chân khi vào khu, đóng dấu khi qua ngày, gõ phím khi chọn lời thoại.
+
+- `themes.ts`: 4 chủ đề nhạc. `instruments.ts`: đàn tranh, đàn bầu, bass, Rhodes, pad, trống. `sfx.ts`: hiệu ứng.
+- `bindings.ts`: nối âm thanh với store của game. `AudioControls.tsx`: nút loa trên thanh trên cùng (âm lượng nhạc, hiệu ứng, tắt tiếng; tự nhớ giữa các lần chơi).
+- Phòng thu: khi `npm run dev` đang chạy, mở `http://localhost:5173/audio-lab.html` trong trình duyệt để nghe thử từng bản nhạc, từng hiệu ứng và tải về dạng WAV.
+
 ## Còn thiếu ở bản khung
 
 - Lưu và tải game.
 - Hỏi chuyện Ngân và Huy, cảnh ép Huy đưa camera.
-- Âm thanh, menu chính, Steam.
+- Menu chính, Steam.

@@ -13,6 +13,9 @@ import '@fontsource/bitter/vietnamese-700.css'
 import '@fontsource/bitter/latin-700.css'
 import './index.css'
 import App from './App'
+import { bindGameAudio } from './audio/bindings'
+
+bindGameAudio()
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
