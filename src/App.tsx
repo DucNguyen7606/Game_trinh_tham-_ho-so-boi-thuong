@@ -21,7 +21,7 @@ const nav: { screen: Screen; label: string; icon: typeof Briefcase }[] = [
 ]
 
 export default function App() {
-  const { screen, go, day, actionsLeft, reputation, data, solvedQuestions } = useGame()
+  const { screen, go, day, left, reputation, data, solvedQuestions } = useGame()
 
   return (
     <div className="flex h-full flex-col">
@@ -42,7 +42,8 @@ export default function App() {
         </nav>
         <div className="ml-auto flex items-center gap-2 text-sm">
           <Badge variant="outline">Ngày {day}/{data.days}</Badge>
-          <Badge variant="outline">Lượt còn lại: {actionsLeft}</Badge>
+          <Badge variant="outline">Hỏi: {left.talk}/{data.limitsPerDay.talk}</Badge>
+          <Badge variant="outline">Khám: {left.explore}/{data.limitsPerDay.explore}</Badge>
           <Badge variant="outline">Uy tín: {reputation}</Badge>
           <Badge variant="outline">
             Câu đã giải: {solvedQuestions.length}/{data.questions.length}

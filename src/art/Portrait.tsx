@@ -37,7 +37,11 @@ const HEAD = 'translate(28 14) scale(0.92)'
 const CX = 120
 const halfWidth = { thin: 72, normal: 88, heavy: 102 }
 
-export function Portrait({ spec, size = 200, className }: { spec: PortraitSpec; size?: number; className?: string }) {
+/**
+ * `zoom` below 1 draws the figure smaller inside the same backdrop, anchored at
+ * the bottom centre, which leaves headroom in small thumbnails.
+ */
+export function Portrait({ spec, size = 200, zoom = 1, className }: { spec: PortraitSpec; size?: number; zoom?: number; className?: string }) {
   const uid = useId()
   const clip = `${uid}-clip`, glow = `${uid}-glow`, dots = `${uid}-dots`, fade = `${uid}-fade`
   const skin = skinTones[spec.skin]
@@ -79,6 +83,7 @@ export function Portrait({ spec, size = 200, className }: { spec: PortraitSpec; 
         <rect width="240" height="320" fill={bg} />
         <rect width="240" height="320" fill={`url(#${glow})`} />
         <rect width="240" height="320" fill={`url(#${dots})`} />
+        <g transform={zoom === 1 ? undefined : `translate(${120 * (1 - zoom)} ${320 * (1 - zoom)}) scale(${zoom})`}>
         {/* Cast shadow on the wall behind */}
         <polygon points={P(torso.map(([x, y]) => [x + 16, y + 6]))} fill={ink.night} opacity="0.25" />
 
@@ -160,6 +165,7 @@ export function Portrait({ spec, size = 200, className }: { spec: PortraitSpec; 
           <polyline points={P([[CX - 15, 154], [CX - 7, 172], [CX, 176], [CX + 7, 172], [CX + 15, 154]])} fill="none" stroke={accent.gold} strokeWidth="3" />
         )}
         {acc.has('pen') && <rect x={CX + 26} y="206" width="4" height="20" fill={accent.red} />}
+        </g>
         <rect width="240" height="320" fill={`url(#${fade})`} />
       </g>
     </svg>

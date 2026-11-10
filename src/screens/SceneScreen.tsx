@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Camera } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { Camera, Maximize2, X } from 'lucide-react'
 import { useGame } from '@/game/store'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -8,9 +8,18 @@ import { getCloseup, getSceneArt } from '@/game/caseLoader'
 import { EvidencePhoto } from '@/art/EvidencePhoto'
 
 export default function SceneScreen() {
-  const { data, visitedZones, visitZone, inspectHotspot, inspectedHotspots, actionsLeft } = useGame()
+  const { data, visitedZones, visitZone, inspectHotspot, inspectedHotspots, left } = useGame()
   const [zoneId, setZoneId] = useState(data.zones[0].id)
   const [selected, setSelected] = useState<string | null>(null)
+  const [zoomed, setZoomed] = useState(false)
+
+  // Esc closes the enlarged photo.
+  useEffect(() => {
+    if (!zoomed) return
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setZoomed(false)
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [zoomed])
 
   const zone = data.zones.find((z) => z.id === zoneId)!
   const visited = visitedZones.includes(zone.id)
@@ -20,6 +29,14 @@ export default function SceneScreen() {
   // Photo number = order of the hotspot within the zone; evidence gets a numbered tent.
   const photoNo = hotspot ? zone.hotspots.indexOf(hotspot) + 1 : 0
   const zoneNo = data.zones.indexOf(zone) + 1
+
+  const photoProps = hotspot ? {
+    marker: hotspot.clueId ? String(photoNo) : undefined,
+    showRuler: Boolean(hotspot.clueId),
+    stamp: `15 07 '25  09:${String(10 + zoneNo * 7 + photoNo).padStart(2, '0')}`,
+    caption: `Ảnh ${zoneNo}.${photoNo} · ${hotspot.label}${hotspot.clueId ? ` · ${hotspot.clueId}` : ''}`,
+    tilt: photoNo % 2 ? -1.5 : 1.2,
+  } : undefined
 
   return (
     <div className="grid h-full grid-cols-[1fr_360px]">
@@ -48,9 +65,14 @@ export default function SceneScreen() {
           <p className="absolute left-4 top-4 max-w-md bg-background/80 px-2 py-1 text-sm text-muted-foreground">{zone.description}</p>
           {!visited ? (
             <div className="absolute inset-0 flex items-center justify-center">
-              <Button disabled={actionsLeft <= 0} onClick={() => visitZone(zone.id)}>
-                Khám khu này (1 lượt)
-              </Button>
+              <div className="flex flex-col items-center gap-2">
+                <Button disabled={left.explore <= 0} onClick={() => visitZone(zone.id)}>
+                  Khám khu này (1 lượt khám)
+                </Button>
+                {left.explore <= 0 && (
+                  <p className="bg-background/80 px-2 py-1 text-sm text-muted-foreground">Hôm nay đã khám đủ. Kết thúc ngày ở Bàn làm việc để khám tiếp.</p>
+                )}
+              </div>
             </div>
           ) : (
             zone.hotspots.map((h) => (
@@ -85,25 +107,61 @@ export default function SceneScreen() {
                 <Camera className="mr-1 size-3" /> Đã chụp ảnh, thêm thẻ {hotspot.clueId} lên bàn suy luận
               </Badge>
             )}
-            {Closeup && (
-              <div className="pt-2">
-                <EvidencePhoto
-                  key={hotspot.id}
-                  marker={hotspot.clueId ? String(photoNo) : undefined}
-                  showRuler={Boolean(hotspot.clueId)}
-                  stamp={`15 07 '25  09:${String(10 + zoneNo * 7 + photoNo).padStart(2, '0')}`}
-                  caption={`Ảnh ${zoneNo}.${photoNo} · ${hotspot.label}${hotspot.clueId ? ` · ${hotspot.clueId}` : ''}`}
-                  tilt={photoNo % 2 ? -1.5 : 1.2}
-                >
-                  <Closeup />
-                </EvidencePhoto>
-              </div>
+            {Closeup && photoProps && (
+              <button
+                className="group relative block w-full pt-2 text-left"
+                onClick={() => setZoomed(true)}
+                aria-label={`Phóng to ảnh ${hotspot.label}`}
+              >
+                <div className="transition duration-200 group-hover:-translate-y-1 group-hover:brightness-110">
+                  <EvidencePhoto key={hotspot.id} {...photoProps}>
+                    <Closeup />
+                  </EvidencePhoto>
+                </div>
+                <span className="display absolute right-3 top-5 flex items-center gap-1 rounded bg-background/80 px-2 py-0.5 text-xs text-amber opacity-0 transition group-hover:opacity-100">
+                  <Maximize2 className="size-3" /> Phóng to
+                </span>
+              </button>
             )}
           </div>
         ) : (
           <p className="text-sm text-muted-foreground">Bấm vào một vật để xem kỹ. Không phải vật nào cũng có ý nghĩa.</p>
         )}
       </aside>
+
+      {zoomed && hotspot && Closeup && photoProps && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-8 backdrop-blur-sm"
+          onClick={() => setZoomed(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-label={photoProps.caption}
+        >
+          <div className="relative flex max-h-full w-[min(1100px,92vw)] items-center gap-8" onClick={(e) => e.stopPropagation()}>
+            <div className="min-w-0 flex-[3]">
+              <EvidencePhoto {...photoProps} tilt={-0.6}>
+                <Closeup />
+              </EvidencePhoto>
+            </div>
+            <div className="document flex-[1.2] space-y-2 p-5">
+              <p className="text-[10px] uppercase tracking-widest opacity-60">Ghi chú ảnh {photoProps.caption.split(' · ')[0].replace('Ảnh ', '')}</p>
+              <h3 className="title text-xl">{hotspot.label}</h3>
+              <p className="text-sm">{hotspot.note}</p>
+              <p className="text-xs opacity-70">Khu: {zone.name}</p>
+              {hotspot.clueId && (
+                <p className="text-xs font-semibold text-[#b23a2e]">Tang vật số {photoProps.marker} · thẻ {hotspot.clueId} đã lên bàn suy luận</p>
+              )}
+            </div>
+            <button
+              className="absolute -right-3 -top-10 rounded-full bg-background/90 p-1.5 text-foreground hover:text-amber"
+              onClick={() => setZoomed(false)}
+              aria-label="Đóng"
+            >
+              <X className="size-5" />
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

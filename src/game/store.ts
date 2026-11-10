@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import type { CaseData } from './types'
+import type { ActionKind, CaseData, DayLimits } from './types'
 import { cases } from './caseLoader'
 
 export type Screen = 'desk' | 'scene' | 'casefile' | 'board' | 'interrogation' | 'verdict' | 'gallery'
@@ -13,7 +13,8 @@ interface GameState {
   data: CaseData
   screen: Screen
   day: number
-  actionsLeft: number
+  /** What is left of today's limits: people to question and zones to search. */
+  left: DayLimits
   reputation: number
   visitedZones: string[]
   inspectedHotspots: string[]
@@ -25,8 +26,8 @@ interface GameState {
   log: string[]
 
   go: (screen: Screen) => void
-  /** Spends one action. Returns false (and does nothing) when the day is used up. */
-  spendAction: (what: string) => boolean
+  /** Spends one action of a kind. Returns false (and does nothing) when today's limit for it is used up. */
+  spendAction: (kind: ActionKind, what: string) => boolean
   endDay: () => void
   visitZone: (zoneId: string) => boolean
   inspectHotspot: (hotspotId: string, clueId?: string) => void
@@ -45,7 +46,7 @@ const initial = (data: CaseData) => ({
   data,
   screen: 'desk' as Screen,
   day: 1,
-  actionsLeft: data.actionsPerDay,
+  left: { ...data.limitsPerDay },
   reputation: 3,
   visitedZones: [] as string[],
   inspectedHotspots: [] as string[],
@@ -64,10 +65,10 @@ export const useGame = create<GameState>((set, get) => ({
 
   go: (screen) => set({ screen }),
 
-  spendAction: (what) => {
-    const { actionsLeft, log, day } = get()
-    if (actionsLeft <= 0) return false
-    set({ actionsLeft: actionsLeft - 1, log: [...log, `Ngày ${day}: ${what}`] })
+  spendAction: (kind, what) => {
+    const { left, log, day } = get()
+    if (left[kind] <= 0) return false
+    set({ left: { ...left, [kind]: left[kind] - 1 }, log: [...log, `Ngày ${day}: ${what}`] })
     return true
   },
 
@@ -77,16 +78,17 @@ export const useGame = create<GameState>((set, get) => ({
       set({ screen: 'verdict' })
       return
     }
-    // Low reputation with the boss costs an action the next day.
+    // Low reputation with the boss costs one interview the next day.
     const penalty = reputation <= 1 ? 1 : 0
-    set({ day: day + 1, actionsLeft: data.actionsPerDay - penalty })
+    const limits = data.limitsPerDay
+    set({ day: day + 1, left: { ...limits, talk: Math.max(0, limits.talk - penalty) } })
   },
 
   visitZone: (zoneId) => {
     const { visitedZones, data } = get()
     if (visitedZones.includes(zoneId)) return true
     const zone = data.zones.find((z) => z.id === zoneId)
-    if (!get().spendAction(`Khám ${zone?.name ?? zoneId}`)) return false
+    if (!get().spendAction('explore', `Khám ${zone?.name ?? zoneId}`)) return false
     set({ visitedZones: [...get().visitedZones, zoneId] })
     return true
   },
@@ -138,7 +140,7 @@ export const useGame = create<GameState>((set, get) => ({
 
   startInterrogation: (suspectId) => {
     const s = get().data.suspects.find((x) => x.id === suspectId)
-    if (!get().spendAction(`Hỏi ${s?.name ?? suspectId}`)) return false
+    if (!get().spendAction('talk', `Hỏi ${s?.name ?? suspectId}`)) return false
     set({ activeSuspect: suspectId, screen: 'interrogation' })
     return true
   },

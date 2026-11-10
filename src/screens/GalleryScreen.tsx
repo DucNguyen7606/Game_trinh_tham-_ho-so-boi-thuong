@@ -206,7 +206,7 @@ export default function GalleryScreen() {
           </div>
           <div className="flex flex-col gap-2">
             <Button>Ký đề xuất</Button>
-            <Button variant="outline">Hỏi chuyện (1 lượt)</Button>
+            <Button variant="outline">Hỏi chuyện</Button>
             <Badge variant="outline">Ngày 1/3</Badge>
           </div>
         </div>

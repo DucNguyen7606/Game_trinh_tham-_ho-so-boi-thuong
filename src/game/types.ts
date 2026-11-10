@@ -94,7 +94,8 @@ export interface CaseData {
   intro: string
   player: { name: string; role: string; portrait?: PortraitSpec }
   days: number
-  actionsPerDay: number
+  /** How many people you can question and how many zones you can search each day. */
+  limitsPerDay: DayLimits
   suspects: Suspect[]
   zones: Zone[]
   clues: Clue[]
@@ -103,3 +104,6 @@ export interface CaseData {
   verdict: VerdictSlot[]
   endings: Ending[]
 }
+
+export type ActionKind = 'talk' | 'explore'
+export type DayLimits = Record<ActionKind, number>
