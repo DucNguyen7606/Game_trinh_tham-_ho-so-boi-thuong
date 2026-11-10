@@ -311,10 +311,61 @@ const fraudRefute: Record<string, { text: string; docs: string[] }> = {
   huy: { text: 'Anh Huy không dính gì tới hợp đồng bảo hiểm. Thư hỏi mua đất của anh đến trước vụ cháy và bị từ chối thẳng.', docs: ['P1', 'X2'] },
 }
 
+function FraudArt({ who }: { who: string }) {
+  return (
+    <>
+      <Pinned who={who} ids={fraudTheory[who].docs} />
+      <PanelStamp text="Giả thuyết" color="#9fb4c8" />
+    </>
+  )
+}
+
+function ArsonArt({ who }: { who: string }) {
+  const a = arsonTheory[who]
+  return (
+    <>
+      <Staged zone={a.place}>
+        <rect width="1600" height="900" fill="#3b4a66" opacity="0.35" style={{ mixBlendMode: 'color' }} />
+        <Person x={a.x} y={a.y} h={360} color={colorOf(who)} pose="crouch" hold="can" />
+        <text x={a.x + 200} y={a.y - 360} textAnchor="middle" fontSize="120" fontWeight="700" fill="#9fb4c8" opacity="0.5" fontFamily="Bitter, serif">?</text>
+      </Staged>
+      <PanelStamp text="Giả thuyết" color="#9fb4c8" />
+    </>
+  )
+}
+
+function DecisionArt({ pay }: { pay: boolean }) {
+  return (
+    <>
+      <OnDesk ids={pay ? ['P2', 'P4'] : ['P1', 'P3']} />
+      <PanelStamp text={pay ? 'Chi trả' : 'Từ chối'} color={pay ? '#3f8a7e' : '#b23a2e'} />
+    </>
+  )
+}
+
+/**
+ * Picture and one-line note shown behind a verdict choice while the player is deciding,
+ * so each pick reads as a small scene of what they are claiming.
+ */
+export function verdictPreview(slotId: string, optionId: string): { Art: () => JSX.Element; note: string } | undefined {
+  if (slotId === 'fraud' && fraudTheory[optionId])
+    return { Art: () => <FraudArt who={optionId} />, note: fraudTheory[optionId].text }
+  if (slotId === 'arson' && arsonTheory[optionId])
+    return { Art: () => <ArsonArt who={optionId} />, note: arsonTheory[optionId].text }
+  if (slotId === 'decision')
+    return {
+      Art: () => <DecisionArt pay={optionId === 'pay'} />,
+      note:
+        optionId === 'pay'
+          ? 'Bạn cho rằng kho cháy thật, hàng mất thật, và công ty nên chi trả 4 tỷ cho ông Thịnh.'
+          : 'Bạn cho rằng đây là vụ gian lận có chủ đích: từ chối chi trả và chuyển hồ sơ cho công an.',
+    }
+  return undefined
+}
+
 export function theoryPanels(picks: Picks): ReconstructionPanel[] {
   const panels: ReconstructionPanel[] = []
   const fraud = fraudTheory[picks.fraud]
-  const arson = arsonTheory[picks.arson]
   const pay = picks.decision === 'pay'
 
   if (fraud)
@@ -323,29 +374,15 @@ export function theoryPanels(picks: Picks): ReconstructionPanel[] {
       time: 'Giả thuyết của bạn',
       title: `Kẻ khai khống: ${suspect(picks.fraud).name}`,
       text: fraud.text,
-      Art: () => (
-        <>
-          <Pinned who={picks.fraud} ids={fraud.docs} />
-          <PanelStamp text="Giả thuyết" color="#9fb4c8" />
-        </>
-      ),
+      Art: () => <FraudArt who={picks.fraud} />,
     })
-  if (arson)
+  if (arsonTheory[picks.arson])
     panels.push({
       kind: 'theory',
       time: 'Giả thuyết của bạn',
       title: `Người châm lửa: ${suspect(picks.arson).name}`,
-      text: arson.text,
-      Art: () => (
-        <>
-          <Staged zone={arson.place}>
-            <rect width="1600" height="900" fill="#3b4a66" opacity="0.35" style={{ mixBlendMode: 'color' }} />
-            <Person x={arson.x} y={arson.y} h={360} color={colorOf(picks.arson)} pose="crouch" hold="can" />
-            <text x={arson.x + 200} y={arson.y - 360} textAnchor="middle" fontSize="120" fontWeight="700" fill="#9fb4c8" opacity="0.5" fontFamily="Bitter, serif">?</text>
-          </Staged>
-          <PanelStamp text="Giả thuyết" color="#9fb4c8" />
-        </>
-      ),
+      text: arsonTheory[picks.arson].text,
+      Art: () => <ArsonArt who={picks.arson} />,
     })
   panels.push({
     kind: 'theory',
@@ -354,12 +391,7 @@ export function theoryPanels(picks: Picks): ReconstructionPanel[] {
     text: pay
       ? 'Bạn đề xuất công ty chi trả. Theo bạn, kho cháy thật, hàng mất thật, và người chủ xứng đáng được bồi thường.'
       : 'Bạn từ chối chi trả và chuyển toàn bộ hồ sơ cho công an điều tra.',
-    Art: () => (
-      <>
-        <OnDesk ids={pay ? ['P2', 'P4'] : ['P1', 'P3']} />
-        <PanelStamp text={pay ? 'Chi trả' : 'Từ chối'} color={pay ? '#3f8a7e' : '#b23a2e'} />
-      </>
-    ),
+    Art: () => <DecisionArt pay={pay} />,
   })
 
   // Take apart each wrong pick with the evidence that disproves it.

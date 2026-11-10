@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { ChevronLeft, ChevronRight, CheckCircle2, CircleHelp, RotateCcw } from 'lucide-react'
 import { questionOrder, useGame } from '@/game/store'
-import { getReconstruction } from '@/game/caseLoader'
+import { getReconstruction, getVerdictPreview } from '@/game/caseLoader'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
@@ -54,34 +54,57 @@ export default function VerdictScreen() {
   }
 
   return (
-    <div className="mx-auto max-w-3xl space-y-4 overflow-auto p-6">
+    <div className="mx-auto h-full max-w-5xl space-y-4 overflow-auto p-6">
       {!allSolved && (
         <p className="text-sm text-muted-foreground">
           Bạn mới giải {solvedQuestions.length}/{data.questions.length} câu trên bàn suy luận. Vẫn có thể nộp, nhưng sẽ là
           đoán.
         </p>
       )}
-      {data.verdict.map((slot) => (
-        <Card key={slot.id}>
-          <CardHeader>
-            <CardTitle>{slot.prompt}</CardTitle>
-          </CardHeader>
-          <CardContent className="flex flex-wrap gap-2">
-            {slot.options.map((o) => (
-              <button
-                key={o.id}
-                onClick={() => setPicks((p) => ({ ...p, [slot.id]: o.id }))}
-                className={cn(
-                  'rounded-md border px-3 py-1.5 text-sm',
-                  picks[slot.id] === o.id ? 'border-primary bg-primary/15' : 'border-border hover:bg-accent',
-                )}
-              >
-                {o.text}
-              </button>
-            ))}
-          </CardContent>
-        </Card>
-      ))}
+      {data.verdict.map((slot) => {
+        const preview = getVerdictPreview(data.id, slot.id, picks[slot.id])
+        return (
+          <Card key={slot.id} className={cn('relative overflow-hidden transition-[min-height] duration-300', preview && 'min-h-[270px]')}>
+            {preview && (
+              <>
+                {/* The picked option drawn as a scene behind the card, face visible on the right. */}
+                <div key={picks[slot.id]} className="absolute inset-y-0 right-0 aspect-video [animation:fadeIn_.35s_ease]">
+                  <div className="h-[540px] w-[960px]" style={{ zoom: 0.5 }}>
+                    <div className="relative h-full w-full" style={{ filter: 'sepia(0.2)' }}>
+                      <preview.Art />
+                    </div>
+                  </div>
+                </div>
+                <div className="absolute inset-0 bg-[linear-gradient(90deg,var(--background)_38%,color-mix(in_srgb,var(--background)_55%,transparent)_62%,transparent_85%)]" />
+              </>
+            )}
+            <div className="relative">
+              <CardHeader>
+                <CardTitle>{slot.prompt}</CardTitle>
+              </CardHeader>
+              <CardContent className="flex max-w-[62%] flex-wrap gap-2">
+                {slot.options.map((o) => (
+                  <button
+                    key={o.id}
+                    onClick={() => setPicks((p) => ({ ...p, [slot.id]: o.id }))}
+                    className={cn(
+                      'rounded-md border px-3 py-1.5 text-sm backdrop-blur-sm',
+                      picks[slot.id] === o.id ? 'border-primary bg-primary/25' : 'border-border bg-background/40 hover:bg-accent',
+                    )}
+                  >
+                    {o.text}
+                  </button>
+                ))}
+              </CardContent>
+              {preview && (
+                <p className="mx-4 mb-4 max-w-[56%] border-l-2 border-amber pl-3 text-sm italic text-amber/90">
+                  Ghi chú: {preview.note}
+                </p>
+              )}
+            </div>
+          </Card>
+        )
+      })}
       <Button
         disabled={!complete}
         onClick={() => {

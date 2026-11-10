@@ -3,7 +3,7 @@ import hoSoBoiThuong from '@/cases/ho-so-boi-thuong/case.json'
 import { sceneArt as hoSoBoiThuongScenes } from '@/cases/ho-so-boi-thuong/scenes'
 import { closeups as hoSoBoiThuongCloseups } from '@/cases/ho-so-boi-thuong/closeups'
 import { documents as hoSoBoiThuongDocuments } from '@/cases/ho-so-boi-thuong/documents'
-import { reconstruction as hoSoBoiThuongReconstruction, theoryPanels as hoSoBoiThuongTheory } from '@/cases/ho-so-boi-thuong/reconstruction'
+import { reconstruction as hoSoBoiThuongReconstruction, theoryPanels as hoSoBoiThuongTheory, verdictPreview as hoSoBoiThuongPreview } from '@/cases/ho-so-boi-thuong/reconstruction'
 import type { ReconstructionPanel } from './types'
 
 // Interrogation scripts are plain .ink text, compiled at runtime by inkjs.
@@ -62,4 +62,13 @@ export function getInkSource(caseId: string, key: string): string | undefined {
 
 export function clueById(data: CaseData, id: string) {
   return data.clues.find((c) => c.id === id)
+}
+
+const previews: Record<string, (slotId: string, optionId: string) => { Art: () => JSX.Element; note: string } | undefined> = {
+  'ho-so-boi-thuong': hoSoBoiThuongPreview,
+}
+
+/** Picture and note shown on a verdict card once the player picks an option. */
+export function getVerdictPreview(caseId: string, slotId: string, optionId?: string) {
+  return optionId ? previews[caseId]?.(slotId, optionId) : undefined
 }
