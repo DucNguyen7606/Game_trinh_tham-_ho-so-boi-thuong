@@ -1,274 +1,467 @@
+import { useId } from 'react'
 import { accent, ink, shade } from '@/art/palette'
-import { Corrugated, Lamp, LightCone, P, Puddle, Rain, SceneFrame, Scorch } from '@/art/primitives'
+import { rng } from '@/art/primitives'
 
-// Backdrops for the four zones. Objects are drawn near their hotspot positions
-// in case.json (percent of 1600 x 900).
+// Backdrops for the four zones, in the soft flat style of the portraits:
+// rounded shapes, a thin ink outline, one shadow tone and pools of lamp light.
+// Objects sit near their hotspot positions in case.json (percent of 1600 x 900).
+
+const LINE = ink.night
+const O = { stroke: LINE, strokeWidth: 3, strokeLinejoin: 'round' as const, strokeLinecap: 'round' as const }
+
+const C = {
+  sky: '#26232b',
+  skyLow: '#3a2f33',
+  wall: '#5a4134',
+  wallDark: '#3e2c24',
+  wallLit: '#8a6448',
+  floor: '#3a2b23',
+  floorLit: '#6b4c36',
+  metal: '#6f7477',
+  metalDark: '#4b5054',
+  wood: '#7a4f32',
+  woodDark: '#573721',
+  soot: '#1f1714',
+  plastic: '#c4452d',
+  water: '#4f6f72',
+  leaf: '#4f7a4a',
+}
+
+/** Shared frame: soft colour grade and vignette, lighter than the old grainy look. */
+function SoftFrame({ children, label }: { children: React.ReactNode; label: string }) {
+  const id = useId()
+  return (
+    <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" className="absolute inset-0 h-full w-full" role="img" aria-label={label}>
+      <defs>
+        <radialGradient id={`${id}-vig`} cx="0.5" cy="0.48" r="0.78">
+          <stop offset="0.6" stopColor={ink.night} stopOpacity="0" />
+          <stop offset="1" stopColor={ink.night} stopOpacity="0.6" />
+        </radialGradient>
+      </defs>
+      {children}
+      <rect width="1600" height="900" fill={accent.amber} opacity="0.06" style={{ mixBlendMode: 'overlay' }} />
+      <rect width="1600" height="900" fill={`url(#${id}-vig)`} />
+    </svg>
+  )
+}
+
+/** Warm pool of light under a lamp. */
+function Glow({ x, y, r, o = 0.5, color = accent.amber }: { x: number; y: number; r: number; o?: number; color?: string }) {
+  const id = useId()
+  return (
+    <g>
+      <defs>
+        <radialGradient id={id}>
+          <stop offset="0" stopColor={color} stopOpacity={o} />
+          <stop offset="1" stopColor={color} stopOpacity="0" />
+        </radialGradient>
+      </defs>
+      <circle cx={x} cy={y} r={r} fill={`url(#${id})`} />
+    </g>
+  )
+}
+
+function Beam({ x, y, w, h, o = 0.28 }: { x: number; y: number; w: number; h: number; o?: number }) {
+  const id = useId()
+  return (
+    <g>
+      <defs>
+        <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#ffd98f" stopOpacity={o} />
+          <stop offset="1" stopColor="#ffd98f" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      <path d={`M${x - 10},${y} L${x + 10},${y} L${x + w / 2},${y + h} Q${x},${y + h + 20} ${x - w / 2},${y + h} Z`} fill={`url(#${id})`} />
+    </g>
+  )
+}
+
+function Bulb({ x, y }: { x: number; y: number }) {
+  return (
+    <g>
+      <path d={`M${x - 28},${y} Q${x},${y - 30} ${x + 28},${y} Z`} fill={ink.night} {...O} />
+      <circle cx={x} cy={y + 6} r="9" fill="#fff1c9" />
+    </g>
+  )
+}
+
+function Rain({ seed = 7, count = 110 }: { seed?: number; count?: number }) {
+  const r = rng(seed)
+  return (
+    <g stroke="#cdbfa8" strokeWidth="2" strokeLinecap="round" opacity="0.28">
+      {Array.from({ length: count }, (_, i) => {
+        const x = r() * 1700 - 50, y = r() * 900, l = 18 + r() * 26
+        return <line key={i} x1={x} y1={y} x2={x - l * 0.2} y2={y + l} />
+      })}
+    </g>
+  )
+}
+
+function Puddle({ x, y, w, o = 0.5 }: { x: number; y: number; w: number; o?: number }) {
+  return (
+    <g>
+      <ellipse cx={x} cy={y} rx={w / 2} ry={w / 12} fill={C.water} opacity={o} />
+      <path d={`M${x - w / 4},${y - 2} Q${x},${y - 6} ${x + w / 5},${y - 2}`} stroke="#d9e3dd" strokeWidth="3" fill="none" opacity="0.4" strokeLinecap="round" />
+    </g>
+  )
+}
+
+function Stool({ x, y, c = C.plastic }: { x: number; y: number; c?: string }) {
+  return (
+    <g {...O}>
+      <path d={`M${x - 34},${y - 60} L${x + 34},${y - 60} L${x + 28},${y} L${x - 28},${y} Z`} fill={shade(c, -0.15)} />
+      <rect x={x - 40} y={y - 72} width="80" height="16" rx="6" fill={c} />
+      <path d={`M${x - 14},${y - 40} h28`} stroke={shade(c, -0.35)} />
+    </g>
+  )
+}
+
+/** Soft soot stain rising from a base point. */
+function Soot({ x, y, w, h }: { x: number; y: number; w: number; h: number }) {
+  return (
+    <g fill={C.soot}>
+      <path d={`M${x - w * 0.18},${y} C${x - w * 0.5},${y - h * 0.4} ${x - w * 0.55},${y - h * 0.8} ${x - w * 0.38},${y - h} C${x - w * 0.2},${y - h * 0.82} ${x - w * 0.05},${y - h * 0.95} ${x},${y - h * 0.82} C${x + w * 0.08},${y - h * 0.98} ${x + w * 0.3},${y - h * 0.86} ${x + w * 0.42},${y - h} C${x + w * 0.56},${y - h * 0.75} ${x + w * 0.45},${y - h * 0.4} ${x + w * 0.18},${y} Z`} opacity="0.8" />
+      <path d={`M${x - w * 0.1},${y} C${x - w * 0.3},${y - h * 0.4} ${x - w * 0.3},${y - h * 0.6} ${x},${y - h * 0.68} C${x + w * 0.3},${y - h * 0.6} ${x + w * 0.3},${y - h * 0.4} ${x + w * 0.1},${y} Z`} fill="#0e0a08" opacity="0.7" />
+    </g>
+  )
+}
+
+// --------------------------------------------------------------------------
+// 1. Gate and the guard hut
 
 function Gate() {
   return (
-    <SceneFrame label="Cổng kho và chòi bảo vệ trong đêm mưa">
-      <rect width="1600" height="900" fill={ink.night} />
-      {/* Alley walls and far neon */}
-      <polygon points={P([[0, 0], [380, 120], [380, 640], [0, 900]])} fill={ink.slate} />
-      <polygon points={P([[1600, 0], [1260, 140], [1260, 640], [1600, 900]])} fill={shade(ink.slate, -0.2)} />
-      <rect x="1290" y="210" width="150" height="46" fill="none" stroke={accent.teal} strokeWidth="5" opacity="0.8" />
-      <rect x="1290" y="210" width="150" height="46" fill={accent.teal} opacity="0.12" />
-      {/* Brick courses on the alley walls */}
-      {Array.from({ length: 14 }, (_, i) => (
-        <line key={`bl${i}`} x1="0" y1={150 + i * 40} x2="380" y2={230 + i * 30} stroke={ink.night} strokeWidth="2" opacity="0.35" />
+    <SoftFrame label="Cổng kho và chòi bảo vệ trong đêm mưa">
+      <rect width="1600" height="900" fill={C.sky} />
+      {/* Far rooftops with a few lit windows */}
+      <path d="M0,200 L0,120 L120,120 L120,80 L260,80 L260,140 L420,140 L420,60 L560,60 L560,150 L760,150 L760,100 L900,100 L900,160 L1100,160 L1100,70 L1260,70 L1260,130 L1420,130 L1420,90 L1600,90 L1600,200 Z" fill={C.skyLow} />
+      {[[170, 100], [460, 90], [500, 90], [1150, 100], [1200, 100], [1480, 110]].map(([x, y]) => (
+        <rect key={`${x}`} x={x} y={y} width="22" height="16" rx="3" fill={accent.amber} opacity="0.55" />
       ))}
-      {Array.from({ length: 12 }, (_, i) => (
-        <line key={`br${i}`} x1="1260" y1={200 + i * 36} x2="1600" y2={140 + i * 50} stroke={ink.night} strokeWidth="2" opacity="0.35" />
-      ))}
-      {/* Electric meters and tangled wires */}
-      {[0, 1, 2].map((i) => (
-        <rect key={i} x={1290 + i * 50} y="330" width="40" height="54" fill={ink.dusk} stroke={ink.night} strokeWidth="3" />
-      ))}
-      <path d="M1290 330 C 1200 200, 1000 260, 900 180 S 600 120, 380 160" fill="none" stroke={ink.night} strokeWidth="4" />
-      <path d="M1340 330 C 1260 240, 1100 300, 980 220" fill="none" stroke={ink.night} strokeWidth="3" />
-      {/* Laundry on a line across the alley */}
-      <line x1="380" y1="130" x2="1260" y2="150" stroke={ink.night} strokeWidth="2" />
-      <polygon points={P([[1100, 146], [1160, 147], [1156, 210], [1104, 208]])} fill={accent.teal} opacity="0.75" />
-      <polygon points={P([[1180, 148], [1220, 149], [1224, 196], [1178, 196]])} fill={accent.rust} opacity="0.75" />
       {/* Ground */}
-      <polygon points={P([[0, 900], [380, 640], [1260, 640], [1600, 900]])} fill={shade(ink.steel, -0.35)} />
-      <Puddle x={700} y={800} w={420} color={accent.amber} />
-      <Puddle x={1150} y={760} w={260} color={accent.teal} />
-      {/* Parked motorbike in the rain */}
-      <g transform="translate(1110 560)">
-        <circle cx="0" cy="70" r="34" fill={ink.night} />
-        <circle cx="170" cy="70" r="34" fill={ink.night} />
-        <circle cx="0" cy="70" r="12" fill={ink.dusk} />
-        <circle cx="170" cy="70" r="12" fill={ink.dusk} />
-        <polygon points={P([[-10, 40], [60, 10], [150, 14], [190, 50], [160, 70], [20, 70]])} fill={accent.red} />
-        <polygon points={P([[60, 10], [150, 14], [140, 0], [70, -4]])} fill={ink.night} />
-        <line x1="180" y1="44" x2="200" y2="-20" stroke={ink.dusk} strokeWidth="8" />
-        <circle cx="205" cy="-22" r="10" fill={accent.amber} opacity="0.7" />
-      </g>
-      {/* Red plastic stools by the booth */}
-      {[[1020, 640], [1068, 652]].map(([x, y], i) => (
-        <g key={i}>
-          <polygon points={P([[x - 26, y - 50], [x + 26, y - 50], [x + 20, y], [x - 20, y]])} fill={accent.red} />
-          <rect x={x - 28} y={y - 56} width="56" height="8" fill={shade(accent.red, 0.15)} />
+      <path d="M0,700 L1600,700 L1600,900 L0,900 Z" fill={C.floor} />
+      <path d="M0,700 L1600,700 L1600,712 L0,712 Z" fill={shade(C.floor, -0.25)} />
+
+      {/* Warehouse front with its rolling shutter */}
+      <rect x="740" y="190" width="620" height="512" fill={C.wall} {...O} />
+      <rect x="780" y="250" width="300" height="452" rx="4" fill={C.metal} {...O} />
+      {Array.from({ length: 18 }, (_, i) => (
+        <line key={i} x1="784" x2="1076" y1={272 + i * 24} y2={272 + i * 24} stroke={C.metalDark} strokeWidth="4" />
+      ))}
+      <path d="M780,250 h300 v34 h-300 Z" fill={C.metalDark} {...O} />
+      <rect x="840" y="208" width="190" height="34" rx="6" fill={accent.teal} {...O} />
+      <text x="935" y="232" textAnchor="middle" fontSize="20" fontWeight="700" fill="#e9f1ec" fontFamily="Barlow Condensed, sans-serif">
+        KHO VẢI THỊNH PHÁT
+      </text>
+      {/* Laundry line and the wall fan (hotspot cong-quat at 1120,360) */}
+      <path d="M1090,230 Q1220,260 1350,226" fill="none" stroke={LINE} strokeWidth="2" />
+      <rect x="1140" y="236" width="44" height="50" rx="4" fill={accent.teal} {...O} />
+      <rect x="1220" y="244" width="40" height="44" rx="4" fill={accent.rust} {...O} />
+      <rect x="1104" y="404" width="34" height="12" rx="3" fill={C.woodDark} {...O} />
+      <circle cx="1120" cy="360" r="44" fill="#d8cdb6" {...O} />
+      <circle cx="1120" cy="360" r="34" fill="none" stroke={LINE} strokeWidth="2" opacity="0.6" />
+      <path d="M1120,360 L1150,340 L1144,330 Z M1120,360 L1094,384 L1104,392 Z" fill={C.metalDark} stroke={LINE} strokeWidth="2" />
+      <circle cx="1120" cy="360" r="7" fill={LINE} />
+      {/* Electric meters and wires */}
+      {[1200, 1260].map((x) => (
+        <g key={x}>
+          <rect x={x} y="440" width="46" height="62" rx="6" fill="#cfc6b2" {...O} />
+          <rect x={x + 8} y="452" width="30" height="16" rx="2" fill={accent.teal} opacity="0.7" />
         </g>
       ))}
-      {/* Guard booth */}
-      <Corrugated x={300} y={210} w={700} h={40} fill={ink.dusk} rib={shade(ink.dusk, -0.3)} />
-      <rect x="320" y="250" width="660" height="430" fill={ink.steel} />
-      <rect x="360" y="290" width="580" height="260" fill={shade(accent.amber, -0.7)} />
-      <LightCone x={650} y={290} w={620} h={330} color={accent.amber} strength={0.45} />
-      <circle cx="650" cy="296" r="10" fill={accent.amber} />
-      {/* Table, cups and bottle */}
-      <rect x="360" y="560" width="580" height="24" fill={shade(ink.dusk, -0.2)} />
-      <polygon points={P([[490, 530], [512, 530], [508, 560], [494, 560]])} fill={ink.bone} opacity="0.85" />
-      <polygon points={P([[524, 532], [546, 532], [542, 560], [528, 560]])} fill={ink.bone} opacity="0.85" />
-      <polygon points={P([[578, 470], [592, 470], [592, 500], [604, 516], [604, 560], [566, 560], [566, 516], [578, 500]])} fill={shade(accent.amber, -0.3)} />
-      {/* Log book */}
-      <polygon points={P([[780, 620], [890, 612], [900, 668], [790, 676]])} fill={ink.paper} />
-      <line x1="835" y1="616" x2="845" y2="672" stroke={shade(ink.paper, -0.4)} strokeWidth="2" />
-      {/* Fan on a shelf */}
-      <rect x="1040" y="400" width="160" height="12" fill={ink.dusk} />
-      <circle cx="1120" cy="350" r="44" fill="none" stroke={ink.fog} strokeWidth="4" />
-      <polygon points={P([[1120, 350], [1150, 320], [1156, 334]])} fill={ink.fog} />
-      <polygon points={P([[1120, 350], [1092, 372], [1086, 358]])} fill={ink.fog} />
-      <rect x="1114" y="394" width="12" height="8" fill={ink.fog} />
-      {/* Gate bars */}
-      {Array.from({ length: 9 }, (_, i) => (
-        <rect key={i} x={1010 + i * 26} y="250" width="6" height="430" fill={ink.night} opacity="0.7" />
+      <path d="M1220,440 C1220,380 1300,360 1360,330 M1282,440 C1290,400 1340,380 1360,360" fill="none" stroke={LINE} strokeWidth="3" />
+
+      {/* Street lamp light over the gate */}
+      <Beam x={1000} y={160} w={560} h={560} o={0.18} />
+
+      {/* Guard hut */}
+      <Glow x={470} y={410} r={300} o={0.45} />
+      <rect x="220" y="250" width="480" height="452" rx="10" fill={C.wallDark} {...O} />
+      <path d="M196,250 Q460,196 724,250 L724,272 L196,272 Z" fill={C.metal} {...O} />
+      {Array.from({ length: 14 }, (_, i) => (
+        <line key={i} x1={214 + i * 36} x2={214 + i * 36} y1="230" y2="270" stroke={C.metalDark} strokeWidth="3" opacity="0.8" />
       ))}
-      <Rain seed={11} />
-    </SceneFrame>
+      {/* Lit window with its counter */}
+      <rect x="252" y="300" width="416" height="236" rx="8" fill="#e9b766" {...O} />
+      <rect x="252" y="300" width="416" height="236" rx="8" fill="#f6d79a" opacity="0.4" />
+      <path d="M252,300 L360,300 L300,536 L252,536 Z" fill="#fff0c9" opacity="0.25" />
+      <Bulb x={460} y={318} />
+      <Beam x={460} y={326} w={360} h={210} o={0.35} />
+      {/* Calendar and a small radio inside the hut */}
+      <rect x="590" y="332" width="54" height="66" rx="3" fill="#f3e4c4" {...O} />
+      <rect x="590" y="332" width="54" height="16" rx="3" fill={accent.red} />
+      <rect x="290" y="472" width="70" height="40" rx="8" fill={C.metalDark} {...O} />
+      <circle cx="342" cy="492" r="10" fill={C.metal} stroke={LINE} strokeWidth="2" />
+      <rect x="236" y="528" width="448" height="24" rx="6" fill={C.wood} {...O} />
+      {/* Two glasses and the rice wine (hotspot cong-ly at 512,522) */}
+      {[488, 528].map((x, i) => (
+        <g key={x}>
+          <path d={`M${x - 14},${494} L${x + 14},${494} L${x + 11},${528} L${x - 11},${528} Z`} fill="#fff6e2" opacity="0.75" {...O} strokeWidth={2.5} />
+          {i === 0 && <path d={`M${x - 12},${514} L${x + 12},${514} L${x + 11},${527} L${x - 11},${527} Z`} fill={accent.amber} />}
+        </g>
+      ))}
+      <path d="M576,528 L576,486 Q576,474 586,470 L586,448 L598,448 L598,470 Q608,474 608,486 L608,528 Z" fill={accent.gold} {...O} strokeWidth={2.5} />
+      <rect x="578" y="492" width="28" height="18" rx="2" fill="#f3e4c4" />
+      <rect x="236" y="552" width="448" height="150" fill={C.wallDark} {...O} />
+      <rect x="270" y="580" width="140" height="90" rx="6" fill="none" stroke={shade(C.wallDark, -0.3)} strokeWidth="4" />
+      <rect x="510" y="580" width="140" height="90" rx="6" fill="none" stroke={shade(C.wallDark, -0.3)} strokeWidth="4" />
+
+      {/* Stools and the night log (hotspot cong-so at 832,648) */}
+      <Stool x={760} y={760} />
+      <rect x="770" y="650" width="150" height="16" rx="5" fill={C.wood} {...O} />
+      <path d="M786,666 L780,760 M904,666 L910,760" stroke={LINE} strokeWidth="6" strokeLinecap="round" />
+      <path d="M790,648 L832,638 L874,648 L874,620 L832,612 L790,620 Z" fill="#f3e4c4" {...O} strokeWidth={2.5} />
+      <path d="M832,612 L832,638" stroke={LINE} strokeWidth="2" />
+      {/* Parked scooter */}
+      <g {...O}>
+        <circle cx="1100" cy="740" r="34" fill="#221a16" />
+        <circle cx="1270" cy="740" r="34" fill="#221a16" />
+        <circle cx="1100" cy="740" r="12" fill={C.metal} />
+        <circle cx="1270" cy="740" r="12" fill={C.metal} />
+        <path d="M1066,720 Q1080,660 1160,664 L1230,664 Q1290,664 1304,716 L1250,720 L1120,722 Z" fill={accent.rust} />
+        <rect x="1150" y="644" width="96" height="22" rx="10" fill="#2b2220" />
+        <path d="M1280,700 L1300,600 L1326,596" fill="none" strokeWidth="6" />
+      </g>
+      <Puddle x={470} y={790} w={320} />
+      <Puddle x={1180} y={830} w={260} o={0.4} />
+      <Rain seed={7} />
+    </SoftFrame>
   )
 }
 
+// --------------------------------------------------------------------------
+// 2. Inside the burnt warehouse
+
 function Warehouse() {
+  const racks = [160, 560, 960, 1360]
   return (
-    <SceneFrame label="Khu hàng cháy đen trong kho">
-      <rect width="1600" height="900" fill={shade(ink.night, -0.2)} />
-      {/* Back wall and burnt roof hole */}
-      <rect x="0" y="0" width="1600" height="560" fill={ink.slate} />
-      <polygon points={P([[620, 0], [980, 0], [940, 40], [660, 40]])} fill={ink.fog} opacity="0.5" />
-      <LightCone x={800} y={20} w={760} h={720} color={ink.fog} strength={0.28} />
-      <Scorch x={300} y={560} w={600} h={520} seed={5} />
-      <Scorch x={1300} y={560} w={520} h={460} seed={9} />
-      {/* Burnt roof beams sagging */}
-      <polygon points={P([[0, 60], [1600, 30], [1600, 54], [0, 86]])} fill={ink.night} />
-      <polygon points={P([[300, 0], [340, 0], [520, 250], [490, 262]])} fill={ink.night} />
-      {[260, 700, 1180].map((x) => (
-        <line key={x} x1={x} y1="70" x2={x + 8} y2="220" stroke={ink.night} strokeWidth="3" strokeDasharray="8 4" />
+    <SoftFrame label="Khu chứa hàng sau vụ cháy">
+      <rect width="1600" height="900" fill="#2e2622" />
+      {/* Roof trusses with a hole letting in the grey morning */}
+      <path d="M0,0 L1600,0 L1600,180 L0,180 Z" fill="#241d1a" />
+      <path d="M560,0 L860,0 L820,120 L600,120 Z" fill="#8c8b88" opacity="0.5" />
+      <Beam x={710} y={60} w={520} h={720} o={0.22} />
+      {Array.from({ length: 9 }, (_, i) => (
+        <path key={i} d={`M${i * 200 - 40},180 L${i * 200 + 60},40 L${i * 200 + 160},180`} fill="none" stroke="#1a1411" strokeWidth="10" strokeLinejoin="round" />
       ))}
-      {/* Floor */}
-      <polygon points={P([[0, 560], [1600, 560], [1600, 900], [0, 900]])} fill={shade(ink.steel, -0.45)} />
-      {/* Racks */}
-      {[140, 520, 980, 1360].map((x, i) => (
-        <g key={i}>
-          <rect x={x - 6} y="180" width="10" height="400" fill={ink.night} />
-          <rect x={x + 186} y="180" width="10" height="400" fill={ink.night} />
-          {[260, 380, 500].map((y) => (
-            <polygon key={y} points={P([[x - 10, y], [x + 200, y + (i % 2 ? 8 : -6)], [x + 200, y + 10], [x - 10, y + 12]])} fill={shade(ink.night, 0.1)} />
+      <path d="M0,180 L1600,180" stroke="#1a1411" strokeWidth="14" />
+      {/* Back wall, sooty */}
+      <rect x="0" y="180" width="1600" height="420" fill={C.wallDark} />
+      <g opacity="0.55">
+        <Soot x={300} y={600} w={500} h={420} />
+        <Soot x={1200} y={600} w={420} h={360} />
+      </g>
+      {/* Floor with water */}
+      <path d="M0,600 L1600,600 L1600,900 L0,900 Z" fill={C.floor} />
+      <Puddle x={760} y={760} w={620} o={0.55} />
+      <Puddle x={1260} y={840} w={300} o={0.45} />
+
+      {/* Shelving racks with burnt rolls */}
+      {racks.map((x, k) => (
+        <g key={x}>
+          <rect x={x - 130} y="260" width="18" height="360" fill={C.metalDark} {...O} />
+          <rect x={x + 112} y="260" width="18" height="360" fill={C.metalDark} {...O} />
+          {[330, 470].map((y) => (
+            <g key={y}>
+              <rect x={x - 136} y={y} width="272" height="14" rx="3" fill={C.metal} {...O} />
+              {[-90, -30, 30, 90].map((dx, j) => {
+                const burnt = (k + j + y) % 3 !== 0
+                return (
+                  <g key={dx}>
+                    <rect x={x + dx - 26} y={y - 70} width="52" height="70" rx="12" fill={burnt ? '#2a201b' : ['#7a9fb0', '#cf9a32', '#b0583a', '#ece2cf'][j]} {...O} />
+                    <ellipse cx={x + dx} cy={y - 70} rx="26" ry="9" fill={burnt ? '#3a2c24' : '#e8dcc4'} stroke={LINE} strokeWidth="2" />
+                    {burnt && <circle cx={x + dx} cy={y - 70} r="5" fill="#c9b48a" />}
+                  </g>
+                )
+              })}
+            </g>
           ))}
         </g>
       ))}
-      {/* Charred rolls: three on the floor near the hotspot, one split open */}
-      {[[620, 470], [700, 490], [780, 462]].map(([x, y], i) => (
-        <g key={i}>
-          <rect x={x - 30} y={y - 70} width="60" height="130" fill={ink.night} />
-          <ellipse cx={x} cy={y - 70} rx="30" ry="10" fill={shade(ink.steel, -0.2)} />
-          <ellipse cx={x} cy={y - 70} rx="9" ry="3" fill={ink.paper} opacity="0.7" />
-        </g>
-      ))}
-      <polygon points={P([[700, 520], [760, 530], [800, 580], [690, 570]])} fill={ink.paper} opacity="0.55" />
-      <circle cx="745" cy="560" r="3" fill={accent.ember} />
-      <Lamp x={1180} y={140} reach={460} spread={480} />
-      {/* Water left by the fire hoses, reflecting the light */}
-      <ellipse cx="900" cy="760" rx="380" ry="40" fill={ink.fog} opacity="0.12" />
-      <ellipse cx="1000" cy="770" rx="160" ry="14" fill={accent.amber} opacity="0.18" />
-      {/* Fallen rolls spilling into the aisle */}
-      {[[420, 700, -20], [520, 730, 10], [860, 690, 70]].map(([x, y, r], i) => (
-        <g key={i} transform={`rotate(${r} ${x} ${y})`}>
-          <rect x={x - 70} y={y - 24} width="140" height="48" fill={ink.night} />
-          <ellipse cx={x + 70} cy={y} rx="10" ry="24" fill={shade(accent.rust, -0.5)} />
-          <ellipse cx={x + 70} cy={y} rx="4" ry="9" fill={ink.paper} opacity="0.6" />
-        </g>
-      ))}
-      {/* Fire extinguisher left on the floor */}
-      <g transform="translate(1460 600)">
-        <rect x="0" y="0" width="34" height="90" rx="10" fill={accent.red} />
-        <rect x="8" y="-14" width="18" height="16" fill={ink.night} />
-        <path d="M26 -8 q30 0 30 40" fill="none" stroke={ink.night} strokeWidth="5" />
+      {/* The half-burnt roll pulled out (hotspot hang-cuon at 720,450) */}
+      <g transform="rotate(-8 720 450)">
+        <rect x="640" y="420" width="170" height="60" rx="26" fill="#cf9a32" {...O} />
+        <rect x="640" y="420" width="90" height="60" rx="26" fill="#2a201b" {...O} />
+        <ellipse cx="810" cy="450" rx="16" ry="30" fill="#e8dcc4" {...O} />
+        <ellipse cx="810" cy="450" rx="8" ry="15" fill="#c9b48a" stroke={LINE} strokeWidth="2" />
       </g>
-      {/* Pallets */}
-      {[0, 1, 2].map((i) => (
-        <rect key={i} x={220} y={590 + i * 22} width="210" height="14" fill={shade(accent.rust, -0.55)} />
+      {/* Fallen rolls on the floor */}
+      {[[460, 700, 12], [900, 690, -6], [1080, 720, 18]].map(([x, y, r]) => (
+        <g key={x} transform={`rotate(${r} ${x} ${y})`}>
+          <rect x={x - 80} y={y - 24} width="160" height="48" rx="22" fill="#2a201b" {...O} />
+          <ellipse cx={x + 80} cy={y} rx="12" ry="24" fill="#c9b48a" {...O} />
+        </g>
       ))}
-      {/* Hand pallet truck */}
-      <polygon points={P([[1160, 600], [1340, 600], [1340, 616], [1160, 616]])} fill={ink.dusk} />
-      <line x1="1170" y1="600" x2="1140" y2="470" stroke={ink.dusk} strokeWidth="10" />
-      <circle cx="1180" cy="626" r="12" fill={ink.night} />
-      <circle cx="1320" cy="626" r="12" fill={ink.night} />
-    </SceneFrame>
+      {/* Pallet pile (hotspot hang-pallet at 320,612) */}
+      {[0, 1, 2].map((i) => (
+        <g key={i}>
+          <rect x={220} y={640 - i * 34} width="210" height="16" rx="3" fill={C.wood} {...O} />
+          {[232, 310, 398].map((x) => (
+            <rect key={x} x={x} y={656 - i * 34} width="22" height="18" fill={C.woodDark} {...O} strokeWidth={2} />
+          ))}
+        </g>
+      ))}
+      {/* Hand pallet jack (hotspot hang-xe at 1248,558) */}
+      <g {...O}>
+        <path d="M1150,640 L1340,640 L1340,620 L1170,620 Z" fill={accent.rust} />
+        <rect x="1300" y="560" width="40" height="64" rx="8" fill={shade(accent.rust, -0.2)} />
+        <path d="M1320,560 L1240,470" fill="none" strokeWidth="10" />
+        <path d="M1226,456 Q1240,440 1258,456" fill="none" strokeWidth="8" />
+        <circle cx="1180" cy="648" r="14" fill="#221a16" />
+        <circle cx="1320" cy="648" r="16" fill="#221a16" />
+      </g>
+      {/* Fire extinguisher and a work lamp */}
+      <rect x="1460" y="560" width="42" height="96" rx="16" fill={accent.red} {...O} />
+      <path d="M1470,560 L1470,540 L1500,536" fill="none" {...O} />
+      <Glow x={1420} y={420} r={220} o={0.35} />
+      <path d="M1400,700 L1420,440 M1440,700 L1420,440 M1380,700 L1420,440" stroke={LINE} strokeWidth="5" />
+      <path d="M1390,440 L1450,440 L1438,400 L1402,400 Z" fill={accent.amber} {...O} />
+    </SoftFrame>
   )
 }
+
+// --------------------------------------------------------------------------
+// 3. The office, where the fire started
 
 function Office() {
   return (
-    <SceneFrame label="Văn phòng nơi đám cháy bắt đầu">
-      <rect width="1600" height="900" fill={ink.night} />
-      {/* Walls: left wall carries the V-shaped burn */}
-      <polygon points={P([[0, 0], [640, 0], [640, 620], [0, 820]])} fill={ink.steel} />
-      <polygon points={P([[640, 0], [1600, 0], [1600, 820], [640, 620]])} fill={ink.slate} />
-      <polygon points={P([[0, 820], [640, 620], [1600, 820], [1600, 900], [0, 900]])} fill={shade(ink.steel, -0.5)} />
-      <Scorch x={360} y={720} w={460} h={640} seed={2} />
-      <polygon points={P([[300, 720], [420, 720], [380, 600], [340, 600]])} fill={accent.rust} opacity="0.35" />
-      {/* Burnt filing cabinet and the coil stand under it */}
-      <rect x="290" y="520" width="190" height="180" fill={ink.night} />
-      <line x1="290" y1="580" x2="480" y2="580" stroke={ink.steel} strokeWidth="3" />
-      <line x1="290" y1="640" x2="480" y2="640" stroke={ink.steel} strokeWidth="3" />
-      <g fill="none" stroke={ink.fog} strokeWidth="3">
-        <path d="M432 690 l30 0 m-15 -10 l0 20" />
-      </g>
-      <ellipse cx="447" cy="692" rx="30" ry="6" fill={accent.rust} opacity="0.45" />
-      {/* Shelf of binders on the right wall */}
-      <rect x="1360" y="360" width="200" height="12" fill={ink.night} />
+    <SoftFrame label="Văn phòng kho, nơi lửa bắt đầu">
+      <rect width="1600" height="900" fill={C.wall} />
+      <rect y="0" width="1600" height="60" fill={C.wallDark} />
+      {/* Floor */}
+      <path d="M0,700 L1600,700 L1600,900 L0,900 Z" fill={C.floor} />
       {Array.from({ length: 8 }, (_, i) => (
-        <rect key={i} x={1366 + i * 24} y={276 - (i % 3) * 6} width="20" height={84 + (i % 3) * 6} fill={[accent.teal, accent.rust, ink.dusk, accent.amber][i % 4]} opacity="0.75" />
+        <line key={i} x1={i * 220 - 60} y1="700" x2={i * 260 - 300} y2="900" stroke={shade(C.floor, -0.2)} strokeWidth="3" />
       ))}
+      {/* V-shaped burn on the wall above the cabinet (hotspot vp-tuong at 352,270) */}
+      <Soot x={355} y={430} w={520} h={420} />
       {/* Wall clock, stopped */}
-      <circle cx="560" cy="140" r="44" fill={ink.bone} stroke={ink.night} strokeWidth="6" />
-      <line x1="560" y1="140" x2="560" y2="110" stroke={ink.night} strokeWidth="4" />
-      <line x1="560" y1="140" x2="584" y2="148" stroke={ink.night} strokeWidth="3" />
-      <Scorch x={560} y={190} w={140} h={90} seed={8} />
-      {/* Window with rain */}
-      <rect x="760" y="140" width="320" height="230" fill={shade(accent.teal, -0.65)} />
-      <rect x="760" y="140" width="320" height="230" fill="none" stroke={ink.night} strokeWidth="10" />
-      <line x1="920" y1="140" x2="920" y2="370" stroke={ink.night} strokeWidth="8" />
-      {/* Desk and computer tower */}
-      <polygon points={P([[780, 520], [1260, 520], [1300, 560], [740, 560]])} fill={shade(accent.rust, -0.6)} />
-      <rect x="760" y="560" width="20" height="160" fill={ink.night} />
-      <rect x="1260" y="560" width="20" height="160" fill={ink.night} />
-      <rect x="940" y="400" width="110" height="120" fill={ink.dusk} />
-      <rect x="958" y="430" width="74" height="22" fill={ink.night} />
-      {[0, 1, 2, 3].map((i) => (
-        <circle key={i} cx={1090 + i * 14} cy="512" r="4" fill={ink.fog} />
+      <circle cx="640" cy="170" r="48" fill="#efe3c8" {...O} />
+      <path d="M640,170 L640,138 M640,170 L662,182" stroke={LINE} strokeWidth="4" strokeLinecap="round" />
+      {/* Window at night */}
+      <rect x="780" y="140" width="300" height="200" rx="8" fill="#2c4a4a" {...O} />
+      <path d="M930,140 V340 M780,240 H1080" stroke={LINE} strokeWidth="5" />
+      <path d="M800,160 L860,160 L800,230 Z" fill="#fff" opacity="0.12" />
+      {/* Calendar with the 20th circled (hotspot vp-lich at 1280,225) */}
+      <rect x="1230" y="150" width="104" height="134" rx="4" fill="#f3e4c4" {...O} />
+      <rect x="1230" y="150" width="104" height="30" rx="4" fill={accent.red} {...O} />
+      {Array.from({ length: 20 }, (_, i) => (
+        <rect key={i} x={1242 + (i % 5) * 18} y={192 + Math.floor(i / 5) * 20} width="10" height="8" fill={LINE} opacity="0.35" />
       ))}
-      {/* Desk lamp, knocked over but still lit from the street outside */}
-      <Lamp x={1180} y={470} reach={60} spread={360} />
-      <line x1="1180" y1="452" x2="1210" y2="520" stroke={ink.night} strokeWidth="6" />
-      {/* Toppled office chair */}
-      <g transform="rotate(-70 1340 760)">
-        <rect x="1300" y="680" width="90" height="20" fill={ink.night} />
-        <rect x="1300" y="610" width="16" height="80" fill={ink.night} />
-        <line x1="1345" y1="700" x2="1345" y2="760" stroke={ink.night} strokeWidth="8" />
+      <circle cx="1304" cy="236" r="12" fill="none" stroke={accent.red} strokeWidth="3" />
+      {/* Shelf of binders */}
+      <rect x="1360" y="330" width="200" height="12" fill={C.woodDark} {...O} />
+      {['#7a9fb0', '#cf9a32', '#4f7a4a', '#b0583a', '#ece2cf', '#7a9fb0', '#cf9a32'].map((c, i) => (
+        <rect key={i} x={1368 + i * 27} y="250" width="22" height="80" rx="3" fill={c} {...O} strokeWidth={2} />
+      ))}
+
+      {/* Burnt ledger cabinet; the metal coil holder lies under it (hotspot vp-de at 448,684) */}
+      <rect x="250" y="390" width="230" height="290" rx="6" fill="#3a2a22" {...O} />
+      <rect x="270" y="410" width="190" height="120" rx="4" fill="#2a1f1a" {...O} />
+      <rect x="270" y="546" width="190" height="120" rx="4" fill="#2a1f1a" {...O} />
+      {[290, 330, 370, 410].map((x) => (
+        <rect key={x} x={x} y="430" width="28" height="90" rx="3" fill="#1f1714" stroke={LINE} strokeWidth="2" />
+      ))}
+      <rect x="262" y="680" width="18" height="24" fill={C.metalDark} {...O} />
+      <rect x="450" y="680" width="18" height="24" fill={C.metalDark} {...O} />
+      <circle cx="420" cy="694" r="16" fill="none" stroke="#9aa0a3" strokeWidth="4" />
+      <path d="M410,694 h20 M420,684 v20" stroke="#9aa0a3" strokeWidth="3" />
+      <path d="M460,700 Q500,690 540,704" fill="none" stroke="#1a1411" strokeWidth="10" opacity="0.6" />
+
+      {/* Desk with lamp, burnt papers, and the opened computer (hotspot vp-may at 992,495) */}
+      <Glow x={1180} y={420} r={260} o={0.4} />
+      <rect x="760" y="480" width="560" height="26" rx="6" fill={C.wood} {...O} />
+      <rect x="780" y="506" width="20" height="194" fill={C.woodDark} {...O} />
+      <rect x="1280" y="506" width="20" height="194" fill={C.woodDark} {...O} />
+      <rect x="940" y="378" width="104" height="102" rx="6" fill="#8d9296" {...O} />
+      <rect x="954" y="392" width="76" height="74" rx="4" fill="#2a2f33" {...O} strokeWidth={2} />
+      <rect x="966" y="430" width="52" height="22" rx="2" fill="none" stroke={accent.amber} strokeWidth="3" strokeDasharray="6 5" />
+      {[[970, 400], [1010, 400]].map(([x, y]) => (
+        <circle key={x} cx={x} cy={y} r="3" fill="#c9cdd0" />
+      ))}
+      <path d="M1180,480 L1200,420 L1170,384" fill="none" {...O} strokeWidth={5} />
+      <path d="M1146,388 L1196,370 L1206,394 L1156,412 Z" fill={accent.amber} {...O} />
+      <path d="M840,476 L900,470 L896,480 Z M1080,478 L1130,468 L1126,480 Z" fill="#f3e4c4" {...O} strokeWidth={2} />
+      {/* Toppled chair and scattered papers */}
+      <g transform="rotate(-70 1180 690)" {...O}>
+        <rect x="1130" y="600" width="100" height="18" rx="6" fill={C.metalDark} />
+        <rect x="1130" y="520" width="18" height="90" rx="6" fill={C.metalDark} />
+        <path d="M1180,618 L1180,690" strokeWidth="6" />
       </g>
-      {/* Charred paper drifting over the floor */}
-      {[[560, 800, 10], [640, 830, -20], [880, 790, 35], [1010, 846, -8], [700, 760, 60]].map(([x, y, r], i) => (
-        <polygon key={i} transform={`rotate(${r} ${x} ${y})`} points={P([[x - 26, y - 16], [x + 28, y - 14], [x + 22, y + 18], [x - 30, y + 14]])} fill={i % 2 ? ink.paper : ink.night} opacity={i % 2 ? 0.55 : 0.85} />
+      {[[620, 780, 12], [880, 820, -18], [1020, 760, 30], [560, 840, -8]].map(([x, y, r]) => (
+        <rect key={x} x={x} y={y} width="54" height="38" rx="2" transform={`rotate(${r} ${x} ${y})`} fill="#e7d2a8" {...O} strokeWidth={2} />
       ))}
-      {/* Calendar */}
-      <rect x="1220" y="150" width="120" height="150" fill={ink.paper} />
-      <rect x="1220" y="150" width="120" height="30" fill={accent.red} />
-      <polygon points={P([[1300, 300], [1340, 260], [1340, 300]])} fill={ink.night} opacity="0.8" />
-      <circle cx="1268" cy="240" r="13" fill="none" stroke={accent.red} strokeWidth="3" />
-    </SceneFrame>
+      <rect x="0" y="0" width="1600" height="900" fill="#1a1411" opacity="0.18" />
+    </SoftFrame>
   )
 }
 
+// --------------------------------------------------------------------------
+// 4. The back alley
+
 function BackYard() {
   return (
-    <SceneFrame label="Sân sau, cửa hông và tủ điện">
-      <rect width="1600" height="900" fill={ink.night} />
-      <rect x="0" y="0" width="1600" height="640" fill={ink.slate} />
-      <Corrugated x={0} y={60} w={1600} h={70} fill={ink.steel} rib={shade(ink.steel, -0.3)} />
-      {/* Overhead wires */}
-      <path d="M0 40 Q 500 140 1000 60 T 1600 90" fill="none" stroke={ink.night} strokeWidth="4" />
-      <path d="M0 20 Q 700 120 1600 50" fill="none" stroke={ink.night} strokeWidth="3" />
-      {/* Side door with the lock */}
-      <rect x="440" y="220" width="220" height="420" fill={ink.steel} />
-      <rect x="440" y="220" width="220" height="420" fill="none" stroke={ink.night} strokeWidth="8" />
-      <rect x="540" y="430" width="40" height="44" fill={accent.gold} opacity="0.75" />
-      <path d="M548 430 v-18 a12 12 0 0 1 24 0 v6" fill="none" stroke={accent.gold} strokeWidth="5" />
-      {/* Electrical box */}
-      <rect x="1040" y="300" width="170" height="220" fill={ink.dusk} />
-      <rect x="1060" y="330" width="130" height="90" fill={ink.night} />
-      <rect x="1100" y="350" width="22" height="50" fill={accent.amber} />
-      <line x1="1125" y1="300" x2="1125" y2="120" stroke={ink.night} strokeWidth="6" />
-      {/* Ground, puddles, sandals by the step */}
-      <polygon points={P([[0, 640], [1600, 640], [1600, 900], [0, 900]])} fill={shade(ink.steel, -0.4)} />
-      <rect x="420" y="640" width="260" height="22" fill={ink.dusk} />
-      <Puddle x={980} y={780} w={360} color={accent.teal} />
-      <polygon points={P([[760, 712], [800, 708], [802, 728], [762, 732]])} fill={accent.teal} />
-      <polygon points={P([[810, 716], [850, 712], [852, 732], [812, 736]])} fill={accent.teal} />
-      {/* Wet tire tracks leading to the side door */}
-      <path d="M1600 860 C 1200 820, 900 760, 600 680" fill="none" stroke={ink.night} strokeWidth="14" opacity="0.4" strokeDasharray="22 10" />
-      <path d="M1600 890 C 1220 850, 920 790, 620 700" fill="none" stroke={ink.night} strokeWidth="14" opacity="0.4" strokeDasharray="22 10" />
-      {/* Blue water drum and potted plants */}
-      <g transform="translate(200 470)">
-        <rect x="0" y="0" width="120" height="170" rx="10" fill={shade(accent.teal, -0.2)} />
-        <rect x="0" y="40" width="120" height="8" fill={shade(accent.teal, -0.45)} />
-        <rect x="0" y="120" width="120" height="8" fill={shade(accent.teal, -0.45)} />
-        <rect x="10" y="0" width="22" height="170" fill={ink.bone} opacity="0.15" />
-      </g>
-      {[[90, 590], [1290, 600]].map(([x, y], i) => (
-        <g key={i}>
-          <polygon points={P([[x - 40, y], [x + 40, y], [x + 30, y + 50], [x - 30, y + 50]])} fill={accent.rust} />
-          <polygon points={P([[x, y], [x - 50, y - 90], [x - 10, y - 20]])} fill={shade(accent.teal, -0.3)} />
-          <polygon points={P([[x, y], [x + 40, y - 110], [x + 10, y - 10]])} fill={shade(accent.teal, -0.15)} />
-          <polygon points={P([[x, y], [x - 6, y - 120], [x + 6, y - 20]])} fill={shade(accent.teal, -0.4)} />
+    <SoftFrame label="Lối hẻm phía sau kho">
+      <rect width="1600" height="900" fill={C.sky} />
+      {/* Overhead wires and the back wall */}
+      <rect x="0" y="120" width="1600" height="600" fill={C.wallDark} />
+      {Array.from({ length: 12 }, (_, i) => (
+        <line key={i} x1="0" x2="1600" y1={150 + i * 48} y2={150 + i * 48} stroke={shade(C.wallDark, -0.2)} strokeWidth="3" />
+      ))}
+      <path d="M0,170 Q400,230 800,180 T1600,190 M0,200 Q500,260 1000,210 T1600,230" fill="none" stroke={LINE} strokeWidth="3" />
+      <rect x="0" y="100" width="1600" height="40" fill={C.metalDark} {...O} />
+      {/* Ground with tyre tracks */}
+      <path d="M0,700 L1600,700 L1600,900 L0,900 Z" fill={C.floor} />
+      <path d="M380,900 Q640,760 1100,740 M460,900 Q700,780 1160,760" fill="none" stroke="#2a1f1a" strokeWidth="14" strokeDasharray="18 12" opacity="0.7" />
+
+      {/* Side door with the padlock (hotspot sau-khoa at 560,450) */}
+      <rect x="450" y="270" width="220" height="430" rx="6" fill={C.wood} {...O} />
+      <rect x="474" y="300" width="172" height="170" rx="4" fill="none" stroke={C.woodDark} strokeWidth="5" />
+      <rect x="474" y="500" width="172" height="170" rx="4" fill="none" stroke={C.woodDark} strokeWidth="5" />
+      <rect x="430" y="700" width="260" height="18" rx="4" fill={C.woodDark} {...O} />
+      <path d="M548,430 Q560,402 572,430" fill="none" stroke="#c9cdd0" strokeWidth="6" />
+      <rect x="540" y="428" width="40" height="40" rx="8" fill={accent.gold} {...O} />
+      <circle cx="560" cy="446" r="5" fill={LINE} />
+
+      {/* Breaker box, switch down (hotspot sau-cau-dao at 1120,405) */}
+      <Beam x={1300} y={240} w={520} h={520} o={0.3} />
+      <path d="M1120,120 L1120,330" stroke={LINE} strokeWidth="4" />
+      <rect x="1050" y="330" width="140" height="160" rx="8" fill="#9a8a72" {...O} />
+      <rect x="1070" y="350" width="100" height="70" rx="4" fill="#2a2420" {...O} strokeWidth={2} />
+      <rect x="1108" y="384" width="24" height="30" rx="4" fill={accent.amber} {...O} strokeWidth={2} />
+      <text x="1120" y="462" textAnchor="middle" fontSize="18" fontWeight="700" fill={LINE} fontFamily="Barlow Condensed, sans-serif">
+        ⚡ CẦU DAO
+      </text>
+      {/* Street lamp */}
+      <path d="M1320,700 L1320,250 Q1320,220 1290,220 L1270,220" fill="none" {...O} strokeWidth={8} />
+      <Bulb x={1270} y={232} />
+
+      {/* Water drum, potted plants, rubbish, a cat on the wall */}
+      <rect x="150" y="520" width="130" height="180" rx="20" fill={accent.teal} {...O} />
+      <path d="M150,570 h130 M150,650 h130" stroke={shade(accent.teal, -0.3)} strokeWidth="6" />
+      {[[870, 700], [1480, 700]].map(([x, y]) => (
+        <g key={x}>
+          <path d={`M${x - 36},${y - 70} L${x + 36},${y - 70} L${x + 28},${y} L${x - 28},${y} Z`} fill={accent.rust} {...O} />
+          <path d={`M${x},${y - 70} C${x - 20},${y - 140} ${x - 50},${y - 160} ${x - 60},${y - 170} M${x},${y - 70} C${x + 10},${y - 150} ${x + 30},${y - 170} ${x + 50},${y - 180} M${x},${y - 70} C${x},${y - 130} ${x},${y - 170} ${x + 4},${y - 200}`} fill="none" stroke={C.leaf} strokeWidth="9" strokeLinecap="round" />
         </g>
       ))}
-      {/* Trash bags and a cat watching from the wall */}
-      <polygon points={P([[700, 640], [720, 560], [780, 540], [820, 600], [810, 640]])} fill={ink.night} />
-      <polygon points={P([[650, 640], [660, 590], [700, 580], [720, 640]])} fill={shade(ink.night, 0.15)} />
-      <g transform="translate(860 210)">
-        <polygon points={P([[0, 30], [10, 0], [18, 14], [30, 14], [38, 0], [46, 30], [40, 60], [6, 60]])} fill={ink.night} />
-        <circle cx="16" cy="28" r="3" fill={accent.amber} />
-        <circle cx="32" cy="28" r="3" fill={accent.amber} />
-        <path d="M40 58 q30 10 20 40" fill="none" stroke={ink.night} strokeWidth="6" />
+      <path d="M700,700 Q690,640 740,630 Q790,620 800,660 Q820,700 790,700 Z" fill="#26201d" {...O} />
+      <g transform="translate(900 120)">
+        <path d="M0,0 Q4,-30 20,-34 L24,-48 L32,-36 L44,-48 L46,-30 Q60,-10 50,0 Z" fill="#1d1715" {...O} strokeWidth={2.5} />
+        <circle cx="26" cy="-24" r="3" fill={accent.amber} />
+        <circle cx="38" cy="-24" r="3" fill={accent.amber} />
+        <path d="M50,0 Q80,10 70,40" fill="none" stroke="#1d1715" strokeWidth="6" strokeLinecap="round" />
       </g>
-      <rect x="1400" y="80" width="10" height="560" fill={ink.night} />
-      <Lamp x={1380} y={110} reach={530} spread={560} />
-      <Rain seed={23} opacity={0.3} />
-    </SceneFrame>
+      {/* A pair of sandals (hotspot sau-dep at 800,720) */}
+      {[0, 1].map((i) => (
+        <g key={i} transform={`rotate(${i ? 14 : -6} ${770 + i * 60} 724)`}>
+          <ellipse cx={770 + i * 60} cy="724" rx="24" ry="44" fill="#3c6d8a" {...O} />
+          <path d={`M${756 + i * 60},708 Q${770 + i * 60},690 ${784 + i * 60},708`} fill="none" stroke="#e8dcc4" strokeWidth="6" strokeLinecap="round" />
+        </g>
+      ))}
+      <Puddle x={980} y={800} w={360} />
+      <Rain seed={11} count={90} />
+    </SoftFrame>
   )
 }
 
