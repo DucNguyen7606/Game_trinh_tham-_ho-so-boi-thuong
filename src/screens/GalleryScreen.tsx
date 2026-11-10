@@ -3,6 +3,7 @@ import { Copy, Shuffle } from 'lucide-react'
 import { useGame } from '@/game/store'
 import { clueById, getDocumentArt, getSceneArt } from '@/game/caseLoader'
 import { Portrait, type PortraitSpec } from '@/art/Portrait'
+import { PortraitAngular } from '@/art/PortraitAngular'
 import { accent, clothColors, hairColors, ink } from '@/art/palette'
 import { rng } from '@/art/primitives'
 import { Button } from '@/components/ui/button'
@@ -21,6 +22,7 @@ const options = {
   outfitColor: Object.keys(clothColors),
   age: ['young', 'mid', 'old'],
   backdrop: ['night', 'amber', 'teal', 'rust'],
+  mood: ['neutral', 'smile', 'stern', 'worried', 'angry'],
 } as const
 
 const accessories = ['glasses', 'bandage', 'gold-chain', 'earrings', 'pen'] as const
@@ -34,6 +36,7 @@ const labels: Record<string, string> = {
   outfitColor: 'Màu áo',
   age: 'Tuổi',
   backdrop: 'Nền',
+  mood: 'Biểu cảm',
 }
 
 function randomSpec(seed: number): PortraitSpec {
@@ -93,6 +96,19 @@ export default function GalleryScreen() {
               <figcaption className="display mt-1 text-sm">{s.name}</figcaption>
             </figure>
           ))}
+        </div>
+      </Section>
+
+      <Section title="So sánh với phong cách cũ">
+        <div className="flex flex-wrap gap-4">
+          {data.suspects.map((s) =>
+            s.portrait ? (
+              <figure key={s.id} className="flex gap-1">
+                <PortraitAngular spec={s.portrait} size={96} />
+                <Portrait spec={s.portrait} size={96} />
+              </figure>
+            ) : null,
+          )}
         </div>
       </Section>
 

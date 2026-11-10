@@ -36,7 +36,8 @@
           "gold-chain"
         ],
         "age": "old",
-        "backdrop": "amber"
+        "backdrop": "amber",
+        "mood": "stern"
       },
       "profile": {
         "traits": [
@@ -68,7 +69,8 @@
           "pen"
         ],
         "age": "young",
-        "backdrop": "teal"
+        "backdrop": "teal",
+        "mood": "worried"
       },
       "profile": {
         "traits": [
@@ -98,7 +100,8 @@
           "earrings"
         ],
         "age": "young",
-        "backdrop": "rust"
+        "backdrop": "rust",
+        "mood": "angry"
       },
       "profile": {
         "traits": [
@@ -156,7 +159,8 @@
           "bandage"
         ],
         "age": "old",
-        "backdrop": "night"
+        "backdrop": "night",
+        "mood": "smile"
       },
       "profile": {
         "traits": [

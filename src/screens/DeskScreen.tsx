@@ -96,7 +96,7 @@ export default function DeskScreen() {
 function PortraitFrame({ spec, size }: { spec: PortraitSpec; size: number }) {
   return (
     <div className="rounded-md bg-[#f3e4c4]/90 p-1 shadow-[0_4px_10px_rgb(0_0_0/0.4)] transition duration-200 group-hover:rotate-[-1.5deg] group-hover:shadow-[0_6px_16px_rgb(242_169_59/0.35)]">
-      <Portrait spec={spec} size={size} zoom={0.84} className="block rounded-[4px]" />
+      <Portrait spec={spec} size={size} className="block rounded-[4px]" />
     </div>
   )
 }
