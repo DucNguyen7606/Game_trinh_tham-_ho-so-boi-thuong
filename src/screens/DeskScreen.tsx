@@ -14,7 +14,7 @@ export default function DeskScreen() {
           {data.player.portrait && <Portrait spec={data.player.portrait} size={120} className="shrink-0" />}
           <div>
           <CardHeader>
-            <CardTitle className="display text-2xl text-amber">{data.title}</CardTitle>
+            <CardTitle className="title text-2xl text-amber">{data.title}</CardTitle>
             <CardDescription>
               {data.player.name} · {data.player.role}
             </CardDescription>
@@ -32,7 +32,7 @@ export default function DeskScreen() {
               {s.portrait && <Portrait spec={s.portrait} size={110} className="shrink-0" />}
               <div className="min-w-0">
               <CardHeader>
-                <CardTitle>
+                <CardTitle className="title">
                   {s.name}, {s.age}
                 </CardTitle>
                 <CardDescription>{s.role}</CardDescription>

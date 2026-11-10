@@ -31,14 +31,15 @@ const shoulders = {
 }
 
 const backdrops = {
-  night: ink.slate,
-  amber: shade(accent.amber, -0.55),
-  teal: shade(accent.teal, -0.45),
-  rust: shade(accent.rust, -0.5),
+  night: ink.steel,
+  amber: shade(accent.amber, -0.45),
+  teal: shade(accent.teal, -0.4),
+  rust: shade(accent.rust, -0.4),
 }
 
 export function Portrait({ spec, size = 200, className }: { spec: PortraitSpec; size?: number; className?: string }) {
-  const clip = useId()
+  const uid = useId()
+  const clip = `${uid}-clip`, glow = `${uid}-glow`, dots = `${uid}-dots`, fade = `${uid}-fade`
   const skin = skinTones[spec.skin]
   const skinShadow = shade(skin, -0.22)
   const hair = hairColors[spec.hairColor]
@@ -54,11 +55,25 @@ export function Portrait({ spec, size = 200, className }: { spec: PortraitSpec; 
         <clipPath id={clip}>
           <rect width="200" height="240" />
         </clipPath>
+        {/* Warm lamp light from the upper left */}
+        <radialGradient id={glow} cx="0.3" cy="0.25" r="0.8">
+          <stop offset="0" stopColor={accent.amber} stopOpacity="0.45" />
+          <stop offset="1" stopColor={accent.amber} stopOpacity="0" />
+        </radialGradient>
+        {/* Halftone dots, like an old printed photo */}
+        <pattern id={dots} width="6" height="6" patternUnits="userSpaceOnUse">
+          <circle cx="3" cy="3" r="1.1" fill={ink.night} opacity="0.25" />
+        </pattern>
+        <linearGradient id={fade} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0.6" stopColor={ink.night} stopOpacity="0" />
+          <stop offset="1" stopColor={ink.night} stopOpacity="0.55" />
+        </linearGradient>
       </defs>
       <g clipPath={`url(#${clip})`}>
         {/* Backdrop with one diagonal light band */}
         <rect width="200" height="240" fill={bg} />
-        <polygon points={P([[120, 0], [200, 0], [200, 90], [60, 240], [0, 240], [0, 200]])} fill={shade(bg, 0.06)} />
+        <rect width="200" height="240" fill={`url(#${glow})`} />
+        <rect width="200" height="240" fill={`url(#${dots})`} />
 
         {/* Long hair sits behind the head */}
         {spec.hair === 'long' && <polygon points={P([[62, 70], [100, 32], [138, 70], [146, 176], [54, 176]])} fill={hair} />}
@@ -67,6 +82,8 @@ export function Portrait({ spec, size = 200, className }: { spec: PortraitSpec; 
         <polygon points={P(sh)} fill={cloth} />
         <polygon points={P([[100, 160], ...sh.slice(3)])} fill={clothShadow} />
         <Outfit spec={spec} cloth={cloth} skin={skin} skinShadow={skinShadow} />
+        {/* Rim light on the lit shoulder */}
+        <polygon points={P([sh[0], sh[1], sh[2], [sh[2][0] + 2, sh[2][1] + 4], [sh[1][0] + 5, sh[1][1] + 4], [sh[0][0] + 5, sh[0][1]]])} fill={accent.amber} opacity="0.35" />
 
         {/* Neck */}
         <polygon points={P([[88, 132], [112, 132], [114, 164], [86, 164]])} fill={skinShadow} />
@@ -74,10 +91,19 @@ export function Portrait({ spec, size = 200, className }: { spec: PortraitSpec; 
         {/* Head: lit left plane, shadowed right plane */}
         <polygon points={P([[70, 60], [100, 40], [130, 60], [134, 104], [118, 134], [100, 142], [82, 134], [66, 104]])} fill={skin} />
         <polygon points={P([[100, 40], [130, 60], [134, 104], [118, 134], [100, 142], [104, 96]])} fill={skinShadow} />
-        {/* Brow shadow, nose plane, mouth */}
-        <polygon points={P([[73, 84], [127, 84], [125, 95], [75, 95]])} fill={ink.night} opacity="0.35" />
+        {/* Rim light on the lit cheek, warm cheek plane */}
+        <polygon points={P([[70, 60], [66, 104], [70, 106], [74, 63]])} fill={accent.amber} opacity="0.55" />
+        <polygon points={P([[74, 104], [90, 108], [82, 120]])} fill={accent.rust} opacity="0.12" />
+        {/* Brows, eyes with a catch-light, nose plane, lips */}
+        <polygon points={P([[73, 82], [127, 82], [125, 97], [75, 97]])} fill={ink.night} opacity="0.12" />
+        <polygon points={P([[78, 84], [94, 81], [95, 85], [79, 88]])} fill={shade(hair, -0.1)} />
+        <polygon points={P([[106, 81], [122, 84], [121, 88], [105, 85]])} fill={shade(hair, -0.1)} />
+        <polygon points={P([[80, 92], [88, 89], [95, 92], [88, 95]])} fill={ink.night} />
+        <polygon points={P([[105, 92], [112, 89], [120, 92], [112, 95]])} fill={ink.night} />
+        <circle cx="89.5" cy="91" r="1.2" fill={ink.bone} />
+        <circle cx="113.5" cy="91" r="1.2" fill={ink.bone} />
         <polygon points={P([[100, 95], [108, 116], [99, 118]])} fill={shade(skin, -0.35)} />
-        <line x1="92" y1="126" x2="108" y2="126" stroke={shade(skin, -0.5)} strokeWidth="2" />
+        <polygon points={P([[91, 125], [100, 122], [109, 125], [100, 129]])} fill={shade(accent.rust, -0.15)} opacity="0.75" />
         {spec.age === 'old' && (
           <g stroke={shade(skin, -0.3)} strokeWidth="1.5">
             <line x1="80" y1="74" x2="96" y2="72" />
@@ -106,6 +132,7 @@ export function Portrait({ spec, size = 200, className }: { spec: PortraitSpec; 
           <polyline points={P([[84, 162], [92, 176], [100, 180], [108, 176], [116, 162]])} fill="none" stroke={accent.gold} strokeWidth="3" />
         )}
         {acc.has('pen') && <rect x="122" y="190" width="4" height="18" fill={accent.red} />}
+        <rect width="200" height="240" fill={`url(#${fade})`} />
       </g>
     </svg>
   )
@@ -153,7 +180,7 @@ function Outfit({ spec, cloth, skin, skinShadow }: { spec: PortraitSpec; cloth: 
 }
 
 function Hair({ style, color }: { style: HairStyle; color: string }) {
-  const hi = shade(color, 0.15)
+  const hi = shade(color, 0.22)
   switch (style) {
     case 'short':
       return (
@@ -170,11 +197,17 @@ function Hair({ style, color }: { style: HairStyle; color: string }) {
         </g>
       )
     case 'long':
-      return <polygon points={P([[64, 92], [68, 54], [100, 34], [132, 54], [136, 92], [124, 62], [100, 54], [76, 62]])} fill={color} />
+      return (
+        <g>
+          <polygon points={P([[64, 92], [68, 54], [100, 34], [132, 54], [136, 92], [124, 62], [100, 54], [76, 62]])} fill={color} />
+          <polygon points={P([[68, 54], [100, 34], [90, 50], [72, 64]])} fill={hi} />
+        </g>
+      )
     case 'bun':
       return (
         <g>
           <polygon points={P([[88, 34], [100, 18], [112, 34], [106, 42], [94, 42]])} fill={color} />
+          <polygon points={P([[88, 34], [100, 18], [98, 32]])} fill={hi} />
           <polygon points={P([[66, 80], [70, 54], [100, 38], [130, 54], [134, 80], [124, 62], [100, 52], [76, 62]])} fill={color} />
         </g>
       )

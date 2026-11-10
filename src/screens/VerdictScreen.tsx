@@ -27,7 +27,7 @@ export default function VerdictScreen() {
     return (
       <div className="mx-auto max-w-2xl p-10">
         <p className="text-sm text-muted-foreground">Kết thúc</p>
-        <h2 className="text-3xl font-semibold text-primary">{ending.title}</h2>
+        <h2 className="title text-3xl text-amber">{ending.title}</h2>
         <p className="mt-4">{ending.text}</p>
         <Button className="mt-8" onClick={reset}>
           Chơi lại

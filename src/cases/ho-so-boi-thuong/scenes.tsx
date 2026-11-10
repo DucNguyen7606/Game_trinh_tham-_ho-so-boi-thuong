@@ -1,5 +1,5 @@
 import { accent, ink, shade } from '@/art/palette'
-import { Corrugated, LightCone, P, Puddle, Rain, SceneFrame, Scorch } from '@/art/primitives'
+import { Corrugated, Lamp, LightCone, P, Puddle, Rain, SceneFrame, Scorch } from '@/art/primitives'
 
 // Backdrops for the four zones. Objects are drawn near their hotspot positions
 // in case.json (percent of 1600 x 900).
@@ -78,6 +78,7 @@ function Warehouse() {
       ))}
       <polygon points={P([[700, 520], [760, 530], [800, 580], [690, 570]])} fill={ink.paper} opacity="0.55" />
       <circle cx="745" cy="560" r="3" fill={accent.ember} />
+      <Lamp x={1180} y={140} reach={460} spread={480} />
       {/* Pallets */}
       {[0, 1, 2].map((i) => (
         <rect key={i} x={220} y={590 + i * 22} width="210" height="14" fill={shade(accent.rust, -0.55)} />
@@ -122,6 +123,9 @@ function Office() {
       {[0, 1, 2, 3].map((i) => (
         <circle key={i} cx={1090 + i * 14} cy="512" r="4" fill={ink.fog} />
       ))}
+      {/* Desk lamp, knocked over but still lit from the street outside */}
+      <Lamp x={1180} y={470} reach={60} spread={360} />
+      <line x1="1180" y1="452" x2="1210" y2="520" stroke={ink.night} strokeWidth="6" />
       {/* Calendar */}
       <rect x="1220" y="150" width="120" height="150" fill={ink.paper} />
       <rect x="1220" y="150" width="120" height="30" fill={accent.red} />
@@ -156,6 +160,8 @@ function BackYard() {
       <Puddle x={980} y={780} w={360} color={accent.teal} />
       <polygon points={P([[760, 712], [800, 708], [802, 728], [762, 732]])} fill={accent.teal} />
       <polygon points={P([[810, 716], [850, 712], [852, 732], [812, 736]])} fill={accent.teal} />
+      <rect x="1400" y="80" width="10" height="560" fill={ink.night} />
+      <Lamp x={1380} y={110} reach={530} spread={560} />
       <Rain seed={23} opacity={0.3} />
     </SceneFrame>
   )

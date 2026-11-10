@@ -56,7 +56,7 @@ export default function InterrogationScreen() {
     <div className="mx-auto grid h-full max-w-5xl grid-cols-[280px_1fr] gap-8 p-6">
       <div>
         {suspect.portrait && <Portrait spec={suspect.portrait} size={280} />}
-        <h2 className="display mt-3 text-2xl text-amber">{suspect.name}</h2>
+        <h2 className="title mt-3 text-2xl text-amber">{suspect.name}</h2>
         <p className="text-sm text-muted-foreground">{suspect.role}</p>
       </div>
       <div className="flex min-h-0 flex-col">

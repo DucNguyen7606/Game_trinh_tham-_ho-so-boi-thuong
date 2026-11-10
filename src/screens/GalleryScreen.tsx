@@ -54,7 +54,7 @@ function randomSpec(seed: number): PortraitSpec {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section className="space-y-3">
-      <h2 className="display border-b border-border pb-1 text-xl text-amber">{title}</h2>
+      <h2 className="title border-b border-brass/40 pb-1 text-xl text-amber">{title}</h2>
       {children}
     </section>
   )
@@ -203,7 +203,8 @@ export default function GalleryScreen() {
           ))}
         </div>
         <div className="space-y-1">
-          <p className="display text-3xl">Barlow Condensed: tiêu đề, nhãn, nút</p>
+          <p className="title text-3xl">Bitter: tên vụ án, tên nhân vật, tiêu đề</p>
+          <p className="display text-2xl">Barlow Condensed: nhãn, nút, menu</p>
           <p>Be Vietnam Pro: lời thoại, mô tả, nội dung đọc dài.</p>
           <p className="font-mono text-sm">IBM Plex Mono: giấy tờ, hóa đơn, sao kê 01:34</p>
         </div>

@@ -51,7 +51,7 @@ src/
 
 ## Hình ảnh
 
-Toàn bộ hình được vẽ bằng code (SVG), theo một phong cách chung: đồ họa phẳng, góc cạnh, nhân vật nhận ra bằng dáng, tóc, quần áo và một món đồ; bảng màu Sài Gòn đêm mưa với màu ấm dành cho ánh đèn, lửa và vật chứng.
+Toàn bộ hình được vẽ bằng code (SVG), theo một phong cách chung: hình khối phẳng góc cạnh nhưng có ánh đèn vàng, ánh viền, vân giấy và chấm in; tông ấm như một bàn làm việc gỗ dưới đèn bàn, xanh ngọc là nốt lạnh duy nhất.
 
 - `src/art/palette.ts`: bảng màu dùng chung (giữ khớp với biến màu trong `src/index.css`).
 - `src/art/Portrait.tsx`: chân dung nhân vật theo tham số (màu da, kiểu tóc, dáng người, trang phục, phụ kiện, tuổi, nền).
@@ -59,7 +59,7 @@ Toàn bộ hình được vẽ bằng code (SVG), theo một phong cách chung: 
 - `src/cases/<vụ>/scenes.tsx`: hình nền từng khu hiện trường, khung 1600 x 900; điểm bấm trong `case.json` tính theo phần trăm của khung này.
 - Màn hình **Thư viện hình** trong game: xem mọi nhân vật, hiện trường, giấy tờ, bảng màu; có bộ tạo nhân vật, chọn xong bấm "Chép JSON" rồi dán vào trường `portrait` của nhân vật trong `case.json`.
 
-Font đi kèm game (không cần mạng): Barlow Condensed cho tiêu đề, Be Vietnam Pro cho nội dung, IBM Plex Mono cho giấy tờ.
+Font đi kèm game (không cần mạng): Bitter cho tên và tiêu đề, Barlow Condensed cho nhãn và nút, Be Vietnam Pro cho nội dung, IBM Plex Mono cho giấy tờ.
 
 ## Thêm hoặc sửa vụ án
 

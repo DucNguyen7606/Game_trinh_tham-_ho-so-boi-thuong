@@ -25,8 +25,8 @@ export default function App() {
 
   return (
     <div className="flex h-full flex-col">
-      <header className="flex items-center gap-4 border-b border-border px-4 py-2">
-        <span className="display text-lg text-amber">{data.title}</span>
+      <header className="flex items-center gap-4 border-b-2 border-brass/50 bg-background/80 px-4 py-2 shadow-lg">
+        <span className="title text-lg text-amber">{data.title}</span>
         <nav className="flex gap-1">
           {nav.map(({ screen: s, label, icon: Icon }) => (
             <Button

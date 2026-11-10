@@ -1,25 +1,25 @@
 // One palette for every drawing in the game: Saigon at night, after the rain.
 // Muted blues and greys, with warm accents reserved for light, fire and evidence.
 export const ink = {
-  night: '#12151c', // deepest shadow, outlines
-  slate: '#222836', // walls in shadow
-  steel: '#363e50', // mid-tone surfaces
-  dusk: '#4f5a70', // lit surfaces
-  fog: '#8a93a6', // distant light, rain
-  bone: '#e6dcc6', // paper, light skin highlights
-  paper: '#d9cdb2', // aged documents
+  night: '#1c130f', // deepest shadow: dark walnut
+  slate: '#2d1f18', // walls in shadow
+  steel: '#4a3326', // mid-tone surfaces
+  dusk: '#6e4c34', // lamp-lit surfaces
+  fog: '#c4a27a', // warm haze, rain under street lamps
+  bone: '#f3e4c4', // paper highlight
+  paper: '#e7d2a8', // aged documents, manila
 }
 
 export const accent = {
-  amber: '#d9a03f', // street lamps, bulbs
-  rust: '#b4552e', // fire damage, rust, the game's main accent
-  ember: '#e07a3c', // glowing embers
-  teal: '#3e7e84', // neon signs, rain sheen
-  red: '#a3302a', // the red string, stamps
-  gold: '#c8a24a', // jewellery
+  amber: '#f2a93b', // lamps, bulbs: the light that makes scenes warm
+  rust: '#c4552d', // fire damage, the game's main accent
+  ember: '#ff8a3d', // glowing embers
+  teal: '#3f8a7e', // jade green: Saigon shutters and neon, the one cool note
+  red: '#b23a2e', // the red string, stamps
+  gold: '#d9b04f', // jewellery
 }
 
-export const skinTones = ['#e0b896', '#c99a77', '#a87a58', '#87603f'] as const
+export const skinTones = ['#efc39b', '#d9a47a', '#b9815a', '#8f5f3d'] as const
 
 export const hairColors = {
   black: '#1a1a1f',
@@ -29,14 +29,14 @@ export const hairColors = {
 } as const
 
 export const clothColors = {
-  white: '#d8d4ca',
-  navy: '#2e3a56',
-  olive: '#5b5f3a',
-  maroon: '#6b2f2f',
-  khaki: '#a08a5c',
-  charcoal: '#33363d',
-  sky: '#6f8fae',
-  mustard: '#b98f35',
+  white: '#ece2cf',
+  navy: '#2f4258',
+  olive: '#6b6a35',
+  maroon: '#7d2f2a',
+  khaki: '#b0925c',
+  charcoal: '#3a332f',
+  sky: '#7a9fb0',
+  mustard: '#cf9a32',
 } as const
 
 /** Darken (amount < 0) or lighten (amount > 0) a hex colour. Used for flat shadow planes. */

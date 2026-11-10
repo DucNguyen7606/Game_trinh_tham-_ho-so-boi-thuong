@@ -2,27 +2,30 @@
 
 /* shadcn/ui tokens. The game uses one dark "night office" theme. */
 :root {
-  /* Saigon night palette; keep in sync with src/art/palette.ts */
-  --background: #12151c;
-  --foreground: #e6dcc6;
-  --card: #1b202b;
-  --card-foreground: #e6dcc6;
-  --primary: #b4552e;
-  --primary-foreground: #f3ece0;
-  --secondary: #222836;
-  --secondary-foreground: #e6dcc6;
-  --muted: #222836;
-  --muted-foreground: #8a93a6;
-  --accent: #2b3242;
-  --accent-foreground: #f3ece0;
-  --destructive: #a3302a;
-  --border: #363e50;
-  --ring: #d9a03f;
-  --paper: #d9cdb2;
-  --paper-ink: #2a2620;
-  --amber: #d9a03f;
-  --teal: #3e7e84;
-  --string: #a3302a;
+  /* Warm "desk under a lamp" palette; keep in sync with src/art/palette.ts */
+  --background: #1c130f;
+  --foreground: #f3e4c4;
+  --card: #2b1e17;
+  --card-foreground: #f3e4c4;
+  --primary: #c4552d;
+  --primary-foreground: #fff4e2;
+  --secondary: #3a2a20;
+  --secondary-foreground: #f3e4c4;
+  --muted: #3a2a20;
+  --muted-foreground: #c4a27a;
+  --accent: #4a3326;
+  --accent-foreground: #fff4e2;
+  --destructive: #b23a2e;
+  --border: #5a4130;
+  --ring: #f2a93b;
+  --paper: #e7d2a8;
+  --paper-ink: #2d1f18;
+  --amber: #f2a93b;
+  --teal: #3f8a7e;
+  --string: #b23a2e;
+  --brass: #b98d4a;
+  /* Paper grain as an inline SVG noise tile */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.24 0 0 0 0 0.12 0 0 0 0.22 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 @theme inline {
@@ -46,6 +49,8 @@
   --color-amber: var(--amber);
   --color-teal: var(--teal);
   --color-string: var(--string);
+  --color-brass: var(--brass);
+  --font-title: 'Bitter', Georgia, serif;
   --font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
   --font-sans: 'Be Vietnam Pro', 'Segoe UI', system-ui, sans-serif;
   --font-mono: 'IBM Plex Mono', Consolas, monospace;
@@ -56,7 +61,11 @@ html, body, #root {
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
+  background-image:
+    radial-gradient(ellipse 70% 55% at 30% 0%, rgb(242 169 59 / 0.16), transparent 70%),
+    repeating-linear-gradient(92deg, rgb(255 220 170 / 0.025) 0 2px, transparent 2px 9px, rgb(0 0 0 / 0.05) 9px 11px, transparent 11px 23px),
+    var(--grain);
   color: var(--foreground);
   font-family: var(--font-sans);
   user-select: none;
@@ -69,13 +78,29 @@ body {
   letter-spacing: 0.04em;
 }
 
+/* Titles: a warm slab serif. */
+.title {
+  font-family: var(--font-title);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+/* Panels look like dark leather desk pads with a brass stitch line. */
+.panel {
+  background: linear-gradient(180deg, rgb(255 230 190 / 0.04), transparent 40%), var(--card);
+  box-shadow: inset 0 0 0 1px rgb(185 141 74 / 0.25), 0 8px 24px rgb(0 0 0 / 0.35);
+}
+
 /* Paper documents: aged paper, typewriter text, a clipped corner. */
 .document {
-  background: var(--paper);
+  background: var(--grain), linear-gradient(170deg, #f3e4c4, var(--paper));
   color: var(--paper-ink);
   font-family: var(--font-mono);
   clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+  box-shadow: 0 6px 14px rgb(0 0 0 / 0.4);
 }
+.document:nth-child(3n + 1) { rotate: -0.8deg; }
+.document:nth-child(3n + 2) { rotate: 0.6deg; }
 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }

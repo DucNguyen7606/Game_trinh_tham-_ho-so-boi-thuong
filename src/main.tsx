@@ -9,6 +9,8 @@ import '@fontsource/be-vietnam-pro/vietnamese-600.css'
 import '@fontsource/be-vietnam-pro/latin-600.css'
 import '@fontsource/ibm-plex-mono/vietnamese-400.css'
 import '@fontsource/ibm-plex-mono/latin-400.css'
+import '@fontsource/bitter/vietnamese-700.css'
+import '@fontsource/bitter/latin-700.css'
 import './index.css'
 import App from './App'
 
