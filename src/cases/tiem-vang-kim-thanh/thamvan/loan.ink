@@ -8,7 +8,7 @@ VAR has_P9 = false
 VAR has_X1 = false
 
 Bà Loan ngồi xuống ghế đẩu sau quầy, tay mân mê sợi dây chuyền trên cổ. Cổ tay còn quấn một miếng băng cá nhân.
-"Hai chục năm buôn vàng, lần đầu bị dao kề cổ. Cô làm giùm tôi cho lẹ, Tết tới nơi rồi."
+"Hai chục năm buôn vàng, lần đầu bị dao kề cổ. {Xco} làm giùm tôi cho lẹ, Tết tới nơi rồi."
 -> hoi
 
 === hoi ===
@@ -33,7 +33,7 @@ Bà Loan ngồi xuống ghế đẩu sau quầy, tay mân mê sợi dây chuyề
     "Rồi chị để két mở luôn tới khi cướp vào?" Bà không trả lời.
     -> hoi
 * {has_H1} [Chiếc nhẫn rơi dưới gầm tủ khắc "1 chỉ" mà chỉ nặng 2,1 g.]
-    "Chắc cân của cô hư. Vàng tiệm tôi là vàng 9999, ai cũng biết."
+    "Chắc cân của {xco} hư. Vàng tiệm tôi là vàng 9999, ai cũng biết."
     -> hoi
 * {has_H8} [Trên lầu có một thùng nhẫn mạ của xưởng ở Quận 5, khắc y chang "KT 9999".]
     Bà Loan đứng bật dậy.
@@ -41,7 +41,7 @@ Bà Loan ngồi xuống ghế đẩu sau quầy, tay mân mê sợi dây chuyề
     "Hàng mẫu mà khắc chữ 9999 hả chị?"
     -> hoi
 * {has_X1} [Bà Ba Lành nhắn sẽ "cho người tới tiệm" nếu chị không trả hụi.]
-    "Đó! Cô thấy chưa. Bà đó dọa tôi hoài. Cô hỏi bà đó đi."
+    "Đó! {Xco} thấy chưa. Bà đó dọa tôi hoài. {Xco} hỏi bà đó đi."
     -> hoi
 * {has_H7} [Sổ hụi ghi hai dây hụi bể từ 15/10, và chị trả đủ 5,5 tỷ trong tháng 11.]
     Bà Loan ngồi xuống lại, nhìn bàn tay mình rất lâu.

@@ -1,4 +1,4 @@
-import { Mark, Phone, Row, Sheet, Signature, Stamp } from '@/art/docParts'
+import { Mark, Phone, PlayerSignature, Row, Sheet, Signature, Stamp } from '@/art/docParts'
 import { ink } from '@/art/palette'
 import { Boat, C, Carton } from './scenes'
 
@@ -109,7 +109,7 @@ const P6 = () => (
     <p className="pt-1 text-[10px]">
       Tổ vớt rác phường 5 xác nhận: hai ngày vớt rác dọc kênh Đôi, <Mark>không thấy thùng điện thoại nào</Mark>, dù thùng bọc nilon nổi trên mặt nước.
     </p>
-    <Signature name="L. T. Hạnh" />
+    <PlayerSignature />
   </Sheet>
 )
 

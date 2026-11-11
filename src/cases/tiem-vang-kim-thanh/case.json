@@ -147,7 +147,7 @@
         "traits": ["Cẩn thận", "Để ý", "Thật thà"],
         "habit": "Mở nhà thuốc tới 10 giờ đêm. Lắp camera sau một lần bị trộm két tiền.",
         "relation": "Hàng xóm mười năm của tiệm Kim Thành, hay mua vàng của bà Loan dịp Tết.",
-        "quote": "\"Camera nhà tôi quay ra đường suốt, cô cần đoạn nào cũng có.\"",
+        "quote": "\"Camera nhà tôi quay ra đường suốt, {xco} cần đoạn nào cũng có.\"",
         "note": "Nhà thuốc nằm thẳng đối diện cửa trước tiệm vàng và đầu hẻm 514."
       }
     }

@@ -2,7 +2,7 @@ VAR has_X1 = false
 VAR has_H4 = false
 
 Khang ngồi vắt chân, sợi dây chuyền vàng to bản lộ ra dưới cổ áo.
-"Tui cho vay đàng hoàng, có giấy tờ. Cô hỏi gì?"
+"Tui cho vay đàng hoàng, có giấy tờ. {Xco} hỏi gì?"
 -> hoi
 
 === hoi ===
@@ -12,7 +12,7 @@ Khang ngồi vắt chân, sợi dây chuyền vàng to bản lộ ra dưới c�
     -> hoi
 * {has_X1} [Tin nhắn "Không trả thì đừng trách" là sao?]
     "Đòi nợ thì nói vậy cho nó sợ. Nó chết rồi thì tui đòi ai?"
-    "Bà Hồng hứa có tiền bảo hiểm sẽ trả tui trước. Tui mong nó sống còn hơn cô."
+    "Bà Hồng hứa có tiền bảo hiểm sẽ trả tui trước. Tui mong nó sống còn hơn {xco}."
     -> hoi
 * [Anh có nghe anh Lực tính chuyện gì không?]
     "Tuần trước nó nói ráng chờ tới tháng Chạp, nó trả đủ cả vốn lẫn lời. Tháng Chạp! Tui tưởng nó hứa lèo."

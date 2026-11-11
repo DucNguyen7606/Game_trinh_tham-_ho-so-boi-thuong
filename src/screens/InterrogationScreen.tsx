@@ -5,6 +5,7 @@ import { getInkSource } from '@/game/caseLoader'
 import { PhotoLightbox, ShownPhoto } from '@/components/SuspectPhoto'
 import { Button } from '@/components/ui/button'
 import { Portrait } from '@/art/Portrait'
+import { addressInk, useProfile } from '@/series/profile'
 
 // A line can carry a photo the suspect shows (ink tag `#photo:X3`).
 type Line = TranscriptLine
@@ -23,7 +24,8 @@ export default function InterrogationScreen() {
     if (!suspect?.interrogation) return null
     const source = getInkSource(data.id, suspect.interrogation)
     if (!source) return null
-    const s = new Compiler(source).Compile() as Story
+    // How people address the investigator ({xco}, {xchi}…) depends on the chosen character.
+    const s = new Compiler(`${addressInk(useProfile.getState().gender)}\n${source}`).Compile() as Story
     // Scripts declare `VAR has_<clue> = false` for each clue that opens a new line of questioning.
     for (const clue of data.clues) {
       const name = `has_${clue.id}`

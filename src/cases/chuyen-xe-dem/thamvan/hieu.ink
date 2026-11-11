@@ -15,7 +15,7 @@ VAR has_P9 = false
     -> hoi
 * {has_X2} [Năm 2023 anh bị phạt vì chứa cà phê không rõ nguồn gốc.]
     "Bị một lần là cả đời bị nghi. Lần đó tui cũng chỉ cho thuê kho."
-    "Lần này tui đâu có mua hạt tiêu nào. Cô kiểm kho tui coi, trống trơn."
+    "Lần này tui đâu có mua hạt tiêu nào. {Xco} kiểm kho tui coi, trống trơn."
     -> hoi
 * {has_H9} [Nền kho anh đầy hạt tiêu và vệt xe nâng.]
     "Xe nâng của tui để sẵn trong kho, người thuê xài thì xài. Chứa tiêu thì vương hạt tiêu chứ sao."

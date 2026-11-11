@@ -9,7 +9,7 @@ Chú Sơn đứng nghiêm bên chòi gác, cái mũ bảo vệ cầm trên tay.
 === hoi ===
 * [Đêm 6/12 chú trực từ mấy giờ?]
     "Từ sáu giờ chiều tới sáu giờ sáng như mọi bữa. Mười giờ bốn lăm có đoàn khách Hà Nội tới, ông chủ ra tận cổng đón. Khuya có thêm một khách lẻ."
-    "Sổ nhận phòng có chữ ký đây cô." #photo:X7
+    "Sổ nhận phòng có chữ ký đây {xco}." #photo:X7
     -> hoi
 * [Trang sổ trực ngày 6/12 đâu rồi chú?]
     "Bữa đó tui làm đổ trà lên, nhòe hết, nên tui xé bỏ."
@@ -27,7 +27,7 @@ Chú Sơn đứng nghiêm bên chòi gác, cái mũ bảo vệ cầm trên tay.
     -> hoi
 * {has_P10} [Chị bán bánh mì bị tông đang nằm Chợ Rẫy, hôn mê ba ngày.]
     Chú Sơn ngồi xuống bậc thềm.
-    "Tui có đứa con gái cũng bán hàng đêm. Cô ghi hết lời tui đi. Tui ký."
+    "Tui có đứa con gái cũng bán hàng đêm. {Xco} ghi hết lời tui đi. Tui ký."
     -> hoi
 * [Cảm ơn chú.]
     -> END

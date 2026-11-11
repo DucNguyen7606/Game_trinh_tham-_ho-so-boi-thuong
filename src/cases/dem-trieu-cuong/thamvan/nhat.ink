@@ -2,7 +2,7 @@ VAR has_X1 = false
 VAR has_P4 = false
 
 Nhật ngả lưng ra ghế, xoay xoay chìa khóa xe trên ngón tay.
-"Má cứ ôm cái kho đó làm gì cho mệt. Chị hỏi lẹ nha, em có hẹn."
+"Má cứ ôm cái kho đó làm gì cho mệt. {Xchi} hỏi lẹ nha, em có hẹn."
 -> hoi
 
 === hoi ===

@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import type { ActionKind, CaseData, DayLimits } from './types'
 import { cases } from './caseLoader'
+import { playerOf, useProfile } from '@/series/profile'
 
 export type Screen = 'menu' | 'desk' | 'scene' | 'casefile' | 'board' | 'interrogation' | 'verdict' | 'gallery'
 
@@ -76,8 +77,11 @@ interface GameState {
   startCase: (caseId: string) => void
 }
 
+/** The case as the chosen investigator plays it: their name, job and portrait in place of the case's default. */
+const withPlayer = (data: CaseData): CaseData => ({ ...data, player: playerOf(useProfile.getState()) })
+
 const initial = (data: CaseData) => ({
-  data,
+  data: withPlayer(data),
   screen: 'desk' as Screen,
   day: 1,
   left: { ...data.limitsPerDay },
@@ -244,3 +248,6 @@ export const useGame = create<GameState>((set, get) => ({
 
   startCase: (caseId) => set(initial(cases.find((c) => c.id === caseId) ?? get().data)),
 }))
+
+// A new or edited character takes over the case in progress too.
+useProfile.subscribe(() => useGame.setState((s) => ({ data: withPlayer(s.data) })))

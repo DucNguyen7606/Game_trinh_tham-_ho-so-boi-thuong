@@ -6,7 +6,7 @@ VAR has_X6 = false
 VAR has_P10 = false
 
 Vũ đứng ở cửa phòng kỹ thuật, tay còn cầm cây tua vít, cười gượng.
-"Có việc thì em lên, không có thì em ngồi dưới hầm. Chị hỏi gì em trả lời nấy."
+"Có việc thì em lên, không có thì em ngồi dưới hầm. {Xchi} hỏi gì em trả lời nấy."
 -> hoi
 
 === hoi ===
@@ -17,13 +17,13 @@ Vũ đứng ở cửa phòng kỹ thuật, tay còn cầm cây tua vít, cười
     "Đầu tháng có lên một lần, chị Ngọc báo khóa kêu pin yếu. Em thay pin xong là xuống."
     -> hoi
 * {has_P6} [Ngày 6/12 anh ở với cái khóa 40 phút. Thay pin đâu cần lâu vậy.]
-    "Thay pin thì phải tháo nắp, cài lại giờ, thử vân tay. Có chị giúp việc ở đó mà, chị hỏi chị Hai đi."
+    "Thay pin thì phải tháo nắp, cài lại giờ, thử vân tay. Có chị giúp việc ở đó mà, {xchi} hỏi chị Hai đi."
     -> hoi
 * {has_H10} [Sổ ca ghi anh kiểm tra bơm 02:00 đến 02:40, mà tủ bơm không ai mở từ 17:05.]
     "Em... nhìn đồng hồ áp suất bên ngoài thôi, đâu cần mở tủ."
     -> hoi
 * {has_H9} [Giày bảo hộ của anh kẹt sợi thảm xanh. Thảm đó chỉ trải ở hành lang các tầng căn hộ.]
-    "Em đi sửa tầng nào chẳng dính thảm, chị."
+    "Em đi sửa tầng nào chẳng dính thảm, {xchi}."
     -> hoi
 * {has_X6} [Anh có xem chị Ngọc livestream không?]
     Vũ khựng lại một giây.
@@ -35,7 +35,7 @@ Vũ đứng ở cửa phòng kỹ thuật, tay còn cầm cây tua vít, cười
     -> hoi
 * {has_P10} [Ngày 23/12 anh bán chiếc Rolex số máy 7Y3K2109 ở tiệm Minh Quang, Lê Văn Sỹ.]
     Vũ ngồi phịch xuống ghế, buông cây tua vít.
-    "App vay nhắn tới công ty, nhắn cho mẹ em dưới quê. Em hết đường rồi chị."
+    "App vay nhắn tới công ty, nhắn cho mẹ em dưới quê. Em hết đường rồi {xchi}."
     "Hôm thay pin em cài thêm một thẻ, tính để lần sau sửa cho tiện. Rồi bữa 12/12 coi live, thấy chị Ngọc bấm mã ngay trước máy..."
     "Chiếc Patek với bộ kim cương em còn giữ trong tủ đồ ở phòng trọ. Em chưa dám bán."
     -> hoi

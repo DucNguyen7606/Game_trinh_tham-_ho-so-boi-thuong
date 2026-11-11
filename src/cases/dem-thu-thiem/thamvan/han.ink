@@ -2,12 +2,12 @@ VAR has_X8 = false
 VAR has_H9 = false
 
 Hân ngồi ở quán cà phê nơi cô làm thêm, khuấy ly trà đào mãi không uống.
-"Ảnh bỏ em lại một mình rồi về, em còn đang giận đây. Mà có chuyện gì hả chị?"
+"Ảnh bỏ em lại một mình rồi về, em còn đang giận đây. Mà có chuyện gì hả {xchi}?"
 -> hoi
 
 === hoi ===
 * [Tối 6/12 em với Khoa ngồi ở đâu?]
-    "Bến Gỗ, ven sông. Tụi em ngồi từ tám giờ. Em đăng story suốt nè chị."
+    "Bến Gỗ, ven sông. Tụi em ngồi từ tám giờ. Em đăng story suốt nè {xchi}."
     "Đây, lúc mười giờ hai mươi." #photo:X4
     -> hoi
 * [Khoa về lúc mấy giờ, về bằng gì?]

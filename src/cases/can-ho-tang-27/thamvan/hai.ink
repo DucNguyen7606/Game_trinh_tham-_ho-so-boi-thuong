@@ -3,7 +3,7 @@ VAR has_P5 = false
 VAR has_H3 = false
 
 Chị Hai lau tay vào vạt áo, ngồi mép ghế.
-"Cô Ngọc dễ thương lắm, chỉ có cái tật khoe. Cô hỏi gì tôi nói nấy."
+"Cô Ngọc dễ thương lắm, chỉ có cái tật khoe. {Xco} hỏi gì tôi nói nấy."
 -> hoi
 
 === hoi ===

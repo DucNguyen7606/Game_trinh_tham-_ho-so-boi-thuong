@@ -70,7 +70,7 @@
         "traits": ["Ham vui", "Mê xe", "Sợ cha"],
         "habit": "Tối thứ bảy nào cũng ra quán Bến Gỗ ven sông Thảo Điền. Lúc nào cũng mặc áo hoodie trắng.",
         "relation": "Phụ cha quản lý khách sạn. Hay mượn chiếc Mercedes của cha đi chơi.",
-        "quote": "\"Tối đó em về sớm, đi taxi mà chị.\"",
+        "quote": "\"Tối đó em về sớm, đi taxi mà {xchi}.\"",
         "note": "Ngồi ở quán Bến Gỗ tối 6/12, cách chỗ chị Hoa bị tông chưa tới một cây số."
       }
     },

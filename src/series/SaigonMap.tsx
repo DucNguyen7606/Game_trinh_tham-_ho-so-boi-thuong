@@ -11,6 +11,17 @@ const LAND_OUT = '#d7bf90'
 const WATER = '#8fa79a'
 const INK = ink.slate
 
+/**
+ * The visible window onto the drawing. The city is drawn in 0–1000 × 0–900; the
+ * paper is wider than that so the map fills a wide screen, and the neighbouring
+ * provinces, sea and road carry on into the extra margin.
+ */
+export const VIEW = { x: -130, w: 1260, h: 900 }
+/** Width over height of the map paper, for the boxes that hold it. */
+export const MAP_ASPECT = VIEW.w / VIEW.h
+/** Horizontal extent of everything drawn, a little past the view on each side. */
+const PAPER = { x0: -260, x1: 1260 }
+
 const outline = (a: Area) => roughOutline(a.shape).map((p) => p.map((v) => v.toFixed(1)).join(',')).join(' ')
 
 /** Smooth path through points (midpoint quadratic curves). */
@@ -54,11 +65,17 @@ function zoomTo(areaId?: string) {
   const b = areaId ? boundsOf(areaId) : undefined
   if (!b) return { s: 1, tx: 0, ty: 0 }
   const pad = 70
-  const s = Math.min(3.4, 1000 / (b[2] - b[0] + pad * 2), 900 / (b[3] - b[1] + pad * 2))
+  const s = Math.min(3.4, VIEW.w / (b[2] - b[0] + pad * 2), VIEW.h / (b[3] - b[1] + pad * 2))
   // Leave room at the bottom for the case tags under the pins.
   // Keep the paper filling the frame: never pan past the map's own edges.
-  const clamp = (v: number, size: number) => Math.min(0, Math.max(size - size * s, v))
-  return { s, tx: clamp(500 - ((b[0] + b[2]) / 2) * s, 1000), ty: clamp(430 - ((b[1] + b[3]) / 2) * s, 900) }
+  // The drawing spans PAPER; the view must stay inside it once scaled.
+  const clamp = (v: number, from: number, size: number, lo: number, hi: number) => Math.min(from - lo * s, Math.max(from + size - hi * s, v))
+  const cx = VIEW.x + VIEW.w / 2
+  return {
+    s,
+    tx: clamp(cx - ((b[0] + b[2]) / 2) * s, VIEW.x, VIEW.w, PAPER.x0, PAPER.x1),
+    ty: clamp(430 - ((b[1] + b[3]) / 2) * s, 0, VIEW.h, 0, 900),
+  }
 }
 
 /** Number of playable cases in each area. */
@@ -118,7 +135,7 @@ export default function SaigonMap({
   const fadeOut = { opacity: zoomed ? 0 : 1 }
 
   return (
-    <svg viewBox="0 0 1000 900" className="h-full w-full" role={interactive ? 'group' : 'img'} aria-label="Bản đồ Sài Gòn">
+    <svg viewBox={`${VIEW.x} 0 ${VIEW.w} ${VIEW.h}`} className="h-full w-full" role={interactive ? 'group' : 'img'} aria-label="Bản đồ Sài Gòn">
       <style>{CSS}</style>
       <defs>
         <pattern id={`${id}-hatch`} width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
@@ -151,8 +168,8 @@ export default function SaigonMap({
 
       <g className="sm-zoom" style={{ transform: `translate(${z.tx}px, ${z.ty}px) scale(${z.s})` }}>
       {/* Neighbouring provinces, hatched; clicking them while zoomed goes back to the whole city */}
-      <rect width="1000" height="900" fill={LAND_OUT} onClick={zoomed && pick ? () => pick('') : undefined} />
-      <rect width="1000" height="900" fill={`url(#${id}-hatch)`} pointerEvents="none" />
+      <rect x={PAPER.x0} width={PAPER.x1 - PAPER.x0} height="900" fill={LAND_OUT} onClick={zoomed && pick ? () => pick('') : undefined} />
+      <rect x={PAPER.x0} width={PAPER.x1 - PAPER.x0} height="900" fill={`url(#${id}-hatch)`} pointerEvents="none" />
       <g className="display" fill={shade(INK, 0.3)} fontSize="22" letterSpacing="6" opacity="0.6">
         <text x="70" y="420" transform="rotate(-70 70 420)">LONG AN</text>
         <text x="600" y="120">BÌNH DƯƠNG</text>
@@ -160,9 +177,9 @@ export default function SaigonMap({
       </g>
 
       {/* The sea */}
-      <path d="M560,900 L620,860 L700,890 L870,860 L880,770 L1000,690 L1000,900 Z" fill={WATER} />
-      <path d="M560,900 L620,860 L700,890 L870,860 L880,770 L1000,690 L1000,900 Z" fill={`url(#${id}-wave)`} />
-      <text x="985" y="880" textAnchor="end" className="display" fontSize="18" fill={shade(WATER, -0.45)} letterSpacing="5">BIỂN ĐÔNG</text>
+      <path d="M560,900 L620,860 L700,890 L870,860 L880,770 L1000,690 L1260,560 L1260,900 Z" fill={WATER} />
+      <path d="M560,900 L620,860 L700,890 L870,860 L880,770 L1000,690 L1260,560 L1260,900 Z" fill={`url(#${id}-wave)`} />
+      <text x="1110" y="880" textAnchor="end" className="display" fontSize="18" fill={shade(WATER, -0.45)} letterSpacing="5">BIỂN ĐÔNG</text>
 
       {/* Districts */}
       <g stroke={shade(INK, 0.15)} strokeWidth="1.6" strokeLinejoin="round">
@@ -192,7 +209,7 @@ export default function SaigonMap({
       />
       {/* Close up, the chosen area shows its streets */}
       {selArea && (
-        <rect width="1000" height="900" fill={`url(#${id}-streets)`} clipPath={`url(#${id}-sel)`} pointerEvents="none" />
+        <rect x={PAPER.x0} width={PAPER.x1 - PAPER.x0} height="900" fill={`url(#${id}-streets)`} clipPath={`url(#${id}-sel)`} pointerEvents="none" />
       )}
       {/* Selected outline on top of the neighbours' borders */}
       {selected && AREAS.some((a) => a.id === selected) && (
@@ -362,13 +379,13 @@ export default function SaigonMap({
       )}
 
       {/* Compass and cartouche */}
-      <g transform="translate(75 75)" pointerEvents="none" fill={INK} className="sm-fade" style={fadeOut}>
+      <g transform="translate(-55 75)" pointerEvents="none" fill={INK} className="sm-fade" style={fadeOut}>
         <circle r="34" fill="none" stroke={INK} strokeWidth="1.5" opacity="0.6" />
         <path d="M0,-44 L9,0 L0,8 L-9,0 Z" />
         <path d="M0,44 L9,0 L0,-8 L-9,0 Z" opacity="0.4" />
         <text y="-50" textAnchor="middle" className="display" fontSize="16" fontWeight="700">B</text>
       </g>
-      <g transform="translate(40 820)" pointerEvents="none" className="sm-fade" style={fadeOut}>
+      <g transform="translate(-100 822)" pointerEvents="none" className="sm-fade" style={fadeOut}>
         <rect width="250" height="56" fill="#f3e4c4" stroke={INK} strokeWidth="1.5" />
         <rect x="5" y="5" width="240" height="46" fill="none" stroke={INK} strokeWidth="0.8" />
         <text x="125" y="26" textAnchor="middle" className="title" fontSize="17" fill={INK}>Bản đồ hồ sơ</text>
@@ -376,8 +393,8 @@ export default function SaigonMap({
       </g>
 
       {/* Age: grain and darkened edges */}
-      <rect width="1000" height="900" fill="#fff" filter={`url(#${id}-paper)`} pointerEvents="none" opacity="0.9" />
-      <rect width="1000" height="900" fill={`url(#${id}-age)`} pointerEvents="none" />
+      <rect x={PAPER.x0} width={PAPER.x1 - PAPER.x0} height="900" fill="#fff" filter={`url(#${id}-paper)`} pointerEvents="none" opacity="0.9" />
+      <rect x={PAPER.x0} width={PAPER.x1 - PAPER.x0} height="900" fill={`url(#${id}-age)`} pointerEvents="none" />
     </svg>
   )
 }

@@ -18,7 +18,7 @@ VAR has_P11 = false
     -> hoi
 * {has_X4} [Ủng anh trong ảnh dính bùn đỏ. Từ bến lên Vàm Sát toàn bùn xám.]
     Ông Tâm nhìn xuống chân.
-    "Bùn nào chả là bùn. Tui lội khắp nơi, cô biết sao được."
+    "Bùn nào chả là bùn. Tui lội khắp nơi, {xco} biết sao được."
     -> hoi
 * {has_H8} [Ở Rạch Đước có năm mẩu thuốc rê cuốn giấy quyến.]
     "Dân ở đây ai không hút thuốc rê. Cô đi hỏi coi."

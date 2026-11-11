@@ -7,7 +7,7 @@ Ngọc ôm chặt túi xách, mắt còn thâm vì thiếu ngủ.
 
 === hoi ===
 * [Đêm 19/11 em ở đâu?]
-    "Bùi Viện với tụi bạn, tới gần 3 giờ. Hình nè chị." #photo:X4
+    "Bùi Viện với tụi bạn, tới gần 3 giờ. Hình nè {xchi}." #photo:X4
     -> hoi
 * [Sáng 20 em phát hiện thế nào?]
     "7 giờ 40 em mở cửa trước, thấy khung trống. Em chạy ra sau thì cửa bị cạy. Em gọi chị Diệp trước rồi mới gọi công an."

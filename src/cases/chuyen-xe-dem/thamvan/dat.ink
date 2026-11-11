@@ -22,7 +22,7 @@ Anh Đạt ngồi ở mép ghế, hai tay xoa xoa cổ tay dù trên da không c
     "Thì... tui thấy xa xa nên rà rà lại. Tối quá nhớ gì đâu."
     -> hoi
 * {has_H4} [Băng keo trói anh được cắt bằng kéo, quấn có ba vòng.]
-    "Tụi nó chuyên nghiệp mà cô. Tui đâu có ngồi đếm."
+    "Tụi nó chuyên nghiệp mà {xco}. Tui đâu có ngồi đếm."
     -> hoi
 * {has_H5} [Cướp xe mà để lại cho anh điện thoại với hơn bốn triệu?]
     Anh Đạt sờ túi áo khoác như để chắc là ví vẫn còn.
@@ -34,10 +34,10 @@ Anh Đạt ngồi ở mép ghế, hai tay xoa xoa cổ tay dù trên da không c
     -> hoi
 * {has_P5} [Qua trạm Sông Lũy lúc 01:58, xe anh chỉ còn nặng 14,5 tấn.]
     Anh Đạt im lặng rất lâu. Bàn tay xoa cổ tay dừng lại.
-    "Cô hỏi ông Tài đi. Tui chỉ là thằng lái xe."
+    "{Xco} hỏi ông Tài đi. Tui chỉ là thằng lái xe."
     -> hoi
 * {has_P8} [Bác sĩ nói cổ tay anh không hằn một vết nào.]
-    "Tui da dày. Cô muốn tui bầm tím mới tin hả?"
+    "Tui da dày. {Xco} muốn tui bầm tím mới tin hả?"
     -> hoi
 * {has_P11} [Ngày 4/11 ông Tài chuyển 250 triệu cho vợ anh.]
     Anh Đạt gục đầu.

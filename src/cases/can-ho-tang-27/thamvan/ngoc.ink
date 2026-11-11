@@ -7,7 +7,7 @@ VAR has_P8 = false
 VAR has_P10 = false
 
 Chị Ngọc ngồi xuống sofa, điện thoại úp trên đùi, mắt còn đỏ.
-"Tôi bay đi có một đêm. Một đêm thôi. Chị giúp tôi giải quyết lẹ, tôi còn phải live bán hàng Tết."
+"Tôi bay đi có một đêm. Một đêm thôi. {Xchi} giúp tôi giải quyết lẹ, tôi còn phải live bán hàng Tết."
 -> hoi
 
 === hoi ===
@@ -31,7 +31,7 @@ Chị Ngọc ngồi xuống sofa, điện thoại úp trên đùi, mắt còn đ
     "Tháng này live ế thật. Nhưng hai chiếc đồng hồ đó là hàng để bán Tết. Bán được thì tôi trả nợ, mất thì tôi còn nợ nhiều hơn."
     -> hoi
 * {has_X2} [Ngày 18/11 chị mua thêm bảo hiểm 3,2 tỷ cho đồng hồ và trang sức.]
-    "Vì tôi mới mua chiếc Patek giữa tháng 11. Bên chị bắt mang đi giám định rồi mới cho mua. Hóa đơn, giấy giám định tôi nộp đủ."
+    "Vì tôi mới mua chiếc Patek giữa tháng 11. Bên {xchi} bắt mang đi giám định rồi mới cho mua. Hóa đơn, giấy giám định tôi nộp đủ."
     -> hoi
 * {has_P5} [Đêm đó cửa nhà chị được mở bằng thẻ từ #09.]
     "Thẻ gì? Tôi đâu có dùng thẻ, tôi mở bằng vân tay. Trong app của tôi chỉ có vân tay tôi với chị Hai."

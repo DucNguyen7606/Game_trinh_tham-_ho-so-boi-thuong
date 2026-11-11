@@ -5,19 +5,19 @@ VAR has_P6 = false
 VAR has_P11 = false
 
 Tài ngồi trên yên chiếc Exciter đỏ dựng ngoài hiên, mũ bảo hiểm vẫn đội trên đầu, tay lướt điện thoại.
-"Dì con làm ăn đàng hoàng, ai mà nỡ. Chị hỏi nhanh nha, đang có cuốc."
+"Dì con làm ăn đàng hoàng, ai mà nỡ. {Xchi} hỏi nhanh nha, đang có cuốc."
 -> hoi
 
 === hoi ===
 * [Tối 2/12 anh ở đâu?]
-    "Chạy xe chứ đâu. Mưa thì cuốc nhiều, giá cao. Chị coi trong app nè, toàn bên Phú Nhuận." #photo:X5
+    "Chạy xe chứ đâu. Mưa thì cuốc nhiều, giá cao. {Xchi} coi trong app nè, toàn bên Phú Nhuận." #photo:X5
     -> hoi
 * [Anh có hay tới tiệm dì không?]
     "Tối nào con cũng ghé ăn cơm. Mà tối đó mưa quá nên con không ghé."
     -> hoi
 * {has_H5} [Trong hẻm sau tiệm có mảnh đèn hậu Exciter đỏ còn mới. Đèn hậu xe anh đang bể.]
     Tài liếc ra đuôi xe, chỗ đèn hậu chỉ còn cái bóng trơ.
-    "Bể từ tuần trước rồi chị. Exciter đỏ Sài Gòn này cả chục ngàn chiếc."
+    "Bể từ tuần trước rồi {xchi}. Exciter đỏ Sài Gòn này cả chục ngàn chiếc."
     -> hoi
 * {has_H6} [Thùng rác trong hẻm có một bộ áo mưa GoXe dính bùn đỏ.]
     "Áo mưa GoXe hãng phát cho cả trăm ngàn tài xế, đâu phải mình con."
@@ -29,7 +29,7 @@ Tài ngồi trên yên chiếc Exciter đỏ dựng ngoài hiên, mũ bảo hi�
     -> hoi
 * {has_P6} [Camera nhà thuốc thấy hai người áo mưa đen chạy ra cửa trước rồi rẽ vào hẻm 514 lúc 21:05.]
     Tài tháo mũ bảo hiểm ra, tóc bết mồ hôi.
-    "Chị nói gì con không hiểu."
+    "{Xchi} nói gì con không hiểu."
     -> hoi
 * {has_P11} [Ngày 5/12 dì Loan chuyển cho anh 150 triệu. Cùng ngày anh trả hết ba app cho vay.]
     Tài cúi gằm mặt, xoay xoay chiếc mũ trong tay.

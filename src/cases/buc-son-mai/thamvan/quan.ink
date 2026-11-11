@@ -5,13 +5,13 @@ VAR has_P10 = false
 VAR has_P11 = false
 
 Quân lau tay vào chiếc tạp dề đầy vệt sơn, ngồi xuống ghế đẩu.
-"Sơn mài là nghề của sự kiên nhẫn, chị à. Chị hỏi gì cứ hỏi."
+"Sơn mài là nghề của sự kiên nhẫn, chị à. {Xchi} hỏi gì cứ hỏi."
 -> hoi
 
 === hoi ===
 * [Đêm 19/11 anh ở đâu?]
     "Ở xưởng, livestream dạy mài sơn tới hơn 2 giờ. Thằng Tí học trò ngồi kế bên."
-    "Video còn đây, chị coi." #photo:X5
+    "Video còn đây, {xchi} coi." #photo:X5
     -> hoi
 * [Hồi tháng 6 anh phục chế bức tranh thế nào?]
     "Xử lý vết rạn chân chim ở góc dưới trái. Mài, trám, phủ lại. Mất gần bốn tuần."

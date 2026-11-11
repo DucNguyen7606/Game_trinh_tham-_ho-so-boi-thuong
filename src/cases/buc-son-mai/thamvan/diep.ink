@@ -5,7 +5,7 @@ VAR has_P7 = false
 VAR has_H5 = false
 
 Bà Diệp ngồi thẳng lưng, tay đặt lên đùi, giọng chậm và rõ.
-"Bức tranh đó là danh dự của tôi. Tôi mong cô làm nhanh."
+"Bức tranh đó là danh dự của tôi. Tôi mong {xco} làm nhanh."
 -> hoi
 
 === hoi ===
@@ -21,7 +21,7 @@ Bà Diệp ngồi thẳng lưng, tay đặt lên đùi, giọng chậm và rõ.
     -> hoi
 * {has_H2} [Bức bị lấy đi vẽ trên MDF. Tranh của ông Khuê vẽ trên vóc gỗ mít.]
     Bà Diệp nhìn bạn rất lâu.
-    "Cô học mấy năm mỹ thuật mà dám nói tranh của tôi là giả?"
+    "{Xco} học mấy năm mỹ thuật mà dám nói tranh của tôi là giả?"
     -> hoi
 * {has_P9} [Ngày 14/10 phòng thí nghiệm gửi chị kết quả: sơn acrylic.]
     Bà Diệp tháo kính, lau rất chậm.

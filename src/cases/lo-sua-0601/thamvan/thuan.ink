@@ -14,10 +14,10 @@ Thuận đẩy gọng kính, đặt cây bút tiêm insulin lên bàn cho ngay n
     "Không. Mẫu đầu ca đạt hết, tôi ký xuất xưởng đàng hoàng. Có kẻ phá hàng ngoài thị trường, thư nó ghi rõ vậy."
     -> hoi
 * [Tối 10/1 anh ở đâu?]
-    "Ở nhà ăn cơm với vợ con. Hình đây, cô coi." #photo:X6
+    "Ở nhà ăn cơm với vợ con. Hình đây, {xco} coi." #photo:X6
     -> hoi
 * [Vì sao Sang bị cho nghỉ?]
-    "Ngủ gật trong ca, ngay cạnh máy tiệt trùng. Nó còn lên mạng hăm dọa công ty. Cô nên hỏi nó tối 10/1 ở đâu."
+    "Ngủ gật trong ca, ngay cạnh máy tiệt trùng. Nó còn lên mạng hăm dọa công ty. {Xco} nên hỏi nó tối 10/1 ở đâu."
     -> hoi
 * {has_H2} [Dòng 02:10 trong sổ vận hành ca đêm 6/1 bị tẩy.]
     "Công nhân ghi sai thì tẩy. Chuyện thường."

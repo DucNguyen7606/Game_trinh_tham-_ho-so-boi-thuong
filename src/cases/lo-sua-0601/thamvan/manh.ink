@@ -20,7 +20,7 @@ VAR has_H6 = false
     -> hoi
 * {has_P3} [Thư tống tiền nói có người chích kim vào 100 chai.]
     "Thư đó ra sau clip của tôi hai ngày mà. Chai tôi đâu có lỗ."
-    "Cô coi, tới bữa thư ra thì cả xóm này ai cũng biết sữa Mộc An bị chua rồi."
+    "{Xco} coi, tới bữa thư ra thì cả xóm này ai cũng biết sữa Mộc An bị chua rồi."
     -> hoi
 * {has_H6} [Sáu chai có lỗ kim ở Hiệp Thành Mart chỉ được tìm thấy sáng 11/1.]
     "Vậy là có người chích sau khi tôi đăng clip. Lạ ghê, chích chi chai đã chua?"

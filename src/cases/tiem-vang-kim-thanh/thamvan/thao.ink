@@ -3,7 +3,7 @@ VAR has_P6 = false
 VAR has_P3 = false
 
 Chị Thảo bước ra từ sau quầy thuốc, kéo hai chiếc ghế nhựa ra hiên.
-"Camera nhà tôi quay ra đường suốt, cô cần đoạn nào cũng có."
+"Camera nhà tôi quay ra đường suốt, {xco} cần đoạn nào cũng có."
 -> hoi
 
 === hoi ===

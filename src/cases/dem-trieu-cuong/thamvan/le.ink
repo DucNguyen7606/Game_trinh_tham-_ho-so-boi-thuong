@@ -6,7 +6,7 @@ VAR has_X1 = false
 VAR has_P10 = false
 
 Bà Lệ ngồi xuống, tay vẫn cầm chiếc điện thoại không ngừng rung.
-"Nước năm nào cũng lên, mà chưa năm nào mất sạch như năm nay. Cô giúp tôi làm cho lẹ, sắp Tết rồi."
+"Nước năm nào cũng lên, mà chưa năm nào mất sạch như năm nay. {Xco} giúp tôi làm cho lẹ, sắp Tết rồi."
 -> hoi
 
 === hoi ===
@@ -18,14 +18,14 @@ Bà Lệ ngồi xuống, tay vẫn cầm chiếc điện thoại không ngừng 
     "Tôi một bộ, thằng Khải một bộ. Sáu năm nay nó lo hết, tôi tin nó như con."
     -> hoi
 * {has_X2} [Tháng 9 chị nâng giá trị bảo hiểm từ 3 lên 4,5 tỷ.]
-    "Thì tôi nhập thêm 500 máy cho mùa Tết, hàng nhiều hơn thì mua bảo hiểm nhiều hơn. Hóa đơn đầy đủ, cô cứ xem."
+    "Thì tôi nhập thêm 500 máy cho mùa Tết, hàng nhiều hơn thì mua bảo hiểm nhiều hơn. Hóa đơn đầy đủ, {xco} cứ xem."
     -> hoi
 * {has_P4} [Báo cáo của Khải nói nước phá cửa sổ, cuốn trôi 90 thùng.]
     "Nó nói vậy thì tôi ghi vậy. Sáng ra tôi xuống tới nơi thì nước rút rồi, kệ trên trống trơn."
     -> hoi
 * {has_H1} [Vệt nước trong kho chỉ cao 0,9 m. Ba tầng kệ trên cao hơn mức đó.]
     Bà Lệ nhíu mày, nhìn lại tấm ảnh trong điện thoại.
-    "Vậy... nước đâu có tới đó. Mà hàng thì mất. Cô nói vậy là sao?"
+    "Vậy... nước đâu có tới đó. Mà hàng thì mất. {Xco} nói vậy là sao?"
     -> hoi
 * {has_P6} [Phường vớt rác hai ngày, không thấy thùng điện thoại nào trên kênh.]
     "Thùng carton bọc nilon, nổi lềnh bềnh chứ chìm sao được..."
@@ -38,7 +38,7 @@ Bà Lệ ngồi xuống, tay vẫn cầm chiếc điện thoại không ngừng 
 * {has_P10} [Ngày 17/11 Khải nhận 1,1 tỷ từ chủ tiệm Gia Hưng ở Quận 10.]
     Bà Lệ ngồi im rất lâu.
     "Gia Hưng... cách tiệm tôi có hai dãy phố. Sáu năm tôi coi nó như con trong nhà."
-    "Cô ghi cho đúng. Cái gì nước làm hư thì tôi nhận. Cái gì người ta lấy thì tôi đi báo công an."
+    "{Xco} ghi cho đúng. Cái gì nước làm hư thì tôi nhận. Cái gì người ta lấy thì tôi đi báo công an."
     -> hoi
 * [Cảm ơn chị.]
     -> END

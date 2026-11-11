@@ -45,7 +45,7 @@
         "traits": ["Lịch thiệp", "Nói chuyện bằng con số", "Không bao giờ chịu lỗ"],
         "habit": "Sáng nào cũng ngồi cà phê đầu hẻm xem giá tiêu trên điện thoại. Đi đâu cũng tự lái chiếc bán tải trắng.",
         "relation": "Hai mươi năm buôn tiêu ở Buôn Ma Thuột. Đứng tên yêu cầu bồi thường 3,04 tỷ.",
-        "quote": "\"Hai chục tấn tiêu bay mất, cô nghĩ tôi vui lắm sao?\"",
+        "quote": "\"Hai chục tấn tiêu bay mất, {xco} nghĩ tôi vui lắm sao?\"",
         "note": "Lần đầu mua bảo hiểm cho một chuyến hàng nội địa, năm ngày trước khi xe bị cướp. Người hưởng lợi rõ nhất."
       }
     },
@@ -70,7 +70,7 @@
         "traits": ["Tay lái lụa", "Ít nói", "Mê bóng đá"],
         "habit": "Chạy tuyến Tây Nguyên về cảng chín năm. Hay chụp ảnh với xe ở các quán cơm dọc đường.",
         "relation": "Tài xế của nhà xe Kiều Phát. Vợ bán tạp hóa ở Buôn Ma Thuột, hai đứa con đang đi học.",
-        "quote": "\"Dao kề cổ, tui còn sống là may rồi cô ơi.\"",
+        "quote": "\"Dao kề cổ, tui còn sống là may rồi {xco} ơi.\"",
         "note": "Người duy nhất thấy bọn cướp. Mọi điều ta biết về vụ cướp đều từ lời anh kể."
       }
     },
@@ -121,7 +121,7 @@
         "traits": ["Lanh lợi", "Nói nhiều", "Ham chơi"],
         "habit": "Đi đâu cũng mang loa bluetooth. Có bạn gái ở Phan Rang.",
         "relation": "Cháu họ bà Kiều, theo xe anh Đạt được một năm.",
-        "quote": "\"Em xuống xe có một đêm mà thành ra vậy đó chị.\"",
+        "quote": "\"Em xuống xe có một đêm mà thành ra vậy đó {xchi}.\"",
         "note": "Theo lẽ phải ngồi cạnh tài xế cả chuyến, nhưng đêm đó lại xuống xe ở Phan Rang. Vắng mặt đúng lúc."
       }
     },
