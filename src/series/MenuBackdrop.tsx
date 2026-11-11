@@ -1,6 +1,39 @@
 import { useId } from 'react'
 import { accent, ink, shade } from '@/art/palette'
-import { Lamp, P, Rain, SceneFrame, rng } from '@/art/primitives'
+import { Lamp, P, SceneFrame, rng } from '@/art/primitives'
+
+// Motion for the menu backdrop. Transforms use view-box units so origins match
+// the 1600 x 900 drawing. The global reduced-motion rule turns all of this off.
+const MOTION_CSS = `
+.mb-rain { animation: mb-fall var(--d) linear infinite; }
+@keyframes mb-fall { from { transform: translate(0, 0); } to { transform: translate(-225px, 900px); } }
+.mb-lamp { transform-box: view-box; transform-origin: 1300px 40px; animation: mb-swing 5.5s ease-in-out infinite alternate; }
+@keyframes mb-swing { from { transform: rotate(-3.2deg); } to { transform: rotate(3.2deg); } }
+.mb-steam { transform-box: fill-box; transform-origin: 50% 100%; opacity: 0; animation: mb-rise 4.2s ease-out infinite; }
+@keyframes mb-rise {
+  0% { transform: translate(0, 10px) scale(0.6, 0.7); opacity: 0; }
+  25% { opacity: 0.85; }
+  100% { transform: translate(14px, -120px) scale(1.4, 1.2); opacity: 0; }
+}
+.mb-flicker { animation: mb-flicker 7s steps(1) infinite; }
+@keyframes mb-flicker { 0%, 61%, 66%, 100% { opacity: 0.55; } 62%, 64% { opacity: 0.1; } 63% { opacity: 0.45; } }
+`
+
+/** Rain that falls: the drops are drawn twice, one screen apart, and the pair slides down forever. */
+function FallingRain({ count, seed, opacity, speed, width }: { count: number; seed: number; opacity: number; speed: number; width: number }) {
+  const r = rng(seed)
+  const drops = Array.from({ length: count }, () => ({ x: r() * 1900 - 50, y: r() * 900, l: 22 + r() * 40 }))
+  const lines = (dy: number, dx: number) =>
+    drops.map((d, i) => <line key={`${dy}-${i}`} x1={d.x + dx} y1={d.y + dy} x2={d.x + dx - d.l * 0.25} y2={d.y + dy + d.l} />)
+  return (
+    <g stroke={ink.fog} strokeWidth={width} opacity={opacity}>
+      <g className="mb-rain" style={{ '--d': `${speed}s` } as React.CSSProperties}>
+        {lines(0, 0)}
+        {lines(-900, 225)}
+      </g>
+    </g>
+  )
+}
 
 /**
  * Main menu backdrop: Saigon at night seen past the edge of an investigator's
@@ -29,6 +62,7 @@ export default function MenuBackdrop() {
 
   return (
     <SceneFrame label="Sài Gòn về đêm, sau mép bàn làm việc của chuyên viên giám định">
+      <style>{MOTION_CSS}</style>
       <defs>
         <linearGradient id={`${id}-sky`} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stopColor="#140d0b" />
@@ -39,6 +73,9 @@ export default function MenuBackdrop() {
           <stop offset="0" stopColor={accent.ember} stopOpacity="0.5" />
           <stop offset="1" stopColor={accent.ember} stopOpacity="0" />
         </radialGradient>
+        <filter id={`${id}-soft`} x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="4" />
+        </filter>
         <pattern id={`${id}-dots`} width="7" height="7" patternUnits="userSpaceOnUse">
           <circle cx="3.5" cy="3.5" r="1.1" fill={ink.night} />
         </pattern>
@@ -77,7 +114,9 @@ export default function MenuBackdrop() {
                   <rect x={h.x + 12} y={y} width={h.w - 24} height="30" fill={on ? accent.amber : ink.night} opacity={on ? 0.75 : 0.8} />
                   {/* Balcony rail */}
                   <rect x={h.x + 6} y={y + 34} width={h.w - 12} height="4" fill={ink.night} />
-                  {on && v > 0.85 && <rect x={h.x + 12} y={y} width={(h.w - 24) / 2} height="30" fill={accent.teal} opacity="0.55" />}
+                  {on && v > 0.85 && (
+                    <rect className="mb-flicker" x={h.x + 12} y={y} width={(h.w - 24) / 2} height="30" fill={accent.teal} opacity="0.55" style={{ animationDelay: `${-f * 2.3 - i}s` }} />
+                  )}
                 </g>
               )
             })}
@@ -93,7 +132,8 @@ export default function MenuBackdrop() {
       </g>
       <rect x="806" y="300" width="12" height="420" fill={ink.night} />
 
-      <Rain count={170} seed={11} opacity={0.3} />
+      <FallingRain count={110} seed={11} opacity={0.22} speed={1.4} width={1} />
+      <FallingRain count={70} seed={23} opacity={0.35} speed={0.75} width={1.6} />
 
       {/* Window frame of the office, blinds pulled halfway */}
       <g fill={ink.night}>
@@ -110,8 +150,10 @@ export default function MenuBackdrop() {
       <polygon points={P([[0, 720], [1600, 700], [1600, 712], [0, 732]])} fill={ink.dusk} />
 
       {/* Lamp light pooled on the desk */}
-      <line x1="1300" y1="40" x2="1300" y2="420" stroke={ink.night} strokeWidth="3" />
-      <Lamp x={1300} y={440} reach={460} spread={720} />
+      <g className="mb-lamp">
+        <line x1="1300" y1="40" x2="1300" y2="420" stroke={ink.night} strokeWidth="3" />
+        <Lamp x={1300} y={440} reach={460} spread={720} />
+      </g>
 
       {/* Stack of case folders */}
       {[0, 1, 2].map((k) => {
@@ -132,6 +174,17 @@ export default function MenuBackdrop() {
       <path d="M 252 720 L 348 720 L 338 800 L 262 800 Z" fill={ink.bone} />
       <ellipse cx="300" cy="720" rx="48" ry="10" fill={shade(accent.rust, -0.5)} />
       <path d="M 346 735 q 34 4 22 32 q -8 14 -26 12" stroke={ink.bone} strokeWidth="9" fill="none" />
+      {/* Steam curling up from the cup */}
+      <g fill="none" stroke={ink.bone} strokeWidth="9" strokeLinecap="round" filter={`url(#${id}-soft)`}>
+        {[0, 1, 2].map((k) => (
+          <path
+            key={k}
+            className="mb-steam"
+            d={`M ${285 + k * 15} 712 c -16 -22 18 -34 2 -58 c -12 -18 14 -30 4 -48`}
+            style={{ animationDelay: `${k * 1.4}s` }}
+          />
+        ))}
+      </g>
 
       {/* Halftone in the corners, like an old print */}
       <rect width="1600" height="900" fill={`url(#${id}-dots)`} opacity="0.18" />
