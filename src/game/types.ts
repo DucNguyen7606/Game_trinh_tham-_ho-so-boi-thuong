@@ -69,6 +69,8 @@ export interface Suspect {
   /** Key of the ink script in the case's thamvan folder, if the player can question them. */
   interrogation?: string
   portrait?: PortraitSpec
+  /** Shown instead of the interview button for someone who can't be questioned. */
+  unavailable?: string
   profile?: SuspectProfile
 }
 
@@ -94,6 +96,17 @@ export interface Ending {
   text: string
 }
 
+/**
+ * How the verdict picks map to an ending. Rules are tried in order and the first
+ * that matches wins: every slot in `picks` must have that option, and every slot
+ * in `correct` must hold its correct option. A rule with neither always matches.
+ */
+export interface EndingRule {
+  ending: string
+  picks?: Record<string, string>
+  correct?: string[]
+}
+
 export interface CaseData {
   id: string
   title: string
@@ -109,6 +122,9 @@ export interface CaseData {
   questions: Question[]
   verdict: VerdictSlot[]
   endings: Ending[]
+  endingRules: EndingRule[]
+  /** Date printed on scene photos, like "15 07 '25". */
+  photoDate?: string
 }
 
 export type ActionKind = 'talk' | 'explore'

@@ -47,7 +47,7 @@ export default function MainMenu() {
         )}
       </div>
 
-      <p className="display absolute bottom-4 left-[8vw] text-xs text-muted-foreground/70">Bản thử nghiệm · Chương 1</p>
+      <p className="display absolute bottom-4 left-[8vw] text-xs text-muted-foreground/70">Bản thử nghiệm · Chương 1–2</p>
     </div>
   )
 }
@@ -81,34 +81,41 @@ function SettingsItem() {
 
 function ChapterSelect({ onBack }: { onBack: () => void }) {
   const started = useStarted()
-  const { go, reset } = useGame()
-  const [confirming, setConfirming] = useState(false)
+  const { go, startCase } = useGame()
+  const currentId = useGame((s) => s.data.id)
+  // Chapter waiting for the player to confirm that starting it drops their progress.
+  const [confirming, setConfirming] = useState<string | null>(null)
 
-  const begin = () => {
-    if (started && !confirming) {
-      setConfirming(true)
+  const begin = (caseId: string) => {
+    if (started && confirming !== caseId) {
+      setConfirming(caseId)
       return
     }
-    reset()
+    startCase(caseId)
     go('desk')
   }
+  const current = SERIES.chapters.find((c) => c.caseId === currentId)
 
   return (
     <div className="space-y-5">
       <div className="flex flex-wrap gap-5">
         {SERIES.chapters.map((c) => (
-          <ChapterFolder key={c.number} chapter={c} onOpen={c.caseId ? begin : undefined} />
+          <ChapterFolder key={c.number} chapter={c} onOpen={c.caseId ? () => begin(c.caseId!) : undefined} />
         ))}
       </div>
 
       {confirming && (
         <div className="panel flex max-w-xl items-center gap-3 rounded-md p-3 text-sm">
-          <span>Bạn đang điều tra dở chương này. Bắt đầu lại sẽ xóa toàn bộ tiến độ.</span>
+          <span>
+            {confirming === currentId
+              ? 'Bạn đang điều tra dở chương này. Bắt đầu lại sẽ xóa toàn bộ tiến độ.'
+              : `Bạn đang điều tra dở Chương ${current?.number ?? ''}. Mở chương khác sẽ xóa tiến độ chương đó.`}
+          </span>
           <button className="display shrink-0 text-amber hover:underline" onClick={() => go('desk')}>
-            Tiếp tục
+            Tiếp tục chương đang dở
           </button>
-          <button className="display shrink-0 text-string hover:underline" onClick={begin}>
-            Bắt đầu lại
+          <button className="display shrink-0 text-string hover:underline" onClick={() => begin(confirming)}>
+            {confirming === currentId ? 'Bắt đầu lại' : 'Mở chương mới'}
           </button>
         </div>
       )}

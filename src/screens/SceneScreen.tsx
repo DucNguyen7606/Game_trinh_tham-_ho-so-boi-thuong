@@ -28,7 +28,7 @@ export default function SceneScreen() {
   const photoProps = hotspot ? {
     marker: hotspot.clueId ? String(photoNo) : undefined,
     showRuler: Boolean(hotspot.clueId),
-    stamp: `15 07 '25  09:${String(10 + zoneNo * 7 + photoNo).padStart(2, '0')}`,
+    stamp: `${data.photoDate ?? "15 07 '25"}  09:${String(10 + zoneNo * 7 + photoNo).padStart(2, '0')}`,
     caption: `Ảnh ${zoneNo}.${photoNo} · ${hotspot.label}${hotspot.clueId ? ` · ${hotspot.clueId}` : ''}`,
     tilt: photoNo % 2 ? -1.5 : 1.2,
   } : undefined
