@@ -79,5 +79,13 @@ export const SERIES = {
       blurb: 'Có kẻ chích kim vào sữa đậu nành rồi gửi thư đòi 500 triệu. Nhà máy thu hồi hai lô, đòi 3,2 tỷ bảo hiểm. Nhưng sữa đã chua từ trước khi có lá thư.',
       place: 'Quận 12 · tháng 1',
     },
+    {
+      number: 9,
+      caseId: 'can-ho-tang-27',
+      area: 'binh-thanh',
+      title: 'Căn hộ tầng 27',
+      blurb: 'Két sắt ở tầng 27 mở toang trong đêm chủ nhà bay ra Hà Nội. Cửa không bị phá, két không bị cạy, và chị đang nợ ngân hàng. Mọi thứ đều giống gian lận.',
+      place: 'Bình Thạnh · tháng 12',
+    },
   ] satisfies Chapter[],
 }
