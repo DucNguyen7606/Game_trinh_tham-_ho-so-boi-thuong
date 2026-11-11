@@ -1,7 +1,7 @@
 import { useId } from 'react'
 import { accent, ink, shade } from '@/art/palette'
 import { AREAS, OFF_MAP, QL1A, RIVER, areaLabel, roughOutline, type Area } from './areas'
-import { SERIES } from './series'
+import { SERIES, type Chapter } from './series'
 
 // The case map: a paper map of Saigon pinned to the desk. Areas with a case get
 // a red pin, and a red string runs from pin to pin in chapter order.
@@ -25,15 +25,40 @@ function smooth(pts: [number, number][]) {
   return d + ` L${last[0]},${last[1]}`
 }
 
-/** Where an area's pin goes: just above its name. */
-export function pinAt(areaId: string): [number, number] | undefined {
-  const a = AREAS.find((x) => x.id === areaId)
+/** Where a chapter's pin goes: its own `spot`, or just above its area's name. */
+export function spotOf(c: Chapter): [number, number] | undefined {
+  if (c.spot) return c.spot
+  const a = AREAS.find((x) => x.id === c.area)
   if (a) {
     const [x, y] = areaLabel(a)
     return [x, y - 26]
   }
-  const o = OFF_MAP.find((x) => x.id === areaId)
+  const o = OFF_MAP.find((x) => x.id === c.area)
   return o && [o.at[0] - 52, o.at[1] - 8]
+}
+
+/** Box around an area (or a road sign) to zoom to. */
+function boundsOf(areaId: string): [number, number, number, number] | undefined {
+  const a = AREAS.find((x) => x.id === areaId)
+  if (a) {
+    const xs = a.shape.map((p) => p[0])
+    const ys = a.shape.map((p) => p[1])
+    return [Math.min(...xs), Math.min(...ys), Math.max(...xs), Math.max(...ys)]
+  }
+  const o = OFF_MAP.find((x) => x.id === areaId)
+  return o && [o.at[0] - 110, o.at[1] - 60, o.at[0] + 100, o.at[1] + 80]
+}
+
+/** Scale and offset that fit an area in the middle of the map. */
+function zoomTo(areaId?: string) {
+  const b = areaId ? boundsOf(areaId) : undefined
+  if (!b) return { s: 1, tx: 0, ty: 0 }
+  const pad = 70
+  const s = Math.min(3.4, 1000 / (b[2] - b[0] + pad * 2), 900 / (b[3] - b[1] + pad * 2))
+  // Leave room at the bottom for the case tags under the pins.
+  // Keep the paper filling the frame: never pan past the map's own edges.
+  const clamp = (v: number, size: number) => Math.min(0, Math.max(size - size * s, v))
+  return { s, tx: clamp(500 - ((b[0] + b[2]) / 2) * s, 1000), ty: clamp(430 - ((b[1] + b[3]) / 2) * s, 900) }
 }
 
 /** Number of playable cases in each area. */
@@ -51,6 +76,11 @@ const CSS = `
 .sm-sign:hover .sm-board { fill: #3f9a8c; }
 .sm-pin { transform-box: fill-box; transform-origin: 50% 100%; animation: sm-drop 0.5s cubic-bezier(0.3, 1.4, 0.5, 1) both; }
 @keyframes sm-drop { from { transform: translateY(-30px) scale(1.2); opacity: 0; } to { transform: none; opacity: 1; } }
+.sm-zoom { transition: transform 750ms cubic-bezier(0.4, 0, 0.2, 1); }
+.sm-fade { transition: opacity 400ms; }
+.sm-case { cursor: pointer; animation: sm-pop 0.4s 0.6s cubic-bezier(0.3, 1.4, 0.5, 1) both; }
+.sm-case:hover .sm-tag { fill: #fff4dc; }
+@keyframes sm-pop { from { transform: translateY(-20px); opacity: 0; } to { transform: none; opacity: 1; } }
 .sm-string { stroke-dasharray: 2400; stroke-dashoffset: 2400; animation: sm-draw 1.6s 0.5s ease-out forwards; }
 @keyframes sm-draw { to { stroke-dashoffset: 0; } }
 `
@@ -58,10 +88,16 @@ const CSS = `
 export default function SaigonMap({
   selected,
   onSelect,
+  chosen,
+  onChoose,
   interactive = true,
 }: {
+  /** Area to zoom into. */
   selected?: string
   onSelect?: (areaId: string) => void
+  /** Chapter number picked inside the zoomed area. */
+  chosen?: number
+  onChoose?: (chapter: number) => void
   interactive?: boolean
 }) {
   const id = useId().replace(/:/g, '')
@@ -71,8 +107,15 @@ export default function SaigonMap({
   // Pins in chapter order, for the red string.
   const pins = SERIES.chapters
     .filter((c) => c.area && c.caseId)
-    .map((c) => ({ chapter: c.number, at: pinAt(c.area!)! }))
+    .map((c) => ({ chapter: c.number, at: spotOf(c)! }))
     .filter((p) => p.at)
+
+  const zoomed = interactive && !!selected && !!boundsOf(selected)
+  const z = zoomTo(zoomed ? selected : undefined)
+  const selArea = zoomed ? AREAS.find((a) => a.id === selected) : undefined
+  // Cases in the zoomed area, as tags drawn at screen scale over the zoomed map.
+  const here = zoomed ? SERIES.chapters.filter((c) => c.area === selected) : []
+  const fadeOut = { opacity: zoomed ? 0 : 1 }
 
   return (
     <svg viewBox="0 0 1000 900" className="h-full w-full" role={interactive ? 'group' : 'img'} aria-label="Bản đồ Sài Gòn">
@@ -84,6 +127,14 @@ export default function SaigonMap({
         <pattern id={`${id}-wave`} width="40" height="16" patternUnits="userSpaceOnUse">
           <path d="M0 8 q10 -6 20 0 t20 0" fill="none" stroke={shade(WATER, 0.25)} strokeWidth="1.3" />
         </pattern>
+        <pattern id={`${id}-streets`} width="46" height="38" patternUnits="userSpaceOnUse" patternTransform="rotate(-18)">
+          <path d="M0 0 H46 M0 19 H46 M0 0 V38 M23 0 V19 M12 19 V38 M34 19 V38" fill="none" stroke={shade(LAND, -0.13)} strokeWidth="0.8" />
+        </pattern>
+        {selArea && (
+          <clipPath id={`${id}-sel`}>
+            <polygon points={outline(selArea)} />
+          </clipPath>
+        )}
         <pattern id={`${id}-mangrove`} width="22" height="18" patternUnits="userSpaceOnUse">
           <path d="M5 13 l3 -6 l3 6 M14 6 l2 -4 l2 4" fill="none" stroke={shade(accent.teal, -0.1)} strokeWidth="1.2" opacity="0.55" />
         </pattern>
@@ -98,9 +149,10 @@ export default function SaigonMap({
         </radialGradient>
       </defs>
 
-      {/* Neighbouring provinces, hatched */}
-      <rect width="1000" height="900" fill={LAND_OUT} />
-      <rect width="1000" height="900" fill={`url(#${id}-hatch)`} />
+      <g className="sm-zoom" style={{ transform: `translate(${z.tx}px, ${z.ty}px) scale(${z.s})` }}>
+      {/* Neighbouring provinces, hatched; clicking them while zoomed goes back to the whole city */}
+      <rect width="1000" height="900" fill={LAND_OUT} onClick={zoomed && pick ? () => pick('') : undefined} />
+      <rect width="1000" height="900" fill={`url(#${id}-hatch)`} pointerEvents="none" />
       <g className="display" fill={shade(INK, 0.3)} fontSize="22" letterSpacing="6" opacity="0.6">
         <text x="70" y="420" transform="rotate(-70 70 420)">LONG AN</text>
         <text x="600" y="120">BÌNH DƯƠNG</text>
@@ -122,6 +174,8 @@ export default function SaigonMap({
               key={a.id}
               points={outline(a)}
               fill={fill}
+              opacity={zoomed && a.id !== selected ? 0.55 : 1}
+              vectorEffect="non-scaling-stroke"
               className={pick ? `sm-area${has ? ' has' : ''}` : undefined}
               onClick={pick && (() => pick(a.id))}
             >
@@ -136,14 +190,18 @@ export default function SaigonMap({
         fill={`url(#${id}-mangrove)`}
         pointerEvents="none"
       />
+      {/* Close up, the chosen area shows its streets */}
+      {selArea && (
+        <rect width="1000" height="900" fill={`url(#${id}-streets)`} clipPath={`url(#${id}-sel)`} pointerEvents="none" />
+      )}
       {/* Selected outline on top of the neighbours' borders */}
       {selected && AREAS.some((a) => a.id === selected) && (
         <polygon
           points={outline(AREAS.find((a) => a.id === selected)!)}
           fill="none"
           stroke={accent.red}
-          strokeWidth="4"
-          strokeDasharray="10 6"
+          strokeWidth={zoomed ? 4 / z.s : 4}
+          strokeDasharray={zoomed ? `${10 / z.s} ${6 / z.s}` : '10 6'}
           strokeLinejoin="round"
           pointerEvents="none"
         />
@@ -174,8 +232,8 @@ export default function SaigonMap({
       </g>
 
       {/* Names */}
-      <g className="display" textAnchor="middle" pointerEvents="none">
-        {AREAS.map((a) => {
+      <g className="display sm-fade" textAnchor="middle" pointerEvents="none" style={{ opacity: zoomed ? 0.45 : 1 }}>
+        {AREAS.filter((a) => !zoomed || a.id !== selected).map((a) => {
           const [x, y] = areaLabel(a)
           const has = (counts[a.id] ?? 0) > 0
           return (
@@ -228,7 +286,8 @@ export default function SaigonMap({
         )
       })}
 
-      {/* Red string between the pins, in chapter order */}
+      {/* Red string between the pins, in chapter order; hidden close up, where the case tags take over */}
+      <g className="sm-fade" style={fadeOut}>
       {pins.length > 1 && (
         <polyline
           className={interactive ? 'sm-string' : undefined}
@@ -253,15 +312,63 @@ export default function SaigonMap({
           </g>
         </g>
       ))}
+      </g>
+      </g>
+
+      {/* Close up: the area's name and its cases, at screen scale */}
+      {selArea && (
+        <text x="500" y="70" textAnchor="middle" className="title" fontSize="44" fill={INK} paintOrder="stroke" stroke="#f6e3b8" strokeWidth="6" pointerEvents="none">
+          {selArea.name}
+        </text>
+      )}
+      {here.map((c, i) => {
+        const at = spotOf(c)
+        if (!at) return null
+        const x = at[0] * z.s + z.tx
+        const y = at[1] * z.s + z.ty
+        const on = c.number === chosen
+        const open = !!c.caseId
+        return (
+          <g
+            key={c.number}
+            className="sm-case"
+            style={{ animationDelay: `${600 + i * 120}ms` }}
+            onClick={onChoose && (() => onChoose(c.number))}
+            opacity={open ? 1 : 0.7}
+          >
+            <title>{c.title}</title>
+            <ellipse cx={x + 5} cy={y + 3} rx="12" ry="5" fill="#000" opacity="0.3" />
+            <line x1={x} y1={y} x2={x} y2={y - 26} stroke={ink.steel} strokeWidth="3" />
+            <circle cx={x} cy={y - 34} r="16" fill={open ? accent.red : ink.steel} stroke={on ? ink.bone : shade(accent.red, -0.4)} strokeWidth={on ? 4 : 2} />
+            <text x={x} y={y - 28} textAnchor="middle" className="display" fontSize="18" fill={ink.bone} fontWeight="700">
+              {c.number}
+            </text>
+            <g transform={`translate(${x} ${y + 14}) rotate(${i % 2 ? 1.5 : -1.5})`}>
+              <rect className="sm-tag" x="-120" y="0" width="240" height="56" fill="#f3e4c4" stroke={on ? accent.red : INK} strokeWidth={on ? 3 : 1.2} />
+              <text y="21" textAnchor="middle" className="display" fontSize="13" fill={shade(INK, 0.3)} letterSpacing="2">
+                {open ? `CHƯƠNG ${c.number}` : `CHƯƠNG ${c.number} · NIÊM PHONG`}
+              </text>
+              <text y="44" textAnchor="middle" className="title" fontSize="19" fill={INK}>
+                {c.title}
+              </text>
+            </g>
+          </g>
+        )
+      })}
+      {zoomed && here.length === 0 && (
+        <text x="500" y="840" textAnchor="middle" className="display" fontSize="20" fill={shade(INK, 0.2)} paintOrder="stroke" stroke="#f6e3b8" strokeWidth="5" pointerEvents="none">
+          CHƯA CÓ HỒ SƠ NÀO Ở ĐÂY
+        </text>
+      )}
 
       {/* Compass and cartouche */}
-      <g transform="translate(75 75)" pointerEvents="none" fill={INK}>
+      <g transform="translate(75 75)" pointerEvents="none" fill={INK} className="sm-fade" style={fadeOut}>
         <circle r="34" fill="none" stroke={INK} strokeWidth="1.5" opacity="0.6" />
         <path d="M0,-44 L9,0 L0,8 L-9,0 Z" />
         <path d="M0,44 L9,0 L0,-8 L-9,0 Z" opacity="0.4" />
         <text y="-50" textAnchor="middle" className="display" fontSize="16" fontWeight="700">B</text>
       </g>
-      <g transform="translate(40 820)" pointerEvents="none">
+      <g transform="translate(40 820)" pointerEvents="none" className="sm-fade" style={fadeOut}>
         <rect width="250" height="56" fill="#f3e4c4" stroke={INK} strokeWidth="1.5" />
         <rect x="5" y="5" width="240" height="46" fill="none" stroke={INK} strokeWidth="0.8" />
         <text x="125" y="26" textAnchor="middle" className="title" fontSize="17" fill={INK}>Bản đồ hồ sơ</text>
