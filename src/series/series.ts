@@ -19,7 +19,7 @@ export const SERIES = {
       number: 1,
       caseId: 'ho-so-boi-thuong',
       title: 'Hồ sơ bồi thường',
-      blurb: 'Kho vải cháy rụi giữa đêm. Chủ kho đòi bồi thường 4 tỷ đồng. Bạn có 6 ngày để đề xuất chi trả hay từ chối.',
+      blurb: 'Kho vải cháy rụi giữa đêm. Chủ kho đòi bồi thường 4 tỷ đồng. Bạn có 10 ngày để đề xuất chi trả hay từ chối.',
       place: 'Bình Tân · tháng 7',
     },
     { number: 2, title: 'Hồ sơ mật', blurb: '', place: 'Sắp ra mắt' },
