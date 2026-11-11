@@ -22,6 +22,8 @@
   --paper-ink: #2d1f18;
   --amber: #f2a93b;
   --teal: #3f8a7e;
+  --match: #5fb36a;
+  --mismatch: #e5483a;
   --string: #b23a2e;
   --brass: #b98d4a;
   /* Paper grain as an inline SVG noise tile */

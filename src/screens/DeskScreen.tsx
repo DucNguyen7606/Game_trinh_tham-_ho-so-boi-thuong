@@ -1,15 +1,18 @@
 import { useState } from 'react'
-import { MessageSquare } from 'lucide-react'
+import { FileText, MessageSquare } from 'lucide-react'
 import { useGame } from '@/game/store'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Portrait, type PortraitSpec } from '@/art/Portrait'
 import { CharacterProfile } from '@/components/CharacterProfile'
+import { Transcript } from '@/components/Transcript'
 
 export default function DeskScreen() {
-  const { data, startInterrogation, endDay, left, day, log } = useGame()
+  const { data, startInterrogation, endDay, left, day, log, transcripts } = useGame()
   const [profileId, setProfileId] = useState<string | null>(null)
   const profile = data.suspects.find((s) => s.id === profileId)
+  const [transcriptId, setTranscriptId] = useState<string | null>(null)
+  const transcriptOf = data.suspects.find((s) => s.id === transcriptId)
 
   return (
     <div className="grid h-full grid-cols-[2fr_1fr] gap-4 overflow-auto p-6">
@@ -55,6 +58,11 @@ export default function DeskScreen() {
                   ) : (
                     <span className="text-xs text-muted-foreground">Chưa hỏi được ở bản khung này</span>
                   )}
+                  {(transcripts[s.id]?.length ?? 0) > 0 && (
+                    <Button size="sm" variant="ghost" onClick={() => setTranscriptId(s.id)} title="Đọc lại không tốn lượt hỏi">
+                      <FileText /> Biên bản ({transcripts[s.id].length})
+                    </Button>
+                  )}
                 </div>
               </div>
             </Card>
@@ -89,6 +97,7 @@ export default function DeskScreen() {
         </Card>
       </aside>
       {profile && <CharacterProfile suspect={profile} onClose={() => setProfileId(null)} />}
+      {transcriptOf && <Transcript suspect={transcriptOf} onClose={() => setTranscriptId(null)} />}
     </div>
   )
 }

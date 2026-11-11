@@ -9,6 +9,20 @@ export interface BoardAnswer {
   clueIds: string[]
 }
 
+/** One line of an interview as it was shown: the suspect's words, narration, or the player's question. */
+export interface TranscriptLine {
+  text: string
+  fromPlayer?: boolean
+  /** Clue id of a photo the suspect showed with this line. */
+  photo?: string
+}
+
+/** One interview with a suspect, kept so the player can reread it from the desk. */
+export interface TranscriptSession {
+  day: number
+  lines: TranscriptLine[]
+}
+
 interface GameState {
   data: CaseData
   screen: Screen
@@ -22,6 +36,9 @@ interface GameState {
   readDocuments: string[]
   solvedQuestions: string[]
   answers: Record<string, BoardAnswer>
+  /** Per question, the cards that were linked when the player last pressed Kiểm tra. Their strings turn green or red. */
+  checkedLinks: Record<string, string[]>
+  transcripts: Record<string, TranscriptSession[]>
   activeSuspect?: string
   log: string[]
 
@@ -38,6 +55,8 @@ interface GameState {
   unlinkClue: (questionId: string, clueId: string) => void
   checkAnswer: (questionId: string) => 'solved' | 'wrong' | 'missing-clues'
   startInterrogation: (suspectId: string) => boolean
+  /** Replaces the lines of the suspect's latest interview (the one in progress). */
+  saveTranscript: (suspectId: string, lines: TranscriptLine[]) => void
   isEnvelopeOpen: (envelopeId: string) => boolean
   /**
    * A question appears on the board only once every document it needs is reachable,
@@ -59,6 +78,8 @@ const initial = (data: CaseData) => ({
   readDocuments: [] as string[],
   solvedQuestions: [] as string[],
   answers: {} as Record<string, BoardAnswer>,
+  checkedLinks: {} as Record<string, string[]>,
+  transcripts: {} as Record<string, TranscriptSession[]>,
   activeSuspect: undefined as string | undefined,
   log: [] as string[],
 })
@@ -163,6 +184,7 @@ export const useGame = create<GameState>((set, get) => ({
     const q = data.questions.find((x) => x.id === questionId)
     const a = answers[questionId]
     if (!q || !a) return 'wrong'
+    set((s) => ({ checkedLinks: { ...s.checkedLinks, [questionId]: [...a.clueIds] } }))
     const hasAllClues = q.requiredClues.every((c) => a.clueIds.includes(c))
     if (a.optionId === q.correctOptionId && hasAllClues) {
       set({ solvedQuestions: addUnique(solvedQuestions, questionId) })
@@ -177,9 +199,21 @@ export const useGame = create<GameState>((set, get) => ({
   startInterrogation: (suspectId) => {
     const s = get().data.suspects.find((x) => x.id === suspectId)
     if (!get().spendAction('talk', `Hỏi ${s?.name ?? suspectId}`)) return false
-    set({ activeSuspect: suspectId, screen: 'interrogation' })
+    set((st) => ({
+      activeSuspect: suspectId,
+      screen: 'interrogation',
+      transcripts: { ...st.transcripts, [suspectId]: [...(st.transcripts[suspectId] ?? []), { day: st.day, lines: [] }] },
+    }))
     return true
   },
+
+  saveTranscript: (suspectId, lines) =>
+    set((st) => {
+      const sessions = st.transcripts[suspectId] ?? []
+      if (sessions.length === 0) return {}
+      const last = { ...sessions[sessions.length - 1], lines }
+      return { transcripts: { ...st.transcripts, [suspectId]: [...sessions.slice(0, -1), last] } }
+    }),
 
   isEnvelopeOpen: (envelopeId) => envelopeOpen(get().data, envelopeId, get().solvedQuestions),
 

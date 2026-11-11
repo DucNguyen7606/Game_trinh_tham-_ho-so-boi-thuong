@@ -118,7 +118,7 @@ const questionNode = (q: { id: string }, index: number): Node => ({
 })
 
 export default function BoardScreen() {
-  const { data, foundClues, answers, linkClue, unlinkClue, solvedQuestions, isQuestionOpen } = useGame()
+  const { data, foundClues, answers, checkedLinks, linkClue, unlinkClue, solvedQuestions, isQuestionOpen } = useGame()
   // Recomputed when a question is solved, since that can open an envelope.
   const openQuestions = useMemo(
     () => questionOrder(data, solvedQuestions).map((id) => data.questions.find((q) => q.id === id)!).filter((q) => isQuestionOpen(q.id)),
@@ -155,17 +155,34 @@ export default function BoardScreen() {
   }, [openQuestions, setNodes])
 
   // The red strings are derived from the store, so they survive leaving the screen.
+  // After Kiểm tra, each string that was checked turns green if the card belongs to the proof, red if not.
   const edges = useMemo<Edge[]>(
     () =>
-      Object.entries(answers).flatMap(([qId, a]) =>
-        a.clueIds.map((c) => ({
-          id: `${c}->${qId}`,
-          source: `clue-${c}`,
-          target: `q-${qId}`,
-          style: { stroke: 'var(--string)', strokeWidth: 2.5 },
-        })),
-      ),
-    [answers],
+      Object.entries(answers).flatMap(([qId, a]) => {
+        const q = data.questions.find((x) => x.id === qId)
+        const checked = checkedLinks[qId] ?? []
+        return a.clueIds.map((c): Edge => {
+          const id = `${c}->${qId}`
+          const base = { id, source: `clue-${c}`, target: `q-${qId}` }
+          if (!q || !checked.includes(c)) return { ...base, style: { stroke: 'var(--string)', strokeWidth: 2.5 } }
+          const ok = q.requiredClues.includes(c)
+          return {
+            ...base,
+            animated: !ok,
+            label: ok ? '✓ Khớp' : '✕ Chưa khớp',
+            labelStyle: { fill: '#fff8e8', fontSize: 11, fontWeight: 600 },
+            labelBgStyle: { fill: ok ? 'var(--match)' : 'var(--mismatch)' },
+            labelBgPadding: [6, 3] as [number, number],
+            labelBgBorderRadius: 4,
+            style: {
+              stroke: ok ? 'var(--match)' : 'var(--mismatch)',
+              strokeWidth: 3.5,
+              filter: `drop-shadow(0 0 4px ${ok ? 'var(--match)' : 'var(--mismatch)'})`,
+            },
+          }
+        })
+      }),
+    [answers, checkedLinks, data],
   )
 
   const onConnect = useCallback(

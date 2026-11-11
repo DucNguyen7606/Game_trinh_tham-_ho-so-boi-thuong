@@ -1,21 +1,16 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Compiler, Story } from 'inkjs/full'
-import { useGame } from '@/game/store'
-import { clueById, getDocumentArt, getInkSource } from '@/game/caseLoader'
-import { Lightbox } from '@/components/Lightbox'
-import { Camera, Maximize2 } from 'lucide-react'
+import { useGame, type TranscriptLine } from '@/game/store'
+import { getInkSource } from '@/game/caseLoader'
+import { PhotoLightbox, ShownPhoto } from '@/components/SuspectPhoto'
 import { Button } from '@/components/ui/button'
 import { Portrait } from '@/art/Portrait'
 
-interface Line {
-  text: string
-  fromPlayer?: boolean
-  /** Clue id of a photo or paper the suspect shows with this line (ink tag `#photo:X3`). */
-  photo?: string
-}
+// A line can carry a photo the suspect shows (ink tag `#photo:X3`).
+type Line = TranscriptLine
 
 export default function InterrogationScreen() {
-  const { data, activeSuspect, foundClues, go, pinClue } = useGame()
+  const { data, activeSuspect, foundClues, go, pinClue, saveTranscript } = useGame()
   const [zoomed, setZoomed] = useState<string | null>(null)
   const suspect = data.suspects.find((s) => s.id === activeSuspect)
 
@@ -94,6 +89,11 @@ export default function InterrogationScreen() {
     if (story) advance(story)
   }, [story])
 
+  // Keep the interview on record so it can be reread from the desk.
+  useEffect(() => {
+    if (suspect && lines.length) saveTranscript(suspect.id, lines)
+  }, [lines])
+
   if (!suspect || !story) {
     return <p className="p-6 text-muted-foreground">Không có kịch bản thẩm vấn cho người này.</p>
   }
@@ -132,58 +132,7 @@ export default function InterrogationScreen() {
         {!typing && choices.length === 0 && <Button onClick={() => go('desk')}>Về bàn làm việc</Button>}
       </div>
       </div>
-      {zoomed && (() => {
-        const Doc = getDocumentArt(data.id, zoomed)
-        const clue = clueById(data, zoomed)
-        return Doc !== undefined && clue ? (
-          <Lightbox
-            label={clue.title}
-            onClose={() => setZoomed(null)}
-            note={
-              <>
-                <p className="text-[10px] uppercase tracking-widest opacity-60">Ảnh {suspect.name} cho xem · {clue.id}</p>
-                <h3 className="title text-xl">{clue.title}</h3>
-                <p className="text-sm">{clue.description}</p>
-                <p className="text-xs opacity-70">Đã thêm thẻ {clue.id} lên bàn suy luận.</p>
-              </>
-            }
-          >
-            <div className="w-[260px] py-4" style={{ zoom: 1.9 }}>
-              <Doc />
-            </div>
-          </Lightbox>
-        ) : null
-      })()}
+      {zoomed && <PhotoLightbox clueId={zoomed} shownBy={suspect.name} onClose={() => setZoomed(null)} />}
     </div>
-  )
-}
-
-/** A photo the suspect hands over, shown under their line; click to enlarge. */
-function ShownPhoto({ clueId, onOpen }: { clueId: string; onOpen: () => void }) {
-  const { data } = useGame()
-  const Doc = getDocumentArt(data.id, clueId)
-  const clue = clueById(data, clueId)
-  if (!Doc || !clue) return null
-  return (
-    <button
-      onClick={(e) => {
-        e.stopPropagation()
-        onOpen()
-      }}
-      className="group mt-3 flex items-end gap-3 text-left [animation:fadeIn_.4s_ease]"
-      aria-label={`Xem ${clue.title}`}
-    >
-      <div className="w-[260px] origin-bottom-left transition group-hover:-translate-y-1 group-hover:rotate-[-1deg]" style={{ zoom: 0.72 }}>
-        <Doc />
-      </div>
-      <span className="space-y-1 pb-2 text-xs not-italic">
-        <span className="flex items-center gap-1 text-amber">
-          <Camera className="size-3.5" /> Thẻ {clue.id} đã lên bàn suy luận
-        </span>
-        <span className="flex items-center gap-1 text-muted-foreground group-hover:text-amber">
-          <Maximize2 className="size-3.5" /> Bấm để xem lớn
-        </span>
-      </span>
-    </button>
   )
 }
