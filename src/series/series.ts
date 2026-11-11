@@ -56,6 +56,14 @@ export const SERIES = {
       place: 'Bình Thuận · tháng 11',
     },
     {
+      number: 5,
+      caseId: 'dem-thu-thiem',
+      area: 'thu-duc',
+      title: 'Đêm Thủ Thiêm',
+      blurb: 'Chiếc Mercedes lao xuống bờ kênh Thủ Thiêm lúc 2 giờ sáng, chủ xe đòi 2,1 tỷ. Cùng đêm đó, cách 4 km, một chiếc xe đen tông người rồi bỏ chạy.',
+      place: 'Thủ Đức · tháng 12',
+    },
+    {
       number: 6,
       caseId: 'dem-trieu-cuong',
       area: 'cho-lon',
