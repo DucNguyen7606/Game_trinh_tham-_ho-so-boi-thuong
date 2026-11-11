@@ -36,5 +36,12 @@ export const SERIES = {
       blurb: 'Bức sơn mài 8 tỷ biến mất khỏi phòng tranh Đồng Khởi ba ngày trước phiên đấu giá. Nhưng thứ bị lấy đi có thật là tranh thật?',
       place: 'Quận 1 · tháng 11',
     },
+    {
+      number: 4,
+      caseId: 'chuyen-xe-dem',
+      title: 'Chuyến xe đêm Quốc lộ 1A',
+      blurb: 'Xe container chở 20 tấn hồ tiêu bị cướp giữa đêm. Chủ hàng đòi 3 tỷ bảo hiểm. Cái cân ở trạm thu phí biết nhiều hơn tài xế kể.',
+      place: 'Bình Thuận · tháng 11',
+    },
   ] satisfies Chapter[],
 }
