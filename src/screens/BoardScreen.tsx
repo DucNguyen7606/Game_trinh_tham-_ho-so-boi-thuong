@@ -58,7 +58,12 @@ function QuestionNode({ data }: NodeProps<Node<QuestionNodeData>>) {
       result === 'solved'
         ? null
         : result === 'missing-clues'
-          ? 'Hướng đúng, nhưng chưa đủ bằng chứng.'
+          ? (() => {
+              // Say how many key cards are still missing, so a board full of supporting cards doesn't look complete.
+              const linked = useGame.getState().answers[q.id]?.clueIds ?? []
+              const missing = q.requiredClues.filter((c) => !linked.includes(c)).length
+              return `Đáp án đúng, nhưng còn thiếu ${missing} thẻ bằng chứng chính. Dây "Liên quan" có ích nhưng chưa đủ để chứng minh.`
+            })()
           : 'Trưởng phòng không tin lập luận này. Uy tín giảm.',
     )
   }
@@ -128,7 +133,7 @@ function QuestionNode({ data }: NodeProps<Node<QuestionNodeData>>) {
 
 const nodeTypes = { clue: ClueNode, question: QuestionNode }
 
-type StringEdgeData = { clueId: string; questionId: string; status?: 'match' | 'mismatch'; locked?: boolean }
+type StringEdgeData = { clueId: string; questionId: string; status?: 'key' | 'match' | 'mismatch'; locked?: boolean }
 
 /** A string between a card and a question, with its check result and a button to take it off. */
 function StringEdge({ id, sourceX, sourceY, targetX, targetY, sourcePosition, targetPosition, data, style }: EdgeProps<Edge<StringEdgeData>>) {
@@ -147,9 +152,9 @@ function StringEdge({ id, sourceX, sourceY, targetX, targetY, sourcePosition, ta
           {status && (
             <span
               className="rounded px-1.5 py-0.5 text-[11px] font-semibold text-[#fff8e8]"
-              style={{ background: status === 'match' ? 'var(--match)' : 'var(--mismatch)' }}
+              style={{ background: status === 'mismatch' ? 'var(--mismatch)' : 'var(--match)' }}
             >
-              {status === 'match' ? '✓ Khớp' : '✕ Chưa khớp'}
+              {status === 'key' ? '✓ Khớp' : status === 'match' ? '✓ Liên quan' : '✕ Chưa khớp'}
             </span>
           )}
           {!locked && (
@@ -243,7 +248,7 @@ export default function BoardScreen() {
           return {
             ...base,
             animated: !ok,
-            data: { ...data, status: ok ? 'match' : 'mismatch' },
+            data: { ...data, status: q.requiredClues.includes(c) ? 'key' : ok ? 'match' : 'mismatch' },
             style: { stroke: color, strokeWidth: 3.5, filter: `drop-shadow(0 0 4px ${color})` },
           }
         })
