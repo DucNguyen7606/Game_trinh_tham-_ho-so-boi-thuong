@@ -9,7 +9,7 @@
 import { pick, type Out, type Rnd } from './core'
 import { bass, bell, danBau, danTranh, epiano, hat, kick, pad, pulseSynth, rim, riser, snare, subBass, tick } from './instruments'
 
-export type ThemeId = 'desk' | 'scene' | 'interrogation' | 'verdict'
+export type ThemeId = 'menu' | 'desk' | 'scene' | 'interrogation' | 'verdict'
 
 export interface Theme {
   id: ThemeId
@@ -207,5 +207,55 @@ const verdict: Theme = {
   },
 }
 
-export const THEMES: Record<ThemeId, Theme> = { desk, scene, interrogation, verdict }
+// ---------------------------------------------------------------- 5. Màn hình chính (series title)
+
+// Slow and cinematic: Dm – Bb – Gm – A, with the series motif on đàn bầu.
+const MENU_CHORDS = [
+  { root: 38, voicing: [50, 57, 62, 65] },
+  { root: 34, voicing: [50, 53, 58, 62] },
+  { root: 43, voicing: [50, 55, 58, 62] },
+  { root: 33, voicing: [49, 52, 57, 61] },
+]
+// The motif: D – F – G – A(slide) ... C – A, answered a step lower.
+const MENU_MOTIF: { m: number; d: number; from?: number; to?: number }[][] = [
+  [{ m: 62, d: 1 }, { m: 65, d: 1 }, { m: 67, d: 2, from: -2 }],
+  [{ m: 69, d: 3, from: -2 }, { m: 72, d: 1 }],
+  [{ m: 69, d: 2 }, { m: 67, d: 1 }, { m: 65, d: 1 }],
+  [{ m: 64, d: 4, from: 1, to: 0 }],
+]
+
+const menu: Theme = {
+  id: 'menu',
+  title: 'Màn hình chính (chủ đề series)',
+  bpm: 62,
+  beats: 4,
+  level: 0.7,
+  bar(o, t, bar, r) {
+    const beat = 60 / this.bpm
+    const ch = MENU_CHORDS[bar % 4]
+    pad(o, t, ch.voicing, beat * 4, 0.028, 800)
+    subBass(o, t, ch.root, beat * 3.5, 0.2)
+    // Low piano-like tolls on the downbeat.
+    epiano(o, t, ch.root + 12, beat * 3, 0.05, 0)
+    // Heartbeat pulse once the intro has settled.
+    if (bar >= 4) {
+      kick(o, t, 0.22, 42)
+      kick(o, t + beat * 0.3, 0.14, 42)
+    }
+    // Motif on đàn bầu in bars 4–7 of every 8, đàn tranh ripples otherwise.
+    if (bar % 8 >= 4) {
+      let pos = 0
+      for (const n of MENU_MOTIF[bar % 4]) {
+        danBau(o, t + pos * beat, { midi: n.m + 12, dur: n.d * beat, from: n.from, to: n.to, vibrato: 0.4, gain: 0.16 }, 0.1)
+        pos += n.d
+      }
+    } else {
+      const notes = ch.voicing.map((m) => m + 12)
+      for (let i = 0; i < 4; i++) if (r() < 0.75) danTranh(o, t + (1 + i * 0.5) * beat, notes[i], { gain: 0.08, pan: -0.3 })
+    }
+    if (bar % 8 === 7) riser(o, t + beat * 2, beat * 2, 0.025)
+  },
+}
+
+export const THEMES: Record<ThemeId, Theme> = { menu, desk, scene, interrogation, verdict }
 
