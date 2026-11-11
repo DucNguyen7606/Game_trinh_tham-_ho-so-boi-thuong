@@ -16,7 +16,7 @@ import {
   type Node,
   type NodeProps,
 } from '@xyflow/react'
-import { CheckCircle2, Lightbulb, X } from 'lucide-react'
+import { CheckCircle2, ChevronLeft, ChevronRight, Lightbulb, X } from 'lucide-react'
 import { questionOrder, useGame } from '@/game/store'
 import { clueById } from '@/game/caseLoader'
 import { Button } from '@/components/ui/button'
@@ -49,11 +49,17 @@ function QuestionNode({ data }: NodeProps<Node<QuestionNodeData>>) {
   const hints = q.hints ?? []
   const shownHints = hints.slice(0, hintLevel[q.id] ?? 0)
   const moreHints = shownHints.length < hints.length
+  // Which unlocked hint is on show; follows the newest one until the player pages back.
+  const [hintPage, setHintPage] = useState<number | null>(null)
+  const page = Math.min(hintPage ?? shownHints.length - 1, shownHints.length - 1)
 
   const onCheck = () => {
     const result = checkAnswer(q.id)
     // A miss opens the next hint, so the player always has somewhere to look.
-    if (result !== 'solved') showHint(q.id)
+    if (result !== 'solved') {
+      showHint(q.id)
+      setHintPage(null)
+    }
     setFeedback(
       result === 'solved'
         ? null
@@ -72,10 +78,28 @@ function QuestionNode({ data }: NodeProps<Node<QuestionNodeData>>) {
     <div className="w-72">
       {!solved && shownHints.length > 0 && (
         <div className="document relative z-10 mx-2 -mb-1 rotate-[-1deg] space-y-1 p-2.5 text-xs shadow-lg [animation:fadeIn_.3s_ease]">
-          <p className="flex items-center gap-1 text-[10px] font-semibold uppercase tracking-widest opacity-70">
-            <Lightbulb className="size-3.5" /> Gợi ý {shownHints.length}/{hints.length}
-          </p>
-          <p>{shownHints[shownHints.length - 1]}</p>
+          <div className="flex items-center gap-1 text-[10px] font-semibold uppercase tracking-widest">
+            <Lightbulb className="size-3.5 opacity-70" />
+            <span className="opacity-70">
+              Gợi ý {page + 1}/{hints.length}
+            </span>
+            {shownHints.length > 1 && (
+              <span className="nodrag ml-auto flex gap-0.5">
+                <button className="rounded p-0.5 hover:bg-black/10 disabled:opacity-25" disabled={page === 0} onClick={() => setHintPage(page - 1)} aria-label="Gợi ý trước">
+                  <ChevronLeft className="size-3.5" />
+                </button>
+                <button
+                  className="rounded p-0.5 hover:bg-black/10 disabled:opacity-25"
+                  disabled={page >= shownHints.length - 1}
+                  onClick={() => setHintPage(page + 1)}
+                  aria-label="Gợi ý sau"
+                >
+                  <ChevronRight className="size-3.5" />
+                </button>
+              </span>
+            )}
+          </div>
+          <p>{shownHints[page]}</p>
         </div>
       )}
     <div className={cn('w-72 rounded-lg border bg-card p-3 shadow-lg transition-opacity', solved ? 'border-primary/50 opacity-45 saturate-50 hover:opacity-80' : 'border-border')}>
@@ -122,7 +146,10 @@ function QuestionNode({ data }: NodeProps<Node<QuestionNodeData>>) {
       </div>
       {feedback && <p className="mt-2 text-xs text-destructive">{feedback}</p>}
       {!solved && moreHints && (
-        <button className="nodrag mt-2 flex items-center gap-1 text-xs text-muted-foreground hover:text-amber" onClick={() => showHint(q.id)}>
+        <button className="nodrag mt-2 flex items-center gap-1 text-xs text-muted-foreground hover:text-amber" onClick={() => {
+            showHint(q.id)
+            setHintPage(null)
+          }}>
           <Lightbulb className="size-3.5" /> {shownHints.length === 0 ? 'Xem gợi ý' : 'Gợi ý tiếp'}
         </button>
       )}

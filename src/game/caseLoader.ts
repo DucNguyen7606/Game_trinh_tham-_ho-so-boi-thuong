@@ -5,6 +5,7 @@ import { closeups as hoSoBoiThuongCloseups } from '@/cases/ho-so-boi-thuong/clos
 import { documents as hoSoBoiThuongDocuments } from '@/cases/ho-so-boi-thuong/documents'
 import { reconstruction as hoSoBoiThuongReconstruction, theoryPanels as hoSoBoiThuongTheory, verdictPreview as hoSoBoiThuongPreview } from '@/cases/ho-so-boi-thuong/reconstruction'
 import type { ReconstructionPanel } from './types'
+import { epilogue as hoSoBoiThuongEpilogue, type EpiloguePanel } from '@/cases/ho-so-boi-thuong/epilogue'
 
 // Interrogation scripts are plain .ink text, compiled at runtime by inkjs.
 const inkFiles = import.meta.glob('/src/cases/*/thamvan/*.ink', {
@@ -71,4 +72,13 @@ const previews: Record<string, (slotId: string, optionId: string) => { Art: () =
 /** Picture and note shown on a verdict card once the player picks an option. */
 export function getVerdictPreview(caseId: string, slotId: string, optionId?: string) {
   return optionId ? previews[caseId]?.(slotId, optionId) : undefined
+}
+
+const epilogues: Record<string, Record<string, EpiloguePanel[]>> = {
+  'ho-so-boi-thuong': hoSoBoiThuongEpilogue,
+}
+
+/** Pictures of what became of everyone, shown with an ending. */
+export function getEpilogue(caseId: string, endingId: string) {
+  return epilogues[caseId]?.[endingId] ?? []
 }

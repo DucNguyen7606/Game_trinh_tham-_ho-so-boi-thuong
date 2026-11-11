@@ -48,6 +48,7 @@ export function Portrait({
   className,
   live = false,
   talking = false,
+  bare = false,
 }: {
   spec: PortraitSpec
   size?: number
@@ -57,6 +58,8 @@ export function Portrait({
   live?: boolean
   /** Move the mouth, raise the brows and gesture with a hand while a line is being spoken. */
   talking?: boolean
+  /** Leave out the coloured backdrop, to stand the figure inside a scene. */
+  bare?: boolean
 }) {
   const uid = useId()
   const faceClip = `${uid}-face`, glow = `${uid}-glow`, frame = `${uid}-frame`, body = `${uid}-body`
@@ -122,11 +125,15 @@ export function Portrait({
         </clipPath>
       </defs>
       <g clipPath={`url(#${frame})`}>
-        <rect width="240" height="320" fill={bg} />
-        <rect width="240" height="320" fill={`url(#${glow})`} />
-        {/* Soft geometric shapes in the backdrop */}
-        <circle cx="196" cy="70" r="70" fill={shade(bg, 0.12)} opacity="0.6" />
-        <circle cx="30" cy="290" r="90" fill={shade(bg, -0.15)} opacity="0.6" />
+        {!bare && (
+          <>
+            <rect width="240" height="320" fill={bg} />
+            <rect width="240" height="320" fill={`url(#${glow})`} />
+            {/* Soft geometric shapes in the backdrop */}
+            <circle cx="196" cy="70" r="70" fill={shade(bg, 0.12)} opacity="0.6" />
+            <circle cx="30" cy="290" r="90" fill={shade(bg, -0.15)} opacity="0.6" />
+          </>
+        )}
 
         <g transform={zoom === 1 ? undefined : `translate(${120 * (1 - zoom)} ${320 * (1 - zoom)}) scale(${zoom})`}>
         <g className={live ? 'pt-breathe' : undefined}>
