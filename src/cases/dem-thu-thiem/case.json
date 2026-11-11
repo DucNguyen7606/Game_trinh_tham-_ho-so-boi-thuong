@@ -1,0 +1,573 @@
+{
+  "id": "dem-thu-thiem",
+  "title": "Hồ sơ bồi thường số 0712",
+  "intro": "Rạng sáng 7/12, chiếc Mercedes GLC màu đen của ông Trần Quang Khải, chủ khách sạn Sông Xanh ở Thảo Điền, lao xuống bờ kênh trên một con đường vắng ở Thủ Thiêm. Ông khai đang lái xe từ Vũng Tàu về thì trời mưa to, một con bò băng ngang, ông đánh lái và mất lái. Ông chỉ trầy tay. Chiếc xe hư hỏng gần như toàn bộ, ông đòi bồi thường 2,1 tỷ đồng. Cùng đêm đó, cách 4 km, một chiếc ô tô màu đen tông một người bán bánh mì rồi bỏ chạy. Bạn có 10 ngày để đề xuất chi trả hay từ chối. Mỗi ngày khám được 1 khu hiện trường. Hỏi chuyện thì không giới hạn.",
+  "player": {
+    "name": "Lê Thu Hạnh",
+    "role": "Chuyên viên giám định bồi thường, Bảo hiểm An Tín",
+    "portrait": {
+      "skin": 0,
+      "hair": "bun",
+      "hairColor": "black",
+      "build": "normal",
+      "outfit": "shirt",
+      "outfitColor": "navy",
+      "age": "young",
+      "backdrop": "teal"
+    }
+  },
+  "photoDate": "08 12 '25",
+  "days": 10,
+  "limitsPerDay": {
+    "talk": 2,
+    "explore": 1
+  },
+  "suspects": [
+    {
+      "id": "khai",
+      "name": "Trần Quang Khải",
+      "age": 58,
+      "role": "Chủ khách sạn Sông Xanh, chủ xe, người đòi bồi thường",
+      "interrogation": "khai",
+      "portrait": {
+        "skin": 1,
+        "hair": "side-part",
+        "hairColor": "gray",
+        "build": "heavy",
+        "outfit": "polo",
+        "outfitColor": "khaki",
+        "accessory": ["glasses"],
+        "age": "old",
+        "backdrop": "amber",
+        "mood": "stern"
+      },
+      "profile": {
+        "traits": ["Điềm đạm", "Trọng thể diện", "Bao bọc con"],
+        "habit": "Đi đâu cũng mang giày tây da bóng, kể cả lúc ra cổng đón khách lúc nửa đêm.",
+        "relation": "Mở khách sạn Sông Xanh ở Thảo Điền 20 năm. Đứng tên chiếc Mercedes GLC 51K-686.68 và yêu cầu bồi thường 2,1 tỷ.",
+        "quote": "\"Tôi lái xe ba mươi năm, chưa từng gây chuyện với ai.\"",
+        "note": "Xe lao xuống kênh mà ông chỉ trầy hai lòng bàn tay. Ông khai đi một mình, từ Vũng Tàu về."
+      }
+    },
+    {
+      "id": "khoa",
+      "name": "Trần Minh Khoa",
+      "age": 24,
+      "role": "Con trai ông Khải",
+      "interrogation": "khoa",
+      "portrait": {
+        "skin": 0,
+        "hair": "short",
+        "hairColor": "black",
+        "build": "thin",
+        "outfit": "shirt",
+        "outfitColor": "white",
+        "age": "young",
+        "backdrop": "teal",
+        "mood": "worried"
+      },
+      "profile": {
+        "traits": ["Ham vui", "Mê xe", "Sợ cha"],
+        "habit": "Tối thứ bảy nào cũng ra quán Bến Gỗ ven sông Thảo Điền. Lúc nào cũng mặc áo hoodie trắng.",
+        "relation": "Phụ cha quản lý khách sạn. Hay mượn chiếc Mercedes của cha đi chơi.",
+        "quote": "\"Tối đó em về sớm, đi taxi mà chị.\"",
+        "note": "Ngồi ở quán Bến Gỗ tối 6/12, cách chỗ chị Hoa bị tông chưa tới một cây số."
+      }
+    },
+    {
+      "id": "han",
+      "name": "Võ Ngọc Hân",
+      "age": 23,
+      "role": "Bạn gái Khoa",
+      "interrogation": "han",
+      "portrait": {
+        "skin": 0,
+        "hair": "long",
+        "hairColor": "brown",
+        "build": "thin",
+        "outfit": "blouse",
+        "outfitColor": "mustard",
+        "accessory": ["earrings"],
+        "age": "young",
+        "backdrop": "teal",
+        "mood": "smile"
+      },
+      "profile": {
+        "traits": ["Hoạt bát", "Thẳng tính", "Mê chụp ảnh"],
+        "habit": "Đăng story gần như mỗi giờ, đi đâu cũng chụp.",
+        "relation": "Quen Khoa hai năm. Có bằng lái ô tô từ năm ngoái, đôi khi lái xe giùm Khoa.",
+        "quote": "\"Ảnh bỏ em lại một mình rồi về, em còn đang giận đây.\"",
+        "note": "Ngồi cùng bàn với Khoa ở Bến Gỗ tối 6/12. Biết lái xe, nên cũng có thể là người cầm lái."
+      }
+    },
+    {
+      "id": "son",
+      "name": "Lê Văn Sơn (chú Sơn)",
+      "age": 61,
+      "role": "Bảo vệ khách sạn Sông Xanh",
+      "interrogation": "son",
+      "portrait": {
+        "skin": 2,
+        "hair": "cap",
+        "hairColor": "gray",
+        "build": "thin",
+        "outfit": "uniform",
+        "outfitColor": "navy",
+        "age": "old",
+        "backdrop": "night",
+        "mood": "neutral"
+      },
+      "profile": {
+        "traits": ["Cần mẫn", "Ít nói", "Mang ơn chủ"],
+        "habit": "Trực cổng ca đêm, ghi sổ từng chiếc xe ra vào bằng bút bi, nét chữ đè rất mạnh.",
+        "relation": "Làm cho ông Khải 15 năm. Năm ngoái ông Khải trả hết viện phí mổ tim cho vợ chú.",
+        "quote": "\"Tui chỉ ghi sổ. Chuyện nhà ông chủ tui không biết.\"",
+        "note": "Người duy nhất thức ở cổng khách sạn suốt đêm 6/12. Trang sổ trực đêm đó bị xé mất."
+      }
+    },
+    {
+      "id": "toan",
+      "name": "Lưu Đức Toàn",
+      "age": 47,
+      "role": "Chủ gara Toàn Phát",
+      "interrogation": "toan",
+      "portrait": {
+        "skin": 2,
+        "hair": "buzz",
+        "hairColor": "black",
+        "build": "heavy",
+        "outfit": "tank",
+        "outfitColor": "charcoal",
+        "accessory": ["gold-chain"],
+        "age": "mid",
+        "backdrop": "rust",
+        "mood": "neutral"
+      },
+      "profile": {
+        "traits": ["Khéo miệng", "Lanh lợi", "Biết điều"],
+        "habit": "Nhận sửa xe cả đêm cho khách quen. Xe nào vô gara cũng chụp hình trước.",
+        "relation": "Sửa xe cho nhà ông Khải nhiều năm. Ông Khải muốn xe được kéo về gara Toàn để giám định.",
+        "quote": "\"Xe đụng kiểu gì, nhìn cái đầu xe là tui biết.\"",
+        "note": "Gara từng bị An Tín nhắc nhở vì báo giá sửa chữa đội lên. Nếu có ai bày vụ này để ăn tiền bảo hiểm, ông là người rành nhất."
+      }
+    },
+    {
+      "id": "hoa",
+      "name": "Đinh Thị Hoa",
+      "age": 36,
+      "role": "Bán bánh mì khuya, nạn nhân vụ tông xe bỏ chạy",
+      "unavailable": "Đang nằm hồi sức ở bệnh viện Chợ Rẫy. Lời khai của chị nằm trong phong bì 3.",
+      "portrait": {
+        "skin": 1,
+        "hair": "bun",
+        "hairColor": "black",
+        "build": "thin",
+        "outfit": "blouse",
+        "outfitColor": "sky",
+        "age": "mid",
+        "backdrop": "night",
+        "mood": "worried"
+      },
+      "profile": {
+        "traits": ["Chịu thương chịu khó", "Hiền", "Thức khuya dậy sớm"],
+        "habit": "Đẩy xe bánh mì ở góc Nguyễn Văn Hưởng tới 10 giờ rưỡi tối, rồi chạy chiếc Wave đỏ về nhà ở Bình Trưng.",
+        "relation": "Không quen ai trong nhà ông Khải.",
+        "quote": "\"Tôi chỉ nhớ hai cái đèn rất sáng, rồi một cái áo trắng.\"",
+        "note": "Bị một chiếc ô tô màu đen tông lúc 22:47 tối 6/12. Xe bỏ chạy, chị hôn mê ba ngày."
+      }
+    }
+  ],
+  "zones": [
+    {
+      "id": "bo-kenh",
+      "name": "Bờ kênh Thủ Thiêm",
+      "description": "Con đường mới mở giữa những bãi cỏ trống ở Thủ Thiêm, không đèn, không nhà. Chiếc Mercedes nằm dưới bờ kênh, đầu xe ghì vào gốc cây dầu.",
+      "hotspots": [
+        {
+          "id": "mep-duong",
+          "label": "Mép đường",
+          "x": 34,
+          "y": 52,
+          "note": "Mặt nhựa sạch trơn: không vết phanh, không vết lết bánh. Hai vệt bánh xe đi thẳng góc ra mép đường rồi lún đều xuống đất mềm, như chiếc xe lăn chậm xuống dốc chứ không văng ra.",
+          "clueId": "H1"
+        },
+        {
+          "id": "dau-giay",
+          "label": "Dấu giày trên bờ đất",
+          "x": 22,
+          "y": 76,
+          "note": "Ngay sau chỗ hai vệt bánh rời mặt đường: một đôi dấu giày tây đế cứng cỡ 40, mũi giày lún sâu, gót gần như không chạm đất. Tư thế của người đang dồn sức đẩy một vật nặng.",
+          "clueId": "H2"
+        },
+        {
+          "id": "dau-xe",
+          "label": "Đầu xe",
+          "x": 78,
+          "y": 68,
+          "note": "Đầu xe có hai kiểu hư. Giữa và bên trái móp lõm theo hình gốc cây, dính nhựa cây và vỏ dầu. Còn góc phải là một vết lõm tròn khác hẳn, dính vệt sơn đỏ, và đèn sương mù phải mất hết kính. Lục quanh xe không thấy một mảnh kính đèn nào.",
+          "clueId": "H3"
+        },
+        {
+          "id": "khoang-lai",
+          "label": "Khoang lái",
+          "x": 64,
+          "y": 52,
+          "note": "Túi khí không bung. Cần số ở N. Chìa khóa thông minh nằm trên ghế phụ. Dây an toàn ghế lái cuộn gọn, bản dây phẳng, không có vết hằn của một cú giật mạnh.",
+          "clueId": "H4"
+        },
+        {
+          "id": "bai-co",
+          "label": "Bãi cỏ chăn bò",
+          "x": 88,
+          "y": 30,
+          "note": "Bãi cỏ trống bên kia đường, có người chăn bò ban ngày. Chuồng bò cuối bãi khóa xích, hàng rào nguyên vẹn, chủ bò nói lùa bò vào từ 6 giờ chiều. Mặt đất dưới gầm xe và mặt đường đều khô ráo.",
+          "clueId": "H10"
+        }
+      ]
+    },
+    {
+      "id": "nguyen-van-huong",
+      "name": "Góc đường Nguyễn Văn Hưởng",
+      "description": "Con đường rợp cây ở Thảo Điền, nơi chị Hoa bị tông lúc 22:47. Vạch sơn của công an vẫn còn trên mặt đường.",
+      "hotspots": [
+        {
+          "id": "vach-son",
+          "label": "Vạch sơn công an",
+          "x": 46,
+          "y": 70,
+          "note": "Vạch sơn trắng khoanh chỗ chiếc Wave đỏ ngã và chỗ chị Hoa nằm. Biên bản của công an phường Thảo Điền có trong hồ sơ giám định bổ sung."
+        },
+        {
+          "id": "ranh-nuoc",
+          "label": "Rãnh thoát nước",
+          "x": 18,
+          "y": 82,
+          "note": "Lọt trong khe rãnh thoát nước là mấy mảnh kính nhỏ, mặt kính có vân sọc ngang như kính đèn sương mù ô tô. Công an đã nhặt mảnh lớn nhất, mấy mảnh này còn sót lại.",
+          "clueId": "H7"
+        },
+        {
+          "id": "vet-nuoc",
+          "label": "Vệt nước trên mặt đường",
+          "x": 76,
+          "y": 62,
+          "note": "Từ chỗ va chạm, một vệt giọt nước màu hồng kéo dài trên mặt đường, nhỏ dần, rẽ về phía đường Thảo Điền. Nước làm mát động cơ ô tô có màu hồng: két nước của chiếc xe kia đã bị nứt.",
+          "clueId": "H8"
+        },
+        {
+          "id": "xe-banh-mi",
+          "label": "Xe bánh mì",
+          "x": 12,
+          "y": 46,
+          "note": "Xe bánh mì của chị Hoa được hàng xóm đẩy vào hiên một nhà gần đó. Tấm bạt còn ghi số điện thoại đặt bánh."
+        }
+      ]
+    },
+    {
+      "id": "gara",
+      "name": "Gara khách sạn Sông Xanh",
+      "description": "Gara tầng trệt của khách sạn, sàn xi măng, một bóng đèn huỳnh quang. Chỗ đỗ đầu tiên, chỗ của chiếc Mercedes, đang trống.",
+      "hotspots": [
+        {
+          "id": "vung-nuoc",
+          "label": "Vệt khô trên sàn",
+          "x": 42,
+          "y": 72,
+          "note": "Ngay chỗ đỗ của chiếc Mercedes, một vũng nước đã khô để lại viền màu hồng trên sàn xi măng, đúng vị trí đầu xe. Trên kệ cạnh đó, một can nước làm mát chính hãng Mercedes mới mở, vơi gần nửa: ai đó đã châm nước cho xe đủ chạy thêm một đoạn.",
+          "clueId": "H5"
+        },
+        {
+          "id": "goc-gara",
+          "label": "Góc gara",
+          "x": 82,
+          "y": 76,
+          "note": "Sau cây chổi, một nhúm mảnh nhựa màu đỏ bị quét dồn vào góc. Mặt trong có chữ dập nổi \"HONDA\" và mã khuôn của ốp đầu xe Wave.",
+          "clueId": "H6"
+        },
+        {
+          "id": "xo-nuoc",
+          "label": "Xô nước và khăn",
+          "x": 62,
+          "y": 70,
+          "note": "Một xô nước còn ướt và mấy cái khăn lau. Có người đã rửa thứ gì đó trong đêm. Nước trong xô giờ chỉ còn mùi xà phòng."
+        },
+        {
+          "id": "xe-innova",
+          "label": "Xe Innova của khách sạn",
+          "x": 18,
+          "y": 52,
+          "note": "Chiếc Innova đưa đón khách của khách sạn. Không trầy xước gì, lốp khô, nắp capô nguội."
+        }
+      ]
+    },
+    {
+      "id": "cong",
+      "name": "Chốt bảo vệ khách sạn",
+      "description": "Chòi bảo vệ nhỏ cạnh cổng khách sạn Sông Xanh, cái quạt cũ, ấm trà và cuốn sổ trực.",
+      "hotspots": [
+        {
+          "id": "so-truc",
+          "label": "Sổ trực",
+          "x": 52,
+          "y": 64,
+          "note": "Trang ngày 6/12 bị xé, còn sót mép giấy. Chú Sơn viết rất mạnh tay. Tô nhẹ bút chì lên trang kế tiếp, nét hằn hiện ra: \"22:58 xe Mercedes 51K vào, cậu Khoa lái, đầu xe bể\" và \"02:15 ông Khải lái Mercedes ra, một mình\".",
+          "clueId": "H9"
+        },
+        {
+          "id": "camera-cong",
+          "label": "Camera cổng",
+          "x": 84,
+          "y": 18,
+          "note": "Camera cổng tắt đèn. Tờ giấy dán bên dưới ghi \"hư từ 20/11, đã báo ông chủ\"."
+        },
+        {
+          "id": "moc-chia-khoa",
+          "label": "Bảng móc chìa khóa",
+          "x": 22,
+          "y": 40,
+          "note": "Bảng móc chìa khóa: chìa Innova, chìa kho, chìa sân thượng. Móc ghi \"MERCEDES\" bỏ trống."
+        },
+        {
+          "id": "am-tra",
+          "label": "Ấm trà",
+          "x": 70,
+          "y": 58,
+          "note": "Ấm trà đã nguội, hai cái tách. Đêm đó có người ngồi uống trà với chú Sơn ở chòi."
+        }
+      ]
+    }
+  ],
+  "clues": [
+    { "id": "H1", "title": "Không vết phanh, xe lăn chậm", "description": "Hai vệt bánh đi thẳng ra mép đường rồi lún đều xuống đất. Không phanh, không lết.", "source": "scene" },
+    { "id": "H2", "title": "Dấu giày tây đang đẩy", "description": "Giày tây cỡ 40 ngay sau chỗ xe rời mặt đường, mũi lún sâu như người dồn sức đẩy.", "source": "scene" },
+    { "id": "H3", "title": "Góc phải đầu xe dính sơn đỏ", "description": "Vết lõm tròn khác vết đâm cây, dính sơn đỏ. Đèn sương mù phải mất kính, quanh xe không có mảnh nào.", "source": "scene" },
+    { "id": "H4", "title": "Dây an toàn chưa từng căng", "description": "Túi khí không bung, cần số N, chìa khóa trên ghế phụ, dây an toàn ghế lái không có vết giật.", "source": "scene" },
+    { "id": "H5", "title": "Vũng nước làm mát trong gara", "description": "Viền nước màu hồng đã khô đúng chỗ đầu chiếc Mercedes. Can nước làm mát mới mở vơi nửa.", "source": "scene" },
+    { "id": "H6", "title": "Mảnh ốp xe Wave đỏ trong gara", "description": "Bị quét dồn vào góc gara khách sạn. Mặt trong dập chữ HONDA.", "source": "scene" },
+    { "id": "H7", "title": "Vụn kính đèn sương mù dưới rãnh", "description": "Mảnh kính vân sọc ngang ở chỗ chị Hoa bị tông.", "source": "scene" },
+    { "id": "H8", "title": "Vệt nước hồng về phía đường Thảo Điền", "description": "Chiếc xe bỏ chạy bị nứt két nước, nhỏ giọt về phía khách sạn Sông Xanh.", "source": "scene" },
+    { "id": "H9", "title": "Nét chữ hằn trong sổ trực", "description": "\"22:58 Mercedes vào, cậu Khoa lái, đầu xe bể\" · \"02:15 ông Khải lái Mercedes ra, một mình\".", "source": "scene" },
+    { "id": "H10", "title": "Chuồng bò khóa, đường khô", "description": "Bò được lùa vào chuồng từ 6 giờ chiều. Mặt đường và đất dưới gầm xe khô ráo.", "source": "scene" },
+    { "id": "P1", "title": "Hợp đồng bảo hiểm vật chất xe", "description": "Mercedes GLC 300, 51K-686.68, giá trị 2,1 tỷ. Không bồi thường thiệt hại do cố ý, hay thiệt hại không do sự cố được khai báo gây ra.", "source": "file" },
+    { "id": "P2", "title": "Tường trình của ông Khải", "description": "Ăn tiệc ở Vũng Tàu, 0:30 lái về một mình qua cao tốc Long Thành. 02:30 ở Thủ Thiêm, mưa to, tránh con bò, xe lao xuống kênh.", "source": "file" },
+    { "id": "P3", "title": "Biên bản hiện trường Thủ Thiêm", "description": "Ông Khải gọi 113 lúc 02:52. CSGT tới 03:10, ông đứng trên đường, trầy hai lòng bàn tay. Nồng độ cồn 0.", "source": "file" },
+    { "id": "P4", "title": "Dữ liệu hộp ghi sự kiện túi khí", "description": "02:34:11: tốc độ 7 km/h, số N, không đạp phanh, ga 0%. Dây an toàn ghế lái chưa cài, cửa lái đang mở.", "source": "file" },
+    { "id": "P5", "title": "Biên bản vụ tông xe bỏ chạy", "description": "22:47 ngày 6/12, đường Nguyễn Văn Hưởng. Ô tô màu đen tông chiếc Wave đỏ của chị Hoa rồi chạy về phía đường Thảo Điền. Thu được mảnh kính đèn sương mù.", "source": "file" },
+    { "id": "P6", "title": "Camera nhà thuốc Nguyễn Văn Hưởng", "description": "22:47: SUV đen, đèn sương mù phải vỡ ngay sau va chạm. Người lái thò đầu ra nhìn: áo hoodie trắng.", "source": "file" },
+    { "id": "P7", "title": "Phiếu tra mã phụ tùng", "description": "Mảnh kính công an thu được là kính đèn sương mù PHẢI của Mercedes GLC đời 2020 đến 2023.", "source": "file" },
+    { "id": "P8", "title": "Tra soát hành trình và thời tiết", "description": "Thu phí tự động: không có giao dịch nào của 51K-686.68 đêm 6 rạng 7/12. Lần cuối: 5/12 lúc 23:40. Trạm đo mưa Thủ Thiêm: không mưa sau 21:10.", "source": "file" },
+    { "id": "P9", "title": "Quyết định tước bằng lái của Khoa", "description": "Tháng 9/2025: lái ô tô sau khi uống rượu bia, tước giấy phép lái xe 22 tháng.", "source": "file" },
+    { "id": "P10", "title": "Lời khai chị Hoa tại Chợ Rẫy", "description": "11/12: \"Xe đen, đèn rất sáng. Người lái là thanh niên, áo trắng có mũ, mở cửa nhìn tôi rồi đóng cửa chạy.\"", "source": "file" },
+    { "id": "X1", "title": "Công văn nhắc nhở gara Toàn Phát", "description": "Năm 2023, An Tín nhắc nhở gara Toàn Phát vì báo giá sửa chữa đội lên 30% ở hai hồ sơ.", "source": "decoy" },
+    { "id": "X2", "title": "Khoản vay sửa khách sạn", "description": "Ông Khải đang nợ ngân hàng 5 tỷ để sửa khách sạn, chậm trả hai kỳ.", "source": "decoy" },
+    { "id": "X3", "title": "Ảnh tiệc ở Vũng Tàu", "description": "Ông Khải đưa ảnh bàn tiệc hải sản ven biển làm bằng chứng. Xem kỹ ngày chụp.", "source": "testimony" },
+    { "id": "X4", "title": "Story của Hân lúc 22:20", "description": "Khoa áo hoodie trắng, ly bia, chìa khóa Mercedes trên bàn ở quán Bến Gỗ.", "source": "testimony" },
+    { "id": "X5", "title": "Story của Hân lúc 22:52", "description": "Hân vẫn ở Bến Gỗ với hai người bạn. Ghế của Khoa trống.", "source": "testimony" },
+    { "id": "X6", "title": "Tin nhắn ông Khải gửi Toàn", "description": "23:15: \"Xe anh bể đầu bên phải, sửa kín giúp anh trong đêm nay, giá nào cũng được.\"", "source": "testimony" },
+    { "id": "X7", "title": "Sổ nhận phòng khách sạn", "description": "22:45 đoàn khách Hà Nội nhận phòng, ông Khải ra cổng đón. 02:40 chú Sơn nhận một khách lẻ.", "source": "testimony" },
+    { "id": "X8", "title": "Lịch sử đặt xe của Khoa", "description": "Khoa nói đi taxi về lúc 22:30. Ứng dụng chỉ có một chuyến tối đó.", "source": "testimony" }
+  ],
+  "envelopes": [
+    {
+      "id": "pb1",
+      "number": 1,
+      "title": "Hồ sơ yêu cầu bồi thường",
+      "unlockedBy": null,
+      "documents": ["P1", "P2", "P3", "P4", "X1", "X2"]
+    },
+    {
+      "id": "pb2",
+      "number": 2,
+      "title": "Giám định bổ sung",
+      "unlockedBy": "q1",
+      "documents": ["P5", "P6", "P7", "P8"]
+    },
+    {
+      "id": "pb3",
+      "number": 3,
+      "title": "Người cầm lái",
+      "unlockedBy": "q3",
+      "documents": ["P9", "P10"]
+    }
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "number": 1,
+      "prompt": "Chiếc xe lao xuống kênh khi đang chạy hay bị thả trôi?",
+      "options": [
+        { "id": "a", "text": "Đang chạy, mất lái khi tránh bò" },
+        { "id": "b", "text": "Bị thả trôi, không ai cầm lái" }
+      ],
+      "correctOptionId": "b",
+      "requiredClues": ["H1", "P4"],
+      "supportingClues": ["H2", "H4", "P3"],
+      "hints": [
+        "Ra Bờ kênh Thủ Thiêm soi Mép đường: một chiếc xe mất lái thì để lại vết gì trên mặt nhựa?",
+        "Đọc Dữ liệu hộp ghi sự kiện túi khí trong phong bì 1: tốc độ bao nhiêu, cần số ở đâu, cửa lái đóng hay mở?"
+      ]
+    },
+    {
+      "id": "q2",
+      "number": 2,
+      "prompt": "Lời khai đi từ Vũng Tàu về, gặp mưa và con bò có khớp không?",
+      "options": [
+        { "id": "a", "text": "Khớp" },
+        { "id": "b", "text": "Không khớp: xe không đi cao tốc, trời không mưa, bò đã nhốt" }
+      ],
+      "correctOptionId": "b",
+      "requiredClues": ["P8", "H10"],
+      "supportingClues": ["P2", "X3"],
+      "hints": [
+        "Muốn từ Vũng Tàu về Thủ Thiêm thì phải qua trạm thu phí cao tốc. Phong bì 2 có bản tra soát hành trình.",
+        "Ở Bờ kênh Thủ Thiêm, xem Bãi cỏ chăn bò: bò ở đâu lúc 2 giờ sáng, và mặt đất có ướt không?"
+      ]
+    },
+    {
+      "id": "q3",
+      "number": 3,
+      "prompt": "Góc phải đầu xe bể vì đâu?",
+      "options": [
+        { "id": "a", "text": "Vì đâm gốc cây dưới kênh" },
+        { "id": "b", "text": "Vì tông xe máy của chị Hoa ở Thảo Điền" }
+      ],
+      "correctOptionId": "b",
+      "requiredClues": ["H3", "P5"],
+      "supportingClues": ["P7", "H7", "H6", "P6"],
+      "hints": [
+        "Soi Đầu xe ở Bờ kênh Thủ Thiêm: có hai kiểu vết hư. Vết ở góc phải dính màu gì, và mảnh kính đèn đi đâu mất?",
+        "Phong bì 2 có biên bản vụ tông xe bỏ chạy cùng đêm. Chiếc xe máy màu gì, công an nhặt được mảnh gì?"
+      ]
+    },
+    {
+      "id": "q4",
+      "number": 4,
+      "prompt": "Từ 23:00 đến 02:15 đêm đó, chiếc Mercedes ở đâu?",
+      "options": [
+        { "id": "a", "text": "Trên đường từ Vũng Tàu về" },
+        { "id": "b", "text": "Trong gara khách sạn Sông Xanh" },
+        { "id": "c", "text": "Ở gara Toàn Phát" }
+      ],
+      "correctOptionId": "b",
+      "requiredClues": ["H5", "H9"],
+      "supportingClues": ["H8", "H6", "X6"],
+      "hints": [
+        "Két nước bị nứt thì xe đỗ ở đâu sẽ để lại vũng nước ở đó. Đi khám Gara khách sạn Sông Xanh.",
+        "Trang sổ trực đêm 6/12 bị xé, nhưng chú Sơn viết rất mạnh tay. Soi Sổ trực ở Chốt bảo vệ khách sạn."
+      ]
+    },
+    {
+      "id": "q5",
+      "number": 5,
+      "prompt": "Lúc 22:47, ai cầm lái chiếc Mercedes?",
+      "options": [
+        { "id": "a", "text": "Trần Quang Khải" },
+        { "id": "b", "text": "Trần Minh Khoa" },
+        { "id": "c", "text": "Võ Ngọc Hân" },
+        { "id": "d", "text": "Lê Văn Sơn" }
+      ],
+      "correctOptionId": "b",
+      "requiredClues": ["X4", "H9"],
+      "supportingClues": ["P6", "P10", "X8"],
+      "hints": [
+        "Hỏi chuyện Hân, xem story cô đăng lúc 22:20: ai mặc áo gì, chìa khóa xe nào nằm trên bàn?",
+        "Nét chữ hằn trong sổ trực ghi rõ ai lái chiếc Mercedes về lúc 22:58, với cái đầu xe như thế nào."
+      ]
+    },
+    {
+      "id": "q6",
+      "number": 6,
+      "prompt": "Ông Khải có biết xe mình vừa tông người không?",
+      "options": [
+        { "id": "a", "text": "Không, ông chỉ gặp tai nạn ở Thủ Thiêm" },
+        { "id": "b", "text": "Biết từ 23:15, trước khi đưa xe đi" }
+      ],
+      "correctOptionId": "b",
+      "requiredClues": ["X6", "P5"],
+      "supportingClues": ["P9", "H9"],
+      "hints": [
+        "Hỏi chuyện chú Toàn ở gara: tối 6/12 có ai gọi cho chú không?",
+        "So giờ ông Khải nhắn Toàn với giờ chị Hoa bị tông, và đọc kỹ chú Toàn trả lời ông thế nào."
+      ]
+    },
+    {
+      "id": "q7",
+      "number": 7,
+      "prompt": "Ngoại phạm của ai đứng vững lúc 22:47?",
+      "options": [
+        { "id": "a", "text": "Tất cả đều vững" },
+        { "id": "b", "text": "Hân, chú Sơn, ông Khải vững. Khoa vỡ." },
+        { "id": "c", "text": "Hân vỡ" }
+      ],
+      "correctOptionId": "b",
+      "requiredClues": ["X5", "X7", "X8"],
+      "supportingClues": ["X4", "P6"],
+      "hints": [
+        "Hỏi chuyện từng người và xem thứ họ đưa ra: ai ở đâu lúc 22:45 đến 22:52?",
+        "Khoa nói về bằng taxi lúc 22:30. Lịch sử đặt xe của cậu ghi chuyến nào, giờ nào, ai đi?"
+      ]
+    }
+  ],
+  "verdict": [
+    {
+      "id": "crash",
+      "prompt": "Ai đưa chiếc Mercedes xuống bờ kênh Thủ Thiêm?",
+      "options": [
+        { "id": "khai", "text": "Trần Quang Khải" },
+        { "id": "khoa", "text": "Trần Minh Khoa" },
+        { "id": "toan", "text": "Lưu Đức Toàn" },
+        { "id": "son", "text": "Lê Văn Sơn" },
+        { "id": "none", "text": "Không ai, đó là tai nạn thật" }
+      ],
+      "correctOptionId": "khai"
+    },
+    {
+      "id": "driver",
+      "prompt": "Ai lái xe tông chị Hoa lúc 22:47?",
+      "options": [
+        { "id": "khoa", "text": "Trần Minh Khoa" },
+        { "id": "khai", "text": "Trần Quang Khải" },
+        { "id": "han", "text": "Võ Ngọc Hân" },
+        { "id": "son", "text": "Lê Văn Sơn" },
+        { "id": "none", "text": "Không phải xe ông Khải" }
+      ],
+      "correctOptionId": "khoa"
+    },
+    {
+      "id": "decision",
+      "prompt": "Đề xuất của bạn",
+      "options": [
+        { "id": "pay", "text": "Chi trả 2,1 tỷ cho ông Khải" },
+        { "id": "deny", "text": "Từ chối và chuyển hồ sơ cho công an" }
+      ],
+      "correctOptionId": "deny"
+    }
+  ],
+  "endings": [
+    {
+      "id": "full",
+      "title": "Trọn vẹn",
+      "text": "Khoa bị khởi tố vì gây tai nạn rồi bỏ chạy khi đang bị tước bằng lái. Ông Khải bị khởi tố vì che giấu tội phạm và gian lận bảo hiểm. Gia đình ông phải lo toàn bộ viện phí cho chị Hoa."
+    },
+    {
+      "id": "half",
+      "title": "Đúng một nửa",
+      "text": "Công ty không phải chi 2,1 tỷ. Nhưng vụ tông xe ở Nguyễn Văn Hưởng vẫn chưa ai bị gọi tên, và chị Hoa tự lo viện phí."
+    },
+    {
+      "id": "wrong",
+      "title": "Sai người",
+      "text": "Luật sư của ông Khải chỉ ra lập luận không có căn cứ. Hồ sơ bị bác, bạn bị rút khỏi vụ."
+    },
+    {
+      "id": "paid",
+      "title": "Chi trả",
+      "text": "Công ty chuyển 2,1 tỷ cho ông Khải. Ông mua cho con trai một chiếc xe mới. Vụ tông xe bỏ chạy bị xếp vào hồ sơ tồn đọng."
+    }
+  ],
+  "endingRules": [
+    { "ending": "paid", "picks": { "decision": "pay" } },
+    { "ending": "full", "correct": ["crash", "driver"] },
+    { "ending": "half", "correct": ["crash"] },
+    { "ending": "wrong" }
+  ]
+}
