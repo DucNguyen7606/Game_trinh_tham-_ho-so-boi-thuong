@@ -71,5 +71,13 @@ export const SERIES = {
       blurb: 'Triều cường tràn vào kho điện thoại bên kênh Đôi. Bà chủ đòi 4,5 tỷ cho 1.500 máy. Nhưng nước chỉ dâng 0,9 m, còn ba tầng kệ trên thì trống trơn.',
       place: 'Quận 8 · tháng 11',
     },
+    {
+      number: 8,
+      caseId: 'lo-sua-0601',
+      area: 'quan-12',
+      title: 'Lô sữa 0601',
+      blurb: 'Có kẻ chích kim vào sữa đậu nành rồi gửi thư đòi 500 triệu. Nhà máy thu hồi hai lô, đòi 3,2 tỷ bảo hiểm. Nhưng sữa đã chua từ trước khi có lá thư.',
+      place: 'Quận 12 · tháng 1',
+    },
   ] satisfies Chapter[],
 }
