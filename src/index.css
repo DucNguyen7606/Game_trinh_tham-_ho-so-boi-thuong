@@ -110,3 +110,35 @@ body {
   from { opacity: 0; transform: scale(0.985); }
   to { opacity: 1; transform: none; }
 }
+
+/* Cards dealt onto the desk one after another when a screen opens. Set --i on each card. */
+@keyframes dealIn {
+  from { opacity: 0; transform: translate(-40px, 26px) rotate(-3deg); }
+  to { opacity: 1; transform: none; }
+}
+.deal {
+  animation: dealIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--i, 0) * 60ms + 120ms);
+}
+
+/* Living portraits in interrogation: breathing, blinking, talking, hand gestures. */
+.pt-breathe, .pt-head, .pt-blink, .pt-mouth, .pt-brow, .pt-gesture { transform-box: fill-box; }
+.pt-breathe { animation: ptBreathe 3.8s ease-in-out infinite; transform-origin: 50% 100%; }
+.pt-head { animation: ptHead 6s ease-in-out infinite; transform-origin: 50% 100%; }
+.pt-blink { animation: ptBlink 4.6s infinite; transform-origin: center; }
+.pt-mouth { animation: ptTalk 0.42s steps(1, end) infinite; transform-origin: center; }
+.pt-brow { animation: ptBrow 1.3s ease-in-out infinite; }
+.pt-gesture { animation: ptGesture 1.7s ease-in-out infinite; transform-origin: 50% 100%; }
+@keyframes ptBreathe { 0%, 100% { transform: translateY(0) scaleY(1); } 50% { transform: translateY(-1.5px) scaleY(1.008); } }
+@keyframes ptHead { 0%, 100% { transform: rotate(0deg); } 30% { transform: rotate(1.4deg); } 65% { transform: rotate(-1deg); } }
+@keyframes ptBlink { 0%, 93%, 100% { transform: scaleY(1); } 95% { transform: scaleY(0.1); } }
+@keyframes ptTalk {
+  0% { transform: scaleY(0.25); } 18% { transform: scaleY(1); } 34% { transform: scaleY(0.55); }
+  52% { transform: scaleY(0.9); } 70% { transform: scaleY(0.2); } 86% { transform: scaleY(0.7); }
+}
+@keyframes ptBrow { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(-2.5px); } }
+@keyframes ptGesture {
+  0%, 100% { transform: translateY(14px) rotate(-8deg); }
+  35% { transform: translateY(-6px) rotate(5deg); }
+  60% { transform: translateY(0) rotate(-2deg); }
+}

@@ -22,6 +22,7 @@
     "@xyflow/react": "^12.12.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "framer-motion": "^11.11.17",
     "inkjs": "^2.4.0",
     "lucide-react": "^1.71.0",
     "react": "^18.3.1",
