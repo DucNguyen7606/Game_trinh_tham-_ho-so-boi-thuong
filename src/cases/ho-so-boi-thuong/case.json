@@ -758,5 +758,11 @@
       "title": "Chi trả",
       "text": "Ba tháng sau, kiểm toán phát hiện kho Long An. Bạn bị kỷ luật."
     }
+  ],
+  "endingRules": [
+    { "ending": "paid", "picks": { "decision": "pay" } },
+    { "ending": "full", "correct": ["fraud", "arson"] },
+    { "ending": "half", "correct": ["fraud"], "picks": { "arson": "thinh" } },
+    { "ending": "wrong" }
   ]
 }

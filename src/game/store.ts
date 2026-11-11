@@ -72,6 +72,8 @@ interface GameState {
    */
   isQuestionOpen: (questionId: string) => boolean
   reset: () => void
+  /** Opens a chapter's case from the start, dropping any progress in the current one. */
+  startCase: (caseId: string) => void
 }
 
 const initial = (data: CaseData) => ({
@@ -239,4 +241,6 @@ export const useGame = create<GameState>((set, get) => ({
   isQuestionOpen: (questionId) => questionOpen(get().data, questionId, get().solvedQuestions),
 
   reset: () => set(initial(get().data)),
+
+  startCase: (caseId) => set(initial(cases.find((c) => c.id === caseId) ?? get().data)),
 }))

@@ -7,13 +7,13 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 import type { CaseData, ReconstructionPanel } from '@/game/types'
 
-// Ending rules for this case. When there are more cases, move this into the case JSON.
+/** First ending rule in the case JSON that the picks satisfy. */
 function pickEnding(data: CaseData, picks: Record<string, string>) {
   const ok = (slot: string) => data.verdict.find((v) => v.id === slot)?.correctOptionId === picks[slot]
-  if (picks.decision === 'pay') return 'paid'
-  if (ok('fraud') && ok('arson')) return 'full'
-  if (ok('fraud') && picks.arson === 'thinh') return 'half'
-  return 'wrong'
+  const rule = data.endingRules.find(
+    (r) => Object.entries(r.picks ?? {}).every(([slot, opt]) => picks[slot] === opt) && (r.correct ?? []).every(ok),
+  )
+  return rule?.ending ?? data.endings[data.endings.length - 1].id
 }
 
 export default function VerdictScreen() {

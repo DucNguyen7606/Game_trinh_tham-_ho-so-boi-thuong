@@ -67,7 +67,7 @@ export default function DeskScreen() {
                       )
                     })()
                   ) : (
-                    <span className="text-xs text-muted-foreground">Chưa hỏi được ở bản khung này</span>
+                    <span className="text-xs text-muted-foreground">{s.unavailable ?? 'Không hỏi chuyện được'}</span>
                   )}
                   {(transcripts[s.id]?.length ?? 0) > 0 && (
                     <Button size="sm" variant="ghost" onClick={() => setTranscriptId(s.id)} title="Đọc lại lời khai">

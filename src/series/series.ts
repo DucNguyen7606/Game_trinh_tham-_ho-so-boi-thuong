@@ -22,7 +22,13 @@ export const SERIES = {
       blurb: 'Kho vải cháy rụi giữa đêm. Chủ kho đòi bồi thường 4 tỷ đồng. Bạn có 10 ngày để đề xuất chi trả hay từ chối.',
       place: 'Bình Tân · tháng 7',
     },
-    { number: 2, title: 'Hồ sơ mật', blurb: '', place: 'Sắp ra mắt' },
+    {
+      number: 2,
+      caseId: 'con-nuoc-can-gio',
+      title: 'Con nước Cần Giờ',
+      blurb: 'Chủ vựa hải sản chết đuối sau đêm ghe chìm. Vợ ông đòi 5 tỷ bảo hiểm nhân thọ. Con nước đêm đó sẽ cho bạn biết ai nói dối.',
+      place: 'Cần Giờ · tháng 9',
+    },
     { number: 3, title: 'Hồ sơ mật', blurb: '', place: 'Sắp ra mắt' },
   ] satisfies Chapter[],
 }
