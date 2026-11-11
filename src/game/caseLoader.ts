@@ -4,6 +4,7 @@ import * as ch1 from '@/cases/ho-so-boi-thuong'
 import * as ch2 from '@/cases/con-nuoc-can-gio'
 import * as ch3 from '@/cases/buc-son-mai'
 import * as ch4 from '@/cases/chuyen-xe-dem'
+import * as ch6 from '@/cases/dem-trieu-cuong'
 
 /** Everything one case folder provides. Each case's index.ts re-exports its modules in this shape. */
 interface CaseModule {
@@ -17,7 +18,7 @@ interface CaseModule {
   epilogue: Record<string, EpiloguePanel[]>
 }
 
-const modules: CaseModule[] = [ch1, ch2, ch3, ch4]
+const modules: CaseModule[] = [ch1, ch2, ch3, ch4, ch6]
 const byId = Object.fromEntries(modules.map((m) => [m.data.id, m])) as Record<string, CaseModule | undefined>
 
 // Interrogation scripts are plain .ink text, compiled at runtime by inkjs.
