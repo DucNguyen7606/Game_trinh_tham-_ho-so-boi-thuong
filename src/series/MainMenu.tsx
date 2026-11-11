@@ -47,7 +47,7 @@ export default function MainMenu() {
         )}
       </div>
 
-      <p className="display absolute bottom-4 left-[8vw] text-xs text-muted-foreground/70">Bản thử nghiệm · Chương 1–2</p>
+      <p className="display absolute bottom-4 left-[8vw] text-xs text-muted-foreground/70">Bản thử nghiệm · Chương 1–3</p>
     </div>
   )
 }
