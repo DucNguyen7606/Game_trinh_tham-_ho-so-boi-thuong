@@ -55,6 +55,8 @@ export interface Question {
   correctOptionId: string
   /** Clues that must be pinned to this question for the answer to be accepted. */
   requiredClues: string[]
+  /** Cards that also back the answer: their strings turn green, but they are not needed to solve it. */
+  supportingClues?: string[]
 }
 
 export interface Suspect {

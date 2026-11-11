@@ -79,16 +79,16 @@ function QuestionNode({ data }: NodeProps<Node<QuestionNodeData>>) {
       </div>
       <div className="mt-2 flex items-center justify-between text-xs text-muted-foreground">
         {/* How many cards the proof needs, so the player can rule cards out. */}
-        <span className="flex items-center gap-1.5" title={`Câu này cần ${q.requiredClues.length} thẻ manh mối`}>
+        <span className="flex items-center gap-1.5" title={`Câu này cần ít nhất ${q.requiredClues.length} thẻ manh mối`}>
           <span className="flex gap-0.5">
             {q.requiredClues.map((_, i) => (
               <span
                 key={i}
-                className={cn('size-2.5 rounded-sm border border-string', i < (answer?.clueIds.length ?? 0) ? 'bg-string' : 'bg-transparent')}
+                className={cn('size-2.5 rounded-sm border border-string', i < Math.min(answer?.clueIds.length ?? 0, q.requiredClues.length) ? 'bg-string' : 'bg-transparent')}
               />
             ))}
           </span>
-          Nối {answer?.clueIds.length ?? 0}/{q.requiredClues.length} thẻ
+          Nối {answer?.clueIds.length ?? 0} thẻ · cần {q.requiredClues.length}
         </span>
         {solved ? (
           <span className="flex items-center gap-1 text-primary">
@@ -212,7 +212,7 @@ export default function BoardScreen() {
           const base = { id: `${c}->${qId}`, source: `clue-${c}`, target: `q-${qId}`, type: 'string' }
           const data: StringEdgeData = { clueId: c, questionId: qId, locked }
           if (!q || !checked.includes(c)) return { ...base, data, style: { stroke: 'var(--string)', strokeWidth: 2.5 } }
-          const ok = q.requiredClues.includes(c)
+          const ok = q.requiredClues.includes(c) || (q.supportingClues ?? []).includes(c)
           const color = ok ? 'var(--match)' : 'var(--mismatch)'
           return {
             ...base,

@@ -527,7 +527,8 @@
         "H1",
         "H2",
         "H7"
-      ]
+      ],
+      "supportingClues": ["P4", "X6"]
     },
     {
       "id": "q2",
@@ -548,7 +549,8 @@
         "H4",
         "P2",
         "P5"
-      ]
+      ],
+      "supportingClues": ["P1", "P10"]
     },
     {
       "id": "q3",
@@ -572,7 +574,8 @@
       "requiredClues": [
         "H2",
         "P6"
-      ]
+      ],
+      "supportingClues": ["P7", "X4"]
     },
     {
       "id": "q4",
@@ -592,7 +595,8 @@
       "requiredClues": [
         "H5",
         "H6"
-      ]
+      ],
+      "supportingClues": ["P12", "X4", "X6"]
     },
     {
       "id": "q5",
@@ -612,7 +616,8 @@
       "requiredClues": [
         "H1",
         "H3"
-      ]
+      ],
+      "supportingClues": ["P8", "P10"]
     },
     {
       "id": "q6",
@@ -632,7 +637,8 @@
       "requiredClues": [
         "P3",
         "P9"
-      ]
+      ],
+      "supportingClues": ["P13"]
     },
     {
       "id": "q7",
@@ -657,7 +663,8 @@
         "P6",
         "P7",
         "X1"
-      ]
+      ],
+      "supportingClues": ["X3", "X4", "X5", "P11", "P13"]
     }
   ],
   "verdict": [
