@@ -11,6 +11,11 @@ type Line = TranscriptLine
 
 export default function InterrogationScreen() {
   const { data, activeSuspect, foundClues, go, pinClue, saveTranscript } = useGame()
+  // Questions asked in earlier interviews, marked so the player can skip them.
+  const [askedBefore] = useState(() => {
+    const sessions = useGame.getState().transcripts[activeSuspect ?? ''] ?? []
+    return new Set(sessions.slice(0, -1).flatMap((x) => x.lines.filter((l) => l.fromPlayer).map((l) => l.text.trim())))
+  })
   const [zoomed, setZoomed] = useState<string | null>(null)
   const suspect = data.suspects.find((s) => s.id === activeSuspect)
 
@@ -126,7 +131,8 @@ export default function InterrogationScreen() {
               advance(story, [{ text: c.text, fromPlayer: true }])
             }}
           >
-            {c.text}
+            <span className={askedBefore.has(c.text.trim()) ? 'opacity-55' : ''}>{c.text}</span>
+            {askedBefore.has(c.text.trim()) && <span className="ml-auto pl-2 text-[11px] text-muted-foreground">đã hỏi</span>}
           </Button>
         ))}
         {!typing && choices.length === 0 && <Button onClick={() => go('desk')}>Về bàn làm việc</Button>}

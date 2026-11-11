@@ -1,7 +1,7 @@
 {
   "id": "ho-so-boi-thuong",
   "title": "Hồ sơ bồi thường số 0714",
-  "intro": "Kho vải Thịnh Phát ở Bình Tân cháy lúc 2 giờ 38 sáng. Chủ kho đòi bồi thường 4 tỷ đồng. Bạn có 6 ngày để đề xuất chi trả hay từ chối. Mỗi ngày chỉ hỏi được 2 người và khám được 1 khu.",
+  "intro": "Kho vải Thịnh Phát ở Bình Tân cháy lúc 2 giờ 38 sáng. Chủ kho đòi bồi thường 4 tỷ đồng. Bạn có 6 ngày để đề xuất chi trả hay từ chối. Mỗi ngày khám được 1 khu hiện trường. Hỏi chuyện thì không giới hạn.",
   "player": {
     "name": "Lê Thu Hạnh",
     "role": "Chuyên viên giám định bồi thường, Bảo hiểm An Tín",
@@ -528,7 +528,8 @@
         "H2",
         "H7"
       ],
-      "supportingClues": ["P4", "X6"]
+      "supportingClues": ["P4", "X6"],
+      "hints": ["Chập điện thì phải có điện. Ra Sân sau xem Tủ điện: cầu dao tổng đang bật hay tắt?", "Vào Văn phòng soi Vết cháy trên tường và Vật kim loại dưới tủ: lửa bắt đầu ở đâu, bằng cái gì?"]
     },
     {
       "id": "q2",
@@ -550,7 +551,8 @@
         "P2",
         "P5"
       ],
-      "supportingClues": ["P1", "P10"]
+      "supportingClues": ["P1", "P10"],
+      "hints": ["Mở phong bì 1, đọc Danh mục hàng kê khai rồi ra Khu hàng xem những cuộn vải cháy dở.", "Hàng thật đi đâu? Phong bì 2 có hợp đồng thuê kho ở Long An, xem ai ký nhận xe tải."]
     },
     {
       "id": "q3",
@@ -575,7 +577,8 @@
         "H2",
         "P6"
       ],
-      "supportingClues": ["P7", "X4"]
+      "supportingClues": ["P7", "X4"],
+      "hints": ["Đế nhang muỗi cháy 1 đến 1,5 giờ mới chạm xăng. Lửa bùng lúc 02:38, vậy nhang được châm khoảng mấy giờ?", "Camera tiệm anh Huy (phong bì 2) ghi lại một chiếc xe ra vào hẻm. Nối nó với cái ngòi hẹn giờ."]
     },
     {
       "id": "q4",
@@ -596,7 +599,8 @@
         "H5",
         "H6"
       ],
-      "supportingClues": ["P12", "X4", "X6"]
+      "supportingClues": ["P12", "X4", "X6"],
+      "hints": ["Ra Sân sau xem Ổ khóa cửa hông: có dấu phá không? Ai có chìa?", "Ra Cổng và chòi bảo vệ xem Hai cái ly, rồi hỏi chuyện ông Tư Rô xem đêm đó ai ghé."]
     },
     {
       "id": "q5",
@@ -617,7 +621,8 @@
         "H1",
         "H3"
       ],
-      "supportingClues": ["P8", "P10"]
+      "supportingClues": ["P8", "P10"],
+      "hints": ["Lửa bắt đầu ở góc văn phòng, dưới tủ sổ sách, không phải ở chỗ chứa vải.", "Trong Văn phòng, mở Thùng máy tính: có thứ gì bị tháo ra trước khi cháy?"]
     },
     {
       "id": "q6",
@@ -638,7 +643,8 @@
         "P3",
         "P9"
       ],
-      "supportingClues": ["P13"]
+      "supportingClues": ["P13"],
+      "hints": ["Ngân hàng hẹn kiểm kê kho ngày nào? Xem thông báo trong phong bì 1.", "Phong bì 3 có tin Zalo ông Thịnh nhắn Bảo về \"vụ 20\". Ai mới là người sợ kiểm kê?"]
     },
     {
       "id": "q7",
@@ -664,7 +670,8 @@
         "P7",
         "X1"
       ],
-      "supportingClues": ["X3", "X4", "X5", "P11", "P13"]
+      "supportingClues": ["X3", "X4", "X5", "P11", "P13"],
+      "hints": ["Giờ châm lửa là khoảng 01:02 đến 01:21. Hỏi chuyện từng người, xem ảnh họ đưa, rồi so với giờ đó.", "Bài Facebook của Ngân cho biết giờ cô livestream. Bảo khai hát từ 1 giờ, nhưng Grab (phong bì 2) đón anh lúc 01:34 gần kho."]
     }
   ],
   "verdict": [

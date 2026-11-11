@@ -39,6 +39,8 @@ interface GameState {
   /** Per question, the cards that were linked when the player last pressed Kiểm tra. Their strings turn green or red. */
   checkedLinks: Record<string, string[]>
   transcripts: Record<string, TranscriptSession[]>
+  /** How many hints of each question the player has seen. */
+  hintLevel: Record<string, number>
   activeSuspect?: string
   log: string[]
 
@@ -57,6 +59,7 @@ interface GameState {
   startInterrogation: (suspectId: string) => boolean
   /** Replaces the lines of the suspect's latest interview (the one in progress). */
   saveTranscript: (suspectId: string, lines: TranscriptLine[]) => void
+  showHint: (questionId: string) => void
   isEnvelopeOpen: (envelopeId: string) => boolean
   /**
    * A question appears on the board only once every document it needs is reachable,
@@ -80,6 +83,7 @@ const initial = (data: CaseData) => ({
   answers: {} as Record<string, BoardAnswer>,
   checkedLinks: {} as Record<string, string[]>,
   transcripts: {} as Record<string, TranscriptSession[]>,
+  hintLevel: {} as Record<string, number>,
   activeSuspect: undefined as string | undefined,
   log: [] as string[],
 })
@@ -130,15 +134,12 @@ export const useGame = create<GameState>((set, get) => ({
   },
 
   endDay: () => {
-    const { day, data, reputation } = get()
+    const { day, data } = get()
     if (day >= data.days) {
       set({ screen: 'verdict' })
       return
     }
-    // Low reputation with the boss costs one interview the next day.
-    const penalty = reputation <= 1 ? 1 : 0
-    const limits = data.limitsPerDay
-    set({ day: day + 1, left: { ...limits, talk: Math.max(0, limits.talk - penalty) } })
+    set({ day: day + 1, left: { ...data.limitsPerDay } })
   },
 
   visitZone: (zoneId) => {
@@ -198,7 +199,8 @@ export const useGame = create<GameState>((set, get) => ({
 
   startInterrogation: (suspectId) => {
     const s = get().data.suspects.find((x) => x.id === suspectId)
-    if (!get().spendAction('talk', `Hỏi ${s?.name ?? suspectId}`)) return false
+    // Interviews are not rationed: the desk hides a suspect once they have nothing new to say.
+    set((st) => ({ log: [...st.log, `Ngày ${st.day}: Hỏi ${s?.name ?? suspectId}`] }))
     set((st) => ({
       activeSuspect: suspectId,
       screen: 'interrogation',
@@ -206,6 +208,13 @@ export const useGame = create<GameState>((set, get) => ({
     }))
     return true
   },
+
+  showHint: (questionId) =>
+    set((st) => {
+      const q = st.data.questions.find((x) => x.id === questionId)
+      const max = q?.hints?.length ?? 0
+      return { hintLevel: { ...st.hintLevel, [questionId]: Math.min(max, (st.hintLevel[questionId] ?? 0) + 1) } }
+    }),
 
   saveTranscript: (suspectId, lines) =>
     set((st) => {

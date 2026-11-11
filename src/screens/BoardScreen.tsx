@@ -16,7 +16,7 @@ import {
   type Node,
   type NodeProps,
 } from '@xyflow/react'
-import { CheckCircle2, X } from 'lucide-react'
+import { CheckCircle2, Lightbulb, X } from 'lucide-react'
 import { questionOrder, useGame } from '@/game/store'
 import { clueById } from '@/game/caseLoader'
 import { Button } from '@/components/ui/button'
@@ -40,14 +40,20 @@ function ClueNode({ data }: NodeProps<Node<ClueNodeData>>) {
 }
 
 function QuestionNode({ data }: NodeProps<Node<QuestionNodeData>>) {
-  const { data: caseData, answers, solvedQuestions, setAnswerOption, checkAnswer } = useGame()
+  const { data: caseData, answers, solvedQuestions, setAnswerOption, checkAnswer, hintLevel, showHint } = useGame()
   const [feedback, setFeedback] = useState<string | null>(null)
   const q = caseData.questions.find((x) => x.id === data.questionId)!
   const answer = answers[q.id]
   const solved = solvedQuestions.includes(q.id)
 
+  const hints = q.hints ?? []
+  const shownHints = hints.slice(0, hintLevel[q.id] ?? 0)
+  const moreHints = shownHints.length < hints.length
+
   const onCheck = () => {
     const result = checkAnswer(q.id)
+    // A miss opens the next hint, so the player always has somewhere to look.
+    if (result !== 'solved') showHint(q.id)
     setFeedback(
       result === 'solved'
         ? null
@@ -58,6 +64,15 @@ function QuestionNode({ data }: NodeProps<Node<QuestionNodeData>>) {
   }
 
   return (
+    <div className="w-72">
+      {!solved && shownHints.length > 0 && (
+        <div className="document relative z-10 mx-2 -mb-1 rotate-[-1deg] space-y-1 p-2.5 text-xs shadow-lg [animation:fadeIn_.3s_ease]">
+          <p className="flex items-center gap-1 text-[10px] font-semibold uppercase tracking-widest opacity-70">
+            <Lightbulb className="size-3.5" /> Gợi ý {shownHints.length}/{hints.length}
+          </p>
+          <p>{shownHints[shownHints.length - 1]}</p>
+        </div>
+      )}
     <div className={cn('w-72 rounded-lg border bg-card p-3 shadow-lg', solved ? 'border-primary' : 'border-border')}>
       <Handle type="target" position={Position.Left} className="!size-3 !bg-string" />
       <p className="text-xs text-muted-foreground">Câu {questionOrder(caseData, solvedQuestions).indexOf(q.id) + 1}</p>
@@ -101,6 +116,12 @@ function QuestionNode({ data }: NodeProps<Node<QuestionNodeData>>) {
         )}
       </div>
       {feedback && <p className="mt-2 text-xs text-destructive">{feedback}</p>}
+      {!solved && moreHints && (
+        <button className="nodrag mt-2 flex items-center gap-1 text-xs text-muted-foreground hover:text-amber" onClick={() => showHint(q.id)}>
+          <Lightbulb className="size-3.5" /> {shownHints.length === 0 ? 'Xem gợi ý' : 'Gợi ý tiếp'}
+        </button>
+      )}
+    </div>
     </div>
   )
 }
@@ -159,7 +180,7 @@ const clueNode = (clueId: string, index: number): Node => ({
 const questionNode = (q: { id: string }, index: number): Node => ({
   id: `q-${q.id}`,
   type: 'question',
-  position: { x: 860, y: index * 230 },
+  position: { x: 860, y: index * 380 },
   data: { questionId: q.id },
 })
 

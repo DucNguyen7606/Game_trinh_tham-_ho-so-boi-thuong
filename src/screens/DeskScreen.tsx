@@ -6,9 +6,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Portrait, type PortraitSpec } from '@/art/Portrait'
 import { CharacterProfile } from '@/components/CharacterProfile'
 import { Transcript } from '@/components/Transcript'
+import { unaskedCount } from '@/game/interviewTopics'
 
 export default function DeskScreen() {
-  const { data, startInterrogation, endDay, left, day, log, transcripts } = useGame()
+  const { data, startInterrogation, endDay, left, day, log, transcripts, foundClues } = useGame()
   const [profileId, setProfileId] = useState<string | null>(null)
   const profile = data.suspects.find((s) => s.id === profileId)
   const [transcriptId, setTranscriptId] = useState<string | null>(null)
@@ -52,14 +53,24 @@ export default function DeskScreen() {
                     Xem hồ sơ
                   </Button>
                   {s.interrogation ? (
-                    <Button size="sm" variant="outline" disabled={left.talk <= 0} onClick={() => startInterrogation(s.id)}>
-                      <MessageSquare /> Hỏi chuyện
-                    </Button>
+                    (() => {
+                      const open = unaskedCount(data.id, s.interrogation, foundClues, transcripts[s.id])
+                      const talked = (transcripts[s.id]?.length ?? 0) > 0
+                      // Hide the button once everything askable has been asked; a new clue brings it back.
+                      return open > 0 ? (
+                        <Button size="sm" variant="outline" onClick={() => startInterrogation(s.id)}>
+                          <MessageSquare /> Hỏi chuyện
+                          {talked && <span className="ml-1 rounded-full bg-amber px-1.5 text-[10px] font-semibold text-background">{open} điều mới</span>}
+                        </Button>
+                      ) : (
+                        <span className="text-xs italic text-muted-foreground">Đã khai hết. Tìm manh mối mới để hỏi tiếp.</span>
+                      )
+                    })()
                   ) : (
                     <span className="text-xs text-muted-foreground">Chưa hỏi được ở bản khung này</span>
                   )}
                   {(transcripts[s.id]?.length ?? 0) > 0 && (
-                    <Button size="sm" variant="ghost" onClick={() => setTranscriptId(s.id)} title="Đọc lại không tốn lượt hỏi">
+                    <Button size="sm" variant="ghost" onClick={() => setTranscriptId(s.id)} title="Đọc lại lời khai">
                       <FileText /> Biên bản ({transcripts[s.id].length})
                     </Button>
                   )}
@@ -77,7 +88,7 @@ export default function DeskScreen() {
               Ngày {day}/{data.days}
             </CardTitle>
             <CardDescription>
-              Hôm nay còn hỏi được {left.talk} người và khám được {left.explore} khu. Hết lượt thì kết thúc ngày để làm tiếp hôm sau.
+              Hôm nay còn khám được {left.explore} khu. Hỏi chuyện thì không giới hạn, cứ hỏi tới khi họ khai hết. Có manh mối mới, người liên quan sẽ có thêm điều để hỏi.
             </CardDescription>
           </CardHeader>
           <CardContent>

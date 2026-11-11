@@ -57,6 +57,8 @@ export interface Question {
   requiredClues: string[]
   /** Cards that also back the answer: their strings turn green, but they are not needed to solve it. */
   supportingClues?: string[]
+  /** Nudges shown one at a time above the question: after a failed check, or when the player asks. */
+  hints?: string[]
 }
 
 export interface Suspect {
