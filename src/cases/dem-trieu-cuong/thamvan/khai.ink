@@ -18,7 +18,7 @@ Khải đứng dậy chào, hai tay để trước bụng, nói chậm rãi.
     -> hoi
 * {has_X3} [Anh gửi ảnh cho bà Lệ lúc 23:58. Lúc đó anh vẫn trong kho.]
     Khải gãi đầu.
-    "Dạ... chắc em nhớ lộn giờ. Em về khoảng 12 giờ. Lúc đó hàng tầng trên vẫn còn đủ, chị thấy đó."
+    "Dạ... chắc em nhớ lộn giờ. Em về khoảng 12 giờ. Lúc đó hàng tầng trên vẫn còn đủ, {xchi} thấy đó."
     -> hoi
 * {has_H2} [Ba tầng kệ trên khô ráo, chỉ có những ô sạch bụi. Nước không tới đó.]
     "Thì... chắc sóng ghe chạy ngoài kênh đánh vô, nước tạt lên cao."

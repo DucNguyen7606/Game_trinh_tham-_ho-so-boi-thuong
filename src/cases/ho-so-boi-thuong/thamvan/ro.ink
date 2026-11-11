@@ -3,7 +3,7 @@ VAR has_P12 = false
 VAR has_X6 = false
 
 Ông Rô ngồi trên ghế nhựa, tay còn quấn băng.
-"Cô hỏi gì thì hỏi lẹ, tui còn phải đi tái khám."
+"{Xco} hỏi gì thì hỏi lẹ, tui còn phải đi tái khám."
 -> hoi
 
 === hoi ===

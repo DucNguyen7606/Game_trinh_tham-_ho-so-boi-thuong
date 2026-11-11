@@ -136,7 +136,7 @@ export const OFF_MAP: OffMapArea[] = [
 
 /** The road out of town towards the off-map signs: Quốc lộ 1A, west to east. */
 export const QL1A: [number, number][] = [
-  [90, 640], [200, 590], [300, 520], [390, 440], [470, 395], [560, 380], [660, 360], [780, 320], [880, 270], [1000, 230],
+  [90, 640], [200, 590], [300, 520], [390, 440], [470, 395], [560, 380], [660, 360], [780, 320], [880, 270], [1000, 230], [1260, 150],
 ]
 
 /** Sông Sài Gòn from the north edge down to the sea. */

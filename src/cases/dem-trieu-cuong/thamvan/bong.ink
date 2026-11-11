@@ -2,7 +2,7 @@ VAR has_P7 = false
 VAR has_H5 = false
 
 Chị Bông rót ly cà phê đá, đẩy qua cho bạn.
-"Ở bến này ba chục năm, nghe tiếng máy là biết ghe ai. Cô hỏi đi."
+"Ở bến này ba chục năm, nghe tiếng máy là biết ghe ai. {Xco} hỏi đi."
 -> hoi
 
 === hoi ===

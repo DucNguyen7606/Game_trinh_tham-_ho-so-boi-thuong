@@ -1,13 +1,18 @@
 import { useState } from 'react'
-import { ArrowLeft, Lock, MapPin, Map as MapIcon, Play, Power, Settings } from 'lucide-react'
+import { ArrowLeft, Lock, Map as MapIcon, Play, Power, Settings, UserRound } from 'lucide-react'
 import { useGame } from '@/game/store'
 import { cn } from '@/lib/utils'
 import AudioControls from '@/audio/AudioControls'
-import SaigonMap from './SaigonMap'
+import SaigonMap, { MAP_ASPECT } from './SaigonMap'
 import { AREAS, OFF_MAP, areaName } from './areas'
 import { SERIES, type Chapter } from './series'
+import CharacterSetup from './CharacterSetup'
+import { ROLES, useProfile } from './profile'
 
 type View = 'home' | 'map'
+
+/** Width of the side panel next to the case map. */
+const PANEL_W = 430
 
 /** Has the player done anything in the current case yet? */
 function useStarted() {
@@ -33,8 +38,13 @@ export default function MainMenu() {
   return view === 'home' ? <Home onMap={() => setView('map')} /> : <CaseMap onBack={() => setView('home')} />
 }
 
-function Home({ onMap }: { onMap: () => void }) {
+function Home({ onMap: showMap }: { onMap: () => void }) {
   const started = useStarted()
+  const profile = useProfile()
+  // The character window: opened from the menu, or before the map the very first time.
+  const [setup, setSetup] = useState<'edit' | 'first' | null>(null)
+  const onMap = () => (profile.created ? showMap() : setSetup('first'))
+  const roleTitle = ROLES.find((r) => r.id === profile.roleId)?.title
   const go = useGame((s) => s.go)
   const current = useGame((s) => SERIES.chapters.find((c) => c.caseId === s.data.id))
   const playable = SERIES.chapters.filter((c) => c.caseId).length
@@ -46,7 +56,7 @@ function Home({ onMap }: { onMap: () => void }) {
       <button
         onClick={onMap}
         aria-label="Mở bản đồ vụ án"
-        className="group absolute top-1/2 right-[-4vw] aspect-[10/9] h-[112vh] -translate-y-1/2 rotate-[4deg] shadow-[0_30px_60px_rgb(0_0_0/0.6)] transition-transform duration-500 hover:rotate-[2.5deg]"
+        className="group absolute top-1/2 right-[-4vw] aspect-[1.4] h-[112vh] -translate-y-1/2 rotate-[4deg] shadow-[0_30px_60px_rgb(0_0_0/0.6)] transition-transform duration-500 hover:rotate-[2.5deg]"
         style={{ animation: 'fadeIn 1100ms ease-out' }}
       >
         <SaigonMap interactive={false} />
@@ -76,10 +86,18 @@ function Home({ onMap }: { onMap: () => void }) {
             />
           )}
           <MenuItem icon={MapIcon} label="Bản đồ vụ án" sub={`${playable} hồ sơ đang chờ`} onClick={onMap} primary={!started} />
+          <MenuItem
+            icon={UserRound}
+            label="Nhân vật điều tra"
+            sub={profile.created ? `${profile.name} · ${roleTitle}` : 'Chọn tên, giới tính và nghề'}
+            onClick={() => setSetup('edit')}
+          />
           <SettingsItem />
           <MenuItem icon={Power} label="Thoát" onClick={() => window.close()} />
         </nav>
       </div>
+
+      {setup && <CharacterSetup onClose={() => setSetup(null)} onDone={setup === 'first' ? showMap : undefined} />}
 
       <p className="display absolute bottom-4 left-[8vw] text-xs text-muted-foreground/70">
         Bản thử nghiệm · {playable} chương
@@ -152,15 +170,19 @@ function CaseMap({ onBack }: { onBack: () => void }) {
   const picked = here.find((c) => c.number === chosen)
 
   return (
-    <div className="relative flex h-full gap-6 overflow-hidden p-6" style={{ animation: 'fadeIn 500ms ease-out' }}>
+    <div className="relative flex h-full items-center justify-center overflow-hidden p-5" style={{ animation: 'fadeIn 500ms ease-out' }}>
       <Desk />
-      <div className="relative flex min-w-0 flex-1 items-center justify-center">
-        <div className="aspect-[10/9] max-h-full w-full max-w-[calc((100vh-3rem)*10/9)] rotate-[-0.6deg] shadow-[0_24px_50px_rgb(0_0_0/0.55)]">
+      {/* Map and panel sit side by side as one block, the panel as tall as the map */}
+      <div className="relative flex items-stretch gap-5">
+        <div
+          className="shrink-0 rotate-[-0.4deg] shadow-[0_24px_50px_rgb(0_0_0/0.55)]"
+          style={{ width: `min(calc(100vw - 2.5rem - 1.25rem - ${PANEL_W}px), calc((100vh - 2.5rem) * ${MAP_ASPECT}))`, aspectRatio: MAP_ASPECT }}
+        >
           <SaigonMap selected={area} onSelect={select} chosen={chosen} onChoose={choose} />
         </div>
-      </div>
 
-      <aside className="panel relative flex w-[380px] shrink-0 flex-col gap-4 overflow-y-auto rounded-md p-5">
+      <aside className="panel relative shrink-0 rounded-md" style={{ width: PANEL_W }}>
+      <div className="absolute inset-0 flex flex-col gap-5 overflow-y-auto p-6">
         <button onClick={onBack} className="display flex items-center gap-2 self-start text-sm text-muted-foreground hover:text-foreground">
           <ArrowLeft className="size-4" /> Màn hình chính
         </button>
@@ -170,11 +192,11 @@ function CaseMap({ onBack }: { onBack: () => void }) {
             <div>
               <p className="display text-xs tracking-[0.3em] text-brass">Bản đồ vụ án</p>
               <h2 className="title mt-1 text-3xl">Chọn một khu vực</h2>
-              <p className="mt-2 text-sm text-muted-foreground">
-                Mỗi đinh ghim đỏ là một hồ sơ đang chờ bạn. Bấm vào một quận để phóng to, rồi chọn vụ án trong quận đó. Hoặc chọn nhanh ở dưới.
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                Mỗi đinh ghim đỏ là một hồ sơ. Bấm vào một quận để phóng to rồi chọn vụ án, hoặc chọn nhanh trong danh sách.
               </p>
             </div>
-            <ul className="space-y-1.5">
+            <ul className="divide-y divide-border/60 border-y border-border/60">
               {SERIES.chapters.map((c) => (
                 <li key={c.number}>
                   <button
@@ -184,14 +206,11 @@ function CaseMap({ onBack }: { onBack: () => void }) {
                       select(c.area)
                       choose(c.number)
                     }}
-                    className="flex w-full items-center gap-3 rounded-sm px-2 py-1.5 text-left hover:bg-string/20 disabled:opacity-50"
+                    className="grid w-full grid-cols-[2rem_1fr_auto] items-center gap-3 px-2 py-2.5 text-left transition-colors hover:bg-string/20 disabled:opacity-50"
                   >
-                    <MapPin className="size-4 shrink-0 text-string" />
-                    <span className="flex-1">
-                      <span className="display mr-2 text-xs text-brass">Chương {c.number}</span>
-                      {c.title}
-                    </span>
-                    <span className="display text-xs text-muted-foreground">{areaName(c.area) ?? '?'}</span>
+                    <span className="flex size-7 items-center justify-center rounded-full bg-string text-sm font-semibold text-white">{c.number}</span>
+                    <span className="text-[15px] leading-snug text-foreground">{c.title}</span>
+                    <span className="display text-xs tracking-wider text-muted-foreground">{areaName(c.area) ?? '?'}</span>
                   </button>
                 </li>
               ))}
@@ -202,7 +221,7 @@ function CaseMap({ onBack }: { onBack: () => void }) {
             <div>
               <p className="display text-xs tracking-[0.3em] text-brass">{OFF_MAP.some((o) => o.id === info.id) ? 'Ngoài thành phố' : 'Khu vực'}</p>
               <h2 className="title mt-1 text-3xl">{info.name}</h2>
-              <p className="mt-2 text-sm text-muted-foreground italic">{info.note}</p>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground italic">{info.note}</p>
             </div>
 
             {here.length === 0 ? (
@@ -222,9 +241,8 @@ function CaseMap({ onBack }: { onBack: () => void }) {
                   Có {here.length} hồ sơ ở khu vực này. Bấm vào một đinh ghim trên bản đồ để xem.
                 </p>
                 {here.map((c) => (
-                  <button key={c.number} onClick={() => choose(c.number)} className="flex w-full items-center gap-3 rounded-sm px-2 py-1.5 text-left hover:bg-string/20">
-                    <MapPin className="size-4 shrink-0 text-string" />
-                    <span className="display mr-1 text-xs text-brass">Chương {c.number}</span>
+                  <button key={c.number} onClick={() => choose(c.number)} className="flex w-full items-center gap-3 rounded-sm px-2 py-2 text-left text-[15px] hover:bg-string/20">
+                    <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-string text-sm font-semibold text-white">{c.number}</span>
                     {c.title}
                   </button>
                 ))}
@@ -254,7 +272,9 @@ function CaseMap({ onBack }: { onBack: () => void }) {
             </button>
           </>
         )}
+      </div>
       </aside>
+      </div>
     </div>
   )
 }

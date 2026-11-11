@@ -4,12 +4,12 @@ VAR has_H3 = false
 VAR has_H8 = false
 
 Hùng ngồi bên bàn chế tác trong một tiệm nhỏ ở Gò Vấp, kính lúp còn kẹp trên trán. Ông đặt cây khò xuống.
-"Tôi biết cô tới hỏi gì. Tôi bị đuổi, rồi tiệm bị cướp. Ai mà không nghĩ tới tôi."
+"Tôi biết {xco} tới hỏi gì. Tôi bị đuổi, rồi tiệm bị cướp. Ai mà không nghĩ tới tôi."
 -> hoi
 
 === hoi ===
 * [Tối 2/12 anh ở đâu?]
-    "Ở bệnh viện phụ sản với vợ tôi. Con gái tôi chào đời đêm đó. Hình đây, cô coi giờ." #photo:X3
+    "Ở bệnh viện phụ sản với vợ tôi. Con gái tôi chào đời đêm đó. Hình đây, {xco} coi giờ." #photo:X3
     -> hoi
 * [Anh làm ở tiệm Kim Thành bao lâu?]
     "Chín năm. Từ hồi ông Thành còn sống. Ông Thành làm ăn thật thà lắm."

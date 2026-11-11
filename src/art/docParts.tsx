@@ -1,4 +1,6 @@
 import { cn } from '@/lib/utils'
+import { useGame } from '@/game/store'
+import { initials } from '@/series/profile'
 
 // Pieces for drawing documents in HTML: printed sheets, phone screenshots,
 // stamps and handwriting. Text stays real text so it is crisp at any size.
@@ -25,6 +27,11 @@ export function Stamp({ text, className }: { text: string; className?: string })
       {text}
     </div>
   )
+}
+
+/** The investigator's own signature, from the chosen character's name. */
+export function PlayerSignature() {
+  return <Signature name={initials(useGame((s) => s.data.player.name))} />
 }
 
 export function Signature({ name }: { name: string }) {

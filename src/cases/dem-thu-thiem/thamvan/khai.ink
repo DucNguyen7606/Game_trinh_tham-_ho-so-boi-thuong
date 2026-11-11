@@ -12,7 +12,7 @@ VAR has_H9 = false
 === hoi ===
 * [Ông kể lại đêm 6/12 giúp tôi.]
     "Tôi ăn tiệc với bạn làm ăn ở Vũng Tàu. Nửa đêm lái về, một mình. Hai giờ rưỡi tới Thủ Thiêm thì mưa như trút, con bò ở đâu băng ra, tôi đánh lái, xe trượt xuống kênh."
-    "Tiệc đây, cô coi." #photo:X3
+    "Tiệc đây, {xco} coi." #photo:X3
     -> hoi
 * [Xe lao xuống mà ông chỉ trầy tay?]
     "Tôi cài dây an toàn đàng hoàng. Xe lăn xuống, tôi mở cửa bò ra, tay chống xuống đất đá nên trầy."

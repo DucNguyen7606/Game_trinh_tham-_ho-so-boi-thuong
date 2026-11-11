@@ -4,7 +4,7 @@ VAR has_P5 = false
 VAR has_P10 = false
 
 Bà Hồng mặc áo tang trắng, mắt đỏ hoe, tay vân vê chiếc khăn mùi xoa.
-"Chồng tôi chết rồi, cô còn muốn hỏi gì nữa?"
+"Chồng tôi chết rồi, {xco} còn muốn hỏi gì nữa?"
 -> hoi
 
 === hoi ===

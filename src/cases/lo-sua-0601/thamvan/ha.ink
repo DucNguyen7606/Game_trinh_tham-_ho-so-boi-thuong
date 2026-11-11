@@ -6,7 +6,7 @@ VAR has_H8 = false
 VAR has_P10 = false
 
 Bà Hà ngồi thẳng lưng, trước mặt là một chai sữa Mộc An còn nguyên nắp.
-"Hai mươi năm, chưa ai dám chích kim vào hàng của tôi. Cô làm nhanh giúp tôi, Tết tới nơi rồi."
+"Hai mươi năm, chưa ai dám chích kim vào hàng của tôi. {Xco} làm nhanh giúp tôi, Tết tới nơi rồi."
 -> hoi
 
 === hoi ===
@@ -36,7 +36,7 @@ Bà Hà ngồi thẳng lưng, trước mặt là một chai sữa Mộc An còn 
     -> hoi
 * {has_P10} [Thư tống tiền được in bằng máy in của phòng QC.]
     Bà Hà tháo kính, đặt xuống bàn.
-    "Cô ghi cho đúng. Nếu là lỗi nhà máy thì tôi nhận lỗi với khách, đền cho từng người. Tôi không lấy tiền bảo hiểm của cái lỗi đó."
+    "{Xco} ghi cho đúng. Nếu là lỗi nhà máy thì tôi nhận lỗi với khách, đền cho từng người. Tôi không lấy tiền bảo hiểm của cái lỗi đó."
     -> hoi
 * [Cảm ơn chị.]
     -> END

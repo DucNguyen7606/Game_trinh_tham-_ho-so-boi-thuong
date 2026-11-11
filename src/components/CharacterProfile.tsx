@@ -2,6 +2,7 @@ import { X } from 'lucide-react'
 import type { Suspect } from '@/game/types'
 import { Portrait } from '@/art/Portrait'
 import { Button } from '@/components/ui/button'
+import { addressPlayer } from '@/series/profile'
 
 // A personnel file that opens when the player clicks a character.
 export function CharacterProfile({ suspect, onClose }: { suspect: Suspect; onClose: () => void }) {
@@ -47,9 +48,9 @@ export function CharacterProfile({ suspect, onClose }: { suspect: Suspect; onClo
               </div>
               <Field label="Thói quen" text={p.habit} />
               <Field label="Quan hệ" text={p.relation} />
-              <blockquote className="border-l-4 border-string/60 pl-3 italic">{p.quote}</blockquote>
+              <blockquote className="border-l-4 border-string/60 pl-3 italic">{addressPlayer(p.quote)}</blockquote>
               <div className="bg-amber/25 p-3">
-                <p className="text-xs uppercase tracking-widest opacity-60">Ghi chú của giám định viên</p>
+                <p className="text-xs uppercase tracking-widest opacity-60">Ghi chú điều tra</p>
                 <p className="text-sm">{p.note}</p>
               </div>
             </>

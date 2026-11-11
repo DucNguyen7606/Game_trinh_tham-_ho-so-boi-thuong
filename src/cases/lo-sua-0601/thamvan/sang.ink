@@ -5,7 +5,7 @@ VAR has_P6 = false
 VAR has_H1 = false
 
 Sang khoanh tay, ngồi lệch ra mép ghế.
-"Tôi bị đuổi rồi, còn hỏi gì nữa chị?"
+"Tôi bị đuổi rồi, còn hỏi gì nữa {xchi}?"
 -> hoi
 
 === hoi ===
@@ -26,7 +26,7 @@ Sang khoanh tay, ngồi lệch ra mép ghế.
 * {has_H2} [Dòng 02:10 trong sổ vận hành bị tẩy trắng.]
     Sang ngồi thẳng lên.
     "Tôi ghi 'báo động nhiệt'. Sáng ra có người tẩy rồi ghi đè."
-    "Tôi có chụp màn hình máy lúc đó, với tin nhắn anh Thuận trả lời. Chị coi đi." #photo:X4
+    "Tôi có chụp màn hình máy lúc đó, với tin nhắn anh Thuận trả lời. {Xchi} coi đi." #photo:X4
     -> hoi
 * {has_P9} [Quyết định cho anh nghỉ vì ngủ gật trong ca.]
     "Ngủ gật? Hai giờ mười bốn tôi còn chụp màn hình máy, ngủ sao chụp được?"
