@@ -27,10 +27,11 @@ export default function DeskScreen() {
 
         <h2 className="display text-muted-foreground">Những người liên quan</h2>
         <div className="grid grid-cols-2 gap-3">
-          {data.suspects.map((s) => (
+          {data.suspects.map((s, i) => (
             <Card
               key={s.id}
-              className="group flex items-center gap-4 p-3 transition duration-200 hover:-translate-y-0.5 hover:border-amber/60 hover:shadow-[0_0_0_1px_rgb(242_169_59/0.45),0_10px_28px_-8px_rgb(242_169_59/0.35)] hover:brightness-110"
+              style={{ '--i': i } as React.CSSProperties}
+              className="deal group flex items-center gap-4 p-3 transition duration-200 hover:-translate-y-0.5 hover:border-amber/60 hover:shadow-[0_0_0_1px_rgb(242_169_59/0.45),0_10px_28px_-8px_rgb(242_169_59/0.35)] hover:brightness-110"
             >
               <button className="shrink-0" onClick={() => setProfileId(s.id)} aria-label={`Xem hồ sơ ${s.name}`}>
                 {s.portrait && <PortraitFrame spec={s.portrait} size={92} />}

@@ -11,6 +11,7 @@ import InterrogationScreen from '@/screens/InterrogationScreen'
 import VerdictScreen from '@/screens/VerdictScreen'
 import GalleryScreen from '@/screens/GalleryScreen'
 import AudioControls from '@/audio/AudioControls'
+import { AnimatePresence, motion, MotionConfig } from 'framer-motion'
 
 const nav: { screen: Screen; label: string; icon: typeof Briefcase }[] = [
   { screen: 'desk', label: 'Bàn làm việc', icon: Briefcase },
@@ -25,6 +26,7 @@ export default function App() {
   const { screen, go, day, left, reputation, data, solvedQuestions } = useGame()
 
   return (
+    <MotionConfig reducedMotion="user">
     <div className="flex h-full flex-col">
       <header className="flex items-center gap-3 border-b-2 border-brass/50 bg-background/80 px-4 py-2 shadow-lg">
         <span className="title shrink-0 whitespace-nowrap text-lg text-amber">{data.title}</span>
@@ -52,15 +54,28 @@ export default function App() {
           </Badge>
         </div>
       </header>
-      <main className="min-h-0 flex-1">
-        {screen === 'desk' && <DeskScreen />}
-        {screen === 'scene' && <SceneScreen />}
-        {screen === 'casefile' && <CaseFileScreen />}
-        {screen === 'board' && <BoardScreen />}
-        {screen === 'interrogation' && <InterrogationScreen />}
-        {screen === 'verdict' && <VerdictScreen />}
-        {screen === 'gallery' && <GalleryScreen />}
+      <main className="relative min-h-0 flex-1 overflow-hidden">
+        {/* Screen change: the old desk is swept off toward the top-right corner, the new one slides in. */}
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={screen}
+            className="h-full"
+            initial={{ opacity: 0, x: -60, y: 30, rotate: -1.2, scale: 0.97 }}
+            animate={{ opacity: 1, x: 0, y: 0, rotate: 0, scale: 1, transition: { duration: 0.38, ease: [0.22, 1, 0.36, 1] } }}
+            exit={{ opacity: 0, x: 220, y: -120, rotate: 3, scale: 0.82, transition: { duration: 0.24, ease: [0.55, 0, 1, 0.45] } }}
+            style={{ transformOrigin: '90% 10%' }}
+          >
+            {screen === 'desk' && <DeskScreen />}
+            {screen === 'scene' && <SceneScreen />}
+            {screen === 'casefile' && <CaseFileScreen />}
+            {screen === 'board' && <BoardScreen />}
+            {screen === 'interrogation' && <InterrogationScreen />}
+            {screen === 'verdict' && <VerdictScreen />}
+            {screen === 'gallery' && <GalleryScreen />}
+          </motion.div>
+        </AnimatePresence>
       </main>
     </div>
+    </MotionConfig>
   )
 }

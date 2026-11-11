@@ -41,7 +41,23 @@ const shoulderHalf = { thin: 80, normal: 94, heavy: 108 }
  * `zoom` below 1 draws the figure smaller inside the same backdrop, anchored at
  * the bottom centre, which leaves headroom in small thumbnails.
  */
-export function Portrait({ spec, size = 200, zoom = 1, className }: { spec: PortraitSpec; size?: number; zoom?: number; className?: string }) {
+export function Portrait({
+  spec,
+  size = 200,
+  zoom = 1,
+  className,
+  live = false,
+  talking = false,
+}: {
+  spec: PortraitSpec
+  size?: number
+  zoom?: number
+  className?: string
+  /** Breathe and blink (interrogation). */
+  live?: boolean
+  /** Move the mouth, raise the brows and gesture with a hand while a line is being spoken. */
+  talking?: boolean
+}) {
   const uid = useId()
   const faceClip = `${uid}-face`, glow = `${uid}-glow`, frame = `${uid}-frame`, body = `${uid}-body`
   const skin = skinTones[spec.skin]
@@ -89,7 +105,7 @@ export function Portrait({ spec, size = 200, zoom = 1, className }: { spec: Port
   }
 
   return (
-    <svg viewBox="0 0 240 320" width={size} height={(size * 320) / 240} className={className} role="img">
+    <svg viewBox="0 0 240 320" width={size} height={(size * 320) / 240} className={[className, live && 'pt-anim'].filter(Boolean).join(' ')} role="img">
       <defs>
         <radialGradient id={glow} cx="0.42" cy="0.36" r="0.7">
           <stop offset="0" stopColor="#fff3d6" stopOpacity="0.38" />
@@ -113,6 +129,7 @@ export function Portrait({ spec, size = 200, zoom = 1, className }: { spec: Port
         <circle cx="30" cy="290" r="90" fill={shade(bg, -0.15)} opacity="0.6" />
 
         <g transform={zoom === 1 ? undefined : `translate(${120 * (1 - zoom)} ${320 * (1 - zoom)}) scale(${zoom})`}>
+        <g className={live ? 'pt-breathe' : undefined}>
           {/* Long hair falls behind the shoulders */}
           {spec.hair === 'long' && (
             <path
@@ -177,6 +194,7 @@ export function Portrait({ spec, size = 200, zoom = 1, className }: { spec: Port
           <path d={`M${CX - 14},170 L${CX - 15},208 Q${CX},216 ${CX + 15},208 L${CX + 14},170 Z`} fill={skin} stroke={LINE} strokeWidth="2" />
           <path d={`M${CX - 14},178 Q${CX},200 ${CX + 14},178 L${CX + 14},170 L${CX - 14},170 Z`} fill={skinShadow} />
 
+          <g className={live ? 'pt-head' : undefined}>
           {/* Ears */}
           {[-1, 1].map((sd) => (
             <g key={sd}>
@@ -208,19 +226,26 @@ export function Portrait({ spec, size = 200, zoom = 1, className }: { spec: Port
           {[-1, 1].map((sd) => {
             const ex = CX + sd * 16
             return (
-              <g key={sd}>
+              <g key={sd} className={live ? 'pt-blink' : undefined}>
                 <ellipse cx={ex} cy="134" rx="4.2" ry={mood === 'angry' ? 3.6 : 5} fill="#2a1d17" />
                 <circle cx={ex + 1.4} cy="132" r="1.3" fill="#fff" />
                 {age === 'old' && <path d={`M${ex - 6},141 Q${ex},144 ${ex + 6},141`} fill="none" stroke={skinShadow} strokeWidth="1.5" />}
               </g>
             )
           })}
-          <g fill="none" stroke={shade(hair, spec.hairColor === 'white' || spec.hairColor === 'gray' ? -0.3 : 0)} strokeWidth="3.6" strokeLinecap="round">
+          <g className={talking ? 'pt-brow' : undefined} fill="none" stroke={shade(hair, spec.hairColor === 'white' || spec.hairColor === 'gray' ? -0.3 : 0)} strokeWidth="3.6" strokeLinecap="round">
             <path d={brow(-1)} />
             <path d={brow(1)} />
           </g>
           <path d={`M${CX + 1},138 Q${CX - 5},152 ${CX + 2},155`} fill="none" stroke={shade(skin, -0.32)} strokeWidth="2.2" strokeLinecap="round" />
-          <path d={mouth} fill="none" stroke="#7a3b2e" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" />
+          {talking ? (
+            <g className="pt-mouth">
+              <ellipse cx={CX} cy="169" rx="9" ry="6" fill="#5a2620" stroke="#7a3b2e" strokeWidth="2" />
+              <ellipse cx={CX} cy="172" rx="5" ry="2.4" fill="#c86a5a" />
+            </g>
+          ) : (
+            <path d={mouth} fill="none" stroke="#7a3b2e" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" />
+          )}
 
           {/* Hair on top of the head */}
           {hairPaths[spec.hair] && (
@@ -256,6 +281,16 @@ export function Portrait({ spec, size = 200, zoom = 1, className }: { spec: Port
               <path d={`M${CX + 14},94 v12 M${CX + 24},94 v12`} stroke="#c8bba0" strokeWidth="1.2" />
             </g>
           )}
+          </g>
+          {/* A hand comes up to gesture while talking */}
+          {talking && (
+            <g className="pt-gesture">
+              <path d={`M${CX + 40},330 L${CX + 50},262 Q${CX + 52},252 ${CX + 64},254 L${CX + 76},258 Q${CX + 84},262 ${CX + 82},272 L${CX + 76},330 Z`} fill={spec.outfit === 'tank' ? skin : cloth} stroke={LINE} strokeWidth="2" strokeLinejoin="round" />
+              <path d={`M${CX + 50},262 C${CX + 44},236 ${CX + 50},214 ${CX + 58},212 C${CX + 62},200 ${CX + 72},200 ${CX + 74},210 C${CX + 80},204 ${CX + 90},208 ${CX + 88},220 C${CX + 94},220 ${CX + 96},232 ${CX + 90},240 C${CX + 88},252 ${CX + 82},260 ${CX + 76},262 Z`} fill={skin} stroke={LINE} strokeWidth="2" strokeLinejoin="round" />
+              <path d={`M${CX + 62},214 L${CX + 64},232 M${CX + 75},212 L${CX + 75},232`} stroke={skinShadow} strokeWidth="2" strokeLinecap="round" />
+            </g>
+          )}
+        </g>
         </g>
       </g>
     </svg>

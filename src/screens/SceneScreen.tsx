@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import { Camera, Maximize2 } from 'lucide-react'
 import { Lightbox } from '@/components/Lightbox'
 import { useGame } from '@/game/store'
@@ -54,7 +55,18 @@ export default function SceneScreen() {
 
         {/* Zone backdrop drawn in code (src/cases/<case>/scenes.tsx); hotspots are positioned in percent on top. */}
         <div className="relative m-4 flex-1 overflow-hidden border border-border bg-background">
-          {Art && <Art />}
+          <AnimatePresence initial={false}>
+            {/* Walking to another zone: the new scene pans in over the old one. */}
+            <motion.div
+              key={zone.id}
+              className="absolute inset-0"
+              initial={{ opacity: 0, x: 80, scale: 1.04 }}
+              animate={{ opacity: 1, x: 0, scale: 1, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } }}
+              exit={{ opacity: 0, x: -60, transition: { duration: 0.3 } }}
+            >
+              {Art && <Art />}
+            </motion.div>
+          </AnimatePresence>
           {!visited && <div className="absolute inset-0 bg-background/70" />}
           <p className="absolute left-4 top-4 max-w-md bg-background/80 px-2 py-1 text-sm text-muted-foreground">{zone.description}</p>
           {!visited ? (
