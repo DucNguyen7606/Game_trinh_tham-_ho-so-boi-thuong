@@ -1,7 +1,7 @@
 import { useId } from 'react'
 import { accent, ink, shade } from '@/art/palette'
 import { rng } from '@/art/primitives'
-import { Frame, Glow } from '@/cases/con-nuoc-can-gio/scenes'
+import { Frame, Glow } from '@/art/soft'
 
 // Backdrops for the four zones of Chapter 4, in the soft flat style of the
 // earlier chapters. Objects sit near their hotspot positions in case.json
