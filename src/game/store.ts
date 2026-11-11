@@ -41,6 +41,9 @@ interface GameState {
   transcripts: Record<string, TranscriptSession[]>
   /** How many hints of each question the player has seen. */
   hintLevel: Record<string, number>
+  /** Where the player left each card on the board, and the board's pan and zoom, kept across tabs. */
+  boardLayout: Record<string, { x: number; y: number }>
+  boardViewport?: { x: number; y: number; zoom: number }
   activeSuspect?: string
   log: string[]
 
@@ -60,6 +63,8 @@ interface GameState {
   /** Replaces the lines of the suspect's latest interview (the one in progress). */
   saveTranscript: (suspectId: string, lines: TranscriptLine[]) => void
   showHint: (questionId: string) => void
+  saveBoardLayout: (positions: Record<string, { x: number; y: number }>) => void
+  saveBoardViewport: (viewport: { x: number; y: number; zoom: number }) => void
   isEnvelopeOpen: (envelopeId: string) => boolean
   /**
    * A question appears on the board only once every document it needs is reachable,
@@ -84,6 +89,8 @@ const initial = (data: CaseData) => ({
   checkedLinks: {} as Record<string, string[]>,
   transcripts: {} as Record<string, TranscriptSession[]>,
   hintLevel: {} as Record<string, number>,
+  boardLayout: {} as Record<string, { x: number; y: number }>,
+  boardViewport: undefined as { x: number; y: number; zoom: number } | undefined,
   activeSuspect: undefined as string | undefined,
   log: [] as string[],
 })
@@ -208,6 +215,9 @@ export const useGame = create<GameState>((set, get) => ({
     }))
     return true
   },
+
+  saveBoardLayout: (positions) => set((st) => ({ boardLayout: { ...st.boardLayout, ...positions } })),
+  saveBoardViewport: (viewport) => set({ boardViewport: viewport }),
 
   showHint: (questionId) =>
     set((st) => {
