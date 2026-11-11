@@ -29,6 +29,12 @@ export const SERIES = {
       blurb: 'Chủ vựa hải sản chết đuối sau đêm ghe chìm. Vợ ông đòi 5 tỷ bảo hiểm nhân thọ. Con nước đêm đó sẽ cho bạn biết ai nói dối.',
       place: 'Cần Giờ · tháng 9',
     },
-    { number: 3, title: 'Hồ sơ mật', blurb: '', place: 'Sắp ra mắt' },
+    {
+      number: 3,
+      caseId: 'buc-son-mai',
+      title: 'Bức sơn mài biến mất',
+      blurb: 'Bức sơn mài 8 tỷ biến mất khỏi phòng tranh Đồng Khởi ba ngày trước phiên đấu giá. Nhưng thứ bị lấy đi có thật là tranh thật?',
+      place: 'Quận 1 · tháng 11',
+    },
   ] satisfies Chapter[],
 }

@@ -2,6 +2,7 @@ import type { CaseData, ReconstructionPanel } from './types'
 import type { EpiloguePanel } from '@/cases/ho-so-boi-thuong/epilogue'
 import * as ch1 from '@/cases/ho-so-boi-thuong'
 import * as ch2 from '@/cases/con-nuoc-can-gio'
+import * as ch3 from '@/cases/buc-son-mai'
 
 /** Everything one case folder provides. Each case's index.ts re-exports its modules in this shape. */
 interface CaseModule {
@@ -15,7 +16,7 @@ interface CaseModule {
   epilogue: Record<string, EpiloguePanel[]>
 }
 
-const modules: CaseModule[] = [ch1, ch2]
+const modules: CaseModule[] = [ch1, ch2, ch3]
 const byId = Object.fromEntries(modules.map((m) => [m.data.id, m])) as Record<string, CaseModule | undefined>
 
 // Interrogation scripts are plain .ink text, compiled at runtime by inkjs.
