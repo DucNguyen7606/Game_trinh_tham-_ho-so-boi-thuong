@@ -9,6 +9,7 @@ import './settings'
 import type { ThemeId } from './themes'
 
 const THEME_FOR: Record<Screen, ThemeId> = {
+  menu: 'desk', // placeholder until the menu gets its own title theme
   desk: 'desk',
   casefile: 'desk',
   board: 'desk',

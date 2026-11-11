@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import type { ActionKind, CaseData, DayLimits } from './types'
 import { cases } from './caseLoader'
 
-export type Screen = 'desk' | 'scene' | 'casefile' | 'board' | 'interrogation' | 'verdict' | 'gallery'
+export type Screen = 'menu' | 'desk' | 'scene' | 'casefile' | 'board' | 'interrogation' | 'verdict' | 'gallery'
 
 export interface BoardAnswer {
   optionId?: string
@@ -96,6 +96,8 @@ const addUnique = (list: string[], id: string) => (list.includes(id) ? list : [.
 
 export const useGame = create<GameState>((set, get) => ({
   ...initial(cases[0]),
+  // The game opens on the series' main menu; reset() later starts at the desk.
+  screen: 'menu',
 
   go: (screen) => set({ screen }),
 
