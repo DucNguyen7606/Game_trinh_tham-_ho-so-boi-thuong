@@ -1,0 +1,552 @@
+{
+  "id": "lo-sua-0601",
+  "title": "Hồ sơ bồi thường số 1201",
+  "intro": "Sáng 11/1, Công ty Sữa đậu nành Mộc An ở Khu công nghiệp Tân Thới Hiệp, Quận 12, nhận một lá thư tống tiền: có kẻ đã chích kim vào sữa của họ ngoài siêu thị. Công ty thu hồi hai lô hàng và đòi An Tín 3,2 tỷ đồng theo hợp đồng bảo hiểm thu hồi sản phẩm. Bạn có 10 ngày để đề xuất chi trả hay từ chối. Mỗi ngày khám được 1 khu hiện trường. Hỏi chuyện thì không giới hạn.",
+  "player": {
+    "name": "Lê Thu Hạnh",
+    "role": "Chuyên viên giám định bồi thường, Bảo hiểm An Tín",
+    "portrait": {
+      "skin": 0,
+      "hair": "bun",
+      "hairColor": "black",
+      "build": "normal",
+      "outfit": "shirt",
+      "outfitColor": "navy",
+      "age": "young",
+      "backdrop": "teal"
+    }
+  },
+  "photoDate": "13 01 '26",
+  "days": 10,
+  "limitsPerDay": {
+    "talk": 2,
+    "explore": 1
+  },
+  "suspects": [
+    {
+      "id": "ha",
+      "name": "Đoàn Thị Ngọc Hà",
+      "age": 52,
+      "role": "Giám đốc Sữa đậu nành Mộc An, người đòi bồi thường",
+      "interrogation": "ha",
+      "portrait": {
+        "skin": 0,
+        "hair": "short",
+        "hairColor": "black",
+        "build": "normal",
+        "outfit": "blouse",
+        "outfitColor": "navy",
+        "accessory": ["glasses", "earrings"],
+        "age": "mid",
+        "backdrop": "teal",
+        "mood": "worried"
+      },
+      "profile": {
+        "traits": ["Thẳng tính", "Cầu toàn", "Làm việc tới khuya"],
+        "habit": "Sáng nào cũng tự tay mở một chai sữa của ca đêm uống thử trước khi lên văn phòng.",
+        "relation": "Hai mươi năm gây dựng Mộc An từ một lò nấu sữa trong hẻm thành nhà máy ba dây chuyền.",
+        "quote": "\"Hai mươi năm, chưa ai dám chích kim vào hàng của tôi.\"",
+        "note": "Ký hợp đồng giao hàng Tết với một chuỗi siêu thị, phạt 2 tỷ nếu thiếu hàng. Lá thư tới đúng lúc gấp nhất."
+      }
+    },
+    {
+      "id": "thuan",
+      "name": "Lương Văn Thuận",
+      "age": 41,
+      "role": "Trưởng phòng Kiểm soát chất lượng (QC)",
+      "interrogation": "thuan",
+      "portrait": {
+        "skin": 1,
+        "hair": "side-part",
+        "hairColor": "black",
+        "build": "thin",
+        "outfit": "shirt",
+        "outfitColor": "white",
+        "accessory": ["glasses", "pen"],
+        "age": "mid",
+        "backdrop": "rust",
+        "mood": "neutral"
+      },
+      "profile": {
+        "traits": ["Tỉ mỉ", "Sĩ diện", "Nói chuyện bằng số liệu"],
+        "habit": "Bị tiểu đường, túi áo lúc nào cũng có cây bút tiêm insulin. Ăn trưa đúng 11:30.",
+        "relation": "Mười năm làm QC ở Mộc An, chưa để lọt một lô lỗi nào ra thị trường.",
+        "quote": "\"Quy trình của tôi không có lỗ hổng. Lỗi nằm ngoài cổng nhà máy.\"",
+        "note": "Người ký phiếu xuất xưởng lô 0601-L2. Cũng là người đề xuất cho công nhân ca đêm nghỉ việc."
+      }
+    },
+    {
+      "id": "sang",
+      "name": "Lý Văn Sang",
+      "age": 26,
+      "role": "Công nhân vận hành máy tiệt trùng ca đêm, vừa bị cho nghỉ",
+      "interrogation": "sang",
+      "portrait": {
+        "skin": 2,
+        "hair": "buzz",
+        "hairColor": "black",
+        "build": "normal",
+        "outfit": "uniform",
+        "outfitColor": "sky",
+        "age": "young",
+        "backdrop": "night",
+        "mood": "angry"
+      },
+      "profile": {
+        "traits": ["Nóng nảy", "Thật thà", "Thạo máy"],
+        "habit": "Chụp ảnh màn hình máy mỗi lần có báo động, thói quen từ hồi học nghề.",
+        "relation": "Ba năm đứng máy tiệt trùng line 2, ca đêm từ 22:00 tới 6:00.",
+        "quote": "\"Tôi bị đuổi rồi, còn hỏi gì nữa chị?\"",
+        "note": "Bị cho nghỉ chiều 7/1 vì \"ngủ gật trong ca\". Tối đó lên mạng hăm dọa công ty."
+      }
+    },
+    {
+      "id": "manh",
+      "name": "Tạ Văn Mạnh",
+      "age": 63,
+      "role": "Chạy xe ôm, khách hàng khiếu nại đầu tiên",
+      "interrogation": "manh",
+      "portrait": {
+        "skin": 3,
+        "hair": "cap",
+        "hairColor": "gray",
+        "build": "thin",
+        "outfit": "polo",
+        "outfitColor": "khaki",
+        "age": "old",
+        "backdrop": "amber",
+        "mood": "stern"
+      },
+      "profile": {
+        "traits": ["Nóng tính", "Nói thẳng", "Để ý chuyện xung quanh"],
+        "habit": "Tối nào cũng đậu xe trước cửa Hiệp Thành Mart chờ khách tới 22 giờ.",
+        "relation": "Uống sữa đậu Mộc An mỗi sáng đã mấy năm. Quay clip chai sữa chua đăng lên mạng sáng 9/1.",
+        "quote": "\"Mở ra nó xì một cái, chua lè.\"",
+        "note": "Nhắn trang của công ty đòi 50 triệu, không thì đưa clip lên báo."
+      }
+    },
+    {
+      "id": "trang",
+      "name": "Nguyễn Thị Thu Trang",
+      "age": 38,
+      "role": "Cửa hàng trưởng Hiệp Thành Mart",
+      "interrogation": "trang",
+      "portrait": {
+        "skin": 1,
+        "hair": "long",
+        "hairColor": "brown",
+        "build": "normal",
+        "outfit": "uniform",
+        "outfitColor": "maroon",
+        "accessory": ["earrings"],
+        "age": "mid",
+        "backdrop": "amber",
+        "mood": "smile"
+      },
+      "profile": {
+        "traits": ["Gọn gàng", "Nhớ mặt khách", "Cẩn thận"],
+        "habit": "Cuối ngày tự đi một vòng các kệ, ghi lại món nào khách cầm lên rồi để xuống.",
+        "relation": "Siêu thị của chị bán Mộc An bốn năm nay, là nơi ông Mạnh mua chai sữa chua.",
+        "quote": "\"Từ bữa báo đăng, khách trả sữa đậu nành nhiều lắm.\"",
+        "note": "Người tìm ra sáu chai có lỗ kim trên kệ sáng 11/1."
+      }
+    }
+  ],
+  "zones": [
+    {
+      "id": "xuong",
+      "name": "Xưởng tiệt trùng line 2",
+      "description": "Bồn inox, đường ống hơi chằng chịt, tiếng máy rít đều. Line 2 chạy ca đêm từ 22 giờ tới 6 giờ sáng.",
+      "hotspots": [
+        {
+          "id": "nhiet-ke",
+          "label": "Nhiệt kế ống giữ nhiệt",
+          "x": 28,
+          "y": 40,
+          "note": "Nhiệt kế kim trên ống giữ nhiệt, loại có kim đỏ ghi mức thấp nhất từ lần chỉnh gần nhất. Vạch chuẩn 121°C. Kim đỏ dừng ở 97°C. Tem chỉnh kim: 22:00 ngày 6/1.",
+          "clueId": "H1"
+        },
+        {
+          "id": "so-van-hanh",
+          "label": "Sổ vận hành ca đêm",
+          "x": 74,
+          "y": 62,
+          "note": "Trang ca đêm 6/1 ghi tay mỗi 30 phút: \"121°C, bình thường\". Riêng dòng 02:10 bị tẩy trắng rồi ghi đè \"bình thường\". Bạn nghiêng sổ dưới đèn: nét bút cũ còn hằn \"báo động nhiệt\".",
+          "clueId": "H2"
+        },
+        {
+          "id": "van-hoi",
+          "label": "Van cấp hơi",
+          "x": 52,
+          "y": 24,
+          "note": "Van cấp hơi còn sáng bóng, mới thay. Tem bảo trì ghi ngày 8/1: \"Thay van kẹt\". Người ký yêu cầu: QC."
+        },
+        {
+          "id": "bang-chuyen",
+          "label": "Băng chuyền chai",
+          "x": 88,
+          "y": 80,
+          "note": "Chai thủy tinh nắp xanh chạy đều trên băng chuyền. Mỗi nắp được in mã lô và giờ chiết."
+        }
+      ]
+    },
+    {
+      "id": "kho",
+      "name": "Kho thành phẩm",
+      "description": "Kho mát cuối nhà máy. Két nhựa xếp trên pallet, mỗi pallet dán phiếu lô.",
+      "hotspots": [
+        {
+          "id": "pallet-0601",
+          "label": "Pallet lô 0601-L2 chưa giao",
+          "x": 30,
+          "y": 58,
+          "note": "Hai pallet lô 0601-L2 chưa từng ra khỏi cổng nhà máy, dán niêm phong kho từ sáng 7/1. Chai nào cũng phồng nắp, sữa tách lớp. Nắp và màng seal nguyên vẹn, không một lỗ kim.",
+          "clueId": "H3"
+        },
+        {
+          "id": "pallet-0701",
+          "label": "Pallet lô 0701-L1",
+          "x": 66,
+          "y": 58,
+          "note": "Lô 0701-L1 chạy trên line 1 ngày 7/1. Nắp phẳng, sữa trắng đều. Lô này cũng bị thu hồi sau lá thư tống tiền."
+        },
+        {
+          "id": "bang-giao",
+          "label": "Bảng giao hàng",
+          "x": 85,
+          "y": 26,
+          "note": "Bảng trắng ghi: \"8/1 · Lô 0601-L2 · 14 điểm bán Q.12, Gò Vấp, Hóc Môn\". Bên dưới có người viết đỏ: \"THU HỒI 11/1\"."
+        },
+        {
+          "id": "xe-nang",
+          "label": "Xe nâng tay",
+          "x": 12,
+          "y": 82,
+          "note": "Xe nâng tay dựng ở góc. Không có gì lạ."
+        }
+      ]
+    },
+    {
+      "id": "phong-qc",
+      "name": "Phòng QC",
+      "description": "Phòng kính cạnh xưởng, nơi Thuận và hai kỹ thuật viên kiểm mẫu mỗi ca. Mùi cồn và giấy in.",
+      "hotspots": [
+        {
+          "id": "hop-kim",
+          "label": "Hộp đựng kim đã dùng",
+          "x": 20,
+          "y": 66,
+          "note": "Hộp nhựa vàng đựng kim y tế đã dùng, đặt dưới bàn của Thuận. Toàn kim bút tiêm insulin 31G, đường kính 0,25 mm. Nhãn ghi \"thay hộp mới 5/1\". Thuận chích một kim mỗi tối, vậy mà sau một tuần hộp đã có hơn 30 cây kim.",
+          "clueId": "H4"
+        },
+        {
+          "id": "khay-giay",
+          "label": "Khay giấy tái sử dụng",
+          "x": 70,
+          "y": 54,
+          "note": "Khay giấy cạnh máy in laser của phòng QC. Giấy là phiếu kiểm nghiệm cũ cắt đôi, in mặt sau. Trên mép giấy còn dòng kẻ in mờ \"…KIỂM NGHIỆM LÔ\".",
+          "clueId": "H5"
+        },
+        {
+          "id": "phieu-xuat",
+          "label": "Phiếu xuất xưởng trên bảng ghim",
+          "x": 46,
+          "y": 30,
+          "note": "Phiếu xuất xưởng lô 0601-L2 ghim trên bảng: \"Kết quả: ĐẠT. Cho phép giao hàng.\" Ký: Lương Văn Thuận, 08:00 ngày 7/1. Hai tiếng sau khi ca đêm kết thúc.",
+          "clueId": "H8"
+        },
+        {
+          "id": "tu-mau",
+          "label": "Tủ mẫu lưu",
+          "x": 88,
+          "y": 50,
+          "note": "Tủ lạnh mẫu lưu, mỗi lô giữ 6 chai. Ngăn lô 0601-L2 trống, giấy ghi: \"Đã gửi kiểm nghiệm 11/1\"."
+        }
+      ]
+    },
+    {
+      "id": "sieu-thi",
+      "name": "Hiệp Thành Mart",
+      "description": "Siêu thị mini trên đường Lê Văn Khương, Quận 12. Kệ sữa nằm ngay lối vào, bãi xe máy trước cửa.",
+      "hotspots": [
+        {
+          "id": "ke-sua",
+          "label": "Kệ sữa đậu nành",
+          "x": 40,
+          "y": 46,
+          "note": "Chỗ sáu chai có lỗ kim được tìm thấy sáng 11/1: hàng ngoài cùng, tầng ngang tầm mắt. Lỗ nhỏ xíu xuyên qua nắp. Bốn chai thuộc lô 0701-L1 vẫn ngon lành. Hai chai lô 0601-L2 thì chua, như mọi chai cùng lô ở các nơi khác.",
+          "clueId": "H6"
+        },
+        {
+          "id": "so-giu-xe",
+          "label": "Sổ giữ xe",
+          "x": 84,
+          "y": 70,
+          "note": "Sổ giữ xe ghi tay của bãi trước siêu thị. Tối 10/1: \"59-V1 268.41 · vào 19:02 · ra 19:20\". Người ghi đánh dấu thêm: \"áo mưa xám\".",
+          "clueId": "H7"
+        },
+        {
+          "id": "camera",
+          "label": "Camera góc trần",
+          "x": 14,
+          "y": 16,
+          "note": "Camera chĩa xuống lối vào và kệ sữa. Đoạn ghi hình nằm ở máy của chị Trang."
+        },
+        {
+          "id": "thung-tra",
+          "label": "Thùng hàng khách trả",
+          "x": 62,
+          "y": 82,
+          "note": "Một thùng chai sữa khách mang trả từ 9/1. Chai nào cũng phồng nắp. Nắp nguyên, không lỗ."
+        }
+      ]
+    }
+  ],
+  "clues": [
+    { "id": "H1", "title": "Nhiệt kế line 2: thấp nhất 97°C", "description": "Kim ghi mức thấp nhất dừng ở 97°C từ lần chỉnh lúc 22:00 ngày 6/1. Chuẩn tiệt trùng là 121°C.", "source": "scene" },
+    { "id": "H2", "title": "Dòng 02:10 trong sổ bị tẩy", "description": "Sổ vận hành ca đêm 6/1: dòng 02:10 bị tẩy, nét cũ còn hằn \"báo động nhiệt\".", "source": "scene" },
+    { "id": "H3", "title": "Pallet chưa xuất kho cũng hỏng", "description": "Lô 0601-L2 chưa từng rời nhà máy cũng phồng nắp. Nắp và màng seal nguyên, không lỗ kim.", "source": "scene" },
+    { "id": "H4", "title": "Hộp kim insulin của Thuận", "description": "Kim 31G, 0,25 mm. Hộp mới thay ngày 5/1 mà đã có hơn 30 cây kim, trong khi Thuận chích một kim mỗi tối.", "source": "scene" },
+    { "id": "H5", "title": "Giấy tái sử dụng ở phòng QC", "description": "Phiếu kiểm nghiệm cũ cắt đôi, in mặt sau. Mép giấy còn dòng kẻ \"…KIỂM NGHIỆM LÔ\".", "source": "scene" },
+    { "id": "H6", "title": "Sáu chai có lỗ kim", "description": "Chỉ ở một kệ của Hiệp Thành Mart. Bốn chai lô 0701-L1 có lỗ kim mà vẫn ngon. Hai chai lô 0601-L2 chua như mọi chai cùng lô.", "source": "scene" },
+    { "id": "H7", "title": "Sổ giữ xe tối 10/1", "description": "Xe 59-V1 268.41 vào bãi 19:02, ra 19:20. Người lái mặc áo mưa xám.", "source": "scene" },
+    { "id": "H8", "title": "Phiếu xuất xưởng lô 0601-L2", "description": "\"ĐẠT, cho phép giao hàng.\" Ký: Lương Văn Thuận, 08:00 ngày 7/1.", "source": "scene" },
+    { "id": "P1", "title": "Hợp đồng bảo hiểm thu hồi sản phẩm", "description": "Chi trả khi thu hồi vì bên thứ ba cố ý làm nhiễm bẩn hoặc đe dọa tống tiền. Loại trừ: lỗi sản xuất, sai sót kiểm soát chất lượng, hành vi của nhân viên người được bảo hiểm.", "source": "file" },
+    { "id": "P2", "title": "Đơn yêu cầu bồi thường", "description": "Thu hồi hai lô 0601-L2 và 0701-L1, 240.000 chai, 3,2 tỷ đồng. Nguyên nhân: \"kẻ xấu chích kim và tống tiền\".", "source": "file" },
+    { "id": "P3", "title": "Thư tống tiền", "description": "\"Tao đã chích kim vào 100 chai Mộc An. Chuẩn bị 500 triệu, tao sẽ liên lạc.\" Bỏ vào hộp thư cổng nhà máy, bảo vệ nhận 08:15 ngày 11/1. Sau đó không ai liên lạc.", "source": "file" },
+    { "id": "P4", "title": "Biên bản tiếp nhận tin báo", "description": "Công an phường Tân Thới Hiệp: bà Hà trình báo lúc 09:30 ngày 11/1, nộp thư gốc, đề nghị điều tra.", "source": "file" },
+    { "id": "P5", "title": "Kết quả kiểm nghiệm", "description": "40 chai chua thu từ 14 điểm bán: 40/40 thuộc lô 0601-L2, không chai nào có lỗ kim. Vi khuẩn sinh bào tử chịu nhiệt, dấu hiệu tiệt trùng thiếu nhiệt.", "source": "file" },
+    { "id": "P6", "title": "Dữ liệu bộ ghi nhiệt line 2", "description": "Đêm 6–7/1: 02:05 đến 03:20 nhiệt độ 97–101°C. Báo động 02:10. 02:31 báo động được tắt từ xa bằng tài khoản QC-THUAN.", "source": "file" },
+    { "id": "P7", "title": "Danh sách khiếu nại", "description": "Khiếu nại đầu tiên 08:40 ngày 9/1 (ông Mạnh). Tới tối 10/1 đã có 22 khiếu nại ở 11 điểm bán, trước khi có lá thư.", "source": "file" },
+    { "id": "P8", "title": "Đăng ký xe 59-V1 268.41", "description": "Xe tay ga màu bạc. Chủ xe: Lương Văn Thuận.", "source": "file" },
+    { "id": "P9", "title": "Quyết định thôi việc của Sang", "description": "17:00 ngày 7/1. Lý do: \"ngủ gật trong ca đêm 6/1\". Người đề xuất: Lương Văn Thuận.", "source": "file" },
+    { "id": "P10", "title": "Giám định lá thư tống tiền", "description": "In bằng máy in laser có vệt lỗi trống mực ở lề trái, trùng mẫu in của máy in phòng QC. Mặt sau là phiếu kiểm nghiệm cũ cắt đôi.", "source": "file" },
+    { "id": "P11", "title": "Quy chế thưởng phạt phòng QC", "description": "Năm không lọt lô lỗi: thưởng 120 triệu. Lô lỗi ra thị trường: trưởng QC bị cách chức, bồi hoàn 10% thiệt hại.", "source": "file" },
+    { "id": "X1", "title": "Bài đăng của Sang", "description": "21:40 ngày 7/1: \"Đuổi tao à? Rồi tụi bây sẽ biết.\"", "source": "decoy" },
+    { "id": "X2", "title": "Tin nhắn ông Mạnh đòi 50 triệu", "description": "Gửi trang của Mộc An 10:15 ngày 9/1: \"50 triệu, không thì tôi đưa clip lên báo.\"", "source": "decoy" },
+    { "id": "X3", "title": "Hợp đồng hàng Tết", "description": "Mộc An giao 600.000 chai cho chuỗi siêu thị trước Tết. Thiếu hàng: phạt 2 tỷ đồng.", "source": "decoy" },
+    { "id": "X4", "title": "Ảnh màn hình máy lúc 02:14", "description": "Sang chụp màn hình line 2: 98°C, đèn báo đỏ. Kèm tin nhắn trả lời của Thuận.", "source": "testimony" },
+    { "id": "X5", "title": "Ảnh Sang ở đám giỗ Tây Ninh", "description": "Sang đưa ảnh đám giỗ ở quê, có giờ trên ảnh.", "source": "testimony" },
+    { "id": "X6", "title": "Ảnh bữa cơm nhà Thuận", "description": "Thuận đưa ảnh bữa cơm tối 10/1 với vợ con, có giờ trên ảnh.", "source": "testimony" },
+    { "id": "X7", "title": "Clip chai sữa của ông Mạnh", "description": "Sáng 9/1 ông Mạnh quay cảnh mở chai sữa phồng. Soi kỹ cái nắp.", "source": "testimony" },
+    { "id": "X8", "title": "Camera kệ sữa tối 10/1", "description": "Một người áo mưa xám, nón lưỡi trai đứng trước kệ sữa từ 19:05 tới 19:14, không mua gì.", "source": "testimony" }
+  ],
+  "envelopes": [
+    {
+      "id": "pb1",
+      "number": 1,
+      "title": "Hồ sơ yêu cầu bồi thường",
+      "unlockedBy": null,
+      "documents": ["P1", "P2", "P3", "P4", "P5", "X1", "X2", "X3"]
+    },
+    {
+      "id": "pb2",
+      "number": 2,
+      "title": "Giám định bổ sung",
+      "unlockedBy": "q2",
+      "documents": ["P6", "P7", "P8", "P9"]
+    },
+    {
+      "id": "pb3",
+      "number": 3,
+      "title": "Từ cơ quan điều tra",
+      "unlockedBy": "q4",
+      "documents": ["P10", "P11"]
+    }
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "number": 1,
+      "prompt": "Vì sao sữa lô 0601-L2 bị chua?",
+      "options": [
+        { "id": "a", "text": "Bị chích kim ngoài siêu thị" },
+        { "id": "b", "text": "Tiệt trùng thiếu nhiệt ngay trong nhà máy" },
+        { "id": "c", "text": "Các điểm bán bảo quản sai" }
+      ],
+      "correctOptionId": "b",
+      "requiredClues": ["H1", "H3"],
+      "supportingClues": ["P5", "X7"],
+      "hints": [
+        "Vào Kho thành phẩm soi pallet lô 0601-L2 chưa giao. Mấy chai đó chưa từng ra tới siêu thị.",
+        "Ở Xưởng tiệt trùng line 2, nhiệt kế có một cây kim đỏ ghi mức thấp nhất. Chuẩn là 121°C."
+      ]
+    },
+    {
+      "id": "q2",
+      "number": 2,
+      "prompt": "Lá thư tống tiền xuất hiện trước hay sau khi khách phát hiện sữa chua?",
+      "options": [
+        { "id": "a", "text": "Trước, kẻ tống tiền chích kim rồi mới có sữa chua" },
+        { "id": "b", "text": "Sau, hai ngày sau khi sữa chua bị đăng lên mạng" }
+      ],
+      "correctOptionId": "b",
+      "requiredClues": ["P3", "X7"],
+      "supportingClues": ["P5", "X2"],
+      "hints": [
+        "Hỏi chuyện ông Mạnh về chai sữa sáng 9/1. Xem clip ông quay, nhất là cái nắp.",
+        "Thư tống tiền trong phong bì 1 được bảo vệ nhận lúc nào? Đặt nó cạnh ngày ông Mạnh mở chai."
+      ]
+    },
+    {
+      "id": "q3",
+      "number": 3,
+      "prompt": "Ai biết máy tiệt trùng tụt nhiệt ngay trong đêm 6/1?",
+      "options": [
+        { "id": "a", "text": "Không ai, máy hỏng mà không ai hay" },
+        { "id": "b", "text": "Sang và Thuận" },
+        { "id": "c", "text": "Bà Hà" }
+      ],
+      "correctOptionId": "b",
+      "requiredClues": ["H2", "X4"],
+      "supportingClues": ["P6", "H1"],
+      "hints": [
+        "Soi Sổ vận hành ca đêm ở Xưởng tiệt trùng. Dòng nào bị tẩy, và nét cũ ghi gì?",
+        "Đem dòng bị tẩy đi hỏi Sang. Anh có thói quen chụp màn hình máy mỗi lần có báo động."
+      ]
+    },
+    {
+      "id": "q4",
+      "number": 4,
+      "prompt": "Ai chích kim vào sáu chai ở Hiệp Thành Mart?",
+      "options": [
+        { "id": "a", "text": "Lương Văn Thuận" },
+        { "id": "b", "text": "Lý Văn Sang" },
+        { "id": "c", "text": "Tạ Văn Mạnh" },
+        { "id": "d", "text": "Một người lạ" }
+      ],
+      "correctOptionId": "a",
+      "requiredClues": ["H7", "P8"],
+      "supportingClues": ["X8", "H4", "H6"],
+      "hints": [
+        "Ra Hiệp Thành Mart soi Sổ giữ xe. Tối 10/1 có một xe vào bãi đúng lúc người áo mưa xám đứng trước kệ sữa.",
+        "Phong bì 2 có giấy đăng ký của một chiếc xe. So biển số với sổ giữ xe."
+      ]
+    },
+    {
+      "id": "q5",
+      "number": 5,
+      "prompt": "Ai viết lá thư tống tiền?",
+      "options": [
+        { "id": "a", "text": "Lương Văn Thuận" },
+        { "id": "b", "text": "Lý Văn Sang" },
+        { "id": "c", "text": "Tạ Văn Mạnh" },
+        { "id": "d", "text": "Một kẻ tống tiền từ bên ngoài" }
+      ],
+      "correctOptionId": "a",
+      "requiredClues": ["H5", "P10"],
+      "supportingClues": ["P3", "P11"],
+      "hints": [
+        "Phong bì 3 có kết quả giám định lá thư: in bằng máy nào, trên giấy gì?",
+        "Vào Phòng QC soi Khay giấy tái sử dụng cạnh máy in."
+      ]
+    },
+    {
+      "id": "q6",
+      "number": 6,
+      "prompt": "Bà Hà có biết lô 0601-L2 hỏng từ trong nhà máy không?",
+      "options": [
+        { "id": "a", "text": "Biết, bà dựng chuyện tống tiền để lấy tiền bảo hiểm" },
+        { "id": "b", "text": "Không, bà tin phiếu xuất xưởng của Thuận" }
+      ],
+      "correctOptionId": "b",
+      "requiredClues": ["H8", "P4"],
+      "supportingClues": ["P6", "X3"],
+      "hints": [
+        "Bà Hà chỉ thấy những gì phòng QC báo lên. Soi Phiếu xuất xưởng trên bảng ghim ở Phòng QC.",
+        "Người dựng chuyện có mời công an vào điều tra ngay không? Xem Biên bản tiếp nhận tin báo trong phong bì 1."
+      ]
+    },
+    {
+      "id": "q7",
+      "number": 7,
+      "prompt": "Lời khai tối 10/1 của ai đứng vững?",
+      "options": [
+        { "id": "a", "text": "Tất cả đều vững" },
+        { "id": "b", "text": "Sang vững. Thuận vỡ." },
+        { "id": "c", "text": "Sang vỡ. Thuận vững." }
+      ],
+      "correctOptionId": "b",
+      "requiredClues": ["X5", "X6", "H7"],
+      "supportingClues": ["X8", "P8"],
+      "hints": [
+        "Người áo mưa xám ở siêu thị từ 19:02 tới 19:20. Hỏi Sang và Thuận tối 10/1 họ ở đâu, xem ảnh họ đưa.",
+        "Ảnh bữa cơm của Thuận chụp lúc mấy giờ? Nó có che được khoảng 19:02 tới 19:20 không?"
+      ]
+    }
+  ],
+  "verdict": [
+    {
+      "id": "cause",
+      "prompt": "Vì sao Mộc An phải thu hồi sữa?",
+      "options": [
+        { "id": "defect", "text": "Lỗi tiệt trùng trong nhà máy, bị che giấu" },
+        { "id": "tamper", "text": "Kẻ tống tiền chích kim ngoài siêu thị" },
+        { "id": "store", "text": "Các điểm bán bảo quản sai" }
+      ],
+      "correctOptionId": "defect"
+    },
+    {
+      "id": "writer",
+      "prompt": "Ai dựng chuyện chích kim và viết thư tống tiền?",
+      "options": [
+        { "id": "thuan", "text": "Lương Văn Thuận" },
+        { "id": "sang", "text": "Lý Văn Sang" },
+        { "id": "manh", "text": "Tạ Văn Mạnh" },
+        { "id": "ha", "text": "Đoàn Thị Ngọc Hà" },
+        { "id": "outsider", "text": "Một kẻ tống tiền từ bên ngoài" }
+      ],
+      "correctOptionId": "thuan"
+    },
+    {
+      "id": "decision",
+      "prompt": "Đề xuất của bạn",
+      "options": [
+        { "id": "pay", "text": "Chi trả đủ 3,2 tỷ cho cả hai lô" },
+        { "id": "part", "text": "Chi 1,4 tỷ cho lô 0701-L1, từ chối lô 0601-L2" },
+        { "id": "deny", "text": "Từ chối toàn bộ, chuyển hồ sơ cho công an" }
+      ],
+      "correctOptionId": "deny"
+    }
+  ],
+  "endings": [
+    {
+      "id": "full",
+      "title": "Trọn vẹn",
+      "text": "An Tín từ chối hồ sơ vì thu hồi do lỗi sản xuất và do chính nhân viên của Mộc An dựng chuyện. Thuận bị khởi tố. Bà Hà công khai xin lỗi khách hàng, đền tiền cho từng người mua phải sữa chua và cho dừng line 2 để sửa."
+    },
+    {
+      "id": "half",
+      "title": "Đúng một nửa",
+      "text": "Bạn từ chối đúng: sữa chua vì lỗi tiệt trùng. Nhưng người bạn chỉ ra không phải kẻ chích kim. Thuận vẫn ký phiếu xuất xưởng mỗi sáng ở Mộc An."
+    },
+    {
+      "id": "wrong",
+      "title": "Sai hướng",
+      "text": "Con dấu \"từ chối\" của bạn đúng, nhưng lý do sai. Mộc An kiện, và An Tín phải mất thêm nửa năm để chứng minh điều bạn bỏ sót."
+    },
+    {
+      "id": "unjust",
+      "title": "Oan cho người ngay",
+      "text": "Bạn tố bà Hà dựng chuyện. Bà mang biên bản báo công an và phiếu xuất xưởng ký tên Thuận ra trình. Hồ sơ bị trả về, bạn bị rút khỏi vụ, còn Thuận được giao lập báo cáo nội bộ."
+    },
+    {
+      "id": "split",
+      "title": "Chia đôi",
+      "text": "Bạn chi 1,4 tỷ cho lô 0701-L1 vì nghĩ nó bị thu hồi oan do lời đe dọa. Nhưng lời đe dọa đó do chính trưởng QC của Mộc An viết. Hợp đồng loại trừ đúng trường hợp này. Bạn bị kỷ luật."
+    },
+    {
+      "id": "paid",
+      "title": "Chi trả",
+      "text": "An Tín chuyển 3,2 tỷ đồng. Line 2 vẫn chạy với van hơi cũ trong bản ghi, Thuận nhận thưởng cuối năm. Ba tháng sau, một lô khác lại chua."
+    }
+  ],
+  "endingRules": [
+    { "ending": "paid", "picks": { "decision": "pay" } },
+    { "ending": "split", "picks": { "decision": "part" } },
+    { "ending": "unjust", "picks": { "writer": "ha" } },
+    { "ending": "full", "correct": ["cause", "writer"] },
+    { "ending": "half", "correct": ["cause"] },
+    { "ending": "wrong" }
+  ]
+}
