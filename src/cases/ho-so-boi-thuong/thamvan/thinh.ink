@@ -8,6 +8,7 @@ VAR has_P9 = false
 === hoi ===
 * [Đêm cháy anh ở đâu?]
     "Vũng Tàu, đám cưới thằng cháu. Hình chụp đầy đó."
+    Ông Thịnh mở điện thoại, lướt cho bạn xem từng tấm. #photo:X3
     -> hoi
 * {has_H4} [Sao trong kho toàn cuộn lõi giấy?]
     "Hàng mẫu! Hàng mẫu thôi. Hàng thật nằm ở dãy trong."

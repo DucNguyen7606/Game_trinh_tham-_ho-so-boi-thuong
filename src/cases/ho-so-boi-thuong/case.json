@@ -17,7 +17,10 @@
     }
   },
   "days": 6,
-  "limitsPerDay": { "talk": 2, "explore": 1 },
+  "limitsPerDay": {
+    "talk": 2,
+    "explore": 1
+  },
   "suspects": [
     {
       "id": "thinh",
@@ -113,7 +116,8 @@
         "relation": "Bị đuổi việc tháng 5 sau khi tố Bảo sửa sổ chấm công.",
         "quote": "\"Tui ghét cái kho đó thiệt. Nhưng tui đâu có ngu.\"",
         "note": "Từng đăng bài \"cái kho đó cháy cho rồi\". Động cơ rõ nhất, nhưng nói chuyện như người không có gì phải giấu."
-      }
+      },
+      "interrogation": "ngan"
     },
     {
       "id": "huy",
@@ -140,7 +144,8 @@
         "relation": "Hàng xóm sát vách. Muốn mua đất kho để mở rộng tiệm, bị ông Thịnh từ chối.",
         "quote": "\"Tui ngủ trên lầu, nghe la mới dậy.\"",
         "note": "Có camera nhìn ra hẻm nhưng chưa chịu đưa. Giấu vì sợ bị nghi, hay vì có gì khác?"
-      }
+      },
+      "interrogation": "huy"
     },
     {
       "id": "ro",
@@ -435,6 +440,30 @@
       "title": "Thư hỏi mua đất của Huy",
       "description": "Huy đề nghị mua đất kho với giá 9 tỷ, Thịnh từ chối.",
       "source": "decoy"
+    },
+    {
+      "id": "X3",
+      "title": "Ảnh đám cưới ở Vũng Tàu",
+      "description": "Ông Thịnh cho xem ảnh tiệc cưới cháu ở Vũng Tàu. Ảnh cuối chụp lúc 01:47 ngày 15/7, cách kho khoảng 2 giờ xe. Soi kỹ phông cưới và cổ tay ông.",
+      "source": "testimony"
+    },
+    {
+      "id": "X4",
+      "title": "Ảnh karaoke của Bảo",
+      "description": "Bảo nói hát từ 1 giờ và gửi ảnh lúc 02:10. Soi kỹ mặt bàn và cổ tay áo của anh.",
+      "source": "testimony"
+    },
+    {
+      "id": "X5",
+      "title": "Ảnh chụp livestream của Ngân",
+      "description": "Ngân đang phát trực tiếp lúc 01:10 với 214 người xem. Đọc kỹ phần bình luận.",
+      "source": "testimony"
+    },
+    {
+      "id": "X6",
+      "title": "Ảnh đám cháy của anh Huy",
+      "description": "Anh Huy chụp từ gác tiệm lúc 02:40. Soi kỹ chỗ lửa bùng, cổng kho và chòi bảo vệ.",
+      "source": "testimony"
     }
   ],
   "envelopes": [
@@ -484,8 +513,14 @@
       "number": 1,
       "prompt": "Tai nạn hay cố ý?",
       "options": [
-        { "id": "a", "text": "Chập điện" },
-        { "id": "b", "text": "Cố ý đốt" }
+        {
+          "id": "a",
+          "text": "Chập điện"
+        },
+        {
+          "id": "b",
+          "text": "Cố ý đốt"
+        }
       ],
       "correctOptionId": "b",
       "requiredClues": [
@@ -499,8 +534,14 @@
       "number": 2,
       "prompt": "Hàng kê khai có thật không?",
       "options": [
-        { "id": "a", "text": "Đủ 412 cuộn" },
-        { "id": "b", "text": "Phần lớn đã bị chuyển đi" }
+        {
+          "id": "a",
+          "text": "Đủ 412 cuộn"
+        },
+        {
+          "id": "b",
+          "text": "Phần lớn đã bị chuyển đi"
+        }
       ],
       "correctOptionId": "b",
       "requiredClues": [
@@ -514,9 +555,18 @@
       "number": 3,
       "prompt": "Lửa được châm lúc nào?",
       "options": [
-        { "id": "a", "text": "Khoảng 02:38" },
-        { "id": "b", "text": "Giữa 01:02 và 01:21" },
-        { "id": "c", "text": "Trước 22:00" }
+        {
+          "id": "a",
+          "text": "Khoảng 02:38"
+        },
+        {
+          "id": "b",
+          "text": "Giữa 01:02 và 01:21"
+        },
+        {
+          "id": "c",
+          "text": "Trước 22:00"
+        }
       ],
       "correctOptionId": "b",
       "requiredClues": [
@@ -529,8 +579,14 @@
       "number": 4,
       "prompt": "Ai vào được kho?",
       "options": [
-        { "id": "a", "text": "Người lạ phá khóa" },
-        { "id": "b", "text": "Người có chìa và quen ông Rô" }
+        {
+          "id": "a",
+          "text": "Người lạ phá khóa"
+        },
+        {
+          "id": "b",
+          "text": "Người có chìa và quen ông Rô"
+        }
       ],
       "correctOptionId": "b",
       "requiredClues": [
@@ -543,8 +599,14 @@
       "number": 5,
       "prompt": "Kẻ đốt muốn mất cái gì?",
       "options": [
-        { "id": "a", "text": "Hàng hóa" },
-        { "id": "b", "text": "Sổ sách và dữ liệu kế toán" }
+        {
+          "id": "a",
+          "text": "Hàng hóa"
+        },
+        {
+          "id": "b",
+          "text": "Sổ sách và dữ liệu kế toán"
+        }
       ],
       "correctOptionId": "b",
       "requiredClues": [
@@ -557,8 +619,14 @@
       "number": 6,
       "prompt": "Vì sao đêm 14 mà không phải đêm 20?",
       "options": [
-        { "id": "a", "text": "Thịnh đổi ý làm sớm" },
-        { "id": "b", "text": "Thịnh đã hủy, kiểm kê ngày 16 sẽ lộ người khác" }
+        {
+          "id": "a",
+          "text": "Thịnh đổi ý làm sớm"
+        },
+        {
+          "id": "b",
+          "text": "Thịnh đã hủy, kiểm kê ngày 16 sẽ lộ người khác"
+        }
       ],
       "correctOptionId": "b",
       "requiredClues": [
@@ -571,9 +639,18 @@
       "number": 7,
       "prompt": "Ngoại phạm của ai đứng vững?",
       "options": [
-        { "id": "a", "text": "Tất cả đều vững" },
-        { "id": "b", "text": "Thịnh, Ngân, Huy vững. Bảo vỡ." },
-        { "id": "c", "text": "Thịnh vỡ" }
+        {
+          "id": "a",
+          "text": "Tất cả đều vững"
+        },
+        {
+          "id": "b",
+          "text": "Thịnh, Ngân, Huy vững. Bảo vỡ."
+        },
+        {
+          "id": "c",
+          "text": "Thịnh vỡ"
+        }
       ],
       "correctOptionId": "b",
       "requiredClues": [
