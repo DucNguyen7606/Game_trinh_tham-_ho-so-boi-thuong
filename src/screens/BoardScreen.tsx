@@ -73,7 +73,7 @@ function QuestionNode({ data }: NodeProps<Node<QuestionNodeData>>) {
           <p>{shownHints[shownHints.length - 1]}</p>
         </div>
       )}
-    <div className={cn('w-72 rounded-lg border bg-card p-3 shadow-lg', solved ? 'border-primary' : 'border-border')}>
+    <div className={cn('w-72 rounded-lg border bg-card p-3 shadow-lg transition-opacity', solved ? 'border-primary/50 opacity-45 saturate-50 hover:opacity-80' : 'border-border')}>
       <Handle type="target" position={Position.Left} className="!size-3 !bg-string" />
       <p className="text-xs text-muted-foreground">Câu {questionOrder(caseData, solvedQuestions).indexOf(q.id) + 1}</p>
       <p className="display text-lg leading-tight">{q.prompt}</p>
@@ -170,22 +170,27 @@ function StringEdge({ id, sourceX, sourceY, targetX, targetY, sourcePosition, ta
 
 const edgeTypes = { string: StringEdge }
 
+// Cards go back where the player left them; new ones get a grid slot.
+const saved = (id: string) => useGame.getState().boardLayout[id]
+
 const clueNode = (clueId: string, index: number): Node => ({
   id: `clue-${clueId}`,
   type: 'clue',
-  position: { x: (index % 3) * 240, y: Math.floor(index / 3) * 140 },
+  position: saved(`clue-${clueId}`) ?? { x: (index % 3) * 240, y: Math.floor(index / 3) * 140 },
   data: { clueId },
 })
 
 const questionNode = (q: { id: string }, index: number): Node => ({
   id: `q-${q.id}`,
   type: 'question',
-  position: { x: 860, y: index * 380 },
+  position: saved(`q-${q.id}`) ?? { x: 860, y: index * 380 },
   data: { questionId: q.id },
 })
 
 export default function BoardScreen() {
-  const { data, foundClues, answers, checkedLinks, linkClue, unlinkClue, solvedQuestions, isQuestionOpen } = useGame()
+  const { data, foundClues, answers, checkedLinks, linkClue, unlinkClue, solvedQuestions, isQuestionOpen, saveBoardLayout, saveBoardViewport } = useGame()
+  // Read once: the board opens at the pan and zoom the player left it.
+  const [boardViewport] = useState(() => useGame.getState().boardViewport)
   // Recomputed when a question is solved, since that can open an envelope.
   const openQuestions = useMemo(
     () => questionOrder(data, solvedQuestions).map((id) => data.questions.find((q) => q.id === id)!).filter((q) => isQuestionOpen(q.id)),
@@ -283,10 +288,13 @@ export default function BoardScreen() {
         nodeTypes={nodeTypes}
         edgeTypes={edgeTypes}
         onNodesChange={onNodesChange}
+        onNodeDragStop={(_, __, dragged) => saveBoardLayout(Object.fromEntries(dragged.map((n) => [n.id, n.position])))}
+        onMoveEnd={(_, vp) => saveBoardViewport(vp)}
+        defaultViewport={boardViewport}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
         colorMode="dark"
-        fitView
+        fitView={!boardViewport}
       >
         <Background />
         <Controls />
