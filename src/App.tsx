@@ -1,4 +1,4 @@
-import { Briefcase, FolderOpen, Network, Search, Gavel, Palette } from 'lucide-react'
+import { Home, Briefcase, FolderOpen, Network, Search, Gavel, Palette } from 'lucide-react'
 import { useGame, type Screen } from '@/game/store'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -11,6 +11,7 @@ import InterrogationScreen from '@/screens/InterrogationScreen'
 import VerdictScreen from '@/screens/VerdictScreen'
 import GalleryScreen from '@/screens/GalleryScreen'
 import AudioControls from '@/audio/AudioControls'
+import MainMenu from '@/series/MainMenu'
 import { AnimatePresence, motion, MotionConfig } from 'framer-motion'
 
 const nav: { screen: Screen; label: string; icon: typeof Briefcase }[] = [
@@ -25,10 +26,15 @@ const nav: { screen: Screen; label: string; icon: typeof Briefcase }[] = [
 export default function App() {
   const { screen, go, day, left, reputation, data, solvedQuestions } = useGame()
 
+  if (screen === 'menu') return <MainMenu />
+
   return (
     <MotionConfig reducedMotion="user">
     <div className="flex h-full flex-col">
       <header className="flex items-center gap-3 border-b-2 border-brass/50 bg-background/80 px-4 py-2 shadow-lg">
+        <Button size="sm" variant="ghost" title="Về màn hình chính" onClick={() => go('menu')}>
+          <Home />
+        </Button>
         <span className="title shrink-0 whitespace-nowrap text-lg text-amber">{data.title}</span>
         <nav className="flex gap-0.5">
           {nav.map(({ screen: s, label, icon: Icon }) => (
