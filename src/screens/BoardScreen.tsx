@@ -34,7 +34,7 @@ function ClueNode({ data }: NodeProps<Node<ClueNodeData>>) {
       <p className="text-[10px] font-semibold uppercase opacity-60">{clue.id}</p>
       <p className="text-sm font-semibold leading-tight">{clue.title}</p>
       <p className="mt-1 text-xs opacity-80">{clue.description}</p>
-      <Handle type="source" position={Position.Right} className="!size-3 !bg-string" />
+      <Handle type="source" position={Position.Right} className="!size-3.5 !bg-string after:absolute after:-inset-2.5 after:rounded-full after:content-['']" />
     </div>
   )
 }
@@ -79,7 +79,7 @@ function QuestionNode({ data }: NodeProps<Node<QuestionNodeData>>) {
         </div>
       )}
     <div className={cn('w-72 rounded-lg border bg-card p-3 shadow-lg transition-opacity', solved ? 'border-primary/50 opacity-45 saturate-50 hover:opacity-80' : 'border-border')}>
-      <Handle type="target" position={Position.Left} className="!size-3 !bg-string" />
+      <Handle type="target" position={Position.Left} className="!size-3.5 !bg-string after:absolute after:-inset-2.5 after:rounded-full after:content-['']" />
       <p className="text-xs text-muted-foreground">Câu {questionOrder(caseData, solvedQuestions).indexOf(q.id) + 1}</p>
       <p className="display text-lg leading-tight">{q.prompt}</p>
       <div className="nodrag mt-2 flex flex-col gap-1">

@@ -1,7 +1,7 @@
 {
   "id": "ho-so-boi-thuong",
   "title": "Hồ sơ bồi thường số 0714",
-  "intro": "Kho vải Thịnh Phát ở Bình Tân cháy lúc 2 giờ 38 sáng. Chủ kho đòi bồi thường 4 tỷ đồng. Bạn có 6 ngày để đề xuất chi trả hay từ chối. Mỗi ngày khám được 1 khu hiện trường. Hỏi chuyện thì không giới hạn.",
+  "intro": "Kho vải Thịnh Phát ở Bình Tân cháy lúc 2 giờ 38 sáng. Chủ kho đòi bồi thường 4 tỷ đồng. Bạn có 10 ngày để đề xuất chi trả hay từ chối. Mỗi ngày khám được 1 khu hiện trường. Hỏi chuyện thì không giới hạn.",
   "player": {
     "name": "Lê Thu Hạnh",
     "role": "Chuyên viên giám định bồi thường, Bảo hiểm An Tín",
@@ -16,7 +16,7 @@
       "backdrop": "teal"
     }
   },
-  "days": 6,
+  "days": 10,
   "limitsPerDay": {
     "talk": 2,
     "explore": 1
