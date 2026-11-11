@@ -3,7 +3,8 @@ import type { PortraitSpec } from '@/art/Portrait'
 // Data shapes for a case. A new case is a new folder of JSON + .ink files;
 // nothing in the engine should need to change.
 
-export type ClueSource = 'scene' | 'file' | 'decoy'
+/** testimony = something a suspect shows during an interview, like photos on their phone. */
+export type ClueSource = 'scene' | 'file' | 'decoy' | 'testimony'
 
 export interface Clue {
   id: string // the code used everywhere: H1, P7, X2...
