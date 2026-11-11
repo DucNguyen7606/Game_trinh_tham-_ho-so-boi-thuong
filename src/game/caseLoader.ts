@@ -6,6 +6,7 @@ import * as ch3 from '@/cases/buc-son-mai'
 import * as ch4 from '@/cases/chuyen-xe-dem'
 import * as ch5 from '@/cases/dem-thu-thiem'
 import * as ch6 from '@/cases/dem-trieu-cuong'
+import * as ch7 from '@/cases/tiem-vang-kim-thanh'
 import * as ch8 from '@/cases/lo-sua-0601'
 import * as ch9 from '@/cases/can-ho-tang-27'
 
@@ -21,7 +22,7 @@ interface CaseModule {
   epilogue: Record<string, EpiloguePanel[]>
 }
 
-const modules: CaseModule[] = [ch1, ch2, ch3, ch4, ch5, ch6, ch8, ch9]
+const modules: CaseModule[] = [ch1, ch2, ch3, ch4, ch5, ch6, ch7, ch8, ch9]
 const byId = Object.fromEntries(modules.map((m) => [m.data.id, m])) as Record<string, CaseModule | undefined>
 
 // Interrogation scripts are plain .ink text, compiled at runtime by inkjs.

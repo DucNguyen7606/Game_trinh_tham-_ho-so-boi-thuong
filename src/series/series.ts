@@ -72,6 +72,15 @@ export const SERIES = {
       place: 'Quận 8 · tháng 11',
     },
     {
+      number: 7,
+      caseId: 'tiem-vang-kim-thanh',
+      area: 'go-vap',
+      spot: [570, 468],
+      title: 'Tiệm vàng Kim Thành',
+      blurb: 'Hai tên cầm dao ập vào tiệm vàng Gò Vấp lúc đóng cửa, bà chủ khai mất 45 lượng, đòi 6,3 tỷ. Nhưng chiếc nhẫn rơi lại dưới gầm tủ nhẹ hơn vàng thật gần một nửa.',
+      place: 'Gò Vấp · tháng 12',
+    },
+    {
       number: 8,
       caseId: 'lo-sua-0601',
       area: 'quan-12',
