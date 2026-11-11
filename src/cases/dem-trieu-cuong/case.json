@@ -1,0 +1,872 @@
+{
+  "id": "dem-trieu-cuong",
+  "title": "Hồ sơ bồi thường số 1411",
+  "intro": "Đêm 14/11, triều cường cộng mưa lớn tràn vào kho điện thoại của bà Trần Thị Mỹ Lệ bên kênh Đôi, gần Bến Bình Đông, Quận 8. Bà đòi bồi thường 4,5 tỷ đồng cho cả 1.500 máy trong kho. Bạn có 10 ngày để đề xuất chi trả bao nhiêu, hay từ chối. Mỗi ngày khám được 1 khu hiện trường. Hỏi chuyện thì không giới hạn.",
+  "player": {
+    "name": "Lê Thu Hạnh",
+    "role": "Chuyên viên giám định bồi thường, Bảo hiểm An Tín",
+    "portrait": {
+      "skin": 0,
+      "hair": "bun",
+      "hairColor": "black",
+      "build": "normal",
+      "outfit": "shirt",
+      "outfitColor": "navy",
+      "age": "young",
+      "backdrop": "teal"
+    }
+  },
+  "photoDate": "16 11 '25",
+  "days": 10,
+  "limitsPerDay": {
+    "talk": 2,
+    "explore": 1
+  },
+  "suspects": [
+    {
+      "id": "le",
+      "name": "Trần Thị Mỹ Lệ",
+      "age": 58,
+      "role": "Chủ kho điện thoại, người đòi bồi thường",
+      "interrogation": "le",
+      "portrait": {
+        "skin": 1,
+        "hair": "bun",
+        "hairColor": "gray",
+        "build": "heavy",
+        "outfit": "blouse",
+        "outfitColor": "mustard",
+        "accessory": [
+          "earrings",
+          "gold-chain"
+        ],
+        "age": "old",
+        "backdrop": "amber",
+        "mood": "worried"
+      },
+      "profile": {
+        "traits": [
+          "Tháo vát",
+          "Cả tin",
+          "Nói nhanh"
+        ],
+        "habit": "Ngồi tiệm ở đường Nguyễn Kim, Quận 10 từ sáng tới tối, việc kho giao hết cho quản lý.",
+        "relation": "Hai mươi năm buôn điện thoại, từ sạp nhỏ thành ba tiệm và một kho ở Quận 8.",
+        "quote": "\"Nước năm nào cũng lên, mà chưa năm nào mất sạch như năm nay.\"",
+        "note": "Tháng 9 nâng giá trị bảo hiểm từ 3 lên 4,5 tỷ. Hai tháng sau thì kho ngập."
+      }
+    },
+    {
+      "id": "khai",
+      "name": "Võ Đình Khải",
+      "age": 36,
+      "role": "Quản lý kho",
+      "interrogation": "khai",
+      "portrait": {
+        "skin": 2,
+        "hair": "short",
+        "hairColor": "black",
+        "build": "normal",
+        "outfit": "polo",
+        "outfitColor": "olive",
+        "accessory": [
+          "pen"
+        ],
+        "age": "mid",
+        "backdrop": "rust",
+        "mood": "neutral"
+      },
+      "profile": {
+        "traits": [
+          "Chăm chỉ",
+          "Kín miệng",
+          "Giỏi sổ sách"
+        ],
+        "habit": "Đi đâu cũng mặc chiếc áo mưa vàng in chữ MỸ LỆ, kể cả khi trời chỉ lất phất.",
+        "relation": "Làm cho bà Lệ 6 năm. Giữ chìa khóa kho, lập báo cáo thiệt hại sau đêm ngập.",
+        "quote": "\"Em kê hàng tới tối mịt, nước lên nhanh quá chị ơi.\"",
+        "note": "Người cuối cùng ở trong kho đêm 14/11. Toàn bộ số liệu trong đơn bồi thường là từ báo cáo của anh."
+      }
+    },
+    {
+      "id": "nhat",
+      "name": "Trần Minh Nhật",
+      "age": 29,
+      "role": "Con trai bà Lệ",
+      "interrogation": "nhat",
+      "portrait": {
+        "skin": 0,
+        "hair": "side-part",
+        "hairColor": "brown",
+        "build": "thin",
+        "outfit": "shirt",
+        "outfitColor": "sky",
+        "accessory": [
+          "gold-chain"
+        ],
+        "age": "young",
+        "backdrop": "teal",
+        "mood": "smile"
+      },
+      "profile": {
+        "traits": [
+          "Ăn nói khéo",
+          "Ham vui",
+          "Tiêu xài rộng"
+        ],
+        "habit": "Tối nào có bóng đá là ngồi quán nhậu ở Phú Mỹ Hưng tới khuya.",
+        "relation": "Không làm gì ở kho, nhưng thuộc từng ngóc ngách vì hồi sinh viên từng phụ mẹ trông hàng.",
+        "quote": "\"Má cứ ôm cái kho đó làm gì cho mệt.\"",
+        "note": "Nợ cá độ khoảng 400 triệu. Mấy tháng nay cứ nhắn mẹ bán kho."
+      }
+    },
+    {
+      "id": "tu",
+      "name": "Lê Văn Tư (Tư ghe)",
+      "age": 52,
+      "role": "Chủ ghe chở hàng ở Bến Bình Đông",
+      "interrogation": "tu",
+      "portrait": {
+        "skin": 3,
+        "hair": "buzz",
+        "hairColor": "gray",
+        "build": "normal",
+        "outfit": "tank",
+        "outfitColor": "charcoal",
+        "age": "old",
+        "backdrop": "night",
+        "mood": "stern"
+      },
+      "profile": {
+        "traits": [
+          "Lì lợm",
+          "Thạo sông nước",
+          "Ít lời"
+        ],
+        "habit": "Chạy ghe máy chở gạo, chở than dọc kênh Đôi, kênh Tẻ. Ngủ luôn trên ghe.",
+        "relation": "Thỉnh thoảng được kho Mỹ Lệ thuê chở hàng xuống miền Tây.",
+        "quote": "\"Đêm nước lớn ai dại mà chạy ghe.\"",
+        "note": "Ghe của ông neo cách kho chừng ba trăm mét."
+      }
+    },
+    {
+      "id": "bong",
+      "name": "Hồ Thị Bông",
+      "age": 47,
+      "role": "Bán cà phê cóc bên kia kênh, nhân chứng",
+      "interrogation": "bong",
+      "portrait": {
+        "skin": 2,
+        "hair": "long",
+        "hairColor": "black",
+        "build": "normal",
+        "outfit": "shirt",
+        "outfitColor": "white",
+        "age": "mid",
+        "backdrop": "amber",
+        "mood": "smile"
+      },
+      "profile": {
+        "traits": [
+          "Thức khuya",
+          "Tò mò",
+          "Thật thà"
+        ],
+        "habit": "Đêm triều cường không dám ngủ, ngồi canh kê đồ trong quán nhìn thẳng ra kênh.",
+        "relation": "Bán cà phê cho cả bến, biết mặt Khải lẫn Tư ghe.",
+        "quote": "\"Ở bến này ba chục năm, nghe tiếng máy là biết ghe ai.\"",
+        "note": "Quán của chị nằm đối diện cửa sổ phía kênh của kho."
+      }
+    }
+  ],
+  "zones": [
+    {
+      "id": "kho",
+      "name": "Trong kho",
+      "description": "Nhà kho mái tôn, năm tầng kệ sắt dọc tường. Nước rút để lại một lớp bùn đen bóng trên sàn.",
+      "hotspots": [
+        {
+          "id": "vet-nuoc",
+          "label": "Vệt nước trên tường",
+          "x": 78,
+          "y": 64,
+          "note": "Một đường bùn nâu chạy ngang tường, đều tăm tắp quanh cả kho. Bạn đo: 0,9 m tính từ sàn. Phía trên vệt, tường vẫn khô, mạng nhện còn nguyên.",
+          "clueId": "H1"
+        },
+        {
+          "id": "ke-tren",
+          "label": "Ba tầng kệ trên",
+          "x": 34,
+          "y": 44,
+          "note": "Tầng 3, 4, 5 trống trơn và khô ráo. Bụi phủ đều mặt kệ, chỉ chừa những ô chữ nhật sạch bong cỡ thùng hàng. Thùng được nhấc ra khỏi kệ, không có vệt bùn hay vệt nước nào kéo theo.",
+          "clueId": "H2"
+        },
+        {
+          "id": "ke-duoi",
+          "label": "Hai tầng kệ dưới",
+          "x": 34,
+          "y": 80,
+          "note": "Tầng 1 và 2 vẫn còn đủ 60 thùng carton, nhũn nước, bùn bám tới nắp. Mỗi thùng 10 máy. Đây là phần hư thật."
+        },
+        {
+          "id": "bao-cat",
+          "label": "Bao cát chặn cửa cuốn",
+          "x": 86,
+          "y": 84,
+          "note": "Ba lớp bao cát xếp trước cửa cuốn. Nước vẫn thấm qua được, nhưng không bao nào bị xê dịch."
+        }
+      ]
+    },
+    {
+      "id": "cua-so",
+      "name": "Cửa sổ phía kênh",
+      "description": "Bức tường sau của kho nhìn thẳng ra kênh Đôi. Cửa sổ song sắt, bậu cao ngang thắt lưng.",
+      "hotspots": [
+        {
+          "id": "chot",
+          "label": "Chốt cửa sổ",
+          "x": 50,
+          "y": 38,
+          "note": "Hai cánh cửa sổ mở toang, chốt sắt được kéo ra gọn gàng từ phía trong. Bản lề, chốt, song sắt đều nguyên. Nước không \"phá\" cánh cửa này.",
+          "clueId": "H3"
+        },
+        {
+          "id": "vet-son",
+          "label": "Vệt sơn trên bậu cửa",
+          "x": 50,
+          "y": 58,
+          "note": "Mép ngoài bậu cửa sổ bị cạ một vệt dài, dính sơn xanh dương và đỏ, đúng màu sơn ghe. Bậu cao 1 m so với sàn kho. Ngày thường mặt kênh thấp hơn sàn kho cả mét, mạn ghe không thể chạm tới đây.",
+          "clueId": "H4"
+        },
+        {
+          "id": "day-buoc",
+          "label": "Mẩu dây trên song sắt",
+          "x": 66,
+          "y": 46,
+          "note": "Một vòng dây nilon xanh bị cắt đứt còn buộc ở song sắt, kiểu nút thắt dân ghe hay dùng để neo tạm."
+        },
+        {
+          "id": "kenh",
+          "label": "Mặt kênh Đôi",
+          "x": 22,
+          "y": 82,
+          "note": "Nước kênh đã rút, đục ngầu, rác lũ dạt vào bờ. Phường vớt rác suốt hai ngày, không thấy thùng điện thoại nào."
+        }
+      ]
+    },
+    {
+      "id": "ben",
+      "name": "Bến Bình Đông",
+      "description": "Bến ghe dọc kênh Đôi. Ghe gạo, ghe than neo san sát, mùi dầu máy và cám gạo.",
+      "hotspots": [
+        {
+          "id": "ghe-tu",
+          "label": "Mạn ghe của Tư",
+          "x": 46,
+          "y": 60,
+          "note": "Mạn trái chiếc ghe sơn xanh dương viền đỏ bị trầy một vệt dài, lớp sơn bong ra, dính vụn vữa xám. Mắc ở đầu đinh mạn ghe là một mẩu băng keo in chữ \"MỸ LỆ\".",
+          "clueId": "H6"
+        },
+        {
+          "id": "can-dau",
+          "label": "Can dầu và hóa đơn",
+          "x": 74,
+          "y": 88,
+          "note": "Hóa đơn cây dầu ven bến kẹp ở cabin: 18:10 ngày 14/11, đổ đầy 60 lít dầu. Sáng nay bình chỉ còn chừng một phần ba. Tư nói cả đêm neo ghe, không nổ máy.",
+          "clueId": "H7"
+        },
+        {
+          "id": "bao-gao",
+          "label": "Bao gạo trên ghe",
+          "x": 24,
+          "y": 54,
+          "note": "Mấy bao gạo phủ bạt ở mũi ghe, chờ chở xuống Cần Đước. Không có gì lạ."
+        },
+        {
+          "id": "quan-bong",
+          "label": "Quán cà phê chị Bông",
+          "x": 86,
+          "y": 30,
+          "note": "Quán cóc bên kia kênh, nhìn thẳng qua cửa sổ phía kênh của kho. Chị Bông nói đêm đó chị thức trắng."
+        }
+      ]
+    },
+    {
+      "id": "van-phong",
+      "name": "Phòng quản lý kho",
+      "description": "Căn phòng nhỏ trên gác lửng của kho, nơi Khải làm sổ sách. Nước không lên tới đây.",
+      "hotspots": [
+        {
+          "id": "ao-mua",
+          "label": "Áo mưa vàng",
+          "x": 20,
+          "y": 46,
+          "note": "Bộ áo mưa vàng in chữ MỸ LỆ của Khải treo trên móc. Ống quần dính bùn phù sa khô cứng tới ngang đùi, chừng 0,8 m. Người mặc đã lội trong nước sâu gần tới đỉnh triều.",
+          "clueId": "H5"
+        },
+        {
+          "id": "moc-chia",
+          "label": "Bảng chìa khóa",
+          "x": 48,
+          "y": 34,
+          "note": "Bảng ghi: \"Chìa cửa sổ kênh + cửa cuốn: 2 bộ. Bộ 1 chị Lệ, bộ 2 anh Khải.\" Móc của bộ 2 trống, Khải nói anh mang theo người.",
+          "clueId": "H8"
+        },
+        {
+          "id": "so-kho",
+          "label": "Sổ kho",
+          "x": 70,
+          "y": 62,
+          "note": "Sổ nhập xuất ghi tay của Khải. Trang 15/11 viết bằng mực mới: \"Thiệt hại do triều cường: toàn bộ 150 thùng (1.500 máy).\""
+        },
+        {
+          "id": "lich",
+          "label": "Bảng đơn hàng",
+          "x": 86,
+          "y": 30,
+          "note": "Bảng trắng ghi lịch giao hàng Tết cho các tiệm ở Quận 10 và miền Tây, bắt đầu từ 1/12."
+        }
+      ]
+    }
+  ],
+  "clues": [
+    {
+      "id": "H1",
+      "title": "Vệt nước 0,9 m",
+      "description": "Đường bùn quanh tường kho ở độ cao 0,9 m. Phía trên tường khô, mạng nhện còn nguyên.",
+      "source": "scene"
+    },
+    {
+      "id": "H2",
+      "title": "Kệ tầng trên khô, chừa ô sạch bụi",
+      "description": "Tầng 3 đến 5 trống và khô. Thùng hàng được nhấc đi, không bị nước cuốn.",
+      "source": "scene"
+    },
+    {
+      "id": "H3",
+      "title": "Chốt cửa sổ mở từ trong",
+      "description": "Chốt, bản lề, song sắt nguyên vẹn. Cửa được mở ra, không bị nước phá.",
+      "source": "scene"
+    },
+    {
+      "id": "H4",
+      "title": "Vệt sơn ghe trên bậu cửa sổ",
+      "description": "Sơn xanh dương và đỏ, cao 1 m so với sàn. Mạn ghe chỉ chạm tới đây khi nước dâng.",
+      "source": "scene"
+    },
+    {
+      "id": "H5",
+      "title": "Áo mưa vàng của Khải",
+      "description": "Bùn phù sa tới ngang đùi, chừng 0,8 m. Người mặc lội trong nước gần đỉnh triều.",
+      "source": "scene"
+    },
+    {
+      "id": "H6",
+      "title": "Mạn ghe của Tư bị trầy",
+      "description": "Ghe xanh dương viền đỏ, vụn vữa xám trong vết trầy, mắc mẩu băng keo \"MỸ LỆ\".",
+      "source": "scene"
+    },
+    {
+      "id": "H7",
+      "title": "Bình dầu ghe Tư vơi hai phần ba",
+      "description": "Đổ đầy 60 lít lúc 18:10 ngày 14/11. Tư nói cả đêm không nổ máy.",
+      "source": "scene"
+    },
+    {
+      "id": "H8",
+      "title": "Hai bộ chìa kho",
+      "description": "Chìa cửa sổ và cửa cuốn chỉ có hai bộ: bà Lệ và Khải.",
+      "source": "scene"
+    },
+    {
+      "id": "P1",
+      "title": "Hợp đồng bảo hiểm hàng hóa trong kho",
+      "description": "Bảo hiểm mọi rủi ro, gồm ngập nước. Loại trừ: hàng bị lấy đi không có dấu hiệu đột nhập, hoặc do nhân viên của người được bảo hiểm chiếm đoạt.",
+      "source": "file"
+    },
+    {
+      "id": "P2",
+      "title": "Đơn yêu cầu bồi thường",
+      "description": "Bà Lệ kê 1.500 máy, 4,5 tỷ đồng, \"theo báo cáo của quản lý kho Võ Đình Khải\".",
+      "source": "file"
+    },
+    {
+      "id": "P3",
+      "title": "Bảng mực nước đêm 14/11",
+      "description": "Nước vào kho 22:40. Sâu 0,4 m lúc 00:00, 0,8 m lúc 01:30, đỉnh 0,9 m lúc 02:30. Rút hết 07:30.",
+      "source": "file"
+    },
+    {
+      "id": "P4",
+      "title": "Báo cáo của Khải",
+      "description": "\"Kê hàng tới 22 giờ thì về vì đường ngập. Nước phá cửa sổ phía kênh, cuốn trôi 90 thùng tầng trên.\"",
+      "source": "file"
+    },
+    {
+      "id": "P5",
+      "title": "Sơ đồ kệ kho",
+      "description": "Năm tầng kệ cao 0,2 / 0,6 / 1,1 / 1,6 / 2,1 m. Mỗi tầng 30 thùng, 300 máy.",
+      "source": "file"
+    },
+    {
+      "id": "P6",
+      "title": "Biên bản kiểm đếm của An Tín",
+      "description": "Còn 60 thùng ngập bùn ở tầng 1–2. Tầng 3–5 trống. Không tìm thấy thùng nào trôi dạt trên kênh hay ven bờ.",
+      "source": "file"
+    },
+    {
+      "id": "P7",
+      "title": "Camera quán nhậu bên kia kênh",
+      "description": "01:52, một ghe máy đèn xanh cập cửa sổ kho. 02:41 rời đi, khoang ghe chất đầy hàng phủ bạt.",
+      "source": "file"
+    },
+    {
+      "id": "P8",
+      "title": "Đăng ký ghe SG-4417",
+      "description": "Chủ ghe Lê Văn Tư. Thân sơn xanh dương, viền mạn đỏ. Bến đăng ký: Bình Đông.",
+      "source": "file"
+    },
+    {
+      "id": "P9",
+      "title": "Hóa đơn nhập hàng tháng 9",
+      "description": "12/9: bà Lệ nhập thêm 500 máy cho mùa Tết, 1,5 tỷ. Cùng ngày nâng giá trị bảo hiểm lên 4,5 tỷ.",
+      "source": "file"
+    },
+    {
+      "id": "P10",
+      "title": "Sao kê của Khải",
+      "description": "17/11: nhận 1,1 tỷ từ Phùng Gia Hưng. 18/11: chuyển 60 triệu cho Lê Văn Tư.",
+      "source": "file"
+    },
+    {
+      "id": "P11",
+      "title": "Tra cứu IMEI",
+      "description": "214 máy trong lô \"bị nước cuốn\" đã gắn sim từ 17/11. Máy đầu tiên bán ra tại tiệm Gia Hưng, Quận 10.",
+      "source": "file"
+    },
+    {
+      "id": "X1",
+      "title": "Tin nhắn của Nhật",
+      "description": "Nhật nhắn mẹ: \"Má bán cái kho đi, con kẹt 400 triệu rồi.\" Ngày 2/11.",
+      "source": "decoy"
+    },
+    {
+      "id": "X2",
+      "title": "Phụ lục nâng giá trị bảo hiểm",
+      "description": "12/9: giá trị bảo hiểm tăng từ 3 tỷ lên 4,5 tỷ, hai tháng trước đêm ngập.",
+      "source": "decoy"
+    },
+    {
+      "id": "X3",
+      "title": "Ảnh Khải gửi lúc 23:58",
+      "description": "Khải gửi bà Lệ: \"Con kê xong rồi cô.\" Soi kỹ mực nước và các tầng kệ.",
+      "source": "testimony"
+    },
+    {
+      "id": "X4",
+      "title": "Ảnh Nhật ở quán bóng đá",
+      "description": "Nhật và bạn bè ở quán nhậu Phú Mỹ Hưng lúc 01:45, màn hình đang chiếu hiệp hai.",
+      "source": "testimony"
+    },
+    {
+      "id": "X5",
+      "title": "Ảnh ghe Tư neo ở bến",
+      "description": "Tư đưa ảnh con gái chụp ghe neo ở bến, có giờ trên ảnh.",
+      "source": "testimony"
+    }
+  ],
+  "envelopes": [
+    {
+      "id": "pb1",
+      "number": 1,
+      "title": "Hồ sơ yêu cầu bồi thường",
+      "unlockedBy": null,
+      "documents": [
+        "P1",
+        "P2",
+        "P3",
+        "P4",
+        "P5",
+        "X1",
+        "X2"
+      ]
+    },
+    {
+      "id": "pb2",
+      "number": 2,
+      "title": "Giám định bổ sung",
+      "unlockedBy": "q2",
+      "documents": [
+        "P6",
+        "P7",
+        "P8",
+        "P9"
+      ]
+    },
+    {
+      "id": "pb3",
+      "number": 3,
+      "title": "Dòng tiền và dòng máy",
+      "unlockedBy": "q4",
+      "documents": [
+        "P10",
+        "P11"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "number": 1,
+      "prompt": "Đêm 14/11 nước trong kho dâng cao nhất bao nhiêu?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Hơn 2 m, ngập cả năm tầng kệ"
+        },
+        {
+          "id": "b",
+          "text": "Khoảng 0,9 m, chỉ ngập hai tầng dưới"
+        }
+      ],
+      "correctOptionId": "b",
+      "requiredClues": [
+        "H1",
+        "P3"
+      ],
+      "supportingClues": [
+        "P5",
+        "H2"
+      ],
+      "hints": [
+        "Vào Trong kho soi Vệt nước trên tường: bùn dừng lại ở độ cao nào?",
+        "Bảng mực nước trong phong bì 1 ghi đỉnh triều trong kho. Đặt nó cạnh Sơ đồ kệ kho: tầng nào nằm dưới mức đó?"
+      ]
+    },
+    {
+      "id": "q2",
+      "number": 2,
+      "prompt": "900 máy ở ba tầng kệ trên đã đi đâu?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Nước cuốn trôi ra kênh"
+        },
+        {
+          "id": "b",
+          "text": "Có người chuyển đi bằng ghe qua cửa sổ phía kênh"
+        },
+        {
+          "id": "c",
+          "text": "Chưa từng có trong kho"
+        }
+      ],
+      "correctOptionId": "b",
+      "requiredClues": [
+        "H2",
+        "H4"
+      ],
+      "supportingClues": [
+        "H3",
+        "P5",
+        "X3"
+      ],
+      "hints": [
+        "Nước chỉ lên 0,9 m mà tầng thấp nhất trong ba tầng trên cao 1,1 m. Soi Ba tầng kệ trên: có dấu bùn hay chỉ có ô sạch bụi?",
+        "Ra Cửa sổ phía kênh soi bậu cửa. Thứ gì để lại vệt sơn xanh đỏ ở độ cao đó?"
+      ]
+    },
+    {
+      "id": "q3",
+      "number": 3,
+      "prompt": "Hàng bị chuyển đi lúc nào?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Trước 22:00, lúc Khải còn kê hàng"
+        },
+        {
+          "id": "b",
+          "text": "Sau 01:30, khi nước đã dâng gần đỉnh"
+        },
+        {
+          "id": "c",
+          "text": "Sáng 15/11, khi nước đã rút"
+        }
+      ],
+      "correctOptionId": "b",
+      "requiredClues": [
+        "X3",
+        "P3"
+      ],
+      "supportingClues": [
+        "H4",
+        "P7"
+      ],
+      "hints": [
+        "Hỏi chuyện bà Lệ, xem tấm ảnh Khải gửi lúc 23:58. Lúc đó ba tầng trên còn hàng không?",
+        "Mạn ghe chỉ chạm được bậu cửa khi nước đã lên cao. Bảng mực nước cho biết lúc nào nước gần 0,8 m."
+      ]
+    },
+    {
+      "id": "q4",
+      "number": 4,
+      "prompt": "Ghe của ai cập cửa sổ kho đêm đó?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ghe của Lê Văn Tư"
+        },
+        {
+          "id": "b",
+          "text": "Ghe cứu hộ của phường"
+        },
+        {
+          "id": "c",
+          "text": "Một ghe lạ từ nơi khác tới"
+        }
+      ],
+      "correctOptionId": "a",
+      "requiredClues": [
+        "H6",
+        "P8"
+      ],
+      "supportingClues": [
+        "P7",
+        "H7",
+        "H4"
+      ],
+      "hints": [
+        "Vệt sơn trên bậu cửa sổ màu xanh dương và đỏ. Phong bì 2 có đăng ký một chiếc ghe sơn đúng hai màu đó.",
+        "Ra Bến Bình Đông soi mạn ghe của Tư: trong vết trầy có gì, và mắc ở đinh là gì?"
+      ]
+    },
+    {
+      "id": "q5",
+      "number": 5,
+      "prompt": "Ai mở cửa sổ từ bên trong cho ghe vào?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Võ Đình Khải"
+        },
+        {
+          "id": "b",
+          "text": "Trần Thị Mỹ Lệ"
+        },
+        {
+          "id": "c",
+          "text": "Trần Minh Nhật"
+        },
+        {
+          "id": "d",
+          "text": "Lê Văn Tư"
+        }
+      ],
+      "correctOptionId": "a",
+      "requiredClues": [
+        "H3",
+        "H5"
+      ],
+      "supportingClues": [
+        "H8",
+        "X3"
+      ],
+      "hints": [
+        "Chốt cửa sổ được kéo ra từ phía trong, vậy người mở đã ở trong kho. Ai giữ chìa? Xem Bảng chìa khóa ở Phòng quản lý kho.",
+        "Khải nói về từ 22 giờ, lúc nước chưa vào kho. Vậy sao áo mưa của anh dính bùn tới ngang đùi?"
+      ]
+    },
+    {
+      "id": "q6",
+      "number": 6,
+      "prompt": "Bà Lệ có biết số máy tầng trên bị lấy đi không?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Biết, bà dựng chuyện để lấy thêm tiền bảo hiểm"
+        },
+        {
+          "id": "b",
+          "text": "Không, bà tin báo cáo của Khải"
+        }
+      ],
+      "correctOptionId": "b",
+      "requiredClues": [
+        "P10",
+        "P9"
+      ],
+      "supportingClues": [
+        "X2",
+        "P2",
+        "X3"
+      ],
+      "hints": [
+        "Tiền bán 900 máy chảy vào túi ai? Xem sao kê trong phong bì 3.",
+        "Bà Lệ nâng giá trị bảo hiểm vì sao? Hóa đơn nhập hàng tháng 9 trong phong bì 2 trả lời câu đó."
+      ]
+    },
+    {
+      "id": "q7",
+      "number": 7,
+      "prompt": "Lời khai đêm 14/11 của ai đứng vững?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Tất cả đều vững"
+        },
+        {
+          "id": "b",
+          "text": "Nhật vững. Khải và Tư vỡ."
+        },
+        {
+          "id": "c",
+          "text": "Nhật vỡ"
+        }
+      ],
+      "correctOptionId": "b",
+      "requiredClues": [
+        "X4",
+        "X5",
+        "X3"
+      ],
+      "supportingClues": [
+        "H7",
+        "H5",
+        "P7"
+      ],
+      "hints": [
+        "Hàng rời kho trong khoảng 01:52 đến 02:41. Hỏi chuyện từng người, xem ảnh họ đưa và so giờ trên ảnh với khoảng đó.",
+        "Ảnh của Tư chụp lúc mấy giờ? Nó có chứng minh được ghe neo ở bến lúc 2 giờ sáng không?"
+      ]
+    }
+  ],
+  "verdict": [
+    {
+      "id": "taker",
+      "prompt": "Ai đưa 900 máy ra khỏi kho đêm 14/11?",
+      "options": [
+        {
+          "id": "khai",
+          "text": "Võ Đình Khải"
+        },
+        {
+          "id": "le",
+          "text": "Trần Thị Mỹ Lệ"
+        },
+        {
+          "id": "nhat",
+          "text": "Trần Minh Nhật"
+        },
+        {
+          "id": "tu",
+          "text": "Lê Văn Tư"
+        },
+        {
+          "id": "none",
+          "text": "Không ai, nước cuốn trôi"
+        }
+      ],
+      "correctOptionId": "khai"
+    },
+    {
+      "id": "helper",
+      "prompt": "Ai chở hàng đi bằng ghe?",
+      "options": [
+        {
+          "id": "tu",
+          "text": "Lê Văn Tư"
+        },
+        {
+          "id": "nhat",
+          "text": "Trần Minh Nhật"
+        },
+        {
+          "id": "bong",
+          "text": "Hồ Thị Bông"
+        },
+        {
+          "id": "none",
+          "text": "Không có ghe nào"
+        }
+      ],
+      "correctOptionId": "tu"
+    },
+    {
+      "id": "decision",
+      "prompt": "Đề xuất của bạn",
+      "options": [
+        {
+          "id": "pay",
+          "text": "Chi trả đủ 4,5 tỷ cho bà Lệ"
+        },
+        {
+          "id": "partial",
+          "text": "Chi 1,8 tỷ cho 600 máy ngập, phần bị lấy chuyển công an"
+        },
+        {
+          "id": "deny",
+          "text": "Từ chối toàn bộ vì bà Lệ gian lận"
+        }
+      ],
+      "correctOptionId": "partial"
+    }
+  ],
+  "endings": [
+    {
+      "id": "full",
+      "title": "Trọn vẹn",
+      "text": "An Tín chi 1,8 tỷ cho 600 máy ngập nước. Khải và Tư bị khởi tố tội trộm cắp tài sản. Công an thu hồi hơn 600 máy từ tiệm Gia Hưng ở Quận 10 và trả lại cho bà Lệ."
+    },
+    {
+      "id": "half",
+      "title": "Đúng một nửa",
+      "text": "Bà Lệ nhận đúng phần tiền cho hàng ngập, Khải bị bắt. Nhưng người chạy ghe đêm đó vẫn neo ở Bến Bình Đông, chờ đêm nước lớn tới."
+    },
+    {
+      "id": "wrong",
+      "title": "Sai người",
+      "text": "Con số bạn duyệt chi đúng, nhưng người bạn chỉ ra lại không phải người lấy hàng. Hồ sơ hình sự bị trả về, số máy bị lấy không bao giờ được tìm lại."
+    },
+    {
+      "id": "unjust",
+      "title": "Oan cho người ngay",
+      "text": "Bạn tố bà Lệ gian lận. Bà mang tấm ảnh 23:58 và hóa đơn nhập hàng ra tòa. An Tín thua kiện, vẫn phải trả 1,8 tỷ kèm án phí. Bạn bị rút khỏi vụ, còn Khải xin nghỉ việc êm thấm."
+    },
+    {
+      "id": "paid",
+      "title": "Chi trả",
+      "text": "Công ty chuyển 4,5 tỷ, trong đó 2,7 tỷ cho 900 máy chưa từng chạm nước. Ba tháng sau, chúng được bán sạch ở Quận 10. Bạn bị kỷ luật."
+    }
+  ],
+  "endingRules": [
+    {
+      "ending": "paid",
+      "picks": {
+        "decision": "pay"
+      }
+    },
+    {
+      "ending": "unjust",
+      "picks": {
+        "decision": "deny"
+      }
+    },
+    {
+      "ending": "full",
+      "correct": [
+        "taker",
+        "helper"
+      ]
+    },
+    {
+      "ending": "half",
+      "correct": [
+        "taker"
+      ]
+    },
+    {
+      "ending": "wrong"
+    }
+  ]
+}

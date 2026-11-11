@@ -49,5 +49,13 @@ export const SERIES = {
       blurb: 'Xe container chở 20 tấn hồ tiêu bị cướp giữa đêm. Chủ hàng đòi 3 tỷ bảo hiểm. Cái cân ở trạm thu phí biết nhiều hơn tài xế kể.',
       place: 'Bình Thuận · tháng 11',
     },
+    {
+      number: 6,
+      caseId: 'dem-trieu-cuong',
+      area: 'cho-lon',
+      title: 'Đêm triều cường',
+      blurb: 'Triều cường tràn vào kho điện thoại bên kênh Đôi. Bà chủ đòi 4,5 tỷ cho 1.500 máy. Nhưng nước chỉ dâng 0,9 m, còn ba tầng kệ trên thì trống trơn.',
+      place: 'Quận 8 · tháng 11',
+    },
   ] satisfies Chapter[],
 }
