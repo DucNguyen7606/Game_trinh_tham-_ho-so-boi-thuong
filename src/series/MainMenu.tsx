@@ -124,6 +124,8 @@ function CaseMap({ onBack }: { onBack: () => void }) {
   const { go, startCase } = useGame()
   const currentId = useGame((s) => s.data.id)
   const [area, setArea] = useState<string | undefined>()
+  // Case picked on the zoomed-in area.
+  const [chosen, setChosen] = useState<number | undefined>()
   // Chapter waiting for the player to confirm that starting it drops their progress.
   const [confirming, setConfirming] = useState<string | null>(null)
 
@@ -136,19 +138,25 @@ function CaseMap({ onBack }: { onBack: () => void }) {
     go('desk')
   }
   const select = (id: string) => {
-    setArea(id)
+    setArea(id || undefined)
+    setConfirming(null)
+    setChosen(undefined)
+  }
+  const choose = (n: number) => {
+    setChosen(n)
     setConfirming(null)
   }
   const current = SERIES.chapters.find((c) => c.caseId === currentId)
   const info = [...AREAS, ...OFF_MAP].find((a) => a.id === area)
   const here = SERIES.chapters.filter((c) => c.area && c.area === area)
+  const picked = here.find((c) => c.number === chosen)
 
   return (
     <div className="relative flex h-full gap-6 overflow-hidden p-6" style={{ animation: 'fadeIn 500ms ease-out' }}>
       <Desk />
       <div className="relative flex min-w-0 flex-1 items-center justify-center">
         <div className="aspect-[10/9] max-h-full w-full max-w-[calc((100vh-3rem)*10/9)] rotate-[-0.6deg] shadow-[0_24px_50px_rgb(0_0_0/0.55)]">
-          <SaigonMap selected={area} onSelect={select} />
+          <SaigonMap selected={area} onSelect={select} chosen={chosen} onChoose={choose} />
         </div>
       </div>
 
@@ -163,7 +171,7 @@ function CaseMap({ onBack }: { onBack: () => void }) {
               <p className="display text-xs tracking-[0.3em] text-brass">Bản đồ vụ án</p>
               <h2 className="title mt-1 text-3xl">Chọn một khu vực</h2>
               <p className="mt-2 text-sm text-muted-foreground">
-                Mỗi đinh ghim đỏ là một hồ sơ đang chờ bạn. Bấm vào một quận trên bản đồ, hoặc chọn nhanh ở dưới.
+                Mỗi đinh ghim đỏ là một hồ sơ đang chờ bạn. Bấm vào một quận để phóng to, rồi chọn vụ án trong quận đó. Hoặc chọn nhanh ở dưới.
               </p>
             </div>
             <ul className="space-y-1.5">
@@ -171,7 +179,11 @@ function CaseMap({ onBack }: { onBack: () => void }) {
                 <li key={c.number}>
                   <button
                     disabled={!c.area}
-                    onClick={() => c.area && select(c.area)}
+                    onClick={() => {
+                      if (!c.area) return
+                      select(c.area)
+                      choose(c.number)
+                    }}
                     className="flex w-full items-center gap-3 rounded-sm px-2 py-1.5 text-left hover:bg-string/20 disabled:opacity-50"
                   >
                     <MapPin className="size-4 shrink-0 text-string" />
@@ -197,10 +209,24 @@ function CaseMap({ onBack }: { onBack: () => void }) {
               <div className="rounded-sm border border-dashed border-border p-4 text-sm text-muted-foreground">
                 Chưa có hồ sơ nào ở khu vực này. Những vụ án sắp tới sẽ được ghim lên đây.
               </div>
+            ) : picked ? (
+              <CaseCard
+                key={picked.number}
+                chapter={picked}
+                current={picked.caseId === currentId && started}
+                onOpen={picked.caseId ? () => begin(picked.caseId!) : undefined}
+              />
             ) : (
-              <div className="flex flex-col gap-4">
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">
+                  Có {here.length} hồ sơ ở khu vực này. Bấm vào một đinh ghim trên bản đồ để xem.
+                </p>
                 {here.map((c) => (
-                  <CaseCard key={c.number} chapter={c} current={c.caseId === currentId && started} onOpen={c.caseId ? () => begin(c.caseId!) : undefined} />
+                  <button key={c.number} onClick={() => choose(c.number)} className="flex w-full items-center gap-3 rounded-sm px-2 py-1.5 text-left hover:bg-string/20">
+                    <MapPin className="size-4 shrink-0 text-string" />
+                    <span className="display mr-1 text-xs text-brass">Chương {c.number}</span>
+                    {c.title}
+                  </button>
                 ))}
               </div>
             )}
@@ -223,8 +249,8 @@ function CaseMap({ onBack }: { onBack: () => void }) {
               </div>
             )}
 
-            <button onClick={() => select('')} className="display self-start text-sm text-muted-foreground hover:text-foreground">
-              Xem tất cả hồ sơ
+            <button onClick={() => select('')} className="display flex items-center gap-2 self-start text-sm text-muted-foreground hover:text-foreground">
+              <ArrowLeft className="size-4" /> Thu nhỏ, xem cả thành phố
             </button>
           </>
         )}

@@ -11,6 +11,8 @@ export interface Chapter {
   place: string
   /** Where the case sits on the Saigon map: an id from src/series/areas.ts. */
   area?: string
+  /** Exact spot of the case on the map (1000 x 900 map units); defaults to the area's middle. */
+  spot?: [number, number]
 }
 
 export const SERIES = {
@@ -21,6 +23,7 @@ export const SERIES = {
       number: 1,
       caseId: 'ho-so-boi-thuong',
       area: 'binh-tan',
+      spot: [335, 575],
       title: 'Hồ sơ bồi thường',
       blurb: 'Kho vải cháy rụi giữa đêm. Chủ kho đòi bồi thường 4 tỷ đồng. Bạn có 10 ngày để đề xuất chi trả hay từ chối.',
       place: 'Bình Tân · tháng 7',
@@ -29,6 +32,7 @@ export const SERIES = {
       number: 2,
       caseId: 'con-nuoc-can-gio',
       area: 'can-gio',
+      spot: [740, 805],
       title: 'Con nước Cần Giờ',
       blurb: 'Chủ vựa hải sản chết đuối sau đêm ghe chìm. Vợ ông đòi 5 tỷ bảo hiểm nhân thọ. Con nước đêm đó sẽ cho bạn biết ai nói dối.',
       place: 'Cần Giờ · tháng 9',
@@ -37,6 +41,7 @@ export const SERIES = {
       number: 3,
       caseId: 'buc-son-mai',
       area: 'trung-tam',
+      spot: [560, 545],
       title: 'Bức sơn mài biến mất',
       blurb: 'Bức sơn mài 8 tỷ biến mất khỏi phòng tranh Đồng Khởi ba ngày trước phiên đấu giá. Nhưng thứ bị lấy đi có thật là tranh thật?',
       place: 'Quận 1 · tháng 11',
@@ -45,6 +50,7 @@ export const SERIES = {
       number: 4,
       caseId: 'chuyen-xe-dem',
       area: 'binh-thuan',
+      spot: [815, 300],
       title: 'Chuyến xe đêm Quốc lộ 1A',
       blurb: 'Xe container chở 20 tấn hồ tiêu bị cướp giữa đêm. Chủ hàng đòi 3 tỷ bảo hiểm. Cái cân ở trạm thu phí biết nhiều hơn tài xế kể.',
       place: 'Bình Thuận · tháng 11',
