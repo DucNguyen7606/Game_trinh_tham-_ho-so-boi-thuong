@@ -79,6 +79,7 @@ Toàn bộ nhạc và hiệu ứng được tổng hợp bằng Web Audio API ng
 | Bàn làm việc, Hồ sơ, Bàn suy luận | Lo-fi hip-hop: Rhodes, sub bass, trống nhẹ, đàn tranh điểm xuyết |
 | Hiện trường | Lo-fi trầm hơn, thưa hơn: Rhodes, pad tối, trống nhẹ, đàn tranh và đàn bầu luyến |
 | Thẩm vấn | Căng thẳng hiện đại: ostinato synth, nhịp tim, đồng hồ tích tắc, đàn bầu trượt xuống |
+| Màn hình chính | Chủ đề series: pad chậm, nhịp tim, đàn bầu hát motif D–F–G–A |
 | Kết luận | Màu Việt: đàn bầu hát giai điệu ngũ cung, đàn tranh rải, pad ấm |
 
 Hiệu ứng gắn tự động theo trạng thái game (không phải sửa từng màn hình): chụp ảnh khi tìm manh mối ở hiện trường, nhặt và thả giấy khi kéo hồ sơ, ghim, lật trang, kéo và nối dây đỏ, cắt dây, xé phong bì khi mở khoá, suy luận đúng / sai / thiếu chứng cứ, bước chân khi vào khu, đóng dấu khi qua ngày, gõ phím khi chọn lời thoại.
