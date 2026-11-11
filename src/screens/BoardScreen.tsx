@@ -2,7 +2,11 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import {
   ReactFlow,
   Background,
+  BaseEdge,
   Controls,
+  EdgeLabelRenderer,
+  getBezierPath,
+  type EdgeProps,
   Handle,
   Position,
   useNodesState,
@@ -12,7 +16,7 @@ import {
   type Node,
   type NodeProps,
 } from '@xyflow/react'
-import { CheckCircle2 } from 'lucide-react'
+import { CheckCircle2, X } from 'lucide-react'
 import { questionOrder, useGame } from '@/game/store'
 import { clueById } from '@/game/caseLoader'
 import { Button } from '@/components/ui/button'
@@ -103,6 +107,48 @@ function QuestionNode({ data }: NodeProps<Node<QuestionNodeData>>) {
 
 const nodeTypes = { clue: ClueNode, question: QuestionNode }
 
+type StringEdgeData = { clueId: string; questionId: string; status?: 'match' | 'mismatch'; locked?: boolean }
+
+/** A string between a card and a question, with its check result and a button to take it off. */
+function StringEdge({ id, sourceX, sourceY, targetX, targetY, sourcePosition, targetPosition, data, style }: EdgeProps<Edge<StringEdgeData>>) {
+  const unlinkClue = useGame((s) => s.unlinkClue)
+  const [path, labelX, labelY] = getBezierPath({ sourceX, sourceY, targetX, targetY, sourcePosition, targetPosition })
+  if (!data) return null
+  const { status, locked } = data
+  return (
+    <>
+      <BaseEdge id={id} path={path} style={style} interactionWidth={18} />
+      <EdgeLabelRenderer>
+        <div
+          className="nodrag nopan pointer-events-auto absolute flex items-center gap-1"
+          style={{ transform: `translate(-50%, -50%) translate(${labelX}px, ${labelY}px)` }}
+        >
+          {status && (
+            <span
+              className="rounded px-1.5 py-0.5 text-[11px] font-semibold text-[#fff8e8]"
+              style={{ background: status === 'match' ? 'var(--match)' : 'var(--mismatch)' }}
+            >
+              {status === 'match' ? '✓ Khớp' : '✕ Chưa khớp'}
+            </span>
+          )}
+          {!locked && (
+            <button
+              onClick={() => unlinkClue(data.questionId, data.clueId)}
+              className="flex size-5 items-center justify-center rounded-full border border-border bg-background/90 text-muted-foreground shadow transition hover:scale-110 hover:border-[var(--mismatch)] hover:text-[var(--mismatch)]"
+              title="Gỡ dây nối này"
+              aria-label={`Gỡ dây nối ${data.clueId}`}
+            >
+              <X className="size-3" />
+            </button>
+          )}
+        </div>
+      </EdgeLabelRenderer>
+    </>
+  )
+}
+
+const edgeTypes = { string: StringEdge }
+
 const clueNode = (clueId: string, index: number): Node => ({
   id: `clue-${clueId}`,
   type: 'clue',
@@ -161,28 +207,22 @@ export default function BoardScreen() {
       Object.entries(answers).flatMap(([qId, a]) => {
         const q = data.questions.find((x) => x.id === qId)
         const checked = checkedLinks[qId] ?? []
-        return a.clueIds.map((c): Edge => {
-          const id = `${c}->${qId}`
-          const base = { id, source: `clue-${c}`, target: `q-${qId}` }
-          if (!q || !checked.includes(c)) return { ...base, style: { stroke: 'var(--string)', strokeWidth: 2.5 } }
+        const locked = solvedQuestions.includes(qId)
+        return a.clueIds.map((c): Edge<StringEdgeData> => {
+          const base = { id: `${c}->${qId}`, source: `clue-${c}`, target: `q-${qId}`, type: 'string' }
+          const data: StringEdgeData = { clueId: c, questionId: qId, locked }
+          if (!q || !checked.includes(c)) return { ...base, data, style: { stroke: 'var(--string)', strokeWidth: 2.5 } }
           const ok = q.requiredClues.includes(c)
+          const color = ok ? 'var(--match)' : 'var(--mismatch)'
           return {
             ...base,
             animated: !ok,
-            label: ok ? '✓ Khớp' : '✕ Chưa khớp',
-            labelStyle: { fill: '#fff8e8', fontSize: 11, fontWeight: 600 },
-            labelBgStyle: { fill: ok ? 'var(--match)' : 'var(--mismatch)' },
-            labelBgPadding: [6, 3] as [number, number],
-            labelBgBorderRadius: 4,
-            style: {
-              stroke: ok ? 'var(--match)' : 'var(--mismatch)',
-              strokeWidth: 3.5,
-              filter: `drop-shadow(0 0 4px ${ok ? 'var(--match)' : 'var(--mismatch)'})`,
-            },
+            data: { ...data, status: ok ? 'match' : 'mismatch' },
+            style: { stroke: color, strokeWidth: 3.5, filter: `drop-shadow(0 0 4px ${color})` },
           }
         })
       }),
-    [answers, checkedLinks, data],
+    [answers, checkedLinks, data, solvedQuestions],
   )
 
   const onConnect = useCallback(
@@ -220,6 +260,7 @@ export default function BoardScreen() {
         nodes={nodes}
         edges={edges}
         nodeTypes={nodeTypes}
+        edgeTypes={edgeTypes}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
