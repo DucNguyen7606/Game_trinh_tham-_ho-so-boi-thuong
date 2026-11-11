@@ -1,8 +1,8 @@
 import { create } from 'zustand'
-import type { CaseData } from './types'
+import type { ActionKind, CaseData, DayLimits } from './types'
 import { cases } from './caseLoader'
 
-export type Screen = 'desk' | 'scene' | 'casefile' | 'board' | 'interrogation' | 'verdict'
+export type Screen = 'desk' | 'scene' | 'casefile' | 'board' | 'interrogation' | 'verdict' | 'gallery'
 
 export interface BoardAnswer {
   optionId?: string
@@ -13,7 +13,8 @@ interface GameState {
   data: CaseData
   screen: Screen
   day: number
-  actionsLeft: number
+  /** What is left of today's limits: people to question and zones to search. */
+  left: DayLimits
   reputation: number
   visitedZones: string[]
   inspectedHotspots: string[]
@@ -25,8 +26,8 @@ interface GameState {
   log: string[]
 
   go: (screen: Screen) => void
-  /** Spends one action. Returns false (and does nothing) when the day is used up. */
-  spendAction: (what: string) => boolean
+  /** Spends one action of a kind. Returns false (and does nothing) when today's limit for it is used up. */
+  spendAction: (kind: ActionKind, what: string) => boolean
   endDay: () => void
   visitZone: (zoneId: string) => boolean
   inspectHotspot: (hotspotId: string, clueId?: string) => void
@@ -38,6 +39,11 @@ interface GameState {
   checkAnswer: (questionId: string) => 'solved' | 'wrong' | 'missing-clues'
   startInterrogation: (suspectId: string) => boolean
   isEnvelopeOpen: (envelopeId: string) => boolean
+  /**
+   * A question appears on the board only once every document it needs is reachable,
+   * i.e. the envelopes holding its required clues are open. Scene clues are always reachable.
+   */
+  isQuestionOpen: (questionId: string) => boolean
   reset: () => void
 }
 
@@ -45,7 +51,7 @@ const initial = (data: CaseData) => ({
   data,
   screen: 'desk' as Screen,
   day: 1,
-  actionsLeft: data.actionsPerDay,
+  left: { ...data.limitsPerDay },
   reputation: 3,
   visitedZones: [] as string[],
   inspectedHotspots: [] as string[],
@@ -57,6 +63,35 @@ const initial = (data: CaseData) => ({
   log: [] as string[],
 })
 
+/** Pure version of the envelope/question gates, for a given set of solved questions. */
+function envelopeOpen(data: CaseData, envelopeId: string, solved: string[]) {
+  const env = data.envelopes.find((e) => e.id === envelopeId)
+  return Boolean(env && (env.unlockedBy === null || solved.includes(env.unlockedBy)))
+}
+
+function questionOpen(data: CaseData, questionId: string, solved: string[]) {
+  const q = data.questions.find((x) => x.id === questionId)
+  if (!q) return false
+  return q.requiredClues.every((c) => {
+    const env = data.envelopes.find((e) => e.documents.includes(c))
+    return !env || envelopeOpen(data, env.id, solved)
+  })
+}
+
+/**
+ * Question ids in the order the player sees them appear on the board. The displayed
+ * question number is the position in this list, so numbers always run 1, 2, 3…
+ * whichever envelope the player opens first.
+ */
+export function questionOrder(data: CaseData, solvedInOrder: string[]) {
+  const order = data.questions.filter((q) => questionOpen(data, q.id, [])).map((q) => q.id)
+  solvedInOrder.forEach((_, i) => {
+    const solved = solvedInOrder.slice(0, i + 1)
+    for (const q of data.questions) if (!order.includes(q.id) && questionOpen(data, q.id, solved)) order.push(q.id)
+  })
+  return order
+}
+
 const addUnique = (list: string[], id: string) => (list.includes(id) ? list : [...list, id])
 
 export const useGame = create<GameState>((set, get) => ({
@@ -64,10 +99,10 @@ export const useGame = create<GameState>((set, get) => ({
 
   go: (screen) => set({ screen }),
 
-  spendAction: (what) => {
-    const { actionsLeft, log, day } = get()
-    if (actionsLeft <= 0) return false
-    set({ actionsLeft: actionsLeft - 1, log: [...log, `Ngày ${day}: ${what}`] })
+  spendAction: (kind, what) => {
+    const { left, log, day } = get()
+    if (left[kind] <= 0) return false
+    set({ left: { ...left, [kind]: left[kind] - 1 }, log: [...log, `Ngày ${day}: ${what}`] })
     return true
   },
 
@@ -77,16 +112,17 @@ export const useGame = create<GameState>((set, get) => ({
       set({ screen: 'verdict' })
       return
     }
-    // Low reputation with the boss costs an action the next day.
+    // Low reputation with the boss costs one interview the next day.
     const penalty = reputation <= 1 ? 1 : 0
-    set({ day: day + 1, actionsLeft: data.actionsPerDay - penalty })
+    const limits = data.limitsPerDay
+    set({ day: day + 1, left: { ...limits, talk: Math.max(0, limits.talk - penalty) } })
   },
 
   visitZone: (zoneId) => {
     const { visitedZones, data } = get()
     if (visitedZones.includes(zoneId)) return true
     const zone = data.zones.find((z) => z.id === zoneId)
-    if (!get().spendAction(`Khám ${zone?.name ?? zoneId}`)) return false
+    if (!get().spendAction('explore', `Khám ${zone?.name ?? zoneId}`)) return false
     set({ visitedZones: [...get().visitedZones, zoneId] })
     return true
   },
@@ -138,16 +174,14 @@ export const useGame = create<GameState>((set, get) => ({
 
   startInterrogation: (suspectId) => {
     const s = get().data.suspects.find((x) => x.id === suspectId)
-    if (!get().spendAction(`Hỏi ${s?.name ?? suspectId}`)) return false
+    if (!get().spendAction('talk', `Hỏi ${s?.name ?? suspectId}`)) return false
     set({ activeSuspect: suspectId, screen: 'interrogation' })
     return true
   },
 
-  isEnvelopeOpen: (envelopeId) => {
-    const env = get().data.envelopes.find((e) => e.id === envelopeId)
-    if (!env) return false
-    return env.unlockedBy === null || get().solvedQuestions.includes(env.unlockedBy)
-  },
+  isEnvelopeOpen: (envelopeId) => envelopeOpen(get().data, envelopeId, get().solvedQuestions),
+
+  isQuestionOpen: (questionId) => questionOpen(get().data, questionId, get().solvedQuestions),
 
   reset: () => set(initial(get().data)),
 }))

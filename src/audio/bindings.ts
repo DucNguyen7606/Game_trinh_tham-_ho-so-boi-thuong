@@ -15,6 +15,7 @@ const THEME_FOR: Record<Screen, ThemeId> = {
   scene: 'scene',
   interrogation: 'interrogation',
   verdict: 'verdict',
+  gallery: 'desk',
 }
 
 const grew = (a: unknown[], b: unknown[]) => a.length > b.length

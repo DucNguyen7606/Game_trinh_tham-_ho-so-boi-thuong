@@ -1,3 +1,5 @@
+import type { PortraitSpec } from '@/art/Portrait'
+
 // Data shapes for a case. A new case is a new folder of JSON + .ink files;
 // nothing in the engine should need to change.
 
@@ -45,6 +47,7 @@ export interface QuestionOption {
 
 export interface Question {
   id: string
+  /** Author's order in the case file. The board shows numbers in the order questions appear (see questionOrder). */
   number: number
   prompt: string
   options: QuestionOption[]
@@ -60,6 +63,17 @@ export interface Suspect {
   role: string
   /** Key of the ink script in the case's thamvan folder, if the player can question them. */
   interrogation?: string
+  portrait?: PortraitSpec
+  profile?: SuspectProfile
+}
+
+export interface SuspectProfile {
+  traits: string[]
+  habit: string
+  relation: string
+  quote: string
+  /** The investigator's own note: why this person matters to the case. */
+  note: string
 }
 
 export interface VerdictSlot {
@@ -79,9 +93,10 @@ export interface CaseData {
   id: string
   title: string
   intro: string
-  player: { name: string; role: string }
+  player: { name: string; role: string; portrait?: PortraitSpec }
   days: number
-  actionsPerDay: number
+  /** How many people you can question and how many zones you can search each day. */
+  limitsPerDay: DayLimits
   suspects: Suspect[]
   zones: Zone[]
   clues: Clue[]
@@ -89,4 +104,19 @@ export interface CaseData {
   questions: Question[]
   verdict: VerdictSlot[]
   endings: Ending[]
+}
+
+export type ActionKind = 'talk' | 'explore'
+export type DayLimits = Record<ActionKind, number>
+
+/** One step of the reconstruction shown after the verdict. */
+export interface ReconstructionPanel {
+  /** theory = the player's own verdict told as a story; refute = evidence against a wrong pick; truth = what happened. */
+  kind?: 'theory' | 'refute' | 'truth'
+  time: string
+  title: string
+  text: string
+  /** The board question that proves this step; used to show whether the player worked it out. */
+  questionId?: string
+  Art: () => JSX.Element
 }
