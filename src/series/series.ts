@@ -96,5 +96,14 @@ export const SERIES = {
       blurb: 'Két sắt ở tầng 27 mở toang trong đêm chủ nhà bay ra Hà Nội. Cửa không bị phá, két không bị cạy, và chị đang nợ ngân hàng. Mọi thứ đều giống gian lận.',
       place: 'Bình Thạnh · tháng 12',
     },
+    {
+      number: 10,
+      caseId: 'ba-muoi-ba-do',
+      area: 'tan-binh',
+      spot: [445, 455],
+      title: 'Ba mươi ba độ',
+      blurb: 'Lô thuốc ung thư 4,6 tỷ nằm trong kho lạnh sân bay Tân Sơn Nhất, vậy mà nhiệt kế báo 33 độ suốt ba tiếng. Lò đốt đã hẹn ngày nhận hàng.',
+      place: 'Tân Bình · tháng 11',
+    },
   ] satisfies Chapter[],
 }

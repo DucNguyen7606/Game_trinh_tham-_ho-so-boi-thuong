@@ -1,0 +1,905 @@
+{
+  "id": "ba-muoi-ba-do",
+  "title": "Hồ sơ bồi thường số 1511",
+  "intro": "Trưa 15/11, một pallet 1.200 lọ thuốc ung thư Herzena bay từ Frankfurt về kho hàng lạnh Tân Sơn Cargo, sân bay Tân Sơn Nhất. Hai ngày sau, dược sĩ của Công ty Dược phẩm Minh Tâm tới nhận thì chiếc nhiệt kế tự ghi trong thùng báo đỏ: thuốc đã nằm ở 33 độ gần ba tiếng, trong khi phải giữ từ 2 đến 8 độ. Minh Tâm đòi bồi thường 4,6 tỷ đồng, lô thuốc bị niêm phong chờ đem đi tiêu hủy ngày 28/11. Bạn có 10 ngày để đề xuất trước khi lò đốt nhận hàng. Mỗi ngày khám được 1 khu hiện trường. Hỏi chuyện thì không giới hạn.",
+  "player": {
+    "name": "Lê Thu Hạnh",
+    "role": "Chuyên viên giám định bồi thường, Bảo hiểm An Tín",
+    "portrait": {
+      "skin": 0,
+      "hair": "bun",
+      "hairColor": "black",
+      "build": "normal",
+      "outfit": "shirt",
+      "outfitColor": "navy",
+      "age": "young",
+      "backdrop": "teal"
+    }
+  },
+  "photoDate": "18 11 '25",
+  "days": 10,
+  "limitsPerDay": {
+    "talk": 2,
+    "explore": 1
+  },
+  "suspects": [
+    {
+      "id": "thu",
+      "name": "Tôn Nữ Minh Thư",
+      "age": 47,
+      "role": "Giám đốc Công ty Dược phẩm Minh Tâm, người đòi bồi thường",
+      "interrogation": "thu",
+      "portrait": {
+        "skin": 0,
+        "hair": "bun",
+        "hairColor": "black",
+        "build": "normal",
+        "outfit": "blouse",
+        "outfitColor": "white",
+        "accessory": [
+          "glasses"
+        ],
+        "age": "mid",
+        "backdrop": "teal",
+        "mood": "worried"
+      },
+      "profile": {
+        "traits": [
+          "Thẳng thắn",
+          "Nóng ruột",
+          "Kỹ tính"
+        ],
+        "habit": "Gọi cho bệnh viện mỗi sáng để báo ngày giao thuốc.",
+        "relation": "Nhập thuốc điều trị ung thư từ Đức mười hai năm nay. Lô Herzena này đã có người đặt.",
+        "quote": "\"Bệnh nhân không chờ được tới lô sau đâu.\"",
+        "note": "Công ty đang nợ nhà cung cấp Đức 2,1 tỷ. Một lô hàng hỏng được bảo hiểm trả đủ thì trông rất giống một lối thoát."
+      }
+    },
+    {
+      "id": "linh",
+      "name": "Phan Thùy Linh",
+      "age": 29,
+      "role": "Dược sĩ phụ trách chất lượng của Minh Tâm",
+      "interrogation": "linh",
+      "portrait": {
+        "skin": 1,
+        "hair": "long",
+        "hairColor": "black",
+        "build": "thin",
+        "outfit": "shirt",
+        "outfitColor": "sky",
+        "age": "young",
+        "backdrop": "amber",
+        "mood": "neutral"
+      },
+      "profile": {
+        "traits": [
+          "Cẩn thận",
+          "Theo quy trình",
+          "Ít cười"
+        ],
+        "habit": "Đi đâu cũng mang theo cáp đọc nhiệt kế tự ghi trong túi áo blouse.",
+        "relation": "Ký nhận mọi lô thuốc lạnh của Minh Tâm ở sân bay.",
+        "quote": "\"Nhiệt kế báo đỏ thì tôi phải niêm phong. Quy định là vậy.\"",
+        "note": "Người đọc nhiệt kế TL-A, tuyên bố cả lô không đạt và lập biên bản cách ly."
+      }
+    },
+    {
+      "id": "tung",
+      "name": "Đỗ Thanh Tùng",
+      "age": 35,
+      "role": "Thủ kho lạnh ca đêm, Tân Sơn Cargo",
+      "interrogation": "tung",
+      "portrait": {
+        "skin": 2,
+        "hair": "short",
+        "hairColor": "black",
+        "build": "normal",
+        "outfit": "uniform",
+        "outfitColor": "olive",
+        "age": "young",
+        "backdrop": "night",
+        "mood": "smile"
+      },
+      "profile": {
+        "traits": [
+          "Lanh lợi",
+          "Xởi lởi",
+          "Mê bóng đá"
+        ],
+        "habit": "Ca đêm thì ngồi phòng nghỉ coi bóng đá, khoác áo phao vì cứ vài tiếng lại vào phòng lạnh.",
+        "relation": "Giữ chìa khóa và thẻ từ phòng lạnh số 3 từ năm 2021.",
+        "quote": "\"Phòng lạnh của em chưa bao giờ trật một độ.\"",
+        "note": "Một mình trực kho lạnh đêm 15/11. Chính anh lập biên bản đề xuất tiêu hủy lô thuốc."
+      }
+    },
+    {
+      "id": "loc",
+      "name": "Châu Văn Lộc",
+      "age": 51,
+      "role": "Tài xế xe kéo hàng ngoài sân đỗ",
+      "interrogation": "loc",
+      "portrait": {
+        "skin": 3,
+        "hair": "cap",
+        "hairColor": "gray",
+        "build": "heavy",
+        "outfit": "polo",
+        "outfitColor": "mustard",
+        "age": "old",
+        "backdrop": "rust",
+        "mood": "worried"
+      },
+      "profile": {
+        "traits": [
+          "Chất phác",
+          "Hay quên",
+          "Sợ phiền"
+        ],
+        "habit": "Kéo hàng từ bụng máy bay vào kho từ sáng tới chiều, trưa nào cũng ăn cơm hộp ngay trên ghế lái.",
+        "relation": "Lái xe kéo ở Tân Sơn Nhất hai mươi năm.",
+        "quote": "\"Bữa đó tôi để cái pallet ngoài nắng có chút xíu, {xco} thông cảm.\"",
+        "note": "Trưa 15/11 để pallet thuốc nằm giữa sân đỗ 45 phút dưới nắng 34 độ, bị lập biên bản."
+      }
+    },
+    {
+      "id": "hung",
+      "name": "Mai Quốc Hưng",
+      "age": 45,
+      "role": "Giám đốc Công ty Môi trường Hưng Thịnh",
+      "interrogation": "hung",
+      "portrait": {
+        "skin": 1,
+        "hair": "side-part",
+        "hairColor": "black",
+        "build": "heavy",
+        "outfit": "shirt",
+        "outfitColor": "charcoal",
+        "accessory": [
+          "gold-chain"
+        ],
+        "age": "mid",
+        "backdrop": "rust",
+        "mood": "smile"
+      },
+      "profile": {
+        "traits": [
+          "Khéo ăn nói",
+          "Chu đáo",
+          "Kín kẽ"
+        ],
+        "habit": "Tự lái xe đi gặp khách, luôn mang theo xấp biên bản tiêu hủy in sẵn.",
+        "relation": "Hưng Thịnh nhận đốt hàng hỏng, thuốc hết hạn cho Tân Sơn Cargo từ năm 2022.",
+        "quote": "\"Hàng đã vô lò của tôi thì chỉ còn tro.\"",
+        "note": "Sẽ nhận 40 thùng thuốc đem về lò đốt ở Bình Chánh ngày 28/11."
+      }
+    }
+  ],
+  "zones": [
+    {
+      "id": "phong-lanh",
+      "name": "Phòng lạnh số 3",
+      "description": "Phòng lạnh khu hàng dược, hơi thở thành khói. Pallet thuốc Minh Tâm quấn màng co, dán thẻ cách ly vàng, nằm riêng một góc.",
+      "hotspots": [
+        {
+          "id": "thung-tren",
+          "label": "Thùng trên cùng",
+          "x": 48,
+          "y": 37,
+          "note": "Cả pallet dán băng keo xanh dương in chữ PHARMA-LOGISTIK của bên gửi hàng ở Đức. Riêng thùng trên cùng, nơi đặt nhiệt kế TL-A, bị rạch rồi dán lại bằng băng keo xanh lá của Tân Sơn Cargo.",
+          "clueId": "H1"
+        },
+        {
+          "id": "thung-17",
+          "label": "Thùng số 17",
+          "x": 60,
+          "y": 64,
+          "note": "Thùng ở tầng giữa, băng keo Đức còn nguyên. Dưới lớp túi giữ lạnh có một nhiệt kế tự ghi thứ hai, nhãn TL-B. Màn hình hiện dấu tích xanh: thấp nhất 2,1 độ, cao nhất 6,4 độ từ lúc đóng hàng ở Frankfurt tới giờ.",
+          "clueId": "H2"
+        },
+        {
+          "id": "cam-bien",
+          "label": "Cảm biến nhiệt độ tường",
+          "x": 16,
+          "y": 30,
+          "note": "Màn hình cảm biến gắn tường ghi 72 giờ qua: thấp nhất 3,9 độ, cao nhất 5,6 độ. Đêm 15/11 phòng lạnh chưa lúc nào vượt 6 độ.",
+          "clueId": "H3"
+        },
+        {
+          "id": "the-cach-ly",
+          "label": "Thẻ cách ly",
+          "x": 40,
+          "y": 65,
+          "note": "Thẻ vàng: \"HÀNG KHÔNG ĐẠT · CHỜ TIÊU HỦY 28/11\". Bên dưới là chữ ký của dược sĩ Phan Thùy Linh và thủ kho Đỗ Thanh Tùng."
+        },
+        {
+          "id": "ke-hang",
+          "label": "Kệ hàng bên cạnh",
+          "x": 84,
+          "y": 50,
+          "note": "Vắc xin, insulin, mẫu xét nghiệm của các công ty khác. Không lô nào báo vượt nhiệt đêm đó."
+        }
+      ]
+    },
+    {
+      "id": "phong-nghi",
+      "name": "Phòng nghỉ ca đêm",
+      "description": "Phòng nhỏ cạnh kho lạnh: bàn nhựa, tivi, dãy tủ đồ nhân viên và một chiếc máy lạnh chạy rì rì.",
+      "hotspots": [
+        {
+          "id": "ao-khoac",
+          "label": "Áo phao trong tủ đồ",
+          "x": 82,
+          "y": 42,
+          "note": "Tủ đồ dán tên \"TÙNG\". Chiếc áo phao kho lạnh có túi trong sát ngực. Trong túi còn dính một mẩu băng keo xanh dương vo tròn, in nửa chữ PHARMA-LOG.",
+          "clueId": "H4"
+        },
+        {
+          "id": "nhiet-ke",
+          "label": "Nhiệt kế treo tường",
+          "x": 44,
+          "y": 24,
+          "note": "Nhiệt kế điện tử có lưu mức cao nhất và thấp nhất. Đêm 15/11: cao nhất 24,5 độ, máy lạnh chạy suốt đêm. Ngoài trời đêm đó 26 độ.",
+          "clueId": "H5"
+        },
+        {
+          "id": "bang-ca",
+          "label": "Bảng phân ca",
+          "x": 18,
+          "y": 40,
+          "note": "Bảng ca tuần 10–16/11. Ô \"Kho lạnh · ca đêm 15/11\" chỉ có một tên: Đỗ Thanh Tùng. Ghi chú: \"Ca đêm giữ thẻ phòng lạnh 1–4.\"",
+          "clueId": "H6"
+        },
+        {
+          "id": "tivi",
+          "label": "Tivi và tờ lịch bóng đá",
+          "x": 56,
+          "y": 30,
+          "note": "Tờ lịch Ngoại hạng Anh dán cạnh tivi, vài trận được khoanh bút đỏ, bên lề ghi những con số như \"-85\", \"-40\"."
+        },
+        {
+          "id": "ban",
+          "label": "Bàn nhựa",
+          "x": 40,
+          "y": 74,
+          "note": "Ly cà phê, hộp cơm, một cuộn băng keo xanh lá của Tân Sơn Cargo. Cuộn này phòng nào trong kho cũng có."
+        }
+      ]
+    },
+    {
+      "id": "san-do",
+      "name": "Sân đỗ và khu chờ hàng",
+      "description": "Mép sân đỗ phía kho hàng hóa. Xe kéo, dàn rơ moóc chở pallet, và một khu chờ có mái che sơn vạch xanh dành cho hàng lạnh.",
+      "hotspots": [
+        {
+          "id": "may-tinh-bang",
+          "label": "Máy tính bảng trên xe kéo",
+          "x": 30,
+          "y": 46,
+          "note": "Lịch sử chuyến của xe kéo số 12, tài xế Châu Văn Lộc: \"15/11 13:10 nhận pallet PMC-4471 dưới bụng máy bay · 13:55 giao cửa kho lạnh.\" Sau 13:55 xe chạy chuyến khác.",
+          "clueId": "H7"
+        },
+        {
+          "id": "mai-che",
+          "label": "Khu chờ có mái che",
+          "x": 70,
+          "y": 45,
+          "note": "Biển ghi \"Hàng lạnh chờ nhập kho · tối đa 30 phút\". Trưa 15/11 khu này còn trống, nhưng pallet thuốc lại nằm ngoài nắng cách đó vài chục mét."
+        },
+        {
+          "id": "bang-thoi-tiet",
+          "label": "Bảng thời tiết sân đỗ",
+          "x": 88,
+          "y": 22,
+          "note": "Bảng ghi nhiệt độ theo giờ ngày 15/11: 13:00 là 34 độ, 23:00 là 26 độ, 02:00 là 25 độ."
+        },
+        {
+          "id": "ro-mooc",
+          "label": "Rơ moóc chở pallet",
+          "x": 52,
+          "y": 70,
+          "note": "Mặt sàn rơ moóc nóng rát dưới nắng. Mấy pallet hàng khô đang chờ, không có gì liên quan."
+        }
+      ]
+    },
+    {
+      "id": "hung-thinh",
+      "name": "Bãi xe Hưng Thịnh, Bình Chánh",
+      "description": "Khu xử lý chất thải ở Bình Chánh: nhà xưởng mái tôn, lò đốt khói đen, dãy thùng phuy và bãi đậu xe tải.",
+      "hotspots": [
+        {
+          "id": "xe-lanh",
+          "label": "Xe tải thùng lạnh",
+          "x": 30,
+          "y": 58,
+          "note": "Một chiếc xe tải thùng lạnh dán tem cho thuê \"Lạnh Việt\". Máy lạnh đang cài sẵn 4 độ. Hàng đem đi đốt thì cần gì giữ lạnh?",
+          "clueId": "H8"
+        },
+        {
+          "id": "lo-dot",
+          "label": "Lò đốt",
+          "x": 70,
+          "y": 43,
+          "note": "Cửa lò treo biển \"Lò số 1 · bảo trì 10/11 – 10/12 · không vận hành\". Hưng Thịnh chỉ có một lò.",
+          "clueId": "H9"
+        },
+        {
+          "id": "bang-gia",
+          "label": "Bảng giá dịch vụ",
+          "x": 12,
+          "y": 30,
+          "note": "\"Tiêu hủy dược phẩm: 18.000 đ/kg · cấp biên bản trong ngày.\" Dưới bảng là xấp biên bản tiêu hủy in sẵn, chỉ chờ điền tên lô hàng."
+        },
+        {
+          "id": "thung-phuy",
+          "label": "Thùng phuy",
+          "x": 87,
+          "y": 64,
+          "note": "Thùng phuy đựng dầu thải và bao bì nhựa. Không có thùng thuốc nào."
+        }
+      ]
+    }
+  ],
+  "clues": [
+    {
+      "id": "H1",
+      "title": "Thùng trên cùng bị dán lại bằng băng keo Tân Sơn Cargo",
+      "description": "Cả pallet dán băng keo Đức PHARMA-LOGISTIK, riêng thùng chứa TL-A bị rạch và dán lại bằng băng keo xanh lá của kho.",
+      "source": "scene"
+    },
+    {
+      "id": "H2",
+      "title": "Nhiệt kế thứ hai TL-B trong thùng 17",
+      "description": "Nằm dưới lớp túi giữ lạnh, băng keo Đức còn nguyên. Thấp nhất 2,1 độ, cao nhất 6,4 độ suốt chuyến hàng.",
+      "source": "scene"
+    },
+    {
+      "id": "H3",
+      "title": "Cảm biến tường phòng lạnh 3: 3,9 đến 5,6 độ",
+      "description": "72 giờ qua, kể cả đêm 15/11, phòng lạnh chưa lúc nào vượt 6 độ.",
+      "source": "scene"
+    },
+    {
+      "id": "H4",
+      "title": "Mẩu băng keo Đức trong túi áo phao của Tùng",
+      "description": "Túi trong sát ngực, mẩu băng keo xanh dương vo tròn in nửa chữ PHARMA-LOG.",
+      "source": "scene"
+    },
+    {
+      "id": "H5",
+      "title": "Phòng nghỉ đêm 15/11 cao nhất 24,5 độ",
+      "description": "Máy lạnh chạy suốt đêm. Ngoài trời 26 độ.",
+      "source": "scene"
+    },
+    {
+      "id": "H6",
+      "title": "Ca đêm 15/11 kho lạnh chỉ có Tùng",
+      "description": "Bảng phân ca: một mình Đỗ Thanh Tùng, giữ thẻ phòng lạnh 1–4.",
+      "source": "scene"
+    },
+    {
+      "id": "H7",
+      "title": "Pallet chỉ nằm ngoài sân đỗ từ 13:10 đến 13:55",
+      "description": "Máy tính bảng xe kéo của Lộc: nhận pallet 13:10, giao cửa kho lạnh 13:55 ngày 15/11.",
+      "source": "scene"
+    },
+    {
+      "id": "H8",
+      "title": "Xe tải lạnh thuê, cài sẵn 4 độ",
+      "description": "Đậu ở bãi Hưng Thịnh, tem cho thuê \"Lạnh Việt\". Hàng đem đốt mà phải giữ lạnh.",
+      "source": "scene"
+    },
+    {
+      "id": "H9",
+      "title": "Lò đốt duy nhất bảo trì tới 10/12",
+      "description": "\"Lò số 1 · bảo trì 10/11 – 10/12 · không vận hành.\" Ngày tiêu hủy 28/11 rơi đúng vào lúc lò nghỉ.",
+      "source": "scene"
+    },
+    {
+      "id": "P1",
+      "title": "Hợp đồng bảo hiểm hàng hóa vận chuyển",
+      "description": "Bảo hiểm hư hỏng do sai lệch nhiệt độ khi hàng không còn đạt chất lượng. Chỉ được tiêu hủy sau khi An Tín giám định. Hàng vẫn đạt thì An Tín trả phí kiểm nghiệm lại.",
+      "source": "file"
+    },
+    {
+      "id": "P2",
+      "title": "Đơn yêu cầu bồi thường",
+      "description": "1.200 lọ Herzena 150 mg, 40 thùng. Tổng 4,6 tỷ đồng.",
+      "source": "file"
+    },
+    {
+      "id": "P3",
+      "title": "Báo cáo nhiệt kế TL-A",
+      "description": "23:56 ngày 15/11 tăng từ 5 lên 32 độ trong 8 phút, giữ 32–33 độ, 02:44 rơi về 6 độ trong 10 phút. Cảm biến ánh sáng: sáng 23:55, tối 23:56, sáng 02:43, tối 02:44. Trưa 15/11 cao nhất 7,8 độ.",
+      "source": "file"
+    },
+    {
+      "id": "P4",
+      "title": "Biên bản cách ly của dược sĩ Linh",
+      "description": "17/11 09:05 đọc TL-A báo đỏ, niêm phong cả lô. Đề nghị An Tín giám định trước khi tiêu hủy.",
+      "source": "file"
+    },
+    {
+      "id": "P5",
+      "title": "Nhật ký cửa phòng lạnh 3",
+      "description": "Đêm 15–16/11: thẻ của Tùng mở 23:52, ra 23:58; mở 02:41, ra 02:47. Không thẻ nào khác.",
+      "source": "file"
+    },
+    {
+      "id": "P6",
+      "title": "Phiếu đóng gói của bên gửi hàng",
+      "description": "Pallet có hai nhiệt kế: TL-A trên nắp thùng 1, TL-B giấu dưới lớp túi lạnh thùng 17.",
+      "source": "file"
+    },
+    {
+      "id": "P7",
+      "title": "Biên bản đề xuất tiêu hủy",
+      "description": "Tùng lập 17/11: đề xuất giao Hưng Thịnh tiêu hủy 40 thùng ngày 28/11.",
+      "source": "file"
+    },
+    {
+      "id": "P8",
+      "title": "Hợp đồng thuê xe tải lạnh",
+      "description": "Hưng Thịnh thuê xe lạnh 2–8 độ ngày 28/11, chở \"40 thùng hàng lạnh từ Tân Sơn Nhất\". Ký ngày 14/11, trước khi lô thuốc hạ cánh.",
+      "source": "file"
+    },
+    {
+      "id": "P9",
+      "title": "Sao kê tài khoản của Tùng",
+      "description": "16/11 nộp tiền mặt 100 triệu ở chi nhánh Bình Chánh. Trả nợ 85 triệu cùng ngày.",
+      "source": "file"
+    },
+    {
+      "id": "P10",
+      "title": "Phiếu kiểm nghiệm lại",
+      "description": "Viện Kiểm nghiệm thuốc lấy mẫu thùng 1 và thùng 17: đạt toàn bộ chỉ tiêu.",
+      "source": "file"
+    },
+    {
+      "id": "P11",
+      "title": "Hợp đồng cung ứng với bệnh viện",
+      "description": "Bệnh viện Ung bướu đặt đủ 1.200 lọ, giao trước 30/11, chậm mỗi tuần phạt 8%.",
+      "source": "file"
+    },
+    {
+      "id": "X1",
+      "title": "Thư nhắc nợ của nhà cung cấp Đức",
+      "description": "Minh Tâm còn nợ 2,1 tỷ, quá hạn 60 ngày.",
+      "source": "decoy"
+    },
+    {
+      "id": "X2",
+      "title": "Biên bản sự cố sân đỗ",
+      "description": "Trưa 15/11 pallet thuốc nằm ngoài nắng 34 độ, quá thời gian chờ cho phép. Tài xế: Châu Văn Lộc.",
+      "source": "decoy"
+    },
+    {
+      "id": "X3",
+      "title": "Ảnh Linh chụp lúc nhận hàng",
+      "description": "17/11 09:03: TL-A báo đỏ, thùng trên cùng có đoạn băng keo khác màu.",
+      "source": "testimony"
+    },
+    {
+      "id": "X4",
+      "title": "Tin nhắn giữa Tùng và \"anh Hưng\"",
+      "description": "Tùng cho xem tin nhắn từ 12/11 đến 17/11.",
+      "source": "testimony"
+    }
+  ],
+  "envelopes": [
+    {
+      "id": "pb1",
+      "number": 1,
+      "title": "Hồ sơ yêu cầu bồi thường",
+      "unlockedBy": null,
+      "documents": [
+        "P1",
+        "P2",
+        "P3",
+        "P4",
+        "X1",
+        "X2"
+      ]
+    },
+    {
+      "id": "pb2",
+      "number": 2,
+      "title": "Sổ sách kho Tân Sơn Cargo",
+      "unlockedBy": "q2",
+      "documents": [
+        "P5",
+        "P6",
+        "P7"
+      ]
+    },
+    {
+      "id": "pb3",
+      "number": 3,
+      "title": "Xe lạnh, tiền mặt và phiếu kiểm nghiệm",
+      "unlockedBy": "q5",
+      "documents": [
+        "P8",
+        "P9",
+        "P10",
+        "P11"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "number": 1,
+      "prompt": "Nhiệt kế TL-A báo vượt nhiệt vào lúc nào?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Trưa 15/11, khi pallet nằm ngoài sân đỗ"
+        },
+        {
+          "id": "b",
+          "text": "Đêm 15 rạng sáng 16/11, khi pallet đã vào phòng lạnh"
+        },
+        {
+          "id": "c",
+          "text": "Sáng 17/11, lúc giao hàng cho Minh Tâm"
+        }
+      ],
+      "correctOptionId": "b",
+      "requiredClues": [
+        "P3",
+        "H7"
+      ],
+      "supportingClues": [
+        "X2"
+      ],
+      "hints": [
+        "Đọc kỹ báo cáo TL-A trong phong bì 1. Nhiệt độ vượt 8 độ bắt đầu từ mấy giờ, ngày nào?",
+        "Ra Sân đỗ soi máy tính bảng trên xe kéo. Pallet nằm ngoài nắng từ mấy giờ đến mấy giờ, và lúc đó TL-A ghi bao nhiêu độ?"
+      ]
+    },
+    {
+      "id": "q2",
+      "number": 2,
+      "prompt": "Thứ thật sự nóng lên đêm đó là gì?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Cả pallet thuốc"
+        },
+        {
+          "id": "b",
+          "text": "Riêng thùng trên cùng"
+        },
+        {
+          "id": "c",
+          "text": "Chỉ chiếc nhiệt kế, bị lấy ra khỏi thùng"
+        }
+      ],
+      "correctOptionId": "c",
+      "requiredClues": [
+        "P3",
+        "H3"
+      ],
+      "supportingClues": [
+        "H1",
+        "X3"
+      ],
+      "hints": [
+        "TL-A lên từ 5 tới 32 độ trong 8 phút, rồi rơi về 6 độ trong 10 phút. Bốn mươi thùng thuốc có túi giữ lạnh có ấm lên và nguội đi nhanh như vậy được không?",
+        "Vào Phòng lạnh số 3 soi cảm biến trên tường. Đêm đó phòng lạnh lên tới mấy độ?"
+      ]
+    },
+    {
+      "id": "q3",
+      "number": 3,
+      "prompt": "Gần ba tiếng ở ngoài thùng, nhiệt kế TL-A nằm ở đâu?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ngoài sân đỗ"
+        },
+        {
+          "id": "b",
+          "text": "Trên bàn phòng nghỉ"
+        },
+        {
+          "id": "c",
+          "text": "Trong túi áo, sát người ai đó"
+        },
+        {
+          "id": "d",
+          "text": "Cạnh bộ sạc xe nâng"
+        }
+      ],
+      "correctOptionId": "c",
+      "requiredClues": [
+        "P3",
+        "H5"
+      ],
+      "supportingClues": [
+        "H4"
+      ],
+      "hints": [
+        "TL-A giữ đều 32–33 độ suốt gần ba tiếng, và cảm biến ánh sáng báo tối từ 23:56. Cái gì vừa tối vừa ấm đúng chừng đó?",
+        "Vào Phòng nghỉ ca đêm soi nhiệt kế treo tường. Đêm đó phòng nghỉ có nóng tới 33 độ không? Ngoài trời bao nhiêu?"
+      ]
+    },
+    {
+      "id": "q4",
+      "number": 4,
+      "prompt": "Ai mở thùng trên cùng lúc 23:55?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Đỗ Thanh Tùng"
+        },
+        {
+          "id": "b",
+          "text": "Châu Văn Lộc"
+        },
+        {
+          "id": "c",
+          "text": "Phan Thùy Linh"
+        },
+        {
+          "id": "d",
+          "text": "Mai Quốc Hưng"
+        }
+      ],
+      "correctOptionId": "a",
+      "requiredClues": [
+        "P5",
+        "H6"
+      ],
+      "supportingClues": [
+        "H4",
+        "H1"
+      ],
+      "hints": [
+        "Phong bì 2 có nhật ký cửa phòng lạnh 3. Thẻ nào mở cửa lúc 23:52 và 02:41?",
+        "Soi Bảng phân ca trong Phòng nghỉ. Đêm 15/11 ai trực kho lạnh, ai giữ thẻ?"
+      ]
+    },
+    {
+      "id": "q5",
+      "number": 5,
+      "prompt": "Lô thuốc có thật sự hỏng không?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Hỏng toàn bộ 40 thùng"
+        },
+        {
+          "id": "b",
+          "text": "Chỉ hỏng thùng trên cùng"
+        },
+        {
+          "id": "c",
+          "text": "Không thùng nào hỏng"
+        }
+      ],
+      "correctOptionId": "c",
+      "requiredClues": [
+        "P6",
+        "H2"
+      ],
+      "supportingClues": [
+        "H3",
+        "P3"
+      ],
+      "hints": [
+        "Phiếu đóng gói trong phong bì 2 ghi pallet có mấy nhiệt kế? Cái thứ hai nằm ở đâu?",
+        "Vào Phòng lạnh số 3 mở thùng số 17. Nhiệt kế TL-B ghi gì?"
+      ]
+    },
+    {
+      "id": "q6",
+      "number": 6,
+      "prompt": "Ai đứng sau, chờ lô thuốc được đem đi \"tiêu hủy\"?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Mai Quốc Hưng"
+        },
+        {
+          "id": "b",
+          "text": "Tôn Nữ Minh Thư"
+        },
+        {
+          "id": "c",
+          "text": "Phan Thùy Linh"
+        },
+        {
+          "id": "d",
+          "text": "Châu Văn Lộc"
+        }
+      ],
+      "correctOptionId": "a",
+      "requiredClues": [
+        "P8",
+        "H9"
+      ],
+      "supportingClues": [
+        "H8",
+        "P7",
+        "P9",
+        "X4"
+      ],
+      "hints": [
+        "Hợp đồng thuê xe lạnh trong phong bì 3 được ký ngày nào? Lúc đó lô thuốc đã về tới Việt Nam chưa?",
+        "Ra bãi Hưng Thịnh soi lò đốt. Ngày 28/11 lò có đốt được gì không?"
+      ]
+    },
+    {
+      "id": "q7",
+      "number": 7,
+      "prompt": "Minh Tâm có gian lận hồ sơ không?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Có, dựng sự cố để lấy tiền trả nợ"
+        },
+        {
+          "id": "b",
+          "text": "Không, Minh Tâm cũng bị lừa"
+        }
+      ],
+      "correctOptionId": "b",
+      "requiredClues": [
+        "P11",
+        "P4"
+      ],
+      "supportingClues": [
+        "X1",
+        "P10"
+      ],
+      "hints": [
+        "Lô thuốc này đã có người mua chưa? Hợp đồng nào trong phong bì 3 trả lời câu đó?",
+        "Biên bản cách ly của dược sĩ Linh đề nghị gì trước khi tiêu hủy? Người muốn gian lận có xin giám định kỹ như vậy không?"
+      ]
+    }
+  ],
+  "verdict": [
+    {
+      "id": "tamper",
+      "prompt": "Ai lấy nhiệt kế TL-A ra khỏi thùng?",
+      "options": [
+        {
+          "id": "tung",
+          "text": "Đỗ Thanh Tùng"
+        },
+        {
+          "id": "loc",
+          "text": "Châu Văn Lộc"
+        },
+        {
+          "id": "linh",
+          "text": "Phan Thùy Linh"
+        },
+        {
+          "id": "hung",
+          "text": "Mai Quốc Hưng"
+        },
+        {
+          "id": "none",
+          "text": "Không ai, thuốc nóng thật"
+        }
+      ],
+      "correctOptionId": "tung"
+    },
+    {
+      "id": "plan",
+      "prompt": "Ai đứng sau và hưởng lợi?",
+      "options": [
+        {
+          "id": "hung",
+          "text": "Mai Quốc Hưng, chờ nhận thuốc đem bán"
+        },
+        {
+          "id": "thu",
+          "text": "Tôn Nữ Minh Thư, chờ tiền bảo hiểm"
+        },
+        {
+          "id": "linh",
+          "text": "Phan Thùy Linh"
+        },
+        {
+          "id": "alone",
+          "text": "Không ai, Tùng làm một mình"
+        }
+      ],
+      "correctOptionId": "hung"
+    },
+    {
+      "id": "decision",
+      "prompt": "Đề xuất của bạn",
+      "options": [
+        {
+          "id": "release",
+          "text": "Không bồi thường hư hỏng: dừng tiêu hủy, trả lô thuốc cho Minh Tâm, An Tín trả phí kiểm nghiệm"
+        },
+        {
+          "id": "pay",
+          "text": "Chi đủ 4,6 tỷ và cho tiêu hủy lô thuốc"
+        },
+        {
+          "id": "split",
+          "text": "Chi 2,3 tỷ vì chưa rõ nguyên nhân vượt nhiệt"
+        },
+        {
+          "id": "deny",
+          "text": "Từ chối vì Minh Tâm dàn dựng sự cố"
+        }
+      ],
+      "correctOptionId": "release"
+    }
+  ],
+  "endings": [
+    {
+      "id": "full",
+      "title": "Không một lọ nào bị đốt",
+      "text": "Lệnh tiêu hủy bị hủy. Viện Kiểm nghiệm xác nhận thuốc đạt, 1.200 lọ Herzena về tới Bệnh viện Ung bướu ngày 26/11. An Tín chỉ trả 38 triệu phí kiểm nghiệm. Tùng và Hưng bị khởi tố về tội lừa đảo chiếm đoạt tài sản. Tân Sơn Cargo cấm mọi nhân viên đụng vào nhiệt kế của khách."
+    },
+    {
+      "id": "half",
+      "title": "Đúng một nửa",
+      "text": "Thuốc được giữ lại và tới tay bệnh nhân, Tùng bị đuổi việc và khởi tố. Nhưng hồ sơ không gọi tên người thuê xe lạnh. Ba tháng sau, Hưng Thịnh trúng thầu tiêu hủy cho một kho lạnh khác."
+    },
+    {
+      "id": "wrong",
+      "title": "Sai người",
+      "text": "Thuốc được giữ lại, nhưng người bạn chỉ ra không phải người cầm nhiệt kế. Hồ sơ hình sự bị trả về. Tùng vẫn trực ca đêm phòng lạnh số 3, túi áo phao vẫn sát ngực."
+    },
+    {
+      "id": "burned",
+      "title": "Lò đốt không đỏ lửa",
+      "text": "An Tín chi 4,6 tỷ, 40 thùng thuốc lên xe tải lạnh của Hưng Thịnh, rồi một biên bản tiêu hủy được gửi về. Lò của Hưng Thịnh đang bảo trì. Tháng sau, Herzena \"xách tay\" được rao bán trên mạng với giá một nửa, còn bệnh nhân của Bệnh viện Ung bướu chờ lô mới thêm hai tháng."
+    },
+    {
+      "id": "split",
+      "title": "Chia đôi cho xong",
+      "text": "An Tín chi 2,3 tỷ cho một lô thuốc chẳng hỏng lọ nào. Minh Tâm không đủ tiền nhập lô mới, bị bệnh viện phạt chậm giao. Còn 40 thùng thuốc vẫn lên xe tải lạnh của Hưng Thịnh."
+    },
+    {
+      "id": "unjust",
+      "title": "Oan cho người ngay",
+      "text": "Bạn từ chối vì cho rằng Minh Tâm dàn dựng. Lô thuốc vẫn bị coi là hỏng và chở đi \"tiêu hủy\". Minh Tâm kiện An Tín, mang theo hợp đồng bệnh viện và biên bản cách ly. An Tín thua, phải chi đủ kèm án phí, còn thuốc thật đã ra chợ đen."
+    }
+  ],
+  "endingRules": [
+    {
+      "ending": "unjust",
+      "picks": {
+        "decision": "deny"
+      }
+    },
+    {
+      "ending": "burned",
+      "picks": {
+        "decision": "pay"
+      }
+    },
+    {
+      "ending": "split",
+      "picks": {
+        "decision": "split"
+      }
+    },
+    {
+      "ending": "full",
+      "correct": [
+        "tamper",
+        "plan"
+      ]
+    },
+    {
+      "ending": "half",
+      "correct": [
+        "tamper"
+      ]
+    },
+    {
+      "ending": "wrong"
+    }
+  ]
+}
