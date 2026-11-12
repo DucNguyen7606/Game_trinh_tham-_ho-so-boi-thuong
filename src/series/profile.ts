@@ -44,17 +44,32 @@ export const ROLES: Role[] = [
   },
 ]
 
-export const LOOKS: Record<Gender, PortraitSpec[]> = {
-  nu: [
-    { skin: 0, hair: 'bun', hairColor: 'black', build: 'normal', outfit: 'shirt', outfitColor: 'navy', age: 'young', backdrop: 'teal' },
-    { skin: 1, hair: 'long', hairColor: 'brown', build: 'thin', outfit: 'blouse', outfitColor: 'maroon', age: 'young', backdrop: 'amber', accessory: ['earrings'] },
-    { skin: 2, hair: 'short', hairColor: 'black', build: 'normal', outfit: 'polo', outfitColor: 'olive', age: 'mid', backdrop: 'rust', accessory: ['glasses'] },
-  ],
-  nam: [
-    { skin: 1, hair: 'side-part', hairColor: 'black', build: 'normal', outfit: 'shirt', outfitColor: 'white', age: 'young', backdrop: 'teal' },
-    { skin: 2, hair: 'short', hairColor: 'black', build: 'thin', outfit: 'polo', outfitColor: 'charcoal', age: 'young', backdrop: 'amber', accessory: ['glasses'] },
-    { skin: 1, hair: 'buzz', hairColor: 'gray', build: 'heavy', outfit: 'shirt', outfitColor: 'khaki', age: 'mid', backdrop: 'rust' },
-  ],
+/** The investigator's portrait: the job decides the clothes, the gender the hair and cut. */
+export const LOOKS: Record<string, Record<Gender, PortraitSpec>> = {
+  // Office wear of the insurer: light shirt, staff ID on a lanyard.
+  'giam-dinh': {
+    nu: { skin: 0, hair: 'bun', hairColor: 'black', build: 'normal', outfit: 'shirt', outfitColor: 'sky', age: 'young', backdrop: 'teal', mood: 'smile', accessory: ['lanyard'] },
+    nam: { skin: 1, hair: 'side-part', hairColor: 'black', build: 'normal', outfit: 'shirt', outfitColor: 'sky', age: 'young', backdrop: 'teal', mood: 'smile', accessory: ['lanyard'] },
+  },
+  // Trench coat and fedora.
+  'tham-tu': {
+    nu: { skin: 0, hair: 'long', hairColor: 'black', build: 'thin', outfit: 'trench', outfitColor: 'khaki', age: 'young', backdrop: 'night', accessory: ['fedora'] },
+    nam: { skin: 1, hair: 'short', hairColor: 'black', build: 'normal', outfit: 'trench', outfitColor: 'khaki', age: 'young', backdrop: 'night', accessory: ['fedora'] },
+  },
+  // Worn leather field jacket, older and sterner.
+  'cuu-dieu-tra': {
+    nu: { skin: 1, hair: 'short', hairColor: 'black', build: 'normal', outfit: 'jacket', outfitColor: 'leather', age: 'mid', backdrop: 'rust', mood: 'stern', accessory: ['earrings'] },
+    nam: { skin: 2, hair: 'buzz', hairColor: 'gray', build: 'heavy', outfit: 'jacket', outfitColor: 'leather', age: 'mid', backdrop: 'rust', mood: 'stern', accessory: ['earrings'] },
+  },
+  // Dark suit; a tie for men, earrings for women; reading glasses.
+  'luat-su': {
+    nu: { skin: 0, hair: 'bun', hairColor: 'brown', build: 'thin', outfit: 'suit', outfitColor: 'charcoal', age: 'young', backdrop: 'amber', accessory: ['earrings', 'glasses'] },
+    nam: { skin: 1, hair: 'side-part', hairColor: 'black', build: 'normal', outfit: 'suit', outfitColor: 'navy', age: 'mid', backdrop: 'amber', accessory: ['tie', 'glasses'] },
+  },
+}
+
+export function lookOf(roleId: string, g: Gender) {
+  return (LOOKS[roleId] ?? LOOKS['giam-dinh'])[g]
 }
 
 export const DEFAULT_NAMES: Record<Gender, string> = { nu: 'Lê Thu Hạnh', nam: 'Lê Quang Huy' }
@@ -63,7 +78,6 @@ export interface Profile {
   name: string
   gender: Gender
   roleId: string
-  look: number
 }
 
 interface ProfileState extends Profile {
@@ -78,19 +92,17 @@ export const useProfile = create<ProfileState>()(
       name: DEFAULT_NAMES.nu,
       gender: 'nu',
       roleId: 'giam-dinh',
-      look: 0,
       created: false,
       save: (p) => set({ ...p, created: true }),
     }),
-    { name: 'hssg-profile', partialize: ({ name, gender, roleId, look, created }) => ({ name, gender, roleId, look, created }) },
+    { name: 'hssg-profile', partialize: ({ name, gender, roleId, created }) => ({ name, gender, roleId, created }) },
   ),
 )
 
 /** The case's `player` block for this profile. */
 export function playerOf(p: Profile) {
   const role = ROLES.find((r) => r.id === p.roleId) ?? ROLES[0]
-  const looks = LOOKS[p.gender]
-  return { name: p.name.trim() || DEFAULT_NAMES[p.gender], role: role.line, portrait: looks[p.look % looks.length] }
+  return { name: p.name.trim() || DEFAULT_NAMES[p.gender], role: role.line, portrait: lookOf(role.id, p.gender) }
 }
 
 /**
