@@ -273,7 +273,7 @@ function Roadside() {
         <rect x="120" y="430" width="70" height="40" fill="#cfa45a" />
       </g>
       <text x="200" y="330" textAnchor="middle" fontSize="18" fontWeight="700" fill="#f3e4c4" fontFamily="Barlow Condensed, sans-serif">NƯỚC MÍA</text>
-      <Paper x={224} y={700} color="#d9d2c2" />
+      <Paper x={224} y={676} color="#d9d2c2" />
     </Frame>
   )
 }
@@ -340,7 +340,7 @@ function PepperStore() {
           <rect key={i} x={100} y={760 - i * 22} width="260" height="20" fill={C.woodLit} />
         ))}
       </g>
-      <Paper x={960} y={322} />
+      <Paper x={960} y={300} />
     </Frame>
   )
 }

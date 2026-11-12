@@ -226,7 +226,7 @@ function Gate() {
       <Puddle x={470} y={790} w={320} />
       <Puddle x={1180} y={830} w={260} o={0.4} />
       <Rain seed={7} />
-      <BurntSocket x={224} y={262} />
+      <BurntSocket x={224} y={222} />
     </SoftFrame>
   )
 }
@@ -318,7 +318,7 @@ function Warehouse() {
       <Glow x={1420} y={420} r={220} o={0.35} />
       <path d="M1400,700 L1420,440 M1440,700 L1420,440 M1380,700 L1420,440" stroke={LINE} strokeWidth="5" />
       <path d="M1390,440 L1450,440 L1438,400 L1402,400 Z" fill={accent.amber} {...O} />
-      <Jerrycan x={992} y={676} />
+      <Jerrycan x={992} y={650} />
     </SoftFrame>
   )
 }
@@ -395,7 +395,7 @@ function Office() {
         <rect key={x} x={x} y={y} width="54" height="38" rx="2" transform={`rotate(${r} ${x} ${y})`} fill="#e7d2a8" {...O} strokeWidth={2} />
       ))}
       <rect x="0" y="0" width="1600" height="900" fill="#1a1411" opacity="0.18" />
-      <Paper x={704} y={700} color="#6b5a4a" />
+      <Paper x={704} y={670} color="#6b5a4a" />
     </SoftFrame>
   )
 }
@@ -465,7 +465,7 @@ function BackYard() {
       ))}
       <Puddle x={980} y={800} w={360} />
       <Rain seed={11} count={90} />
-      <Lighter x={320} y={656} />
+      <Lighter x={320} y={630} />
     </SoftFrame>
   )
 }

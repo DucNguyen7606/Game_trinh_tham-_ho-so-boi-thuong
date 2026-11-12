@@ -265,6 +265,75 @@ function ClientBook() {
   )
 }
 
+
+// Close-ups for the noise hotspots added in the tightening pass.
+const NO = { stroke: '#1d1512', strokeWidth: 2.5, strokeLinejoin: 'round' as const, strokeLinecap: 'round' as const }
+const NBg = ({ top = '#3a2f2a', floor = '#5a4232', y = 170 }: { top?: string; floor?: string; y?: number }) => (
+  <g>
+    <rect width="400" height="300" fill={top} />
+    <rect y={y} width="400" height={300 - y} fill={floor} />
+  </g>
+)
+const NText = ({ x, y, t, size = 11, fill = '#2d1f18', anchor = 'middle', weight = 700 }: { x: number; y: number; t: string; size?: number; fill?: string; anchor?: 'start' | 'middle' | 'end'; weight?: number }) => (
+  <text x={x} y={y} textAnchor={anchor} fontSize={size} fontWeight={weight} fill={fill} fontFamily="IBM Plex Mono, monospace">{t}</text>
+)
+
+/** Phong's folding loupe under the grinding bench, his name on the back. */
+function NLoupe() {
+  return (
+    <g>
+      <NBg top="#3a2f2a" floor="#2a1f1a" y={140} />
+      {Array.from({ length: 40 }, (_, k) => (
+        <circle key={k} cx={(k * 47) % 400} cy={150 + (k * 29) % 140} r="2" fill="#1a1a1a" opacity="0.5" />
+      ))}
+      <g transform="rotate(-14 200 200)">
+        <rect x="80" y="170" width="150" height="56" rx="10" fill="#8a5a2e" {...NO} />
+        {Array.from({ length: 6 }, (_, k) => <circle key={k} cx={100 + k * 24} cy={186 + (k % 2) * 16} r="7" fill="#5a3418" opacity="0.6" />)}
+        <circle cx="280" cy="198" r="62" fill="#c9e1e6" fillOpacity="0.55" {...NO} strokeWidth={6} />
+        <path d="M250,170 q24,-14 48,0" stroke="#fff" strokeWidth="5" fill="none" opacity="0.7" />
+        <rect x="96" y="226" width="118" height="22" rx="3" fill="#000" opacity="0.35" />
+        <NText x={155} y={242} t="L.H.Phong" size={13} fill="#e8dcc4" />
+      </g>
+    </g>
+  )
+}
+
+/** Two wine glasses on the reception table, one with red lipstick. */
+function NWine() {
+  return (
+    <g>
+      <NBg top="#2d2a30" floor="#5a3a2a" y={200} />
+      {[150, 250].map((x, i) => (
+        <g key={x}>
+          <path d={`M${x - 40},60 q0,90 40,100 q40,-10 40,-100 Z`} fill="#e8dcc4" fillOpacity="0.25" {...NO} />
+          <path d={`M${x - 34},110 q34,30 68,0 q-6,40 -34,48 q-28,-8 -34,-48 Z`} fill="#6a1a24" opacity="0.85" />
+          <path d={`M${x},160 v60 M${x - 34},224 h68`} {...NO} strokeWidth={4} />
+          {i === 0 && <path d={`M${x - 36},62 q8,-6 18,0`} stroke="#c42a3a" strokeWidth="8" strokeLinecap="round" />}
+        </g>
+      ))}
+      <rect x="230" y="246" width="150" height="40" rx="3" fill="#f3e4c4" {...NO} strokeWidth={1.5} />
+      <NText x={305} y={264} t="Lễ tân 19/11" size={9} />
+      <NText x={305} y={278} t="khách 19:00–21:00" size={9} weight={400} />
+    </g>
+  )
+}
+
+/** Cheap cigarette ends at the mouth of the alley. */
+function NButts() {
+  return (
+    <g>
+      <NBg top="#3a3a40" floor="#4a4a4c" y={110} />
+      {[[90, 180, 20], [150, 220, -30], [210, 190, 60], [260, 236, 10], [320, 200, -50], [180, 260, 80]].map(([x, y, r], k) => (
+        <g key={k} transform={`rotate(${r} ${x} ${y})`}>
+          <rect x={x - 26} y={y - 7} width="34" height="14" rx="3" fill="#e8e0d0" {...NO} strokeWidth={1.5} />
+          <rect x={x + 8} y={y - 7} width="18" height="14" rx="3" fill="#d9a45a" {...NO} strokeWidth={1.5} />
+          <rect x={x - 30} y={y - 6} width="6" height="12" fill="#3a3030" />
+        </g>
+      ))}
+    </g>
+  )
+}
+
 export const closeups: Record<string, () => JSX.Element> = {
   'khung-trong': FrameCorner,
   camera: Camera,
@@ -282,4 +351,7 @@ export const closeups: Record<string, () => JSX.Element> = {
   'giay-can': Tracing,
   'hu-vo-trung': Eggshell,
   'so-khach': ClientBook,
+  'kinh-lup': NLoupe,
+  'ly-vang': NWine,
+  'dau-loc': NButts,
 }
