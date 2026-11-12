@@ -5,6 +5,7 @@ VAR has_P6 = false
 VAR has_P7 = false
 VAR has_X7 = false
 VAR has_P10 = false
+VAR has_H12 = false
 
 Ông Tài rót trà, ngón tay gõ nhịp lên mặt bàn như đang bấm máy tính.
 "Hai chục tấn tiêu bay mất, {xco} nghĩ tôi vui lắm sao?"
@@ -42,6 +43,11 @@ VAR has_P10 = false
     Ông Tài ngồi im rất lâu. Rồi ông gỡ kính ra.
     "Ba năm tôi giao hàng cho bả. Bả còn ngồi ăn giỗ nhà tôi."
     "Vậy mà bả tính để bảo hiểm trả tiền cho tôi, còn nếu lộ thì người ta nghi tôi trước."
+    -> hoi
+* {has_H12} [Tờ nháp dưới kính bàn anh: "Mất hàng có công an xác nhận = miễn phạt??"]
+    Ông Tài cầm tờ nháp lên, cười khẩy.
+    "Tôi tính đủ đường. Ai làm ăn mà không tính. Tính xong tôi chọn cách khác: xin khách nâng giá."
+    "Thư đây, {xco} đọc ngày gửi đi." #photo:X8
     -> hoi
 * [Cảm ơn anh.]
     -> END

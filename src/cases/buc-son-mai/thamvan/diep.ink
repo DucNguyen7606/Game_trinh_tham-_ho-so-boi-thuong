@@ -5,6 +5,7 @@ VAR has_P7 = false
 VAR has_H5 = false
 VAR has_H8 = false
 VAR has_X1 = false
+VAR has_X7 = false
 
 Bà Diệp ngồi thẳng lưng, tay đặt lên đùi, giọng chậm và rõ.
 "Bức tranh đó là danh dự của tôi. Tôi mong {xco} làm nhanh."
@@ -44,6 +45,11 @@ Bà Diệp ngồi thẳng lưng, tay đặt lên đùi, giọng chậm và rõ.
 * {has_H8} [Dấu giày trong hẻm là giày bệt, cỡ khoảng 36.]
     Bà Diệp chìa chân ra. Đôi giày cao gót màu kem.
     "Tôi đi cỡ 38, ba mươi năm nay chưa mang giày bệt ra đường."
+    -> hoi
+* {has_X7} [Ngày 15/11 chị xin Hải Đăng dời buổi kiểm định. Chị sợ họ lấy mẫu sơn?]
+    "Tôi muốn có mặt khi họ lấy mẫu. Ngày 21 con gái tôi cưới ở Singapore."
+    Bà mở điện thoại, đưa bạn xem tấm thiệp. #photo:X8
+    "Họ không cho dời thì tôi đồng ý luôn. Người sợ kiểm định thì đâu có trả lời 'cứ làm theo lịch'."
     -> hoi
 * [Cảm ơn chị.]
     -> END

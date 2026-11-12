@@ -1,5 +1,6 @@
 VAR has_X2 = false
 VAR has_P5 = false
+VAR has_H9 = false
 
 Ông Phong rút chiếc kính lúp gấp trong túi áo, xoay xoay trong tay.
 "Tôi chỉ ký cái gì tôi đã nhìn tận mắt."
@@ -19,6 +20,10 @@ VAR has_P5 = false
     Ông Phong đưa kính lúp sát tấm ảnh.
     "Chuồn chuồn vàng? Khuê không bao giờ vẽ chuồn chuồn vàng. Chữ ký ông ấy chỉ ghi hai số cuối của năm."
     "Đây không phải bức tôi đã thẩm định."
+    -> hoi
+* {has_H9} [Kính lúp của ông nằm ở xưởng anh Quân.]
+    "À, tôi tìm nó cả tháng. Đầu tháng 6 bà Diệp nhờ tôi ghé xưởng coi vết rạn trước khi phục chế."
+    "Lúc đó bức tranh còn là bức tôi thẩm định. Con chuồn chuồn còn đỏ son."
     -> hoi
 * [Cảm ơn ông.]
     -> END

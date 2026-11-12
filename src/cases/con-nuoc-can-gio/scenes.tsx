@@ -1,6 +1,7 @@
 import { useId } from 'react'
 import { accent, ink, shade } from '@/art/palette'
 import { rng } from '@/art/primitives'
+import { Bottle, Paper, Smear } from '@/art/noiseProps'
 
 // Backdrops for the four zones of Chapter 2, in the same soft flat style as
 // Chapter 1: rounded shapes, a thin ink outline, one shadow tone, pools of light.
@@ -249,6 +250,7 @@ function Landing() {
       {[120, 150, 1520].map((x) => (
         <line key={x} x1={x} y1="560" x2={x + 10} y2="360" stroke={C.woodLit} strokeWidth="9" strokeLinecap="round" />
       ))}
+      <Smear x={960} y={550} />
     </Frame>
   )
 }
@@ -321,6 +323,7 @@ function Office() {
       {[0, 1, 2].map((i) => (
         <rect key={i} x="20" y={560 + i * 70} width="130" height="66" rx="4" fill="#ece6da" {...O} />
       ))}
+      <Paper x={1408} y={260} color="#e8c84a" />
     </Frame>
   )
 }
@@ -392,6 +395,7 @@ function House() {
         <circle cx="1400" cy="220" r="60" fill="#f6efe2" />
         <path d="M1400,220 V180 M1400,220 L1428,232" strokeWidth="5" />
       </g>
+      <Paper x={1344} y={660} color="#d9c7e0" />
     </Frame>
   )
 }
@@ -454,6 +458,7 @@ function Creek() {
       {[[160, 690], [200, 670], [230, 700], [130, 720]].map(([x, y]) => (
         <ellipse key={x} cx={x} cy={y} rx="12" ry="6" fill={C.mudRedDark} stroke={LINE} strokeWidth="2" />
       ))}
+      <Bottle x={1440} y={720} color="#9aa3a8" />
     </Frame>
   )
 }

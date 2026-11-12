@@ -20,5 +20,8 @@ Chú Bảy Lộc gõ hai tiếng mõ, cười móm.
 * {has_H8} [Ngoài người đó, có ai khác vô hẻm không?]
     "Không. Từ 10 giờ tới 3 giờ, ngoài bả thì chỉ có mèo."
     -> hoi
+* [Đầu hẻm có mấy đầu lọc thuốc. Của ai vậy chú?]
+    "Của tui chứ ai. Đứng chờ khách mà không hút thì buồn ngủ chết."
+    -> hoi
 * [Cảm ơn chú.]
     -> END

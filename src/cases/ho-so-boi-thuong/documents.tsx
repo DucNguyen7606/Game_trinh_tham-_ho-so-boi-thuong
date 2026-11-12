@@ -503,4 +503,68 @@ const X6 = () => (
   </Phone>
 )
 
-export const documents: Record<string, () => JSX.Element> = { P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12, P13, X1, X2, X3, X4, X5, X6 }
+/** Old electrical inspection: makes a short circuit sound likely, until you see the main breaker was off. */
+const X7 = () => (
+  <Sheet org="Đội PCCC quận Bình Tân" title="Biên bản kiểm tra an toàn PCCC">
+    <Row k="Cơ sở" v="Kho vải Thịnh Phát" />
+    <Row k="Ngày kiểm tra" v="18/09/2024" />
+    <p>1. Bình chữa cháy: đủ, còn hạn.</p>
+    <p>
+      2. Hệ thống điện: <Mark>dây dẫn khu văn phòng xuống cấp</Mark>, vỏ bọc nứt. Đề nghị thay trước 31/12/2024.
+    </p>
+    <p>3. Lối thoát hiểm: thông thoáng.</p>
+    <p className="pt-1 text-[10px] opacity-70">Hồ sơ không kèm biên bản khắc phục mục 2.</p>
+    <Signature name="Đ. Văn Khoa" />
+  </Sheet>
+)
+
+/** Huy's credit book: the warehouse buys petrol from him for its generator. */
+const X8 = () => (
+  <Phone header="Thư viện ảnh · Gia Huy">
+    <div className="rounded-md bg-[#efe3c8] p-2 font-mono text-[10px] text-[#2d1f18]">
+      <p className="mb-1 text-center font-semibold">SỔ BÁN CHỊU · THÁNG 7</p>
+      {[
+        ['02/7', 'Xi măng 2 bao', 'Út Mập'],
+        ['05/7', 'Xăng 5L + can', 'Kho T.Phát (chú Tư)'],
+        ['09/7', 'Ốc vít, keo', 'Chị Bảy'],
+        ['12/7', 'Xăng 5L + can', 'Kho T.Phát (Bảo)'],
+        ['13/7', 'Bóng đèn 40W', 'Kho T.Phát (chú Tư)'],
+      ].map(([a, b, c]) => (
+        <div key={a + b} className="grid grid-cols-[34px_1fr_auto] gap-1 border-b border-dotted border-black/25">
+          <span>{a}</span>
+          <span>{b}</span>
+          <span>{c}</span>
+        </div>
+      ))}
+      <p className="pt-1 text-[9px] opacity-70">Kho xài máy phát lúc cúp điện, tháng nào cũng mua.</p>
+    </div>
+    <PhotoMeta when="16/07/2025 · 10:05" where="Tiệm vật tư Gia Huy" />
+  </Phone>
+)
+
+/** Thịnh pawned his house papers three days before the fire: a motive, not proof. */
+const X9 = () => (
+  <Sheet org="Hiệu cầm đồ Phát Đạt · Quận 6" title="Biên nhận cầm đồ">
+    <Row k="Người cầm" v="Quách Thịnh" />
+    <Row k="Tài sản" v="Sổ đỏ nhà số 41 đường Bình Phú" />
+    <Row k="Số tiền" v="300.000.000 đ" strong />
+    <Row k="Ngày cầm" v="11/07/2025" />
+    <Row k="Lãi" v="3.000 đ / 1 triệu / ngày" />
+    <p className="pt-1">Ghi chú: <Mark>"trả lương công nhân + tiền hàng"</Mark>.</p>
+    <Signature name="Q. Thịnh" />
+  </Sheet>
+)
+
+/** Ngân's complaint about fake workers on the payroll. It was returned for lack of proof. */
+const X10 = () => (
+  <Sheet org="Phòng Lao động · Thương binh và Xã hội quận Bình Tân" title="Đơn khiếu nại">
+    <p>Người làm đơn: Võ Thị Kim Ngân, công nhân Kho vải Thịnh Phát.</p>
+    <p>
+      Nội dung: kế toán Phan Quốc Bảo <Mark>ghi thêm 6 người không có thật</Mark> vào bảng chấm công từ tháng 1, lĩnh lương thay. Tôi phản ánh với chủ kho thì bị cho nghỉ việc ngày 20/5.
+    </p>
+    <p className="pt-1 text-[10px] opacity-70">Bút phê: "Trả đơn. Người khiếu nại chưa cung cấp được bảng lương gốc."</p>
+    <Stamp text="Đã trả đơn · 06/2025" className="bottom-3 right-6" />
+  </Sheet>
+)
+
+export const documents: Record<string, () => JSX.Element> = { P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12, P13, X1, X2, X3, X4, X5, X6, X7, X8, X9, X10 }

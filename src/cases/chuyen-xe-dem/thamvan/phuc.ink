@@ -1,5 +1,6 @@
 VAR has_H3 = false
 VAR has_P4 = false
+VAR has_X10 = false
 
 Phúc đội ngược cái nón lưỡi trai, tay cầm điện thoại không ngừng lướt.
 "Em xuống xe có một đêm mà thành ra vậy đó {xchi}."
@@ -23,6 +24,10 @@ Phúc đội ngược cái nón lưỡi trai, tay cầm điện thoại không n
     -> hoi
 * {has_P4} [Xe mất sóng định vị gần Phan Rí hơn một tiếng.]
     "Khúc Phan Rí sóng mạnh lắm {xchi}, em lướt mạng hoài có sao đâu. Mất sóng là lạ à nha."
+    -> hoi
+* {has_X10} [Ngày 1/11 bà Kiều chuyển cho em 5 triệu.]
+    "Em ứng lương mà {xchi}, bạn gái em sinh nhật. Tháng nào em cũng ứng, chị Mai trừ vô lương."
+    "Chuyến này em còn mất ăn chia vì không đi hết tuyến."
     -> hoi
 * [Cảm ơn em.]
     -> END

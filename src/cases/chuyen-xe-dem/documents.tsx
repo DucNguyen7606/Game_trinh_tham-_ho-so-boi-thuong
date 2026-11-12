@@ -419,4 +419,43 @@ const X7 = () => (
   </Phone>
 )
 
-export const documents: Record<string, () => JSX.Element> = { P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, X1, X2, X3, X4, X5, X6, X7 }
+/** A police warning about real truck robberies: same road, same story. But real victims lost their phones and wallets. */
+const X9 = () => (
+  <Sheet org="Công an tỉnh Bình Thuận · Phòng CSHS" title="Thông báo cảnh giác">
+    <p>Từ 05/10 đến 24/10/2025, trên QL1A đoạn qua huyện Hàm Thuận Nam xảy ra <b>3 vụ cướp tài sản</b> của tài xế xe tải.</p>
+    <p>Thủ đoạn: nhóm 3 người bịt mặt đi xe 7 chỗ tạt đầu, dùng dao khống chế, <Mark>trói chặt tay chân bằng dây rút</Mark>.</p>
+    <p>Tài sản bị cướp: <Mark>điện thoại, tiền mặt, ví giấy tờ</Mark> của tài xế. Chưa vụ nào bị lấy hàng hóa.</p>
+    <p className="pt-1 text-[10px] opacity-70">Đề nghị các doanh nghiệp vận tải nhắc tài xế không dừng xe dọc đường vào ban đêm.</p>
+    <Stamp text="CA tỉnh Bình Thuận" className="bottom-3 right-6" />
+  </Sheet>
+)
+
+/** Phúc got 5 million from Kiều the day before the trip. An advance on wages, as the payroll shows. */
+const X10 = () => (
+  <Sheet org="Ngân hàng Nông nghiệp · Sao kê tài khoản" title="Trần Minh Phúc">
+    {[
+      ['25/10', '+ 7.500.000', 'KIEU PHAT LUONG T10'],
+      ['28/10', '- 1.200.000', 'chuyen cho Ngoc Anh'],
+      ['01/11', '+ 5.000.000', 'DOAN THI KIEU tam ung', true],
+      ['02/11', '- 500.000', 'rut tien mat Phan Rang'],
+    ].map(([a, b, c, m]) => (
+      <div key={String(a) + b} className="grid grid-cols-[40px_80px_1fr] gap-x-2 border-b border-dotted border-black/20">
+        <span>{a}</span>
+        <span className="text-right">{b}</span>
+        <span>{m ? <Mark>{c}</Mark> : c}</span>
+      </div>
+    ))}
+    <p className="pt-1 text-[10px] opacity-70">Ghi chú kế toán Kiều Phát: "Phúc ứng 5tr lương T11, trừ vào 25/11".</p>
+  </Sheet>
+)
+
+/** Tài had already asked the buyer for a better price, and got part of it. The loss was smaller than his note says. */
+const X8 = () => (
+  <Phone header="Email · Tài Đất Đỏ ↔ Hamburg">
+    <p className="rounded-md bg-white/70 p-2">"Giá tiêu lên 152, giao đúng 98 thì tôi lỗ nặng. Xin anh chia lại phần chênh." · 15/10/2025</p>
+    <p className="rounded-md bg-[#d7ecd9] p-2 text-right">"OK, we accept 125.000 VND/kg for this lot. Please ship before 15/11." · 21/10/2025</p>
+    <p className="text-[10px] opacity-70">Phụ lục giá mới ký 22/10, sáu ngày trước khi mua bảo hiểm.</p>
+  </Phone>
+)
+
+export const documents: Record<string, () => JSX.Element> = { P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, X1, X2, X3, X4, X5, X6, X7, X8, X9, X10 }

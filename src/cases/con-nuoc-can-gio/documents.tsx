@@ -405,4 +405,51 @@ const X6 = () => (
   </Phone>
 )
 
-export const documents: Record<string, () => JSX.Element> = { P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, X1, X2, X3, X4, X5, X6 }
+/** Mediation record: Khang's threat in his own hand. Loud, but he was at the ferry all night. */
+const X7 = () => (
+  <Sheet org="UBND xã Long Hòa · Tổ hòa giải" title="Biên bản hòa giải">
+    <Row k="Ngày" v="08/08/2025" />
+    <Row k="Bên cho vay" v="Lý Minh Khang" />
+    <Row k="Bên vay" v="Trương Văn Lực" />
+    <Row k="Số nợ" v="1.800.000.000 đ" strong />
+    <p>Ông Lực xin khất tới <b>10/09/2025</b>, ông Khang đồng ý.</p>
+    <p>
+      Ghi thêm tay bên lề: <Mark>"Quá hạn tôi tự xử. — Khang"</Mark>
+    </p>
+    <Signature name="M. Khang" />
+  </Sheet>
+)
+
+/** Hồng's rotating-savings book: explains both her savings account and her "tomorrow it's all over" text. */
+const X8 = () => (
+  <Phone header="Thư viện ảnh · Hồng">
+    <div className="rounded-md bg-[#efe3c8] p-2 font-mono text-[10px] text-[#2d1f18]">
+      <p className="mb-1 text-center font-semibold">SỔ HỤI CHỊ TƯ BẾN ĐÒ · DÂY 10 TRIỆU</p>
+      {[
+        ['10/01', 'Kỳ 1', 'đóng'],
+        ['18/05', 'Kỳ 5', 'HỐT 200tr'],
+        ['10/08', 'Kỳ 8', 'đóng'],
+        ['10/09', 'Kỳ chót', 'đóng xong'],
+      ].map(([a, b, c]) => (
+        <div key={a} className="grid grid-cols-[40px_1fr_auto] gap-1 border-b border-dotted border-black/25">
+          <span>{a}</span>
+          <span>{b}</span>
+          <span>{c}</span>
+        </div>
+      ))}
+      <p className="pt-1 text-[9px] opacity-70">Ghi tay: "hốt xong gửi ngân hàng, để dành cho con Như mổ mắt".</p>
+    </div>
+    <PhotoMeta when="13/09/2025 · 09:20" where="Nhà riêng, Long Hòa" />
+  </Phone>
+)
+
+/** Hồng's text to her sister at 21:15. Sounds like she knew. She meant the last savings-circle payment. */
+const X9 = () => (
+  <Phone header="Tin nhắn · Út Lan (Bình Dương)">
+    <p className="rounded-md bg-white/70 p-2">"Ảnh đi rồi. Mai là xong hết rồi, em đừng lo cho chị nữa." · 21:15</p>
+    <p className="rounded-md bg-[#d7ecd9] p-2 text-right">"Dạ, xong rồi chị ngủ cho ngon nha. Lo hoài bạc tóc." · 21:17</p>
+    <p className="text-[10px] opacity-70">Trích từ điện thoại bà Hồng, đêm 9/9/2025.</p>
+  </Phone>
+)
+
+export const documents: Record<string, () => JSX.Element> = { P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, X1, X2, X3, X4, X5, X6, X7, X8, X9 }
