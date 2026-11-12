@@ -2,6 +2,7 @@ import { useId } from 'react'
 import { accent, ink, shade } from '@/art/palette'
 import { rng } from '@/art/primitives'
 import { Frame, Glow } from '@/art/soft'
+import { Paper } from '@/art/noiseProps'
 
 // Backdrops for the four zones of Chapter 4, in the soft flat style of the
 // earlier chapters. Objects sit near their hotspot positions in case.json
@@ -272,6 +273,7 @@ function Roadside() {
         <rect x="120" y="430" width="70" height="40" fill="#cfa45a" />
       </g>
       <text x="200" y="330" textAnchor="middle" fontSize="18" fontWeight="700" fill="#f3e4c4" fontFamily="Barlow Condensed, sans-serif">NƯỚC MÍA</text>
+      <Paper x={224} y={700} color="#d9d2c2" />
     </Frame>
   )
 }
@@ -338,6 +340,7 @@ function PepperStore() {
           <rect key={i} x={100} y={760 - i * 22} width="260" height="20" fill={C.woodLit} />
         ))}
       </g>
+      <Paper x={960} y={322} />
     </Frame>
   )
 }
