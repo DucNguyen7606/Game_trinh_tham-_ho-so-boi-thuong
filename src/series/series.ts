@@ -119,8 +119,8 @@ export const SERIES = {
       area: 'quan-3',
       spot: [518, 540],
       title: 'Đồng hồ dừng lúc 22:47',
-      blurb: 'Ông kiến trúc sư già nằm dưới chân cầu thang gỗ trong biệt thự Pháp. Đồng hồ trên tay ông dừng lúc 22:47, đúng lúc người cháu đòi 6 tỷ đang ở tiệc cưới. Nhưng cái núm vặn đang ở sai nấc.',
-      place: 'Quận 3 · tháng 3',
+      blurb: 'Ông kiến trúc sư già nằm dưới chân cầu thang gỗ trong biệt thự Pháp. Đồng hồ trên tay ông dừng lúc 22:47, đúng lúc người cháu đòi 7 tỷ đang ở tiệc cưới. Nhưng cái núm vặn đang ở sai nấc.',
+      place: 'Quận 3 · tháng 4',
     },
   ] satisfies Chapter[],
 }

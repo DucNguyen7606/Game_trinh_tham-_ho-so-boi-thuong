@@ -110,7 +110,7 @@ function Desk({ stamp, sub }: { stamp: string; sub: string }) {
     <>
       <rect width="360" height="240" fill="#5a3a24" />
       <rect x="70" y="30" width="220" height="180" fill="#fbf4e4" stroke={LINE} strokeWidth="2" transform="rotate(-3 180 120)" />
-      <text x="180" y="60" textAnchor="middle" fontSize="10" fill={LINE} fontFamily={mono}>HỒ SƠ BỒI THƯỜNG 0903</text>
+      <text x="180" y="60" textAnchor="middle" fontSize="10" fill={LINE} fontFamily={mono}>HỒ SƠ BỒI THƯỜNG 1304</text>
       {Array.from({ length: 5 }, (_, i) => (
         <rect key={i} x="96" y={76 + i * 14} width={150 - (i % 2) * 30} height="5" fill="#c4b494" />
       ))}
@@ -146,8 +146,17 @@ const Transfer = ({ amount, to }: { amount: string; to: string }) => (
 export const epilogue: Record<string, EpiloguePanel[]> = {
   full: [
     {
+      id: 'file',
+      caption: 'Hồ sơ 1304 đóng lại. An Tín từ chối theo Điều 7: ông Hiển mất vì bệnh tim, không phải tai nạn. Hồ sơ dựng hiện trường được chuyển cho công an.',
+      Art: () => (
+        <Panel>
+          <Desk stamp="TỪ CHỐI · ĐIỀU 7, ĐIỀU 9" sub="CHUYỂN CA Q.3: TRẦN ĐÌNH KHOA" />
+        </Panel>
+      ),
+    },
+    {
       id: 'court',
-      caption: 'Tôn Thất Khoa bị đưa ra xét xử về tội giết người. Hai con ốc đồng và chiếc đồng hồ bị kéo núm nằm trên bàn vật chứng.',
+      caption: 'Trần Đình Khoa bị xét xử về tội gian lận bảo hiểm, không phải tội giết người. Hai con ốc đồng và chiếc đồng hồ bị kéo núm nằm trên bàn vật chứng.',
       Art: () => (
         <div className="relative">
           <Panel people={[{ id: 'khoa', x: 50, mood: 'worried', size: 42 }]}>
@@ -159,7 +168,7 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
     },
     {
       id: 'chau',
-      caption: 'Chị Châu nhận 6 tỷ theo Điều 8. Chị không bán căn biệt thự. Bàn vẽ của ba vẫn kê sát cửa sổ, bản vẽ dang dở được đóng khung.',
+      caption: 'Chị Châu không bán căn biệt thự. Bản vẽ dang dở của ba được đóng khung, giữ nguyên nét chì cuối cùng.',
       Art: () => (
         <Panel people={[{ id: 'chau', x: 70, mood: 'neutral', size: 44 }]}>
           <Study />
@@ -184,29 +193,60 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
         </Panel>
       ),
     },
-    {
-      id: 'file',
-      caption: 'Hồ sơ 0903 đóng lại. An Tín chi đủ 6 tỷ, nhưng không chi cho người có tên trên hợp đồng.',
-      Art: () => (
-        <Panel>
-          <Desk stamp="CHI TRẢ 6 TỶ · NGƯỜI THỪA KẾ" sub="ĐIỀU 8: KHOA MẤT QUYỀN NHẬN" />
-        </Panel>
-      ),
-    },
   ],
   half: [
     {
       id: 'file',
-      caption: 'Chị Châu được chi trả, Khoa bị khởi tố.',
+      caption: 'An Tín từ chối đúng: ông Hiển mất vì bệnh tim.',
       Art: () => (
         <Panel>
-          <Desk stamp="CHI TRẢ 6 TỶ · NGƯỜI THỪA KẾ" sub="KHỞI TỐ: TÔN THẤT KHOA" />
+          <Desk stamp="TỪ CHỐI · ĐIỀU 7" sub="NGƯỜI DỰNG CẢNH: CHƯA RÕ" />
         </Panel>
       ),
     },
     {
       id: 'khoa',
-      caption: 'Hồ sơ vẫn ghi giờ chết 22:47. Luật sư của Khoa đưa ra tấm ảnh tiệc cưới, tòa trả hồ sơ để điều tra lại từ đầu.',
+      caption: 'Nhưng hồ sơ chỉ sai người dựng cảnh. Khoa chỉ bị phạt hành chính, dọn khỏi nhà phụ, mang theo hộp đồ nghề.',
+      Art: () => (
+        <Panel people={[{ id: 'khoa', x: 34, mood: 'smile', size: 44 }]}>
+          <Gate />
+        </Panel>
+      ),
+    },
+  ],
+  wrong: [
+    {
+      id: 'file',
+      caption: 'Bạn không chi đồng nào, nhưng hồ sơ kể một cái chết khác với kết luận pháp y.',
+      Art: () => (
+        <Panel>
+          <Desk stamp="TỪ CHỐI" sub="LÝ DO: CHƯA KHỚP PHÁP Y" />
+        </Panel>
+      ),
+    },
+    {
+      id: 'player',
+      caption: 'Luật sư của Khoa bám vào chỗ lệch đó. Bạn mất nửa năm ra tòa giải trình mới giữ được quyết định.',
+      Art: () => (
+        <Panel people={[{ id: 'player', x: 40, mood: 'worried', size: 52 }]}>
+          <Office />
+        </Panel>
+      ),
+    },
+  ],
+  framed: [
+    {
+      id: 'transfer',
+      caption: 'Bạn chi 7 tỷ cho chị Châu và kết luận Khoa giết chú.',
+      Art: () => (
+        <Panel>
+          <Transfer amount="7.000.000.000đ" to="TRAN MINH CHAU" />
+        </Panel>
+      ),
+    },
+    {
+      id: 'khoa',
+      caption: 'Ba tháng sau, phụ lục pháp y được đọc kỹ: ông Hiển mất vì bệnh tim, gãy cổ sau khi đã mất. Khoa được thả về tội giết người.',
       Art: () => (
         <div className="relative">
           <Panel people={[{ id: 'khoa', x: 50, mood: 'smile', size: 42 }]}>
@@ -216,75 +256,41 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
         </div>
       ),
     },
-  ],
-  wrong: [
     {
-      id: 'file',
-      caption: 'Người bạn chỉ ra có ngoại phạm vững. Hồ sơ hình sự bị trả về.',
+      id: 'player',
+      caption: 'An Tín đã chi 7 tỷ cho một hợp đồng không phải trả. Bạn bị đình chỉ công việc.',
+      Art: () => (
+        <Panel people={[{ id: 'player', x: 40, mood: 'worried', size: 52 }]}>
+          <Office />
+        </Panel>
+      ),
+    },
+  ],
+  paid: [
+    {
+      id: 'transfer',
+      caption: 'Bạn duyệt chi 7 tỷ cho Khoa, đúng như đơn yêu cầu.',
       Art: () => (
         <Panel>
-          <Desk stamp="TRẢ HỒ SƠ" sub="KHÔNG ĐỦ CĂN CỨ" />
+          <Transfer amount="7.000.000.000đ" to="TRAN DINH KHOA" />
         </Panel>
       ),
     },
     {
       id: 'khoa',
-      caption: 'Khoa dọn khỏi nhà phụ, mang theo hộp đồ nghề. Hai con ốc đồng không bao giờ được tìm thấy nữa.',
+      caption: 'Một tuần sau, Khoa trả sạch nợ rồi đóng cửa nhà phụ đi Đà Nẵng.',
       Art: () => (
         <Panel people={[{ id: 'khoa', x: 34, mood: 'smile', size: 44 }]}>
           <Gate />
         </Panel>
       ),
     },
-  ],
-  reward: [
-    {
-      id: 'transfer',
-      caption: 'Bạn duyệt chi 6 tỷ cho Khoa, đúng như tên ghi trên hợp đồng.',
-      Art: () => (
-        <Panel>
-          <Transfer amount="6.000.000.000đ" to="TON THAT KHOA" />
-        </Panel>
-      ),
-    },
-    {
-      id: 'khoa',
-      caption: 'Một tuần sau, Khoa trả sạch 2,3 tỷ tiền nợ. Ba tháng sau, anh ta bị khởi tố, nhưng số tiền đã đi mất.',
-      Art: () => (
-        <div className="relative">
-          <Panel people={[{ id: 'khoa', x: 50, mood: 'worried', size: 42 }]}>
-            <Courtroom />
-          </Panel>
-          <DockRail />
-        </div>
-      ),
-    },
     {
       id: 'chau',
-      caption: 'Chị Châu kiện An Tín vì chi tiền cho kẻ đã giết ba mình. Bạn bị đình chỉ công việc.',
+      caption: 'Chị Châu không bao giờ biết ba mình ra đi bên bàn vẽ, chứ không phải dưới chân cầu thang.',
       Art: () => (
-        <Panel people={[{ id: 'chau', x: 40, mood: 'angry', size: 44 }, { id: 'player', x: 78, mood: 'worried', size: 40 }]}>
-          <Office />
-        </Panel>
-      ),
-    },
-  ],
-  unjust: [
-    {
-      id: 'court',
-      caption: 'Chị Châu kiện An Tín, mang theo kết luận pháp y và hợp đồng. Bị đẩy ngã vẫn là tai nạn với người được bảo hiểm. Công ty thua kiện.',
-      Art: () => (
-        <Panel people={[{ id: 'chau', x: 50, mood: 'angry', size: 44 }]}>
-          <Courtroom />
-        </Panel>
-      ),
-    },
-    {
-      id: 'player',
-      caption: 'An Tín phải chi đủ 6 tỷ kèm lãi chậm trả. Bạn bị phê bình vì đọc sai Điều 3 và Điều 8.',
-      Art: () => (
-        <Panel people={[{ id: 'player', x: 40, mood: 'worried', size: 52 }]}>
-          <Office />
+        <Panel people={[{ id: 'chau', x: 70, mood: 'worried', size: 44 }]}>
+          <Study />
         </Panel>
       ),
     },

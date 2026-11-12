@@ -121,8 +121,10 @@ function Hall() {
         <rect x="1196" y="92" width="404" height="12" fill={C.lim} />
       </g>
       <rect x="1205" y="120" width="12" height="9" fill="#e7c48a" />
-      {/* One slipper at the edge of the top step */}
-      <path d="M1236,196 q24,-14 54,-4 q8,8 -6,12 l-44,0 q-8,-2 -4,-8 Z" fill={C.green} {...O} strokeWidth={2} />
+      {/* Two drag marks along the landing carpet towards the top step */}
+      {[0, 1].map((k) => (
+        <path key={k} d={`M${1560 - k * 10},${200 + k * 8} L${1150},${200 + k * 8}`} stroke="#e8c9a8" strokeWidth="3" strokeDasharray="14 6" opacity="0.8" />
+      ))}
 
       {/* The staircase, eight steps from the landing down to the hall */}
       {Array.from({ length: 8 }, (_, i) => {
@@ -224,6 +226,17 @@ function Study() {
         <rect x="600" y="430" width="340" height="14" fill={C.lim} />
       </g>
 
+      {/* Armchair pulled up to the drafting table, cushion still sunk */}
+      <g {...O}>
+        <rect x="660" y="520" width="200" height="40" rx="10" fill="#6b3a2a" />
+        <rect x="670" y="440" width="180" height="90" rx="20" fill="#7d4a34" />
+        <rect x="650" y="500" width="30" height="80" rx="8" fill="#6b3a2a" />
+        <rect x="840" y="500" width="30" height="80" rx="8" fill="#6b3a2a" />
+        <line x1="670" y1="580" x2="660" y2="660" strokeWidth="6" />
+        <line x1="850" y1="580" x2="860" y2="660" strokeWidth="6" />
+        <path d="M760,664 l36,-6" stroke={accent.amber} strokeWidth="6" />
+      </g>
+      <path d="M755,270 C760,320 768,370 790,410" fill="none" stroke="#3a3a3a" strokeWidth="2.5" />
       {/* Side table with the weekly pill box (hotspot hop-thuoc 480,558) */}
       <g {...O}>
         <rect x="340" y="600" width="300" height="20" fill={C.lim} />
@@ -395,10 +408,10 @@ function Annex() {
         {Array.from({ length: 28 }, (_, i) => (
           <rect key={i} x={932 + (i % 7) * 28} y={204 + Math.floor(i / 7) * 46} width="22" height="38" fill="none" strokeWidth={1} />
         ))}
-        <circle cx="943" cy="223" r="16" fill="none" stroke={accent.red} strokeWidth="3" />
-        <rect x="1100" y="250" width="22" height="38" fill={accent.amber} opacity="0.5" strokeWidth={1} />
+        <circle cx="1083" cy="223" r="16" fill="none" stroke={accent.red} strokeWidth="3" />
+        <rect x="1072" y="250" width="22" height="38" fill={accent.amber} opacity="0.5" strokeWidth={1} />
       </g>
-      <text x="1025" y="174" textAnchor="middle" fontSize="20" fontWeight="700" fill="#fff" fontFamily="Barlow Condensed, sans-serif">THÁNG 3 · 2026</text>
+      <text x="1025" y="174" textAnchor="middle" fontSize="20" fontWeight="700" fill="#fff" fontFamily="Barlow Condensed, sans-serif">THÁNG 4 · 2026</text>
 
       {/* Door with the suit hanging behind it (hotspot ao-vest 1376,414) */}
       <g {...O}>

@@ -1,6 +1,5 @@
 import { accent, clothColors, ink, shade } from '@/art/palette'
 import { P } from '@/art/primitives'
-import { Portrait, type PortraitSpec } from '@/art/Portrait'
 import caseData from './case.json'
 import { C, sceneArt, stepAt } from './scenes'
 import { documents } from './documents'
@@ -9,7 +8,7 @@ import type { ReconstructionPanel } from '@/game/types'
 // "Dựng lại vụ án": the true sequence of events, shown after the player signs.
 
 /** Flat, faceless figure in the scene's 1600x900 space. (x, y) is where the feet touch the ground. */
-function Person({ x, y, h = 260, color, flip = false, hair = ink.night, hold, arms }: { x: number; y: number; h?: number; color: string; flip?: boolean; hair?: string; hold?: 'screwdriver' | 'watch'; arms?: 'push' | 'up' }) {
+function Person({ x, y, h = 260, color, flip = false, hair = ink.night, hold, arms }: { x: number; y: number; h?: number; color: string; flip?: boolean; hair?: string; hold?: 'screwdriver' | 'watch'; arms?: 'push' | 'up' | 'carry' }) {
   const s = h / 260
   const dark = shade(color, -0.35)
   const skin = '#d9a47a'
@@ -22,6 +21,11 @@ function Person({ x, y, h = 260, color, flip = false, hair = ink.night, hold, ar
         <>
           <polygon points={P([[30, -196], [96, -176], [94, -162], [24, -176]])} fill={color} />
           <polygon points={P([[30, -150], [96, -168], [98, -154], [26, -134]])} fill={dark} />
+        </>
+      ) : arms === 'carry' ? (
+        <>
+          <polygon points={P([[30, -196], [80, -150], [72, -140], [24, -176]])} fill={color} />
+          <polygon points={P([[-30, -196], [20, -150], [12, -140], [-24, -176]])} fill={dark} />
         </>
       ) : arms === 'up' ? (
         <>
@@ -80,25 +84,34 @@ const Marker = ({ x, y, n }: { x: number; y: number; n: string }) => (
 )
 
 const Dusk = () => <rect width="1600" height="900" fill="#1e2440" opacity="0.4" />
+const Night = () => <rect width="1600" height="900" fill="#141a2a" opacity="0.55" />
 const KHOA = clothColors.white
 const HIEN = clothColors.khaki
-const top = stepAt(0)
 const third = stepAt(2)
+
+/** Ông Hiển slumped over the drafting table, drawn in the study's space. */
+const Slumped = () => (
+  <g transform="translate(760 560)">
+    <polygon points={P([[-40, -120], [40, -120], [70, -60], [-10, -40]])} fill={HIEN} stroke={ink.night} strokeWidth="3" />
+    <ellipse cx="66" cy="-128" rx="24" ry="20" fill="#efc39b" stroke={ink.night} strokeWidth="3" />
+    <path d="M48,-140 q18,-14 40,-2" fill="none" stroke="#cfccc6" strokeWidth="8" />
+  </g>
+)
 
 export const reconstruction: ReconstructionPanel[] = (
   [
     {
-      time: '02/03',
-      title: 'Một cuộc gọi hỏi điều khoản',
-      text: 'Nợ 2,3 tỷ, chủ nợ hẹn tới cuối tháng 3, còn ông chú thì không chịu bán nhà. Khoa gọi lên tổng đài An Tín hỏi: người được bảo hiểm té cầu thang trong nhà thì có được chi đủ không, có cần giám định giờ chết không. Rồi anh ta ghi lên lịch: "Cưới Tùng. Đi trễ."',
+      time: '06/04',
+      title: '"Bệnh thì không chi"',
+      text: 'Nợ 2,3 tỷ, chủ nợ hẹn tới cuối tháng 4, còn ông chú bị tim thì không chịu bán nhà. Khoa gọi tổng đài An Tín hỏi: chú mất vì bệnh tim thì có được chi không. Tổng đài trả lời: không, bệnh lý bị loại trừ, chỉ chi khi tai nạn, như té ngã.',
       questionId: 'q7',
-      Art: () => <OnDesk ids={['P9', 'P8']} />,
+      Art: () => <OnDesk ids={['P9', 'P1']} />,
     },
     {
-      time: '09/03, 19:30',
-      title: 'Người cuối cùng thấy ông còn sống',
-      text: 'Chị Liên về lúc 18:05. Chú Tư khóa cổng ra về lúc 19:30, ngoái lên thấy ông Hiển đứng ở cửa sổ lầu, đèn sáng. Camera hẻm ghi lại cảnh đó. Trong biệt thự giờ chỉ còn ông Hiển và Khoa, người đã về nhà từ 18:20.',
-      questionId: 'q4',
+      time: '13/04, 19:30',
+      title: 'Lần cuối ông đứng bên cửa sổ',
+      text: 'Chị Liên về lúc 18:05, ông Hiển hơi mệt. Chú Tư khóa cổng ra về lúc 19:30, ngoái lên thấy ông đứng ở cửa sổ phòng làm việc, đèn sáng. Camera hẻm ghi lại cảnh đó.',
+      questionId: 'q1',
       Art: () => (
         <Staged zone="san-cong">
           <Dusk />
@@ -108,65 +121,60 @@ export const reconstruction: ReconstructionPanel[] = (
       ),
     },
     {
-      time: 'Khoảng 19:40',
-      title: 'Hai con ốc đồng',
-      text: 'Khoa lên cầu thang, dùng tua vít vặn hai con ốc của thanh chặn thảm ở bậc thứ ba rồi đút vào túi. Ren gỗ không sứt chút nào. Anh ta kéo tấm thảm lệch đi cho giống người trượt chân.',
-      questionId: 'q5',
+      time: 'Khoảng 19:45',
+      title: 'Nét chì cuối cùng',
+      text: 'Ông Hiển ngồi vẽ tiếp mặt đứng căn biệt thự. Cơn nhồi máu cơ tim tới giống hệt lần tháng 3, nhưng lần này ông không qua được. Nét chì trượt dài xuống mép giấy, cây bút rơi gãy dưới ghế. Ông gục trên bàn vẽ, không ai hay.',
+      questionId: 'q4',
       Art: () => (
-        <Staged zone="cau-thang">
-          <Dusk />
-          <Person x={third.x + 60} y={third.y + 80} h={250} color={KHOA} hold="screwdriver" flip />
-          <Marker x={third.x + 40} y={third.y - 40} n="2" />
+        <Staged zone="phong-lam-viec">
+          <Slumped />
+          <Marker x={752} y={200} n="2" />
         </Staged>
       ),
     },
     {
-      time: 'Khoảng 19:45',
-      title: 'Ở đầu cầu thang',
-      text: 'Khoa gọi ông Hiển ra đầu cầu thang. Ông bám trụ tay vịn, rơi một chiếc dép ở mép bậc trên cùng. Khoa nắm chặt hai bắp tay ông, giật ông khỏi trụ tay vịn rồi đẩy xuống. Ông lăn qua tám bậc gỗ lim, gãy cổ dưới chân cầu thang.',
-      questionId: 'q6',
+      time: '20:00 đến 21:41',
+      title: 'Chuông reo, đèn vẫn sáng',
+      text: 'Chị Châu gọi máy bàn lúc 20:00 và 20:14, máy để ngay cạnh tay ông. Cữ thuốc 21:00 còn nguyên. 20:42 Khoa đi đám cưới, không lên chào chú. 21:35 Thắng bấm chuông, thấy đèn phòng còn sáng và bóng ông gục bên cửa sổ, tưởng ông ngủ gật.',
+      questionId: 'q1',
+      Art: () => <OnDesk ids={['X5', 'X6']} />,
+    },
+    {
+      time: '00:38 đến 01:12',
+      title: 'Kéo ra cầu thang',
+      text: 'Khoa về thấy đèn phòng chú còn sáng, lên lầu thì ông đã lạnh. Nhớ câu "bệnh thì không chi", anh ta xốc nách kéo ông qua hành lang, hai gót chân để lại vệt trên thảm, rồi thả ông xuống cầu thang. Ông đã ngồi như vậy năm tiếng, hoen tử thi đã in ở mông và đùi.',
+      questionId: 'q3',
       Art: () => (
         <Staged zone="cau-thang">
-          <Dusk />
-          <Person x={top.x + 165} y={top.y - 4} h={180} color={KHOA} arms="push" flip />
-          <Person x={top.x + 90} y={top.y - 4} h={168} color={HIEN} hair="#cfccc6" arms="up" />
+          <Night />
+          <Person x={1330} y={196} h={180} color={KHOA} arms="carry" flip />
           <Marker x={1460} y={70} n="3" />
         </Staged>
       ),
     },
     {
-      time: '20:00 và 20:14',
-      title: 'Chuông điện thoại không ai nghe',
-      text: 'Như mọi tối, chị Châu gọi máy bàn của ba lúc 8 giờ. Rồi 8 giờ 14. Không ai nhấc máy. Trên lầu, ô thuốc 21:00 của ngày thứ Hai mãi mãi còn nguyên ba viên.',
-      questionId: 'q3',
-      Art: () => <OnDesk ids={['X5', 'P6']} />,
-    },
-    {
-      time: 'Khoảng 20:30',
-      title: 'Kim đồng hồ dừng lúc 22:47',
-      text: 'Khoa chỉnh chiếc Seiko trên tay ông chú sang 22:47, đập mặt kính vào cạnh bậc thang. Đồng hồ tự động thì va đập không làm nó dừng, nên anh ta để núm ở nấc chỉnh giờ cho kim đứng yên. Rồi anh ta tắt đèn cầu thang.',
-      questionId: 'q2',
+      time: 'Khoảng 01:00',
+      title: 'Hai con ốc và một giờ giả',
+      text: 'Khoa tháo hai con ốc thanh chặn thảm ở bậc thứ ba cho giống người trượt chân. Rồi anh ta chỉnh chiếc Seiko sang 22:47, lúc mình đang nâng ly ở tiệc cưới, đập kính vào cạnh bậc và để núm ở nấc chỉnh giờ cho kim đứng yên. 01:12, đèn phòng làm việc tắt.',
+      questionId: 'q6',
       Art: () => (
         <Staged zone="cau-thang">
-          <Rect />
-          <Person x={640} y={850} h={230} color={KHOA} hold="watch" />
-          <Marker x={740} y={660} n="4" />
+          <Night />
+          <Person x={third.x + 60} y={third.y + 80} h={250} color={KHOA} hold="screwdriver" flip />
+          <Marker x={third.x + 40} y={third.y - 40} n="4" />
+          <Marker x={740} y={660} n="5" />
         </Staged>
       ),
     },
     {
-      time: '20:42 đến 00:38',
-      title: 'Ngoại phạm tới trễ',
-      text: 'Tiệc cưới khai lúc 19:00, nhưng 20:42 Khoa mới mặc vest dắt xe ra cổng. Lúc 22:46 anh ta nâng ly với cô dâu chú rể, để trăm người làm chứng cho giờ ghi trên đồng hồ. Còn Hưng tới cổng lúc 21:35, bấm chuông mà không ai mở.',
-      questionId: 'q4',
-      Art: () => <OnDesk ids={['X3', 'P5']} />,
+      time: '14/04 đến 16/04',
+      title: 'Một hồ sơ tai nạn',
+      text: 'Sáng 14/4 chú Tư phát hiện ông dưới chân cầu thang. Công an ghi nhận té ngã. Hai ngày sau Khoa nộp đơn đòi 7 tỷ, kèm tấm ảnh tiệc cưới lúc 22:46. Không có án mạng nào, chỉ có một cái chết vì bệnh bị dựng thành tai nạn.',
+      questionId: 'q2',
+      Art: () => <OnDesk ids={['P2', 'P7']} />,
     },
   ] as ReconstructionPanel[]
 ).map((p) => ({ ...p, kind: 'truth' as const }))
-
-function Rect() {
-  return <rect width="1600" height="900" fill="#141a2a" opacity="0.55" />
-}
 
 // ---------------------------------------------------------------------------
 // The player's verdict told as a story first, then each wrong pick taken apart.
@@ -174,25 +182,6 @@ function Rect() {
 type Picks = Record<string, string>
 const suspect = (id: string) => caseData.suspects.find((s) => s.id === id)!
 const colorOf = (id: string) => clothColors[suspect(id).portrait.outfitColor as keyof typeof clothColors]
-
-function Pinned({ who, ids }: { who: string; ids: string[] }) {
-  return (
-    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[radial-gradient(circle_at_40%_30%,#3b4250,#15161b_75%)] p-6">
-      <div className="shrink-0 bg-[#f3e4c4] p-1.5 shadow-lg" style={{ rotate: '-3deg' }}>
-        <Portrait spec={suspect(who).portrait as PortraitSpec} size={190} />
-        <p className="pt-1 text-center font-mono text-xs text-[#2d1f18]">{suspect(who).name}</p>
-      </div>
-      {ids.map((id, i) => {
-        const Doc = documents[id]
-        return (
-          <div key={id} className="w-[290px] shrink-0" style={{ rotate: `${i % 2 ? -2 : 2}deg` }}>
-            <Doc />
-          </div>
-        )
-      })}
-    </div>
-  )
-}
 
 const PanelStamp = ({ text, color }: { text: string; color: string }) => (
   <div
@@ -203,61 +192,70 @@ const PanelStamp = ({ text, color }: { text: string; color: string }) => (
   </div>
 )
 
-const killerTheory: Record<string, string> = {
-  khoa: 'Theo bạn, Khoa tháo ốc thanh chặn thảm, đẩy ông chú từ đầu cầu thang xuống, rồi chỉnh đồng hồ để có ngoại phạm ở tiệc cưới.',
-  chau: 'Theo bạn, chị Châu muốn bán căn biệt thự nên đã ra tay với ba mình.',
-  tu: 'Theo bạn, chú Tư ra tay trước khi khóa cổng ra về, rồi sáng hôm sau làm như mới phát hiện.',
-  hung: 'Theo bạn, Hưng bị từ chối bán nhà lần thứ ba nên đã vào biệt thự tối 9/3 và đẩy ông Hiển.',
-  none: 'Theo bạn, không ai gây ra chuyện này. Ông Hiển tự trượt chân trên tấm thảm lỏng.',
+const causeTheory: Record<string, string> = {
+  heart: 'Theo bạn, ông Hiển mất vì cơn nhồi máu cơ tim khi đang ngồi bên bàn vẽ. Cú ngã cầu thang xảy ra sau khi ông đã mất.',
+  pushed: 'Theo bạn, có người nắm lấy ông Hiển ở đầu cầu thang rồi đẩy ông xuống.',
+  slip: 'Theo bạn, ông Hiển tự trượt chân trên tấm thảm lỏng và ngã gãy cổ.',
 }
 
-const clockTheory: Record<string, { text: string; docs: string[] }> = {
-  alibi: { text: 'Theo bạn, đồng hồ bị chỉnh sang 22:47 để giờ chết rơi đúng lúc Khoa đang ở tiệc cưới.', docs: ['X3', 'P4'] },
-  real: { text: 'Theo bạn, 22:47 là giờ ông Hiển ngã thật. Kính vỡ làm đồng hồ dừng.', docs: ['P3', 'P2'] },
-  hung: { text: 'Theo bạn, ai đó dừng đồng hồ ở 22:47 để đổ tội cho Hưng, người tới cổng tối hôm đó.', docs: ['X2', 'P5'] },
+const stagerTheory: Record<string, string> = {
+  khoa: 'Theo bạn, Khoa kéo thi thể ra cầu thang, tháo ốc thanh chặn thảm và chỉnh đồng hồ về lúc mình đang ở tiệc cưới.',
+  chau: 'Theo bạn, chị Châu đã dựng cảnh té cầu thang.',
+  tu: 'Theo bạn, chú Tư dựng cảnh té cầu thang trước khi khóa cổng ra về, hoặc sáng hôm sau.',
+  thang: 'Theo bạn, Thắng đã vào biệt thự và dựng cảnh té cầu thang.',
+  none: 'Theo bạn, không ai dựng gì cả. Những gì ở chân cầu thang là thật.',
 }
 
-const killerRefute: Record<string, { text: string; docs: string[] }> = {
-  chau: { text: 'Lúc 20:00 và 20:14 chị Châu đang gọi cho ba từ nhà ở Quận 7. Camera hẻm không ghi chị tới biệt thự lần nào trong đêm.', docs: ['X5', 'P5'] },
-  tu: { text: 'Chú Tư ra cổng lúc 19:30, một phút sau ông Hiển còn đứng ở cửa sổ lầu. Chú không quay lại cho tới 06:25 sáng.', docs: ['P5', 'P6'] },
-  hung: { text: 'Hưng tới lúc 21:35, khi ông Hiển đã chết gần hai tiếng. Anh bấm chuông sáu phút rồi đi, không bước qua cổng.', docs: ['P5', 'X6'] },
-  none: { text: 'Ốc thanh chặn thảm được vặn ra bằng tua vít và nằm trong hộp đồ nghề của Khoa. Hai bắp tay ông Hiển có dấu ngón tay từ trước lúc chết.', docs: ['P10', 'P7'] },
+const causeRefute: Record<string, { text: string; docs: string[] }> = {
+  pushed: { text: 'Gãy cổ không có phản ứng sống: ông đã mất trước khi chạm bậc thang. Hoen tử thi cho thấy ông ngồi nguyên nhiều giờ sau khi mất. Không ai đẩy một người đã chết.', docs: ['P7', 'P4'] },
+  slip: { text: 'Người trượt chân thì còn sống lúc ngã. Vết gãy của ông không có phản ứng sống, và đôi dép của ông còn xếp ngay ngắn trước cửa phòng làm việc.', docs: ['P7', 'P6'] },
 }
 
-const clockRefute: Record<string, { text: string; docs: string[] }> = {
-  real: { text: 'Pháp y nói ông chết trước 21:30, cháo trong dạ dày mới tiêu một phần. Cữ thuốc 21:00 ông chưa bao giờ bỏ thì vẫn còn nguyên. Ông đã chết từ trước 22:47 rất lâu.', docs: ['P4', 'P6'] },
-  hung: { text: 'Lúc 22:47 Hưng đã rời hẻm hơn một tiếng. Người được lợi từ giờ 22:47 là người đang đứng giữa tiệc cưới đúng phút đó.', docs: ['P5', 'X3'] },
+const stagerRefute: Record<string, { text: string; docs: string[] }> = {
+  chau: { text: 'Đêm đó chị Châu ở nhà Quận 7, gọi cho ba lúc 20:00 và 20:14. Camera hẻm không ghi chị tới biệt thự.', docs: ['X5', 'P5'] },
+  tu: { text: 'Lúc chú Tư ra cổng 19:30, ông Hiển còn sống bên cửa sổ. Sáng 06:25 chú tới thì đèn phòng làm việc đã tắt từ 01:12, khi chú không có trong nhà.', docs: ['P5', 'P6'] },
+  thang: { text: 'Thắng đứng ngoài cổng sáu phút rồi đi, không bước vào. Tường cao 3 m cắm mảnh chai.', docs: ['P5', 'X6'] },
+  none: { text: 'Ốc thanh chặn thảm được vặn ra bằng tua vít và nằm trong hộp đồ nghề của Khoa. Đồng hồ bị kéo núm, thi thể bị dời khỏi ghế.', docs: ['P10', 'P7'] },
 }
 
-function KillerArt({ who }: { who: string }) {
+function CauseArt({ id }: { id: string }) {
+  return (
+    <>
+      {id === 'heart' ? (
+        <Staged zone="phong-lam-viec">
+          <rect width="1600" height="900" fill="#3b4a66" opacity="0.35" style={{ mixBlendMode: 'color' }} />
+          <Slumped />
+        </Staged>
+      ) : (
+        <Staged zone="cau-thang">
+          <rect width="1600" height="900" fill="#3b4a66" opacity="0.35" style={{ mixBlendMode: 'color' }} />
+          {id === 'pushed' && <Person x={1265} y={196} h={180} color="#55606a" arms="push" flip />}
+          <Person x={1190} y={196} h={168} color={HIEN} hair="#cfccc6" arms="up" />
+          <text x="600" y="460" textAnchor="middle" fontSize="120" fontWeight="700" fill="#9fb4c8" opacity="0.5" fontFamily="Bitter, serif">?</text>
+        </Staged>
+      )}
+      <PanelStamp text="Giả thuyết" color="#9fb4c8" />
+    </>
+  )
+}
+
+function StagerArt({ who }: { who: string }) {
   return (
     <>
       <Staged zone="cau-thang">
         <rect width="1600" height="900" fill="#3b4a66" opacity="0.35" style={{ mixBlendMode: 'color' }} />
-        {who !== 'none' && <Person x={top.x + 165} y={top.y - 4} h={180} color={colorOf(who)} arms="push" flip />}
-        <Person x={top.x + 90} y={top.y - 4} h={168} color={HIEN} hair="#cfccc6" arms="up" />
-        <text x="600" y="460" textAnchor="middle" fontSize="120" fontWeight="700" fill="#9fb4c8" opacity="0.5" fontFamily="Bitter, serif">?</text>
+        {who !== 'none' && <Person x={third.x + 60} y={third.y + 80} h={250} color={colorOf(who)} hold="screwdriver" flip />}
+        <text x="1300" y="560" textAnchor="middle" fontSize="120" fontWeight="700" fill="#9fb4c8" opacity="0.5" fontFamily="Bitter, serif">?</text>
       </Staged>
       <PanelStamp text="Giả thuyết" color="#9fb4c8" />
     </>
   )
 }
 
-function ClockArt({ id }: { id: string }) {
-  const t = clockTheory[id]
-  return (
-    <>
-      {id === 'hung' ? <Pinned who="hung" ids={t.docs} /> : <OnDesk ids={t.docs} />}
-      <PanelStamp text="Giả thuyết" color="#9fb4c8" />
-    </>
-  )
-}
-
 const decisionText: Record<string, { title: string; note: string; stamp: string; color: string; docs: string[] }> = {
-  heir: { title: 'Chi 6 tỷ cho người thừa kế', note: 'Bạn cho rằng ông Hiển chết do bị đẩy ngã, vẫn là tai nạn theo Điều 3. Khoa cố ý gây ra cái chết nên mất quyền nhận theo Điều 8, tiền chi cho chị Châu.', stamp: 'Chi cho chị Châu', color: '#3f8a7e', docs: ['P1', 'P7'] },
-  pay: { title: 'Chi 6 tỷ cho Khoa', note: 'Bạn chi đủ 6 tỷ cho Khoa, người thụ hưởng có tên trên hợp đồng.', stamp: 'Chi cho Khoa', color: '#cf9a32', docs: ['P1', 'P2'] },
-  deny: { title: 'Từ chối vì là án mạng', note: 'Bạn cho rằng ông Hiển bị giết chứ không phải gặp tai nạn, nên hợp đồng tai nạn không phải chi.', stamp: 'Từ chối', color: '#b23a2e', docs: ['P3', 'P7'] },
-  ill: { title: 'Từ chối vì bệnh tim', note: 'Bạn cho rằng ông Hiển chết vì bệnh tim, thuộc điều khoản loại trừ, công ty không chi đồng nào.', stamp: 'Từ chối', color: '#b23a2e', docs: ['X1', 'P1'] },
+  deny: { title: 'Từ chối, chuyển hồ sơ gian dối', note: 'Bạn cho rằng ông Hiển mất vì bệnh tim, thuộc Điều 7. Cảnh té cầu thang là dựng lên, nên theo Điều 9 hồ sơ bị từ chối và chuyển công an.', stamp: 'Từ chối', color: '#3f8a7e', docs: ['P1', 'P7'] },
+  heir: { title: 'Chi 7 tỷ cho chị Châu', note: 'Bạn cho rằng Khoa giết chú để lấy tiền nên mất quyền nhận, tiền chi cho người thừa kế là chị Châu.', stamp: 'Chi cho chị Châu', color: '#cf9a32', docs: ['P1', 'X4'] },
+  pay: { title: 'Chi 7 tỷ cho Khoa', note: 'Bạn chi đủ 7 tỷ cho Khoa, người thụ hưởng có tên trên hợp đồng.', stamp: 'Chi cho Khoa', color: '#b23a2e', docs: ['P2', 'P3'] },
 }
 
 function DecisionArt({ id }: { id: string }) {
@@ -271,8 +269,8 @@ function DecisionArt({ id }: { id: string }) {
 }
 
 export function verdictPreview(slotId: string, optionId: string): { Art: () => JSX.Element; note: string } | undefined {
-  if (slotId === 'killer' && killerTheory[optionId]) return { Art: () => <KillerArt who={optionId} />, note: killerTheory[optionId] }
-  if (slotId === 'clock' && clockTheory[optionId]) return { Art: () => <ClockArt id={optionId} />, note: clockTheory[optionId].text }
+  if (slotId === 'cause' && causeTheory[optionId]) return { Art: () => <CauseArt id={optionId} />, note: causeTheory[optionId] }
+  if (slotId === 'stager' && stagerTheory[optionId]) return { Art: () => <StagerArt who={optionId} />, note: stagerTheory[optionId] }
   if (slotId === 'decision' && decisionText[optionId]) return { Art: () => <DecisionArt id={optionId} />, note: decisionText[optionId].note }
   return undefined
 }
@@ -292,21 +290,21 @@ const refutePanel = (title: string, r: { text: string; docs: string[] }): Recons
 
 export function theoryPanels(picks: Picks): ReconstructionPanel[] {
   const panels: ReconstructionPanel[] = []
-  if (killerTheory[picks.killer])
+  if (causeTheory[picks.cause])
     panels.push({
       kind: 'theory',
       time: 'Giả thuyết của bạn',
-      title: picks.killer === 'none' ? 'Một tai nạn trong nhà' : `Hung thủ: ${suspect(picks.killer).name}`,
-      text: killerTheory[picks.killer],
-      Art: () => <KillerArt who={picks.killer} />,
+      title: picks.cause === 'heart' ? 'Mất vì bệnh tim bên bàn vẽ' : picks.cause === 'pushed' ? 'Bị đẩy xuống cầu thang' : 'Trượt chân trên thảm',
+      text: causeTheory[picks.cause],
+      Art: () => <CauseArt id={picks.cause} />,
     })
-  if (clockTheory[picks.clock])
+  if (stagerTheory[picks.stager])
     panels.push({
       kind: 'theory',
       time: 'Giả thuyết của bạn',
-      title: picks.clock === 'alibi' ? 'Giờ giả cho một ngoại phạm' : picks.clock === 'real' ? '22:47 là giờ thật' : 'Giờ giả để đổ tội cho Hưng',
-      text: clockTheory[picks.clock].text,
-      Art: () => <ClockArt id={picks.clock} />,
+      title: picks.stager === 'none' ? 'Không ai dựng cảnh' : `Người dựng cảnh: ${suspect(picks.stager).name}`,
+      text: stagerTheory[picks.stager],
+      Art: () => <StagerArt who={picks.stager} />,
     })
   const d = decisionText[picks.decision]
   if (d)
@@ -319,29 +317,22 @@ export function theoryPanels(picks: Picks): ReconstructionPanel[] {
     })
 
   const wrong: ReconstructionPanel[] = []
-  const kr = killerRefute[picks.killer]
-  if (kr) wrong.push(refutePanel(picks.killer === 'none' ? 'Ông Hiển không tự ngã' : `${suspect(picks.killer).name} không gây ra cái chết`, kr))
-  const cr = clockRefute[picks.clock]
-  if (cr) wrong.push(refutePanel('Chiếc đồng hồ không nói như vậy', cr))
+  const cr = causeRefute[picks.cause]
+  if (cr) wrong.push(refutePanel('Ông Hiển không chết vì cú ngã', cr))
+  const sr = stagerRefute[picks.stager]
+  if (sr) wrong.push(refutePanel(picks.stager === 'none' ? 'Hiện trường đã bị dựng' : `${suspect(picks.stager).name} không dựng cảnh`, sr))
+  if (picks.decision === 'heir')
+    wrong.push(
+      refutePanel('Không có án mạng để mất quyền nhận', {
+        text: 'Ông Hiển mất vì bệnh tim trước khi bị đưa ra cầu thang. Không ai gây ra cái chết, nên không có chuyện chuyển tiền sang người thừa kế. Chết vì bệnh thì hợp đồng tai nạn không chi cho ai cả.',
+        docs: ['P7', 'P1'],
+      }),
+    )
   if (picks.decision === 'pay')
     wrong.push(
-      refutePanel('Người thụ hưởng mất quyền nhận', {
-        text: 'Điều 8: người thụ hưởng cố ý gây ra cái chết của người được bảo hiểm thì mất quyền nhận. Tiền phải chi cho người thừa kế theo pháp luật, là chị Châu.',
+      refutePanel('Cái chết không phải tai nạn', {
+        text: 'Điều 7 loại trừ chết vì bệnh lý, kể cả khi sau đó có thương tích khác. Điều 9: hồ sơ có làm sai lệch hiện trường thì từ chối và chuyển cơ quan chức năng.',
         docs: ['P1', 'P10'],
-      }),
-    )
-  if (picks.decision === 'deny')
-    wrong.push(
-      refutePanel('Bị đẩy ngã vẫn là tai nạn', {
-        text: 'Điều 3 chi trả cả khi người được bảo hiểm chết do hành vi cố ý của người khác. Án mạng không làm mất hợp đồng, chỉ làm hung thủ mất quyền nhận.',
-        docs: ['P1', 'P7'],
-      }),
-    )
-  if (picks.decision === 'ill')
-    wrong.push(
-      refutePanel('Ông Hiển không chết vì bệnh tim', {
-        text: 'Pháp y kết luận tim không nhồi máu, não không xuất huyết. Ông chết vì gãy cổ khi ngã, và hai bắp tay có dấu ngón tay.',
-        docs: ['P4', 'P7'],
       }),
     )
   return [...panels, ...wrong]

@@ -9,40 +9,40 @@ const mono = 'IBM Plex Mono, monospace'
 
 const P1 = () => (
   <Sheet org="Công ty Bảo hiểm An Tín" title="Hợp đồng bảo hiểm tai nạn cá nhân">
-    <Row k="Số hợp đồng" v="AT-TN-2025-0117" />
-    <Row k="Bên mua, đóng phí" v="Tôn Thất Khoa" />
-    <Row k="Người được BH" v="Tôn Thất Hiển, 79 tuổi" />
-    <Row k="Người thụ hưởng" v="Tôn Thất Khoa (cháu)" strong />
-    <Row k="Số tiền BH" v="6.000.000.000 đ" strong />
-    <p className="pt-1 text-[10px]">
-      Điều 3: chi trả khi người được bảo hiểm chết do tai nạn, gồm cả té ngã, <Mark>kể cả do hành vi cố ý của người khác</Mark>.
-    </p>
-    <p className="text-[10px] italic">Điều 7, loại trừ: tự tử; chết do bệnh lý như nhồi máu cơ tim, đột quỵ.</p>
+    <Row k="Số hợp đồng" v="AT-TN-2025-0214" />
+    <Row k="Bên mua, đóng phí" v="Trần Đình Khoa" />
+    <Row k="Người được BH" v="Trần Đình Hiển, 79 tuổi" />
+    <Row k="Người thụ hưởng" v="Trần Đình Khoa (cháu)" strong />
+    <Row k="Số tiền BH" v="7.000.000.000 đ" strong />
+    <p className="pt-1 text-[10px]">Điều 3: chi trả khi người được bảo hiểm chết do tai nạn, gồm cả té ngã.</p>
     <p className="text-[10px]">
-      Điều 8: <Mark>người thụ hưởng cố ý gây ra cái chết thì mất quyền nhận</Mark>. Khi đó số tiền bảo hiểm được chi cho người thừa kế theo pháp luật của người được bảo hiểm.
+      Điều 7, loại trừ: tự tử; <Mark>chết do bệnh lý như nhồi máu cơ tim, đột quỵ</Mark>, kể cả khi sau đó có thương tích khác.
+    </p>
+    <p className="text-[10px] italic">
+      Điều 9: hồ sơ có <Mark>khai báo gian dối, làm sai lệch hiện trường</Mark> thì An Tín từ chối và chuyển cơ quan chức năng.
     </p>
     <div className="flex justify-between">
-      <Signature name="T. T. Khoa" />
-      <Signature name="T. T. Hiển" />
+      <Signature name="T. Đ. Khoa" />
+      <Signature name="T. Đ. Hiển" />
     </div>
   </Sheet>
 )
 
 const P2 = () => (
   <Sheet org="Gửi Công ty Bảo hiểm An Tín" title="Đơn yêu cầu bồi thường">
-    <Row k="Ngày" v="12/03/2026" />
-    <Row k="Người yêu cầu" v="Tôn Thất Khoa" />
-    <Row k="Sự cố" v="Ông Tôn Thất Hiển té cầu thang" />
-    <Row k="Số tiền yêu cầu" v="6.000.000.000 đ" strong />
+    <Row k="Ngày" v="16/04/2026" />
+    <Row k="Người yêu cầu" v="Trần Đình Khoa" />
+    <Row k="Sự cố" v="Ông Trần Đình Hiển té cầu thang" />
+    <Row k="Số tiền yêu cầu" v="7.000.000.000 đ" strong />
     <p className="pt-1 text-[10px]">
       Chú tôi trượt chân trên thảm cầu thang <Mark>khoảng 22:47, giờ trên đồng hồ của chú</Mark>. Thanh chặn thảm đã lỏng từ lâu. Lúc đó tôi đang dự tiệc cưới ở Quận 10, có nhiều người làm chứng.
     </p>
-    <Signature name="T. T. Khoa" />
+    <Signature name="T. Đ. Khoa" />
   </Sheet>
 )
 
 const P3 = () => (
-  <Sheet org="Công an phường Võ Thị Sáu, Quận 3" title="Biên bản khám nghiệm hiện trường · 10/03">
+  <Sheet org="Công an phường Võ Thị Sáu, Quận 3" title="Biên bản khám nghiệm hiện trường · 14/04">
     <Row k="Người phát hiện" v="Phạm Văn Tư, 06:25" />
     <Row k="Vị trí" v="Chân cầu thang, sảnh tầng trệt" strong />
     <Row k="Đồng hồ nạn nhân" v="Seiko, vỡ kính, dừng 22:47" />
@@ -57,36 +57,38 @@ const P3 = () => (
 )
 
 const P4 = () => (
-  <Sheet org="Trung tâm Pháp y TP.HCM" title="Kết luận giám định pháp y số 0311">
-    <Row k="Người chết" v="Tôn Thất Hiển, 79 tuổi" />
-    <Row k="Nguyên nhân chết" v="Gãy đốt sống cổ C2 do ngã" strong />
-    <Row k="Tim" v="Phì đại nhẹ, không nhồi máu" />
-    <Row k="Não" v="Không xuất huyết, không đột quỵ" />
+  <Sheet org="Trung tâm Pháp y TP.HCM" title="Kết luận giám định pháp y số 1404">
+    <Row k="Người chết" v="Trần Đình Hiển, 79 tuổi" />
+    <Row k="Tổn thương 1" v="Nhồi máu cơ tim cấp, thành trước" strong />
+    <Row k="Tổn thương 2" v="Gãy đốt sống cổ C2" strong />
+    <Row k="Não" v="Không xuất huyết" />
     <p className="pt-1 text-[10px]">
-      Thời điểm chết ước tính: <Mark>từ 19:00 đến 21:30 ngày 09/03</Mark>, theo nhiệt độ thi thể và tử ban.
+      Thời điểm chết ước tính: <Mark>từ 19:00 đến 21:30 ngày 13/04</Mark>, theo nhiệt độ thi thể và mức co cứng.
     </p>
     <p className="text-[10px]">Dạ dày: cháo gạo mới tiêu một phần, phù hợp bữa ăn cách lúc chết 1 đến 3 giờ.</p>
+    <p className="text-[10px] italic">Tổn thương nào gây tử vong: chờ phụ lục 02.</p>
     <Signature name="BS. L. T. Mai" />
     <Stamp text="Pháp y" className="bottom-2 left-6" />
   </Sheet>
 )
 
 const P5 = () => (
-  <Sheet org="Tổ dân phố 7 · Camera đầu hẻm Tú Xương" title="Trích xuất camera đêm 09–10/03">
+  <Sheet org="Tổ dân phố 7 · Camera đầu hẻm Tú Xương" title="Trích xuất camera đêm 13–14/04">
     {[
       ['18:05', 'Đào Thị Liên ra cổng, đi bộ'],
-      ['18:20', 'Tôn Thất Khoa về, dắt xe vào sân'],
+      ['18:20', 'Trần Đình Khoa về, dắt xe vào sân'],
       ['19:30', 'Phạm Văn Tư ra cổng, khóa cổng'],
-      ['19:31', 'Ông Hiển đứng ở cửa sổ lầu, đèn sáng'],
+      ['19:31', 'Ông Hiển ở cửa sổ lầu, đèn sáng'],
       ['20:42', 'Khoa dắt xe ra, mặc vest'],
-      ['21:35', 'Lâm Quốc Hưng bấm chuông, chờ'],
-      ['21:41', 'Hưng rời đi, không vào'],
+      ['21:35', 'Lâm Quốc Thắng bấm chuông. Đèn lầu sáng'],
+      ['21:41', 'Thắng rời đi, không vào'],
       ['00:38', 'Khoa về'],
+      ['01:12', 'Đèn phòng làm việc trên lầu tắt'],
       ['06:25', 'Phạm Văn Tư mở cổng'],
     ].map(([t, e]) => (
       <div key={t} className="grid grid-cols-[3rem_1fr] gap-x-2 border-b border-dotted border-black/20 font-mono text-[10px]">
         <span>{t}</span>
-        <span>{t === '19:31' || t === '20:42' ? <Mark>{e}</Mark> : e}</span>
+        <span>{t === '00:38' || t === '01:12' ? <Mark>{e}</Mark> : e}</span>
       </div>
     ))}
     <p className="pt-1 text-[10px] italic">Không ai khác ra vào cổng số 27 trong đêm.</p>
@@ -96,18 +98,19 @@ const P5 = () => (
 )
 
 const P6 = () => (
-  <Sheet org="Sổ chăm sóc tại nhà · Đào Thị Liên" title="Bác Tôn Thất Hiển · tháng 3">
+  <Sheet org="Sổ chăm sóc tại nhà · Đào Thị Liên" title="Bác Trần Đình Hiển · tháng 4">
     <Row k="Thuốc sáng, trưa" v="Điều dưỡng đưa tận tay" />
     <Row k="Thuốc tối 21:00" v="Bác tự uống" strong />
     <p className="pt-1 text-[10px]">
       Ghi chú chung: <Mark>hai năm chưa bỏ cữ 21:00 lần nào</Mark>, sáng nào cũng kiểm hộp thuốc.
     </p>
-    <p className="pt-1 text-[10px] font-bold">Thứ Hai 09/03</p>
+    <p className="text-[10px] italic">18/03: tức ngực khi ngồi vẽ, rơi bút, tự hết sau 10 phút. Đã báo bác sĩ.</p>
+    <p className="pt-1 text-[10px] font-bold">Thứ Hai 13/04</p>
     {[
       ['07:00', 'Huyết áp 130/80, tỉnh táo'],
       ['12:00', 'Ăn cơm, uống thuốc trưa'],
       ['17:30', 'Bưng cháo lên phòng'],
-      ['17:45', 'Ăn hết cháo. Khỏe'],
+      ['17:45', 'Ăn hết cháo. Hơi mệt'],
       ['18:05', 'Ra về'],
     ].map(([t, e]) => (
       <div key={t} className="grid grid-cols-[3rem_1fr] gap-x-2 border-b border-dotted border-black/20 font-mono text-[10px]">
@@ -121,7 +124,7 @@ const P6 = () => (
 
 /** Body outline seen from the front, with the two bruises on the upper arms. */
 const P7 = () => (
-  <Sheet org="Trung tâm Pháp y TP.HCM" title="Phụ lục 02 · Thương tích ngoài da">
+  <Sheet org="Trung tâm Pháp y TP.HCM" title="Phụ lục 02 · Thương tích và hoen tử thi">
     <div className="flex gap-3">
       <svg viewBox="0 0 120 170" className="w-24 shrink-0">
         <g fill="#f4efe0" stroke={LINE} strokeWidth="1.5">
@@ -132,20 +135,26 @@ const P7 = () => (
           <path d="M40,110 L44,166 L56,166 L58,112 Z" />
           <path d="M80,110 L76,166 L64,166 L62,112 Z" />
         </g>
-        {[[36, 56], [84, 56]].map(([x, y]) => (
+        <path d="M36,96 L84,96 L86,112 L80,140 L40,140 L34,112 Z" fill="#7a5aa8" opacity="0.55" />
+        <path d="M44,156 L56,156 L56,166 L44,166 Z M64,156 L76,156 L76,166 L64,166 Z" fill="#7a5aa8" opacity="0.55" />
+        {[[42, 48], [78, 48]].map(([x, y]) => (
           <g key={x}>
-            {[0, 1, 2, 3].map((k) => (
-              <ellipse key={k} cx={x + (x < 60 ? 2 : -2)} cy={y + k * 6} rx="3.4" ry="2.4" fill="#5b4a8a" opacity="0.8" />
+            {[0, 1, 2].map((k) => (
+              <ellipse key={k} cx={x} cy={y + k * 5} rx="3" ry="2" fill="#5b4a8a" opacity="0.8" />
             ))}
           </g>
         ))}
+        <text x="60" y="8" textAnchor="middle" fontSize="7" fill={LINE} fontFamily={mono}>MẶT SAU</text>
       </svg>
       <div className="space-y-1 text-[10px]">
         <p>
-          Mặt trước hai bắp tay trên: <Mark>bốn vết bầm bầu dục mỗi bên</Mark>, cỡ đầu ngón tay người lớn, xếp thành hàng.
+          Gãy C2, trầy ở trán và vai: <Mark>không có phản ứng sống</Mark>, xảy ra sau khi chết.
         </p>
-        <p>Phản ứng sống rõ: vết bầm có trước lúc chết, không do va vào bậc thang.</p>
-        <p className="italic">Phù hợp với việc bị nắm chặt hai tay từ phía trước.</p>
+        <p>
+          Hoen tử thi cố định ở <Mark>mông, mặt sau đùi, gót chân</Mark>: sau khi chết, thi thể ở tư thế ngồi nhiều giờ rồi mới bị chuyển sang nằm.
+        </p>
+        <p>Dưới hai nách: vết hằn ngón tay, không phản ứng sống.</p>
+        <p className="font-bold">Kết luận: chết do nhồi máu cơ tim cấp.</p>
       </div>
     </div>
     <Signature name="BS. L. T. Mai" />
@@ -153,14 +162,14 @@ const P7 = () => (
 )
 
 const P8 = () => (
-  <Sheet org="Tổng hợp của chuyên viên giám định An Tín" title="Các khoản nợ của Tôn Thất Khoa">
+  <Sheet org="Tổng hợp của chuyên viên giám định An Tín" title="Các khoản nợ của Trần Đình Khoa">
     <Row k="Ngân hàng Phương Đông" v="1.100.000.000 đ" />
     <Row k="Ngân hàng Bến Thành" v="600.000.000 đ" />
     <Row k="Vay tay, giấy viết tay" v="600.000.000 đ" />
     <Row k="Tổng" v="2.300.000.000 đ" strong />
-    <p className="pt-1 text-[10px]">Quán cà phê Mái Ngói đóng cửa 15/2, thiết bị bị thanh lý.</p>
+    <p className="pt-1 text-[10px]">Quán cà phê Mái Ngói đóng cửa 15/3, thiết bị bị thanh lý.</p>
     <p className="text-[10px]">
-      Chủ khoản vay tay nhắn: <Mark>"Hạn chót 31/3. Không có tiền thì tôi tới nhà nói chuyện với ông chú của cậu."</Mark>
+      Chủ khoản vay tay nhắn: <Mark>"Hạn chót 30/4. Không có tiền thì tôi tới nhà nói chuyện với ông chú của cậu."</Mark>
     </p>
     <div className="h-16" />
     <Stamp text="Quá hạn" className="bottom-2 right-3" />
@@ -168,23 +177,23 @@ const P8 = () => (
 )
 
 const P9 = () => (
-  <Sheet org="An Tín · Tổng đài chăm sóc khách hàng" title="Bản ghi cuộc gọi 02/03/2026 · 10:14">
-    <p className="text-[10px] opacity-70">Người gọi xưng tên Tôn Thất Khoa, hợp đồng AT-TN-2025-0117.</p>
+  <Sheet org="An Tín · Tổng đài chăm sóc khách hàng" title="Bản ghi cuộc gọi 06/04/2026 · 10:14">
+    <p className="text-[10px] opacity-70">Người gọi xưng tên Trần Đình Khoa, hợp đồng AT-TN-2025-0214.</p>
     <div className="space-y-1 pt-1 text-[10px]">
       <p>
-        <b>KH:</b> Cho tôi hỏi, <Mark>người được bảo hiểm té cầu thang trong nhà</Mark> thì có được chi đủ 6 tỷ không?
+        <b>KH:</b> Cho tôi hỏi, chú tôi bị tim. <Mark>Nếu chú mất vì bệnh tim</Mark> thì có được chi không em?
       </p>
       <p>
-        <b>TĐV:</b> Dạ có, té ngã là tai nạn theo Điều 3.
+        <b>TĐV:</b> Dạ không ạ. <Mark>Bệnh lý bị loại trừ theo Điều 7</Mark>. Hợp đồng chỉ chi khi tai nạn, như té ngã chẳng hạn.
       </p>
       <p>
-        <b>KH:</b> Có cần <Mark>giám định giờ chết</Mark> gì không em? Hay công an ghi là xong?
+        <b>KH:</b> Té ngã trong nhà cũng được hả? Cầu thang chẳng hạn?
       </p>
       <p>
-        <b>TĐV:</b> Dạ, tùy hồ sơ ạ. Anh có muốn hỏi thêm điều khoản nào không?
+        <b>TĐV:</b> Dạ được ạ, nếu giám định xác nhận là tai nạn.
       </p>
       <p>
-        <b>KH:</b> Thôi, vậy được rồi.
+        <b>KH:</b> Ừ, vậy được rồi.
       </p>
     </div>
     <div className="h-16" />
@@ -219,11 +228,11 @@ const P10 = () => (
 
 const X1 = () => (
   <Sheet org="Bệnh viện Tim Tâm Đức · Phòng khám" title="Tóm tắt bệnh án">
-    <Row k="Bệnh nhân" v="Tôn Thất Hiển, 79 tuổi" />
+    <Row k="Bệnh nhân" v="Trần Đình Hiển, 79 tuổi" />
     <Row k="Chẩn đoán" v="Suy tim độ II (NYHA)" strong />
     <Row k="Thuốc" v="3 cữ/ngày, cữ tối 21:00" />
     <p className="pt-1 text-[10px]">Lời dặn: đề phòng chóng mặt, té ngã. Nên dọn xuống sống ở tầng trệt, hạn chế đi cầu thang.</p>
-    <p className="text-[10px] italic">Tái khám: 10/03/2026, 08:00.</p>
+    <p className="text-[10px] italic">18/03: cơn đau thắt ngực. Tái khám: 14/04/2026, 08:00.</p>
     <Signature name="BS. P. Q. Bình" />
   </Sheet>
 )
@@ -236,11 +245,11 @@ const Bubble = ({ me, children, time }: { me?: boolean; children: React.ReactNod
 )
 
 const X2 = () => (
-  <Phone header="Hưng môi giới">
+  <Phone header="Thắng môi giới">
     <p className="text-center text-[9px] opacity-50">Tin nhắn gửi ông Hiển</p>
-    <Bubble time="12/01">Chủ đầu tư trả 80 tỷ, giữ nguyên mặt tiền Pháp. Ông cân nhắc giúp tôi.</Bubble>
-    <Bubble time="14/02">85 tỷ. Giá này cả Quận 3 không ai trả.</Bubble>
-    <Bubble time="06/03">92 tỷ, lần chót. Ông đừng để tới lúc hối hận.</Bubble>
+    <Bubble time="12/02">Chủ đầu tư trả 80 tỷ, giữ nguyên mặt tiền Pháp. Ông cân nhắc giúp tôi.</Bubble>
+    <Bubble time="14/03">85 tỷ. Giá này cả Quận 3 không ai trả.</Bubble>
+    <Bubble time="08/04">92 tỷ, lần chót. Ông đừng để tới lúc hối hận.</Bubble>
   </Phone>
 )
 
@@ -252,7 +261,7 @@ const X4 = () => (
       <p>
         Ba không bán. <Mark>Con muốn nhà thì đợi ba chết.</Mark>
       </p>
-      <p className="text-right">Ba, tháng 2.2026</p>
+      <p className="text-right">Ba, tháng 3.2026</p>
     </div>
   </Sheet>
 )
@@ -295,7 +304,7 @@ const X3 = () => (
       <svg viewBox="0 0 320 220" className="block w-full">
         <rect width="320" height="220" fill="#5a2a2a" />
         <rect x="60" y="20" width="200" height="60" fill="#d9b04f" opacity="0.6" />
-        <text x="160" y="58" textAnchor="middle" fontSize="20" fill="#7d2f2a" fontFamily="Bitter, serif">Tùng ♥ Vy</text>
+        <text x="160" y="58" textAnchor="middle" fontSize="20" fill="#7d2f2a" fontFamily="Bitter, serif">Phát ♥ Uyên</text>
         {Array.from({ length: 10 }, (_, i) => (
           <circle key={i} cx={20 + i * 32} cy="100" r="5" fill="#ffd98f" opacity="0.8" />
         ))}
@@ -304,10 +313,10 @@ const X3 = () => (
         <Guest x={230} y={164} s={1.2} shirt="#2f2a2a" skin="#d9a47a" />
         <rect x="244" y="120" width="8" height="26" fill="#f2a93b" opacity="0.8" stroke={LINE} strokeWidth="1" />
         <rect y="196" width="320" height="24" fill="#3a2a22" />
-        <TimeTag t="09/03 22:46" />
+        <TimeTag t="13/04 22:46" />
       </svg>
     </div>
-    <PhotoMeta when="09/03/2026 · 22:46" where="NH Hoa Viên, Q.10" />
+    <PhotoMeta when="13/04/2026 · 22:46" where="NH Hoa Viên, Q.10" />
     <p className="text-[10px]">"Gần 11 giờ tôi còn ở đây, cả trăm người thấy."</p>
   </Phone>
 )
@@ -315,10 +324,10 @@ const X3 = () => (
 const X5 = () => (
   <Phone header="Nhật ký cuộc gọi · Châu">
     {[
-      ['Ba (máy bàn)', '09/03 20:14', 'Không trả lời'],
-      ['Ba (máy bàn)', '09/03 20:00', 'Không trả lời'],
-      ['Ba (máy bàn)', '08/03 20:00', '6 phút 12 giây'],
-      ['Ba (máy bàn)', '07/03 20:01', '4 phút 40 giây'],
+      ['Ba (máy bàn)', '13/04 20:14', 'Không trả lời'],
+      ['Ba (máy bàn)', '13/04 20:00', 'Không trả lời'],
+      ['Ba (máy bàn)', '12/04 20:00', '6 phút 12 giây'],
+      ['Ba (máy bàn)', '11/04 20:01', '4 phút 40 giây'],
     ].map(([who, t, r], i) => (
       <div key={t} className="flex items-center justify-between border-b border-black/10 py-1">
         <div>
@@ -334,9 +343,9 @@ const X5 = () => (
 
 const X6 = () => (
   <Phone header="Zalo · Ông Hiển">
-    <p className="text-center text-[9px] opacity-50">09/03/2026</p>
+    <p className="text-center text-[9px] opacity-50">13/04/2026</p>
     <Bubble me time="21:37">Tôi đang đứng ở cổng, ông mở cửa giùm. Tôi mang bản hợp đồng mới.</Bubble>
-    <Bubble me time="21:40">Trên lầu tắt đèn rồi. Mai tôi quay lại.</Bubble>
+    <Bubble me time="21:40">Đèn phòng ông còn sáng mà. Thôi mai tôi quay lại.</Bubble>
     <p className="text-right text-[9px] opacity-60">Đã gửi · chưa xem</p>
   </Phone>
 )

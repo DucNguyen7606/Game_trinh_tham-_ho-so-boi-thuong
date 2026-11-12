@@ -1,7 +1,7 @@
 {
   "id": "dong-ho-dung",
-  "title": "Hồ sơ bồi thường số 0903",
-  "intro": "Sáng 10/3, ông Tôn Thất Hiển, 79 tuổi, kiến trúc sư về hưu, được tìm thấy dưới chân cầu thang gỗ trong căn biệt thự Pháp ở hẻm Tú Xương, Quận 3. Chiếc đồng hồ trên tay ông vỡ kính, dừng lúc 22:47. Cháu trai ông, người thụ hưởng hợp đồng bảo hiểm tai nạn, đòi 6 tỷ đồng. Bạn có 10 ngày để đề xuất chi trả hay từ chối, và chi cho ai. Mỗi ngày khám được 1 khu hiện trường. Hỏi chuyện thì không giới hạn.",
+  "title": "Hồ sơ bồi thường số 1304",
+  "intro": "Sáng 14/4, ông Trần Đình Hiển, 79 tuổi, kiến trúc sư về hưu, được tìm thấy dưới chân cầu thang gỗ trong căn biệt thự Pháp ở hẻm Tú Xương, Quận 3. Chiếc đồng hồ trên tay ông vỡ kính, dừng lúc 22:47. Cháu trai ông, người thụ hưởng hợp đồng bảo hiểm tai nạn, đòi 7 tỷ đồng. Công an ghi nhận ban đầu là té ngã. Bạn có 10 ngày để đề xuất chi trả hay từ chối. Mỗi ngày khám được 1 khu hiện trường. Hỏi chuyện thì không giới hạn.",
   "player": {
     "name": "Lê Thu Hạnh",
     "role": "Chuyên viên giám định bồi thường, Bảo hiểm An Tín",
@@ -16,7 +16,7 @@
       "backdrop": "teal"
     }
   },
-  "photoDate": "10 03 '26",
+  "photoDate": "14 04 '26",
   "days": 10,
   "limitsPerDay": {
     "talk": 2,
@@ -25,7 +25,7 @@
   "suspects": [
     {
       "id": "khoa",
-      "name": "Tôn Thất Khoa",
+      "name": "Trần Đình Khoa",
       "age": 36,
       "role": "Cháu ruột ông Hiển, người thụ hưởng bảo hiểm",
       "interrogation": "khoa",
@@ -46,15 +46,15 @@
           "Thích làm ăn lớn",
           "Chu đáo quá mức"
         ],
-        "habit": "Ở căn nhà phụ phía sau biệt thự. Mở quán cà phê Mái Ngói ngay trong sân, tháng 2 vừa đóng cửa.",
+        "habit": "Ở căn nhà phụ phía sau biệt thự. Mở quán cà phê Mái Ngói ngay trong sân, giữa tháng 3 vừa đóng cửa.",
         "relation": "Con trai của em ông Hiển. Về ở với ông từ năm 2022, lo giấy tờ và điện nước trong nhà.",
         "quote": "\"Chú tôi lớn tuổi, cầu thang thì dốc. Tôi dặn hoài mà chú không chịu dọn xuống nhà dưới.\"",
-        "note": "Đứng tên mua hợp đồng tai nạn 6 tỷ cho ông Hiển từ 01/2025, tự đóng phí, tự ghi tên mình là người thụ hưởng."
+        "note": "Đứng tên mua hợp đồng tai nạn 7 tỷ cho ông Hiển từ 02/2025, tự đóng phí, tự ghi tên mình là người thụ hưởng."
       }
     },
     {
       "id": "chau",
-      "name": "Tôn Nữ Minh Châu",
+      "name": "Trần Minh Châu",
       "age": 47,
       "role": "Con gái duy nhất của ông Hiển",
       "interrogation": "chau",
@@ -81,7 +81,7 @@
         "habit": "Đúng 20 giờ mỗi tối gọi máy bàn cho ba. Hai mươi năm chưa bỏ một tối nào.",
         "relation": "Giáo viên, sống ở Quận 7. Mẹ mất đã lâu, chị là người thừa kế duy nhất của ông Hiển.",
         "quote": "\"Ba tôi đi cầu thang đó năm mươi năm. Ba không té.\"",
-        "note": "Nhiều lần khuyên ba bán biệt thự về ở với mình. Thư tay của ông Hiển gửi chị tháng 2 lời lẽ rất gắt."
+        "note": "Nhiều lần khuyên ba bán biệt thự về ở với mình. Thư tay của ông Hiển gửi chị tháng 3 lời lẽ rất gắt."
       }
     },
     {
@@ -110,7 +110,7 @@
         "habit": "Có mặt 06:30 sáng, về nhà ở Quận 4 lúc 19:30 tối. Ba mươi năm không trễ một bữa.",
         "relation": "Lái xe cho ông Hiển từ thời ông còn làm ở viện thiết kế. Giữ một chìa cổng.",
         "quote": "\"Tối đó tôi về, ông còn đứng cửa sổ dặn sáng mai chở đi khám tim.\"",
-        "note": "Người phát hiện thi thể lúc 06:25 sáng 10/3."
+        "note": "Người phát hiện thi thể lúc 06:25 sáng 14/4."
       }
     },
     {
@@ -139,15 +139,15 @@
         "habit": "Làm từ 7 giờ sáng tới 18 giờ. Tối Chủ nhật chia thuốc cả tuần vào hộp bảy ngày.",
         "relation": "Chăm ông Hiển hai năm, từ khi ông bị suy tim.",
         "quote": "\"Bác Hiển uống thuốc còn đúng giờ hơn đồng hồ.\"",
-        "note": "Rời biệt thự lúc 18:05 tối 9/3, sau khi cho ông ăn cháo."
+        "note": "Rời biệt thự lúc 18:05 tối 13/4, sau khi cho ông ăn cháo. Tháng trước từng thấy ông tức ngực khi ngồi vẽ."
       }
     },
     {
-      "id": "hung",
-      "name": "Lâm Quốc Hưng",
+      "id": "thang",
+      "name": "Lâm Quốc Thắng",
       "age": 52,
       "role": "Môi giới bất động sản",
-      "interrogation": "hung",
+      "interrogation": "thang",
       "portrait": {
         "skin": 2,
         "hair": "short",
@@ -171,12 +171,12 @@
         "habit": "Đi khắp các hẻm Quận 3 gõ cửa biệt thự cũ, túi lúc nào cũng có xấp hợp đồng mẫu.",
         "relation": "Đại diện một chủ đầu tư muốn mua biệt thự để xây khách sạn. Ông Hiển từ chối ba lần.",
         "quote": "\"Tôi gõ cửa, chứ tôi đâu có phá cửa.\"",
-        "note": "Tối 9/3 có ghé cổng biệt thự. Tin nhắn cũ gửi ông Hiển: \"Ông đừng để tới lúc hối hận.\""
+        "note": "Tối 13/4 có ghé cổng biệt thự. Tin nhắn cũ gửi ông Hiển: \"Ông đừng để tới lúc hối hận.\""
       }
     },
     {
       "id": "hien",
-      "name": "Tôn Thất Hiển",
+      "name": "Trần Đình Hiển",
       "age": 79,
       "role": "Người được bảo hiểm, đã mất",
       "unavailable": "Ông Hiển đã mất. Chỉ còn căn biệt thự, bàn vẽ và hộp thuốc của ông.",
@@ -203,7 +203,7 @@
         "habit": "Sống một mình trên lầu, ngày nào cũng ngồi bàn vẽ. 21 giờ uống thuốc tim rồi đi ngủ.",
         "relation": "Kiến trúc sư về hưu. Biệt thự là nhà của cha ông xây năm 1930.",
         "quote": "\"Nhà này còn thì tôi còn.\"",
-        "note": "Suy tim độ II nhưng vẫn tự đi lên xuống cầu thang mỗi ngày."
+        "note": "Suy tim độ II. Tháng trước có cơn tức ngực, hẹn tái khám sáng 14/4."
       }
     }
   ],
@@ -231,10 +231,10 @@
         },
         {
           "id": "dau-cau-thang",
-          "label": "Đầu cầu thang trên lầu",
+          "label": "Đầu cầu thang và hành lang lầu",
           "x": 76,
           "y": 17,
-          "note": "Chiếu nghỉ trên lầu: một chiếc dép trong nhà của ông nằm sát mép bậc trên cùng, chiếc kia ở dưới sảnh. Trụ tay vịn trên cùng tróc một mảng véc ni mới, cỡ đầu ngón tay, như có người bám chặt vào rồi bị giật ra.",
+          "note": "Đôi dép trong nhà của ông nằm ngay ngắn trước cửa phòng làm việc, không phải ở cầu thang. Trên tấm thảm hành lang lầu có hai vệt xước song song chạy từ cửa phòng tới mép bậc trên cùng, như hai gót chân bị kéo lê. Trụ tay vịn không một vết.",
           "clueId": "H3"
         },
         {
@@ -271,15 +271,16 @@
           "label": "Điện thoại bàn",
           "x": 64,
           "y": 56,
-          "note": "Máy bàn kiểu cũ có màn hình nhỏ. Nút cuộc gọi nhỡ nhấp nháy: \"Châu · 9/3 · 20:00\" và \"Châu · 9/3 · 20:14\". Không ai nhấc máy cả hai lần.",
+          "note": "Máy bàn kiểu cũ có màn hình nhỏ. Nút cuộc gọi nhỡ nhấp nháy: \"Châu · 13/4 · 20:00\" và \"Châu · 13/4 · 20:14\". Không ai nhấc máy cả hai lần.",
           "clueId": "H5"
         },
         {
           "id": "ban-ve",
-          "label": "Bàn vẽ và mô hình",
+          "label": "Ghế và bàn vẽ",
           "x": 47,
           "y": 36,
-          "note": "Bản vẽ dang dở: mặt đứng chính của căn biệt thự này, ghi chú tay \"Giữ nguyên. Không bán.\" Bút chì, thước chữ T xếp ngay ngắn."
+          "note": "Ghế bành trước bàn vẽ, đệm còn lõm sâu. Trên bản vẽ mặt đứng của căn biệt thự, một nét chì kéo xệch từ mái nhà xuống tận mép giấy, như tay người vẽ bị trượt. Cây bút chì gãy ngòi nằm dưới gầm ghế. Góc giấy vẫn ghi tay: \"Giữ nguyên. Không bán.\"",
+          "clueId": "H10"
         },
         {
           "id": "khay-chao",
@@ -293,7 +294,7 @@
           "label": "Cửa sổ nhìn xuống hẻm",
           "x": 16,
           "y": 30,
-          "note": "Cửa sổ nằm ngay trên cổng. Đứng đây nhìn thấy rõ cột điện đầu hẻm, nơi tổ dân phố gắn camera."
+          "note": "Cửa sổ nằm ngay trên cổng. Đứng đây nhìn thấy rõ cột điện đầu hẻm, nơi tổ dân phố gắn camera. Từ camera cũng nhìn thấy cửa sổ này."
         }
       ]
     },
@@ -315,7 +316,7 @@
           "label": "Danh thiếp kẹp ở khe cổng",
           "x": 62,
           "y": 58,
-          "note": "Một tấm danh thiếp ướt sương kẹp ở khe cổng: \"Lâm Quốc Hưng · Môi giới nhà phố\". Mặt sau viết vội: \"21:35. Bấm chuông không ai mở. Mai tôi quay lại. H.\"",
+          "note": "Một tấm danh thiếp ướt sương kẹp ở khe cổng: \"Lâm Quốc Thắng · Môi giới nhà phố\". Mặt sau viết vội: \"21:35. Đèn phòng ông còn sáng mà bấm chuông không ai ra. Mai tôi quay lại. T.\"",
           "clueId": "H7"
         },
         {
@@ -330,7 +331,7 @@
           "label": "Bảng quán Mái Ngói",
           "x": 84,
           "y": 62,
-          "note": "Bảng gỗ quán cà phê dựng ở góc sân, dán tờ giấy: \"Tạm đóng cửa từ 15/2. Xin lỗi quý khách.\""
+          "note": "Bảng gỗ quán cà phê dựng ở góc sân, dán tờ giấy: \"Tạm đóng cửa từ 15/3. Xin lỗi quý khách.\""
         }
       ]
     },
@@ -344,7 +345,7 @@
           "label": "Hộp đồ nghề",
           "x": 28,
           "y": 70,
-          "note": "Hộp đồ nghề bằng thiếc dưới gầm bàn. Ngăn trên cùng có cây tua vít dẹp và hai con ốc đồng đầu tròn, ren còn dính vụn gỗ màu nâu đỏ. Trong nhà phụ không có đồ gỗ nào bắt ốc đồng.",
+          "note": "Hộp đồ nghề bằng thiếc dưới gầm bàn. Ngăn trên cùng có cây tua vít dẹp và hai con ốc đồng đầu tròn, ren còn dính vụn gỗ màu nâu đỏ. Trong nhà phụ không có món đồ gỗ nào bắt ốc đồng.",
           "clueId": "H8"
         },
         {
@@ -352,7 +353,7 @@
           "label": "Lịch treo tường",
           "x": 64,
           "y": 30,
-          "note": "Lịch tháng 3. Ô ngày 2 khoanh đỏ: \"Gọi An Tín, hỏi điều 3\". Ô ngày 9 ghi: \"Cưới Tùng. Đi trễ.\" Hai chữ \"đi trễ\" được gạch dưới hai lần.",
+          "note": "Lịch tháng 4. Ô ngày 6 khoanh đỏ: \"Gọi An Tín, hỏi điều 7\". Ô ngày 13 ghi: \"Cưới Phát, 19h\".",
           "clueId": "H9"
         },
         {
@@ -367,7 +368,7 @@
           "label": "Bộ vest treo sau cửa",
           "x": 86,
           "y": 46,
-          "note": "Bộ vest còn kẹp tấm thiệp cưới: \"Tùng & Vy · Nhà hàng Hoa Viên, Quận 10 · Đón khách 18:30 · Khai tiệc 19:00\"."
+          "note": "Bộ vest còn kẹp tấm thiệp cưới: \"Phát & Uyên · Nhà hàng Hoa Viên, Quận 10 · Đón khách 18:30 · Khai tiệc 19:00\"."
         }
       ]
     }
@@ -387,8 +388,8 @@
     },
     {
       "id": "H3",
-      "title": "Đầu cầu thang: dép rơi, trụ tay vịn tróc",
-      "description": "Một chiếc dép ở mép bậc trên cùng. Trụ tay vịn tróc véc ni như có người bám chặt rồi bị giật ra.",
+      "title": "Vệt kéo lê từ phòng làm việc tới đầu cầu thang",
+      "description": "Hai vệt xước song song trên thảm hành lang lầu. Đôi dép của ông xếp ngay ngắn trước cửa phòng.",
       "source": "scene"
     },
     {
@@ -400,7 +401,7 @@
     {
       "id": "H5",
       "title": "Hai cuộc gọi nhỡ lúc 20:00 và 20:14",
-      "description": "Máy bàn trong phòng ông Hiển: chị Châu gọi hai lần, không ai nhấc máy.",
+      "description": "Máy bàn trong phòng ông Hiển: tối 13/4 chị Châu gọi hai lần, không ai nhấc máy.",
       "source": "scene"
     },
     {
@@ -411,8 +412,8 @@
     },
     {
       "id": "H7",
-      "title": "Danh thiếp của Hưng: \"21:35, không ai mở\"",
-      "description": "Kẹp ở khe cổng. Hưng bấm chuông, không vào được.",
+      "title": "Danh thiếp của Thắng: \"21:35, đèn sáng, không ai ra\"",
+      "description": "Kẹp ở khe cổng. Thắng bấm chuông, không vào được. Đèn phòng ông Hiển lúc đó còn sáng.",
       "source": "scene"
     },
     {
@@ -423,14 +424,20 @@
     },
     {
       "id": "H9",
-      "title": "Lịch của Khoa: \"Gọi An Tín\", \"Đi trễ\"",
-      "description": "Ngày 2/3: \"Gọi An Tín, hỏi điều 3\". Ngày 9/3: \"Cưới Tùng. Đi trễ.\"",
+      "title": "Lịch của Khoa: \"Gọi An Tín, hỏi điều 7\"",
+      "description": "Ngày 6/4 khoanh đỏ: \"Gọi An Tín, hỏi điều 7\". Ngày 13/4: \"Cưới Phát, 19h\".",
+      "source": "scene"
+    },
+    {
+      "id": "H10",
+      "title": "Nét chì kéo xệch, bút gãy dưới ghế",
+      "description": "Trên bản vẽ dang dở, một nét chì trượt dài xuống mép giấy. Đệm ghế bành còn lõm.",
       "source": "scene"
     },
     {
       "id": "P1",
       "title": "Hợp đồng bảo hiểm tai nạn cá nhân",
-      "description": "6 tỷ nếu chết do tai nạn, kể cả do người khác cố ý gây ra. Loại trừ chết vì bệnh. Điều 8: người thụ hưởng cố ý gây ra cái chết thì mất quyền nhận, tiền chi cho người thừa kế.",
+      "description": "7 tỷ nếu chết do tai nạn. Điều 7 loại trừ chết do bệnh lý (nhồi máu cơ tim, đột quỵ). Điều 9: hồ sơ gian dối thì từ chối và chuyển cơ quan chức năng.",
       "source": "file"
     },
     {
@@ -442,43 +449,43 @@
     {
       "id": "P3",
       "title": "Biên bản hiện trường của công an phường",
-      "description": "Chú Tư phát hiện thi thể lúc 06:25. Đồng hồ dừng 22:47. Thanh chặn thảm bậc 3 bung. Nhận định ban đầu: té ngã.",
+      "description": "Chú Tư phát hiện thi thể lúc 06:25 ngày 14/4. Đồng hồ dừng 22:47. Thanh chặn thảm bậc 3 bung. Nhận định ban đầu: té ngã.",
       "source": "file"
     },
     {
       "id": "P4",
       "title": "Kết luận giám định pháp y",
-      "description": "Chết do gãy cổ khi ngã cầu thang. Tim không nhồi máu, não không xuất huyết. Chết trong khoảng 19:00 đến 21:30. Cháo trong dạ dày mới tiêu một phần.",
+      "description": "Hai tổn thương: nhồi máu cơ tim cấp và gãy đốt sống cổ C2. Chưa kết luận cái nào gây tử vong. Chết trong khoảng 19:00 đến 21:30, cháo trong dạ dày mới tiêu một phần.",
       "source": "file"
     },
     {
       "id": "P5",
-      "title": "Camera hẻm đêm 9/3",
-      "description": "18:05 chị Liên về. 18:20 Khoa về. 19:30 chú Tư về, ông Hiển đứng ở cửa sổ lầu. 20:42 Khoa đi. 21:35 Hưng bấm chuông rồi đi. 00:38 Khoa về.",
+      "title": "Camera hẻm đêm 13/4",
+      "description": "19:30 chú Tư về, ông Hiển đứng ở cửa sổ lầu. 20:42 Khoa đi. 21:35 Thắng bấm chuông, đèn lầu sáng. 00:38 Khoa về. 01:12 đèn phòng làm việc trên lầu tắt.",
       "source": "file"
     },
     {
       "id": "P6",
       "title": "Sổ chăm sóc của điều dưỡng",
-      "description": "Ông Hiển tự uống thuốc 21:00, hai năm chưa bỏ cữ nào. Tối 9/3: ăn hết cháo lúc 17:45, khỏe, tỉnh táo.",
+      "description": "Ông Hiển tự uống thuốc 21:00, hai năm chưa bỏ cữ nào. Tối 13/4: ăn hết cháo lúc 17:45. Tháng 3 có một cơn tức ngực khi ngồi vẽ.",
       "source": "file"
     },
     {
       "id": "P7",
-      "title": "Phụ lục pháp y: vết bầm ở hai bắp tay",
-      "description": "Bầm hình bầu dục ở mặt trước hai bắp tay, khớp với dấu ngón tay người lớn, có trước lúc chết. Không phải vết do va vào bậc thang.",
+      "title": "Phụ lục pháp y: thương tích sau khi chết",
+      "description": "Gãy cổ và vết trầy không có phản ứng sống: xảy ra sau khi chết. Hoen tử thi ở mông, mặt sau đùi: ông chết khi đang ngồi và ngồi nguyên nhiều giờ. Vết hằn ngón tay dưới hai nách. Kết luận: chết do nhồi máu cơ tim.",
       "source": "file"
     },
     {
       "id": "P8",
       "title": "Hồ sơ nợ của Khoa",
-      "description": "Nợ ngân hàng và vay tay 2,3 tỷ sau khi quán Mái Ngói đóng cửa. Chủ nợ cho hạn chót 31/3.",
+      "description": "Nợ ngân hàng và vay tay 2,3 tỷ sau khi quán Mái Ngói đóng cửa. Chủ nợ cho hạn chót 30/4.",
       "source": "file"
     },
     {
       "id": "P9",
-      "title": "Ghi âm tổng đài An Tín ngày 02/3",
-      "description": "Khoa hỏi: người được bảo hiểm té cầu thang trong nhà thì có được chi đủ không, có cần giám định gì không.",
+      "title": "Ghi âm tổng đài An Tín ngày 06/4",
+      "description": "Khoa hỏi: nếu chú tôi mất vì bệnh tim thì có được chi không. Tổng đài: không, bệnh lý bị loại trừ, chỉ chi khi tai nạn như té ngã.",
       "source": "file"
     },
     {
@@ -490,37 +497,37 @@
     {
       "id": "X1",
       "title": "Bệnh án tim mạch của ông Hiển",
-      "description": "Suy tim độ II. Bác sĩ dặn đề phòng chóng mặt, té ngã khi lên xuống cầu thang.",
+      "description": "Suy tim độ II. Bác sĩ dặn đề phòng chóng mặt, té ngã khi lên xuống cầu thang. Hẹn tái khám 14/4.",
       "source": "decoy"
     },
     {
       "id": "X2",
-      "title": "Tin nhắn của Hưng gửi ông Hiển",
+      "title": "Tin nhắn của Thắng gửi ông Hiển",
       "description": "Lần thứ ba trả giá 92 tỷ cho căn biệt thự: \"Ông đừng để tới lúc hối hận.\"",
       "source": "decoy"
     },
     {
       "id": "X4",
       "title": "Thư tay của ông Hiển gửi chị Châu",
-      "description": "Tháng 2: \"Ba không bán. Con muốn nhà thì đợi ba chết.\"",
+      "description": "Tháng 3: \"Ba không bán. Con muốn nhà thì đợi ba chết.\"",
       "source": "decoy"
     },
     {
       "id": "X3",
       "title": "Ảnh tiệc cưới lúc 22:46",
-      "description": "Khoa nâng ly với cô dâu chú rể ở nhà hàng Quận 10, ảnh có giờ trên máy.",
+      "description": "Khoa nâng ly với cô dâu chú rể ở nhà hàng Quận 10 lúc 22:46, ảnh có giờ trên máy.",
       "source": "testimony"
     },
     {
       "id": "X5",
       "title": "Nhật ký cuộc gọi của chị Châu",
-      "description": "20:00 và 20:14 gọi máy bàn của ba, đổ chuông, không ai bắt. Gọi từ nhà ở Quận 7.",
+      "description": "20:00 và 20:14 tối 13/4 gọi máy bàn của ba, đổ chuông, không ai bắt. Gọi từ nhà ở Quận 7.",
       "source": "testimony"
     },
     {
       "id": "X6",
-      "title": "Tin nhắn chưa đọc của Hưng lúc 21:37",
-      "description": "\"Tôi đang đứng ở cổng, ông mở cửa giùm.\" Ông Hiển không bao giờ đọc được.",
+      "title": "Tin nhắn chưa đọc của Thắng lúc 21:37",
+      "description": "\"Tôi đang đứng ở cổng. Đèn phòng ông còn sáng mà.\" Ông Hiển không bao giờ đọc được.",
       "source": "testimony"
     }
   ],
@@ -543,7 +550,7 @@
     {
       "id": "pb2",
       "number": 2,
-      "title": "Camera hẻm và sổ chăm sóc",
+      "title": "Camera hẻm và pháp y bổ sung",
       "unlockedBy": "q2",
       "documents": [
         "P5",
@@ -555,7 +562,7 @@
       "id": "pb3",
       "number": 3,
       "title": "Nợ, cuộc gọi và hai con ốc",
-      "unlockedBy": "q4",
+      "unlockedBy": "q5",
       "documents": [
         "P8",
         "P9",
@@ -567,50 +574,52 @@
     {
       "id": "q1",
       "number": 1,
-      "prompt": "Ông Hiển chết vì sao?",
+      "prompt": "Ông Hiển mất trong khoảng thời gian nào?",
       "options": [
         {
           "id": "a",
-          "text": "Lên cơn đau tim rồi gục xuống"
+          "text": "Từ 19:30 đến 21:00"
         },
         {
           "id": "b",
-          "text": "Ngã cầu thang, gãy cổ"
+          "text": "Lúc 22:47"
         },
         {
           "id": "c",
-          "text": "Tự tử"
+          "text": "Sau nửa đêm"
         }
       ],
-      "correctOptionId": "b",
+      "correctOptionId": "a",
       "requiredClues": [
         "P4",
-        "P3"
+        "H4"
       ],
       "supportingClues": [
-        "X1"
+        "H5",
+        "X5",
+        "P3"
       ],
       "hints": [
-        "Bệnh án nói ông bị suy tim, nhưng bệnh án không phải kết luận. Phong bì 1 có giấy nào của bác sĩ pháp y không?",
-        "Đặt Kết luận giám định pháp y cạnh Biên bản hiện trường. Tim ông có bị nhồi máu không, và ông được tìm thấy ở đâu?"
+        "Phong bì 1 có kết luận pháp y. Bác sĩ ước tính ông mất trong khoảng mấy giờ?",
+        "Lên Phòng làm việc soi hộp thuốc. Cữ 21:00 ông chưa từng bỏ thì giờ ra sao?"
       ]
     },
     {
       "id": "q2",
       "number": 2,
-      "prompt": "Đồng hồ dừng lúc 22:47 có phải giờ ông Hiển ngã?",
+      "prompt": "Chiếc đồng hồ dừng lúc 22:47 nói lên điều gì?",
       "options": [
         {
           "id": "a",
-          "text": "Phải, kính vỡ khi ngã làm đồng hồ dừng"
+          "text": "Kính vỡ khi ngã làm đồng hồ dừng đúng giờ ngã"
         },
         {
           "id": "b",
-          "text": "Không, có người kéo núm chỉnh giờ để giữ kim đứng yên"
+          "text": "Có người kéo núm chỉnh giờ để giữ kim ở một giờ giả"
         },
         {
           "id": "c",
-          "text": "Không, đồng hồ đã hỏng từ trước"
+          "text": "Đồng hồ đã hỏng từ trước"
         }
       ],
       "correctOptionId": "b",
@@ -619,60 +628,83 @@
         "P4"
       ],
       "supportingClues": [
-        "P3",
-        "P2"
+        "P2",
+        "P3"
       ],
       "hints": [
         "Vào Sảnh và cầu thang soi chiếc đồng hồ trong túi vật chứng. Cái núm vặn đang ở nấc nào?",
-        "Pháp y ước tính ông chết trong khoảng mấy giờ? 22:47 có nằm trong khoảng đó không?"
+        "Pháp y ước tính ông mất trong khoảng nào? 22:47 có nằm trong đó không?"
       ]
     },
     {
       "id": "q3",
       "number": 3,
-      "prompt": "Ông Hiển ngã vào khoảng thời gian nào?",
+      "prompt": "Ông Hiển ngã xuống cầu thang khi còn sống hay đã chết?",
       "options": [
         {
           "id": "a",
-          "text": "Từ 19:30 đến 20:00"
+          "text": "Còn sống, ngã rồi mới chết"
         },
         {
           "id": "b",
-          "text": "Từ 20:45 đến 21:30"
-        },
-        {
-          "id": "c",
-          "text": "Lúc 22:47"
-        },
-        {
-          "id": "d",
-          "text": "Sau nửa đêm"
+          "text": "Đã chết, thi thể bị đưa ra cầu thang rồi thả xuống"
         }
       ],
-      "correctOptionId": "a",
+      "correctOptionId": "b",
       "requiredClues": [
-        "P5",
-        "H5"
+        "P7",
+        "H3"
       ],
       "supportingClues": [
-        "H4",
-        "P6",
-        "X5",
-        "P4"
+        "P4",
+        "H2"
       ],
       "hints": [
-        "Camera hẻm trong phong bì 2 cho thấy lần cuối có người thấy ông Hiển còn sống là lúc nào?",
-        "Lên Phòng làm việc soi điện thoại bàn. Chị Châu gọi lúc mấy giờ, và ông có nghe máy không?"
+        "Phong bì 2 có phụ lục pháp y. Vết gãy cổ có phản ứng sống không?",
+        "Lên đầu cầu thang soi tấm thảm hành lang. Vệt gì chạy từ cửa phòng làm việc tới mép bậc trên cùng?"
       ]
     },
     {
       "id": "q4",
       "number": 4,
-      "prompt": "Từ 19:30 đến 20:00, ai ở trong biệt thự với ông Hiển?",
+      "prompt": "Ông Hiển trút hơi thở cuối cùng ở đâu, vì sao?",
       "options": [
         {
           "id": "a",
-          "text": "Tôn Thất Khoa"
+          "text": "Dưới chân cầu thang, vì gãy cổ"
+        },
+        {
+          "id": "b",
+          "text": "Trên ghế trước bàn vẽ, vì cơn nhồi máu cơ tim"
+        },
+        {
+          "id": "c",
+          "text": "Trên giường, khi đang ngủ"
+        }
+      ],
+      "correctOptionId": "b",
+      "requiredClues": [
+        "P7",
+        "H10"
+      ],
+      "supportingClues": [
+        "X1",
+        "P6",
+        "P4"
+      ],
+      "hints": [
+        "Hoen tử thi trong phụ lục pháp y cho biết ông nằm hay ngồi trong nhiều giờ sau khi mất?",
+        "Soi ghế và bàn vẽ trong Phòng làm việc. Nét chì cuối cùng của ông trông thế nào?"
+      ]
+    },
+    {
+      "id": "q5",
+      "number": 5,
+      "prompt": "Sau nửa đêm, ai ở trong biệt thự?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Trần Đình Khoa"
         },
         {
           "id": "b",
@@ -680,7 +712,7 @@
         },
         {
           "id": "c",
-          "text": "Lâm Quốc Hưng"
+          "text": "Lâm Quốc Thắng"
         },
         {
           "id": "d",
@@ -694,17 +726,16 @@
       ],
       "supportingClues": [
         "H7",
-        "X5",
         "X6"
       ],
       "hints": [
         "Ra Sân trước soi cổng. Còn đường nào khác để vào biệt thự không?",
-        "Đọc lại camera hẻm: ai đã vào mà chưa ra trước 20:00?"
+        "Đọc lại camera hẻm: ai về sau nửa đêm, và đèn phòng làm việc tắt lúc mấy giờ?"
       ]
     },
     {
-      "id": "q5",
-      "number": 5,
+      "id": "q6",
+      "number": 6,
       "prompt": "Vì sao thanh chặn thảm bậc thứ ba bung ra?",
       "options": [
         {
@@ -713,7 +744,7 @@
         },
         {
           "id": "b",
-          "text": "Có người tháo ốc ra trước"
+          "text": "Có người tháo ốc ra để dựng cảnh trượt chân"
         },
         {
           "id": "c",
@@ -735,195 +766,156 @@
       ]
     },
     {
-      "id": "q6",
-      "number": 6,
-      "prompt": "Ông Hiển ngã như thế nào?",
+      "id": "q7",
+      "number": 7,
+      "prompt": "Vì sao Khoa phải biến cái chết của chú thành tai nạn?",
       "options": [
         {
           "id": "a",
-          "text": "Tự trượt chân trên tấm thảm lệch"
+          "text": "Để che việc chính mình đã giết ông"
         },
         {
           "id": "b",
-          "text": "Bị nắm hai tay đẩy từ đầu cầu thang xuống"
+          "text": "Chết vì bệnh thì bảo hiểm tai nạn không chi, mà Khoa cần tiền trả nợ"
         },
         {
           "id": "c",
-          "text": "Chóng mặt vì bệnh tim rồi ngã"
-        }
-      ],
-      "correctOptionId": "b",
-      "requiredClues": [
-        "P7",
-        "H3"
-      ],
-      "supportingClues": [
-        "H2",
-        "P4"
-      ],
-      "hints": [
-        "Phong bì 2 có phụ lục pháp y. Vết bầm trên tay ông có hình gì, có trước hay sau lúc chết?",
-        "Lên đầu cầu thang soi trụ tay vịn và chiếc dép. Người tự trượt chân có để lại dấu như vậy không?"
-      ]
-    },
-    {
-      "id": "q7",
-      "number": 7,
-      "prompt": "Khoa có tính trước chuyện này không?",
-      "options": [
-        {
-          "id": "a",
-          "text": "Không, hai chú cháu cãi nhau rồi lỡ tay"
-        },
-        {
-          "id": "b",
-          "text": "Có, Khoa sắp đặt từ trước để lấy 6 tỷ trả nợ"
+          "text": "Để đổ tội cho Thắng"
         }
       ],
       "correctOptionId": "b",
       "requiredClues": [
         "P9",
-        "P8"
+        "P1"
       ],
       "supportingClues": [
-        "H9",
-        "P10",
-        "H1"
+        "P8",
+        "H9"
       ],
       "hints": [
-        "Một tuần trước khi ông Hiển chết, ai gọi lên tổng đài An Tín và hỏi gì?",
-        "Khoa đang nợ bao nhiêu, hạn chót là ngày nào? Lịch treo tường trong nhà phụ còn ghi gì cho tối 9/3?"
+        "Hợp đồng loại trừ những trường hợp nào ở Điều 7?",
+        "Đầu tháng 4, ai gọi lên tổng đài An Tín và hỏi gì? Lịch trong nhà phụ còn khoanh ngày đó."
       ]
     }
   ],
   "verdict": [
     {
-      "id": "killer",
-      "prompt": "Ai gây ra cái chết của ông Hiển?",
+      "id": "cause",
+      "prompt": "Ông Hiển chết vì sao?",
+      "options": [
+        {
+          "id": "heart",
+          "text": "Nhồi máu cơ tim khi đang ngồi vẽ"
+        },
+        {
+          "id": "pushed",
+          "text": "Bị đẩy từ đầu cầu thang xuống"
+        },
+        {
+          "id": "slip",
+          "text": "Trượt chân trên tấm thảm lỏng"
+        }
+      ],
+      "correctOptionId": "heart"
+    },
+    {
+      "id": "stager",
+      "prompt": "Ai dựng cảnh té cầu thang?",
       "options": [
         {
           "id": "khoa",
-          "text": "Tôn Thất Khoa"
+          "text": "Trần Đình Khoa"
         },
         {
           "id": "chau",
-          "text": "Tôn Nữ Minh Châu"
+          "text": "Trần Minh Châu"
         },
         {
           "id": "tu",
           "text": "Phạm Văn Tư"
         },
         {
-          "id": "hung",
-          "text": "Lâm Quốc Hưng"
+          "id": "thang",
+          "text": "Lâm Quốc Thắng"
         },
         {
           "id": "none",
-          "text": "Không ai, ông tự ngã"
+          "text": "Không ai, hiện trường là thật"
         }
       ],
       "correctOptionId": "khoa"
-    },
-    {
-      "id": "clock",
-      "prompt": "Chiếc đồng hồ dừng 22:47 để làm gì?",
-      "options": [
-        {
-          "id": "alibi",
-          "text": "Dời giờ chết vào lúc Khoa đang dự tiệc cưới"
-        },
-        {
-          "id": "real",
-          "text": "Không để làm gì, đó là giờ ông ngã thật"
-        },
-        {
-          "id": "hung",
-          "text": "Đổ tội cho Hưng, người tới cổng tối đó"
-        }
-      ],
-      "correctOptionId": "alibi"
     },
     {
       "id": "decision",
       "prompt": "Đề xuất của bạn",
       "options": [
         {
+          "id": "deny",
+          "text": "Từ chối: chết vì bệnh, thuộc loại trừ. Chuyển hồ sơ gian dối của Khoa cho công an"
+        },
+        {
           "id": "heir",
-          "text": "Chi 6 tỷ cho chị Châu, người thừa kế. Khoa mất quyền nhận"
+          "text": "Chi 7 tỷ cho chị Châu vì Khoa giết ông, mất quyền nhận"
         },
         {
           "id": "pay",
-          "text": "Chi 6 tỷ cho Khoa, người thụ hưởng trên hợp đồng"
-        },
-        {
-          "id": "deny",
-          "text": "Từ chối vì đây là án mạng, không phải tai nạn"
-        },
-        {
-          "id": "ill",
-          "text": "Từ chối vì ông Hiển chết do bệnh tim"
+          "text": "Chi 7 tỷ cho Khoa như đơn yêu cầu"
         }
       ],
-      "correctOptionId": "heir"
+      "correctOptionId": "deny"
     }
   ],
   "endings": [
     {
       "id": "full",
       "title": "Trọn vẹn",
-      "text": "An Tín chi 6 tỷ cho chị Châu theo Điều 8 hợp đồng. Khoa bị khởi tố tội giết người: hai con ốc trong hộp đồ nghề khớp từng đường ren với thanh chặn thảm, còn chiếc đồng hồ bị kéo núm không cho anh ta ngoại phạm nào nữa. Chị Châu giữ lại căn biệt thự và bàn vẽ của ba."
+      "text": "An Tín từ chối hồ sơ theo Điều 7 và Điều 9. Không có án mạng nào: ông Hiển mất vì cơn nhồi máu cơ tim bên bàn vẽ. Khoa bị khởi tố vì làm giả hiện trường để chiếm đoạt 7 tỷ tiền bảo hiểm. Chị Châu nhận lại căn biệt thự và bản vẽ dang dở của ba."
     },
     {
       "id": "half",
       "title": "Đúng một nửa",
-      "text": "Chị Châu được chi trả, Khoa bị khởi tố. Nhưng hồ sơ của bạn vẫn coi 22:47 là giờ chết thật. Luật sư của Khoa đưa ra tấm ảnh tiệc cưới lúc 22:46, và tòa trả hồ sơ để điều tra lại từ đầu."
+      "text": "Bạn từ chối đúng, vì ông Hiển mất do bệnh tim. Nhưng hồ sơ chỉ sai người dựng cảnh. Người đó có ngoại phạm, công an trả hồ sơ, còn Khoa chỉ bị phạt hành chính rồi dọn đi."
     },
     {
       "id": "wrong",
-      "title": "Sai người",
-      "text": "Chị Châu được chi trả đúng người, nhưng người bạn chỉ ra là hung thủ có đủ bằng chứng ngoại phạm. Hồ sơ hình sự bị trả về. Khoa dọn khỏi nhà phụ, mang theo hộp đồ nghề."
+      "title": "Đúng tiền, sai chuyện",
+      "text": "Bạn không chi đồng nào, nhưng hồ sơ của bạn kể một cái chết khác với kết luận pháp y. Luật sư của Khoa bám vào đó, An Tín phải ra tòa giải trình suốt nửa năm mới giữ được quyết định."
     },
     {
-      "id": "reward",
-      "title": "Trả tiền cho hung thủ",
-      "text": "Bạn chi 6 tỷ cho Khoa đúng như tên ghi trên hợp đồng. Tiền về tài khoản là anh ta trả nợ sạch trong một tuần. Ba tháng sau, khi công an khởi tố Khoa, An Tín không đòi lại được đồng nào và còn bị chị Châu kiện vì chi sai người."
+      "id": "framed",
+      "title": "Án mạng không có thật",
+      "text": "Bạn kết luận Khoa giết chú để chi 7 tỷ cho chị Châu. Khoa bị bắt vì tội giết người. Ba tháng sau, phụ lục pháp y được đọc kỹ: ông Hiển chết vì bệnh tim, gãy cổ sau khi đã mất. Khoa được thả về tội giết người, còn An Tín đã chi 7 tỷ cho một hợp đồng không phải trả."
     },
     {
-      "id": "unjust",
-      "title": "Từ chối sai",
-      "text": "Bạn từ chối chi trả. Chị Châu mang kết luận pháp y và Điều 3, Điều 8 của hợp đồng đi kiện: ông Hiển chết vì ngã, kể cả bị người khác đẩy thì vẫn là tai nạn với người được bảo hiểm. An Tín thua kiện, phải chi đủ kèm lãi chậm trả."
+      "id": "paid",
+      "title": "Trả tiền cho người dựng cảnh",
+      "text": "Bạn chi 7 tỷ cho Khoa. Một tuần sau anh trả sạch nợ, rồi đóng cửa nhà phụ đi Đà Nẵng. Bản vẽ dang dở của ông Hiển nằm trong thùng rác, cạnh hai con ốc đồng."
     }
   ],
   "endingRules": [
     {
-      "ending": "reward",
+      "ending": "paid",
       "picks": {
         "decision": "pay"
       }
     },
     {
-      "ending": "unjust",
+      "ending": "framed",
       "picks": {
-        "decision": "deny"
-      }
-    },
-    {
-      "ending": "unjust",
-      "picks": {
-        "decision": "ill"
+        "decision": "heir"
       }
     },
     {
       "ending": "full",
       "correct": [
-        "killer",
-        "clock"
+        "cause",
+        "stager"
       ]
     },
     {
       "ending": "half",
       "correct": [
-        "killer"
+        "cause"
       ]
     },
     {

@@ -51,18 +51,23 @@ function StairRod() {
 }
 
 /** Top of the stairs: one slipper and the chipped newel post. */
+/** Upstairs corridor: two drag marks from the study door to the top step, slippers left by the door. */
 function Landing() {
   return (
     <g>
       <rect width="400" height="300" fill={C.wall} />
-      <rect y="200" width="400" height="100" fill={C.lim} {...O} />
-      <rect x="40" y="20" width="70" height="190" fill={C.lim} {...O} />
-      <rect x="30" y="10" width="90" height="22" rx="4" fill={C.lim} {...O} />
-      <rect x="92" y="100" width="18" height="14" fill="#e7c48a" />
-      <path d="M200,212 q40,-24 96,-8 q14,12 -10,20 l-78,0 q-14,-4 -8,-12 Z" fill={C.green} {...O} />
-      <line x1="0" y1="232" x2="400" y2="232" stroke={LINE} strokeWidth="3" />
-      <Label x={190} y={110} t="← véc ni tróc" c={ink.night} />
-      <Label x={250} y={270} t="dép ở mép bậc trên cùng" />
+      <rect y="150" width="400" height="150" fill={C.runner} {...O} />
+      <rect x="20" y="20" width="110" height="140" fill={C.limDark} {...O} />
+      <text x="75" y="70" textAnchor="middle" fontSize="10" fill="#f3e4c4" fontFamily={mono}>PHÒNG LÀM VIỆC</text>
+      {[0, 1].map((k) => (
+        <path key={k} d={`M${60 + k * 34},170 C${140 + k * 30},200 ${250 + k * 20},230 ${360 + k * 14},${280 - k * 4}`} fill="none" stroke="#e8c9a8" strokeWidth="4" strokeDasharray="10 4" opacity="0.85" />
+      ))}
+      {[140, 176].map((x) => (
+        <path key={x} d={`M${x},160 q12,-10 30,-4 q6,6 -4,10 l-24,0 q-6,-2 -2,-6 Z`} fill={C.green} {...O} strokeWidth={1.5} />
+      ))}
+      <rect x="360" y="150" width="40" height="150" fill={C.limDark} />
+      <Label x={250} y={140} t="dép xếp trước cửa phòng" c={ink.night} />
+      <Label x={250} y={196} t="hai vệt kéo lê tới bậc trên cùng" />
     </g>
   )
 }
@@ -126,8 +131,8 @@ function Landline() {
       <path d="M66,90 q134,-90 268,0 l0,20 l-268,0 Z" fill="#3a4148" {...O} />
       <rect x="100" y="130" width="200" height="74" rx="4" fill="#9fd0a8" {...O} strokeWidth={1.5} />
       <text x="112" y="150" fontSize="11" fill={ink.night} fontFamily={mono}>CUỘC GỌI NHỠ (2)</text>
-      <text x="112" y="172" fontSize="13" fontWeight="700" fill={ink.night} fontFamily={mono}>CHÂU  09/03 20:00</text>
-      <text x="112" y="194" fontSize="13" fontWeight="700" fill={ink.night} fontFamily={mono}>CHÂU  09/03 20:14</text>
+      <text x="112" y="172" fontSize="13" fontWeight="700" fill={ink.night} fontFamily={mono}>CHÂU  13/04 20:00</text>
+      <text x="112" y="194" fontSize="13" fontWeight="700" fill={ink.night} fontFamily={mono}>CHÂU  13/04 20:14</text>
       <circle cx="320" cy="222" r="9" fill={accent.red} />
     </g>
   )
@@ -137,13 +142,17 @@ function Drawing() {
   return (
     <g>
       <rect width="400" height="300" fill="#efe6cf" />
-      <rect x="30" y="20" width="340" height="260" fill={C.paper} {...O} strokeWidth={1.5} />
-      <path d="M80,240 L80,140 L200,80 L320,140 L320,240 Z" fill="none" stroke="#2f4258" strokeWidth="2" />
+      <rect x="30" y="20" width="340" height="200" fill={C.paper} {...O} strokeWidth={1.5} />
+      <path d="M80,200 L80,120 L200,64 L320,120 L320,200 Z" fill="none" stroke="#2f4258" strokeWidth="2" />
       {[100, 170, 240].map((x) => (
-        <rect key={x} x={x} y="160" width="44" height="60" fill="none" stroke="#2f4258" strokeWidth="1.5" />
+        <rect key={x} x={x} y="134" width="44" height="50" fill="none" stroke="#2f4258" strokeWidth="1.5" />
       ))}
-      <text x="250" y="60" fontSize="15" fill="#1d3a6a" fontFamily="Bitter, serif" fontStyle="italic">Giữ nguyên.</text>
-      <text x="250" y="80" fontSize="15" fill="#1d3a6a" fontFamily="Bitter, serif" fontStyle="italic">Không bán.</text>
+      <path d="M200,64 C206,110 214,170 236,222" fill="none" stroke="#3a3a3a" strokeWidth="2.5" />
+      <text x="260" y="48" fontSize="13" fill="#1d3a6a" fontFamily="Bitter, serif" fontStyle="italic">Giữ nguyên. Không bán.</text>
+      <rect y="232" width="400" height="68" fill="#6b3a2a" {...O} />
+      <path d="M260,262 l70,-10" stroke={accent.amber} strokeWidth="7" strokeLinecap="round" />
+      <path d="M330,252 l10,-2" stroke={LINE} strokeWidth="3" />
+      <Label x={150} y={250} t="nét chì kéo xệch · bút gãy dưới ghế" />
     </g>
   )
 }
@@ -271,7 +280,7 @@ function Calendar() {
       <rect width="400" height="300" fill="#cdbf9e" />
       <rect x="30" y="20" width="340" height="270" fill="#fbf4e4" {...O} />
       <rect x="30" y="20" width="340" height="40" fill={accent.red} />
-      <text x="200" y="47" textAnchor="middle" fontSize="18" fontWeight="700" fill="#fff" fontFamily="Barlow Condensed, sans-serif">THÁNG 3 · 2026</text>
+      <text x="200" y="47" textAnchor="middle" fontSize="18" fontWeight="700" fill="#fff" fontFamily="Barlow Condensed, sans-serif">THÁNG 4 · 2026</text>
       {Array.from({ length: 14 }, (_, i) => (
         <g key={i}>
           <rect x={40 + (i % 7) * 46} y={70 + Math.floor(i / 7) * 100} width="42" height="94" fill="none" stroke={LINE} strokeWidth="1" />
@@ -280,13 +289,12 @@ function Calendar() {
           </text>
         </g>
       ))}
-      <circle cx="93" cy="80" r="9" fill="none" stroke={accent.red} strokeWidth="2.5" />
-      <text x="89" y="112" fontSize="9" fill={accent.red} fontFamily="Bitter, serif">Gọi</text>
-      <text x="89" y="126" fontSize="9" fill={accent.red} fontFamily="Bitter, serif">An Tín</text>
-      <rect x="88" y="174" width="42" height="90" fill={accent.amber} opacity="0.3" />
-      <text x="90" y="200" fontSize="9" fill="#1d3a6a" fontFamily="Bitter, serif">Cưới Tùng.</text>
-      <text x="90" y="216" fontSize="9" fill="#1d3a6a" fontFamily="Bitter, serif">Đi trễ.</text>
-      <path d="M90,220 h30 M90,224 h30" stroke="#1d3a6a" strokeWidth="1.2" />
+      <circle cx="277" cy="80" r="9" fill="none" stroke={accent.red} strokeWidth="2.5" />
+      <text x="273" y="112" fontSize="9" fill={accent.red} fontFamily="Bitter, serif">Gọi An</text>
+      <text x="273" y="126" fontSize="9" fill={accent.red} fontFamily="Bitter, serif">Tín, hỏi</text>
+      <text x="273" y="140" fontSize="9" fill={accent.red} fontFamily="Bitter, serif">điều 7</text>
+      <text x="273" y="200" fontSize="9" fill="#1d3a6a" fontFamily="Bitter, serif">Cưới</text>
+      <text x="273" y="214" fontSize="9" fill="#1d3a6a" fontFamily="Bitter, serif">Phát, 19h</text>
     </g>
   )
 }
@@ -313,7 +321,7 @@ function Suit() {
       <path d="M150,26 L118,110 L150,240 L182,110 Z" fill="#ece2cf" {...O} strokeWidth={1.5} />
       <rect x="200" y="90" width="170" height="120" fill="#fbf4e4" {...O} transform="rotate(6 285 150)" />
       <g transform="rotate(6 285 150)">
-        <text x="285" y="118" textAnchor="middle" fontSize="14" fill={accent.red} fontFamily="Bitter, serif">Tùng & Vy</text>
+        <text x="285" y="118" textAnchor="middle" fontSize="14" fill={accent.red} fontFamily="Bitter, serif">Phát & Uyên</text>
         <text x="285" y="142" textAnchor="middle" fontSize="10" fill={ink.night} fontFamily={mono}>NH Hoa Viên · Q.10</text>
         <text x="285" y="166" textAnchor="middle" fontSize="10" fill={ink.night} fontFamily={mono}>Đón khách 18:30</text>
         <text x="285" y="186" textAnchor="middle" fontSize="11" fontWeight="700" fill={ink.night} fontFamily={mono}>Khai tiệc 19:00</text>
