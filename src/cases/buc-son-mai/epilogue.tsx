@@ -144,11 +144,20 @@ const Transfer = () => (
 export const epilogue: Record<string, EpiloguePanel[]> = {
   full: [
     {
+      id: 'transfer',
+      caption: 'An Tín chuyển 8 tỷ đồng cho bà Diệp. Bức tranh gốc bà mua bảo hiểm đã bị trộm thật, trong đợt phục chế tháng 6.',
+      Art: () => (
+        <Panel>
+          <Transfer />
+        </Panel>
+      ),
+    },
+    {
       id: 'court',
-      caption: 'Tô Minh Quân bị đưa ra xét xử về tội lừa đảo chiếm đoạt tài sản. Anh nhờ học trò giữ giùm xưởng.',
+      caption: 'Tô Minh Quân bị xét xử về tội lừa đảo chiếm đoạt tài sản. Trịnh Bảo Ngọc bị xử cùng vụ vì nhận 300 triệu để phi tang bản chép.',
       Art: () => (
         <div className="relative">
-          <Panel people={[{ id: 'quan', x: 50, mood: 'worried', size: 44 }]}>
+          <Panel people={[{ id: 'quan', x: 34, mood: 'worried', size: 40 }, { id: 'ngoc', x: 68, mood: 'worried', size: 40 }]}>
             <Courtroom />
           </Panel>
           <DockRail />
@@ -157,85 +166,27 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
     },
     {
       id: 'painting',
-      caption: 'Bức "Thiếu nữ bên sen" thật được thu hồi từ nhà ông Hứa Vĩnh Thành. Chuồn chuồn vẫn đỏ son, vết rạn vẫn ở góc.',
+      caption: 'Bức "Thiếu nữ bên sen" thật được thu hồi từ nhà ông Hứa Vĩnh Thành. Bà Diệp hoàn lại 8 tỷ để chuộc nó về, treo đúng chỗ cũ.',
       Art: () => (
-        <Panel>
-          <Gallery />
-        </Panel>
-      ),
-    },
-    {
-      id: 'diep',
-      caption: 'Bà Diệp bị xử tội gian lận bảo hiểm, án treo. Diệp Gallery đóng cửa sau 25 năm.',
-      Art: () => (
-        <Panel people={[{ id: 'diep', x: 70, mood: 'worried', size: 44 }]}>
-          <Closed />
-        </Panel>
-      ),
-    },
-    {
-      id: 'ngoc',
-      caption: 'Ngọc được nhà đấu giá Hải Đăng nhận vào làm. Cô tự trả xong nợ thẻ sau một năm.',
-      Art: () => (
-        <Panel people={[{ id: 'ngoc', x: 40, mood: 'smile', size: 48 }]}>
+        <Panel people={[{ id: 'diep', x: 22, mood: 'smile', size: 40 }]}>
           <Gallery />
         </Panel>
       ),
     },
     {
       id: 'file',
-      caption: 'Hồ sơ 1120 đóng lại. Công ty không chi 8 tỷ đồng, và hồ sơ được chuyển sang cơ quan điều tra.',
+      caption: 'Hồ sơ 1120 đóng lại. Tiền về đúng người bị mất tranh, còn hai người dựng chuyện phải ra tòa.',
       Art: () => (
         <Panel>
-          <Desk stamp="TỪ CHỐI BỒI THƯỜNG" sub="CHUYỂN CƠ QUAN ĐIỀU TRA" />
+          <Desk stamp="CHI TRẢ BỒI THƯỜNG" sub="AN TÍN THẾ QUYỀN ĐÒI LẠI TRANH" />
         </Panel>
       ),
     },
   ],
   half: [
     {
-      id: 'file',
-      caption: 'Công ty từ chối chi trả vì hồ sơ gian lận. Sếp hài lòng với kết quả.',
-      Art: () => (
-        <Panel>
-          <Desk stamp="TỪ CHỐI BỒI THƯỜNG" sub="LÝ DO: DỰNG HIỆN TRƯỜNG TRỘM" />
-        </Panel>
-      ),
-    },
-    {
-      id: 'quan',
-      caption: 'Ở Bình Thạnh, Quân nhận thêm một đơn "phục chế" tranh cổ. Anh mua sẵn một tấm MDF mới.',
-      Art: () => (
-        <Panel people={[{ id: 'quan', x: 35, mood: 'neutral', size: 46 }]}>
-          <Workshop />
-        </Panel>
-      ),
-    },
-  ],
-  wrong: [
-    {
-      id: 'file',
-      caption: 'Luật sư của bà Diệp chỉ ra lập luận không có căn cứ. Hồ sơ bị bác.',
-      Art: () => (
-        <Panel>
-          <Desk stamp="BÁC KẾT LUẬN" sub="KHÔNG ĐỦ CĂN CỨ" />
-        </Panel>
-      ),
-    },
-    {
-      id: 'player',
-      caption: 'Bạn bị rút khỏi vụ việc. Sếp giao hồ sơ 1120 cho người khác.',
-      Art: () => (
-        <Panel people={[{ id: 'player', x: 40, mood: 'worried', size: 52 }]}>
-          <Office />
-        </Panel>
-      ),
-    },
-  ],
-  paid: [
-    {
       id: 'transfer',
-      caption: 'Bảo hiểm An Tín chuyển 8 tỷ đồng cho bà Đoàn Ngọc Diệp.',
+      caption: 'Bà Diệp được chi trả đúng, tranh thật được thu hồi, Quân bị khởi tố.',
       Art: () => (
         <Panel>
           <Transfer />
@@ -243,20 +194,89 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
       ),
     },
     {
+      id: 'ngoc',
+      caption: 'Nhưng hồ sơ ghi sai người lẻn vào phòng tranh đêm 19/11. Ngọc vẫn ngồi bàn tiếp khách ở Diệp Gallery.',
+      Art: () => (
+        <Panel people={[{ id: 'ngoc', x: 40, mood: 'smile', size: 48 }]}>
+          <Gallery />
+        </Panel>
+      ),
+    },
+  ],
+  wrong: [
+    {
+      id: 'transfer',
+      caption: 'Bà Diệp được chi trả đúng.',
+      Art: () => (
+        <Panel>
+          <Transfer />
+        </Panel>
+      ),
+    },
+    {
+      id: 'quan',
+      caption: 'Nhưng hồ sơ không chỉ ra ai đã tráo tranh. An Tín không đòi được bức thật. Ở Bình Thạnh, Quân nhận thêm một đơn "phục chế" tranh cổ, và mua sẵn một tấm MDF mới.',
+      Art: () => (
+        <Panel people={[{ id: 'quan', x: 35, mood: 'neutral', size: 46 }]}>
+          <Workshop />
+        </Panel>
+      ),
+    },
+  ],
+  fakeonly: [
+    {
+      id: 'file',
+      caption: 'Bạn từ chối vì thứ bị lấy đêm 19/11 chỉ là bản chép.',
+      Art: () => (
+        <Panel>
+          <Desk stamp="TỪ CHỐI BỒI THƯỜNG" sub="LÝ DO: TÀI SẢN BỊ MẤT LÀ TRANH GIẢ" />
+        </Panel>
+      ),
+    },
+    {
+      id: 'court',
+      caption: 'Luật sư của bà Diệp chỉ ra bức gốc đã bị tráo tháng 6, giữa thời hạn bảo hiểm, và hợp đồng bảo hiểm cả lúc tranh đi phục chế. An Tín thua, chi đủ 8 tỷ kèm án phí.',
+      Art: () => (
+        <Panel people={[{ id: 'diep', x: 50, mood: 'stern', size: 44 }]}>
+          <Courtroom />
+        </Panel>
+      ),
+    },
+    {
       id: 'auction',
-      caption: 'Một năm sau, bức "Thiếu nữ bên sen" có chuồn chuồn đỏ son xuất hiện ở phiên đấu giá Hồng Kông.',
+      caption: 'Không ai đứng ra đòi bức thật. Một năm sau, nó xuất hiện ở phiên đấu giá Hồng Kông.',
       Art: () => (
         <Panel>
           <Auction />
         </Panel>
       ),
     },
+  ],
+  unjust: [
     {
-      id: 'file',
-      caption: 'Bạn bị kỷ luật vì duyệt chi sai.',
+      id: 'diep',
+      caption: 'Bạn tố bà Diệp tự dựng vụ trộm. Bà mang email đồng ý lấy mẫu sơn, tấm ảnh lúc 01:44 ở Thảo Điền và đôi giày cỡ 38 của mình ra tòa.',
+      Art: () => (
+        <Panel people={[{ id: 'diep', x: 50, mood: 'stern', size: 44 }]}>
+          <Courtroom />
+        </Panel>
+      ),
+    },
+    {
+      id: 'closed',
+      caption: 'An Tín thua kiện, chi đủ 8 tỷ kèm án phí. Tin đồn "bà chủ trộm tranh của mình" khiến Diệp Gallery phải tạm đóng cửa.',
       Art: () => (
         <Panel>
-          <Desk stamp="KỶ LUẬT" sub="DUYỆT CHI SAI · HS 1120" />
+          <Closed />
+        </Panel>
+      ),
+    },
+    {
+      id: 'player',
+      caption: 'Bạn bị rút khỏi vụ việc. Ngọc xin nghỉ việc êm thấm.',
+      Art: () => (
+        <Panel people={[{ id: 'player', x: 40, mood: 'worried', size: 52 }]}>
+          <Office />
         </Panel>
       ),
     },

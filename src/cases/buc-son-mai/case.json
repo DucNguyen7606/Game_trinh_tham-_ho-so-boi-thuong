@@ -43,7 +43,7 @@
       },
       "profile": {
         "traits": ["Sang trọng", "Kiêu hãnh", "Rất giữ thể diện"],
-        "habit": "Chạy chiếc Vespa xanh ngọc đi khắp Sài Gòn, cổ lúc nào cũng quấn khăn lụa.",
+        "habit": "Ban ngày chạy chiếc Vespa xanh ngọc, tối gửi xe ở phòng tranh rồi đi taxi về Thảo Điền. Cổ lúc nào cũng quấn khăn lụa, chân đi giày cao gót cỡ 38.",
         "relation": "Mở Diệp Gallery 25 năm. Mua bức \"Thiếu nữ bên sen\" từ năm 2009, coi nó là \"linh hồn phòng tranh\".",
         "quote": "\"Bức tranh đó là danh dự của tôi.\"",
         "note": "Bức tranh được bảo hiểm 8 tỷ từ tháng 3. Ba ngày trước phiên đấu giá thì mất. Mã báo động đêm đó là mã của chính bà."
@@ -95,7 +95,7 @@
       "profile": {
         "traits": ["Nhanh nhẹn", "Thích tiệc tùng", "Hay lo"],
         "habit": "Tối thứ tư nào cũng đi quán với bạn ở Bùi Viện. Chạy chiếc Vision trắng.",
-        "relation": "Làm cho bà Diệp 4 năm, biết cả mã báo động của mình lẫn của chủ.",
+        "relation": "Làm cho bà Diệp 4 năm, biết cả mã báo động của mình lẫn của chủ, giữ chìa khóa mọi cửa và lo hồ sơ cho phiên đấu giá.",
         "quote": "\"Em mà biết vụ này thì em đâu đi chơi tới sáng.\"",
         "note": "Đang nợ thẻ tín dụng. Tuần trước còn hỏi bên bảo hiểm \"mất tranh thì được trả bao nhiêu\"."
       }
@@ -171,7 +171,7 @@
           "label": "Camera góc trần",
           "x": 84,
           "y": 16,
-          "note": "Camera ngừng ghi lúc 01:39. Không bị đập, không bị cắt dây: ai đó đã tắt nó bằng phần mềm trên máy tính trong phòng làm việc, mà máy đó cần mật khẩu của bà Diệp.",
+          "note": "Camera ngừng ghi lúc 01:39. Không bị đập, không bị cắt dây: ai đó đã tắt nó bằng phần mềm trên máy tính trong phòng làm việc. Máy đó cần mật khẩu của bà Diệp, và người hay dùng máy để gửi email cho khách là quản lý Ngọc.",
           "clueId": "H3"
         },
         {
@@ -208,7 +208,7 @@
           "label": "Dấu giày trong vũng nước",
           "x": 60,
           "y": 84,
-          "note": "Dấu giày nữ đế bằng, cỡ khoảng 36, in trên lớp bùn mỏng: một người đi vào, cùng người đó đi ra. Không có dấu giày nào khác.",
+          "note": "Dấu giày bệt, cỡ khoảng 36, in trên lớp bùn mỏng: một người vào, cùng người đó ra. Không có dấu giày nào khác. Người đi bước dài và nhanh.",
           "clueId": "H8"
         },
         {
@@ -237,7 +237,7 @@
           "label": "Máy hủy giấy",
           "x": 28,
           "y": 72,
-          "note": "Thùng máy hủy đầy sợi giấy. Ghép vài dải lại đọc được: \"...chất kết dính: nhựa ACRYLIC... không phù hợp niên đại 1962...\" và logo một phòng thí nghiệm.",
+          "note": "Thùng máy hủy đầy sợi giấy. Ghép vài dải lại đọc được: \"...chất kết dính: nhựa ACRYLIC... không phù hợp niên đại 1962...\" và logo một phòng thí nghiệm. Có cả dải đầu trang in email: \\\"Diệp Gallery · gửi Bảo Ngọc\\\".",
           "clueId": "H4"
         },
         {
@@ -245,7 +245,7 @@
           "label": "Khăn lụa trên ghế",
           "x": 66,
           "y": 48,
-          "note": "Chiếc khăn lụa màu kem viền đỏ vắt trên lưng ghế, mép khăn dính vệt bụi đen mịn như bụi mài sơn.",
+          "note": "Chiếc khăn lụa màu kem viền đỏ của bà Diệp vắt trên lưng ghế, mép khăn dính vệt bụi đen mịn như bụi mài sơn. Ngọc nói bà để quên ở đây từ tuần trước.",
           "clueId": "H5"
         },
         {
@@ -305,27 +305,27 @@
   "clues": [
     { "id": "H1", "title": "Cửa sau bị nạy từ bên trong", "description": "Mạt gỗ rơi ra ngoài hẻm. Vết cạy được dựng sau khi người đó đã ở trong.", "source": "scene" },
     { "id": "H2", "title": "Mảnh MDF trong khung", "description": "Bức bị lấy đi vẽ trên ván MDF, không phải vóc gỗ mít của tranh thật.", "source": "scene" },
-    { "id": "H3", "title": "Camera bị tắt bằng phần mềm", "description": "01:39, tắt từ máy tính phòng làm việc, cần mật khẩu của bà Diệp.", "source": "scene" },
+    { "id": "H3", "title": "Camera bị tắt bằng phần mềm", "description": "01:39, tắt từ máy tính phòng làm việc, cần mật khẩu của bà Diệp. Quản lý Ngọc cũng biết mật khẩu này.", "source": "scene" },
     { "id": "H4", "title": "Kết quả xét nghiệm bị hủy", "description": "Mảnh giấy trong máy hủy: \"chất kết dính nhựa ACRYLIC, không phù hợp niên đại 1962\".", "source": "scene" },
-    { "id": "H5", "title": "Khăn lụa kem viền đỏ", "description": "Khăn của bà Diệp, mép dính bụi đen mịn như bụi mài sơn.", "source": "scene" },
+    { "id": "H5", "title": "Khăn lụa kem viền đỏ", "description": "Khăn của bà Diệp, để quên ở phòng tranh. Mép dính bụi đen mịn như bụi mài sơn.", "source": "scene" },
     { "id": "H6", "title": "Ván MDF đúng cỡ tranh ở xưởng", "description": "90 × 120 cm, phủ sơn đen, bỏ dở. Xưởng truyền thống không dùng MDF.", "source": "scene" },
     { "id": "H7", "title": "Giấy can 1:1 bức tranh", "description": "Nét sen, thiếu nữ và chữ ký Khuê, can trực tiếp từ tranh thật.", "source": "scene" },
-    { "id": "H8", "title": "Dấu giày nữ cỡ 36", "description": "Một người vào, cùng người đó ra. Không có ai khác.", "source": "scene" },
-    { "id": "P1", "title": "Hợp đồng bảo hiểm tác phẩm", "description": "Hiệu lực 10/3/2025, giá trị 8 tỷ, theo biên bản thẩm định của ông Phong. Người được bảo hiểm: Đoàn Ngọc Diệp.", "source": "file" },
+    { "id": "H8", "title": "Dấu giày nữ cỡ 36", "description": "Dấu giày bệt cỡ 36. Một người vào, cùng người đó ra. Không có ai khác.", "source": "scene" },
+    { "id": "P1", "title": "Hợp đồng bảo hiểm tác phẩm", "description": "Hiệu lực 10/3/2025, giá trị 8 tỷ, theo biên bản thẩm định của ông Phong. Bảo hiểm mọi rủi ro mất mát, kể cả khi tranh rời phòng tranh để phục chế. Người được bảo hiểm: Đoàn Ngọc Diệp.", "source": "file" },
     { "id": "P2", "title": "Biên bản thẩm định tháng 3", "description": "Vóc gỗ mít, 7 lớp sơn ta. Ảnh kèm: chuồn chuồn đỏ son góc trên phải, chữ ký \"Khuê 62\", vết rạn chân chim góc dưới trái.", "source": "file" },
     { "id": "P3", "title": "Nhật ký báo động", "description": "20/11: tắt lúc 01:38 bằng mã #01, bật lại 01:57 bằng mã #01. Mã #01 là của bà Diệp.", "source": "file" },
     { "id": "P4", "title": "Biên bản công an phường Bến Nghé", "description": "Cửa sau bị cạy, tranh mất khỏi khung. Phát hiện 07:40 ngày 20/11 bởi quản lý Bảo Ngọc.", "source": "file" },
     { "id": "P5", "title": "Ảnh khai mạc triển lãm 5/7", "description": "Bức tranh treo sau khi phục chế: chuồn chuồn màu vàng, chữ ký \"Khuê 1962\", không còn vết rạn.", "source": "file" },
     { "id": "P6", "title": "Phiếu giao nhận phục chế", "description": "Tranh rời phòng tranh 2/6, về lại 28/6. Người nhận và giao: Tô Minh Quân.", "source": "file" },
-    { "id": "P7", "title": "Camera đường Đồng Khởi", "description": "01:36, một phụ nữ quấn khăn sáng màu viền sẫm, đi Vespa xanh ngọc rẽ vào hẻm sau phòng tranh. 01:59 ra, chở một túi dẹt lớn.", "source": "file" },
+    { "id": "P7", "title": "Camera đường Đồng Khởi", "description": "01:36, một phụ nữ quấn khăn sáng màu viền sẫm, đi chiếc Vespa xanh ngọc của phòng tranh rẽ vào hẻm sau. 01:59 ra, chở một túi dẹt lớn.", "source": "file" },
     { "id": "P8", "title": "Email nhà đấu giá Hải Đăng", "description": "Gửi bà Diệp 28/10: chuyên gia sẽ kiểm định kỹ thuật bức tranh ngày 21/11, gồm lấy mẫu sơn.", "source": "file" },
-    { "id": "P9", "title": "Kết quả phân tích mẫu sơn", "description": "Phòng thí nghiệm gửi bà Diệp ngày 14/10: chất kết dính nhựa acrylic, không phải sơn ta. Không phù hợp niên đại 1962.", "source": "file" },
-    { "id": "P10", "title": "Sao kê của Quân", "description": "3/7/2025: nhận 2,5 tỷ từ tài khoản Hứa Vĩnh Thành, nội dung \"thanh toan tac pham\".", "source": "file" },
+    { "id": "P9", "title": "Kết quả phân tích mẫu sơn", "description": "Gửi email Diệp Gallery ngày 14/10, người đặt làm: Trịnh Bảo Ngọc. Chất kết dính nhựa acrylic, không phải sơn ta. Không phù hợp niên đại 1962.", "source": "file" },
+    { "id": "P10", "title": "Sao kê của Quân", "description": "3/7/2025: nhận 2,5 tỷ từ Hứa Vĩnh Thành, \"thanh toan tac pham\". 16/10 và 20/11: chuyển cho Trịnh Bảo Ngọc tổng 300 triệu.", "source": "file" },
     { "id": "P11", "title": "Bài báo nhà sưu tầm Hứa Vĩnh Thành", "description": "Tạp chí nội thất tháng 9: phòng khách nhà ông Thành treo bức sen có chuồn chuồn đỏ son và vết rạn góc dưới trái.", "source": "file" },
     { "id": "X1", "title": "Tin nhắn của Ngọc", "description": "Ngọc hỏi nhân viên An Tín: \"Tranh mất thì bảo hiểm trả bao nhiêu chị?\" Kèm thông báo nợ thẻ 180 triệu.", "source": "decoy" },
     { "id": "X2", "title": "Hóa đơn phí thẩm định", "description": "Bà Diệp trả ông Phong 120 triệu phí thẩm định, gấp ba mức thường.", "source": "decoy" },
-    { "id": "X3", "title": "Ảnh bà Diệp đăng lúc 00:50", "description": "Bà khoe ảnh ôm chó ở nhà Thảo Điền, ghi \"mất ngủ\". Soi kỹ cổ bà và mấy thứ trên bàn.", "source": "testimony" },
-    { "id": "X4", "title": "Ảnh Ngọc ở Bùi Viện", "description": "Ngọc chụp với nhóm bạn lúc 01:35 ở quán trên phố Bùi Viện.", "source": "testimony" },
+    { "id": "X3", "title": "Ảnh bà Diệp đăng lúc 00:50", "description": "Bà khoe ảnh ôm chó ở nhà Thảo Điền lúc 01:44, ghi \"mất ngủ\". Soi kỹ cổ bà, đồng hồ và mấy thứ trên bàn.", "source": "testimony" },
+    { "id": "X4", "title": "Ảnh Ngọc ở Bùi Viện", "description": "Ngọc đăng story với nhóm bạn lúc 01:35 ở quán trên phố Bùi Viện. Soi kỹ đồng hồ trong quán.", "source": "testimony" },
     { "id": "X5", "title": "Livestream của Quân", "description": "Quân livestream mài sơn ở xưởng Bình Thạnh từ 01:00 tới 02:20, có học trò ngồi cạnh.", "source": "testimony" },
     { "id": "X6", "title": "Ảnh ông Phong ở Đà Lạt", "description": "Ông Phong chụp sương đêm bên hồ Xuân Hương lúc 01:20, đang dự hội thảo.", "source": "testimony" }
   ],
@@ -428,12 +428,12 @@
         { "id": "a", "text": "Không, bà cũng là nạn nhân" },
         { "id": "b", "text": "Biết từ giữa tháng 10" }
       ],
-      "correctOptionId": "b",
-      "requiredClues": ["P9", "H4"],
-      "supportingClues": ["P8"],
+      "correctOptionId": "a",
+      "requiredClues": ["P9", "P8"],
+      "supportingClues": ["H4", "X1"],
       "hints": [
-        "Phong bì 2 có kết quả phân tích mẫu sơn. Ai đặt làm, gửi cho ai, ngày nào?",
-        "Trong Phòng làm việc bà Diệp, xem Máy hủy giấy: bà muốn hủy tờ giấy nào?"
+        "Phong bì 2 có kết quả phân tích mẫu sơn. Ai đặt làm, kết quả gửi tới hộp thư của ai?",
+        "Email nhà đấu giá Hải Đăng hỏi bà Diệp có đồng ý cho lấy mẫu sơn ngày 21/11 không. Người biết tranh mình giả có trả lời như vậy không?"
       ]
     },
     {
@@ -446,12 +446,12 @@
         { "id": "c", "text": "Tô Minh Quân" },
         { "id": "d", "text": "Lâm Hữu Phong" }
       ],
-      "correctOptionId": "b",
-      "requiredClues": ["P7", "X3", "H5"],
-      "supportingClues": ["P3", "H3", "H8"],
+      "correctOptionId": "a",
+      "requiredClues": ["X4", "P10"],
+      "supportingClues": ["P7", "H5", "H8", "X3", "H3", "X1"],
       "hints": [
-        "Camera đường Đồng Khởi (phong bì 2) thấy một người đi xe gì, quấn gì trên cổ? Xem hồ sơ nhân vật: ai đi Vespa xanh ngọc?",
-        "Hỏi chuyện bà Diệp, xem ảnh bà đăng lúc 00:50. Chiếc khăn trên cổ bà giống chiếc khăn vắt trong phòng làm việc."
+        "Khăn, xe và mã báo động đều là của bà Diệp, nhưng chúng đều để ở phòng tranh. Ai giữ chìa khóa và biết mật khẩu? Hỏi chuyện Ngọc, soi đồng hồ trong story của cô.",
+        "Phong bì 3 có sao kê của Quân. Sau ngày 14/10, anh chuyển tiền cho ai?"
       ]
     },
     {
@@ -460,15 +460,15 @@
       "prompt": "Ngoại phạm của ai đứng vững?",
       "options": [
         { "id": "a", "text": "Tất cả đều vững" },
-        { "id": "b", "text": "Ngọc, Quân, Phong vững. Bà Diệp vỡ." },
-        { "id": "c", "text": "Ngọc vỡ" }
+        { "id": "b", "text": "Bà Diệp, Quân, Phong vững. Ngọc vỡ." },
+        { "id": "c", "text": "Bà Diệp vỡ" }
       ],
       "correctOptionId": "b",
       "requiredClues": ["X4", "X5", "X6"],
       "supportingClues": ["X3", "P7", "H8"],
       "hints": [
         "Tranh rời phòng tranh trong khoảng 01:38 đến 01:57. Hỏi chuyện từng người và xem ảnh họ đưa, rồi so với giờ đó.",
-        "Bà Diệp nói đi ngủ từ 11 giờ. Ảnh bà đăng lúc 00:50: người sắp ngủ có quấn khăn và để mũ bảo hiểm với chìa khóa xe trên bàn không?"
+        "Ngọc nói ở Bùi Viện tới gần 3 giờ, story đăng lúc 01:35. Nhưng đồng hồ điện tử trên quầy bar trong ảnh chỉ mấy giờ?"
       ]
     }
   ],
@@ -482,7 +482,7 @@
         { "id": "quan", "text": "Tô Minh Quân" },
         { "id": "phong", "text": "Lâm Hữu Phong" }
       ],
-      "correctOptionId": "diep"
+      "correctOptionId": "ngoc"
     },
     {
       "id": "swap",
@@ -500,38 +500,45 @@
       "id": "decision",
       "prompt": "Đề xuất của bạn",
       "options": [
-        { "id": "pay", "text": "Chi trả 8 tỷ cho bà Diệp" },
-        { "id": "deny", "text": "Từ chối và chuyển hồ sơ cho công an" }
+        { "id": "pay", "text": "Chi trả 8 tỷ cho bà Diệp, An Tín đứng ra đòi lại tranh thật" },
+        { "id": "fake", "text": "Từ chối vì thứ bị lấy đêm 19/11 chỉ là tranh giả" },
+        { "id": "deny", "text": "Từ chối vì bà Diệp tự dựng vụ trộm, chuyển hồ sơ cho công an" }
       ],
-      "correctOptionId": "deny"
+      "correctOptionId": "pay"
     }
   ],
   "endings": [
     {
       "id": "full",
       "title": "Trọn vẹn",
-      "text": "Quân bị khởi tố tội lừa đảo chiếm đoạt tài sản. Bức \"Thiếu nữ bên sen\" thật được thu hồi từ nhà ông Hứa Vĩnh Thành. Bà Diệp bị xử tội gian lận bảo hiểm, Diệp Gallery đóng cửa."
+      "text": "An Tín chi 8 tỷ cho bà Diệp: bức tranh thật bị đánh cắp trong đợt phục chế tháng 6, giữa thời hạn bảo hiểm. Quân và Ngọc bị khởi tố. Bức \"Thiếu nữ bên sen\" thật được thu hồi từ nhà ông Hứa Vĩnh Thành, và bà Diệp xin hoàn tiền để chuộc nó về."
     },
     {
       "id": "half",
       "title": "Đúng một nửa",
-      "text": "Công ty không phải chi 8 tỷ. Nhưng bức tranh thật vẫn treo trong phòng khách của một nhà sưu tầm, và người làm ra bức giả vẫn nhận khách."
+      "text": "Bà Diệp được chi trả, tranh thật được thu hồi, Quân bị khởi tố. Nhưng hồ sơ ghi sai người lẻn vào phòng tranh đêm 19/11. Ngọc vẫn ngồi bàn tiếp khách ở Diệp Gallery."
     },
     {
       "id": "wrong",
       "title": "Sai người",
-      "text": "Luật sư của bà Diệp chỉ ra lập luận không có căn cứ. Hồ sơ bị bác, bạn bị rút khỏi vụ."
+      "text": "Bà Diệp được chi trả đúng, nhưng hồ sơ không chỉ ra ai đã tráo tranh. An Tín không có căn cứ đòi lại bức thật, và nó vẫn treo trong phòng khách ở Phú Mỹ Hưng."
     },
     {
-      "id": "paid",
-      "title": "Chi trả",
-      "text": "Công ty chuyển 8 tỷ cho bà Diệp. Một năm sau, bức tranh thật xuất hiện ở phiên đấu giá Hồng Kông. Bạn bị kỷ luật."
+      "id": "fakeonly",
+      "title": "Đúng chuyện tranh giả, sai chuyện tiền",
+      "text": "Bạn từ chối vì thứ bị lấy chỉ là tranh giả. Luật sư của bà Diệp chỉ ra tranh thật đã bị tráo trong đợt phục chế tháng 6, giữa thời hạn bảo hiểm, và hợp đồng bảo hiểm cả lúc tranh đi phục chế. An Tín thua, chi đủ 8 tỷ kèm án phí."
+    },
+    {
+      "id": "unjust",
+      "title": "Oan cho người ngay",
+      "text": "Bạn tố bà Diệp tự dựng vụ trộm. Bà mang email đồng ý lấy mẫu sơn, ảnh lúc 01:44 ở Thảo Điền và cỡ giày của mình ra trình. An Tín thua kiện, chi đủ 8 tỷ kèm án phí, còn Ngọc xin nghỉ việc êm thấm."
     }
   ],
   "endingRules": [
-    { "ending": "paid", "picks": { "decision": "pay" } },
+    { "ending": "unjust", "picks": { "decision": "deny" } },
+    { "ending": "fakeonly", "picks": { "decision": "fake" } },
     { "ending": "full", "correct": ["theft", "swap"] },
-    { "ending": "half", "correct": ["theft"] },
+    { "ending": "half", "correct": ["swap"] },
     { "ending": "wrong" }
   ]
 }

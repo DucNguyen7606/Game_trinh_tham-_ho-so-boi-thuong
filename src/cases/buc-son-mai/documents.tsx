@@ -38,6 +38,7 @@ const P1 = () => (
     <Row k="Giá trị BH" v="8.000.000.000 đ" strong />
     <Row k="Hiệu lực" v="10/03/2025" strong />
     <p className="pt-1 text-[10px]">Căn cứ: biên bản thẩm định của ông Lâm Hữu Phong ngày 07/03/2025.</p>
+    <p className="text-[10px]">Phạm vi: <Mark>mọi rủi ro mất mát, kể cả khi tác phẩm rời phòng tranh để vận chuyển hoặc phục chế</Mark>.</p>
     <p className="text-[10px] italic">Điều 11: Chỉ bồi thường cho tác phẩm gốc đã được thẩm định. Không bồi thường nếu người được bảo hiểm gian lận.</p>
     <Signature name="Đ. N. Diệp" />
     <Stamp text="An Tín · Đã duyệt" className="bottom-2 right-24" />
@@ -140,7 +141,7 @@ const P7 = () => (
       <text x="312" y="172" fontSize="9" fill="#e8e8e8" textAnchor="end" fontFamily={mono}>20/11/2025 01:36:12</text>
     </svg>
     <p className="px-1 pt-1 font-mono text-[10px] text-[#c4a27a]">
-      Xe Vespa xanh ngọc, người lái quấn khăn sáng màu viền sẫm. 01:59:40 ra, chở một túi dẹt cỡ 1 m.
+      Xe Vespa xanh ngọc, người lái quấn khăn sáng màu viền sẫm, dáng nhỏ. 01:59:40 ra, chở một túi dẹt cỡ 1 m.
     </p>
   </div>
 )
@@ -165,7 +166,8 @@ const P8 = () => (
 
 const P9 = () => (
   <Sheet org="Phòng thí nghiệm Vật liệu Mỹ thuật" title="Phiếu kết quả phân tích">
-    <Row k="Khách hàng" v="Đoàn Ngọc Diệp" strong />
+    <Row k="Khách hàng" v="Diệp Gallery" />
+    <Row k="Người đặt, nhận kết quả" v="Trịnh Bảo Ngọc · ngoc@diepgallery" strong />
     <Row k="Ngày nhận mẫu" v="06/10/2025" />
     <Row k="Ngày trả kết quả" v="14/10/2025" strong />
     <Row k="Mẫu" v="Vụn sơn, mép dưới tranh" />
@@ -175,7 +177,7 @@ const P9 = () => (
     <p>
       Kết luận: <Mark>không phù hợp niên đại 1962</Mark>.
     </p>
-    <p className="text-[10px] italic">Bản gốc gửi khách hàng. Bản lưu do cơ quan điều tra yêu cầu.</p>
+    <p className="text-[10px] italic">Kết quả chỉ gửi qua email người đặt. Bản lưu do cơ quan điều tra yêu cầu.</p>
     <Stamp text="PTN · Bản lưu" className="bottom-2 right-3" />
   </Sheet>
 )
@@ -186,10 +188,12 @@ const P10 = () => (
       ['28/06', 'Diệp Gallery · phi phuc che', '+ 45.000.000'],
       ['03/07', 'HUA VINH THANH · thanh toan tac pham', '+ 2.500.000.000'],
       ['10/07', 'Mua xe Ford Ranger', '− 980.000.000'],
+      ['16/10', 'TRINH BAO NGOC · gui em', '− 100.000.000'],
+      ['20/11', 'TRINH BAO NGOC · phan con lai', '− 200.000.000'],
     ].map(([d, n, v]) => (
       <div key={d} className="grid grid-cols-[auto_1fr_auto] gap-x-2 border-b border-dotted border-black/20">
         <span>{d}</span>
-        <span>{n.startsWith('HUA') ? <Mark>{n}</Mark> : n}</span>
+        <span>{n.startsWith('HUA') || n.startsWith('TRINH') ? <Mark>{n}</Mark> : n}</span>
         <span className="text-right">{v}</span>
       </div>
     ))}
@@ -272,7 +276,7 @@ const TimeTag = ({ t }: { t: string }) => (
   </>
 )
 
-/** Diệp's "can't sleep" post: she is dressed to go out, scarf on, helmet and Vespa key on the table. */
+/** Diệp's "can't sleep" post at 01:44: pyjamas, bare neck, the clock behind her. She is home while the gallery is entered. */
 const X3 = () => (
   <Phone header="Trang cá nhân · Ngọc Diệp Gallery">
     <div className="overflow-hidden rounded-md">
@@ -280,27 +284,33 @@ const X3 = () => (
         <rect width="320" height="220" fill="#d8cdb6" />
         <rect x="200" y="20" width="100" height="120" fill="#2a3448" stroke={LINE} strokeWidth="2" />
         <path d="M250,20 V140 M200,80 H300" stroke="#e9dfcc" strokeWidth="4" />
-        {/* Diệp with the dog, scarf around her neck */}
-        <Guest x={120} y={150} s={1.5} shirt="#7d2f2a" hair="#7d7a76" hairStyle="bun" />
-        <path d="M100,116 Q120,130 140,116 L136,134 Q120,140 104,134 Z" fill="#efe6d4" stroke={LINE} strokeWidth="1.4" />
-        <path d="M104,134 Q120,140 136,134" stroke="#b23a2e" strokeWidth="2.5" fill="none" />
-        <path d="M128,134 l6,34" stroke="#efe6d4" strokeWidth="7" strokeLinecap="round" />
+        {/* Wall clock at a quarter to two */}
+        <g stroke={LINE} strokeWidth="1.5">
+          <circle cx="60" cy="50" r="20" fill="#fff8e8" />
+          <path d="M60,50 L67,44.5 M60,50 L46.1,51.5" strokeLinecap="round" strokeWidth="2" />
+        </g>
+        {/* Diệp with the dog, in striped pyjamas, nothing round her neck */}
+        <Guest x={120} y={150} s={1.5} shirt="#9fb4c8" hair="#7d7a76" hairStyle="bun" />
+        {[100, 112, 124, 136].map((x) => (
+          <line key={x} x1={x} y1="146" x2={x} y2="196" stroke="#f6efe2" strokeWidth="2" />
+        ))}
         <g stroke={LINE} strokeWidth="1.4">
           <ellipse cx="80" cy="170" rx="26" ry="18" fill="#f6efe2" />
           <circle cx="62" cy="156" r="12" fill="#f6efe2" />
           <circle cx="58" cy="154" r="1.6" fill={LINE} />
         </g>
-        {/* Table: helmet and a key with a turquoise fob */}
+        {/* Bedside table: a cup of tea and a strip of sleeping pills */}
         <rect x="0" y="186" width="320" height="34" fill="#7a4f32" stroke={LINE} strokeWidth="1.5" />
-        <path d="M218,186 Q218,150 250,150 Q282,150 282,186 Z" fill="#4fa8a0" stroke={LINE} strokeWidth="1.5" />
-        <rect x="232" y="164" width="36" height="10" rx="3" fill="#2a3448" />
-        <circle cx="180" cy="196" r="5" fill="none" stroke="#c9b27a" strokeWidth="1.6" />
-        <rect x="184" y="192" width="18" height="8" rx="2" fill="#4fa8a0" stroke={LINE} strokeWidth="1" />
-        <text x="193" y="199" textAnchor="middle" fontSize="5" fill="#fff" fontFamily={mono}>VESPA</text>
-        <TimeTag t="20/11 00:50" />
+        <path d="M232,186 v-22 h24 v22 Z" fill="#f6efe2" stroke={LINE} strokeWidth="1.5" />
+        <path d="M256,170 q8,0 8,7 q0,6 -8,6" fill="none" stroke={LINE} strokeWidth="1.5" />
+        <rect x="270" y="176" width="34" height="10" rx="2" fill="#d8dde2" stroke={LINE} strokeWidth="1" />
+        {[276, 284, 292, 300].map((x) => (
+          <circle key={x} cx={x} cy="181" r="2.2" fill="#fff" stroke={LINE} strokeWidth="0.8" />
+        ))}
+        <TimeTag t="20/11 01:44" />
       </svg>
     </div>
-    <PhotoMeta when="20/11/2025 · 00:50" where="Thảo Điền, TP Thủ Đức" />
+    <PhotoMeta when="20/11/2025 · 01:44" where="Thảo Điền, TP Thủ Đức" />
     <p className="text-[10px]">"Mất ngủ, có bé Mochi canh 🐶" · 41 lượt thích</p>
   </Phone>
 )
@@ -317,11 +327,14 @@ const X4 = () => (
         <Guest x={80} y={170} shirt="#cf9a32" hairStyle="long" />
         <Guest x={160} y={164} s={1.25} shirt="#ece2cf" hair="#4a3426" hairStyle="long" />
         <Guest x={240} y={170} shirt="#2f4258" />
+        {/* LED clock above the bar: the photo was taken long before it was posted */}
+        <rect x="250" y="70" width="56" height="22" rx="3" fill="#0e0a14" stroke="#f2a93b" strokeWidth="1" />
+        <text x="278" y="86" textAnchor="middle" fontSize="13" fill="#ff5a3a" fontFamily={mono}>00:14</text>
         <rect x="0" y="196" width="320" height="24" fill="#3a2a4a" />
-        <TimeTag t="20/11 01:35" />
+        <TimeTag t="Đăng 01:35" />
       </svg>
     </div>
-    <PhotoMeta when="20/11/2025 · 01:35" where="Phố đi bộ Bùi Viện, Q.1" />
+    <PhotoMeta when="Đăng lúc 01:35 · 20/11/2025" where="Phố đi bộ Bùi Viện, Q.1" />
     <p className="text-[10px]">"Thứ tư mà như thứ bảy 🍹" · được 3 người bạn gắn thẻ</p>
   </Phone>
 )

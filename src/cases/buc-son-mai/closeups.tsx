@@ -138,7 +138,7 @@ function Bins() {
 
 /** Shredder bin with a few strips laid out and read. */
 function Shreds() {
-  const strips = ['...chất kết dính: nhựa ACRYLIC...', '...không phù hợp niên đại 1962...', 'PTN Vật liệu Mỹ thuật · 14/10']
+  const strips = ['Diệp Gallery · gửi Bảo Ngọc · 14/10', '...chất kết dính: nhựa ACRYLIC...', '...không phù hợp niên đại 1962...']
   return (
     <g>
       <rect width="400" height="300" fill="#3a332f" />

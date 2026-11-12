@@ -5,6 +5,7 @@ VAR has_H6 = false
 VAR has_P5 = false
 VAR has_P8 = false
 VAR has_P11 = false
+VAR has_H7 = false
 
 Anh Đạt ngồi ở mép ghế, hai tay xoa xoa cổ tay dù trên da không có vết gì.
 "Dao kề cổ, tui còn sống là may rồi cô ơi."
@@ -39,10 +40,15 @@ Anh Đạt ngồi ở mép ghế, hai tay xoa xoa cổ tay dù trên da không c
 * {has_P8} [Bác sĩ nói cổ tay anh không hằn một vết nào.]
     "Tui da dày. {Xco} muốn tui bầm tím mới tin hả?"
     -> hoi
-* {has_P11} [Ngày 4/11 ông Tài chuyển 250 triệu cho vợ anh.]
+* {has_H7} [Sợi chì dự phòng 55190 Đất Đỏ giao anh giữ. Nó nằm trên cửa container bị cắt ở Hàm Tân.]
+    "Tui... làm rớt đâu mất rồi. Chì thì ai lượm chả được."
+    Anh Đạt nói mà không nhìn lên.
+    -> hoi
+* {has_P11} [Ngày 4/11 bà Kiều chuyển 250 triệu cho vợ anh.]
     Anh Đạt gục đầu.
-    "Tui nợ cá độ hơn hai trăm triệu, tụi nó tới tận nhà. Ông Tài nói chỉ cần chạy vô kho Phan Rí, ngồi yên một tiếng, rồi tới Hàm Thuận Nam để người ta trói."
-    "Ổng nói hàng của ổng, bảo hiểm có đền, không ai mất gì hết."
+    "Tui nợ cá độ hơn hai trăm triệu, tụi nó tới tận nhà. Bà Kiều nói chỉ cần chạy vô kho Phan Rí, ngồi yên một tiếng, rồi tới Hàm Thuận Nam để người ta trói."
+    "Bả nói hàng có bảo hiểm, An Tín đền cho ông Tài, nhà xe khỏi đền, không ai mất gì hết."
+    "Sợi chì dự phòng cũng là bả biểu tui giữ lại."
     -> hoi
 * [Vậy được rồi.]
     -> END

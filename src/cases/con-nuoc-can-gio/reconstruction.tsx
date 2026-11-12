@@ -97,7 +97,7 @@ export const reconstruction: ReconstructionPanel[] = (
     {
       time: '12/5 đến 8/9/2025',
       title: 'Một kế hoạch biến mất',
-      text: 'Nợ khoảng 3 tỷ, ông Lực mua bảo hiểm nhân thọ 5 tỷ cho vợ đứng tên thụ hưởng. Ngày 8/9 ông rút hết tiền hàng của vựa, kể cả 600 triệu Vinh đặt cọc, mua 30 lượng vàng, rồi đặt vé xe đi Châu Đốc dưới tên giả bằng một sim không chính chủ.',
+      text: 'Nợ khoảng 3 tỷ, ông Lực mua bảo hiểm nhân thọ 5 tỷ cho vợ đứng tên thụ hưởng, nhưng không nói với bà về kế hoạch. Ngày 8/9 ông rút hết tiền hàng của vựa, kể cả 600 triệu Vinh đặt cọc, mua 30 lượng vàng, rồi đặt vé xe đi Châu Đốc dưới tên giả bằng một sim không chính chủ.',
       questionId: 'q3',
       Art: () => <OnDesk ids={['P6', 'P7']} />,
     },
@@ -117,7 +117,7 @@ export const reconstruction: ReconstructionPanel[] = (
     {
       time: '22:58 đến 23:00',
       title: 'Tự tay đánh chìm ghe',
-      text: 'Ra giữa sông, ông gọi cho vợ 12 giây: "Anh ra rồi." Rồi ông tắt máy, rút chìa và rút nút lù dưới đáy. Ghe ngập dần. Trời lặng, gió nhẹ, không có sóng nào đánh úp chiếc ghe cả.',
+      text: 'Ra giữa sông, ông gọi cho vợ bằng sim mới. Bà alo mấy lần, ông không nói gì, 12 giây thì cúp. Rồi ông tắt máy, rút chìa và rút nút lù dưới đáy. Ghe ngập dần. Trời lặng, gió nhẹ, không có sóng nào đánh úp chiếc ghe cả.',
       questionId: 'q1',
       Art: () => (
         <Staged zone="ben-ghe">
@@ -171,8 +171,8 @@ export const reconstruction: ReconstructionPanel[] = (
     },
     {
       time: '13/9',
-      title: 'Lời dặn',
-      text: 'Thi thể dạt vào Cần Thạnh. Bà Hồng làm đúng lời chồng dặn: nhận đó là ông, không cho khám nghiệm. Bà tin chồng đang trốn ở Châu Đốc. Bà không biết đó thật sự là ông.',
+      title: 'Người không được biết',
+      text: 'Thi thể dạt vào Cần Thạnh. Bà Hồng nhận ra bộ bà ba bà may và chiếc nhẫn cưới, xin an táng sớm theo lệ ở đây. Bà không biết chồng định trốn đi. Ông đã dặn Tâm giấu bà, để bà khóc như thật, và bà khóc thật.',
       questionId: 'q6',
       Art: () => <OnDesk ids={['P10', 'P3']} />,
     },
@@ -237,7 +237,7 @@ const killerTheory: Record<string, string> = {
 }
 
 const planRefute: Record<string, { text: string; docs: string[] }> = {
-  hong: { text: 'Bà Hồng có tiếp tay, nhưng người mua vàng, đặt vé tên giả và tự rút nút lù là ông Lực. Tin Zalo cho thấy chính ông dặn vợ từng bước.', docs: ['P10', 'P6'] },
+  hong: { text: 'Bà Hồng không biết gì. Người mua vàng, đặt vé tên giả và tự rút nút lù là ông Lực, và ông dặn Tâm phải giấu bà. Đêm đó bà còn nhắn em gái rằng sáng mai chồng sẽ chở con đi khám.', docs: ['P10', 'X5'] },
   tam: { text: 'Tâm chỉ được giao việc chờ ở Rạch Đước. Vàng, vé xe, sim mới đều do ông Lực tự lo, và tin nhắn của ông nói rõ kế hoạch.', docs: ['P10', 'P7'] },
   khang: { text: 'Khang không dính gì tới vé xe, sim mới hay số vàng. Ông Lực trốn chính là để khỏi trả nợ Khang.', docs: ['P7', 'X1'] },
 }
@@ -294,8 +294,8 @@ export function verdictPreview(slotId: string, optionId: string): { Art: () => J
       Art: () => <DecisionArt pay={optionId === 'pay'} />,
       note:
         optionId === 'pay'
-          ? 'Bạn cho rằng ông Lực chết vì tai nạn thật, và công ty nên chi trả 5 tỷ cho bà Hồng.'
-          : 'Bạn cho rằng hồ sơ có gian lận: từ chối chi trả và chuyển toàn bộ cho công an.',
+          ? 'Bạn cho rằng ông Lực đã chết thật và bà Hồng là người thụ hưởng ngay tình: chi 5 tỷ cho bà, chuyển hồ sơ án mạng cho công an.'
+          : 'Bạn cho rằng ông Lực dựng chuyện giả chết nên hợp đồng không phải trả: từ chối và chuyển hồ sơ cho công an.',
     }
   return undefined
 }
@@ -322,8 +322,8 @@ export function theoryPanels(picks: Picks): ReconstructionPanel[] {
   panels.push({
     kind: 'theory',
     time: 'Đề xuất của bạn',
-    title: pay ? 'Chi trả 5 tỷ' : 'Từ chối và chuyển hồ sơ cho công an',
-    text: pay ? 'Bạn đề xuất công ty chi trả 5 tỷ cho bà Hồng.' : 'Bạn từ chối chi trả và chuyển toàn bộ hồ sơ cho công an điều tra.',
+    title: pay ? 'Chi trả 5 tỷ cho bà Hồng' : 'Từ chối và chuyển hồ sơ cho công an',
+    text: pay ? 'Bạn đề xuất công ty chi trả 5 tỷ cho bà Hồng và chuyển hồ sơ án mạng cho công an.' : 'Bạn từ chối chi trả vì ông Lực định giả chết, và chuyển toàn bộ hồ sơ cho công an điều tra.',
     Art: () => <DecisionArt pay={pay} />,
   })
 
@@ -356,15 +356,15 @@ export function theoryPanels(picks: Picks): ReconstructionPanel[] {
         </>
       ),
     })
-  if (pay)
+  if (!pay)
     wrong.push({
       kind: 'refute',
       time: 'Lật lại',
-      title: 'Không phải tai nạn',
-      text: 'Ghe bị rút nút lù, máy tắt, chìa đã rút. Bà Hồng biết chồng định giả chết và nhận dạng theo lời dặn. Theo Điều 9 hợp đồng, công ty không chi trả khi người thụ hưởng gian lận.',
+      title: 'Kế hoạch giả chết không xóa được cái chết thật',
+      text: 'Ông Lực định giả chết, nhưng ông chết thật, do Tâm đánh bằng cây sào. Bà Hồng không biết kế hoạch, ông dặn Tâm giấu bà. Điều 9 chỉ cho từ chối khi tự tử trong 2 năm đầu hoặc người thụ hưởng cố ý gây ra cái chết. Không điều nào đúng ở đây.',
       Art: () => (
         <>
-          <OnDesk ids={['P10', 'P1']} />
+          <OnDesk ids={['P1', 'P10']} />
           <PanelStamp text="Không khớp" color="#b23a2e" />
         </>
       ),

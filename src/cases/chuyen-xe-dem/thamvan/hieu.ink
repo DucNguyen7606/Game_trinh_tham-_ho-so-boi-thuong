@@ -20,9 +20,9 @@ VAR has_P9 = false
 * {has_H9} [Nền kho anh đầy hạt tiêu và vệt xe nâng.]
     "Xe nâng của tui để sẵn trong kho, người thuê xài thì xài. Chứa tiêu thì vương hạt tiêu chứ sao."
     -> hoi
-* {has_P9} [Người thuê tên "Lê Văn Hùng", nhưng tiền cọc từ tài khoản Trần Thị Mai.]
+* {has_P9} [Người thuê tên "Lê Văn Hùng", nhưng tiền cọc từ tài khoản Trần Thị Mai, kế toán nhà xe Kiều Phát.]
     "Tui chỉ coi tiền vô chưa. Tên ai chuyển thì tui đâu có để ý."
-    "Mà cái ông Hùng đó nói giọng Ban Mê. Cái đó thì tui nhớ."
+    "Mà cái ông Hùng đó nói giọng Ban Mê. Lúc gọi, đầu dây còn có tiếng đàn bà nhắc bài. Cái đó thì tui nhớ."
     -> hoi
 * [Cảm ơn anh.]
     -> END

@@ -75,6 +75,7 @@ const Marker = ({ x, y, n }: { x: number; y: number; n: string }) => (
 
 const Night = () => <rect width="1600" height="900" fill="#141a2a" opacity="0.5" />
 const DIEP = clothColors.maroon
+const NGOC = clothColors.white
 const QUAN = clothColors.charcoal
 
 /** Two paintings side by side: the real one and the copy. */
@@ -130,21 +131,21 @@ export const reconstruction: ReconstructionPanel[] = (
       Art: () => <TwoPaintings />,
     },
     {
-      time: '14/10 và 28/10',
-      title: 'Bà Diệp biết',
-      text: 'Bà Diệp tự gửi mẫu sơn đi xét nghiệm: nhựa acrylic, không thể là năm 1962. Hai tuần sau nhà đấu giá báo sẽ lấy mẫu sơn ngày 21/11. Bà không báo ai. Tờ kết quả bị cho vào máy hủy.',
+      time: '14/10 đến 28/10',
+      title: 'Người đọc kết quả trước',
+      text: 'Ngọc gửi mẫu sơn đi xét nghiệm để làm hồ sơ đấu giá. Kết quả về hộp thư của cô: nhựa acrylic, không thể là năm 1962. Cô không báo bà Diệp mà gọi cho Quân. Hai ngày sau, Quân chuyển cho cô 100 triệu. Tờ kết quả vào máy hủy. Ngày 28/10 bà Diệp vẫn vui vẻ trả lời nhà đấu giá: "Tôi đồng ý" cho lấy mẫu sơn.',
       questionId: 'q5',
       Art: () => <OnDesk ids={['P9', 'P8']} />,
     },
     {
       time: '20/11, 01:36 đến 01:59',
-      title: 'Chủ nhà làm kẻ trộm',
-      text: 'Bà Diệp chạy Vespa xanh ngọc từ Thảo Điền tới, quấn chiếc khăn kem viền đỏ. Bà tắt báo động bằng mã của mình, tắt camera trên máy tính phòng làm việc, gỡ bản chép khỏi khung rồi nạy cửa sau từ bên trong cho giống trộm phá cửa.',
+      title: 'Mượn dáng bà chủ',
+      text: 'Ngọc rời Bùi Viện sau khi chụp ảnh lúc 00:14, mở cửa phòng tranh bằng chìa của mình. Cô quấn chiếc khăn bà Diệp để quên, lấy chiếc Vespa bà gửi lại phòng tranh, tắt báo động bằng mã của chủ, tắt camera trên máy tính bà Diệp, gỡ bản chép khỏi khung rồi nạy cửa sau từ bên trong cho giống trộm phá cửa.',
       questionId: 'q6',
       Art: () => (
         <Staged zone="cua-sau">
           <Night />
-          <Person x={700} y={720} h={330} color={DIEP} hold="pry" scarf flip />
+          <Person x={700} y={720} h={300} color={NGOC} hold="pry" scarf flip />
           <Marker x={672} y={400} n="3" />
           <Marker x={960} y={700} n="4" />
         </Staged>
@@ -153,14 +154,14 @@ export const reconstruction: ReconstructionPanel[] = (
     {
       time: '01:59',
       title: 'Một chiếc túi dẹt',
-      text: 'Camera Đồng Khởi thấy chiếc Vespa ra khỏi hẻm, chở một túi dẹt cỡ một mét. Chú Bảy Lộc bán hủ tiếu thấy người phụ nữ quấn khăn quay lại "làm gì đó ở cửa". Ngọc lúc đó ở Bùi Viện, Quân đang livestream, ông Phong ở Đà Lạt.',
+      text: 'Camera Đồng Khởi thấy chiếc Vespa ra khỏi hẻm, chở một túi dẹt cỡ một mét. 01:35 Ngọc đã đăng tấm ảnh chụp từ 00:14 để làm chứng mình còn ở Bùi Viện. Lúc 01:44 bà Diệp mặc đồ ngủ ở Thảo Điền, Quân đang livestream, ông Phong ở Đà Lạt.',
       questionId: 'q7',
-      Art: () => <OnDesk ids={['P7', 'X3']} />,
+      Art: () => <OnDesk ids={['X4', 'X3']} />,
     },
     {
       time: '20/11, 07:51',
       title: 'Hồ sơ 8 tỷ',
-      text: 'Bà Diệp có mặt 11 phút sau khi Ngọc báo tin, bình tĩnh lạ thường, rồi nộp hồ sơ đòi 8 tỷ cho một bức tranh mà bà biết là không đáng một đồng.',
+      text: 'Bà Diệp có mặt 11 phút sau khi Ngọc báo tin và nộp hồ sơ đòi 8 tỷ. Bà tin bức Khuê thật vừa bị trộm. Bà không sai: bức thật đã bị trộm từ tháng 6, khi hợp đồng bảo hiểm đã có hiệu lực, và người trộm là thợ phục chế bà tin nhất.',
       questionId: 'q1',
       Art: () => (
         <Staged zone="trung-bay">
@@ -209,7 +210,7 @@ const PanelStamp = ({ text, color }: { text: string; color: string }) => (
 
 const theftTheory: Record<string, string> = {
   diep: 'Theo bạn, chính bà Diệp vào phòng tranh lúc 01:38, gỡ bức tranh rồi dựng vết cạy để đòi tiền bảo hiểm.',
-  ngoc: 'Theo bạn, Ngọc dùng mã của chủ để vào phòng tranh, lấy bức tranh bán đi trả nợ thẻ.',
+  ngoc: 'Theo bạn, Ngọc nhận tiền của Quân để phi tang bản chép trước buổi lấy mẫu sơn: cô dùng mã, khăn và xe của bà Diệp để mọi thứ chỉ về bà chủ.',
   quan: 'Theo bạn, Quân quay lại lấy bức tranh để xóa dấu vết bản chép.',
   phong: 'Theo bạn, ông Phong lấy bức tranh để không ai phát hiện ông thẩm định sai.',
 }
@@ -223,13 +224,13 @@ const swapTheory: Record<string, { text: string; docs: string[] }> = {
 }
 
 const theftRefute: Record<string, { text: string; docs: string[] }> = {
-  ngoc: { text: 'Lúc 01:35 Ngọc ở Bùi Viện với ba người bạn. Người vào hẻm đi Vespa xanh ngọc, còn Ngọc chạy Vision trắng. Câu hỏi về tiền bảo hiểm là bà Diệp sai cô hỏi.', docs: ['X4', 'P7'] },
+  diep: { text: 'Lúc 01:44 bà Diệp mặc đồ ngủ ở Thảo Điền, cổ không quấn khăn. Chiếc khăn và chiếc Vespa của bà đều để ở phòng tranh. Bà đi giày cao gót cỡ 38, dấu giày trong hẻm là giày bệt cỡ 36. Tiền của Quân chảy về tài khoản Ngọc.', docs: ['X3', 'P10'] },
   quan: { text: 'Từ 01:00 đến 02:20 Quân livestream ở xưởng Bình Thạnh, học trò ngồi cạnh. Anh đã có tranh thật, không cần lấy bản chép.', docs: ['X5'] },
   phong: { text: 'Ông Phong ở Đà Lạt dự hội thảo, chụp hồ Xuân Hương lúc 01:20. Ông không có mã báo động.', docs: ['X6'] },
 }
 
 const swapRefute: Record<string, { text: string; docs: string[] }> = {
-  diep: { text: 'Bà Diệp chỉ biết tranh là giả từ tháng 10. Bức tranh rời phòng tranh duy nhất một lần, tới xưởng Quân, và tiền bán tranh thật vào tài khoản Quân.', docs: ['P6', 'P10'] },
+  diep: { text: 'Bà Diệp chưa bao giờ biết tranh là giả, bà còn đồng ý cho lấy mẫu sơn. Bức tranh rời phòng tranh duy nhất một lần, tới xưởng Quân, và tiền bán tranh thật vào tài khoản Quân.', docs: ['P6', 'P10'] },
   phong: { text: 'Bức ông Phong thẩm định tháng 3 có chuồn chuồn đỏ, chữ ký "Khuê 62" và vết rạn, đúng như bức đang treo nhà ông Thành. Ông chính là người nhận ra ảnh tháng 7 là đồ chép.', docs: ['P2', 'P11'] },
   ngoc: { text: 'Ngọc chỉ ký nhận tranh về. Giấy can và ván MDF đúng cỡ nằm ở xưởng Quân, tiền bán tranh vào tài khoản Quân.', docs: ['P6', 'P10'] },
   none: { text: 'Mảnh vụn trong khung là MDF, tranh của Khuê vẽ trên vóc gỗ mít. Mẫu sơn là acrylic. Bức bị lấy đi đêm đó là đồ chép.', docs: ['P9', 'P5'] },
@@ -260,7 +261,7 @@ function SwapArt({ who }: { who: string }) {
 function DecisionArt({ pay }: { pay: boolean }) {
   return (
     <>
-      <OnDesk ids={pay ? ['P1', 'P4'] : ['P9', 'P3']} />
+      <OnDesk ids={pay ? ['P1', 'P11'] : ['P9', 'P3']} />
       <PanelStamp text={pay ? 'Chi trả' : 'Từ chối'} color={pay ? '#3f8a7e' : '#b23a2e'} />
     </>
   )
@@ -272,12 +273,21 @@ export function verdictPreview(slotId: string, optionId: string): { Art: () => J
   if (slotId === 'decision')
     return {
       Art: () => <DecisionArt pay={optionId === 'pay'} />,
-      note:
-        optionId === 'pay'
-          ? 'Bạn cho rằng bức tranh gốc bị trộm thật, và công ty nên chi trả 8 tỷ cho bà Diệp.'
-          : 'Bạn cho rằng hồ sơ có gian lận: từ chối chi trả và chuyển toàn bộ cho công an.',
+      note: decisionNote[optionId] ?? '',
     }
   return undefined
+}
+
+const decisionNote: Record<string, string> = {
+  pay: 'Bạn cho rằng bức tranh gốc đã bị trộm trong thời hạn bảo hiểm: chi 8 tỷ cho bà Diệp, An Tín đứng ra đòi lại bức thật.',
+  fake: 'Bạn cho rằng thứ bị lấy đêm 19/11 chỉ là tranh giả, nên công ty không phải trả gì.',
+  deny: 'Bạn cho rằng bà Diệp tự dựng vụ trộm: từ chối chi trả và chuyển toàn bộ cho công an.',
+}
+
+const decisionTitle: Record<string, string> = {
+  pay: 'Chi trả 8 tỷ cho bà Diệp',
+  fake: 'Từ chối vì chỉ mất tranh giả',
+  deny: 'Từ chối và chuyển hồ sơ cho công an',
 }
 
 export function theoryPanels(picks: Picks): ReconstructionPanel[] {
@@ -302,8 +312,8 @@ export function theoryPanels(picks: Picks): ReconstructionPanel[] {
   panels.push({
     kind: 'theory',
     time: 'Đề xuất của bạn',
-    title: pay ? 'Chi trả 8 tỷ' : 'Từ chối và chuyển hồ sơ cho công an',
-    text: pay ? 'Bạn đề xuất công ty chi trả 8 tỷ cho bà Diệp.' : 'Bạn từ chối chi trả và chuyển toàn bộ hồ sơ cho công an điều tra.',
+    title: decisionTitle[picks.decision] ?? 'Đề xuất',
+    text: decisionNote[picks.decision] ?? '',
     Art: () => <DecisionArt pay={pay} />,
   })
 
@@ -336,15 +346,15 @@ export function theoryPanels(picks: Picks): ReconstructionPanel[] {
         </>
       ),
     })
-  if (pay)
+  if (!pay)
     wrong.push({
       kind: 'refute',
       time: 'Lật lại',
-      title: 'Không có tranh gốc nào bị trộm',
-      text: 'Thứ biến mất đêm 19/11 là bản chép trên MDF. Bà Diệp biết từ tháng 10 và tự tay gỡ nó xuống. Theo Điều 11, công ty chỉ bồi thường cho tác phẩm gốc và không bồi thường khi người được bảo hiểm gian lận.',
+      title: 'Tranh gốc đã bị trộm, chỉ là sớm hơn',
+      text: 'Thứ biến mất đêm 19/11 là bản chép. Nhưng bức gốc ông Phong thẩm định đã bị Quân lấy đi trong đợt phục chế tháng 6, khi hợp đồng đã có hiệu lực, và hợp đồng bảo hiểm cả lúc tranh đi phục chế. Bà Diệp không gian lận. An Tín phải chi 8 tỷ, rồi đòi lại bức thật từ nhà ông Thành.',
       Art: () => (
         <>
-          <OnDesk ids={['P9', 'P1']} />
+          <OnDesk ids={['P1', 'P11']} />
           <PanelStamp text="Không khớp" color="#b23a2e" />
         </>
       ),
