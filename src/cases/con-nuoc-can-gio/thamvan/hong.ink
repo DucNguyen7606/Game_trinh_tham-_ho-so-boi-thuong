@@ -1,7 +1,9 @@
 VAR has_H6 = false
+VAR has_H12 = false
 VAR has_P8 = false
 VAR has_P5 = false
 VAR has_P10 = false
+VAR has_X9 = false
 
 Bà Hồng mặc áo tang trắng, mắt đỏ hoe, tay vân vê chiếc khăn mùi xoa.
 "Chồng tôi chết rồi, {xco} còn muốn hỏi gì nữa?"
@@ -19,6 +21,15 @@ Bà Hồng mặc áo tang trắng, mắt đỏ hoe, tay vân vê chiếc khăn m
 * [Anh Lực mua bảo hiểm 5 tỷ hồi tháng 5. Ai bày?]
     "Ảnh tự đi ký. Về nhà mới nói, nhà mình làm nghề sông nước, lỡ có chuyện thì vợ con còn cái mà sống."
     "Tôi còn rầy ảnh, tiền đâu mà đóng phí."
+    -> hoi
+* {has_X9} [Tối 9/9 chị nhắn em gái "Ảnh đi rồi. Mai là xong hết rồi". Xong cái gì?]
+    Bà Hồng ngẩng lên, mặt đỏ bừng.
+    "Mai là kỳ hụi chót. Tôi đóng hụi cả năm, Út nó sợ tôi bị giựt nên hỏi hoài."
+    "{Xco} không tin thì coi sổ hụi nè." #photo:X8
+    -> hoi
+* {has_H12} [Ngày 20/5 chị mở sổ tiết kiệm 200 triệu, tám ngày sau khi anh Lực mua bảo hiểm.]
+    "Tiền hốt hụi đó. Tôi để dành cho con Như mổ mắt. Ảnh nói đưa ảnh trả nợ, tôi không chịu."
+    "Hai chuyện đó trùng ngày chứ đâu có dính gì nhau."
     -> hoi
 * {has_H6} [Thuốc huyết áp cả tháng của anh Lực đâu rồi?]
     Bà Hồng ngơ ngác.

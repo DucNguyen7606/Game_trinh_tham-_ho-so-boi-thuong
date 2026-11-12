@@ -104,3 +104,13 @@ export function Card({ x, y, color = '#3c6d8a' }: P) {
     </g>
   )
 }
+
+/** A long scrape of foreign paint along a hull or a wall. */
+export function Smear({ x, y, color = '#3f78b0' }: P) {
+  return (
+    <g transform={`translate(${x} ${y}) rotate(-4)`}>
+      <path d="M-90,-6 q40,-10 90,-4 q50,6 90,-2 l-4,14 q-46,6 -88,2 q-46,-4 -84,4 Z" fill={color} opacity="0.85" />
+      <path d="M-70,0 h40 M10,2 h50" stroke="#e8dcc4" strokeWidth="2" opacity="0.5" />
+    </g>
+  )
+}
