@@ -99,6 +99,14 @@ function Shelves() {
       ))}
       <Label x={200} y={222} t="vắc xin · insulin · mẫu xét nghiệm" c={ink.night} />
       <Label x={200} y={236} t="không lô nào báo vượt nhiệt" c={ink.night} />
+      {/* Linh's sticky note on the shelf edge: the noise card H10. */}
+      <g transform="translate(-10 8) rotate(2 300 262)">
+        <rect x="236" y="240" width="150" height="54" fill="#f6e27a" stroke={LINE} strokeWidth="1.5" />
+        <text x="244" y="256" fontSize="9" fill={ink.night} fontFamily={mono}>16/11 · Anh Tùng để riêng</text>
+        <text x="244" y="268" fontSize="9" fill={ink.night} fontFamily={mono}>thùng 1 ra mép kệ giùm em.</text>
+        <text x="244" y="280" fontSize="9" fill="#b23a2e" fontFamily={mono}>Đừng báo chị Thư!</text>
+        <text x="350" y="290" fontSize="10" fill={ink.night} fontFamily={mono} fontStyle="italic">Linh</text>
+      </g>
     </g>
   )
 }

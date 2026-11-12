@@ -232,6 +232,16 @@ function Frangipani() {
           <circle r="3" fill={accent.gold} />
         </g>
       ))}
+      {/* Wall foot and dress-shoe prints pressed on top of the fallen flowers: the noise card H11. */}
+      <rect x="0" y="0" width="400" height="34" fill="#c9b9a0" stroke={LINE} strokeWidth="2" />
+      {[[150, 120, -8], [210, 170, 6], [160, 225, -4]].map(([x, y, r]) => (
+        <g key={`${x}-${y}`} transform={`rotate(${r} ${x} ${y})`} opacity="0.85">
+          <path d={`M${x - 14},${y - 30} q14,-10 28,0 l2,26 q-16,6 -32,0 Z`} fill="#5a3a28" stroke={LINE} strokeWidth="1" />
+          <rect x={x - 13} y={y + 2} width="26" height="18" rx="4" fill="#5a3a28" stroke={LINE} strokeWidth="1" />
+        </g>
+      ))}
+      <rect x="70" y="270" width="260" height="20" fill="#1b1b1f" opacity="0.7" />
+      <Label x={200} y={284} t="dấu giày tây in lên trên lớp hoa rụng" />
     </g>
   )
 }
