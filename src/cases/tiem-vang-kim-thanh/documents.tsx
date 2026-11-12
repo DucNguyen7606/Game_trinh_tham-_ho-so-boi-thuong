@@ -361,7 +361,7 @@ const X7 = () => (
     <Row k="Hàng" v="Nhẫn tròn trơn 9999 · 2 lượng" />
     <Row k="Thành tiền" v="280.000.000 đ" strong />
     <Row k="Thanh toán" v="Tiền mặt" />
-    <Stamp text="Bảo Ngọc · Đã thu" className="bottom-2 right-3" />
+    <Stamp text="Bảo Ngọc · Đã thu" className="bottom-2 left-3" />
     <div className="h-12" />
   </Sheet>
 )
