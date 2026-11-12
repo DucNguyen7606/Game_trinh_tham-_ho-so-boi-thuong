@@ -7,6 +7,13 @@ VAR has_H9 = false
 VAR has_H10 = false
 VAR has_P6 = false
 VAR has_P8 = false
+VAR has_P4 = false
+VAR has_P5 = false
+VAR has_H7 = false
+VAR has_H8 = false
+VAR has_X3 = false
+VAR has_P10 = false
+VAR has_H12 = false
 
 Anh Toàn đứng dậy bắt tay, mắt thâm quầng sau kính, áo polo đồng phục công ty.
 "Cảm ơn {xchi} đã tới. Tang lễ xong tôi mới đầu óc mà làm giấy tờ. Anh tôi trượt chân, tôi chỉ mong bên {xchi} giải quyết cho nhanh."
@@ -45,11 +52,44 @@ Anh Toàn đứng dậy bắt tay, mắt thâm quầng sau kính, áo polo đồ
 * {has_H9} [Áo khoác đồng phục của anh rách cổ tay, giặt ngay trong đêm.]
     "Khiêng thùng hàng bị móc đinh rách. Dính dầu máy nên tôi giặt luôn trong nhà vệ sinh, có gì đâu."
     -> hoi
-* {has_P8} [Chiếc Wave của Phúc ra cổng phụ lúc 22:52, về lại 00:09. Người lái mặc áo khoác navy, không phải đồng phục kho.]
-    Anh Toàn im rất lâu. Rồi anh đặt cặp kính xuống bàn.
-    "Tôi chỉ qua để xin ảnh thêm một tháng. Một tháng thôi, tôi xoay đủ trả lại. Ảnh nói sáng mai ảnh đưa hết cho kiểm toán, cho công an."
-    "Ảnh quay lưng ra ban công gọi điện. Tôi nắm tay ảnh lại... Tôi không nhớ mình đã nghĩ gì nữa."
-    "Tôi lau cái ly, đi thang xuống hầm. Cả đường về cảng tôi chỉ nghe tiếng ông bảo vệ la."
+* {has_P10} [Ông Khả nhắn cho anh Hưng lúc 23:15: "Mai không có tiền thì đừng trách tôi."]
+    "Đó. Tôi nói rồi mà, ông đó dọa anh tôi suốt. {Xchi} đi mà hỏi ông Khả."
     -> hoi
+* {has_P8} [Chiếc Wave của Phúc ra cổng phụ lúc 22:52, về lại 00:09. Người lái mặc áo khoác navy, không phải đồng phục kho.]
+    Anh Toàn đẩy gọng kính, im một lúc.
+    "Ừ, tôi mượn xe Phúc. Chạy qua Quận 4 ăn ốc, ngồi tới hơn 12 giờ. Tôi giấu vì biết kiểu gì người ta cũng nghĩ bậy."
+    -> toan_xe
 * [Cảm ơn anh.]
     -> END
+
+// Toàn lùi từng bước: nhận mượn xe, rồi nhận có ghé, chỉ chịu khai khi bị đặt đúng vào ban công lúc 23:41.
+=== toan_xe ===
++ {has_X3} [Anh Hưng còn nợ ông Khả 2 tỷ đã quá hạn.]
+    "Thì đó. Người cần tìm là ông Khả, đâu phải tôi đi ăn ốc."
+    Anh Toàn lấy lại giọng đều đều. Món nợ của ông Khả không trả lời được chiếc xe đã đi đâu. Lần sau phải hỏi lại cho trúng.
+    -> hoi
++ {has_H8} [Xe 59P2-418.36 vào hầm B2 chung cư Sen Hồng lúc 23:07, ra 23:49. Quán ốc nào nằm dưới hầm chung cư?]
+    Anh Toàn tháo kính, xoa sống mũi.
+    "Thôi được. Tôi có ghé anh tôi, nói chuyện công ty chừng nửa tiếng. Lúc tôi về ảnh còn đứng ngoài ban công hút thuốc, khỏe re."
+    -> toan_ghe
++ [Để tôi xem lại hồ sơ.]
+    -> hoi
+
+=== toan_ghe ===
++ {has_H12} [Dưới bồn hoa có đầu lọc Jet, loại ông Khả hút.]
+    "Đó! Ông Khả còn lởn vởn dưới đó. Tôi về rồi thì ai lên, {xchi} phải hỏi ông ta."
+    Anh Toàn đeo kính lại. Đầu lọc dưới bồn hoa không nói ai đứng trên ban công. Lần sau phải hỏi lại cho trúng.
+    -> hoi
++ {has_H7 and has_P5} [Bảo vệ nghe tiếng rơi lúc 23:41. Người mặc áo navy đi thang xuống hầm lúc 23:47. Lúc anh Hưng rơi, anh vẫn còn trên lầu.]
+    -> toan_khai
++ {has_P4 and has_H9} [Kẽ móng tay anh Hưng có sợi polyester xanh navy, cổ tay bầm bốn ngón. Áo khoác navy của anh rách cổ tay, giặt ngay trong đêm.]
+    -> toan_khai
++ [Để tôi xem lại hồ sơ.]
+    -> hoi
+
+=== toan_khai ===
+Anh Toàn im rất lâu. Rồi anh đặt cặp kính xuống bàn.
+"Tôi chỉ qua để xin ảnh thêm một tháng. Một tháng thôi, tôi xoay đủ trả lại. Ảnh nói sáng mai ảnh đưa hết cho kiểm toán, cho công an."
+"Ảnh quay lưng ra ban công gọi điện. Tôi nắm tay ảnh lại... Tôi không nhớ mình đã nghĩ gì nữa."
+"Tôi lau cái ly, đi thang xuống hầm. Cả đường về cảng tôi chỉ nghe tiếng ông bảo vệ la."
+-> hoi

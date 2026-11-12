@@ -269,6 +269,18 @@ const X2 = () => (
   </Sheet>
 )
 
+const P12 = () => (
+  <Sheet org="Tân Sơn Cargo · Tổ kỹ thuật lạnh" title="Phiếu báo lỗi thiết bị số 1311-03">
+    <Row k="Ngày báo" v="13/11/2025 · 16:20" />
+    <Row k="Thiết bị" v="Máy nén số 2, phòng lạnh 3" />
+    <Row k="Lỗi" v="Quá dòng, tự ngắt" strong />
+    <Row k="Hẹn thay" v="20/11/2025" strong />
+    <p className="pt-1 text-[10px]">Phòng lạnh 3 tạm chạy bằng máy nén số 1. Thủ kho theo dõi cảm biến tường, vượt 8°C thì chuyển hàng sang phòng 4.</p>
+    <Signature name="Đ. T. Tùng" />
+    <Stamp text="Chờ xử lý" className="bottom-2 right-3" />
+  </Sheet>
+)
+
 const Bubble = ({ me, children, time }: { me?: boolean; children: React.ReactNode; time: string }) => (
   <div className={me ? 'ml-6 rounded-lg rounded-tr-none bg-[#3f8a7e] p-2 text-white' : 'mr-6 rounded-lg rounded-tl-none bg-white p-2'}>
     <p>{children}</p>
@@ -312,4 +324,4 @@ const X4 = () => (
   </Phone>
 )
 
-export const documents: Record<string, () => JSX.Element> = { P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, X1, X2, X3, X4 }
+export const documents: Record<string, () => JSX.Element> = { P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, X1, X2, X3, X4, P12 }

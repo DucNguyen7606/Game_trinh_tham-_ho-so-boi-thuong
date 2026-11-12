@@ -3,6 +3,7 @@ VAR has_P3 = false
 VAR has_P7 = false
 VAR has_P10 = false
 VAR has_H2 = false
+VAR has_P12 = false
 
 Bà Thư ngồi thẳng lưng trong phòng khách của kho, điện thoại rung liên tục trên bàn.
 "Bệnh nhân không chờ được tới lô sau đâu. {Xchi} làm lẹ giùm tôi."
@@ -31,6 +32,10 @@ Bà Thư ngồi thẳng lưng trong phòng khách của kho, điện thoại run
     -> hoi
 * {has_P10} [Viện Kiểm nghiệm báo thuốc đạt toàn bộ chỉ tiêu.]
     "Trời đất..." Bà cầm điện thoại lên. "Tôi gọi bệnh viện liền. Mấy chị bệnh nhân hỏi tôi cả tuần nay."
+    -> hoi
+* {has_P12} [Máy nén phòng lạnh 3 hư từ 13/11.]
+    Bà Thư đập tay xuống bàn.
+    "Đó! Kho hư máy mà không báo khách. Lỗi của Tân Sơn Cargo rành rành, bảo hiểm đền rồi đi đòi kho."
     -> hoi
 * [Cảm ơn bà.]
     -> END

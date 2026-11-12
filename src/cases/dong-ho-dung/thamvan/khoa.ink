@@ -8,6 +8,10 @@ VAR has_H9 = false
 VAR has_P7 = false
 VAR has_P9 = false
 VAR has_P10 = false
+VAR has_X1 = false
+VAR has_X2 = false
+VAR has_P11 = false
+VAR has_H11 = false
 
 Khoa rót trà mời trước, tay áo sơ mi xắn gọn gàng.
 "Chú tôi lớn tuổi, cầu thang thì dốc. Tôi dặn hoài mà chú không chịu dọn xuống nhà dưới. {Xchi} cần giấy tờ gì, tôi lo đủ."
@@ -56,11 +60,52 @@ Khoa rót trà mời trước, tay áo sơ mi xắn gọn gàng.
     Khoa cười, nhưng nụ cười tắt rất nhanh.
     "Chú bị tim, tôi lo xa. Cô tổng đài nói bệnh thì không chi, té ngã thì chi. Vậy thôi."
     -> hoi
-* {has_P10} [Giám định nói hai con ốc của anh dính vụn gỗ lim của cầu thang, khớp từng đường ren.]
-    Khoa ngồi yên rất lâu, hai tay đan chặt.
-    "Tôi về thấy đèn phòng chú còn sáng. Lên tới nơi thì chú ngồi gục trên bàn vẽ, tay còn cầm bút chì, người lạnh ngắt rồi."
-    "Tôi đứng đó nghĩ tới chủ nợ, nghĩ tới cô tổng đài nói bệnh thì không chi."
-    "Tôi không làm gì chú hết {xchi}. Tôi chỉ kéo chú ra cầu thang, tháo hai con ốc, chỉnh cái đồng hồ về lúc tôi đang ở tiệc. Rồi tôi tắt đèn."
+* {has_P11} [Ông Hiển dặn để lại cho chú Tư phòng sau bếp và 500 triệu.]
+    Khoa nhướng mày.
+    "Tôi không biết vụ đó. Mà chú Tư giữ chìa cổng với cửa sảnh, ra vô lúc nào chẳng được. {Xchi} hỏi chú Tư thử coi."
     -> hoi
+* {has_P10} [Giám định nói hai con ốc của anh dính vụn gỗ lim của cầu thang, khớp từng đường ren.]
+    Khoa gật đầu, như đã chờ câu này.
+    "Thì đúng là ốc của thanh đó. Tết tôi tháo ra định thay thanh mới, chú không cho, tôi cất vô hộp. Thanh đó lỏng từ hồi đó, chú già rồi mà cứ đi cầu thang ban đêm."
+    -> khoa_oc
 * [Cảm ơn anh.]
     -> END
+
+// Khoa nhận cái nhỏ (tháo ốc từ Tết) để giữ cái lớn (chú té thật). Phải chỉ ra ông Hiển không hề đi xuống cầu thang, rồi chỉ ra chỉ Khoa có mặt.
+=== khoa_oc ===
++ {has_X1} [Ông Hiển suy tim, bác sĩ dặn đề phòng té ngã khi lên xuống cầu thang.]
+    "Đó, {xchi} thấy chưa. Chú yếu tim, chóng mặt, thanh chặn lỏng. Té là chuyện sớm muộn."
+    Khoa rót thêm trà, tay đã hết run. Bệnh án chỉ làm câu chuyện "té cầu thang" của anh thêm chắc. Lần sau phải hỏi lại cho trúng.
+    -> hoi
++ {has_X2} [Thắng từng nhắn: "Ông đừng để tới lúc hối hận."]
+    "Ông môi giới đó dai như đỉa. {Xchi} đi mà hỏi ổng."
+    Khoa rót thêm trà, tay đã hết run. Tin nhắn của Thắng không nói gì về thanh chặn thảm. Lần sau phải hỏi lại cho trúng.
+    -> hoi
++ {has_P7} [Ông Hiển không đi xuống cầu thang nào hết. Ông mất khi đang ngồi, gãy cổ sau khi chết, dưới hai nách có vết hằn ngón tay. Có người đã khiêng ông ra đó.]
+    Khoa đặt tách trà xuống.
+    "Ai khiêng thì tôi đâu biết. Chú Tư có chìa cửa sảnh, chú ra vô cả ngày."
+    -> khoa_khieng
++ [Để tôi xem lại hồ sơ.]
+    -> hoi
+
+=== khoa_khieng ===
++ {has_P11} [Chú Tư được ông dặn để lại phòng sau bếp và 500 triệu.]
+    "Đó. Người có lợi là chú Tư chứ đâu phải tôi."
+    Khoa ngả người ra ghế. Có lợi chưa chắc đã có mặt: phải xem đêm đó ai ở trong nhà. Lần sau phải hỏi lại cho trúng.
+    -> hoi
++ {has_H11} [Dưới gốc hoa sứ có dấu giày tây sát tường rào.]
+    "Thì có người trèo tường vô. Ông Thắng đi giày tây đó {xchi}."
+    Khoa ngả người ra ghế. Dấu giày in lên trên lớp hoa rụng từ hôm có chuyện, và tường thì cao ba mét cắm mảnh chai. Lần sau phải hỏi lại cho trúng.
+    -> hoi
++ {has_P5 and has_H1} [Chú Tư về 19:30, tới 06:25 mới mở cổng. Sau nửa đêm chỉ có anh trong nhà, đèn phòng làm việc tắt 01:12. Núm đồng hồ bị kéo ra, chỉnh về 22:47, đúng lúc anh đang nâng ly ở tiệc.]
+    -> khoa_khai
++ [Để tôi xem lại hồ sơ.]
+    -> hoi
+
+=== khoa_khai ===
+Khoa ngồi yên rất lâu, hai tay đan chặt.
+"Tôi về thấy đèn phòng chú còn sáng. Lên tới nơi thì chú ngồi gục trên bàn vẽ, tay còn cầm bút chì, người lạnh ngắt rồi."
+"Tôi đứng đó nghĩ tới chủ nợ, nghĩ tới cô tổng đài nói bệnh thì không chi."
+"Tôi không làm gì chú hết {xchi}. Tôi chỉ kéo chú ra cầu thang, tháo hai con ốc, chỉnh cái đồng hồ về lúc tôi đang ở tiệc. Rồi tôi tắt đèn."
+"Chuyện tháo ốc từ Tết là tôi bịa. Chủ nhật trước chú Tư còn lau thanh đó."
+-> hoi

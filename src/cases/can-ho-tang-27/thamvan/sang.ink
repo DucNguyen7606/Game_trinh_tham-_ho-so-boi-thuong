@@ -1,6 +1,7 @@
 VAR has_H7 = false
 VAR has_P7 = false
 VAR has_H6 = false
+VAR has_P12 = false
 
 Ông Sang ngồi thẳng lưng sau bàn sảnh, dãy màn hình camera nhấp nháy trước mặt.
 "Qua sảnh này thì không ai lọt khỏi mắt tôi."
@@ -24,6 +25,11 @@ VAR has_H6 = false
     -> hoi
 * {has_P7} [Thẻ KT-03 đi thang hàng lên tầng 27 lúc 02:09.]
     "KT-03 là thẻ ca đêm. Thằng Vũ ký nhận lúc gần 10 giờ tối, sáng mới trả."
+    -> hoi
+* {has_P12} [Tối 18/12 anh Bảo có tới tòa nhà?]
+    Ông Sang lật cuốn sổ giao nhận dưới quầy.
+    "Có. Nó gửi một thùng giấy cho cô Ngọc, tôi ký nhận lúc 19 giờ 50. Nó đứng ở quầy hút hết điếu thuốc rồi về."
+    "Khách không có thẻ thì thang khách cũng không chạy. Nó không lên lầu được."
     -> hoi
 * [Cảm ơn ông.]
     -> END
