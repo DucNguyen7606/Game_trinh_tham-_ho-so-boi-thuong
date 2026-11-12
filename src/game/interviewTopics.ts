@@ -6,6 +6,8 @@ interface Topic {
   text: string
   /** Clue ids the question needs (`{has_P7}`), all of which must be found. */
   needs: string[]
+  /** `{has_X1 || has_X5}`: any one of `needs` is enough. */
+  any?: boolean
 }
 
 const cache = new Map<string, Topic[]>()
@@ -28,8 +30,12 @@ function topics(caseId: string, script: string): Topic[] {
     let j = i + 1
     while (j < lines.length && !/^\s*\*/.test(lines[j]) && !/^\s*===/.test(lines[j])) j++
     if (lines.slice(i + 1, j).some((l) => /->\s*END/.test(l))) return
-    const needs = [...(m[1] ?? '').matchAll(/has_(\w+)/g)].map((x) => x[1])
-    out.push({ text: m[2].trim(), needs })
+    const cond = m[1] ?? ''
+    // A question gated on something said earlier in the same interview (`{vo_gio && vo_tien}`)
+    // only appears mid-conversation, so it is not counted as waiting to be asked.
+    if (/\b(?!has_)[a-z]\w*\b/i.test(cond.replace(/\b(not|and|or)\b/g, ''))) return
+    const needs = [...cond.matchAll(/has_(\w+)/g)].map((x) => x[1])
+    out.push({ text: m[2].trim(), needs, any: cond.includes('||') })
   })
   cache.set(key, out)
   return out
@@ -38,5 +44,5 @@ function topics(caseId: string, script: string): Topic[] {
 /** How many questions are open to ask right now and have not been asked in any earlier interview. */
 export function unaskedCount(caseId: string, script: string, foundClues: string[], sessions: TranscriptSession[] = []) {
   const asked = new Set(sessions.flatMap((s) => s.lines.filter((l) => l.fromPlayer).map((l) => l.text.trim())))
-  return topics(caseId, script).filter((t) => t.needs.every((c) => foundClues.includes(c)) && !asked.has(t.text)).length
+  return topics(caseId, script).filter((t) => (t.any ? t.needs.some((c) => foundClues.includes(c)) : t.needs.every((c) => foundClues.includes(c))) && !asked.has(t.text)).length
 }

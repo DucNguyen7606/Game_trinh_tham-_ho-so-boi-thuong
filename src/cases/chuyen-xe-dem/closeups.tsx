@@ -320,6 +320,75 @@ function Leftovers() {
   )
 }
 
+
+// Close-ups for the noise hotspots added in the tightening pass.
+const NO = { stroke: '#1d1512', strokeWidth: 2.5, strokeLinejoin: 'round' as const, strokeLinecap: 'round' as const }
+const NBg = ({ top = '#3a2f2a', floor = '#5a4232', y = 170 }: { top?: string; floor?: string; y?: number }) => (
+  <g>
+    <rect width="400" height="300" fill={top} />
+    <rect y={y} width="400" height={300 - y} fill={floor} />
+  </g>
+)
+const NText = ({ x, y, t, size = 11, fill = '#2d1f18', anchor = 'middle', weight = 700 }: { x: number; y: number; t: string; size?: number; fill?: string; anchor?: 'start' | 'middle' | 'end'; weight?: number }) => (
+  <text x={x} y={y} textAnchor={anchor} fontSize={size} fontWeight={weight} fill={fill} fontFamily="IBM Plex Mono, monospace">{t}</text>
+)
+
+/** Boot prints round the container. One sits on top of the police patrol car's tyre track. */
+function NPrints() {
+  return (
+    <g>
+      <rect width="400" height="300" fill="#9a4a2a" />
+      {/* Patrol car tyre track, laid down at 06:30 */}
+      <path d="M0,150 h400 M0,196 h400" stroke="#6a2f18" strokeWidth="30" opacity="0.6" />
+      {Array.from({ length: 20 }, (_, k) => <path key={k} d={`M${k * 20},140 v20 M${k * 20 + 6},186 v20`} stroke="#5a2410" strokeWidth="4" />)}
+      {[[90, 90, -10], [160, 250, 20], [300, 80, 5]].map(([x, y, r], k) => (
+        <ellipse key={k} cx={x} cy={y} rx="20" ry="40" fill="#5a2410" opacity="0.7" transform={`rotate(${r} ${x} ${y})`} />
+      ))}
+      {/* This one presses into the tyre track: made after the patrol car arrived */}
+      <g transform="rotate(8 240 172)">
+        <ellipse cx="240" cy="172" rx="22" ry="44" fill="#4a1a08" />
+        {Array.from({ length: 6 }, (_, k) => <path key={k} d={`M224,${146 + k * 10} h32`} stroke="#9a4a2a" strokeWidth="3" />)}
+      </g>
+      <rect x="110" y="262" width="180" height="26" rx="4" fill="#000" opacity="0.5" />
+      <NText x={200} y={280} t="dấu ủng in đè vệt xe tuần tra" fill="#e8dcc4" size={10} weight={400} />
+    </g>
+  )
+}
+
+/** Paper cups and melon-seed shells from the roadside stall. */
+function NSeeds() {
+  return (
+    <g>
+      <NBg top="#2a2f3a" floor="#6a5a3a" y={90} />
+      {Array.from({ length: 34 }, (_, k) => (
+        <ellipse key={k} cx={40 + (k * 61) % 330} cy={130 + (k * 41) % 150} rx="7" ry="4" fill="#1a1a1a" transform={`rotate(${k * 37} ${40 + (k * 61) % 330} ${130 + (k * 41) % 150})`} />
+      ))}
+      {[[120, 170], [270, 220]].map(([x, y], k) => (
+        <path key={k} d={`M${x - 26},${y - 40} h52 l-8,70 h-36 Z`} fill="#f3e4c4" fillOpacity="0.7" {...NO} />
+      ))}
+    </g>
+  )
+}
+
+/** Tài's scrap of arithmetic under the desk glass. */
+function NScrap() {
+  return (
+    <g>
+      <rect width="400" height="300" fill="#6b4c36" />
+      <rect x="20" y="20" width="360" height="260" fill="#c9e1e6" opacity="0.12" />
+      <g transform="rotate(-3 200 150)">
+        <rect x="60" y="56" width="280" height="190" fill="#f6efe2" {...NO} />
+        {[0, 1, 2, 3, 4, 5].map((i) => <path key={i} d={`M74,${92 + i * 26} h252`} stroke="#9fb4c8" strokeWidth="1" />)}
+        <text x="80" y="88" fontSize="15" fill="#2f4258" fontFamily="Bitter, serif" fontStyle="italic">20 tấn × 152 = 3,04 tỷ</text>
+        <text x="80" y="128" fontSize="15" fill="#2f4258" fontFamily="Bitter, serif" fontStyle="italic">HĐ Tây 98 → lỗ 1,08 tỷ</text>
+        <text x="80" y="170" fontSize="14" fill="#2f4258" fontFamily="Bitter, serif" fontStyle="italic">Mất hàng có CA xác nhận</text>
+        <text x="80" y="194" fontSize="14" fill="#2f4258" fontFamily="Bitter, serif" fontStyle="italic">= miễn phạt ??</text>
+        <path d="M76,206 q60,8 120,-2" stroke="#b23a2e" strokeWidth="2" fill="none" />
+      </g>
+    </g>
+  )
+}
+
 export const closeups: Record<string, () => JSX.Element> = {
   'bx-chi': Seal,
   'bx-san': Floor,
@@ -340,4 +409,7 @@ export const closeups: Record<string, () => JSX.Element> = {
   'pr-the': SackScrap,
   'pr-cong': Gate,
   'pr-chai': Leftovers,
+  'bx-dau-giay': NPrints,
+  'ld-hat-dua': NSeeds,
+  'kd-nhap': NScrap,
 }

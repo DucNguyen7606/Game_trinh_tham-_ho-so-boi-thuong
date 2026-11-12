@@ -307,6 +307,86 @@ function CrabHoles() {
   )
 }
 
+
+// Close-ups for the noise hotspots added in the tightening pass.
+const NO = { stroke: '#1d1512', strokeWidth: 2.5, strokeLinejoin: 'round' as const, strokeLinecap: 'round' as const }
+const NBg = ({ top = '#3a2f2a', floor = '#5a4232', y = 170 }: { top?: string; floor?: string; y?: number }) => (
+  <g>
+    <rect width="400" height="300" fill={top} />
+    <rect y={y} width="400" height={300 - y} fill={floor} />
+  </g>
+)
+const NText = ({ x, y, t, size = 11, fill = '#2d1f18', anchor = 'middle', weight = 700 }: { x: number; y: number; t: string; size?: number; fill?: string; anchor?: 'start' | 'middle' | 'end'; weight?: number }) => (
+  <text x={x} y={y} textAnchor={anchor} fontSize={size} fontWeight={weight} fill={fill} fontFamily="IBM Plex Mono, monospace">{t}</text>
+)
+
+/** Blue paint on the hull, faded, with barnacles grown over its edge: an old scrape. */
+function NPaint() {
+  return (
+    <g>
+      <rect width="400" height="300" fill="#7a4f32" />
+      {[40, 100, 160, 220, 280].map((y) => <path key={y} d={`M0,${y} h400`} stroke="#573721" strokeWidth="3" />)}
+      <path d="M30,130 q90,-24 180,-8 q90,14 170,-6 l-6,40 q-90,16 -170,6 q-90,-10 -170,10 Z" fill="#3f78b0" opacity="0.6" />
+      {Array.from({ length: 14 }, (_, k) => (
+        <g key={k}>
+          <circle cx={40 + k * 25} cy={k % 2 ? 128 : 172} r="7" fill="#d8d2c2" {...NO} strokeWidth={1.5} />
+          <circle cx={40 + k * 25} cy={k % 2 ? 128 : 172} r="2.5" fill="#6b6458" />
+        </g>
+      ))}
+      <rect x="110" y="232" width="180" height="26" rx="4" fill="#000" opacity="0.5" />
+      <NText x={200} y={250} t="sơn bạc · hà bám lên mép" fill="#e8dcc4" size={11} weight={400} />
+    </g>
+  )
+}
+
+/** The office raincoat: dry and dusty. */
+function NRaincoat() {
+  return (
+    <g>
+      <NBg top="#6b5a44" floor="#4a3a2c" y={250} />
+      <circle cx="200" cy="40" r="7" fill="#2a2a2a" />
+      <path d="M200,40 l-60,40 v170 h120 v-170 Z" fill="#e8c84a" {...NO} />
+      <path d="M140,80 l-40,90 l26,8 l20,-60 M260,80 l40,90 l-26,8 l-20,-60" fill="#d8b83a" {...NO} />
+      {Array.from({ length: 22 }, (_, k) => (
+        <circle key={k} cx={150 + (k * 37) % 100} cy={84 + (k * 23) % 50} r="2" fill="#8a7a5a" opacity="0.6" />
+      ))}
+    </g>
+  )
+}
+
+/** Hồng's savings book, opened on 20/5. */
+function NSavings() {
+  return (
+    <g>
+      <NBg top="#5a4134" floor="#7a4f32" y={60} />
+      <rect x="60" y="70" width="280" height="190" rx="6" fill="#c8546a" {...NO} />
+      <rect x="74" y="82" width="252" height="166" rx="3" fill="#f6efe2" {...NO} strokeWidth={1.5} />
+      <NText x={200} y={106} t="SỔ TIẾT KIỆM" size={13} />
+      <NText x={92} y={136} t="Chủ sổ: PHẠM THỊ HỒNG" size={10} anchor="start" weight={400} />
+      <NText x={92} y={160} t="Ngày mở: 20/05/2025" size={10} anchor="start" weight={400} />
+      <NText x={92} y={190} t="Số tiền: 200.000.000 đ" size={12} anchor="start" />
+      <NText x={92} y={216} t="Kỳ hạn: 6 tháng" size={10} anchor="start" weight={400} />
+    </g>
+  )
+}
+
+/** Two old beer cans, half sunk in mud. */
+function NCans() {
+  return (
+    <g>
+      <rect width="400" height="300" fill="#8a3a2a" />
+      {[120, 250].map((x, i) => (
+        <g key={x} transform={`rotate(${i ? 70 : -20} ${x} 170)`}>
+          <rect x={x - 30} y="110" width="60" height="110" rx="8" fill="#a9aeb2" {...NO} />
+          <rect x={x - 30} y="140" width="60" height="40" fill="#c9b27a" opacity="0.5" />
+          <rect x={x - 30} y="190" width="60" height="30" fill="#7a3a22" opacity="0.8" />
+        </g>
+      ))}
+      <path d="M0,220 q100,-20 200,0 t200,0 v80 h-400 Z" fill="#7a2f22" />
+    </g>
+  )
+}
+
 export const closeups: Record<string, () => JSX.Element> = {
   'ghe-lu': DrainHole,
   'ghe-may': Engine,
@@ -326,4 +406,8 @@ export const closeups: Record<string, () => JSX.Element> = {
   'rach-bun': DragMark,
   'rach-sao': BrokenPole,
   'rach-cua': CrabHoles,
+  'ghe-son': NPaint,
+  'vp-ao': NRaincoat,
+  'nha-so': NSavings,
+  'rach-lon': NCans,
 }

@@ -265,6 +265,96 @@ function Sandals() {
   )
 }
 
+
+// Close-ups for the noise hotspots added in the tightening pass.
+const NO = { stroke: '#1d1512', strokeWidth: 2.5, strokeLinejoin: 'round' as const, strokeLinecap: 'round' as const }
+const NBg = ({ top = '#3a2f2a', floor = '#5a4232', y = 170 }: { top?: string; floor?: string; y?: number }) => (
+  <g>
+    <rect width="400" height="300" fill={top} />
+    <rect y={y} width="400" height={300 - y} fill={floor} />
+  </g>
+)
+const NText = ({ x, y, t, size = 11, fill = '#2d1f18', anchor = 'middle', weight = 700 }: { x: number; y: number; t: string; size?: number; fill?: string; anchor?: 'start' | 'middle' | 'end'; weight?: number }) => (
+  <text x={x} y={y} textAnchor={anchor} fontSize={size} fontWeight={weight} fill={fill} fontFamily="IBM Plex Mono, monospace">{t}</text>
+)
+
+/** The guard hut socket: burnt, but wired to its own battery, not to the warehouse. */
+function NSocket() {
+  return (
+    <g>
+      <NBg top="#6b5a44" floor="#4a3a2c" y={210} />
+      <ellipse cx="150" cy="96" rx="96" ry="70" fill="#1a120e" opacity="0.6" />
+      <rect x="110" y="62" width="80" height="64" rx="8" fill="#d9d0bf" {...NO} />
+      <path d="M110,62 h80 v26 q-40,18 -80,0 Z" fill="#2a1d18" opacity="0.85" />
+      <circle cx="136" cy="100" r="5" fill="#1d1512" />
+      <circle cx="164" cy="100" r="5" fill="#1d1512" />
+      <path d="M164,126 q12,30 -16,44 q-20,10 -4,36" fill="none" stroke="#2a1d18" strokeWidth="8" strokeLinecap="round" />
+      {/* Wire running down to the battery under the table */}
+      <path d="M190,96 h70 q20,0 20,20 v84" fill="none" stroke="#c4452d" strokeWidth="5" />
+      <rect x="236" y="200" width="110" height="64" rx="4" fill="#2f3438" {...NO} />
+      <rect x="250" y="190" width="16" height="12" fill="#c4452d" {...NO} />
+      <rect x="316" y="190" width="16" height="12" fill="#1d1512" {...NO} />
+      <NText x={291} y={238} t="ẮC-QUY 12V" fill="#e8dcc4" />
+      <rect x="60" y="214" width="120" height="44" rx="4" fill="#4b5054" {...NO} />
+      <NText x={120} y={242} t="ĐỔI ĐIỆN" fill="#e8dcc4" size={10} />
+      <NText x={200} y={290} t="không nối cầu dao tổng · cách văn phòng ~30 m" fill="#e8dcc4" size={10} weight={400} />
+    </g>
+  )
+}
+
+/** An empty 5-litre jerrycan with the neighbour's shop sticker. */
+function NJerrycan() {
+  return (
+    <g>
+      <NBg top="#2e2622" floor="#3a2b23" y={200} />
+      <ellipse cx="200" cy="262" rx="130" ry="18" fill="#000" opacity="0.35" />
+      <path d="M100,90 h170 l40,40 v130 h-210 Z" fill="#c9452d" {...NO} />
+      <rect x="250" y="56" width="40" height="34" rx="5" fill="#2a2a2a" {...NO} />
+      <path d="M120,90 v-24 h80 v24" fill="none" {...NO} strokeWidth={6} />
+      <rect x="126" y="150" width="130" height="70" rx="5" fill="#f3e4c4" {...NO} />
+      <NText x={191} y={176} t="VẬT TƯ" size={12} />
+      <NText x={191} y={196} t="GIA HUY" size={16} />
+      <NText x={191} y={212} t="xăng · dầu · sơn" size={9} weight={400} />
+      <path d="M100,250 q60,-30 90,-60" stroke="#1a120e" strokeWidth="10" opacity="0.4" />
+    </g>
+  )
+}
+
+/** A half-burnt letter from the bank in the office bin. */
+function NBin() {
+  return (
+    <g>
+      <NBg top="#3e2c24" floor="#2e2018" y={150} />
+      <path d="M90,110 h220 l-24,170 h-172 Z" fill="#555a5e" {...NO} />
+      <path d="M130,150 l130,-14 l6,90 l-124,12 Z" fill="#efe6d2" {...NO} />
+      <path d="M180,140 q20,40 -8,70 q30,10 40,40 l60,-6 l-6,-118 Z" fill="#1a120e" opacity="0.9" />
+      <NText x={150} y={170} t="NGÂN HÀNG" size={9} anchor="start" />
+      <NText x={150} y={184} t="PHƯƠNG NAM" size={9} anchor="start" />
+      <NText x={150} y={206} t="...gia hạn..." size={10} anchor="start" weight={400} />
+    </g>
+  )
+}
+
+/** A plastic lighter by the side door, under a film of ash. */
+function NLighter() {
+  return (
+    <g>
+      <NBg top="#2a2f3a" floor="#4a4440" y={120} />
+      {Array.from({ length: 30 }, (_, k) => (
+        <circle key={k} cx={(k * 53) % 400} cy={140 + ((k * 37) % 150)} r={2 + (k % 3)} fill="#8a8580" opacity="0.5" />
+      ))}
+      <g transform="rotate(-16 200 200)">
+        <ellipse cx="200" cy="246" rx="120" ry="14" fill="#000" opacity="0.3" />
+        <rect x="100" y="170" width="180" height="64" rx="14" fill="#d8473a" {...NO} />
+        <rect x="280" y="176" width="44" height="52" rx="6" fill="#b9b4aa" {...NO} />
+        <rect x="128" y="186" width="124" height="32" rx="4" fill="#f3e4c4" />
+        <NText x={190} y={208} t="NGÂN STORE" size={15} fill="#c42a3a" />
+        <rect x="100" y="170" width="180" height="64" rx="14" fill="#9a9590" opacity="0.25" />
+      </g>
+    </g>
+  )
+}
+
 export const closeups: Record<string, () => JSX.Element> = {
   'cong-ly': Cups,
   'cong-quat': Fan,
@@ -279,4 +369,8 @@ export const closeups: Record<string, () => JSX.Element> = {
   'sau-khoa': Padlock,
   'sau-cau-dao': Breaker,
   'sau-dep': Sandals,
+  'cong-o-cam': NSocket,
+  'hang-can': NJerrycan,
+  'vp-thung-rac': NBin,
+  'sau-bat-lua': NLighter,
 }

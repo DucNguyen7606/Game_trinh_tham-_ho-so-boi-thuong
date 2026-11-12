@@ -147,7 +147,7 @@ function Hall() {
 
       {/* Bench */}
       <rect x="540" y="740" width="520" height="40" rx="8" fill={C.wood} {...O} />
-      <Glasses x={512} y={640} />
+      <Glasses x={512} y={616} />
     </Frame>
   )
 }
@@ -210,7 +210,7 @@ function Alley() {
       {/* The noodle cart's lamp at the end of the alley */}
       <Glow x={800} y={620} r={110} o={0.6} color="#ffcf8a" />
       <rect x="760" y="590" width="80" height="60" rx="6" fill={C.wood} {...O} />
-      <CigPack x={480} y={690} color="#e8dcc4" />
+      <CigPack x={480} y={668} color="#e8dcc4" />
     </Frame>
   )
 }
@@ -340,7 +340,7 @@ function Workshop() {
         <rect x="268" y="620" width="16" height="120" fill={C.woodDark} />
         <path d="M160,600 L180,560 L290,560 L280,600 Z" fill="#e7d2a8" />
       </g>
-      <Loupe x={768} y={690} />
+      <Loupe x={768} y={668} />
     </Frame>
   )
 }
