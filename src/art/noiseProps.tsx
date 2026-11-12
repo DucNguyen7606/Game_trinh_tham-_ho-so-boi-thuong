@@ -114,3 +114,32 @@ export function Smear({ x, y, color = '#3f78b0' }: P) {
     </g>
   )
 }
+
+/** A folding magnifier left on a bench. */
+export function Loupe({ x, y }: P) {
+  return (
+    <g transform={`translate(${x} ${y}) rotate(-20)`}>
+      <ellipse cx="0" cy="22" rx="46" ry="7" fill="#000" opacity="0.25" />
+      <rect x="-38" y="-8" width="40" height="16" rx="4" fill="#2a2a2a" {...O} />
+      <circle cx="18" cy="0" r="18" fill="#c9e1e6" fillOpacity="0.6" {...O} />
+      <path d="M10,-8 q6,-4 12,0" stroke="#fff" strokeWidth="3" fill="none" opacity="0.7" />
+    </g>
+  )
+}
+
+/** Two wine glasses, one with a lipstick mark. */
+export function Glasses({ x, y }: P) {
+  return (
+    <g transform={`translate(${x} ${y})`}>
+      <ellipse cx="0" cy="40" rx="50" ry="7" fill="#000" opacity="0.25" />
+      {[-18, 18].map((dx) => (
+        <g key={dx}>
+          <path d={`M${dx - 12},-30 q0,26 12,30 q12,-4 12,-30 Z`} fill="#e8dcc4" fillOpacity="0.35" {...O} strokeWidth={2.5} />
+          <path d={`M${dx - 9},-12 q9,10 18,0 q-2,10 -9,12 q-7,-2 -9,-12 Z`} fill="#7a1f2a" opacity="0.8" />
+          <path d={`M${dx},0 v34 M${dx - 10},36 h20`} {...O} strokeWidth={2.5} />
+        </g>
+      ))}
+      <path d="M-26,-30 q4,-3 8,0" stroke="#c42a3a" strokeWidth="4" strokeLinecap="round" />
+    </g>
+  )
+}

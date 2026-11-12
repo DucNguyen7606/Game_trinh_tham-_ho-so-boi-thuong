@@ -386,4 +386,32 @@ const X6 = () => (
   </Phone>
 )
 
-export const documents: Record<string, () => JSX.Element> = { P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, X1, X2, X3, X4, X5, X6 }
+/** Diệp asked to delay the inspection. Looks like she knew; she wanted to be there for it. */
+const X7 = () => (
+  <Phone header="Email · Diệp Gallery → Hải Đăng">
+    <p className="font-semibold">Về buổi kiểm định ngày 21/11</p>
+    <p className="rounded-md bg-white/70 p-2">
+      "Chào anh Vĩnh, chị xin dời buổi kiểm định ngày 21/11 sang đầu tháng 12 được không? Chị muốn có mặt khi các anh lấy mẫu." · 15/11 08:12
+    </p>
+    <p className="rounded-md bg-[#d7ecd9] p-2 text-right">"Dạ không dời được chị, lịch chuyên gia đã chốt. Bên em vẫn lấy mẫu ngày 21 ạ." · 15/11 10:40</p>
+    <p className="rounded-md bg-white/70 p-2">"Ok em, cứ làm theo lịch." · 15/11 10:52</p>
+  </Phone>
+)
+
+/** The reason for X7: her daughter's wedding abroad on the same day. */
+const X8 = () => (
+  <Phone header="Thư viện ảnh · Ngọc Diệp">
+    <div className="rounded-md bg-[#f3e4d4] p-3 text-center text-[#5a2a2a]">
+      <p className="text-[9px] uppercase tracking-widest opacity-70">Trân trọng kính mời</p>
+      <p className="title text-base">Lễ thành hôn</p>
+      <p className="text-[11px]">Đoàn Ngọc Mai & Lim Wei Jie</p>
+      <p className="mt-1 text-[10px]">
+        <Mark>11 giờ, thứ Sáu 21/11/2025</Mark>
+      </p>
+      <p className="text-[10px]">Khách sạn Fullerton, Singapore</p>
+    </div>
+    <p className="text-[10px]">Lời nhắn của Mai: "Mẹ bay sáng 21 nha, con đặt vé rồi đó." · 02/11</p>
+  </Phone>
+)
+
+export const documents: Record<string, () => JSX.Element> = { P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, X1, X2, X3, X4, X5, X6, X7, X8 }
