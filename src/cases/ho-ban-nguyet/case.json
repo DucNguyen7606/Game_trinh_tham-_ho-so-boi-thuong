@@ -1,0 +1,918 @@
+{
+  "id": "ho-ban-nguyet",
+  "title": "Hồ sơ bồi thường số 1403",
+  "intro": "Gần nửa đêm 14/3, ông Đặng Quốc Hưng, giám đốc Hưng Toàn Logistics, rơi từ ban công căn 21.05 chung cư Sen Hồng, nhìn xuống hồ Bán Nguyệt, Phú Mỹ Hưng. Công ty ông đang nợ ngân hàng 9 tỷ, công an nghiêng về tự tử. Em trai ông, người thụ hưởng hợp đồng nhân thọ 6 tỷ, khẳng định anh mình trượt chân. Hợp đồng mới 14 tháng: nếu là tự tử, An Tín chỉ hoàn phí. Bạn có 10 ngày để đề xuất chi trả, cho ai, hay từ chối. Mỗi ngày khám được 1 khu hiện trường. Hỏi chuyện thì không giới hạn.",
+  "player": {
+    "name": "Lê Thu Hạnh",
+    "role": "Chuyên viên giám định bồi thường, Bảo hiểm An Tín",
+    "portrait": {
+      "skin": 0,
+      "hair": "bun",
+      "hairColor": "black",
+      "build": "normal",
+      "outfit": "shirt",
+      "outfitColor": "navy",
+      "age": "young",
+      "backdrop": "teal"
+    }
+  },
+  "photoDate": "15 03 '26",
+  "days": 10,
+  "limitsPerDay": {
+    "talk": 2,
+    "explore": 1
+  },
+  "suspects": [
+    {
+      "id": "toan",
+      "name": "Đặng Quốc Toàn",
+      "age": 44,
+      "role": "Em trai ông Hưng, phó giám đốc, người thụ hưởng",
+      "interrogation": "toan",
+      "portrait": {
+        "skin": 1,
+        "hair": "side-part",
+        "hairColor": "black",
+        "build": "normal",
+        "outfit": "polo",
+        "outfitColor": "navy",
+        "accessory": [
+          "glasses"
+        ],
+        "age": "mid",
+        "backdrop": "night",
+        "mood": "worried"
+      },
+      "profile": {
+        "traits": [
+          "Chu đáo",
+          "Khéo ăn nói",
+          "Giữ thể diện"
+        ],
+        "habit": "Tối thứ bảy nào cũng ở lại văn phòng kho ở cảng Tân Thuận, chốt hàng cho tàu sáng chủ nhật.",
+        "relation": "Cùng anh trai lập Hưng Toàn Logistics mười năm trước. Lo phần chi tiền và hợp đồng vận chuyển.",
+        "quote": "\"Anh tôi hút thuốc ngoài ban công mỗi tối. Tôi đã dặn bao lần rồi.\"",
+        "note": "Người thụ hưởng duy nhất của hợp đồng nhân thọ 6 tỷ. Khai đêm 14/3 ở cảng từ 19:40 tới khi công an gọi."
+      }
+    },
+    {
+      "id": "truc",
+      "name": "Lý Thanh Trúc",
+      "age": 45,
+      "role": "Vợ cũ ông Hưng, mẹ của Vy",
+      "interrogation": "truc",
+      "portrait": {
+        "skin": 0,
+        "hair": "long",
+        "hairColor": "black",
+        "build": "thin",
+        "outfit": "blouse",
+        "outfitColor": "white",
+        "accessory": [
+          "earrings"
+        ],
+        "age": "mid",
+        "backdrop": "teal",
+        "mood": "stern"
+      },
+      "profile": {
+        "traits": [
+          "Thẳng thắn",
+          "Nóng tính",
+          "Thương con"
+        ],
+        "habit": "Đưa đón con gái Vy đi học thêm mỗi tối, về nhà ở Thảo Điền trước 21 giờ.",
+        "relation": "Ly hôn ông Hưng năm 2024. Con gái Vy, 17 tuổi, ở với ông Hưng nhưng tuần này về ở với mẹ.",
+        "quote": "\"Tôi với anh Hưng cãi nhau cả đời, nhưng chuyện của Vy thì chưa bao giờ.\"",
+        "note": "Tháng 2 nộp đơn xin giành quyền nuôi Vy. Gọi điện cãi nhau với ông Hưng lúc 22:40 đêm 14/3."
+      }
+    },
+    {
+      "id": "kha",
+      "name": "Lâm Khả",
+      "age": 58,
+      "role": "Người cho ông Hưng vay nóng",
+      "interrogation": "kha",
+      "portrait": {
+        "skin": 2,
+        "hair": "bald",
+        "hairColor": "gray",
+        "build": "heavy",
+        "outfit": "shirt",
+        "outfitColor": "mustard",
+        "accessory": [
+          "gold-chain"
+        ],
+        "age": "old",
+        "backdrop": "rust",
+        "mood": "smile"
+      },
+      "profile": {
+        "traits": [
+          "Xởi lởi",
+          "Lì lợm",
+          "Mê hát"
+        ],
+        "habit": "Đòi nợ thì tới tận nhà, đòi xong thì đi hát karaoke ở Quận 4.",
+        "relation": "Cho ông Hưng vay 2 tỷ hồi tháng 12 để trả lương công nhân.",
+        "quote": "\"Người chết rồi thì ai trả nợ cho tôi? Tôi là người muốn ổng sống nhất.\"",
+        "note": "Khoản vay quá hạn từ 10/3. Có mặt ở căn 21.05 tối 14/3, hai người cãi to."
+      }
+    },
+    {
+      "id": "quyen",
+      "name": "Phan Thị Quyên",
+      "age": 39,
+      "role": "Kế toán trưởng Hưng Toàn Logistics",
+      "interrogation": "quyen",
+      "portrait": {
+        "skin": 1,
+        "hair": "bun",
+        "hairColor": "brown",
+        "build": "normal",
+        "outfit": "shirt",
+        "outfitColor": "sky",
+        "accessory": [
+          "glasses"
+        ],
+        "age": "mid",
+        "backdrop": "amber",
+        "mood": "worried"
+      },
+      "profile": {
+        "traits": [
+          "Kỹ tính",
+          "Kín đáo",
+          "Sợ va chạm"
+        ],
+        "habit": "Ngồi soát chứng từ tới khuya, đối chiếu từng phiếu chi với hợp đồng.",
+        "relation": "Làm kế toán cho công ty bảy năm, báo cáo thẳng cho ông Hưng.",
+        "quote": "\"Con số không biết nói dối. Người ký nó thì có.\"",
+        "note": "Hẹn ông Hưng buổi đối chiếu sổ sách lúc 9 giờ sáng 15/3. Buổi đó không bao giờ diễn ra."
+      }
+    },
+    {
+      "id": "phuc",
+      "name": "Hồ Văn Phúc",
+      "age": 24,
+      "role": "Công nhân kho ca đêm ở cảng",
+      "interrogation": "phuc",
+      "portrait": {
+        "skin": 3,
+        "hair": "buzz",
+        "hairColor": "black",
+        "build": "thin",
+        "outfit": "uniform",
+        "outfitColor": "olive",
+        "age": "young",
+        "backdrop": "night",
+        "mood": "worried"
+      },
+      "profile": {
+        "traits": [
+          "Hiền",
+          "Nể người",
+          "Chăm chỉ"
+        ],
+        "habit": "Ca đêm lái xe nâng trong kho, để chiếc Wave đỏ ở bãi xe nhân viên, chìa móc trên bảng.",
+        "relation": "Quê Sóc Trăng, làm cho Hưng Toàn Logistics hai năm. Anh Toàn xin việc cho.",
+        "quote": "\"Em làm tới sáng, đâu có đi đâu.\"",
+        "note": "Chiếc xe máy biển 59P2-418.36 đứng tên Phúc."
+      }
+    }
+  ],
+  "zones": [
+    {
+      "id": "ban-cong",
+      "name": "Ban công căn 21.05",
+      "description": "Ban công tầng 21 nhìn xuống hồ Bán Nguyệt. Lan can kính, sàn gỗ ngoài trời, một chậu cây và chiếc bàn nhỏ ông Hưng hay ngồi hút thuốc.",
+      "hotspots": [
+        {
+          "id": "lan-can",
+          "label": "Lan can kính",
+          "x": 58,
+          "y": 58,
+          "note": "Bạn đặt thước: lan can cao 1,4 m, tới ngang vai một người đàn ông. Tay vịn inox khô ráo, đêm 14/3 trời không mưa. Không ghế, không bậc kê nào sát lan can. Đứng hút thuốc thì không thể trượt chân lọt qua.",
+          "clueId": "H1"
+        },
+        {
+          "id": "chau-cay",
+          "label": "Chậu cây đổ",
+          "x": 28,
+          "y": 74,
+          "note": "Chậu cau tiểu trâm đổ nghiêng, đất vương thành một vệt dài kéo về phía lan can. Trên sàn gỗ có hai vệt cao su đen như gót giày bị lết đi.",
+          "clueId": "H2"
+        },
+        {
+          "id": "gat-tan",
+          "label": "Bàn nhỏ và gạt tàn",
+          "x": 76,
+          "y": 66,
+          "note": "Gạt tàn có ba đầu lọc cùng một hiệu, loại ông Hưng hút. Cạnh đó là bật lửa và một ly trà đã nguội. Ông hay ra đây hút thuốc thật."
+        },
+        {
+          "id": "ghe",
+          "label": "Ghế xếp",
+          "x": 10,
+          "y": 62,
+          "note": "Hai chiếc ghế xếp gấp gọn, dựng sát tường phía trong, cách lan can hơn ba mét. Không ai kéo chúng ra đêm đó."
+        },
+        {
+          "id": "dep",
+          "label": "Đôi dép lê",
+          "x": 47,
+          "y": 88,
+          "note": "Một chiếc dép lê nằm sát chân lan can, chiếc kia văng ngược vào trong, nằm úp ngay cửa kính lùa."
+        }
+      ]
+    },
+    {
+      "id": "phong-khach",
+      "name": "Phòng khách căn 21.05",
+      "description": "Phòng khách rộng, sofa da, bàn làm việc kê sát cửa sổ. Cửa chính có màn hình liên lạc nội bộ với sảnh và hầm xe.",
+      "hotspots": [
+        {
+          "id": "ly-ruou",
+          "label": "Hai ly rượu",
+          "x": 45,
+          "y": 72,
+          "note": "Chai whisky đã vơi một phần ba, hai ly. Một ly còn dấu môi, dấu tay của ông Hưng. Ly kia sạch bóng như vừa lau, úp trên khay, nhưng dưới đáy vẫn đọng một lớp rượu màu hổ phách.",
+          "clueId": "H3"
+        },
+        {
+          "id": "man-hinh-cua",
+          "label": "Màn hình liên lạc nội bộ",
+          "x": 9,
+          "y": 46,
+          "note": "Bạn bấm xem lịch sử ngày 14/3. \"21:28 · Sảnh A gọi · Đã mở thang.\" \"23:08 · Hầm xe máy B2 gọi · Đã mở thang.\" Cả hai lần ông Hưng tự bấm mở cho khách lên.",
+          "clueId": "H4"
+        },
+        {
+          "id": "ban-lam-viec",
+          "label": "Bàn làm việc",
+          "x": 74,
+          "y": 58,
+          "note": "Bìa hồ sơ \"Đối chiếu sổ sách · 9:00 15/3\". Cuốn sổ tay mở ở trang cuối, nét chữ ông Hưng: \"Nói chuyện với Toàn tối nay. 7 tỷ.\" Hai chữ \"7 tỷ\" gạch dưới hai lần.",
+          "clueId": "H5"
+        },
+        {
+          "id": "vali",
+          "label": "Vali ở góc phòng",
+          "x": 90,
+          "y": 78,
+          "note": "Vali nhỏ đã xếp sẵn quần áo. Kẹp trên quai là hai vé máy bay đi Đà Nẵng ngày 20/3: Đặng Quốc Hưng, Đặng Bảo Vy. Ngày 20/3 là sinh nhật 17 tuổi của Vy.",
+          "clueId": "H6"
+        },
+        {
+          "id": "ke-anh",
+          "label": "Kệ ảnh",
+          "x": 30,
+          "y": 34,
+          "note": "Ảnh hai anh em Hưng, Toàn cắt băng khánh thành kho ở cảng Tân Thuận năm 2016. Cạnh đó là ảnh Vy mặc áo dài khai giảng."
+        }
+      ]
+    },
+    {
+      "id": "san-duoi",
+      "name": "Sân vườn và hầm xe",
+      "description": "Thảm cỏ dưới chân tòa B, chòi bảo vệ và lối dốc xuống hầm xe. Bên kia đường là mặt hồ Bán Nguyệt.",
+      "hotspots": [
+        {
+          "id": "diem-roi",
+          "label": "Vòng sơn trên cỏ",
+          "x": 46,
+          "y": 78,
+          "note": "Vòng sơn trắng của công an, cách chân tường 1,8 m, ngay dưới ban công 21.05. Cỏ quanh đó bị giẫm nát bởi người cấp cứu."
+        },
+        {
+          "id": "choi-bao-ve",
+          "label": "Sổ trực bảo vệ",
+          "x": 14,
+          "y": 56,
+          "note": "Sổ trực của ông Lộc, ca đêm 14/3: \"23:41 nghe tiếng rơi mạnh ở vườn phía Đông tòa B. 23:43 gọi cấp cứu 115. 23:58 báo công an phường.\" Ông Lộc ghi theo đồng hồ treo tường trong chòi.",
+          "clueId": "H7"
+        },
+        {
+          "id": "ve-xe",
+          "label": "Máy giữ xe hầm B2",
+          "x": 80,
+          "y": 56,
+          "note": "Bạn nhờ bảo vệ in lại lượt xe máy khách đêm 14/3. \"Vào 23:07 · 59P2-418.36 · vé khách.\" \"Ra 23:49 · 59P2-418.36.\" Từ 22:00 tới sáng, đó là chiếc xe khách duy nhất xuống hầm B2.",
+          "clueId": "H8"
+        },
+        {
+          "id": "cong-ham-oto",
+          "label": "Camera hầm ô tô",
+          "x": 62,
+          "y": 50,
+          "note": "Màn hình camera hầm ô tô B1 lưu biển số tự động. Sau 22:00 đêm 14/3 chỉ có xe cư dân ra vào, không một xe khách nào."
+        },
+        {
+          "id": "bon-hoa",
+          "label": "Bồn hoa",
+          "x": 28,
+          "y": 86,
+          "note": "Bồn hoa dừa cạn dọc lối đi. Ai đó vứt một hộp sữa và vài đầu lọc thuốc lá, khác hiệu với loại ông Hưng hút. Bảo vệ nói tài xế công nghệ hay đứng hút ở đây."
+        }
+      ]
+    },
+    {
+      "id": "van-phong-cang",
+      "name": "Văn phòng kho ở cảng Tân Thuận",
+      "description": "Văn phòng tầng lửng của Hưng Toàn Logistics trong cảng Tân Thuận. Qua cửa kính là dãy container và bãi xe máy của công nhân.",
+      "hotspots": [
+        {
+          "id": "ao-khoac",
+          "label": "Áo khoác sau cửa",
+          "x": 16,
+          "y": 46,
+          "note": "Trên móc sau cửa phòng anh Toàn: áo khoác đồng phục xanh navy, vừa giặt, vẫn còn ẩm. Cổ tay áo phải rách một vệt dài, sợi vải tưa ra.",
+          "clueId": "H9"
+        },
+        {
+          "id": "so-cong",
+          "label": "Sổ ra vào cổng chính",
+          "x": 54,
+          "y": 62,
+          "note": "Bản sao sổ cổng chính của cảng, anh Toàn tự đưa cho công an: \"Xe 51K-226.81 · vào 19:40 14/3 · ra 01:15 15/3.\" Ô tô của anh không rời cảng lúc gần nửa đêm.",
+          "clueId": "H10"
+        },
+        {
+          "id": "xe-may",
+          "label": "Bãi xe máy công nhân",
+          "x": 86,
+          "y": 66,
+          "note": "Qua cửa kính, bạn thấy một chiếc Wave đỏ đầu dãy. Bạn xuống xem: biển số 59P2-418.36. Móc chìa trên bảng ở cửa kho đề tên \"Phúc\".",
+          "clueId": "H11"
+        },
+        {
+          "id": "tu-chung-tu",
+          "label": "Tủ chứng từ",
+          "x": 38,
+          "y": 58,
+          "note": "Tủ hồ sơ khóa, ngăn trên dán nhãn \"Chi phí vận chuyển thuê ngoài · 2025\". Khóa có vết cạy cũ. Bên trong đã trống một nửa."
+        },
+        {
+          "id": "bang-ca",
+          "label": "Bảng phân ca",
+          "x": 70,
+          "y": 28,
+          "note": "Bảng trắng ghi ca đêm 14/3: \"Chốt hàng tàu 6h: a. Toàn. Kho: Phúc, Sơn. Cổng phụ xe máy mở suốt đêm.\""
+        }
+      ]
+    }
+  ],
+  "clues": [
+    {
+      "id": "H1",
+      "title": "Lan can cao 1,4 m, không có gì để trèo",
+      "description": "Tay vịn khô, đêm không mưa. Ghế xếp gọn cách lan can ba mét. Đứng không thể trượt chân lọt qua.",
+      "source": "scene"
+    },
+    {
+      "id": "H2",
+      "title": "Chậu cây đổ, vệt gót giày lết về phía lan can",
+      "description": "Đất vương thành vệt dài, sàn gỗ có hai vệt cao su đen.",
+      "source": "scene"
+    },
+    {
+      "id": "H3",
+      "title": "Hai ly rượu, một ly bị lau sạch",
+      "description": "Ly của ông Hưng còn dấu tay. Ly kia lau bóng, úp lại, đáy vẫn còn rượu.",
+      "source": "scene"
+    },
+    {
+      "id": "H4",
+      "title": "Ông Hưng tự mở thang cho hai lượt khách",
+      "description": "21:28 từ sảnh A. 23:08 từ hầm xe máy B2.",
+      "source": "scene"
+    },
+    {
+      "id": "H5",
+      "title": "Sổ tay: \"Nói chuyện với Toàn tối nay. 7 tỷ.\"",
+      "description": "Cạnh bìa hồ sơ đối chiếu sổ sách 9:00 sáng 15/3.",
+      "source": "scene"
+    },
+    {
+      "id": "H6",
+      "title": "Vé đi Đà Nẵng 20/3 cho hai cha con",
+      "description": "Vali xếp sẵn. Ngày 20/3 là sinh nhật 17 tuổi của Vy.",
+      "source": "scene"
+    },
+    {
+      "id": "H7",
+      "title": "Sổ trực: tiếng rơi lúc 23:41",
+      "description": "Bảo vệ Lộc nghe tiếng rơi 23:41, gọi 115 lúc 23:43.",
+      "source": "scene"
+    },
+    {
+      "id": "H8",
+      "title": "Xe máy 59P2-418.36 vào hầm B2 23:07, ra 23:49",
+      "description": "Chiếc xe khách duy nhất xuống hầm B2 sau 22:00.",
+      "source": "scene"
+    },
+    {
+      "id": "H9",
+      "title": "Áo khoác navy của Toàn rách cổ tay, vừa giặt",
+      "description": "Treo sau cửa văn phòng ở cảng, còn ẩm. Cổ tay phải rách, sợi vải tưa.",
+      "source": "scene"
+    },
+    {
+      "id": "H10",
+      "title": "Ô tô của Toàn ở trong cảng từ 19:40 tới 01:15",
+      "description": "Sổ cổng chính cảng Tân Thuận. Anh Toàn tự nộp cho công an làm ngoại phạm.",
+      "source": "scene"
+    },
+    {
+      "id": "H11",
+      "title": "Xe Wave 59P2-418.36 ở bãi xe cảng, chìa đề \"Phúc\"",
+      "description": "Đỗ ở bãi xe máy công nhân Hưng Toàn Logistics.",
+      "source": "scene"
+    },
+    {
+      "id": "P1",
+      "title": "Hợp đồng bảo hiểm nhân thọ",
+      "description": "6 tỷ, hiệu lực 10/01/2025. Người thụ hưởng: Đặng Quốc Toàn. Tự tử trong 24 tháng đầu: chỉ hoàn phí. Người thụ hưởng cố ý gây ra cái chết: không trả cho người đó, trả cho người thừa kế.",
+      "source": "file"
+    },
+    {
+      "id": "P2",
+      "title": "Đơn yêu cầu bồi thường của Toàn",
+      "description": "\"Anh tôi trượt chân khi đứng hút thuốc ngoài ban công.\" Yêu cầu 6 tỷ.",
+      "source": "file"
+    },
+    {
+      "id": "P3",
+      "title": "Biên bản công an phường Tân Phong",
+      "description": "Rơi từ tầng 21, tử vong tại chỗ. Thời điểm theo bảo vệ: 23:41. Nhận định ban đầu: nghiêng về tự tử do áp lực nợ.",
+      "source": "file"
+    },
+    {
+      "id": "P4",
+      "title": "Kết luận giám định pháp y",
+      "description": "Nồng độ cồn thấp. Cổ tay trái bầm hình bốn ngón tay. Kẽ móng tay phải có sợi polyester xanh navy, không phải áo thun trắng nạn nhân mặc.",
+      "source": "file"
+    },
+    {
+      "id": "P5",
+      "title": "Sổ khách và camera thang tòa B",
+      "description": "21:28 Lâm Khả đăng ký ở sảnh A, 22:16 ra về. 23:10 thang từ B2 lên tầng 21: một người đội mũ bảo hiểm trắng, áo khoác xanh navy. 23:47 thang xuống B2.",
+      "source": "file"
+    },
+    {
+      "id": "P6",
+      "title": "Email kiểm toán của chị Quyên",
+      "description": "14 phiếu chi cho Công ty Vận tải Thành Đạt, tổng 7,1 tỷ, không có chuyến hàng nào. Người duyệt: Đặng Quốc Toàn. Giám đốc Thành Đạt: Ngô Thị Thắm, vợ anh Toàn.",
+      "source": "file"
+    },
+    {
+      "id": "P7",
+      "title": "Tra cứu đăng ký xe 59P2-418.36",
+      "description": "Chủ xe: Hồ Văn Phúc, công nhân Hưng Toàn Logistics.",
+      "source": "file"
+    },
+    {
+      "id": "P8",
+      "title": "Camera cổng phụ cảng Tân Thuận",
+      "description": "Xe 59P2-418.36 ra cổng phụ 22:52, vào lại 00:09. Người lái đội mũ bảo hiểm trắng, mặc áo khoác đồng phục navy. Ca đêm đó Phúc mặc đồng phục kho màu olive.",
+      "source": "file"
+    },
+    {
+      "id": "P9",
+      "title": "Trích lục hộ tịch và hàng thừa kế",
+      "description": "Ông Hưng ly hôn năm 2024, cha mẹ đã mất. Người thừa kế hàng thứ nhất duy nhất: con gái Đặng Bảo Vy, sinh 20/3/2009.",
+      "source": "file"
+    },
+    {
+      "id": "X1",
+      "title": "Thông báo thu hồi nợ của ngân hàng",
+      "description": "Hưng Toàn Logistics nợ 9 tỷ, ngân hàng đòi trả trước hạn trong 30 ngày.",
+      "source": "decoy"
+    },
+    {
+      "id": "X2",
+      "title": "Đơn xin giành quyền nuôi con",
+      "description": "Tháng 2/2026, bà Trúc nộp đơn xin nuôi Vy, nói ông Hưng \"say xỉn, nợ nần\".",
+      "source": "decoy"
+    },
+    {
+      "id": "X3",
+      "title": "Giấy vay 2 tỷ của ông Khả",
+      "description": "Ông Hưng vay ông Khả 2 tỷ, lãi 5%/tháng, hạn trả 10/3. Đã quá hạn.",
+      "source": "decoy"
+    },
+    {
+      "id": "X4",
+      "title": "Tin nhắn ông Hưng gửi chị Quyên lúc 23:02",
+      "description": "\"Mai 9h chị mang đủ chứng từ. Tối nay tôi nói chuyện với Toàn. Xong vụ này tôi đưa Vy đi Đà Nẵng.\"",
+      "source": "testimony"
+    },
+    {
+      "id": "X5",
+      "title": "Ảnh ông Khả ở karaoke Quận 4 lúc 23:40",
+      "description": "Phòng hát đông người, ảnh có giờ trên máy và định vị.",
+      "source": "testimony"
+    },
+    {
+      "id": "X6",
+      "title": "Tin nhắn Toàn gửi Phúc lúc 22:49",
+      "description": "\"Phúc, anh mượn xe đi mua đồ ăn khuya. Chìa móc ở bảng hả?\"",
+      "source": "testimony"
+    }
+  ],
+  "envelopes": [
+    {
+      "id": "pb1",
+      "number": 1,
+      "title": "Hồ sơ yêu cầu bồi thường",
+      "unlockedBy": null,
+      "documents": [
+        "P1",
+        "P2",
+        "P3",
+        "X1",
+        "X2",
+        "X3"
+      ]
+    },
+    {
+      "id": "pb2",
+      "number": 2,
+      "title": "Pháp y và tòa nhà Sen Hồng",
+      "unlockedBy": "q2",
+      "documents": [
+        "P4",
+        "P5",
+        "P6"
+      ]
+    },
+    {
+      "id": "pb3",
+      "number": 3,
+      "title": "Chiếc Wave đỏ và người thừa kế",
+      "unlockedBy": "q4",
+      "documents": [
+        "P7",
+        "P8",
+        "P9"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "number": 1,
+      "prompt": "Ông Hưng rơi xuống lúc mấy giờ?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Khoảng 22:16, lúc ông Khả ra về"
+        },
+        {
+          "id": "b",
+          "text": "23:41"
+        },
+        {
+          "id": "c",
+          "text": "Sau 00:30 ngày 15/3"
+        }
+      ],
+      "correctOptionId": "b",
+      "requiredClues": [
+        "H7",
+        "P3"
+      ],
+      "supportingClues": [
+        "X4"
+      ],
+      "hints": [
+        "Ra Sân vườn và hầm xe, tìm sổ trực của bảo vệ. Ông Lộc nghe tiếng rơi lúc nào?",
+        "Biên bản công an trong phong bì 1 ghi thời điểm theo lời bảo vệ. Ghép hai tờ đó vào câu hỏi."
+      ]
+    },
+    {
+      "id": "q2",
+      "number": 2,
+      "prompt": "Ông Hưng có tự tử không?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Có, vì công ty nợ ngân hàng 9 tỷ"
+        },
+        {
+          "id": "b",
+          "text": "Có, sau khi cãi nhau với vợ cũ"
+        },
+        {
+          "id": "c",
+          "text": "Không, ông đang chuẩn bị cho sáng mai và chuyến đi với con"
+        }
+      ],
+      "correctOptionId": "c",
+      "requiredClues": [
+        "H5",
+        "H6"
+      ],
+      "supportingClues": [
+        "X4",
+        "X1"
+      ],
+      "hints": [
+        "Người định chết thường không lên lịch cho ngày mai. Vào Phòng khách xem bàn làm việc và góc phòng.",
+        "Sổ tay ghi việc phải làm tối nay và sáng mai. Vali ghi việc ông định làm tuần sau."
+      ]
+    },
+    {
+      "id": "q3",
+      "number": 3,
+      "prompt": "Ông Hưng có trượt chân không?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Có, ông trượt chân khi đứng hút thuốc"
+        },
+        {
+          "id": "b",
+          "text": "Không, ông bị người khác đẩy qua lan can"
+        }
+      ],
+      "correctOptionId": "b",
+      "requiredClues": [
+        "H1",
+        "P4"
+      ],
+      "supportingClues": [
+        "H2",
+        "H3"
+      ],
+      "hints": [
+        "Ra Ban công đo lan can. Một người đứng hút thuốc có thể lọt qua đó không?",
+        "Phong bì 2 có kết luận pháp y. Trên tay ông Hưng có dấu vết gì không phải của ông?"
+      ]
+    },
+    {
+      "id": "q4",
+      "number": 4,
+      "prompt": "Vị khách lúc 23:08 lên căn 21.05 bằng đường nào?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Đi ô tô xuống hầm B1"
+        },
+        {
+          "id": "b",
+          "text": "Đi xe máy xuống hầm B2, ông Hưng mở thang cho lên"
+        },
+        {
+          "id": "c",
+          "text": "Leo cầu thang thoát hiểm, không qua thang máy"
+        }
+      ],
+      "correctOptionId": "b",
+      "requiredClues": [
+        "H4",
+        "H8"
+      ],
+      "supportingClues": [
+        "P5",
+        "H3"
+      ],
+      "hints": [
+        "Màn hình liên lạc ở cửa căn hộ ghi lượt gọi lúc 23:08 từ đâu?",
+        "Ra Sân vườn và hầm xe xem máy giữ xe hầm B2. Có chiếc xe khách nào xuống đó ngay trước 23:08?"
+      ]
+    },
+    {
+      "id": "q5",
+      "number": 5,
+      "prompt": "Ai lái chiếc xe 59P2-418.36 đêm 14/3?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Hồ Văn Phúc, chủ xe"
+        },
+        {
+          "id": "b",
+          "text": "Đặng Quốc Toàn, mượn xe của Phúc"
+        },
+        {
+          "id": "c",
+          "text": "Một người lạ trộm xe ở bãi"
+        }
+      ],
+      "correctOptionId": "b",
+      "requiredClues": [
+        "H11",
+        "X6"
+      ],
+      "supportingClues": [
+        "P7",
+        "P8"
+      ],
+      "hints": [
+        "Chiếc Wave đỏ đang đỗ ở đâu? Vào Văn phòng kho ở cảng nhìn ra bãi xe máy.",
+        "Hỏi Phúc về chiếc xe. Đêm đó có ai nhắn mượn không?"
+      ]
+    },
+    {
+      "id": "q6",
+      "number": 6,
+      "prompt": "Ngoại phạm \"ở cảng cả đêm\" của Toàn có đứng vững không?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Có, ô tô của anh không rời cảng"
+        },
+        {
+          "id": "b",
+          "text": "Không, anh ra cổng phụ bằng xe máy lúc 22:52, về lại 00:09"
+        }
+      ],
+      "correctOptionId": "b",
+      "requiredClues": [
+        "H10",
+        "P8"
+      ],
+      "supportingClues": [
+        "H9",
+        "P4",
+        "P5"
+      ],
+      "hints": [
+        "Sổ cổng chính chỉ ghi ô tô. Cảng còn cổng nào khác không? Xem Bảng phân ca ở văn phòng.",
+        "Phong bì 3 có camera cổng phụ. Đặt giờ ra vào của chiếc Wave cạnh giờ nó vào hầm B2 ở Sen Hồng."
+      ]
+    },
+    {
+      "id": "q7",
+      "number": 7,
+      "prompt": "Vì sao Toàn cần anh trai chết đêm 14/3?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Để chặn buổi đối chiếu 7,1 tỷ sáng 15/3 và nhận 6 tỷ bảo hiểm"
+        },
+        {
+          "id": "b",
+          "text": "Để giành quyền nuôi Vy"
+        },
+        {
+          "id": "c",
+          "text": "Để khỏi phải gánh món nợ của ông Khả"
+        }
+      ],
+      "correctOptionId": "a",
+      "requiredClues": [
+        "P6",
+        "P1"
+      ],
+      "supportingClues": [
+        "H5",
+        "X4"
+      ],
+      "hints": [
+        "Sáng 15/3 có việc gì sắp xảy ra ở công ty? Email của chị Quyên trong phong bì 2 nói rõ.",
+        "Ai là người thụ hưởng hợp đồng nhân thọ trong phong bì 1?"
+      ]
+    }
+  ],
+  "verdict": [
+    {
+      "id": "cause",
+      "prompt": "Ông Hưng chết vì sao?",
+      "options": [
+        {
+          "id": "pushed",
+          "text": "Bị đẩy qua lan can"
+        },
+        {
+          "id": "suicide",
+          "text": "Tự tử vì nợ"
+        },
+        {
+          "id": "slip",
+          "text": "Trượt chân khi hút thuốc"
+        }
+      ],
+      "correctOptionId": "pushed"
+    },
+    {
+      "id": "killer",
+      "prompt": "Ai có mặt trên ban công lúc 23:41?",
+      "options": [
+        {
+          "id": "toan",
+          "text": "Đặng Quốc Toàn"
+        },
+        {
+          "id": "phuc",
+          "text": "Hồ Văn Phúc"
+        },
+        {
+          "id": "kha",
+          "text": "Lâm Khả"
+        },
+        {
+          "id": "truc",
+          "text": "Lý Thanh Trúc"
+        },
+        {
+          "id": "quyen",
+          "text": "Phan Thị Quyên"
+        }
+      ],
+      "correctOptionId": "toan"
+    },
+    {
+      "id": "decision",
+      "prompt": "Đề xuất của bạn",
+      "options": [
+        {
+          "id": "heir",
+          "text": "Chi 6 tỷ cho người thừa kế là cháu Vy, không trả cho Toàn, chuyển hồ sơ công an"
+        },
+        {
+          "id": "pay",
+          "text": "Chi 6 tỷ cho người thụ hưởng Đặng Quốc Toàn"
+        },
+        {
+          "id": "refund",
+          "text": "Từ chối vì tự tử trong 2 năm đầu, chỉ hoàn phí"
+        },
+        {
+          "id": "deny",
+          "text": "Từ chối toàn bộ vì người thụ hưởng gây ra cái chết"
+        }
+      ],
+      "correctOptionId": "heir"
+    }
+  ],
+  "endings": [
+    {
+      "id": "full",
+      "title": "Đúng người nhận",
+      "text": "An Tín không trả cho Toàn đồng nào. 6 tỷ được chuyển vào tài khoản đứng tên Đặng Bảo Vy, mẹ cháu giữ hộ tới năm cháu 18 tuổi. Toàn bị khởi tố về tội giết người, vợ anh bị điều tra vụ 7,1 tỷ. Ngày 20/3, Vy vẫn bay ra Đà Nẵng, với mẹ."
+    },
+    {
+      "id": "half",
+      "title": "Đúng một nửa",
+      "text": "Tiền về đúng tay Vy và Toàn bị bắt. Nhưng hồ sơ của bạn ghi sai cách ông Hưng chết, luật sư của Toàn bám vào đó suốt phiên tòa. Bản án nhẹ hơn nhiều so với điều anh đã làm."
+    },
+    {
+      "id": "wrong",
+      "title": "Sai người",
+      "text": "Tiền về tay Vy, nhưng người bạn chỉ ra có ngoại phạm vững. Hồ sơ hình sự bị trả về. Toàn đứng ra lo tang lễ cho anh trai, rồi xin làm người giám hộ số tiền của cháu."
+    },
+    {
+      "id": "paid",
+      "title": "Trả tiền cho kẻ giết người",
+      "text": "An Tín chuyển 6 tỷ cho Đặng Quốc Toàn. Tuần sau, anh trả lại 7,1 tỷ vào sổ công ty cho êm chuyện kiểm toán. Vy mất cha, mất luôn số tiền cha để lại cho mình."
+    },
+    {
+      "id": "refunded",
+      "title": "Khép nhầm hồ sơ",
+      "text": "Bạn kết luận tự tử, An Tín chỉ hoàn 180 triệu tiền phí. Công an đóng hồ sơ theo. Vy lớn lên tin rằng cha mình đã bỏ đi trước sinh nhật của cô một tuần."
+    },
+    {
+      "id": "denied",
+      "title": "Quỵt người ngay",
+      "text": "Bạn đúng khi không trả cho Toàn, nhưng sai khi không trả cho ai. Mẹ của Vy kiện thay con, chỉ cần đưa ra đúng điều khoản trong hợp đồng. An Tín thua, chi đủ 6 tỷ kèm lãi chậm trả và án phí."
+    }
+  ],
+  "endingRules": [
+    {
+      "ending": "paid",
+      "picks": {
+        "decision": "pay"
+      }
+    },
+    {
+      "ending": "refunded",
+      "picks": {
+        "decision": "refund"
+      }
+    },
+    {
+      "ending": "denied",
+      "picks": {
+        "decision": "deny"
+      }
+    },
+    {
+      "ending": "full",
+      "correct": [
+        "cause",
+        "killer"
+      ]
+    },
+    {
+      "ending": "half",
+      "correct": [
+        "killer"
+      ]
+    },
+    {
+      "ending": "wrong"
+    }
+  ]
+}

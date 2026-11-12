@@ -105,5 +105,13 @@ export const SERIES = {
       blurb: 'Lô thuốc ung thư 4,6 tỷ nằm trong kho lạnh sân bay Tân Sơn Nhất, vậy mà nhiệt kế báo 33 độ suốt ba tiếng. Lò đốt đã hẹn ngày nhận hàng.',
       place: 'Tân Bình · tháng 11',
     },
+    {
+      number: 11,
+      caseId: 'ho-ban-nguyet',
+      area: 'quan-7',
+      title: 'Đêm bên hồ Bán Nguyệt',
+      blurb: 'Giám đốc công ty vận tải rơi từ tầng 21 xuống bờ hồ Bán Nguyệt. Công an nói tự tử, em trai ông nói trượt chân và đòi 6 tỷ. Câu hỏi khó nhất là tiền phải trả cho ai.',
+      place: 'Quận 7 · tháng 3',
+    },
   ] satisfies Chapter[],
 }
