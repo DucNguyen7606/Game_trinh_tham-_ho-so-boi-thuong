@@ -1,3 +1,4 @@
+VAR has_X7 = false
 VAR has_X1 = false
 VAR has_P4 = false
 
@@ -18,7 +19,11 @@ Nhật ngả lưng ra ghế, xoay xoay chìa khóa xe trên ngón tay.
     -> hoi
 * {has_P4} [Khải báo nước phá cửa sổ cuốn trôi 90 thùng.]
     "Cửa sổ song sắt đó em còn trèo không lọt, nước nào phá nổi."
-    "À mà tháng trước ông Khải có hỏi em quen ai mua điện thoại số lượng lớn không. Em tưởng ổng hỏi giùm má."
+    -> hoi
+* {has_X7} [Ngày 20/11 anh rao bán 30 máy iPhone rẻ hơn tiệm 15%.]
+    Nhật ngừng xoay chìa khóa.
+    "Hàng xách tay của thằng bạn, em bán ăn hoa hồng trả nợ. Kho của má toàn máy phổ thông, có cái iPhone nào đâu. {Xchi} tra IMEI là biết."
+    "Mà nhắc mới nhớ, tháng trước ông Khải hỏi em quen ai mua điện thoại số lượng lớn không. Em giới thiệu tiệm Gia Hưng bên Quận 10, tưởng ổng hỏi giùm má."
     -> hoi
 * [Cảm ơn anh.]
     -> END

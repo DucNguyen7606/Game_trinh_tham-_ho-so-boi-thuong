@@ -232,7 +232,8 @@
           "label": "Camera đầu nhà 514/3",
           "x": 62,
           "y": 18,
-          "note": "Một chiếc camera gắn trên cột, dây điện đứt lủng lẳng. Chủ nhà nói hư từ hồi tháng 6, để đó cho trộm sợ. Ai ở khu này cũng biết."
+          "note": "Một chiếc camera gắn trên cột, dây điện đứt lủng lẳng. Chủ nhà nói hư từ hồi tháng 6, để đó cho trộm sợ. Ai ở khu này cũng biết.",
+          "clueId": "X9"
         },
         {
           "id": "vung-nuoc",
@@ -342,7 +343,11 @@
     { "id": "X2", "title": "Quyết định cho thôi việc thợ Hùng", "description": "10/10: bà Loan cho Hùng nghỉ vì \"làm hao vàng khi chế tác\". Hùng không ký.", "source": "decoy" },
     { "id": "X3", "title": "Ảnh của Hùng ở bệnh viện", "description": "Hùng bế con mới sinh ở bệnh viện phụ sản. Xem giờ trên ảnh.", "source": "testimony" },
     { "id": "X4", "title": "Ảnh đám giỗ của bà Ba Lành", "description": "Bà Lành ngồi mâm giỗ ở nhà em gái tại Hóc Môn. Xem giờ trên ảnh.", "source": "testimony" },
-    { "id": "X5", "title": "Lịch sử chuyến xe của Tài", "description": "Tài đưa ứng dụng GoXe ra làm chứng tối 2/12 anh chạy xe ở Phú Nhuận.", "source": "testimony" }
+    { "id": "X5", "title": "Lịch sử chuyến xe của Tài", "description": "Tài đưa ứng dụng GoXe ra làm chứng tối 2/12 anh chạy xe ở Phú Nhuận.", "source": "testimony" },
+    { "id": "X6", "title": "Phiếu bảo trì két sắt", "description": "25/11: thợ két Đinh Văn Phú tới tiệm thay pin và cài lại két điện tử. Ba tuần trước vụ cướp, có người ngoài đụng tay vào két.", "source": "decoy" },
+    { "id": "X7", "title": "Hóa đơn Hùng mua 2 lượng vàng", "description": "4/12, hai ngày sau vụ cướp: Hùng mua 2 lượng vàng nhẫn ở một tiệm vàng Gò Vấp, trả tiền mặt 280 triệu.", "source": "decoy" },
+    { "id": "X8", "title": "Sổ tiết kiệm của Hùng", "description": "Hùng đưa sổ tiết kiệm ra làm chứng cho số tiền mua vàng. Xem ngày tất toán.", "source": "testimony" },
+    { "id": "X9", "title": "Camera hẻm hư từ tháng 6", "description": "Camera trên cột đầu hẻm 514 đứt dây từ tháng 6, để đó cho trộm sợ. Người trong khu ai cũng biết nó không quay.", "source": "scene" }
   ],
   "envelopes": [
     {
@@ -357,14 +362,14 @@
       "number": 2,
       "title": "Giám định bổ sung",
       "unlockedBy": "q1",
-      "documents": ["P6", "P7", "P8"]
+      "documents": ["P6", "P7", "P8", "X6"]
     },
     {
       "id": "pb3",
       "number": 3,
       "title": "Vàng đi đâu, tiền về đâu",
       "unlockedBy": "q4",
-      "documents": ["P9", "P10", "P11"]
+      "documents": ["P9", "P10", "P11", "X7"]
     }
   ],
   "questions": [

@@ -317,7 +317,8 @@
           "label": "Camera cổng",
           "x": 84,
           "y": 18,
-          "note": "Camera cổng tắt đèn. Tờ giấy dán bên dưới ghi \"hư từ 20/11, đã báo ông chủ\"."
+          "note": "Camera cổng tắt đèn. Tờ giấy dán bên dưới ghi \"hư từ 20/11, đã báo ông chủ\".",
+          "clueId": "X12"
         },
         {
           "id": "moc-chia-khoa",
@@ -364,7 +365,11 @@
     { "id": "X5", "title": "Story của Hân lúc 22:52", "description": "Hân vẫn ở Bến Gỗ với hai người bạn. Ghế của Khoa trống.", "source": "testimony" },
     { "id": "X6", "title": "Tin nhắn ông Khải gửi Toàn", "description": "23:15: \"Xe anh bể đầu bên phải, sửa kín giúp anh trong đêm nay, giá nào cũng được.\"", "source": "testimony" },
     { "id": "X7", "title": "Sổ nhận phòng khách sạn", "description": "22:45 đoàn khách Hà Nội nhận phòng, ông Khải ra cổng đón. 02:40 chú Sơn nhận một khách lẻ.", "source": "testimony" },
-    { "id": "X8", "title": "Lịch sử đặt xe của Khoa", "description": "Khoa nói đi taxi về lúc 22:30. Ứng dụng chỉ có một chuyến tối đó.", "source": "testimony" }
+    { "id": "X8", "title": "Lịch sử đặt xe của Khoa", "description": "Khoa nói đi taxi về lúc 22:30. Ứng dụng chỉ có một chuyến tối đó.", "source": "testimony" },
+    { "id": "X9", "title": "Tin rao bán chiếc Mercedes", "description": "15/11: ông Khải rao bán GLC 300 51K-686.68 giá 1,75 tỷ trên chợ xe. Gần một tháng không ai hỏi mua. Bảo hiểm đền 2,1 tỷ.", "source": "decoy" },
+    { "id": "X10", "title": "Quyết định xử phạt gara Toàn Phát", "description": "Tháng 4/2022: gara Toàn Phát bị phạt vì nhận sửa một xe gây tai nạn mà không báo công an.", "source": "decoy" },
+    { "id": "X11", "title": "Hân từng lái chiếc Mercedes", "description": "Hân có bằng B2. Ảnh Facebook 20/11: Hân cầm lái chiếc Mercedes 51K-686.68, Khoa ngồi ghế phụ.", "source": "decoy" },
+    { "id": "X12", "title": "Camera cổng hư từ 20/11", "description": "Camera cổng khách sạn tắt từ 20/11, có giấy ghi đã báo ông chủ. Đêm 6/12 cổng không có hình.", "source": "scene" }
   ],
   "envelopes": [
     {
@@ -372,21 +377,21 @@
       "number": 1,
       "title": "Hồ sơ yêu cầu bồi thường",
       "unlockedBy": null,
-      "documents": ["P1", "P2", "P3", "P4", "X1", "X2"]
+      "documents": ["P1", "P2", "P3", "P4", "X1", "X2", "X9"]
     },
     {
       "id": "pb2",
       "number": 2,
       "title": "Giám định bổ sung",
       "unlockedBy": "q1",
-      "documents": ["P5", "P6", "P7", "P8"]
+      "documents": ["P5", "P6", "P7", "P8", "X10"]
     },
     {
       "id": "pb3",
       "number": 3,
       "title": "Người cầm lái",
       "unlockedBy": "q3",
-      "documents": ["P9", "P10"]
+      "documents": ["P9", "P10", "X11"]
     }
   ],
   "questions": [

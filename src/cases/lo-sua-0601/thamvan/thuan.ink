@@ -1,3 +1,5 @@
+VAR has_X10 = false
+VAR has_X11 = false
 VAR has_H2 = false
 VAR has_X4 = false
 VAR has_H4 = false
@@ -37,9 +39,23 @@ Thuận đẩy gọng kính, đặt cây bút tiêm insulin lên bàn cho ngay n
     "...Mua gì thì tôi không nhớ."
     -> hoi
 * {has_P10} [Thư tống tiền in bằng máy in phòng QC, trên mặt sau phiếu kiểm nghiệm.]
+    "Máy in đó cả phòng QC xài chung, công nhân ca đêm cũng vô in phiếu. Sang ra vào phòng tôi suốt ba năm."
+    -> hoi
+* {has_P10 && has_P8} [Sang bị khóa thẻ từ chiều 7/1. Thư in bằng máy in phòng anh, và tối 10/1 xe anh vào bãi Hiệp Thành Mart đúng lúc có người đứng chín phút trước kệ sữa.]
     Thuận im rất lâu. Cây bút tiêm lăn khỏi mép bàn, anh không nhặt.
     "Mười năm không lọt một lô. Lô đó mà là lỗi nhà máy thì tôi mất hết, còn phải bồi hoàn."
     "Tôi chỉ chích sáu chai. Sáu chai thôi. Còn lại là cái van hơi."
+    -> hoi
+* {has_X4 && has_P6} [Anh nói cảm biến báo sai. Nhưng bộ ghi nhiệt riêng của line 2 ghi 97 tới 101°C suốt 75 phút, khớp với ảnh Sang chụp.]
+    Thuận đặt cây bút tiêm xuống.
+    "Đêm đó đang chạy đơn hàng Tết. Dừng máy là trễ cả tuần."
+    "Tôi tính sáng ra kiểm mẫu, mẫu nào hỏng thì chặn. Mẫu đầu ca đạt, tôi ký."
+    -> hoi
+* {has_X10} [Sáng 11/1 bảo vệ thấy Sang đứng gần hộp thư cổng.]
+    "Đó, {xco} thấy chưa. Bị đuổi rồi còn lảng vảng ở cổng làm gì?"
+    -> hoi
+* {has_X11} [Van hơi line 2 được thay ngày 8/1 theo yêu cầu của phòng QC.]
+    "Bảo trì định kỳ. Van nào cũng có tuổi thọ."
     -> hoi
 * [Cảm ơn anh.]
     -> END

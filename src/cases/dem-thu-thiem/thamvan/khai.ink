@@ -1,3 +1,7 @@
+VAR has_P5 = false
+VAR has_X2 = false
+VAR has_X3 = false
+VAR has_X9 = false
 VAR has_P4 = false
 VAR has_P8 = false
 VAR has_H3 = false
@@ -33,9 +37,29 @@ VAR has_H9 = false
     "Xe đậu trong gara nhà tôi thì có nước nhỏ xuống là chuyện thường."
     -> hoi
 * {has_X6} [23:15 ông nhắn anh Toàn: "Xe anh bể đầu bên phải, sửa kín giúp anh trong đêm nay".]
+    Ông Khải gỡ kính ra, lau.
+    "Chiều đó tôi lùi xe quẹt cột cổng. Khách Hà Nội sắp tới, tôi muốn sửa cho kín, đỡ mất mặt."
+    "Quẹt cột cổng mà sửa trong đêm, giá nào cũng được?" Ông không trả lời.
+    -> hoi
+* {has_X6 && has_P5} [Tin nhắn 23:15 gửi đi 28 phút sau vụ tông xe trên Nguyễn Văn Hưởng. Vụ đó vỡ đúng đèn sương mù phải.]
     Ông Khải gỡ kính ra, lau rất lâu.
     "Nó là con tôi. Mẹ nó mất rồi. Nó mà đi tù thì đời nó hết."
     "Tôi tưởng người ta chỉ té xe."
+    -> hoi
+* {has_X9} [Tháng 11 ông rao bán chiếc xe 1,75 tỷ mà không ai mua. Bảo hiểm thì đền 2,1 tỷ.]
+    Ông Khải cười nhạt.
+    "{Xco} nghĩ tôi lao xe xuống kênh để lấy chênh lệch ba trăm triệu? Tôi cần tiền thì tôi bán khách sạn, chứ không đi tù vì một chiếc xe."
+    -> hoi
+* {has_X2} [Ông đang nợ ngân hàng 5 tỷ, chậm trả hai kỳ.]
+    "Khách sạn nào ở Thảo Điền mà không vay. Mùa khách Tết tới là tôi trả."
+    -> hoi
+* {has_X3} [Ảnh tiệc của ông chụp lúc 20:14 ngày 5/12, không phải 6/12.]
+    "Tiệc hai bữa liền. Bữa đầu tôi chụp, bữa sau mải nói chuyện nên quên."
+    -> hoi
+* {has_X3 && has_P8} [Thu phí ghi xe ông qua cao tốc lần cuối lúc 23:40 ngày 5/12. Tức là ông về từ Vũng Tàu tối hôm trước.]
+    Ông Khải im một lúc.
+    "Thôi được. Tối 6/12 tôi ở nhà đón đoàn khách Hà Nội. Tôi nói Vũng Tàu cho đỡ rắc rối."
+    "Nhưng xe xuống kênh là thật. Tôi lái nó ra Thủ Thiêm lúc khuya, vậy thôi."
     -> hoi
 * {has_H9} [Sổ trực ghi 02:15 ông lái chiếc Mercedes ra khỏi khách sạn, một mình.]
     "Sổ đó xé rồi mà." Ông khựng lại, biết mình lỡ lời.

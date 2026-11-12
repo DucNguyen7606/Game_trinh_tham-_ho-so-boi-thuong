@@ -27,7 +27,7 @@ VAR has_H6 = false
     -> hoi
 * {has_H7} [Tối 10/1 ông có đậu xe trước siêu thị không?]
     "Có, tối nào tôi cũng đậu đó chờ khách."
-    "Có cái ông đeo kính, mặc áo mưa xám, chạy tay ga bạc vô bãi rồi ra lẹ lắm. Tôi để ý vì tối đó trời khô ráo, mặc áo mưa chi?"
+    "Có một người mặc áo mưa xám, chạy tay ga bạc vô bãi rồi ra lẹ lắm. Tôi để ý vì tối đó trời khô ráo, mặc áo mưa chi?"
     -> hoi
 * [Cảm ơn ông.]
     -> END

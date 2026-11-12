@@ -1,3 +1,4 @@
+VAR has_X9 = false
 VAR has_H5 = false
 VAR has_H6 = false
 VAR has_X5 = false
@@ -32,9 +33,16 @@ Tài ngồi trên yên chiếc Exciter đỏ dựng ngoài hiên, mũ bảo hi�
     "{Xchi} nói gì con không hiểu."
     -> hoi
 * {has_P11} [Ngày 5/12 dì Loan chuyển cho anh 150 triệu. Cùng ngày anh trả hết ba app cho vay.]
+    "Dì thương con nên cho mượn. Tụi app gọi cho cả xóm, dì coi không đành."
+    "Vừa bị cướp sáu tỷ mà ba ngày sau có 150 triệu cho cháu mượn?" Tài nhún vai.
+    -> hoi
+* {has_P11 && has_X5 && has_H5} [Anh tắt app từ 20:31 tới 21:48, đúng giờ tiệm bị cướp. Đèn hậu Exciter của anh rơi trong hẻm sau tiệm. Ba ngày sau dì chuyển cho anh 150 triệu.]
     Tài cúi gằm mặt, xoay xoay chiếc mũ trong tay.
     "Tụi app gọi cho cả xóm, gửi hình con lên mạng. Dì nói chỉ cần chạy vô, đập cái tủ, ôm cái túi ra. Vàng trong đó là đồ giả hết, không ai mất gì."
     "Con với thằng bạn chạy ra cửa trước cho camera thấy, rồi vòng vô hẻm lấy xe. Lúc lùi xe con quẹt cột điện."
+    -> hoi
+* {has_X9} [Camera đầu hẻm 514 hư từ tháng 6. Ai hay lui tới khu này mới biết.]
+    "Thì cả xóm biết chứ đâu riêng con. Bà Ba Lành, ông thợ Hùng, ai cũng biết."
     -> hoi
 * [Cảm ơn anh.]
     -> END

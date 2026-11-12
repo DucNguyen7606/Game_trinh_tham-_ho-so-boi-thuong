@@ -1,3 +1,5 @@
+VAR has_P8 = false
+VAR has_X6 = false
 VAR has_P7 = false
 VAR has_H5 = false
 
@@ -11,7 +13,15 @@ Chị Bông rót ly cà phê đá, đẩy qua cho bạn.
     "Tui tưởng người ta cứu hàng cho khỏi ngập, nên không nói gì."
     -> hoi
 * [Chị có nhận ra chiếc ghe không?]
-    "Tối quá, nhưng tiếng máy thì tui nghe là biết, máy ghe ông Tư nổ khục khục như trâu rống. Mà nước lớn vậy, ghe nổi cao ngang cửa sổ luôn."
+    "Tối quá, chỉ thấy cái đèn xanh. Ở bến này ghe đèn xanh cả chục chiếc. Mà nước lớn vậy, ghe nổi cao ngang cửa sổ luôn."
+    -> hoi
+* {has_P8} [Ghe SG-4417 của ông Tư sơn xanh dương viền đỏ. Chị nhớ lại tiếng máy giúp tôi.]
+    Chị Bông nhắm mắt một hồi.
+    "Máy nổ khục khục như trâu rống, hụt một nhịp rồi mới chạy đều. Cả bến chỉ có máy ghe ông Tư bị vậy, ổng hứa sửa hoài mà không sửa."
+    -> hoi
+* {has_X6} [Đêm đó ghe cứu hộ phường có tuần tra kênh Đôi.]
+    "Có, khoảng một giờ rưỡi nó chạy ngang, đèn nháy xanh đỏ, ghe sơn cam. Nó chạy thẳng ra cầu, không ghé kho."
+    "Còn chiếc kia đèn xanh đứng yên, không nháy. Khác hẳn."
     -> hoi
 * {has_P7} [Camera quán nhậu thấy ghe đó rời đi lúc 02:41.]
     "Đúng rồi, bốc gần một tiếng. Ghe chở đầy, phủ bạt kín mít, chạy ra hướng kênh Tẻ."

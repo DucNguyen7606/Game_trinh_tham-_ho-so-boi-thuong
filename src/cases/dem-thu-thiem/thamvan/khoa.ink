@@ -1,3 +1,5 @@
+VAR has_X8 = false
+VAR khoa_nhan = false
 VAR has_X4 = false
 VAR has_H9 = false
 VAR has_P6 = false
@@ -28,13 +30,22 @@ Khoa đứng ở quầy lễ tân, hai tay đút túi áo hoodie trắng, mắt 
     Giọng cậu run lên.
     -> hoi
 * {has_H9} [22:58 chú Sơn ghi: "Mercedes vào, cậu Khoa lái, đầu xe bể".]
+    "Chú Sơn già rồi, đêm tối nhìn ai cũng ra em. Em nói rồi, em về taxi."
+    -> hoi
+* {has_H9 && has_X8} [Chuyến xe duy nhất trong app của em là 23:41, đặt hộ Hân. Vậy 22:30 em về bằng gì, mà 22:58 chú Sơn thấy em lái?]
+    ~ khoa_nhan = true
     Khoa ngồi phịch xuống ghế sofa sảnh.
     "Chị ấy tự nhiên quẹo ra. Em đạp thắng không kịp. Em có dừng, em có mở cửa ra nhìn."
     "Rồi em sợ. Em chạy về kêu ba."
     -> hoi
 * {has_P10} [Chị Hoa tỉnh rồi. Chị nhớ người lái mở cửa nhìn chị rồi chạy.]
-    Khoa ôm mặt.
-    "Chị ấy còn sống hả {xchi}? Em tưởng... Ba nói để ba lo hết, em cứ im."
+    {khoa_nhan:
+        Khoa ôm mặt.
+        "Chị ấy còn sống hả {xchi}? Em tưởng... Ba nói để ba lo hết, em cứ im."
+    - else:
+        Khoa nuốt khan.
+        "Thanh niên áo trắng thì đầy đường. Chị ấy bị tông tối thui, sao nhớ được mặt ai."
+    }
     -> hoi
 * [Cảm ơn em.]
     -> END
