@@ -394,13 +394,33 @@ const X10 = () => (
 
 const X11 = () => (
   <Phone header="Facebook · Võ Ngọc Hân">
-    <p className="text-[10px] opacity-60">20/11/2025 · 21:30</p>
     <p>"Tài xế riêng của ai kia 🙄"</p>
-    <div className="rounded bg-white p-2 text-[10px]">
-      <p>[Ảnh] Hân cầm vô lăng Mercedes, Khoa ngồi ghế phụ cười.</p>
-      <p className="opacity-70">Biển số trong gương: 51K-686.68</p>
+    <div className="overflow-hidden rounded-md">
+      <svg viewBox="0 0 320 220" className="block w-full">
+        <rect width="320" height="220" fill="#24262e" />
+        {/* windscreen, night street */}
+        <path d="M20,20 L300,20 L280,110 L40,110 Z" fill="#3a4a5e" stroke={LINE} strokeWidth="2" />
+        <circle cx="90" cy="70" r="6" fill="#f3d27a" opacity="0.8" />
+        <circle cx="230" cy="60" r="5" fill="#f3d27a" opacity="0.6" />
+        {/* rear-view mirror with the plate reflected */}
+        <rect x="132" y="26" width="56" height="20" rx="4" fill="#cfd6dc" stroke={LINE} strokeWidth="1.6" />
+        <text x="160" y="40" textAnchor="middle" fontSize="8" fill="#1d2b44" fontFamily={mono}>51K-686.68</text>
+        {/* Hân driving (left seat), Khoa beside her */}
+        <Guest x={95} y={168} s={1.25} shirt="#c46b7a" hair="#2a1a14" hairStyle="long" />
+        <Guest x={225} y={168} s={1.2} shirt="#f4f1ea" hood />
+        {/* steering wheel with the star badge */}
+        <circle cx="95" cy="190" r="34" fill="none" stroke="#111" strokeWidth="7" />
+        <circle cx="95" cy="190" r="8" fill="#9aa3ad" stroke={LINE} strokeWidth="1.5" />
+        <path d="M95,183 L95,190 M95,190 L89,194 M95,190 L101,194" stroke="#1d2b44" strokeWidth="1.5" />
+        <rect x="0" y="200" width="320" height="20" fill="#16171c" />
+        <TimeTag t="20/11 21:30" />
+      </svg>
     </div>
-    <p className="text-[10px]">Kèm ảnh bằng lái hạng B2, cấp 03/2024.</p>
+    <PhotoMeta when="20/11/2025 · 21:30" where="Thảo Điền" />
+    <div className="rounded bg-white p-1.5 text-[10px]">
+      <p className="font-semibold">Ảnh kèm: Giấy phép lái xe</p>
+      <p>Võ Ngọc Hân · Hạng <b>B2</b> · cấp 03/2024</p>
+    </div>
   </Phone>
 )
 
