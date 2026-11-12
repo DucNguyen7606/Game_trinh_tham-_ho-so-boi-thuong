@@ -13,10 +13,10 @@ const P1 = () => (
     <Row k="Người được BH" v="Trương Văn Lực, 49 tuổi" />
     <Row k="Nghề nghiệp" v="Chủ vựa hải sản" />
     <Row k="Số tiền BH" v="5.000.000.000 đ" strong />
-    <Row k="Quyền lợi" v="Tử vong do tai nạn: 100%" />
+    <Row k="Quyền lợi" v="Tử vong: 100% số tiền BH" />
     <Row k="Ngày hiệu lực" v="12/05/2025" strong />
     <Row k="Người thụ hưởng" v="Phạm Thị Hồng (vợ)" strong />
-    <p className="pt-1 text-[10px] italic">Điều 9: Không chi trả nếu người thụ hưởng cố ý gây ra hoặc gian lận trong sự kiện bảo hiểm.</p>
+    <p className="pt-1 text-[10px] italic">Điều 9: Chỉ từ chối khi tự tử trong 2 năm đầu, hoặc người thụ hưởng cố ý gây ra cái chết.</p>
     <Signature name="T. V. Lực" />
     <Stamp text="An Tín · Đã duyệt" className="bottom-2 right-24" />
   </Sheet>
@@ -184,17 +184,18 @@ const P9 = () => (
 )
 
 const P10 = () => (
-  <Phone header="Hồng ❤ (khôi phục từ máy ông Lực)">
+  <Phone header="Sáu Tâm (khôi phục từ máy ông Lực)">
     <p className="text-center text-[9px] opacity-50">07/09/2025</p>
     <Bubble me time="21:40">
-      Đêm 9 nước đứng 11g40, ròng thì anh thả trôi xuống. <Mark>Tâm chờ ở Rạch Đước</Mark>.
+      Đêm 9 nước đứng 11g40, ròng thì tao thả trôi xuống. <Mark>Mày chờ ở Rạch Đước</Mark>, giữ ba lô cho tao.
     </Bubble>
-    <Bubble time="21:42">Anh đi rồi em làm sao?</Bubble>
+    <Bubble time="21:42">Còn chị Hai sao anh?</Bubble>
     <Bubble me time="21:44">
-      Em cứ khóc như thiệt. <Mark>Có xác ai trôi dạt thì em cứ nhận là anh, đừng cho mổ.</Mark> Ba tháng nhận tiền rồi trả Khang.
+      <Mark>Đừng cho bả biết gì hết. Bả không biết thì khóc mới thiệt</Mark>, bảo hiểm mới tin. Sáng ra mày báo ghe úp.
     </Bubble>
-    <Bubble time="21:45">Dạ. Anh nhớ mang thuốc.</Bubble>
-    <p className="text-right text-[8px] opacity-50">Tin đã bị xóa ngày 09/09 · khôi phục 18/09</p>
+    <Bubble time="21:45">Còn tám tháng lương của tui?</Bubble>
+    <Bubble me time="21:46">Bả nhận tiền rồi tao gửi mày. Vàng tao giữ.</Bubble>
+    <p className="text-right text-[8px] opacity-50">Tin đã bị xóa ngày 09/09 · bà Hồng giao nộp máy 17/09 · khôi phục 18/09</p>
   </Phone>
 )
 
@@ -344,23 +345,23 @@ const X4 = () => (
   </Phone>
 )
 
-/** Hồng and her daughter at home: the SIM box on the shelf has the same last digits as the burner. */
+/** Hồng and her daughter at home: her husband's phone is charging on the shelf, and she still expects him back. */
 const X5 = () => (
   <Phone header="Tin nhắn · Út Lan (Bình Dương)">
     <div className="overflow-hidden rounded-md">
       <svg viewBox="0 0 320 220" className="block w-full">
         <rect width="320" height="220" fill="#c99a4a" />
         <rect y="160" width="320" height="60" fill="#a8604a" />
-        {/* Shelf behind them with a SIM box and the TV */}
+        {/* Shelf behind them: the TV, and Lực's own phone charging, left at home */}
         <rect x="20" y="70" width="280" height="10" fill="#573721" stroke={LINE} strokeWidth="1.5" />
         <rect x="196" y="20" width="96" height="50" rx="3" fill="#141020" stroke={LINE} strokeWidth="2" />
         <rect x="202" y="26" width="84" height="38" fill="#7a5f8a" />
         <g stroke={LINE} strokeWidth="1.2">
-          <rect x="34" y="46" width="44" height="24" fill="#f2a93b" />
-          <rect x="40" y="52" width="14" height="10" rx="1" fill="#d9b04f" />
+          <rect x="44" y="36" width="20" height="34" rx="3" fill="#1d1d22" />
+          <rect x="47" y="40" width="14" height="24" fill="#3a6a8a" />
         </g>
-        <text x="66" y="58" textAnchor="middle" fontSize="5" fill="#2d1f18" fontFamily={mono}>SIM</text>
-        <text x="56" y="67" textAnchor="middle" fontSize="5.5" fill="#2d1f18" fontFamily={mono}>••• 471</text>
+        <path d="M54,70 q0,10 -14,10" stroke="#f2f2f2" strokeWidth="1.5" fill="none" />
+        <text x="54" y="30" textAnchor="middle" fontSize="5.5" fill="#2d1f18" fontFamily={mono}>⚡ 100%</text>
         <rect x="100" y="50" width="20" height="20" rx="2" fill="#3f8a7e" stroke={LINE} strokeWidth="1" />
         {/* Mother and daughter on the sofa */}
         <rect x="40" y="130" width="240" height="50" rx="12" fill="#7d2f2a" stroke={LINE} strokeWidth="1.5" />
@@ -371,6 +372,7 @@ const X5 = () => (
     </div>
     <PhotoMeta when="10/09/2025 · 00:28" where="Nhà riêng, Long Hòa" />
     <p className="text-[10px]">"Hai mẹ con coi hết tập 40 rồi nè Út" · gửi lúc 00:29</p>
+    <p className="text-[10px]">"Ảnh đi đáy chưa về, quên cả điện thoại. Sáng mai ảnh chở con Như lên Chợ Rẫy tái khám" · 00:31</p>
   </Phone>
 )
 

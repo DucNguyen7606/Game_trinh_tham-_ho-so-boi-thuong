@@ -177,13 +177,13 @@ function Stall() {
   )
 }
 
-/** The seal ledger: 55120 issued to the truck, 55190 struck out and initialled. */
+/** The seal ledger: 55120 issued to the truck, 55190 handed to the driver as a spare and never returned. */
 function SealLedger() {
   const rows: [string, string, boolean?][] = [
     ['AT-55118', '30/10 · xe 51C', false],
     ['AT-55119', '31/10 · xe 47H', false],
     ['AT-55120', '02/11 · xe 47H · Đạt', false],
-    ['AT-55190', 'hỏng, đã hủy · T.', true],
+    ['AT-55190', 'dự phòng · tài xế 47H · Đạt', true],
   ]
   return (
     <g>
@@ -194,7 +194,7 @@ function SealLedger() {
         <g key={n}>
           <text x="58" y={96 + i * 40} fontSize="13" fill={LINE} fontFamily={mono}>{n}</text>
           <text x="160" y={96 + i * 40} fontSize="12" fill={struck ? accent.red : '#2f4258'} fontFamily="Bitter, serif" fontStyle="italic">{note}</text>
-          {struck && <line x1="54" y1={92 + i * 40} x2="146" y2={92 + i * 40} stroke={accent.red} strokeWidth="2" />}
+          {struck && <text x="160" y={119 + i * 40} fontSize="10" fill={accent.red} fontFamily={mono}>trả lại: ___</text>}
           <line x1="50" y1={104 + i * 40} x2="350" y2={104 + i * 40} stroke={shade(ink.paper, -0.25)} strokeWidth="1" />
         </g>
       ))}

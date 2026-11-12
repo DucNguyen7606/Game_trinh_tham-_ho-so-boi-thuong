@@ -32,6 +32,11 @@ Quân lau tay vào chiếc tạp dề đầy vệt sơn, ngồi xuống ghế đ
     "Tôi làm cho người ta mười lăm năm, mỗi bức được vài triệu. Họ bán một bức được mấy tỷ."
     "Bà Diệp treo nó mười sáu năm mà không nhận ra. Vậy thì nó có khác gì đâu."
     -> hoi
+* {has_P10} [Ngày 16/10 và 20/11 anh chuyển cho Ngọc 300 triệu.]
+    Quân cúi xuống nhìn hai bàn tay.
+    "Con nhỏ nợ thẻ. Tôi cho mượn."
+    Cho mượn, đúng hai ngày sau khi kết quả xét nghiệm về hộp thư của cô, và đúng sáng hôm bức tranh biến mất.
+    -> hoi
 * {has_P11} [Ảnh phòng khách nhà ông Thành có bức sen với chuồn chuồn đỏ và vết rạn góc dưới.]
     "Vết rạn đó tôi cố ý để lại. Tranh của ông Khuê thì phải có vết thời gian."
     -> hoi

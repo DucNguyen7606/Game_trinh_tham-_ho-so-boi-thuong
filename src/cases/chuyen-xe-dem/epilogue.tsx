@@ -137,122 +137,8 @@ const Sacks = () => (
 export const epilogue: Record<string, EpiloguePanel[]> = {
   full: [
     {
-      id: 'court',
-      caption: 'Ông Nguyễn Hữu Tài bị xét xử về tội lừa đảo chiếm đoạt tài sản. Ông vẫn nói mình chỉ bán hàng của mình.',
-      Art: () => (
-        <div className="relative">
-          <Panel people={[{ id: 'tai', x: 50, mood: 'stern', size: 44 }]}>
-            <Courtroom />
-          </Panel>
-          <DockRail />
-        </div>
-      ),
-    },
-    {
-      id: 'dat',
-      caption: 'Anh Đạt khai hết ngay từ đầu và được giảm án. Vợ anh trả lại 250 triệu.',
-      Art: () => (
-        <div className="relative">
-          <Panel people={[{ id: 'dat', x: 50, mood: 'worried', size: 44 }]}>
-            <Courtroom />
-          </Panel>
-          <DockRail />
-        </div>
-      ),
-    },
-    {
-      id: 'sacks',
-      caption: '400 bao tiêu lô DD-1102 được tìm thấy ở Long Khánh. Tiền bán tiêu bị phong tỏa.',
-      Art: () => (
-        <Panel>
-          <Sacks />
-        </Panel>
-      ),
-    },
-    {
-      id: 'kieu',
-      caption: 'Nhà xe Kiều Phát không phải đền hàng. Bà Kiều giữ được hai chiếc container và tháo hết ổ tẩu trong cabin.',
-      Art: () => (
-        <Panel people={[{ id: 'kieu', x: 35, mood: 'smile', size: 48 }]}>
-          <Yard />
-        </Panel>
-      ),
-    },
-    {
-      id: 'phuc',
-      caption: 'Phúc được lên làm tài xế phụ. Giờ cậu không dám xin xuống xe giữa đường nữa.',
-      Art: () => (
-        <Panel people={[{ id: 'phuc', x: 60, mood: 'smile', size: 46 }]}>
-          <Yard />
-        </Panel>
-      ),
-    },
-    {
-      id: 'file',
-      caption: 'Hồ sơ 0311 đóng lại. Công ty không chi 3,04 tỷ đồng, và hồ sơ được chuyển sang cơ quan điều tra.',
-      Art: () => (
-        <Panel>
-          <Desk stamp="TỪ CHỐI BỒI THƯỜNG" sub="CHUYỂN CƠ QUAN ĐIỀU TRA" />
-        </Panel>
-      ),
-    },
-  ],
-  half: [
-    {
-      id: 'file',
-      caption: 'Công ty từ chối chi trả vì vụ cướp được dàn dựng. Sếp hài lòng với kết quả.',
-      Art: () => (
-        <Panel>
-          <Desk stamp="TỪ CHỐI BỒI THƯỜNG" sub="LÝ DO: DÀN DỰNG VỤ CƯỚP" />
-        </Panel>
-      ),
-    },
-    {
-      id: 'dat',
-      caption: 'Anh Đạt nhận hết tội về mình. Vợ anh vẫn giữ 250 triệu "tiền hụi".',
-      Art: () => (
-        <div className="relative">
-          <Panel people={[{ id: 'dat', x: 50, mood: 'worried', size: 44 }]}>
-            <Courtroom />
-          </Panel>
-          <DockRail />
-        </div>
-      ),
-    },
-    {
-      id: 'tai',
-      caption: 'Ông Tài vẫn ngồi cà phê đầu hẻm mỗi sáng, xem giá tiêu lên từng ngày.',
-      Art: () => (
-        <Panel people={[{ id: 'tai', x: 36, mood: 'smile', size: 50 }]}>
-          <Cafe />
-        </Panel>
-      ),
-    },
-  ],
-  wrong: [
-    {
-      id: 'file',
-      caption: 'Luật sư của Đất Đỏ chỉ ra lập luận không có căn cứ. Hồ sơ bị bác.',
-      Art: () => (
-        <Panel>
-          <Desk stamp="BÁC KẾT LUẬN" sub="KHÔNG ĐỦ CĂN CỨ" />
-        </Panel>
-      ),
-    },
-    {
-      id: 'player',
-      caption: 'Bạn bị rút khỏi vụ việc. Sếp giao hồ sơ 0311 cho người khác.',
-      Art: () => (
-        <Panel people={[{ id: 'player', x: 40, mood: 'worried', size: 52 }]}>
-          <Office />
-        </Panel>
-      ),
-    },
-  ],
-  paid: [
-    {
       id: 'transfer',
-      caption: 'Bảo hiểm An Tín chuyển 3,04 tỷ đồng cho công ty Tiêu Đất Đỏ.',
+      caption: 'An Tín chuyển 3,04 tỷ đồng cho Tiêu Đất Đỏ. Chủ hàng không gian lận, ông chỉ là người bị mất 20 tấn tiêu.',
       Art: () => (
         <Panel>
           <Transfer />
@@ -260,8 +146,29 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
       ),
     },
     {
+      id: 'court',
+      caption: 'Bà Đoàn Thị Kiều bị xét xử về tội lừa đảo chiếm đoạt tài sản. An Tín đứng ra đòi lại 3,04 tỷ từ nhà xe.',
+      Art: () => (
+        <div className="relative">
+          <Panel people={[{ id: 'kieu', x: 50, mood: 'worried', size: 44 }]}>
+            <Courtroom />
+          </Panel>
+          <DockRail />
+        </div>
+      ),
+    },
+    {
+      id: 'dat',
+      caption: 'Anh Đạt khai hết và được giảm án. Vợ anh trả lại 250 triệu.',
+      Art: () => (
+        <Panel people={[{ id: 'dat', x: 50, mood: 'worried', size: 44 }]}>
+          <Office />
+        </Panel>
+      ),
+    },
+    {
       id: 'sacks',
-      caption: 'Ba tháng sau, công an lần ra 400 bao tiêu lô DD-1102 ở một đại lý tại Long Khánh.',
+      caption: '400 bao tiêu lô DD-1102 được tìm thấy ở một đại lý tại Long Khánh. Tiền bán tiêu trong tài khoản bà Kiều bị phong tỏa.',
       Art: () => (
         <Panel>
           <Sacks />
@@ -269,11 +176,98 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
       ),
     },
     {
-      id: 'file',
-      caption: 'Bạn bị kỷ luật vì duyệt chi sai.',
+      id: 'yard',
+      caption: 'Hai chiếc container thế chấp vẫn bị ngân hàng kéo đi. Bãi xe Kiều Phát chỉ còn ba chiếc.',
       Art: () => (
         <Panel>
-          <Desk stamp="KỶ LUẬT" sub="DUYỆT CHI SAI · HS 0311" />
+          <Yard />
+        </Panel>
+      ),
+    },
+    {
+      id: 'tai',
+      caption: 'Ông Tài giao trễ hợp đồng xuất, chịu phạt, nhưng giữ được uy tín. Sáng nào ông vẫn ngồi cà phê đầu hẻm xem giá tiêu.',
+      Art: () => (
+        <Panel people={[{ id: 'tai', x: 36, mood: 'smile', size: 50 }]}>
+          <Cafe />
+        </Panel>
+      ),
+    },
+    {
+      id: 'file',
+      caption: 'Hồ sơ 0311 đóng lại. Tiền về đúng chủ hàng, còn người dựng vụ cướp phải trả lại từng đồng.',
+      Art: () => (
+        <Panel>
+          <Desk stamp="CHI TRẢ BỒI THƯỜNG" sub="ĐÒI LẠI TỪ NHÀ XE KIỀU PHÁT" />
+        </Panel>
+      ),
+    },
+  ],
+  half: [
+    {
+      id: 'transfer',
+      caption: 'Tiêu Đất Đỏ được chi trả đúng, anh Đạt bị khởi tố.',
+      Art: () => (
+        <Panel>
+          <Transfer />
+        </Panel>
+      ),
+    },
+    {
+      id: 'kieu',
+      caption: 'Nhưng hồ sơ không gọi đúng tên người đứng sau. Anh Đạt nhận hết tội, An Tín không có căn cứ đòi tiền nhà xe. Bà Kiều trả xong nợ ngân hàng, giữ trọn năm chiếc container.',
+      Art: () => (
+        <Panel people={[{ id: 'kieu', x: 35, mood: 'smile', size: 48 }]}>
+          <Yard />
+        </Panel>
+      ),
+    },
+  ],
+  wrong: [
+    {
+      id: 'transfer',
+      caption: 'Tiêu Đất Đỏ được chi trả đúng.',
+      Art: () => (
+        <Panel>
+          <Transfer />
+        </Panel>
+      ),
+    },
+    {
+      id: 'file',
+      caption: 'Nhưng người tiếp tay bạn chỉ ra có ngoại phạm vững. Hồ sơ hình sự bị trả về, An Tín không đòi lại được đồng nào.',
+      Art: () => (
+        <Panel>
+          <Desk stamp="TRẢ HỒ SƠ" sub="KHÔNG ĐỦ CĂN CỨ" />
+        </Panel>
+      ),
+    },
+  ],
+  unjust: [
+    {
+      id: 'file',
+      caption: 'Bạn từ chối hồ sơ vì cho rằng ông Tài dựng vụ cướp để né hợp đồng lỗ.',
+      Art: () => (
+        <Panel>
+          <Desk stamp="TỪ CHỐI BỒI THƯỜNG" sub="LÝ DO: CHỦ HÀNG DÀN DỰNG" />
+        </Panel>
+      ),
+    },
+    {
+      id: 'court',
+      caption: 'Ông Tài kiện An Tín, mang theo sổ cấp chì, ảnh đêm 2/11 và sao kê tài khoản của mình. An Tín thua, chi đủ 3,04 tỷ kèm án phí.',
+      Art: () => (
+        <Panel people={[{ id: 'tai', x: 50, mood: 'stern', size: 44 }]}>
+          <Courtroom />
+        </Panel>
+      ),
+    },
+    {
+      id: 'kieu',
+      caption: 'Còn bà Kiều đã trả xong nợ ngân hàng, giữ trọn năm chiếc container. Bạn bị rút khỏi vụ.',
+      Art: () => (
+        <Panel people={[{ id: 'kieu', x: 35, mood: 'smile', size: 48 }]}>
+          <Yard />
         </Panel>
       ),
     },

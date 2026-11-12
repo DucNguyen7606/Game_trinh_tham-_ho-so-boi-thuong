@@ -83,27 +83,27 @@ const Marker = ({ x, y, n }: { x: number; y: number; n: string }) => (
 /** Night grade over a daylit scene. */
 const Night = () => <rect width="1600" height="900" fill="#141a2a" opacity="0.55" />
 
-const TAI = clothColors.navy
+const KIEU = clothColors.maroon
 const DAT = clothColors.khaki
 const CREW = clothColors.charcoal
 
 export const reconstruction: ReconstructionPanel[] = (
   [
     {
-      time: '15/2 đến 28/10/2025',
-      title: 'Một hợp đồng lỗ',
-      text: 'Đầu năm, ông Tài ký bán 20 tấn tiêu cho khách nước ngoài giá 98.000đ/kg. Tới tháng 10, giá tiêu lên 152.000đ. Giao hàng thì lỗ hơn một tỷ, giao trễ thì bị phạt mỗi ngày. Chỉ có một cách thoát: hàng bị mất, có công an xác nhận. Ngày 28/10, lần đầu tiên ông mua bảo hiểm cho một chuyến hàng nội địa.',
+      time: 'Tháng 10/2025',
+      title: 'Hai chiếc xe sắp bị kéo',
+      text: 'Nhà xe Kiều Phát nợ ngân hàng 2,1 tỷ, hạn chót 30/11. Bà Kiều biết hàng của Đất Đỏ giờ đáng giá 152.000đ/kg, và biết ông Tài đang kẹt một hợp đồng xuất giá thấp. Bà đòi ông mua bảo hiểm cho chuyến hàng, còn giới thiệu đại lý. Ngày 28/10 ông ký.',
       questionId: 'q6',
-      Art: () => <OnDesk ids={['P6', 'P1']} />,
+      Art: () => <OnDesk ids={['X1', 'P1']} />,
     },
     {
       time: '2/11, 15:20',
       title: 'Chì số 55120',
-      text: 'Tại kho Đất Đỏ, 400 bao tiêu lô DD-1102 được chất lên xe 47H và kẹp chì AT-55120. Ông Tài đã gạch sẵn sợi chì AT-55190 trong sổ là "hỏng, đã hủy", rồi bỏ nó vào túi. Camera kho đã được rút điện từ tuần trước.',
+      text: 'Tại kho Đất Đỏ, 400 bao tiêu lô DD-1102 được chất lên xe 47H và kẹp chì AT-55120. Như mọi chuyến, anh Đạt ký nhận thêm một sợi chì dự phòng, AT-55190. Bà Kiều đã dặn anh giữ nó lại.',
       questionId: 'q4',
       Art: () => (
         <Staged zone="kho-dd">
-          <Person x={700} y={760} h={280} color={TAI} />
+          <Person x={700} y={760} h={280} color={clothColors.navy} />
           <Person x={1000} y={760} h={270} color={DAT} flip />
           <Marker x={832} y={480} n="1" />
         </Staged>
@@ -119,12 +119,12 @@ export const reconstruction: ReconstructionPanel[] = (
     {
       time: '23:52 đến 01:04',
       title: 'Một tiếng không có sóng',
-      text: 'Gần Phan Rí, anh Đạt cắm máy phá sóng vào ổ tẩu dưới ghế phụ rồi rẽ vào kho cũ của ông Hiếu. Ông Tài đã chờ sẵn với chiếc bán tải. Sáu người cùng một chiếc xe nâng dỡ 400 bao tiêu trong vòng một tiếng. Ông Tài kẹp chì 55190 vào cửa container trống.',
+      text: 'Gần Phan Rí, anh Đạt cắm máy phá sóng vào ổ tẩu dưới ghế phụ rồi rẽ vào kho cũ của ông Hiếu. Bà Kiều đã chờ sẵn với chiếc bán tải của nhà xe. Sáu người cùng một chiếc xe nâng dỡ 400 bao tiêu trong vòng một tiếng. Anh Đạt kẹp sợi chì dự phòng 55190 vào cửa container trống.',
       questionId: 'q3',
       Art: () => (
         <Staged zone="kho-pr">
           <Night />
-          <Person x={420} y={820} h={300} color={TAI} />
+          <Person x={420} y={820} h={290} color={KIEU} />
           <Person x={980} y={800} h={280} color={CREW} hold="sack" flip />
           <Person x={1240} y={810} h={280} color={CREW} hold="sack" />
           <Marker x={704} y={720} n="2" />
@@ -142,7 +142,7 @@ export const reconstruction: ReconstructionPanel[] = (
     {
       time: '02:40',
       title: 'Vụ cướp ba vòng băng keo',
-      text: 'Ở Hàm Thuận Nam, anh Đạt dừng xe từ từ, không có vệt phanh nào. Người của ông Tài quấn ba vòng băng keo ra ngoài tay áo khoác của anh, cắt bằng kéo, rồi lái chiếc xe đi. Ví tiền và điện thoại vẫn nằm yên trong túi áo.',
+      text: 'Ở Hàm Thuận Nam, anh Đạt dừng xe từ từ, không có vệt phanh nào. Người của bà Kiều quấn ba vòng băng keo ra ngoài tay áo khoác của anh, cắt bằng kéo, rồi lái chiếc xe đi. Ví tiền và điện thoại vẫn nằm yên trong túi áo.',
       questionId: 'q1',
       Art: () => (
         <Staged zone="le-duong">
@@ -158,7 +158,7 @@ export const reconstruction: ReconstructionPanel[] = (
     {
       time: '03:00 đến 06:30',
       title: 'Cắt chì ở Hàm Tân',
-      text: 'Chiếc container trống được bỏ lại trên một con đường đất đỏ ở Hàm Tân. Người lái cắt sợi chì 55190 cho giống bị phá cửa. Trong kẽ sàn vẫn còn vài hạt tiêu lẫn cát trắng Phan Rí. 03:22, xe bán tải của ông Tài qua trạm Cà Ná, chạy ngược về Buôn Ma Thuột.',
+      text: 'Chiếc container trống được bỏ lại trên một con đường đất đỏ ở Hàm Tân. Người lái cắt sợi chì 55190 cho giống bị phá cửa. Trong kẽ sàn vẫn còn vài hạt tiêu lẫn cát trắng Phan Rí. 03:22, xe bán tải của Kiều Phát qua trạm Cà Ná, chạy ngược về Buôn Ma Thuột.',
       questionId: 'q4',
       Art: () => (
         <Staged zone="bo-xe">
@@ -170,16 +170,16 @@ export const reconstruction: ReconstructionPanel[] = (
       ),
     },
     {
-      time: '2/11, 23:40',
-      title: 'Bữa tiệc lúc chiều',
-      text: 'Tấm ảnh "tiếp khách tới khuya" được chụp lúc trời còn hoàng hôn, đồng hồ trên tường chỉ 5 giờ 50. Ông Tài chỉ đăng nó lúc 23:40, khi ông đang trên đường tới Phan Rí. Thu phí không dừng ghi lại xe ông qua trạm Cà Ná lúc 23:31.',
+      time: '3/11, 00:31',
+      title: 'Canh xe "ở nhà"',
+      text: 'Bà Kiều chụp màn hình định vị gửi anh Đạt, hỏi vì sao xe mất sóng, như thể bà đang ngồi ở Buôn Ma Thuột. Nhưng chấm xanh "vị trí của bạn" nằm sát xe 47H ở Phan Rí. Cùng lúc đó, ông Tài vẫn đang tiếp khách ở Buôn Ma Thuột.',
       questionId: 'q7',
-      Art: () => <OnDesk ids={['X6', 'P7']} />,
+      Art: () => <OnDesk ids={['X5', 'X6']} />,
     },
     {
       time: '4/11 đến 6/11',
       title: 'Tiền về',
-      text: 'Ông Tài chuyển 250 triệu cho vợ anh Đạt, ghi là "trả tiền hụi". Hai ngày sau, 400 bao tiêu còn nguyên mã lô DD-1102 được bán cho một đại lý ở Long Khánh với giá 2,82 tỷ, tiền vào thẳng tài khoản của ông. Nếu bảo hiểm chi trả, ông được thêm 3,04 tỷ.',
+      text: 'Bà Kiều chuyển 250 triệu cho vợ anh Đạt, ghi là "trả tiền hụi". Hai ngày sau, 400 bao tiêu còn nguyên mã lô DD-1102 được bán cho một đại lý ở Long Khánh với giá 2,82 tỷ, tiền vào tài khoản của bà. Hôm sau bà trả sạch 2,1 tỷ nợ ngân hàng. Còn ông Tài chỉ có hợp đồng xuất khẩu và một kho trống.',
       questionId: 'q6',
       Art: () => <OnDesk ids={['P11', 'P10']} />,
     },
@@ -221,8 +221,8 @@ const PanelStamp = ({ text, color }: { text: string; color: string }) => (
 )
 
 const planTheory: Record<string, { text: string; docs: string[] }> = {
-  tai: { text: 'Theo bạn, chính chủ hàng Nguyễn Hữu Tài dựng vụ cướp: mua bảo hiểm, dỡ hàng giữa đường, giả cướp để vừa né hợp đồng lỗ vừa lấy tiền bảo hiểm.', docs: ['P6', 'P7'] },
-  kieu: { text: 'Theo bạn, bà Kiều dựng vụ cướp để có tiền trả nợ ngân hàng. Bà biết rõ lộ trình và canh xe suốt đêm.', docs: ['X1'] },
+  tai: { text: 'Theo bạn, chính chủ hàng Nguyễn Hữu Tài dựng vụ cướp: mua bảo hiểm, dỡ hàng giữa đường, giả cướp để vừa né hợp đồng lỗ vừa lấy tiền bảo hiểm.', docs: ['P6', 'P1'] },
+  kieu: { text: 'Theo bạn, bà Kiều dựng vụ cướp để có tiền trả nợ ngân hàng: đòi ông Tài mua bảo hiểm, cho tài xế giữ chì dự phòng, rồi tự lái bán tải tới Phan Rí nhận hàng.', docs: ['X1', 'P7'] },
   hieu: { text: 'Theo bạn, ông Hiếu dựng vụ cướp. Kho của ông nằm đúng chỗ xe mất sóng, và ông từng bị phạt vì chứa hàng không rõ nguồn gốc.', docs: ['X2', 'P9'] },
   dat: { text: 'Theo bạn, anh Đạt tự dựng vụ cướp một mình để bán 20 tấn tiêu trả nợ.', docs: ['P2'] },
 }
@@ -234,9 +234,9 @@ const insideTheory: Record<string, string> = {
 }
 
 const planRefute: Record<string, { text: string; docs: string[] }> = {
-  kieu: { text: 'Lúc 00:31 bà Kiều ở nhà Buôn Ma Thuột, còn nhắn hỏi vì sao xe mất sóng. Hàng mất thì nhà xe phải đền, và chì 55190 thuộc lô chì của Đất Đỏ chứ không phải Kiều Phát.', docs: ['X5', 'X1'] },
-  hieu: { text: 'Ông Hiếu chỉ cho thuê kho. Tiền cọc chuyển từ kế toán của Đất Đỏ, chiếc bán tải vào kho mang logo Đất Đỏ, và tiền bán tiêu chảy về tài khoản ông Tài.', docs: ['P9', 'X7'] },
-  dat: { text: 'Anh Đạt chỉ lái xe và giả bị trói. Chì kẹp lại là của Đất Đỏ, xe bán tải của ông Tài có mặt ở Phan Rí, và tiền bán tiêu vào tài khoản ông Tài.', docs: ['P7', 'P10'] },
+  tai: { text: 'Ông Tài có động cơ trên giấy, nhưng lúc 23:40 ông đang tiếp khách ở Buôn Ma Thuột, trời tối, đồng hồ chỉ gần 12 giờ. Chiếc bán tải tới Phan Rí là của Kiều Phát, và tiền bán tiêu vào tài khoản bà Kiều.', docs: ['X6', 'P10'] },
+  hieu: { text: 'Ông Hiếu chỉ cho thuê kho. Tiền cọc chuyển từ kế toán của Kiều Phát, chiếc bán tải vào kho mang logo Kiều Phát, và tiền bán tiêu chảy về tài khoản bà Kiều.', docs: ['P9', 'X7'] },
+  dat: { text: 'Anh Đạt chỉ lái xe và giả bị trói. Xe bán tải của nhà xe có mặt ở Phan Rí, bà Kiều chuyển tiền cho vợ anh, và tiền bán tiêu vào tài khoản bà.', docs: ['P7', 'P11'] },
 }
 
 const insideRefute: Record<string, { text: string; docs: string[] }> = {
@@ -294,8 +294,8 @@ export function verdictPreview(slotId: string, optionId: string): { Art: () => J
       Art: () => <DecisionArt pay={optionId === 'pay'} />,
       note:
         optionId === 'pay'
-          ? 'Bạn cho rằng xe bị cướp thật, và công ty nên chi trả 3,04 tỷ cho Tiêu Đất Đỏ.'
-          : 'Bạn cho rằng vụ cướp được dàn dựng: từ chối chi trả và chuyển toàn bộ cho công an.',
+          ? 'Bạn cho rằng chủ hàng là người bị hại: chi 3,04 tỷ cho Tiêu Đất Đỏ, rồi An Tín đòi lại từ nhà xe Kiều Phát.'
+          : 'Bạn cho rằng chủ hàng dựng vụ cướp: từ chối chi trả và chuyển toàn bộ cho công an.',
     }
   return undefined
 }
@@ -322,8 +322,8 @@ export function theoryPanels(picks: Picks): ReconstructionPanel[] {
   panels.push({
     kind: 'theory',
     time: 'Đề xuất của bạn',
-    title: pay ? 'Chi trả 3,04 tỷ' : 'Từ chối và chuyển hồ sơ cho công an',
-    text: pay ? 'Bạn đề xuất công ty chi trả 3,04 tỷ cho Tiêu Đất Đỏ.' : 'Bạn từ chối chi trả và chuyển toàn bộ hồ sơ cho công an điều tra.',
+    title: pay ? 'Chi trả 3,04 tỷ cho Tiêu Đất Đỏ' : 'Từ chối và chuyển hồ sơ cho công an',
+    text: pay ? 'Bạn đề xuất công ty chi trả 3,04 tỷ cho Tiêu Đất Đỏ, rồi đòi lại từ nhà xe Kiều Phát.' : 'Bạn từ chối chi trả vì cho rằng ông Tài dàn dựng, và chuyển toàn bộ hồ sơ cho công an điều tra.',
     Art: () => <DecisionArt pay={pay} />,
   })
 
@@ -356,15 +356,15 @@ export function theoryPanels(picks: Picks): ReconstructionPanel[] {
         </>
       ),
     })
-  if (pay)
+  if (!pay)
     wrong.push({
       kind: 'refute',
       time: 'Lật lại',
-      title: 'Không phải cướp',
-      text: 'Xe đã rỗng từ trước giờ "bị cướp", hàng được dỡ ở Phan Rí và bán lại ở Long Khánh, tiền về tài khoản ông Tài. Theo Điều 11 hợp đồng, công ty không bồi thường khi người được bảo hiểm gian lận.',
+      title: 'Người được bảo hiểm không gian lận',
+      text: 'Vụ cướp là giả, nhưng người dựng nó là nhà xe, không phải chủ hàng. Ông Tài mất trắng 20 tấn tiêu. Điều 11 chỉ loại trừ gian lận của người được bảo hiểm. An Tín phải chi cho Đất Đỏ, rồi đứng ra đòi lại từ Kiều Phát.',
       Art: () => (
         <>
-          <OnDesk ids={['P5', 'P10']} />
+          <OnDesk ids={['P1', 'P10']} />
           <PanelStamp text="Không khớp" color="#b23a2e" />
         </>
       ),

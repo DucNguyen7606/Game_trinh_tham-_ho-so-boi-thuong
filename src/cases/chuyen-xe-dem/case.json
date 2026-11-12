@@ -94,7 +94,7 @@
       },
       "profile": {
         "traits": ["Thẳng tính", "Tự quản từng chiếc xe", "Hay lo"],
-        "habit": "Đêm nào có xe chạy là thức canh định vị trên laptop tới khi xe vào cảng.",
+        "habit": "Đêm nào có xe chạy là thức canh định vị trên laptop tới khi xe vào cảng. Nhà xe có một chiếc bán tải trắng để chạy theo xử lý sự cố.",
         "relation": "Năm chiếc container, hai chiếc đang thế chấp ngân hàng. Nhận chở hàng cho Đất Đỏ ba năm nay.",
         "quote": "\"Xe tôi mất hàng thì tôi cũng phải đền. Tôi được gì?\"",
         "note": "Nợ ngân hàng quá hạn. Biết rõ lộ trình, giờ chạy và người lái của từng chuyến."
@@ -253,7 +253,7 @@
           "label": "Sổ cấp chì niêm phong",
           "x": 52,
           "y": 62,
-          "note": "Công ty tự mua chì kẹp theo lô, số từ AT-55101 đến AT-55200. Sổ ghi rõ: chì 55120 cấp cho xe 47H ngày 2/11. Dòng chì 55190 bị gạch, ghi \"hỏng, đã hủy\" và chữ ký tắt của ông Tài.",
+          "note": "Công ty tự mua chì kẹp theo lô, số từ AT-55101 đến AT-55200. Sổ ghi rõ: chì 55120 cấp cho xe 47H ngày 2/11. Ngay dòng dưới, chì 55190 ghi \"dự phòng, giao tài xế xe 47H\", chữ ký của anh Đạt. Cột \"đã trả lại\" để trống.",
           "clueId": "H7"
         },
         {
@@ -276,7 +276,7 @@
           "label": "Camera trong kho",
           "x": 86,
           "y": 22,
-          "note": "Camera kho hỏng từ tuần trước, thủ kho nói ông Tài dặn để đó chưa cần sửa."
+          "note": "Camera kho hỏng từ tuần trước, thủ kho nói đã gọi thợ mà thợ chưa tới."
         },
         {
           "id": "kd-ban",
@@ -332,26 +332,26 @@
     { "id": "H4", "title": "Băng keo cắt bằng kéo", "description": "Đầu băng keo phẳng, quấn lỏng ba vòng. Không giống trói vội bên đường.", "source": "scene" },
     { "id": "H5", "title": "Ví và điện thoại còn nguyên", "description": "Bọn cướp để lại 4,2 triệu và điện thoại của tài xế.", "source": "scene" },
     { "id": "H6", "title": "Không có vệt phanh", "description": "Tài xế khai phanh gấp, nhưng mặt đường không có vệt lốp.", "source": "scene" },
-    { "id": "H7", "title": "Sổ cấp chì của Đất Đỏ", "description": "Chì 55101 đến 55200 là của công ty Đất Đỏ. Chì 55190 bị ghi \"hỏng, đã hủy\", ông Tài ký.", "source": "scene" },
+    { "id": "H7", "title": "Sổ cấp chì của Đất Đỏ", "description": "Chì 55101 đến 55200 là của công ty Đất Đỏ. Chì 55190 ghi \"dự phòng, giao tài xế xe 47H\", anh Đạt ký nhận và chưa trả lại.", "source": "scene" },
     { "id": "H8", "title": "Bảng giá tiêu 152.000đ", "description": "Giá tiêu hôm nay 152.000đ/kg, đầu năm chỉ 98.000đ.", "source": "scene" },
     { "id": "H9", "title": "Hạt tiêu và vệt xe nâng ở Phan Rí", "description": "Nền kho cát trắng, hạt tiêu vương vãi, vệt xe nâng mới và vệt container quay đầu.", "source": "scene" },
     { "id": "H10", "title": "Mẩu bao lô DD-1102", "description": "Mẩu bao in \"ĐẤT ĐỎ · LÔ DD-1102\", đúng mã lô chuyến hàng 2/11.", "source": "scene" },
-    { "id": "P1", "title": "Hợp đồng bảo hiểm hàng hóa", "description": "Ký 28/10/2025: 20 tấn tiêu đen, 3,04 tỷ (152.000đ/kg). Lần đầu Đất Đỏ mua bảo hiểm cho chuyến nội địa.", "source": "file" },
+    { "id": "P1", "title": "Hợp đồng bảo hiểm hàng hóa", "description": "Ký 28/10/2025: 20 tấn tiêu đen, 3,04 tỷ (152.000đ/kg). Lần đầu Đất Đỏ mua bảo hiểm cho chuyến nội địa, qua đại lý do nhà xe Kiều Phát giới thiệu.", "source": "file" },
     { "id": "P2", "title": "Biên bản của công an huyện", "description": "Đạt khai bị chặn lúc 02:40 ở Hàm Thuận Nam, được tìm thấy 04:10. Xe trống tìm thấy 06:30 ở Hàm Tân, chì bị cắt.", "source": "file" },
     { "id": "P3", "title": "Biên bản đóng hàng, niêm phong", "description": "2/11, 15:20 tại kho Đất Đỏ: 400 bao × 50 kg, lô DD-1102. Kẹp chì AT-55120. Đạt ký nhận.", "source": "file" },
     { "id": "P4", "title": "Dữ liệu hành trình xe 47H", "description": "Qua trạm Cà Ná 23:05. Mất sóng 23:52 gần Phan Rí, có sóng lại 01:04 đúng chỗ cũ. Qua trạm Sông Lũy 01:58.", "source": "file" },
     { "id": "P5", "title": "Phiếu cân tải trọng hai trạm", "description": "Cà Ná 23:05: 34,6 tấn. Sông Lũy 01:58: 14,5 tấn, đúng trọng lượng xe rỗng.", "source": "file" },
     { "id": "P6", "title": "Hợp đồng xuất khẩu của Đất Đỏ", "description": "Ký tháng 2, bán 20 tấn giá 98.000đ/kg, giao trước 15/11. Hàng mất có xác nhận công an thì được miễn phạt.", "source": "file" },
-    { "id": "P7", "title": "Lịch sử thu phí xe bán tải 47C", "description": "Xe ông Tài qua trạm Cà Ná hướng Nam 23:31 đêm 2/11, hướng Bắc 03:22 sáng 3/11.", "source": "file" },
+    { "id": "P7", "title": "Lịch sử thu phí xe bán tải 47C", "description": "Xe bán tải trắng của nhà xe Kiều Phát qua trạm Cà Ná hướng Nam 23:31 đêm 2/11, hướng Bắc 03:22 sáng 3/11.", "source": "file" },
     { "id": "P8", "title": "Giám định thương tích tài xế", "description": "Cổ tay không hằn, không trầy. Băng keo quấn ngoài tay áo khoác. Không thương tích nào.", "source": "file" },
-    { "id": "P9", "title": "Giấy thuê kho Phan Rí", "description": "Người thuê \"Lê Văn Hùng\", 2 đến 5/11. Tiền cọc chuyển từ tài khoản Trần Thị Mai, kế toán Đất Đỏ.", "source": "file" },
-    { "id": "P10", "title": "Phiếu mua tiêu ở Long Khánh", "description": "6/11: mua 400 bao tiêu lô DD-1102 giá 141.000đ/kg. Tiền chuyển vào tài khoản Nguyễn Hữu Tài.", "source": "file" },
-    { "id": "P11", "title": "Sao kê chuyển khoản 250 triệu", "description": "4/11: Nguyễn Hữu Tài chuyển 250 triệu cho Hồ Thị Liên, vợ anh Đạt. Nội dung: \"tra tien hui\".", "source": "file" },
+    { "id": "P9", "title": "Giấy thuê kho Phan Rí", "description": "Người thuê \"Lê Văn Hùng\", 2 đến 5/11. Tiền cọc chuyển từ tài khoản Trần Thị Mai, kế toán nhà xe Kiều Phát.", "source": "file" },
+    { "id": "P10", "title": "Phiếu mua tiêu ở Long Khánh", "description": "6/11: mua 400 bao tiêu lô DD-1102 giá 141.000đ/kg. Tiền chuyển vào tài khoản Đoàn Thị Kiều.", "source": "file" },
+    { "id": "P11", "title": "Sao kê chuyển khoản 250 triệu", "description": "Tài khoản bà Kiều: 4/11 chuyển 250 triệu cho Hồ Thị Liên, vợ anh Đạt, ghi \"tra tien hui\". 7/11 trả ngân hàng 2,1 tỷ nợ quá hạn.", "source": "file" },
     { "id": "X1", "title": "Thông báo nợ quá hạn của Kiều Phát", "description": "Ngân hàng đòi 2,1 tỷ, dọa phát mãi hai xe container thế chấp.", "source": "decoy" },
     { "id": "X2", "title": "Quyết định xử phạt ông Hiếu", "description": "Năm 2023, ông Hiếu bị phạt vì chứa 6 tấn cà phê không rõ nguồn gốc trong kho.", "source": "decoy" },
     { "id": "X3", "title": "Ảnh anh Đạt ở quán cơm Cà Ná", "description": "Anh Đạt chụp với xe lúc 22:30. Soi kỹ cửa sau container.", "source": "testimony" },
     { "id": "X4", "title": "Ảnh Phúc ở quán karaoke Phan Rang", "description": "Phúc hát với bạn bè lúc 00:40, cách Phan Rí 60 km. Soi kỹ màn hình.", "source": "testimony" },
-    { "id": "X5", "title": "Ảnh bà Kiều canh xe đêm", "description": "Bà Kiều chụp màn hình định vị ở nhà lúc 00:31. Soi kỹ trạng thái của xe 47H.", "source": "testimony" },
+    { "id": "X5", "title": "Ảnh bà Kiều canh xe đêm", "description": "Bà Kiều chụp màn hình định vị \"ở nhà\" lúc 00:31. Soi kỹ bản đồ: còn chấm nào khác ngoài xe 47H?", "source": "testimony" },
     { "id": "X6", "title": "Ảnh ông Tài tiếp khách", "description": "Ông Tài đăng ảnh tiếp khách ở Buôn Ma Thuột lúc 23:40. Soi kỹ cửa sổ và đồng hồ.", "source": "testimony" },
     { "id": "X7", "title": "Ảnh camera cổng kho Phan Rí", "description": "Camera cổng chụp lúc 00:12: một xe bán tải trắng vào kho sau chiếc container. Soi kỹ cửa xe.", "source": "testimony" }
   ],
@@ -473,12 +473,12 @@
         { "id": "c", "text": "Ông Nguyễn Hữu Tài, chủ hàng" },
         { "id": "d", "text": "Anh Đạt tự làm một mình" }
       ],
-      "correctOptionId": "c",
-      "requiredClues": ["P6", "P7"],
-      "supportingClues": ["H8", "H7", "P9", "P10", "X7", "P1"],
+      "correctOptionId": "a",
+      "requiredClues": ["P7", "P10"],
+      "supportingClues": ["X1", "P9", "P11", "X7", "P1", "P6"],
       "hints": [
-        "Đọc Hợp đồng xuất khẩu (phong bì 2) rồi nhìn Bảng giá ở kho Đất Đỏ. Giao hàng đúng hợp đồng thì ông Tài lời hay lỗ?",
-        "Lịch sử thu phí xe bán tải 47C: đêm 2/11 xe của ai chạy về phía Phan Rí?"
+        "Ông Tài có động cơ trên giấy, nhưng ai thật sự có mặt ở Phan Rí? Lịch sử thu phí xe bán tải 47C (phong bì 2) ghi xe đó của ai.",
+        "Hàng mất thì tiền đi về đâu? Phiếu mua tiêu ở Long Khánh (phong bì 3) ghi tiền chuyển vào tài khoản của ai."
       ]
     },
     {
@@ -487,15 +487,15 @@
       "prompt": "Ngoại phạm của ai đứng vững?",
       "options": [
         { "id": "a", "text": "Tất cả đều vững" },
-        { "id": "b", "text": "Phúc, bà Kiều vững. Ông Tài vỡ." },
-        { "id": "c", "text": "Bà Kiều vỡ" }
+        { "id": "b", "text": "Phúc, ông Tài vững. Bà Kiều vỡ." },
+        { "id": "c", "text": "Ông Tài vỡ" }
       ],
       "correctOptionId": "b",
       "requiredClues": ["X4", "X5", "X6"],
       "supportingClues": ["P7", "X7"],
       "hints": [
         "Hàng được dỡ ở Phan Rí khoảng 00:00 đến 01:00. Hỏi chuyện từng người, xem ảnh họ đưa và so với giờ đó.",
-        "Ông Tài đăng ảnh lúc 23:40. Soi cửa sổ và đồng hồ trong ảnh: ảnh được chụp lúc mấy giờ?"
+        "Bà Kiều nói lúc 00:31 bà ở nhà Buôn Ma Thuột. Soi ảnh chụp màn hình định vị của bà: chấm xanh \"vị trí của bạn\" đang nằm ở đâu?"
       ]
     }
   ],
@@ -509,7 +509,7 @@
         { "id": "hieu", "text": "Mạc Văn Hiếu" },
         { "id": "dat", "text": "Hồ Văn Đạt" }
       ],
-      "correctOptionId": "tai"
+      "correctOptionId": "kieu"
     },
     {
       "id": "inside",
@@ -525,36 +525,36 @@
       "id": "decision",
       "prompt": "Đề xuất của bạn",
       "options": [
-        { "id": "pay", "text": "Chi trả 3,04 tỷ cho Tiêu Đất Đỏ" },
-        { "id": "deny", "text": "Từ chối và chuyển hồ sơ cho công an" }
+        { "id": "pay", "text": "Chi trả 3,04 tỷ cho Tiêu Đất Đỏ, rồi đòi lại từ nhà xe Kiều Phát" },
+        { "id": "deny", "text": "Từ chối vì chủ hàng dàn dựng, chuyển hồ sơ cho công an" }
       ],
-      "correctOptionId": "deny"
+      "correctOptionId": "pay"
     }
   ],
   "endings": [
     {
       "id": "full",
       "title": "Trọn vẹn",
-      "text": "Ông Tài bị khởi tố tội lừa đảo chiếm đoạt tài sản, anh Đạt là đồng phạm. 2,82 tỷ tiền bán tiêu bị phong tỏa. Đối tác nước ngoài kiện Đất Đỏ vì giao hàng trễ, đúng khoản phạt ông Tài tìm cách né."
+      "text": "An Tín chi 3,04 tỷ cho Tiêu Đất Đỏ, rồi kiện nhà xe Kiều Phát đòi lại. Bà Kiều bị khởi tố tội lừa đảo chiếm đoạt tài sản, anh Đạt là đồng phạm. Hai chiếc container thế chấp vẫn bị ngân hàng thu giữ."
     },
     {
       "id": "half",
       "title": "Đúng một nửa",
-      "text": "Công ty không phải chi 3,04 tỷ. Anh Đạt nhận hết tội về mình, nói tự bán hàng để trả nợ. Người đứng sau vẫn ngồi cà phê xem giá tiêu mỗi sáng."
+      "text": "Ông Tài được chi trả đúng, anh Đạt bị khởi tố. Nhưng hồ sơ không gọi đúng tên người đứng sau. Anh Đạt nhận hết tội, còn nhà xe Kiều Phát vẫn nhận chở hàng tuyến Tây Nguyên."
     },
     {
       "id": "wrong",
       "title": "Sai người",
-      "text": "Luật sư của Đất Đỏ chỉ ra lập luận không có căn cứ. Hồ sơ bị bác, bạn bị rút khỏi vụ."
+      "text": "Ông Tài được chi trả đúng, nhưng người tiếp tay bạn chỉ ra lại có ngoại phạm vững. Hồ sơ hình sự bị trả về, An Tín không đòi lại được đồng nào từ nhà xe."
     },
     {
-      "id": "paid",
-      "title": "Chi trả",
-      "text": "Công ty chuyển 3,04 tỷ cho Tiêu Đất Đỏ. Ba tháng sau, công an lần ra 400 bao tiêu lô DD-1102 ở Long Khánh. Bạn bị kỷ luật."
+      "id": "unjust",
+      "title": "Oan cho người ngay",
+      "text": "Bạn từ chối vì cho rằng ông Tài dựng vụ cướp để né hợp đồng lỗ. Ông mang hóa đơn, sổ cấp chì và ảnh đêm 2/11 đi kiện. An Tín thua, chi đủ kèm án phí, còn người thật sự bán 20 tấn tiêu đã trả xong nợ ngân hàng."
     }
   ],
   "endingRules": [
-    { "ending": "paid", "picks": { "decision": "pay" } },
+    { "ending": "unjust", "picks": { "decision": "deny" } },
     { "ending": "full", "correct": ["plan", "inside"] },
     { "ending": "half", "correct": ["inside"] },
     { "ending": "wrong" }

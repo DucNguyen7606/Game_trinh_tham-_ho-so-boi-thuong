@@ -3,6 +3,7 @@ VAR has_H8 = false
 VAR has_P8 = false
 VAR has_P9 = false
 VAR has_P11 = false
+VAR has_P10 = false
 
 Ông Sáu Tâm ngồi xổm ở mép cầu tàu, cuốn điếu thuốc rê bằng giấy quyến.
 "Tui theo anh Lực mười hai năm. Tui còn đau hơn ai hết."
@@ -31,6 +32,11 @@ VAR has_P11 = false
     Ông Tâm dụi điếu thuốc đang hút dở.
     "Thằng nhỏ nhà tui nằm viện trên thành phố. Tui đem đồ ăn lên cho nó."
     Hai giờ sáng, đem đồ ăn bằng thùng xốp. Ông không nói gì thêm.
+    -> hoi
+* {has_P10} [Anh Lực nhắn anh chờ ở Rạch Đước và dặn đừng cho chị Hồng biết.]
+    Ông Tâm im một lúc lâu, rồi gật đầu.
+    "Chị Hai không biết gì hết. Ảnh dặn kỹ lắm, nói bả mà biết là bả không chịu."
+    "Tui chỉ chờ để đưa ảnh ra lộ. Ảnh tới, lấy ba lô, rồi tui về. Vậy thôi."
     -> hoi
 * {has_P11} [Ba lượng vàng anh bán ở Quận 8 có số sê-ri của tiệm Kim Hưng.]
     Bàn tay ông Tâm run lên.

@@ -16,6 +16,7 @@ const P1 = () => (
     <Row k="Số tiền BH" v="3.040.000.000 đ" strong />
     <Row k="Đơn giá khai báo" v="152.000 đ/kg" />
     <Row k="Ngày ký" v="28/10/2025" strong />
+    <Row k="Kênh khai thác" v="Đại lý, do nhà xe Kiều Phát giới thiệu" />
     <p className="pt-1 text-[10px] italic">
       Ghi chú của phòng khai thác: <Mark>khách hàng lần đầu mua bảo hiểm cho chuyến nội địa</Mark>, các chuyến trước đều tự chịu rủi ro.
     </p>
@@ -132,7 +133,7 @@ const P6 = () => (
 
 const P7 = () => (
   <Sheet org="Đơn vị thu phí không dừng · Trích xuất theo yêu cầu" title="Lịch sử qua trạm xe 47C-218.••">
-    <p className="text-[10px]">Chủ phương tiện: Nguyễn Hữu Tài. Loại xe: bán tải, màu trắng.</p>
+    <p className="text-[10px]">Chủ phương tiện: <Mark>Hộ kinh doanh vận tải Kiều Phát (Đoàn Thị Kiều)</Mark>. Loại xe: bán tải, màu trắng.</p>
     {[
       ['02/11 18:21', 'QL26 · Km 45', 'hướng Ninh Hòa'],
       ['02/11 23:31', 'Trạm Cà Ná', 'hướng Nam'],
@@ -179,7 +180,7 @@ const P9 = () => (
         <br />
         <span className="text-[9px] opacity-60">31/10/2025 16:02</span>
       </p>
-      <p className="text-[10px] opacity-70">Trần Thị Mai: kế toán Cty Tiêu Đất Đỏ (theo hồ sơ BHXH).</p>
+      <p className="text-[10px] opacity-70">Trần Thị Mai: kế toán nhà xe Kiều Phát (theo hồ sơ BHXH).</p>
     </Phone>
   </div>
 )
@@ -193,18 +194,19 @@ const P10 = () => (
     <Row k="Đơn giá" v="141.000 đ/kg" />
     <Row k="Thành tiền" v="2.820.000.000 đ" strong />
     <p className="pt-1">
-      Chuyển khoản theo yêu cầu người bán, tài khoản <Mark>NGUYEN HUU TAI</Mark>.
+      Chuyển khoản theo yêu cầu người bán, tài khoản <Mark>DOAN THI KIEU</Mark>.
     </p>
     <p className="text-[10px] italic">Người bán nói bao cũ xin lại của chỗ quen, chưa kịp thay.</p>
   </Sheet>
 )
 
 const P11 = () => (
-  <Sheet org="Ngân hàng · Sao kê theo yêu cầu cơ quan điều tra" title="Giao dịch tài khoản Nguyễn Hữu Tài">
+  <Sheet org="Ngân hàng · Sao kê theo yêu cầu cơ quan điều tra" title="Giao dịch tài khoản Đoàn Thị Kiều">
     {[
-      ['31/10', '−15.000.000', 'TRAN THI MAI', 'tam ung'],
+      ['31/10', '−15.000.000', 'TRAN THI MAI', 'hoan ung'],
       ['04/11', '−250.000.000', 'HO THI LIEN', 'tra tien hui'],
       ['06/11', '+2.820.000.000', 'DL PHUOC THINH', 'tien hang'],
+      ['07/11', '−2.100.000.000', 'NGAN HANG DL', 'tat toan no qua han'],
     ].map(([d, amt, who, nd]) => (
       <div key={d} className="grid grid-cols-[auto_auto_1fr] gap-x-2 border-b border-dotted border-black/20">
         <span>{d}</span>
@@ -213,6 +215,7 @@ const P11 = () => (
       </div>
     ))}
     <p className="pt-1 text-[10px]">Hồ Thị Liên: vợ anh Hồ Văn Đạt, chủ tạp hóa ở phường Tân Lợi.</p>
+    <p className="text-[10px] italic">Đã đối chiếu: không có giao dịch nào với tài khoản Nguyễn Hữu Tài trong tháng 10 và 11.</p>
   </Sheet>
 )
 
@@ -328,7 +331,7 @@ const X4 = () => (
   </Phone>
 )
 
-/** Kiều's screenshot of the fleet map: 47H lost since 23:52 near Phan Rí, while she is home. */
+/** Kiều's screenshot of the fleet map, sent "from home": the blue you-are-here dot sits right beside 47H at Phan Rí. */
 const X5 = () => (
   <Phone header="Zalo · Đạt 47H">
     <div className="overflow-hidden rounded-md border border-black/10">
@@ -337,6 +340,10 @@ const X5 = () => (
         <path d="M40,0 Q110,60 150,100 T300,200" stroke="#f2c230" strokeWidth="10" fill="none" />
         <path d="M0,150 Q60,140 110,170" stroke="#9fb4c8" strokeWidth="18" fill="none" />
         <circle cx="140" cy="92" r="9" fill="#9a9a9a" stroke={LINE} strokeWidth="1.5" />
+        {/* The phone's own location, a few hundred metres from the truck */}
+        <circle cx="126" cy="104" r="11" fill="#2f7fe0" opacity="0.25" />
+        <circle cx="126" cy="104" r="5" fill="#2f7fe0" stroke="#fff" strokeWidth="1.5" />
+        <text x="126" y="126" textAnchor="middle" fontSize="7" fill="#2f7fe0" fontFamily={mono}>Vị trí của bạn</text>
         <rect x="156" y="70" width="150" height="40" rx="4" fill="#fff" stroke={LINE} strokeWidth="1" />
         <text x="164" y="86" fontSize="9" fontWeight="700" fill={LINE} fontFamily={mono}>47H-••• · MẤT TÍN HIỆU</text>
         <text x="164" y="100" fontSize="8" fill={accent.red} fontFamily={mono}>từ 23:52 · gần Phan Rí</text>
@@ -351,21 +358,23 @@ const X5 = () => (
   </Phone>
 )
 
-/** Tài's post at 23:40, but the window shows sunset and the clock reads 5:50. */
+/** Tài's post at 23:40: dark window and the clock at twenty to twelve. His alibi holds. */
 const X6 = () => (
   <Phone header="Trang cá nhân · Tài Tiêu Đất Đỏ">
     <div className="overflow-hidden rounded-md">
       <svg viewBox="0 0 320 220" className="block w-full">
         <rect width="320" height="220" fill="#6e4c34" />
-        {/* Window with an orange sunset */}
-        <rect x="20" y="20" width="110" height="90" fill="#f2a05a" stroke={LINE} strokeWidth="2" />
-        <circle cx="76" cy="96" r="18" fill="#ffd98f" />
-        <rect x="20" y="88" width="110" height="22" fill="#5a4a5a" opacity="0.6" />
+        {/* Window onto the night, street lights below */}
+        <rect x="20" y="20" width="110" height="90" fill="#1b2236" stroke={LINE} strokeWidth="2" />
+        <circle cx="104" cy="40" r="8" fill="#f3e4c4" />
+        {[34, 58, 92, 116].map((x) => (
+          <circle key={x} cx={x} cy="98" r="2.5" fill="#ffd98f" />
+        ))}
         <line x1="75" y1="20" x2="75" y2="110" stroke={LINE} strokeWidth="2" />
-        {/* Wall clock at ten to six */}
+        {/* Wall clock at twenty to twelve */}
         <g stroke={LINE} strokeWidth="1.5">
           <circle cx="250" cy="44" r="18" fill="#fff8e8" />
-          <path d="M250,44 L250,30 M250,44 L243,56" strokeLinecap="round" strokeWidth="2" />
+          <path d="M250,44 L248.3,34.2 M250,44 L237.9,51" strokeLinecap="round" strokeWidth="2" />
         </g>
         <rect x="0" y="160" width="320" height="60" fill="#7a4f32" />
         {[60, 140, 220].map((x) => (
@@ -382,7 +391,7 @@ const X6 = () => (
   </Phone>
 )
 
-/** Hiếu's gate camera: the container, then a white pickup with a Đất Đỏ sticker on the door. */
+/** Hiếu's gate camera: the container, then a white pickup with the Kiều Phát sticker on the door. */
 const X7 = () => (
   <Phone header="Camera cổng kho PR · Cảnh báo chuyển động" dark>
     <div className="overflow-hidden rounded-md">
@@ -396,9 +405,9 @@ const X7 = () => (
           <path d="M40,150 L40,120 L80,98 L150,98 L160,120 L190,122 L190,150 Z" fill="#d8d8d0" />
           <circle cx="70" cy="152" r="14" fill="#111" />
           <circle cx="165" cy="152" r="14" fill="#111" />
-          <rect x="96" y="112" width="34" height="20" fill="#7d2f2a" />
+          <rect x="94" y="112" width="40" height="20" fill="#2f4258" />
         </g>
-        <text x="113" y="125" textAnchor="middle" fontSize="6" fill="#f3e4c4" fontFamily={mono}>ĐẤT ĐỎ</text>
+        <text x="114" y="125" textAnchor="middle" fontSize="5.5" fill="#f3e4c4" fontFamily={mono}>KIỀU PHÁT</text>
         <rect x="100" y="140" width="40" height="10" fill="#f3e4c4" stroke="#111" strokeWidth="1" />
         <text x="120" y="148" textAnchor="middle" fontSize="6" fill="#111" fontFamily={mono}>47C-2••</text>
         <rect width="320" height="200" fill="#9fbf9a" opacity="0.12" />

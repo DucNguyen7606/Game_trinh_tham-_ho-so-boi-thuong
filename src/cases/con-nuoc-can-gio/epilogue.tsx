@@ -142,6 +142,15 @@ const Gold = () => (
 export const epilogue: Record<string, EpiloguePanel[]> = {
   full: [
     {
+      id: 'transfer',
+      caption: 'An Tín chuyển 5 tỷ đồng cho bà Phạm Thị Hồng. Ông Lực đã chết thật, và người thụ hưởng không biết gì về kế hoạch của chồng.',
+      Art: () => (
+        <Panel>
+          <Transfer />
+        </Panel>
+      ),
+    },
+    {
       id: 'court',
       caption: 'Nguyễn Văn Tâm bị đưa ra xét xử về tội giết người và cướp tài sản. Ông nhận tội ngay phiên đầu.',
       Art: () => (
@@ -151,15 +160,6 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
           </Panel>
           <DockRail />
         </div>
-      ),
-    },
-    {
-      id: 'hong',
-      caption: 'Bà Hồng bị xử tội gian lận bảo hiểm, án treo. Sáng nào bà cũng ra bến, nơi chồng bà xuống ghe lần cuối.',
-      Art: () => (
-        <Panel people={[{ id: 'hong', x: 40, mood: 'worried', size: 50 }]}>
-          <Riverbank />
-        </Panel>
       ),
     },
     {
@@ -181,6 +181,15 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
       ),
     },
     {
+      id: 'hong',
+      caption: 'Bà Hồng trả hết nợ cho vựa, giữ lại chiếc ghe. Sáng nào bà cũng ra bến, nơi chồng bà xuống ghe lần cuối.',
+      Art: () => (
+        <Panel people={[{ id: 'hong', x: 40, mood: 'worried', size: 50 }]}>
+          <Riverbank />
+        </Panel>
+      ),
+    },
+    {
       id: 'son',
       caption: 'Con trai ông Tâm vẫn được mổ tim nhờ một quỹ từ thiện. Bạn là người gửi hồ sơ cho quỹ.',
       Art: () => (
@@ -191,27 +200,50 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
     },
     {
       id: 'file',
-      caption: 'Hồ sơ 0909 đóng lại. Công ty không chi 5 tỷ đồng, và hồ sơ được chuyển sang cơ quan điều tra.',
+      caption: 'Hồ sơ 0909 đóng lại. Kế hoạch giả chết là của ông Lực, cái chết là thật, và tiền về đúng người thụ hưởng ngay tình.',
       Art: () => (
         <Panel>
-          <Desk stamp="TỪ CHỐI BỒI THƯỜNG" sub="CHUYỂN CƠ QUAN ĐIỀU TRA" />
+          <Desk stamp="CHI TRẢ BỒI THƯỜNG" sub="CHUYỂN HỒ SƠ ÁN MẠNG CHO CÔNG AN" />
         </Panel>
       ),
     },
   ],
   half: [
     {
-      id: 'file',
-      caption: 'Công ty từ chối chi trả vì hồ sơ gian lận. Sếp hài lòng với kết quả.',
+      id: 'transfer',
+      caption: 'Bà Hồng nhận đủ 5 tỷ, Tâm bị bắt.',
       Art: () => (
         <Panel>
-          <Desk stamp="TỪ CHỐI BỒI THƯỜNG" sub="LÝ DO: GIẢ CHẾT TRỤC LỢI" />
+          <Transfer />
         </Panel>
       ),
     },
     {
       id: 'tam',
-      caption: 'Sáu Tâm vẫn lái ghe ở Long Hòa. Mỗi tháng ông lên thành phố một lần, mang theo một thùng xốp.',
+      caption: 'Nhưng hồ sơ ghi sai người bày vụ chìm ghe. Luật sư của Tâm nói thân chủ chỉ là người làm thuê bị ép, và bản án nhẹ đi nhiều.',
+      Art: () => (
+        <div className="relative">
+          <Panel people={[{ id: 'tam', x: 50, mood: 'stern', size: 44 }]}>
+            <Courtroom />
+          </Panel>
+          <DockRail />
+        </div>
+      ),
+    },
+  ],
+  wrong: [
+    {
+      id: 'transfer',
+      caption: 'Bà Hồng được chi trả đúng.',
+      Art: () => (
+        <Panel>
+          <Transfer />
+        </Panel>
+      ),
+    },
+    {
+      id: 'tam',
+      caption: 'Nhưng người bạn chỉ ra là kẻ giết ông Lực có ngoại phạm vững, hồ sơ hình sự bị trả về. Sáu Tâm vẫn lái ghe ở Long Hòa. Mỗi tháng ông lên thành phố một lần, mang theo một thùng xốp.',
       Art: () => (
         <Panel people={[{ id: 'tam', x: 55, mood: 'stern', size: 46 }]}>
           <Riverbank />
@@ -219,13 +251,22 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
       ),
     },
   ],
-  wrong: [
+  unjust: [
     {
       id: 'file',
-      caption: 'Luật sư của bà Hồng chỉ ra lập luận không có căn cứ. Hồ sơ bị bác.',
+      caption: 'Bạn từ chối hồ sơ vì ông Lực định giả chết để trục lợi.',
       Art: () => (
         <Panel>
-          <Desk stamp="BÁC KẾT LUẬN" sub="KHÔNG ĐỦ CĂN CỨ" />
+          <Desk stamp="TỪ CHỐI BỒI THƯỜNG" sub="LÝ DO: GIẢ CHẾT TRỤC LỢI" />
+        </Panel>
+      ),
+    },
+    {
+      id: 'court',
+      caption: 'Bà Hồng kiện An Tín. Luật sư của bà chỉ đọc Điều 9: ông Lực không tự tử, và người thụ hưởng không gây ra cái chết. An Tín thua, chi đủ 5 tỷ kèm lãi chậm trả và án phí.',
+      Art: () => (
+        <Panel people={[{ id: 'hong', x: 50, mood: 'worried', size: 44 }]}>
+          <Courtroom />
         </Panel>
       ),
     },
@@ -235,35 +276,6 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
       Art: () => (
         <Panel people={[{ id: 'player', x: 40, mood: 'worried', size: 52 }]}>
           <Office />
-        </Panel>
-      ),
-    },
-  ],
-  paid: [
-    {
-      id: 'transfer',
-      caption: 'Bảo hiểm An Tín chuyển 5 tỷ đồng cho bà Phạm Thị Hồng.',
-      Art: () => (
-        <Panel>
-          <Transfer />
-        </Panel>
-      ),
-    },
-    {
-      id: 'gold',
-      caption: 'Nửa năm sau, công an lần theo số sê-ri vàng Kim Hưng tới một thùng xốp ở Quận 8.',
-      Art: () => (
-        <Panel>
-          <Gold />
-        </Panel>
-      ),
-    },
-    {
-      id: 'file',
-      caption: 'Bạn bị kỷ luật vì duyệt chi sai.',
-      Art: () => (
-        <Panel>
-          <Desk stamp="KỶ LUẬT" sub="DUYỆT CHI SAI · HS 0909" />
         </Panel>
       ),
     },
