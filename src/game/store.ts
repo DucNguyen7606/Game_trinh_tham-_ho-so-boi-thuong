@@ -42,6 +42,14 @@ interface GameState {
   transcripts: Record<string, TranscriptSession[]>
   /** How many hints of each question the player has seen. */
   hintLevel: Record<string, number>
+  /**
+   * Per question, what the player had proven when they took their last hint: the cards
+   * whose strings had turned green, and how many checks they had made. The next hint
+   * opens only once the board moves past this (see hintGate).
+   */
+  hintBasis: Record<string, { matched: string[]; checks: number }>
+  /** How many times the player pressed Kiểm tra on each question. */
+  checkCount: Record<string, number>
   /** Where the player left each card on the board, and the board's pan and zoom, kept across tabs. */
   boardLayout: Record<string, { x: number; y: number }>
   boardViewport?: { x: number; y: number; zoom: number }
@@ -63,7 +71,8 @@ interface GameState {
   startInterrogation: (suspectId: string) => boolean
   /** Replaces the lines of the suspect's latest interview (the one in progress). */
   saveTranscript: (suspectId: string, lines: TranscriptLine[]) => void
-  showHint: (questionId: string) => void
+  /** Opens the question's next hint if hintGate allows it. Returns whether one opened. */
+  showHint: (questionId: string) => boolean
   saveBoardLayout: (positions: Record<string, { x: number; y: number }>) => void
   saveBoardViewport: (viewport: { x: number; y: number; zoom: number }) => void
   isEnvelopeOpen: (envelopeId: string) => boolean
@@ -95,6 +104,8 @@ const initial = (data: CaseData) => ({
   checkedLinks: {} as Record<string, string[]>,
   transcripts: {} as Record<string, TranscriptSession[]>,
   hintLevel: {} as Record<string, number>,
+  hintBasis: {} as Record<string, { matched: string[]; checks: number }>,
+  checkCount: {} as Record<string, number>,
   boardLayout: {} as Record<string, { x: number; y: number }>,
   boardViewport: undefined as { x: number; y: number; zoom: number } | undefined,
   activeSuspect: undefined as string | undefined,
@@ -128,6 +139,39 @@ export function questionOrder(data: CaseData, solvedInOrder: string[]) {
     for (const q of data.questions) if (!order.includes(q.id) && questionOpen(data, q.id, solved)) order.push(q.id)
   })
   return order
+}
+
+export type HintGate = 'available' | 'locked' | 'none-left'
+
+/** Cards on a question whose string turned green at the last check: required or supporting clues. */
+export function matchedClues(data: CaseData, checkedLinks: Record<string, string[]>, questionId: string) {
+  const q = data.questions.find((x) => x.id === questionId)
+  if (!q) return []
+  const relevant = [...q.requiredClues, ...(q.supportingClues ?? [])]
+  return (checkedLinks[questionId] ?? []).filter((c) => relevant.includes(c))
+}
+
+/**
+ * One hint per step of progress. The first hint of a question is free; each further one opens
+ * only after a check shows a new green string (a card that matches or relates to the question)
+ * since the last hint. If every such card was already proven when the hint was taken, there is
+ * nothing left to find, so one more check (a new attempt at the answer) opens the next hint.
+ */
+export function hintGate(
+  st: Pick<GameState, 'data' | 'hintLevel' | 'hintBasis' | 'checkedLinks' | 'checkCount'>,
+  questionId: string,
+): HintGate {
+  const q = st.data.questions.find((x) => x.id === questionId)
+  const level = st.hintLevel[questionId] ?? 0
+  if (!q || level >= (q.hints?.length ?? 0)) return 'none-left'
+  const basis = st.hintBasis[questionId]
+  if (level === 0 || !basis) return 'available'
+  const matched = matchedClues(st.data, st.checkedLinks, questionId)
+  if (matched.some((c) => !basis.matched.includes(c))) return 'available'
+  const relevant = [...q.requiredClues, ...(q.supportingClues ?? [])]
+  const nothingLeft = relevant.every((c) => basis.matched.includes(c))
+  if (nothingLeft && (st.checkCount[questionId] ?? 0) > basis.checks) return 'available'
+  return 'locked'
 }
 
 const addUnique = (list: string[], id: string) => (list.includes(id) ? list : [...list, id])
@@ -198,7 +242,10 @@ export const useGame = create<GameState>((set, get) => ({
     const q = data.questions.find((x) => x.id === questionId)
     const a = answers[questionId]
     if (!q || !a) return 'wrong'
-    set((s) => ({ checkedLinks: { ...s.checkedLinks, [questionId]: [...a.clueIds] } }))
+    set((s) => ({
+      checkedLinks: { ...s.checkedLinks, [questionId]: [...a.clueIds] },
+      checkCount: { ...s.checkCount, [questionId]: (s.checkCount[questionId] ?? 0) + 1 },
+    }))
     const hasAllClues = q.requiredClues.every((c) => a.clueIds.includes(c))
     if (a.optionId === q.correctOptionId && hasAllClues) {
       set({ solvedQuestions: addUnique(solvedQuestions, questionId) })
@@ -225,12 +272,18 @@ export const useGame = create<GameState>((set, get) => ({
   saveBoardLayout: (positions) => set((st) => ({ boardLayout: { ...st.boardLayout, ...positions } })),
   saveBoardViewport: (viewport) => set({ boardViewport: viewport }),
 
-  showHint: (questionId) =>
-    set((st) => {
-      const q = st.data.questions.find((x) => x.id === questionId)
-      const max = q?.hints?.length ?? 0
-      return { hintLevel: { ...st.hintLevel, [questionId]: Math.min(max, (st.hintLevel[questionId] ?? 0) + 1) } }
-    }),
+  showHint: (questionId) => {
+    const st = get()
+    if (hintGate(st, questionId) !== 'available') return false
+    set({
+      hintLevel: { ...st.hintLevel, [questionId]: (st.hintLevel[questionId] ?? 0) + 1 },
+      hintBasis: {
+        ...st.hintBasis,
+        [questionId]: { matched: matchedClues(st.data, st.checkedLinks, questionId), checks: st.checkCount[questionId] ?? 0 },
+      },
+    })
+    return true
+  },
 
   saveTranscript: (suspectId, lines) =>
     set((st) => {
