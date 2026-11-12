@@ -16,8 +16,8 @@ import {
   type Node,
   type NodeProps,
 } from '@xyflow/react'
-import { CheckCircle2, ChevronLeft, ChevronRight, Lightbulb, X } from 'lucide-react'
-import { questionOrder, useGame } from '@/game/store'
+import { CheckCircle2, ChevronLeft, ChevronRight, Lightbulb, Lock, X } from 'lucide-react'
+import { hintGate, questionOrder, useGame } from '@/game/store'
 import { clueById } from '@/game/caseLoader'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
@@ -48,18 +48,14 @@ function QuestionNode({ data }: NodeProps<Node<QuestionNodeData>>) {
 
   const hints = q.hints ?? []
   const shownHints = hints.slice(0, hintLevel[q.id] ?? 0)
-  const moreHints = shownHints.length < hints.length
+  const gate = useGame((st) => hintGate(st, q.id))
   // Which unlocked hint is on show; follows the newest one until the player pages back.
   const [hintPage, setHintPage] = useState<number | null>(null)
   const page = Math.min(hintPage ?? shownHints.length - 1, shownHints.length - 1)
 
   const onCheck = () => {
     const result = checkAnswer(q.id)
-    // A miss opens the next hint, so the player always has somewhere to look.
-    if (result !== 'solved') {
-      showHint(q.id)
-      setHintPage(null)
-    }
+    // A miss no longer opens a hint by itself: hints are one per step of progress (see hintGate).
     setFeedback(
       result === 'solved'
         ? null
@@ -145,13 +141,18 @@ function QuestionNode({ data }: NodeProps<Node<QuestionNodeData>>) {
         )}
       </div>
       {feedback && <p className="mt-2 text-xs text-destructive">{feedback}</p>}
-      {!solved && moreHints && (
+      {!solved && gate === 'available' && (
         <button className="nodrag mt-2 flex items-center gap-1 text-xs text-muted-foreground hover:text-amber" onClick={() => {
-            showHint(q.id)
-            setHintPage(null)
+            if (showHint(q.id)) setHintPage(null)
           }}>
           <Lightbulb className="size-3.5" /> {shownHints.length === 0 ? 'Xem gợi ý' : 'Gợi ý tiếp'}
         </button>
+      )}
+      {!solved && gate === 'locked' && (
+        <p className="mt-2 flex items-start gap-1 text-xs text-muted-foreground" title="Mỗi câu chỉ mở một gợi ý cho đến khi bạn có tiến triển">
+          <Lock className="mt-0.5 size-3.5 shrink-0" />
+          Gợi ý tiếp bị khóa: nối thêm một manh mối khớp hoặc liên quan tới câu này rồi bấm Kiểm tra để mở.
+        </p>
       )}
     </div>
     </div>
