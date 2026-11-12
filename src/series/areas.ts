@@ -54,7 +54,7 @@ export const AREAS: Area[] = [
     id: 'go-vap',
     name: 'Gò Vấp',
     note: 'Hẻm sâu như mê cung, quán nhậu sáng đèn tới khuya.',
-    shape: [[500, 435], [560, 440], [620, 410], [630, 470], [560, 500], [500, 490]],
+    shape: [[500, 435], [560, 440], [620, 410], [630, 470], [560, 500], [540, 497], [500, 490]],
   },
   {
     id: 'binh-thanh',
@@ -71,11 +71,19 @@ export const AREAS: Area[] = [
     shape: [[380, 440], [450, 430], [500, 435], [500, 490], [510, 540], [440, 560], [390, 530]],
   },
   {
+    id: 'quan-3',
+    name: 'Quận 3',
+    note: 'Biệt thự Pháp cũ, hẻm cà phê và hàng me già trên đường Tú Xương.',
+    shape: [[500, 490], [540, 497], [550, 548], [510, 540]],
+    label: [536, 502],
+    short: 'Q.3',
+  },
+  {
     id: 'trung-tam',
     name: 'Quận 1',
     note: 'Đồng Khởi, phòng tranh, khách sạn và những người không muốn bị nhìn thấy.',
-    shape: [[500, 490], [560, 500], [585, 548], [600, 600], [560, 610], [510, 590], [510, 540]],
-    label: [548, 555],
+    shape: [[540, 497], [560, 500], [585, 548], [600, 600], [560, 610], [510, 590], [510, 540], [550, 548]],
+    label: [552, 568],
   },
   {
     id: 'binh-tan',
