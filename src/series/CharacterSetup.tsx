@@ -1,26 +1,24 @@
 import { useState } from 'react'
-import { ChevronLeft, ChevronRight, X } from 'lucide-react'
+import { X } from 'lucide-react'
 import { Portrait } from '@/art/Portrait'
 import { cn } from '@/lib/utils'
-import { DEFAULT_NAMES, LOOKS, ROLES, useProfile, type Gender, type Profile } from './profile'
+import { DEFAULT_NAMES, ROLES, lookOf, useProfile, type Gender, type Profile } from './profile'
 
 /**
- * The investigator's file: name, gender, job and look. Shown from the main menu,
+ * The investigator's file: name, gender and job (the job sets the outfit). Shown from the main menu,
  * and before the first case if the player has not made a character yet.
  */
 export default function CharacterSetup({ onClose, onDone }: { onClose: () => void; onDone?: () => void }) {
   const saved = useProfile()
-  const [p, setP] = useState<Profile>({ name: saved.name, gender: saved.gender, roleId: saved.roleId, look: saved.look })
-  const looks = LOOKS[p.gender]
+  const [p, setP] = useState<Profile>({ name: saved.name, gender: saved.gender, roleId: saved.roleId })
   const role = ROLES.find((r) => r.id === p.roleId) ?? ROLES[0]
 
   const setGender = (g: Gender) => {
     if (g === p.gender) return
     // Swap the default name too, unless the player typed their own.
     const name = !p.name.trim() || p.name === DEFAULT_NAMES[p.gender] ? DEFAULT_NAMES[g] : p.name
-    setP({ ...p, gender: g, name, look: 0 })
+    setP({ ...p, gender: g, name })
   }
-  const turn = (d: number) => setP({ ...p, look: (p.look + d + looks.length) % looks.length })
   const save = () => {
     saved.save({ ...p, name: p.name.trim() || DEFAULT_NAMES[p.gender] })
     onDone ? onDone() : onClose()
@@ -33,25 +31,15 @@ export default function CharacterSetup({ onClose, onDone }: { onClose: () => voi
           <X className="size-5" />
         </button>
 
-        {/* The ID card: portrait you can flip through, with the name and job under it */}
+        {/* The ID card: the job's outfit, with the name and job under it */}
         <div className="flex w-64 shrink-0 flex-col items-center gap-3">
           <p className="display self-start text-xs tracking-[0.3em] text-brass">Hồ sơ điều tra viên</p>
           <div className="document flex w-full flex-col items-center gap-2 p-4" style={{ rotate: '-1deg' }}>
-            <Portrait spec={looks[p.look % looks.length]} size={200} />
+            <Portrait key={`${p.roleId}-${p.gender}`} spec={lookOf(p.roleId, p.gender)} size={200} className="deal" />
             <p className="title text-center text-xl leading-tight">{p.name.trim() || DEFAULT_NAMES[p.gender]}</p>
             <p className="text-center font-sans text-xs text-paper-ink/70">{role.line}</p>
           </div>
-          <div className="flex items-center gap-3">
-            <button onClick={() => turn(-1)} className="rounded-full p-1.5 hover:bg-string/25" aria-label="Diện mạo trước">
-              <ChevronLeft className="size-5" />
-            </button>
-            <span className="display text-sm text-muted-foreground">
-              Diện mạo {(p.look % looks.length) + 1}/{looks.length}
-            </span>
-            <button onClick={() => turn(1)} className="rounded-full p-1.5 hover:bg-string/25" aria-label="Diện mạo sau">
-              <ChevronRight className="size-5" />
-            </button>
-          </div>
+          <p className="text-center text-xs text-muted-foreground">Trang phục đổi theo nghề bạn chọn.</p>
         </div>
 
         <div className="flex min-w-0 flex-1 flex-col gap-5">
