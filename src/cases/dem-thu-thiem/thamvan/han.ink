@@ -1,3 +1,4 @@
+VAR has_X11 = false
 VAR has_X8 = false
 VAR has_H9 = false
 
@@ -24,6 +25,10 @@ Hân ngồi ở quán cà phê nơi cô làm thêm, khuấy ly trà đào mãi k
     Hân bỏ cái muỗng xuống.
     "Trời ơi. Cái vụ tông xe trên Nguyễn Văn Hưởng là..."
     Cô không nói hết câu.
+    -> hoi
+* {has_X11} [Em có bằng B2, và từng lái chiếc Mercedes này chở Khoa.]
+    "Mấy lần ảnh say thì em lái. Tối đó em đòi lái mà ảnh giật chìa khóa, nói em lo uống đi."
+    "Em ngồi Bến Gỗ tới gần mười hai giờ, story có giờ hết đó {xchi}. Hai đứa bạn em cũng làm chứng được."
     -> hoi
 * [Cảm ơn em.]
     -> END

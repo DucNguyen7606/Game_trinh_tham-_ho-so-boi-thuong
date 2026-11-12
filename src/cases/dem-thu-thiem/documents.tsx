@@ -365,4 +365,43 @@ const X8 = () => (
   </Phone>
 )
 
-export const documents: Record<string, () => JSX.Element> = { P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, X1, X2, X3, X4, X5, X6, X7, X8 }
+const X9 = () => (
+  <Phone header="Chợ Xe Sài Gòn · Tin đăng">
+    <div className="rounded bg-white p-2">
+      <p className="font-semibold">Mercedes GLC 300 · 2021 · đen</p>
+      <p>Biển 51K-686.68, chính chủ, 38.000 km.</p>
+      <p className="text-base font-bold text-[#b23a2e]">1,75 tỷ</p>
+      <p className="text-[10px] opacity-70">Người đăng: Quang Khải · Thảo Điền</p>
+    </div>
+    <p className="text-[10px] opacity-60">Đăng 15/11 · Đẩy tin 3 lần · 0 lượt hỏi mua</p>
+    <p className="text-[10px] italic">Giá trị xe trên hợp đồng bảo hiểm: 2,1 tỷ.</p>
+  </Phone>
+)
+
+const X10 = () => (
+  <Sheet org="Phòng CSGT · Công an TP.HCM" title="Quyết định xử phạt vi phạm hành chính">
+    <Row k="Ngày" v="18/04/2022" />
+    <Row k="Đơn vị bị phạt" v="Gara Toàn Phát · Lưu Đức Toàn" />
+    <p>
+      Nhận sửa chữa xe ô tô <Mark>liên quan vụ tai nạn giao thông</Mark> mà không thông báo cho cơ quan công an theo quy định.
+    </p>
+    <Row k="Mức phạt" v="15.000.000 đ" strong />
+    <p className="text-[10px] italic">Ghi chú của An Tín: gara vẫn trong danh sách liên kết, theo dõi thêm.</p>
+    <Stamp text="Phòng CSGT" className="bottom-2 right-3" />
+    <div className="h-12" />
+  </Sheet>
+)
+
+const X11 = () => (
+  <Phone header="Facebook · Võ Ngọc Hân">
+    <p className="text-[10px] opacity-60">20/11/2025 · 21:30</p>
+    <p>"Tài xế riêng của ai kia 🙄"</p>
+    <div className="rounded bg-white p-2 text-[10px]">
+      <p>[Ảnh] Hân cầm vô lăng Mercedes, Khoa ngồi ghế phụ cười.</p>
+      <p className="opacity-70">Biển số trong gương: 51K-686.68</p>
+    </div>
+    <p className="text-[10px]">Kèm ảnh bằng lái hạng B2, cấp 03/2024.</p>
+  </Phone>
+)
+
+export const documents: Record<string, () => JSX.Element> = { P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, X1, X2, X3, X4, X5, X6, X7, X8, X9, X10, X11 }

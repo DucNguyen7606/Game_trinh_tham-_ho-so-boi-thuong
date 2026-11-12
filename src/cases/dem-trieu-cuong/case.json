@@ -243,7 +243,8 @@
           "label": "Mẩu dây trên song sắt",
           "x": 66,
           "y": 46,
-          "note": "Một vòng dây nilon xanh bị cắt đứt còn buộc ở song sắt, kiểu nút thắt dân ghe hay dùng để neo tạm."
+          "note": "Một vòng dây nilon xanh bị cắt đứt còn buộc ở song sắt, kiểu nút thắt dân ghe hay dùng để neo tạm.",
+          "clueId": "X8"
         },
         {
           "id": "kenh",
@@ -473,6 +474,24 @@
       "title": "Ảnh ghe Tư neo ở bến",
       "description": "Tư đưa ảnh con gái chụp ghe neo ở bến, có giờ trên ảnh.",
       "source": "testimony"
+    },
+    {
+      "id": "X6",
+      "title": "Nhật ký ghe cứu hộ phường",
+      "description": "Đêm 14/11, ghe cứu hộ của phường tuần tra kênh Đôi từ 01:30 tới 03:00, bật đèn xanh nháy. Ghe composite sơn cam.",
+      "source": "decoy"
+    },
+    {
+      "id": "X7",
+      "title": "Nhật rao bán 30 iPhone",
+      "description": "20/11: Nhật đăng bán 30 máy iPhone \"mới nguyên seal, rẻ hơn tiệm 15%\" trong một nhóm mua bán trên mạng.",
+      "source": "decoy"
+    },
+    {
+      "id": "X8",
+      "title": "Dây neo bị cắt ở song sắt",
+      "description": "Vòng dây nilon xanh buộc kiểu dân ghe ở song sắt cửa sổ phía kênh, bị cắt đứt chứ không phải bị giật.",
+      "source": "scene"
     }
   ],
   "envelopes": [
@@ -500,7 +519,8 @@
         "P6",
         "P7",
         "P8",
-        "P9"
+        "P9",
+        "X6"
       ]
     },
     {
@@ -510,7 +530,8 @@
       "unlockedBy": "q4",
       "documents": [
         "P10",
-        "P11"
+        "P11",
+        "X7"
       ]
     }
   ],

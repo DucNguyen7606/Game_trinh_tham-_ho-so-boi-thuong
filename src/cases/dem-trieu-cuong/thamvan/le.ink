@@ -1,3 +1,4 @@
+VAR has_X7 = false
 VAR has_X2 = false
 VAR has_P4 = false
 VAR has_H1 = false
@@ -39,6 +40,10 @@ Bà Lệ ngồi xuống, tay vẫn cầm chiếc điện thoại không ngừng 
     Bà Lệ ngồi im rất lâu.
     "Gia Hưng... cách tiệm tôi có hai dãy phố. Sáu năm tôi coi nó như con trong nhà."
     "{Xco} ghi cho đúng. Cái gì nước làm hư thì tôi nhận. Cái gì người ta lấy thì tôi đi báo công an."
+    -> hoi
+* {has_X7} [Nhật đang rao bán 30 máy điện thoại giá rẻ.]
+    "Nó buôn bán lặt vặt với bạn bè, tôi không quản nổi."
+    "Mà kho tôi không có iPhone. Tôi bán máy cho công nhân, dân miền Tây, ba bốn triệu một cái."
     -> hoi
 * [Cảm ơn chị.]
     -> END

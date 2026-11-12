@@ -1,3 +1,4 @@
+VAR has_X9 = false
 VAR has_H6 = false
 VAR has_P8 = false
 VAR has_X2 = false
@@ -26,6 +27,10 @@ Chị Trang dẫn bạn đi qua quầy thu ngân, tay cầm cuốn sổ kiểm k
     -> hoi
 * {has_X2} [Ông Mạnh nhắn đòi công ty 50 triệu.]
     "Ông Mạnh xe ôm đầu hẻm, nóng tính chứ không xấu. Sáng 9/1 ổng mang chai chua vô la ầm lên rồi đi."
+    -> hoi
+* {has_X9} [Đậu Việt gửi chị thư chào hàng ngày 12/1.]
+    "Sáng 12/1, sau lá thư tống tiền một ngày. Mấy hãng này đánh hơi nhanh lắm."
+    "Mà người của Đậu Việt chưa bao giờ đứng ở kệ Mộc An. Tối 10/1 trên camera chỉ có một người lạ."
     -> hoi
 * [Cảm ơn chị.]
     -> END

@@ -359,4 +359,34 @@ const X8 = () => (
   </div>
 )
 
-export const documents: Record<string, () => JSX.Element> = { P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, X1, X2, X3, X4, X5, X6, X7, X8 }
+const X9 = () => (
+  <Sheet org="Công ty Sữa Đậu Việt · Phòng kinh doanh" title="Thư chào hàng">
+    <Row k="Gửi" v="Hiệp Thành Mart · chị Nguyễn Thị Thu Trang" />
+    <Row k="Ngày" v="12/01/2026" strong />
+    <p>
+      Nhận được tin <Mark>Mộc An thu hồi hai lô hàng</Mark>, Đậu Việt sẵn sàng thay thế toàn bộ kệ sữa đậu nành trong 48 giờ, chiết khấu 20% cho đơn đầu tiên.
+    </p>
+    <p className="text-[10px] italic">"Khách hàng của chị xứng đáng với sản phẩm an toàn."</p>
+    <Signature name="Trưởng phòng KD" />
+  </Sheet>
+)
+
+const X10 = () => (
+  <Sheet org="Mộc An · Tổ bảo vệ" title="Sổ trực cổng chính · 11/01">
+    {[
+      ['06:00', 'Mở hộp thư cổng: trống'],
+      ['07:10', 'Anh Sang (đã nghỉ việc) đứng gần hộp thư khoảng 10 phút rồi đi'],
+      ['07:30', 'Phòng nhân sự mở cửa'],
+      ['08:15', 'Mở hộp thư: 01 phong bì không tên, chuyển lên giám đốc'],
+    ].map(([t, v]) => (
+      <div key={t} className="flex gap-3 border-b border-dotted border-black/20">
+        <span className="font-bold">{t}</span>
+        <span>{v}</span>
+      </div>
+    ))}
+    <p className="pt-1 text-[10px]">Ghi chú: thẻ ra vào của Sang đã khóa từ 17:00 ngày 7/1.</p>
+    <Signature name="Bảo vệ ca sáng" />
+  </Sheet>
+)
+
+export const documents: Record<string, () => JSX.Element> = { P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, X1, X2, X3, X4, X5, X6, X7, X8, X9, X10 }

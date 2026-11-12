@@ -179,7 +179,8 @@
           "label": "Van cấp hơi",
           "x": 52,
           "y": 24,
-          "note": "Van cấp hơi còn sáng bóng, mới thay. Tem bảo trì ghi ngày 8/1: \"Thay van kẹt\". Người ký yêu cầu: QC."
+          "note": "Van cấp hơi còn sáng bóng, mới thay. Tem bảo trì ghi ngày 8/1: \"Thay van kẹt\". Người ký yêu cầu: QC.",
+          "clueId": "X11"
         },
         {
           "id": "bang-chuyen",
@@ -329,7 +330,10 @@
     { "id": "X5", "title": "Ảnh Sang ở đám giỗ Tây Ninh", "description": "Sang đưa ảnh đám giỗ ở quê, có giờ trên ảnh.", "source": "testimony" },
     { "id": "X6", "title": "Ảnh bữa cơm nhà Thuận", "description": "Thuận đưa ảnh bữa cơm tối 10/1 với vợ con, có giờ trên ảnh.", "source": "testimony" },
     { "id": "X7", "title": "Clip chai sữa của ông Mạnh", "description": "Sáng 9/1 ông Mạnh quay cảnh mở chai sữa phồng. Soi kỹ cái nắp.", "source": "testimony" },
-    { "id": "X8", "title": "Camera kệ sữa tối 10/1", "description": "Một người áo mưa xám, nón lưỡi trai đứng trước kệ sữa từ 19:05 tới 19:14, không mua gì.", "source": "testimony" }
+    { "id": "X8", "title": "Camera kệ sữa tối 10/1", "description": "Một người áo mưa xám, nón lưỡi trai đứng trước kệ sữa từ 19:05 tới 19:14, không mua gì.", "source": "testimony" },
+    { "id": "X9", "title": "Thư chào hàng của Đậu Việt", "description": "12/1: công ty sữa Đậu Việt, đối thủ của Mộc An, gửi Hiệp Thành Mart đề nghị thay toàn bộ kệ sữa đậu nành Mộc An bằng hàng của họ, chiết khấu 20%.", "source": "decoy" },
+    { "id": "X10", "title": "Bảo vệ thấy Sang ở cổng sáng 11/1", "description": "Bảo vệ cổng nhà máy ghi: 07:10 ngày 11/1, Sang đứng gần hộp thư cổng khoảng mười phút rồi đi. Lá thư được nhận lúc 08:15.", "source": "decoy" },
+    { "id": "X11", "title": "Van hơi line 2 mới thay", "description": "Tem bảo trì ngày 8/1: \"Thay van kẹt\". Người ký yêu cầu: QC. Hai ngày sau đêm máy tụt nhiệt.", "source": "scene" }
   ],
   "envelopes": [
     {
@@ -344,14 +348,14 @@
       "number": 2,
       "title": "Giám định bổ sung",
       "unlockedBy": "q2",
-      "documents": ["P6", "P7", "P8", "P9"]
+      "documents": ["P6", "P7", "P8", "P9", "X9"]
     },
     {
       "id": "pb3",
       "number": 3,
       "title": "Từ cơ quan điều tra",
       "unlockedBy": "q4",
-      "documents": ["P10", "P11"]
+      "documents": ["P10", "P11", "X10"]
     }
   ],
   "questions": [

@@ -1,3 +1,5 @@
+VAR has_X10 = false
+VAR has_X11 = false
 VAR has_X1 = false
 VAR has_H2 = false
 VAR has_P9 = false
@@ -34,6 +36,13 @@ Sang khoanh tay, ngồi lệch ra mép ghế.
     -> hoi
 * {has_P6} [Bộ ghi nhiệt cho thấy máy tụt nhiệt hơn một tiếng.]
     "Một tiếng mười lăm phút. Sữa chạy qua máy lúc đó coi như chưa tiệt trùng. Tôi biết mà ảnh không cho dừng."
+    -> hoi
+* {has_X10} [Sáng 11/1 lúc 7:10 bảo vệ thấy anh đứng gần hộp thư cổng nhà máy.]
+    "Tôi từ Tây Ninh lên thẳng, ghé lấy sổ bảo hiểm xã hội. Phòng nhân sự 7 giờ rưỡi mới mở, tôi đứng chờ ngoài cổng vì thẻ bị khóa rồi."
+    "Tôi mà viết thư thì tôi in ở đâu? Tôi đâu còn vô được phòng nào trong đó."
+    -> hoi
+* {has_X11} [Van hơi line 2 được thay ngày 8/1.]
+    "Thay sau khi đuổi tôi một ngày. Van đó kẹt từ hơn 2 giờ đêm 6/1, tôi báo mà không ai nghe."
     -> hoi
 * [Cảm ơn anh.]
     -> END

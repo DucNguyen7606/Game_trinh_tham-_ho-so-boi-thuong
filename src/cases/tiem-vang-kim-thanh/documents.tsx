@@ -340,5 +340,45 @@ const X5 = () => (
   </Phone>
 )
 
-export const documents: Record<string, () => JSX.Element> = { P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, X1, X2, X3, X4, X5 }
+const X6 = () => (
+  <Sheet org="Két sắt điện tử Hòa Phát · Đại lý Gò Vấp" title="Phiếu bảo trì tại nhà khách">
+    <Row k="Ngày" v="25/11/2025 · 15:20" strong />
+    <Row k="Khách hàng" v="Tiệm vàng Kim Thành" />
+    <Row k="Kỹ thuật viên" v="Đinh Văn Phú" />
+    <p>Thay pin bàn phím. Khôi phục cài đặt gốc, <Mark>khách hàng tự nhập mã chủ mới</Mark>. KTV quay lưng khi khách nhập mã.</p>
+    <p className="text-[10px] italic">Bộ nhớ đóng mở giữ nguyên sau bảo trì.</p>
+    <div className="flex justify-between">
+      <Signature name="Đ. V. Phú" />
+      <Signature name="H. T. K. Loan" />
+    </div>
+  </Sheet>
+)
+
+const X7 = () => (
+  <Sheet org="Tiệm vàng Bảo Ngọc · Gò Vấp" title="Hóa đơn bán lẻ">
+    <Row k="Ngày" v="04/12/2025 · 10:05" strong />
+    <Row k="Khách" v="Trịnh Quốc Hùng" />
+    <Row k="Hàng" v="Nhẫn tròn trơn 9999 · 2 lượng" />
+    <Row k="Thành tiền" v="280.000.000 đ" strong />
+    <Row k="Thanh toán" v="Tiền mặt" />
+    <Stamp text="Bảo Ngọc · Đã thu" className="bottom-2 right-3" />
+    <div className="h-12" />
+  </Sheet>
+)
+
+const X8 = () => (
+  <Phone header="Ngân hàng số · Sổ tiết kiệm">
+    <p className="text-[9px] opacity-60">Chủ sổ: Trịnh Quốc Hùng</p>
+    <div className="rounded bg-white p-2">
+      <p className="font-semibold">Sổ 12 tháng · mở 15/11/2016</p>
+      <p>Gửi góp hằng tháng, 9 năm.</p>
+      <p>
+        Tất toán: <Mark>01/12/2025</Mark> · 285.400.000 đ
+      </p>
+    </div>
+    <p className="text-[10px]">Hùng: "Tiền để dành chín năm. Mua vàng để dành cho con, đầy tháng con bé."</p>
+  </Phone>
+)
+
+export const documents: Record<string, () => JSX.Element> = { P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, X1, X2, X3, X4, X5, X6, X7, X8 }
 

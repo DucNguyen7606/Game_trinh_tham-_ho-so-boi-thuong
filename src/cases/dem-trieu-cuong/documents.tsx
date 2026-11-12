@@ -325,4 +325,35 @@ const X5 = () => (
   </Phone>
 )
 
-export const documents: Record<string, () => JSX.Element> = { P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, X1, X2, X3, X4, X5 }
+const X6 = () => (
+  <Sheet org="UBND phường 4 · Tổ cứu hộ" title="Nhật ký ghe cứu hộ đêm 14/11">
+    <Row k="Phương tiện" v="Ghe composite, sơn cam, đèn xanh nháy" />
+    {[
+      ['23:10', 'Đưa 2 hộ dân hẻm 62 lên điểm cao'],
+      ['01:30', 'Bắt đầu tuần tra kênh Đôi'],
+      ['02:15', 'Hỗ trợ kéo xuồng chìm gần cầu Nhị Thiên Đường'],
+      ['03:00', 'Về trạm'],
+    ].map(([t, v]) => (
+      <div key={t} className="flex gap-3 border-b border-dotted border-black/20">
+        <span className="font-bold">{t}</span>
+        <span>{v}</span>
+      </div>
+    ))}
+    <p className="pt-1 text-[10px] italic">Không ghi nhận việc cập kho hay chở hàng cho tư nhân.</p>
+    <Signature name="Tổ trưởng N. V. Bé" />
+  </Sheet>
+)
+
+const X7 = () => (
+  <Phone header="Nhóm Chợ Điện Thoại Sài Gòn">
+    <p className="text-center text-[9px] opacity-50">20/11/2025 · 14:02</p>
+    <div className="rounded bg-white p-2">
+      <p className="font-semibold">Trần Minh Nhật</p>
+      <p>Thanh lý 30 máy iPhone mới nguyên seal, rẻ hơn tiệm 15%. Lấy số lượng có giá tốt, inbox.</p>
+      <p className="text-[10px] opacity-60">12 bình luận · "Hàng gì mà rẻ vậy bạn?"</p>
+    </div>
+    <p className="text-[10px] opacity-60">Khu vực: Quận 7 · Giao tận nơi</p>
+  </Phone>
+)
+
+export const documents: Record<string, () => JSX.Element> = { P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, X1, X2, X3, X4, X5, X6, X7 }

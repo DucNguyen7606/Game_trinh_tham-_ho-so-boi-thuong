@@ -1,3 +1,5 @@
+VAR has_P10 = false
+VAR has_X6 = false
 VAR has_H2 = false
 VAR has_H4 = false
 VAR has_P7 = false
@@ -48,9 +50,16 @@ Bà Loan ngồi xuống ghế đẩu sau quầy, tay mân mê sợi dây chuyề
     "Hai chục năm, ai trong khu này cũng gửi tiền cho tôi. Hụi mà bể thì tiệm Kim Thành cũng chết theo, không ai bước vô mua một chỉ."
     -> hoi
 * {has_P9} [Tháng 11 chị bán 42 lượng vàng ở tiệm Ngọc Phát, Phú Nhuận.]
+    "Tôi bán vàng cũ trả hụi cho người ta, không thiếu ai một đồng. Vàng trong tủ là hàng tôi nhập lại sau đó."
+    "Nhập lại ở đâu, hóa đơn đâu chị?" Bà Loan nói để tìm.
+    -> hoi
+* {has_P9 && has_P10} [Chị bán 42 lượng vàng thật, rồi ngày 12/11 đặt 300 nhẫn mạ khắc "KT 9999". Vàng nhập lại chị không có hóa đơn nào.]
     Bà gỡ sợi dây chuyền ra, đặt lên quầy.
     "Tôi bán vàng trả hụi cho người ta, không thiếu ai một đồng. Còn cái tủ kính trống thì làm sao tôi mở tiệm."
     "Tôi tính bảo hiểm đền lại thì tiệm sống. Thằng Tài nó chỉ làm theo lời tôi. Cô đừng làm khó nó."
+    -> hoi
+* {has_X6} [Ngày 25/11 có thợ két tới cài lại két của chị.]
+    "Đó! Ông thợ đó biết hết đường đi nước bước trong tiệm tôi. {Xco} điều tra ổng đi."
     -> hoi
 * [Cảm ơn chị.]
     -> END

@@ -1,3 +1,5 @@
+VAR has_X7 = false
+VAR has_X6 = false
 VAR has_X2 = false
 VAR has_H1 = false
 VAR has_H3 = false
@@ -28,6 +30,14 @@ Hùng ngồi bên bàn chế tác trong một tiệm nhỏ ở Gò Vấp, kính 
     -> hoi
 * {has_H8} [Trên lầu có thùng nhẫn mạ của xưởng Thành Công, Quận 5.]
     "Xưởng Thành Công chuyên làm hàng mạ cho mấy sạp đồ cưới, đồ diễn. Khắc chữ gì lên cũng được, miễn trả tiền."
+    -> hoi
+* {has_X7} [Ngày 4/12, hai ngày sau vụ cướp, anh mua 2 lượng vàng bằng tiền mặt.]
+    Hùng tháo kính lúp xuống.
+    "Mua cho con gái đầy tháng. Tiền đó tôi để dành chín năm, rút ra từ trước hôm cướp. Sổ đây." #photo:X8
+    "Mà {xco} nghĩ coi, tôi mà cướp vàng thì tôi đi mua vàng làm gì?"
+    -> hoi
+* {has_X6} [Thợ két từng tới cài lại két tiệm Kim Thành ngày 25/11.]
+    "Ông Phú hả? Ổng làm két cho nửa cái chợ Gò Vấp. Cài lại thì khách tự bấm mã, thợ phải quay lưng. Luật nghề vậy."
     -> hoi
 * [Cảm ơn anh.]
     -> END

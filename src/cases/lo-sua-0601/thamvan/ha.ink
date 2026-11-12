@@ -1,3 +1,5 @@
+VAR has_X9 = false
+VAR has_X11 = false
 VAR has_X3 = false
 VAR has_H3 = false
 VAR has_P6 = false
@@ -37,6 +39,12 @@ Bà Hà ngồi thẳng lưng, trước mặt là một chai sữa Mộc An còn 
 * {has_P10} [Thư tống tiền được in bằng máy in của phòng QC.]
     Bà Hà tháo kính, đặt xuống bàn.
     "{Xco} ghi cho đúng. Nếu là lỗi nhà máy thì tôi nhận lỗi với khách, đền cho từng người. Tôi không lấy tiền bảo hiểm của cái lỗi đó."
+    -> hoi
+* {has_X9} [Đậu Việt gửi thư xin thay kệ Mộc An ở Hiệp Thành Mart ngay sau vụ thu hồi.]
+    "Họ chờ chỗ trên kệ của tôi mấy năm nay. Nhưng gửi thư chào hàng thì ai cũng làm được, chích kim thì phải vô tận kệ."
+    -> hoi
+* {has_X11} [Van hơi line 2 được thay ngày 8/1 theo yêu cầu của phòng QC.]
+    "Tôi ký duyệt tiền thay van. Phiếu ghi 'bảo trì định kỳ', tôi không hỏi thêm."
     -> hoi
 * [Cảm ơn chị.]
     -> END
