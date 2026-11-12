@@ -220,7 +220,8 @@
           "label": "Đèn vòng livestream",
           "x": 46,
           "y": 30,
-          "note": "Đèn vòng và giá điện thoại dựng sát tủ gỗ. Ống kính chĩa thẳng vào bàn trang điểm, nửa khung hình là cửa két và bàn phím của nó."
+          "note": "Đèn vòng và giá điện thoại dựng sát tủ gỗ. Ống kính chĩa thẳng vào bàn trang điểm, nửa khung hình là cửa két và bàn phím của nó. Trên cạnh tủ dán một tờ lịch live viết tay: \"22/12 · Xả kho đồng hồ hiệu, giảm 40%.\"",
+          "clueId": "H11"
         }
       ]
     },
@@ -499,6 +500,18 @@
       "title": "Ảnh chụp livestream 12/12",
       "description": "Chị Hai chụp màn hình lúc chị Ngọc mở két trên sóng. Soi bàn tay, bàn phím và phần bình luận.",
       "source": "testimony"
+    },
+    {
+      "id": "P12",
+      "title": "Camera hầm xe B1 ngày 18/12",
+      "description": "Xe máy của Bảo vào hầm Riverlight 19:40, ra 20:15 ngày 18/12, hai đêm trước vụ trộm. Bảo nói từ tháng 10 chưa bước chân vô tòa nhà.",
+      "source": "decoy"
+    },
+    {
+      "id": "H11",
+      "title": "Lịch live \"xả kho Tết\" 22/12",
+      "description": "Tờ lịch dán cạnh đèn livestream: \"22/12 · Xả kho đồng hồ hiệu, giảm 40%\". Hai ngày sau đêm mất trộm, chị Ngọc định bán rẻ chính mấy món trong két?",
+      "source": "decoy"
     }
   ],
   "envelopes": [
@@ -526,7 +539,8 @@
         "P5",
         "P6",
         "P7",
-        "P8"
+        "P8",
+        "P12"
       ]
     },
     {
@@ -733,17 +747,18 @@
       "correctOptionId": "c",
       "requiredClues": [
         "P7",
-        "P9"
+        "P9",
+        "H10"
       ],
       "supportingClues": [
         "H6",
         "H9",
-        "H10",
         "X5"
       ],
       "hints": [
         "Thang khách không ai lên tầng 27. Nhật ký thang hàng trong phong bì 2 ghi thẻ nào?",
-        "Phong bì 3 có bảng phân thẻ kỹ thuật. Đêm đó ai cầm thẻ KT-03?"
+        "Phong bì 3 có bảng phân thẻ kỹ thuật. Đêm đó ai cầm thẻ KT-03?",
+        "Thẻ thì có thể cho người khác mượn. Vào Phòng kỹ thuật soi sổ ca trực: lúc KT-03 đi thang hàng lên tầng 27, Vũ ghi mình đang làm gì, và việc đó có thật không?"
       ]
     },
     {

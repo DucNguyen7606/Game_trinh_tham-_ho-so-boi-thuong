@@ -2,6 +2,7 @@ VAR has_H3 = false
 VAR has_H2 = false
 VAR has_P3 = false
 VAR has_P5 = false
+VAR has_P11 = false
 
 Chú Tư đứng nép ở cửa sảnh, mũ cầm tay, không chịu ngồi.
 "Tối đó tôi về, ông còn đứng cửa sổ dặn sáng mai chở đi khám tim."
@@ -29,6 +30,11 @@ Chú Tư đứng nép ở cửa sảnh, mũ cầm tay, không chịu ngồi.
     -> hoi
 * {has_P5} [Camera hẻm ghi đèn phòng làm việc tắt lúc 01:12.]
     "Ông không bao giờ thức tới giờ đó. Mà sau nửa đêm trong nhà chỉ có cậu Khoa."
+    -> hoi
+* {has_P11} [Ông Hiển viết giấy để lại cho chú phòng sau bếp và 500 triệu.]
+    Chú Tư vò cái mũ trong tay.
+    "Ông có đưa tôi coi hồi Tết năm ngoái. Tôi nói ông viết chi cho xui. Tôi đưa bản sao cho {xco} vì sợ giấu thì người ta nghi."
+    "Tối đó tôi về nhà ở Bình Thạnh. Camera hẻm quay tôi ra lúc bảy rưỡi, sáng sáu giờ hai lăm mới quay tôi vô. Chìa thì tôi có, nhưng tôi đâu có quay lại."
     -> hoi
 * [Cảm ơn chú.]
     -> END

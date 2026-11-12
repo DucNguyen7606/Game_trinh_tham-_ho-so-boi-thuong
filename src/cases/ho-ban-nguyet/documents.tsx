@@ -236,6 +236,15 @@ const Singer = ({ x, s = 1, shirt, skin = '#d9a47a', bald }: { x: number; s?: nu
   </g>
 )
 
+const P10 = () => (
+  <Phone header="Điện thoại ông Hưng · công an trích xuất">
+    <p className="text-center text-[9px] opacity-50">Lâm Khả · 14/3/2026</p>
+    <Bubble time="22:31">Ông hứa cuối tháng thì cuối tháng. Tôi không chờ thêm ngày nào</Bubble>
+    <Bubble time="23:15">Mai không có tiền thì đừng trách tôi. Nhà ông tôi biết rồi</Bubble>
+    <p className="text-center text-[9px] opacity-50">Đã xem 23:16</p>
+  </Phone>
+)
+
 const X5 = () => (
   <Phone header="Ảnh · Lâm Khả">
     <div className="overflow-hidden rounded-md">
@@ -281,4 +290,4 @@ export const JacketPhoto = () => (
   </div>
 )
 
-export const documents: Record<string, () => JSX.Element> = { P1, P2, P3, P4, P5, P6, P7, P8, P9, X1, X2, X3, X4, X5, X6 }
+export const documents: Record<string, () => JSX.Element> = { P1, P2, P3, P4, P5, P6, P7, P8, P9, X1, X2, X3, X4, X5, X6, P10 }

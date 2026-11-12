@@ -312,7 +312,8 @@
           "label": "Bồn hoa",
           "x": 28,
           "y": 86,
-          "note": "Bồn hoa dừa cạn dọc lối đi. Ai đó vứt một hộp sữa và vài đầu lọc thuốc lá, khác hiệu với loại ông Hưng hút. Bảo vệ nói tài xế công nghệ hay đứng hút ở đây."
+          "note": "Bồn hoa dừa cạn dọc lối đi, ngay dưới ban công 21.05. Ai đó vứt một hộp sữa và bốn đầu lọc thuốc Jet còn mới, khác hiệu với loại ông Hưng hút. Bảo vệ nói tài xế công nghệ hay đứng hút chờ khách ở đây.",
+          "clueId": "H12"
         }
       ]
     },
@@ -518,6 +519,18 @@
       "title": "Tin nhắn Toàn gửi Phúc lúc 22:49",
       "description": "\"Phúc, anh mượn xe đi mua đồ ăn khuya. Chìa móc ở bảng hả?\"",
       "source": "testimony"
+    },
+    {
+      "id": "P10",
+      "title": "Tin nhắn ông Khả gửi ông Hưng lúc 23:15",
+      "description": "\"Mai không có tiền thì đừng trách tôi. Nhà ông tôi biết rồi.\" Gửi gần nửa tiếng trước khi ông Hưng rơi.",
+      "source": "decoy"
+    },
+    {
+      "id": "H12",
+      "title": "Đầu lọc thuốc Jet dưới bồn hoa",
+      "description": "Bốn đầu lọc Jet còn mới vứt dưới bồn hoa, ngay dưới ban công 21.05. Ông Khả hút Jet.",
+      "source": "decoy"
     }
   ],
   "envelopes": [
@@ -543,7 +556,8 @@
       "documents": [
         "P4",
         "P5",
-        "P6"
+        "P6",
+        "P10"
       ]
     },
     {
@@ -703,15 +717,16 @@
       "correctOptionId": "b",
       "requiredClues": [
         "H11",
-        "X6"
+        "X6",
+        "P8"
       ],
       "supportingClues": [
-        "P7",
-        "P8"
+        "P7"
       ],
       "hints": [
         "Chiếc Wave đỏ đang đỗ ở đâu? Vào Văn phòng kho ở cảng nhìn ra bãi xe máy.",
-        "Hỏi Phúc về chiếc xe. Đêm đó có ai nhắn mượn không?"
+        "Hỏi Phúc về chiếc xe. Đêm đó có ai nhắn mượn không?",
+        "Hỏi mượn xe chưa chắc đã là người cầm lái. Camera cổng phụ cảng trong phong bì 3 quay người lái mặc áo gì? Ca đêm đó Phúc mặc gì?"
       ]
     },
     {

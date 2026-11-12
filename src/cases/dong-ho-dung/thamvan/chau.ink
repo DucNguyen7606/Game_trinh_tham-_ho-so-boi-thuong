@@ -4,6 +4,7 @@ VAR has_P1 = false
 VAR has_H1 = false
 VAR has_P7 = false
 VAR has_H10 = false
+VAR has_P11 = false
 
 Chị Châu ngồi thẳng lưng ở bàn nước dưới tán hoa sứ, tay cầm chặt cặp kính.
 "Ba tôi đi cầu thang đó năm mươi năm. Ba không té. {Xco} hỏi đi."
@@ -41,6 +42,10 @@ Chị Châu ngồi thẳng lưng ở bàn nước dưới tán hoa sứ, tay c�
     Chị Châu nhắm mắt lại, rất lâu.
     "Vậy là ba ra đi bên bàn vẽ, không phải dưới chân cầu thang. Cảm ơn {xco}. Ít nhất ba đã ở chỗ ba thương nhất."
     "Còn người kéo ba ra đó, {xco} đừng để nó được một đồng."
+    -> hoi
+* {has_P11} [Ba chị dặn để lại cho chú Tư phòng sau bếp và 500 triệu.]
+    "Tôi biết. Ba nói với tôi từ năm ngoái, tôi chịu liền. Chú Tư ở với ba lâu hơn tôi."
+    "Chú Tư mà muốn hại ba thì có ba mươi năm để làm, đâu cần đợi tới đêm đó."
     -> hoi
 * [Cảm ơn chị.]
     -> END

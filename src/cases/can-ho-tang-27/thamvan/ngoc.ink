@@ -5,6 +5,8 @@ VAR has_X2 = false
 VAR has_P5 = false
 VAR has_P8 = false
 VAR has_P10 = false
+VAR has_H11 = false
+VAR has_P12 = false
 
 Chị Ngọc ngồi xuống sofa, điện thoại úp trên đùi, mắt còn đỏ.
 "Tôi bay đi có một đêm. Một đêm thôi. {Xchi} giúp tôi giải quyết lẹ, tôi còn phải live bán hàng Tết."
@@ -40,6 +42,14 @@ Chị Ngọc ngồi xuống sofa, điện thoại úp trên đùi, mắt còn đ
     Chị Ngọc nhìn tờ biên bản rất lâu.
     "Vũ... cậu kỹ thuật hay lên sửa đồ cho tôi. Cậu còn vô live của tôi bình luận hoài."
     "Tôi khoe đồ quen rồi, chưa bao giờ nghĩ có người ngồi đếm từng ngón tay tôi bấm."
+    -> hoi
+* {has_H11} [Chị định live "xả kho đồng hồ hiệu, giảm 40%" ngày 22/12. Là mấy chiếc trong két?]
+    "Đúng. Hai chiếc đó là món chốt của buổi live Tết. Ba khách đã đặt cọc, tôi còn giữ tin nhắn."
+    "Giờ mất rồi, tôi phải hoàn cọc, còn bị chửi lừa đảo. {Xchi} nghĩ coi, tự dựng vụ trộm hai ngày trước buổi bán lớn nhất năm thì tôi được gì?"
+    -> hoi
+* {has_P12} [Ngày 18/12 anh Bảo có tới tòa nhà.]
+    Chị Ngọc sững người.
+    "Ông Sang có gọi báo có thùng đồ của anh Bảo gửi ở quầy. Tôi chưa mở, tôi không muốn thấy."
     -> hoi
 * [Cảm ơn chị.]
     -> END

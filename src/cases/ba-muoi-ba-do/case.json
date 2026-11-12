@@ -217,7 +217,8 @@
           "label": "Kệ hàng bên cạnh",
           "x": 84,
           "y": 50,
-          "note": "Vắc xin, insulin, mẫu xét nghiệm của các công ty khác. Không lô nào báo vượt nhiệt đêm đó."
+          "note": "Vắc xin, insulin, mẫu xét nghiệm của các công ty khác, không lô nào báo vượt nhiệt đêm đó. Mép kệ sát pallet Minh Tâm dán một tờ giấy nhớ viết tay, ký tên Linh.",
+          "clueId": "H10"
         }
       ]
     },
@@ -484,6 +485,18 @@
       "title": "Tin nhắn giữa Tùng và \"anh Hưng\"",
       "description": "Tùng cho xem tin nhắn từ 12/11 đến 17/11.",
       "source": "testimony"
+    },
+    {
+      "id": "H10",
+      "title": "Giấy nhớ của Linh dán trên kệ",
+      "description": "\"Anh Tùng để riêng thùng 1 ra mép kệ giùm em. Sáng 17 em tới đọc nhiệt kế sớm, đừng báo chị Thư.\" Chữ Linh, đề ngày 16/11.",
+      "source": "decoy"
+    },
+    {
+      "id": "P12",
+      "title": "Phiếu báo lỗi máy nén phòng lạnh 3",
+      "description": "13/11: máy nén số 2 của phòng lạnh 3 báo lỗi, hẹn thợ thay ngày 20/11. Đêm 15/11 phòng lạnh chạy bằng một máy nén.",
+      "source": "decoy"
     }
   ],
   "envelopes": [
@@ -509,7 +522,8 @@
       "documents": [
         "P5",
         "P6",
-        "P7"
+        "P7",
+        "P12"
       ]
     },
     {
@@ -649,15 +663,16 @@
       "correctOptionId": "a",
       "requiredClues": [
         "P5",
-        "H6"
+        "H6",
+        "H4"
       ],
       "supportingClues": [
-        "H4",
         "H1"
       ],
       "hints": [
         "Phong bì 2 có nhật ký cửa phòng lạnh 3. Thẻ nào mở cửa lúc 23:52 và 02:41?",
-        "Soi Bảng phân ca trong Phòng nghỉ. Đêm 15/11 ai trực kho lạnh, ai giữ thẻ?"
+        "Soi Bảng phân ca trong Phòng nghỉ. Đêm 15/11 ai trực kho lạnh, ai giữ thẻ?",
+        "Thẻ thì có thể đưa người khác cầm. Vào Phòng nghỉ lục tủ đồ: trong áo của ai còn dính thứ chỉ có trên thùng thuốc từ Đức?"
       ]
     },
     {

@@ -235,6 +235,26 @@ const X4 = () => (
   </Phone>
 )
 
+const P12 = () => (
+  <Sheet org="Ban quản lý Riverlight · Camera hầm xe máy B1" title="Trích xuất biển số ngày 18/12">
+    {[
+      ['19:40', '59X3-271.48', 'Vào', 'Khách · Huỳnh Gia Bảo'],
+      ['19:52', '59T1-604.15', 'Vào', 'Cư dân 14.02'],
+      ['20:15', '59X3-271.48', 'Ra', 'Khách · Huỳnh Gia Bảo'],
+    ].map(([t, b, k, w]) => (
+      <div key={t} className="grid grid-cols-[2.6rem_5.4rem_1.8rem_1fr] gap-x-2 border-b border-dotted border-black/20 font-mono text-[10px]">
+        <span>{t}</span>
+        <span>{b.startsWith('59X3') ? <Mark>{b}</Mark> : b}</span>
+        <span>{k}</span>
+        <span>{w}</span>
+      </div>
+    ))}
+    <p className="pt-1 text-[10px]">Khách gửi xe phải đăng ký ở quầy lễ tân sảnh. Trích theo yêu cầu của An Tín.</p>
+    <p className="text-[10px] italic">Hai đêm trước vụ mất trộm.</p>
+    <Stamp text="BQL Riverlight" className="bottom-2 right-3" />
+  </Sheet>
+)
+
 // ---------------------------------------------------------------------------
 // Photos a suspect shows on their phone during an interview.
 
@@ -352,4 +372,4 @@ const X6 = () => (
   </Phone>
 )
 
-export const documents: Record<string, () => JSX.Element> = { P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, X1, X2, X3, X4, X5, X6 }
+export const documents: Record<string, () => JSX.Element> = { P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, X1, X2, X3, X4, X5, X6, P12 }

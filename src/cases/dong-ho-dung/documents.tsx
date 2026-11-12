@@ -266,6 +266,19 @@ const X4 = () => (
   </Sheet>
 )
 
+const P11 = () => (
+  <Sheet org="Giấy viết tay · chú Tư nộp bản sao" title="Dặn lại">
+    <div className="space-y-1.5 text-[12px] italic leading-snug text-[#1d3a6a]" style={{ fontFamily: 'Bitter, serif' }}>
+      <p>Tôi, Trần Đình Hiển, dặn lại các con cháu:</p>
+      <p>
+        Nếu tôi mất, <Mark>chú Phạm Văn Tư được ở căn phòng sau bếp trọn đời</Mark> và nhận 500 triệu đồng, coi như trả ơn ba mươi năm chú lo cho nhà này.
+      </p>
+      <p className="text-right">Hiển, 02.2024</p>
+    </div>
+    <Row k="Chìa cổng, cửa sảnh" v="ông Hiển, chú Tư" />
+  </Sheet>
+)
+
 // ---------------------------------------------------------------------------
 // Photos and screens a suspect shows during an interview.
 
@@ -350,4 +363,4 @@ const X6 = () => (
   </Phone>
 )
 
-export const documents: Record<string, () => JSX.Element> = { P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, X1, X2, X3, X4, X5, X6 }
+export const documents: Record<string, () => JSX.Element> = { P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, X1, X2, X3, X4, X5, X6, P11 }

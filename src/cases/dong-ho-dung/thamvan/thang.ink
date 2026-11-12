@@ -1,6 +1,7 @@
 VAR has_X2 = false
 VAR has_H7 = false
 VAR has_P5 = false
+VAR has_H11 = false
 
 Thắng ngồi xuống ghế đá, đặt cặp da lên đùi, cười xởi lởi.
 "Tôi gõ cửa, chứ tôi đâu có phá cửa. {Xco} hỏi gì cứ hỏi."
@@ -22,6 +23,11 @@ Thắng ngồi xuống ghế đá, đặt cặp da lên đùi, cười xởi l�
     -> hoi
 * {has_P5} [Camera hẻm ghi anh đứng ở cổng từ 21:35 tới 21:41.]
     "Sáu phút, bấm chuông ba lần. Tôi còn thấy bóng ông ngồi bên cửa sổ, gục đầu xuống bàn. Tôi tưởng ông ngủ gật nên mai mới quay lại."
+    -> hoi
+* {has_H11} [Dưới gốc hoa sứ sát tường rào có dấu giày tây. Anh đi giày tây.]
+    Thắng nhìn xuống đôi giày của mình rồi bật cười.
+    "Sáng 14 nghe có chuyện, tôi quay lại, đứng sát tường coi công an làm việc. Cả chục người giẫm ở đó."
+    "Mà {xco} nhìn kỹ đi, dấu giày nằm lên trên lớp hoa rụng. Hoa đó rụng sau đêm 13. Tối 13 tôi đứng ngoài cổng, camera hẻm quay đủ sáu phút."
     -> hoi
 * [Cảm ơn anh.]
     -> END

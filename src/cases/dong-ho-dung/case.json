@@ -324,7 +324,8 @@
           "label": "Cây hoa sứ",
           "x": 20,
           "y": 36,
-          "note": "Cây hoa sứ già gần trăm tuổi. Hoa rụng trắng sân, chưa ai quét từ hôm có chuyện."
+          "note": "Cây hoa sứ già gần trăm tuổi. Hoa rụng trắng sân, chưa ai quét từ hôm có chuyện. Sát chân tường rào có mấy dấu giày tây đế cứng, in lún lên trên lớp hoa rụng.",
+          "clueId": "H11"
         },
         {
           "id": "bang-quan",
@@ -529,6 +530,18 @@
       "title": "Tin nhắn chưa đọc của Thắng lúc 21:37",
       "description": "\"Tôi đang đứng ở cổng. Đèn phòng ông còn sáng mà.\" Ông Hiển không bao giờ đọc được.",
       "source": "testimony"
+    },
+    {
+      "id": "P11",
+      "title": "Giấy ông Hiển dặn lại cho chú Tư",
+      "description": "Viết tay năm 2024: nếu ông mất, chú Tư được ở phòng sau bếp trọn đời và nhận 500 triệu. Chú Tư giữ chìa cổng và cửa sảnh.",
+      "source": "decoy"
+    },
+    {
+      "id": "H11",
+      "title": "Dấu giày tây dưới gốc hoa sứ",
+      "description": "Dấu giày tây cỡ lớn sát chân tường rào, ngay dưới gốc hoa sứ. Thắng đi giày tây.",
+      "source": "decoy"
     }
   ],
   "envelopes": [
@@ -555,7 +568,8 @@
       "documents": [
         "P5",
         "P6",
-        "P7"
+        "P7",
+        "P11"
       ]
     },
     {
@@ -754,15 +768,16 @@
       "correctOptionId": "b",
       "requiredClues": [
         "H2",
-        "H8"
+        "H8",
+        "P10"
       ],
       "supportingClues": [
-        "P10",
         "P3"
       ],
       "hints": [
         "Soi thanh chặn thảm trên cầu thang. Nếu ốc bị bật ra vì vấp, ren gỗ và mấy con ốc sẽ ra sao?",
-        "Hai con ốc biến mất đi đâu? Vào Nhà phụ của Khoa mà tìm."
+        "Hai con ốc biến mất đi đâu? Vào Nhà phụ của Khoa mà tìm.",
+        "Ốc đồng thì nhà trăm tuổi nào cũng có. Phong bì 3 có phiếu giám định hai con ốc: chúng có đúng là ốc của thanh chặn thảm không?"
       ]
     },
     {
