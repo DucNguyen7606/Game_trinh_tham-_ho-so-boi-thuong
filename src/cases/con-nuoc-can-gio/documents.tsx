@@ -16,7 +16,7 @@ const P1 = () => (
     <Row k="Quyền lợi" v="Tử vong: 100% số tiền BH" />
     <Row k="Ngày hiệu lực" v="12/05/2025" strong />
     <Row k="Người thụ hưởng" v="Phạm Thị Hồng (vợ)" strong />
-    <p className="pt-1 text-[10px] italic">Điều 9: An Tín chỉ từ chối chi trả khi người được bảo hiểm tự tử trong 2 năm đầu, hoặc chết do lỗi cố ý của người thụ hưởng.</p>
+    <p className="pt-1 text-[10px] italic">Điều 9: Chỉ từ chối khi tự tử trong 2 năm đầu, hoặc người thụ hưởng cố ý gây ra cái chết.</p>
     <Signature name="T. V. Lực" />
     <Stamp text="An Tín · Đã duyệt" className="bottom-2 right-24" />
   </Sheet>
