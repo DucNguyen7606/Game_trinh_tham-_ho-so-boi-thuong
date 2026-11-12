@@ -266,7 +266,16 @@ function FlowerBed() {
       {[220, 260].map((x) => (
         <rect key={x} x={x} y="200" width="26" height="8" fill="#f2f2ee" transform={`rotate(20 ${x} 204)`} />
       ))}
-      <Label x={200} y={280} t="hiệu thuốc khác · tài xế hay đứng đây" />
+      {/* Four fresh Jet butts: the noise card H12. */}
+      {[[290, 228, -15], [312, 236, 30], [330, 224, 5], [300, 244, 60]].map(([x, y, r]) => (
+        <g key={`${x}-${y}`} transform={`rotate(${r} ${x} ${y})`}>
+          <rect x={x - 12} y={y - 3} width="18" height="6" fill="#f2f2ee" stroke={LINE} strokeWidth="1" />
+          <rect x={x + 6} y={y - 3} width="7" height="6" fill="#d9a24a" stroke={LINE} strokeWidth="1" />
+        </g>
+      ))}
+      <rect x="276" y="252" width="70" height="14" fill="#1b1b1f" opacity="0.6" />
+      <text x="311" y="263" textAnchor="middle" fontSize="10" fill="#f3e4c4" fontFamily={mono}>JET × 4</text>
+      <Label x={200} y={284} t="đầu lọc Jet còn mới · tài xế hay đứng đây" />
     </g>
   )
 }

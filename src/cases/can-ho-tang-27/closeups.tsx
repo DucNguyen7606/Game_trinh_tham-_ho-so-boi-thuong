@@ -90,6 +90,16 @@ function RingLight() {
       <rect x="270" y="80" width="40" height="76" rx="6" fill={ink.night} {...O} />
       <path d="M270,118 L140,210" stroke={accent.amber} strokeWidth="2" strokeDasharray="6 6" />
       <Label x={290} y={250} t="ống kính chĩa vào bàn phím két" c={ink.night} />
+      {/* Hand-written live schedule taped on the cabinet: the noise card H11. */}
+      <g transform="rotate(-4 85 60)">
+        <rect x="18" y="18" width="134" height="88" fill="#fbf3d6" stroke={LINE} strokeWidth="1.5" />
+        <rect x="70" y="12" width="30" height="12" fill="#e8d9a8" opacity="0.8" />
+        <text x="26" y="40" fontSize="10" fill={ink.night} fontFamily={mono}>LỊCH LIVE</text>
+        <text x="26" y="58" fontSize="10" fill="#b23a2e" fontFamily={mono}>22/12 · XẢ KHO</text>
+        <text x="26" y="74" fontSize="9" fill={ink.night} fontFamily={mono}>đồng hồ hiệu</text>
+        <text x="26" y="90" fontSize="11" fill="#b23a2e" fontFamily={mono} fontWeight="bold">-40%</text>
+        <circle cx="122" cy="84" r="13" fill="none" stroke="#b23a2e" strokeWidth="1.5" />
+      </g>
     </g>
   )
 }
