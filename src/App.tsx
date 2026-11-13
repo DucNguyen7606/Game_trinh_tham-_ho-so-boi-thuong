@@ -52,7 +52,6 @@ export default function App() {
         <div className="ml-auto flex items-center gap-2 text-sm">
           <AudioControls />
           <Badge variant="outline">Ngày {day}/{data.days}</Badge>
-          <Badge variant="outline">Hỏi: {left.talk}/{data.limitsPerDay.talk}</Badge>
           <Badge variant="outline">Khám: {left.explore}/{data.limitsPerDay.explore}</Badge>
           <Badge variant="outline">Uy tín: {reputation}</Badge>
           <Badge variant="outline">

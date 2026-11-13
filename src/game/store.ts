@@ -1,12 +1,27 @@
 import { create } from 'zustand'
 import type { ActionKind, CaseData, DayLimits } from './types'
 import { cases } from './caseLoader'
+import { playerOf, useProfile } from '@/series/profile'
 
 export type Screen = 'menu' | 'desk' | 'scene' | 'casefile' | 'board' | 'interrogation' | 'verdict' | 'gallery'
 
 export interface BoardAnswer {
   optionId?: string
   clueIds: string[]
+}
+
+/** One line of an interview as it was shown: the suspect's words, narration, or the player's question. */
+export interface TranscriptLine {
+  text: string
+  fromPlayer?: boolean
+  /** Clue id of a photo the suspect showed with this line. */
+  photo?: string
+}
+
+/** One interview with a suspect, kept so the player can reread it from the desk. */
+export interface TranscriptSession {
+  day: number
+  lines: TranscriptLine[]
 }
 
 interface GameState {
@@ -22,6 +37,22 @@ interface GameState {
   readDocuments: string[]
   solvedQuestions: string[]
   answers: Record<string, BoardAnswer>
+  /** Per question, the cards that were linked when the player last pressed Kiểm tra. Their strings turn green or red. */
+  checkedLinks: Record<string, string[]>
+  transcripts: Record<string, TranscriptSession[]>
+  /** How many hints of each question the player has seen. */
+  hintLevel: Record<string, number>
+  /**
+   * Per question, what the player had proven when they took their last hint: the cards
+   * whose strings had turned green, and how many checks they had made. The next hint
+   * opens only once the board moves past this (see hintGate).
+   */
+  hintBasis: Record<string, { matched: string[]; checks: number }>
+  /** How many times the player pressed Kiểm tra on each question. */
+  checkCount: Record<string, number>
+  /** Where the player left each card on the board, and the board's pan and zoom, kept across tabs. */
+  boardLayout: Record<string, { x: number; y: number }>
+  boardViewport?: { x: number; y: number; zoom: number }
   activeSuspect?: string
   log: string[]
 
@@ -38,6 +69,12 @@ interface GameState {
   unlinkClue: (questionId: string, clueId: string) => void
   checkAnswer: (questionId: string) => 'solved' | 'wrong' | 'missing-clues'
   startInterrogation: (suspectId: string) => boolean
+  /** Replaces the lines of the suspect's latest interview (the one in progress). */
+  saveTranscript: (suspectId: string, lines: TranscriptLine[]) => void
+  /** Opens the question's next hint if hintGate allows it. Returns whether one opened. */
+  showHint: (questionId: string) => boolean
+  saveBoardLayout: (positions: Record<string, { x: number; y: number }>) => void
+  saveBoardViewport: (viewport: { x: number; y: number; zoom: number }) => void
   isEnvelopeOpen: (envelopeId: string) => boolean
   /**
    * A question appears on the board only once every document it needs is reachable,
@@ -45,10 +82,15 @@ interface GameState {
    */
   isQuestionOpen: (questionId: string) => boolean
   reset: () => void
+  /** Opens a chapter's case from the start, dropping any progress in the current one. */
+  startCase: (caseId: string) => void
 }
 
+/** The case as the chosen investigator plays it: their name, job and portrait in place of the case's default. */
+const withPlayer = (data: CaseData): CaseData => ({ ...data, player: playerOf(useProfile.getState()) })
+
 const initial = (data: CaseData) => ({
-  data,
+  data: withPlayer(data),
   screen: 'desk' as Screen,
   day: 1,
   left: { ...data.limitsPerDay },
@@ -59,6 +101,13 @@ const initial = (data: CaseData) => ({
   readDocuments: [] as string[],
   solvedQuestions: [] as string[],
   answers: {} as Record<string, BoardAnswer>,
+  checkedLinks: {} as Record<string, string[]>,
+  transcripts: {} as Record<string, TranscriptSession[]>,
+  hintLevel: {} as Record<string, number>,
+  hintBasis: {} as Record<string, { matched: string[]; checks: number }>,
+  checkCount: {} as Record<string, number>,
+  boardLayout: {} as Record<string, { x: number; y: number }>,
+  boardViewport: undefined as { x: number; y: number; zoom: number } | undefined,
   activeSuspect: undefined as string | undefined,
   log: [] as string[],
 })
@@ -92,6 +141,39 @@ export function questionOrder(data: CaseData, solvedInOrder: string[]) {
   return order
 }
 
+export type HintGate = 'available' | 'locked' | 'none-left'
+
+/** Cards on a question whose string turned green at the last check: required or supporting clues. */
+export function matchedClues(data: CaseData, checkedLinks: Record<string, string[]>, questionId: string) {
+  const q = data.questions.find((x) => x.id === questionId)
+  if (!q) return []
+  const relevant = [...q.requiredClues, ...(q.supportingClues ?? [])]
+  return (checkedLinks[questionId] ?? []).filter((c) => relevant.includes(c))
+}
+
+/**
+ * One hint per step of progress. The first hint of a question is free; each further one opens
+ * only after a check shows a new green string (a card that matches or relates to the question)
+ * since the last hint. If every such card was already proven when the hint was taken, there is
+ * nothing left to find, so one more check (a new attempt at the answer) opens the next hint.
+ */
+export function hintGate(
+  st: Pick<GameState, 'data' | 'hintLevel' | 'hintBasis' | 'checkedLinks' | 'checkCount'>,
+  questionId: string,
+): HintGate {
+  const q = st.data.questions.find((x) => x.id === questionId)
+  const level = st.hintLevel[questionId] ?? 0
+  if (!q || level >= (q.hints?.length ?? 0)) return 'none-left'
+  const basis = st.hintBasis[questionId]
+  if (level === 0 || !basis) return 'available'
+  const matched = matchedClues(st.data, st.checkedLinks, questionId)
+  if (matched.some((c) => !basis.matched.includes(c))) return 'available'
+  const relevant = [...q.requiredClues, ...(q.supportingClues ?? [])]
+  const nothingLeft = relevant.every((c) => basis.matched.includes(c))
+  if (nothingLeft && (st.checkCount[questionId] ?? 0) > basis.checks) return 'available'
+  return 'locked'
+}
+
 const addUnique = (list: string[], id: string) => (list.includes(id) ? list : [...list, id])
 
 export const useGame = create<GameState>((set, get) => ({
@@ -109,15 +191,12 @@ export const useGame = create<GameState>((set, get) => ({
   },
 
   endDay: () => {
-    const { day, data, reputation } = get()
+    const { day, data } = get()
     if (day >= data.days) {
       set({ screen: 'verdict' })
       return
     }
-    // Low reputation with the boss costs one interview the next day.
-    const penalty = reputation <= 1 ? 1 : 0
-    const limits = data.limitsPerDay
-    set({ day: day + 1, left: { ...limits, talk: Math.max(0, limits.talk - penalty) } })
+    set({ day: day + 1, left: { ...data.limitsPerDay } })
   },
 
   visitZone: (zoneId) => {
@@ -163,6 +242,10 @@ export const useGame = create<GameState>((set, get) => ({
     const q = data.questions.find((x) => x.id === questionId)
     const a = answers[questionId]
     if (!q || !a) return 'wrong'
+    set((s) => ({
+      checkedLinks: { ...s.checkedLinks, [questionId]: [...a.clueIds] },
+      checkCount: { ...s.checkCount, [questionId]: (s.checkCount[questionId] ?? 0) + 1 },
+    }))
     const hasAllClues = q.requiredClues.every((c) => a.clueIds.includes(c))
     if (a.optionId === q.correctOptionId && hasAllClues) {
       set({ solvedQuestions: addUnique(solvedQuestions, questionId) })
@@ -176,14 +259,48 @@ export const useGame = create<GameState>((set, get) => ({
 
   startInterrogation: (suspectId) => {
     const s = get().data.suspects.find((x) => x.id === suspectId)
-    if (!get().spendAction('talk', `Hỏi ${s?.name ?? suspectId}`)) return false
-    set({ activeSuspect: suspectId, screen: 'interrogation' })
+    // Interviews are not rationed: the desk hides a suspect once they have nothing new to say.
+    set((st) => ({ log: [...st.log, `Ngày ${st.day}: Hỏi ${s?.name ?? suspectId}`] }))
+    set((st) => ({
+      activeSuspect: suspectId,
+      screen: 'interrogation',
+      transcripts: { ...st.transcripts, [suspectId]: [...(st.transcripts[suspectId] ?? []), { day: st.day, lines: [] }] },
+    }))
     return true
   },
+
+  saveBoardLayout: (positions) => set((st) => ({ boardLayout: { ...st.boardLayout, ...positions } })),
+  saveBoardViewport: (viewport) => set({ boardViewport: viewport }),
+
+  showHint: (questionId) => {
+    const st = get()
+    if (hintGate(st, questionId) !== 'available') return false
+    set({
+      hintLevel: { ...st.hintLevel, [questionId]: (st.hintLevel[questionId] ?? 0) + 1 },
+      hintBasis: {
+        ...st.hintBasis,
+        [questionId]: { matched: matchedClues(st.data, st.checkedLinks, questionId), checks: st.checkCount[questionId] ?? 0 },
+      },
+    })
+    return true
+  },
+
+  saveTranscript: (suspectId, lines) =>
+    set((st) => {
+      const sessions = st.transcripts[suspectId] ?? []
+      if (sessions.length === 0) return {}
+      const last = { ...sessions[sessions.length - 1], lines }
+      return { transcripts: { ...st.transcripts, [suspectId]: [...sessions.slice(0, -1), last] } }
+    }),
 
   isEnvelopeOpen: (envelopeId) => envelopeOpen(get().data, envelopeId, get().solvedQuestions),
 
   isQuestionOpen: (questionId) => questionOpen(get().data, questionId, get().solvedQuestions),
 
   reset: () => set(initial(get().data)),
+
+  startCase: (caseId) => set(initial(cases.find((c) => c.id === caseId) ?? get().data)),
 }))
+
+// A new or edited character takes over the case in progress too.
+useProfile.subscribe(() => useGame.setState((s) => ({ data: withPlayer(s.data) })))

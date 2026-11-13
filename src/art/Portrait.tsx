@@ -6,8 +6,8 @@ import { accent, clothColors, hairColors, ink, shade, skinTones } from './palett
 // mouth) so each person's mood reads at a glance.
 
 export type HairStyle = 'short' | 'side-part' | 'long' | 'bun' | 'bald' | 'cap' | 'buzz'
-export type Outfit = 'shirt' | 'polo' | 'tank' | 'uniform' | 'blouse'
-export type Accessory = 'none' | 'glasses' | 'bandage' | 'gold-chain' | 'earrings' | 'pen'
+export type Outfit = 'shirt' | 'polo' | 'tank' | 'uniform' | 'blouse' | 'suit' | 'trench' | 'jacket'
+export type Accessory = 'none' | 'glasses' | 'bandage' | 'gold-chain' | 'earrings' | 'pen' | 'tie' | 'lanyard' | 'fedora'
 export type Mood = 'neutral' | 'smile' | 'stern' | 'worried' | 'angry'
 
 export interface PortraitSpec {
@@ -48,6 +48,7 @@ export function Portrait({
   className,
   live = false,
   talking = false,
+  bare = false,
 }: {
   spec: PortraitSpec
   size?: number
@@ -57,6 +58,8 @@ export function Portrait({
   live?: boolean
   /** Move the mouth, raise the brows and gesture with a hand while a line is being spoken. */
   talking?: boolean
+  /** Leave out the coloured backdrop, to stand the figure inside a scene. */
+  bare?: boolean
 }) {
   const uid = useId()
   const faceClip = `${uid}-face`, glow = `${uid}-glow`, frame = `${uid}-frame`, body = `${uid}-body`
@@ -122,11 +125,15 @@ export function Portrait({
         </clipPath>
       </defs>
       <g clipPath={`url(#${frame})`}>
-        <rect width="240" height="320" fill={bg} />
-        <rect width="240" height="320" fill={`url(#${glow})`} />
-        {/* Soft geometric shapes in the backdrop */}
-        <circle cx="196" cy="70" r="70" fill={shade(bg, 0.12)} opacity="0.6" />
-        <circle cx="30" cy="290" r="90" fill={shade(bg, -0.15)} opacity="0.6" />
+        {!bare && (
+          <>
+            <rect width="240" height="320" fill={bg} />
+            <rect width="240" height="320" fill={`url(#${glow})`} />
+            {/* Soft geometric shapes in the backdrop */}
+            <circle cx="196" cy="70" r="70" fill={shade(bg, 0.12)} opacity="0.6" />
+            <circle cx="30" cy="290" r="90" fill={shade(bg, -0.15)} opacity="0.6" />
+          </>
+        )}
 
         <g transform={zoom === 1 ? undefined : `translate(${120 * (1 - zoom)} ${320 * (1 - zoom)}) scale(${zoom})`}>
         <g className={live ? 'pt-breathe' : undefined}>
@@ -168,8 +175,60 @@ export function Portrait({
               </>
             )}
             {spec.outfit === 'shirt' && <rect x={CX - 52} y="252" width="26" height="24" rx="2" fill="none" stroke={clothShadow} strokeWidth="2" />}
+            {/* Suit: white shirt in the V, wide lapels, optional tie */}
+            {spec.outfit === 'suit' && (
+              <g stroke={LINE} strokeWidth="2" strokeLinejoin="round">
+                <path d={`M${CX - 22},200 L${CX},288 L${CX + 22},200 Z`} fill={clothColors.white} strokeWidth="1.5" />
+                {acc.has('tie') && (
+                  <>
+                    <path d={`M${CX - 7},206 L${CX + 7},206 L${CX + 5},217 L${CX - 5},217 Z`} fill={shade(accent.red, -0.15)} />
+                    <path d={`M${CX - 5},217 L${CX + 5},217 L${CX + 9},280 L${CX},292 L${CX - 9},280 Z`} fill={accent.red} />
+                  </>
+                )}
+                <path d={`M${CX - 22},202 L${CX - 46},214 L${CX - 32},238 L${CX - 42},248 L${CX - 2},294 Z`} fill={shade(cloth, 0.14)} />
+                <path d={`M${CX + 22},202 L${CX + 46},214 L${CX + 32},238 L${CX + 42},248 L${CX + 2},294 Z`} fill={shade(cloth, 0.14)} />
+                <circle cx={CX + 2} cy="308" r="3.2" fill={shade(cloth, -0.4)} strokeWidth="1" />
+              </g>
+            )}
+            {/* Trench coat: dark turtleneck, wide lapels, double row of buttons, belt */}
+            {spec.outfit === 'trench' && (
+              <g stroke={LINE} strokeWidth="2" strokeLinejoin="round">
+                <path d={`M${CX - 22},200 L${CX},262 L${CX + 22},200 Z`} fill={clothColors.charcoal} strokeWidth="1.5" />
+                <path d={`M${CX - 22},202 L${CX - 58},218 L${CX - 42},246 L${CX - 52},258 L${CX - 4},268 Z`} fill={shade(cloth, 0.12)} />
+                <path d={`M${CX + 22},202 L${CX + 58},218 L${CX + 42},246 L${CX + 52},258 L${CX + 4},268 Z`} fill={shade(cloth, 0.12)} />
+                {[282, 304].flatMap((y) => [-20, 20].map((x) => <circle key={`${x}${y}`} cx={CX + x} cy={y} r="3.4" fill={shade(cloth, -0.45)} strokeWidth="1" />))}
+                <rect x={CX - W - 12} y="314" width={W * 2 + 24} height="12" fill={shade(cloth, -0.18)} />
+                <rect x={CX - 12} y="312" width="24" height="16" rx="2" fill="none" stroke={shade(cloth, -0.5)} strokeWidth="2.5" />
+              </g>
+            )}
+            {/* Field jacket: open collar over a light shirt, zip, chest pockets */}
+            {spec.outfit === 'jacket' && (
+              <g stroke={LINE} strokeWidth="2" strokeLinejoin="round">
+                <path d={`M${CX - 20},202 L${CX},252 L${CX + 20},202 Z`} fill={clothColors.white} strokeWidth="1.5" />
+                <line x1={CX + 2} y1="252" x2={CX + 2} y2="330" stroke={shade(cloth, -0.5)} strokeWidth="3" />
+                {[-1, 1].map((sd) => (
+                  <g key={sd}>
+                    <rect x={sd < 0 ? CX - 56 : CX + 24} y="262" width="32" height="28" rx="2" fill={shade(cloth, -0.08)} strokeWidth="1.5" />
+                    <path d={`M${sd < 0 ? CX - 58 : CX + 22},260 h36 v9 h-36 Z`} fill={shade(cloth, 0.08)} strokeWidth="1.5" />
+                  </g>
+                ))}
+              </g>
+            )}
           </g>
           {/* Collars */}
+          {/* Popped trench collar, and the broad collar of a field jacket */}
+          {spec.outfit === 'trench' && (
+            <g fill={shade(cloth, 0.06)} stroke={LINE} strokeWidth="2" strokeLinejoin="round">
+              <path d={`M${CX - 18},204 L${CX - 26},182 L${CX - 46},196 L${CX - 42},218 Z`} />
+              <path d={`M${CX + 18},204 L${CX + 26},182 L${CX + 46},196 L${CX + 42},218 Z`} />
+            </g>
+          )}
+          {spec.outfit === 'jacket' && (
+            <g fill={shade(cloth, 0.12)} stroke={LINE} strokeWidth="2" strokeLinejoin="round">
+              <path d={`M${CX - 20},200 L${CX - 2},250 L${CX - 18},256 L${CX - 44},214 Z`} />
+              <path d={`M${CX + 20},200 L${CX + 2},250 L${CX + 18},256 L${CX + 44},214 Z`} />
+            </g>
+          )}
           {(spec.outfit === 'shirt' || spec.outfit === 'uniform') && (
             <g fill={shade(cloth, 0.08)} stroke={LINE} strokeWidth="2" strokeLinejoin="round">
               <path d={`M${CX - 20},202 L${CX},228 L${CX - 10},240 L${CX - 30},212 Z`} />
@@ -180,6 +239,16 @@ export function Portrait({
             <g fill={shade(cloth, 0.1)} stroke={LINE} strokeWidth="2" strokeLinejoin="round">
               <path d={`M${CX - 20},202 Q${CX - 8},222 ${CX},224 L${CX - 6},232 Q${CX - 22},224 ${CX - 30},210 Z`} />
               <path d={`M${CX + 20},202 Q${CX + 8},222 ${CX},224 L${CX + 6},232 Q${CX + 22},224 ${CX + 30},210 Z`} />
+            </g>
+          )}
+          {/* Staff ID on a lanyard */}
+          {acc.has('lanyard') && (
+            <g strokeLinejoin="round">
+              <path d={`M${CX - 14},210 L${CX - 6},268 M${CX + 14},210 L${CX + 6},268`} stroke={accent.teal} strokeWidth="3.5" fill="none" />
+              <rect x={CX - 15} y="266" width="30" height="38" rx="3" fill="#f6efe0" stroke={LINE} strokeWidth="1.8" />
+              <rect x={CX - 10} y="272" width="20" height="5" fill={accent.teal} />
+              <rect x={CX - 7} y="281" width="14" height="13" rx="1" fill={shade(skin, -0.1)} />
+              <path d={`M${CX - 9},299 h18`} stroke={LINE} strokeWidth="1.2" />
             </g>
           )}
           {acc.has('gold-chain') && <path d={`M${CX - 20},210 Q${CX},240 ${CX + 20},210`} fill="none" stroke={accent.gold} strokeWidth="3" strokeLinecap="round" />}
@@ -268,6 +337,14 @@ export function Portrait({
             </g>
           )}
 
+          {/* Fedora over the hair */}
+          {acc.has('fedora') && (
+            <g stroke={LINE} strokeWidth="2" strokeLinejoin="round">
+              <path d={`M${L - 4},104 C${L - 6},64 ${CX - 14},50 ${CX},58 C${CX + 14},50 ${R + 6},64 ${R + 4},104 Z`} fill="#4a3a2e" />
+              <path d={`M${L - 3},92 Q${CX},86 ${R + 3},92 L${R + 4},104 Q${CX},98 ${L - 4},104 Z`} fill={shade(accent.red, -0.35)} />
+              <path d={`M${L - 30},108 Q${CX},90 ${R + 30},108 Q${R + 10},118 ${CX},114 Q${L - 10},118 ${L - 30},108 Z`} fill="#3a2d24" />
+            </g>
+          )}
           {acc.has('glasses') && (
             <g fill="#fff" fillOpacity="0.12" stroke={LINE} strokeWidth="2.6">
               <rect x={CX - 29} y="125" width="24" height="18" rx="5" />

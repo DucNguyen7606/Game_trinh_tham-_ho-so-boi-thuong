@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react'
 import { ChevronLeft, ChevronRight, CheckCircle2, CircleHelp, RotateCcw } from 'lucide-react'
 import { questionOrder, useGame } from '@/game/store'
-import { getReconstruction, getVerdictPreview } from '@/game/caseLoader'
+import { getEpilogue, getReconstruction, getVerdictPreview } from '@/game/caseLoader'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 import type { CaseData, ReconstructionPanel } from '@/game/types'
 
-// Ending rules for this case. When there are more cases, move this into the case JSON.
+/** First ending rule in the case JSON that the picks satisfy. */
 function pickEnding(data: CaseData, picks: Record<string, string>) {
   const ok = (slot: string) => data.verdict.find((v) => v.id === slot)?.correctOptionId === picks[slot]
-  if (picks.decision === 'pay') return 'paid'
-  if (ok('fraud') && ok('arson')) return 'full'
-  if (ok('fraud') && picks.arson === 'thinh') return 'half'
-  return 'wrong'
+  const rule = data.endingRules.find(
+    (r) => Object.entries(r.picks ?? {}).every(([slot, opt]) => picks[slot] === opt) && (r.correct ?? []).every(ok),
+  )
+  return rule?.ending ?? data.endings[data.endings.length - 1].id
 }
 
 export default function VerdictScreen() {
@@ -34,10 +34,23 @@ export default function VerdictScreen() {
 
   if (ending) {
     return (
-      <div className="mx-auto max-w-2xl p-10">
+      <div className="mx-auto h-full max-w-5xl overflow-auto p-10">
         <p className="text-sm text-muted-foreground">Kết thúc</p>
         <h2 className="title text-3xl text-amber">{ending.title}</h2>
-        <p className="mt-4">{ending.text}</p>
+        <p className="mt-4 max-w-2xl">{ending.text}</p>
+        {/* What became of everyone, one picture each. */}
+        <div className="mt-8 grid grid-cols-2 gap-5 lg:grid-cols-3">
+          {getEpilogue(data.id, ending.id).map((p, i) => (
+            <figure
+              key={p.id}
+              className="document p-2 pb-3 shadow-[0_10px_24px_rgb(0_0_0/0.45)] [animation:fadeIn_.6s_ease_both]"
+              style={{ animationDelay: `${0.15 + i * 0.25}s`, rotate: `${[-1.2, 0.8, -0.6, 1.1, -0.9][i % 5]}deg` }}
+            >
+              <p.Art />
+              <figcaption className="mt-2 px-1 text-xs leading-snug">{p.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
         <p className="mt-4 text-sm text-muted-foreground">
           Bạn đã giải {solvedQuestions.length}/{data.questions.length} câu trên bàn suy luận.
         </p>

@@ -1,0 +1,922 @@
+{
+  "id": "can-ho-tang-27",
+  "title": "Hồ sơ bồi thường số 2112",
+  "intro": "Sáng 21/12, chị Lâm Bảo Ngọc bay từ Hà Nội về căn hộ 27.08 chung cư Riverlight, Bình Thạnh, thì thấy két sắt trong phòng ngủ mở toang. Hai chiếc đồng hồ và một bộ trang sức kim cương biến mất, tổng 3,2 tỷ đồng. Cửa không bị phá, két không bị cạy, và chị đang nợ ngân hàng. Bạn có 10 ngày để đề xuất chi trả hay từ chối. Mỗi ngày khám được 1 khu hiện trường. Hỏi chuyện thì không giới hạn.",
+  "player": {
+    "name": "Lê Thu Hạnh",
+    "role": "Chuyên viên giám định bồi thường, Bảo hiểm An Tín",
+    "portrait": {
+      "skin": 0,
+      "hair": "bun",
+      "hairColor": "black",
+      "build": "normal",
+      "outfit": "shirt",
+      "outfitColor": "navy",
+      "age": "young",
+      "backdrop": "teal"
+    }
+  },
+  "photoDate": "22 12 '25",
+  "days": 10,
+  "limitsPerDay": {
+    "talk": 2,
+    "explore": 1
+  },
+  "suspects": [
+    {
+      "id": "ngoc",
+      "name": "Lâm Bảo Ngọc",
+      "age": 34,
+      "role": "Chủ căn hộ 27.08, người đòi bồi thường",
+      "interrogation": "ngoc",
+      "portrait": {
+        "skin": 0,
+        "hair": "long",
+        "hairColor": "brown",
+        "build": "thin",
+        "outfit": "blouse",
+        "outfitColor": "maroon",
+        "accessory": [
+          "earrings"
+        ],
+        "age": "young",
+        "backdrop": "teal",
+        "mood": "worried"
+      },
+      "profile": {
+        "traits": [
+          "Nhanh nhảu",
+          "Thích phô diễn",
+          "Liều"
+        ],
+        "habit": "Livestream bán đồng hồ và trang sức mỗi tối từ phòng ngủ, đèn vòng đặt ngay cạnh két sắt.",
+        "relation": "Mua căn hộ tầng 27 hai năm trước. Chia tay bạn trai hồi tháng 10.",
+        "quote": "\"Tôi bay đi có một đêm. Một đêm thôi.\"",
+        "note": "Đang nợ ngân hàng 1,2 tỷ quá hạn. Tháng 11 mua thêm bảo hiểm tài sản giá trị cao. Một tháng sau thì mất trộm."
+      }
+    },
+    {
+      "id": "vu",
+      "name": "Trịnh Hoàng Vũ",
+      "age": 31,
+      "role": "Kỹ thuật viên ban quản lý tòa nhà",
+      "interrogation": "vu",
+      "portrait": {
+        "skin": 2,
+        "hair": "cap",
+        "hairColor": "black",
+        "build": "normal",
+        "outfit": "uniform",
+        "outfitColor": "navy",
+        "accessory": [
+          "pen"
+        ],
+        "age": "young",
+        "backdrop": "night",
+        "mood": "neutral"
+      },
+      "profile": {
+        "traits": [
+          "Khéo tay",
+          "Lễ phép",
+          "Ít nói"
+        ],
+        "habit": "Đêm trực thì ngồi phòng kỹ thuật dưới hầm B2, điện thoại lúc nào cũng mở livestream.",
+        "relation": "Làm kỹ thuật ở Riverlight ba năm. Sửa điện nước, khóa cửa cho cư dân.",
+        "quote": "\"Có việc thì em lên, không có thì em ngồi dưới hầm.\"",
+        "note": "Trực ca đêm 20/12. Đầu tháng từng lên căn 27.08 thay pin khóa điện tử."
+      }
+    },
+    {
+      "id": "bao",
+      "name": "Huỳnh Gia Bảo",
+      "age": 36,
+      "role": "Bạn trai cũ của chị Ngọc",
+      "interrogation": "bao",
+      "portrait": {
+        "skin": 1,
+        "hair": "side-part",
+        "hairColor": "black",
+        "build": "normal",
+        "outfit": "shirt",
+        "outfitColor": "charcoal",
+        "accessory": [
+          "gold-chain"
+        ],
+        "age": "mid",
+        "backdrop": "rust",
+        "mood": "smile"
+      },
+      "profile": {
+        "traits": [
+          "Bốc đồng",
+          "Hay say",
+          "Sĩ diện"
+        ],
+        "habit": "Đêm nào cũng ngồi bar của bạn ở Quận 1 tới gần sáng.",
+        "relation": "Sống chung với chị Ngọc ở căn 27.08 gần hai năm, dọn đi tháng 10.",
+        "quote": "\"Tôi mà muốn lấy thì tôi lấy từ hồi còn ở chung.\"",
+        "note": "Ngày 9/12 nhắn chị Ngọc rằng anh vẫn nhớ mã két."
+      }
+    },
+    {
+      "id": "hai",
+      "name": "Nguyễn Thị Hai (chị Hai)",
+      "age": 52,
+      "role": "Giúp việc theo giờ",
+      "interrogation": "hai",
+      "portrait": {
+        "skin": 2,
+        "hair": "bun",
+        "hairColor": "gray",
+        "build": "heavy",
+        "outfit": "shirt",
+        "outfitColor": "khaki",
+        "age": "old",
+        "backdrop": "amber",
+        "mood": "smile"
+      },
+      "profile": {
+        "traits": [
+          "Chịu khó",
+          "Thật thà",
+          "Mê coi live"
+        ],
+        "habit": "Sáng nào cũng lên dọn ba tiếng, tối về Gò Vấp coi chị Ngọc livestream.",
+        "relation": "Làm cho chị Ngọc hai năm. Có vân tay mở cửa căn hộ.",
+        "quote": "\"Cô Ngọc dễ thương lắm, chỉ có cái tật khoe.\"",
+        "note": "Người duy nhất ngoài chị Ngọc mở được cửa căn hộ bằng vân tay."
+      }
+    },
+    {
+      "id": "sang",
+      "name": "Lương Văn Sang",
+      "age": 58,
+      "role": "Bảo vệ ca đêm ở sảnh",
+      "interrogation": "sang",
+      "portrait": {
+        "skin": 3,
+        "hair": "buzz",
+        "hairColor": "gray",
+        "build": "normal",
+        "outfit": "uniform",
+        "outfitColor": "olive",
+        "age": "old",
+        "backdrop": "night",
+        "mood": "stern"
+      },
+      "profile": {
+        "traits": [
+          "Cẩn thận",
+          "Hay ngủ gật",
+          "Thẳng tính"
+        ],
+        "habit": "Ngồi bàn sảnh từ 22 giờ tới 6 giờ, trước mặt là dãy màn hình camera.",
+        "relation": "Bảo vệ Riverlight từ ngày tòa nhà mở cửa.",
+        "quote": "\"Qua sảnh này thì không ai lọt khỏi mắt tôi.\"",
+        "note": "Khẳng định đêm 20/12 không ai lạ vào tòa nhà."
+      }
+    }
+  ],
+  "zones": [
+    {
+      "id": "phong-ngu",
+      "name": "Phòng ngủ và két sắt",
+      "description": "Phòng ngủ kiêm phòng livestream. Két sắt âm trong tủ gỗ, cửa két còn mở hé, đèn vòng vẫn dựng bên cạnh.",
+      "hotspots": [
+        {
+          "id": "ket",
+          "label": "Cửa két sắt",
+          "x": 30,
+          "y": 70,
+          "note": "Cửa két dày, mép sơn không một vết trầy. Ổ chìa cơ khẩn cấp phía dưới còn nguyên tem niêm bạc của hãng. Két không bị cạy, không bị khoan: nó được mở như bình thường.",
+          "clueId": "H2"
+        },
+        {
+          "id": "man-hinh-ket",
+          "label": "Màn hình két",
+          "x": 25,
+          "y": 51,
+          "note": "Bạn bấm nút xem lịch sử. \"Lần mở gần nhất: 21/12 02:19 · nhập mã 1 lần · đúng.\" Lần mở trước đó: 20/12 11:07.",
+          "clueId": "H1"
+        },
+        {
+          "id": "so-bao-hanh",
+          "label": "Sổ bảo hành két",
+          "x": 81,
+          "y": 54,
+          "note": "Cuốn sổ nhỏ trên bàn trang điểm. Trang cuối có dòng viết tay: \"Đổi mã 10/12, sau tin nhắn của B.\" Mã cũ trước đó dùng từ năm 2023.",
+          "clueId": "H3"
+        },
+        {
+          "id": "hop-dong-ho",
+          "label": "Hộp đựng đồng hồ",
+          "x": 56,
+          "y": 76,
+          "note": "Hộp da ba ngăn nằm trên giường, cả ba ngăn trống. Tủ quần áo, ngăn kéo, bàn trang điểm đều gọn gàng. Người lấy biết chính xác đồ nằm ở đâu."
+        },
+        {
+          "id": "den-live",
+          "label": "Đèn vòng livestream",
+          "x": 46,
+          "y": 30,
+          "note": "Đèn vòng và giá điện thoại dựng sát tủ gỗ. Ống kính chĩa thẳng vào bàn trang điểm, nửa khung hình là cửa két và bàn phím của nó. Trên cạnh tủ dán một tờ lịch live viết tay: \"22/12 · Xả kho đồng hồ hiệu, giảm 40%.\"",
+          "clueId": "H11"
+        }
+      ]
+    },
+    {
+      "id": "phong-khach",
+      "name": "Phòng khách và ban công",
+      "description": "Phòng khách nhìn ra sông Sài Gòn qua vách kính. Cửa chính dùng khóa điện tử vân tay kèm thẻ từ.",
+      "hotspots": [
+        {
+          "id": "khoa-cua",
+          "label": "Khóa điện tử cửa chính",
+          "x": 12,
+          "y": 50,
+          "note": "Mặt khóa sạch, không vết nạy, chốt vẫn chạy êm. Mặt trong dán tem \"BQL Riverlight · Bảo trì 06/12\". Khóa mở được bằng vân tay, mã số hoặc thẻ từ.",
+          "clueId": "H4"
+        },
+        {
+          "id": "ban-cong",
+          "label": "Cửa ban công",
+          "x": 80,
+          "y": 48,
+          "note": "Cửa kính lùa chốt từ bên trong. Lan can ban công phủ một lớp bụi mịn, không dấu tay, không dấu dây. Tầng 27, hai bên là tường trơn, không ban công nào kề sát.",
+          "clueId": "H5"
+        },
+        {
+          "id": "ban-tra",
+          "label": "Bàn trà",
+          "x": 50,
+          "y": 76,
+          "note": "Hộp hàng chờ giao, sổ ghi đơn livestream, một phong bì của ngân hàng đã bóc. Không có gì bị xới tung."
+        },
+        {
+          "id": "khung-anh",
+          "label": "Khung ảnh úp mặt",
+          "x": 34,
+          "y": 40,
+          "note": "Trên kệ, một khung ảnh bị úp xuống: chị Ngọc và anh Bảo ở Đà Lạt. Bụi phủ lên mặt sau, nó đã nằm úp như vậy từ lâu."
+        }
+      ]
+    },
+    {
+      "id": "hanh-lang",
+      "name": "Hành lang tầng 27",
+      "description": "Hành lang trải thảm xanh, mười căn hộ hai bên. Cuối hành lang là thang khách và cửa thang hàng dành cho nhân viên.",
+      "hotspots": [
+        {
+          "id": "tham",
+          "label": "Dấu giày trên thảm",
+          "x": 50,
+          "y": 84,
+          "note": "Trên thảm xanh có một hàng dấu giày đế răng cưa, đi từ cửa thang hàng tới cửa 27.08 rồi quay lại. Bảng lịch vệ sinh ghi: \"Hút bụi hành lang 22:00 hằng ngày.\" Dấu này in sau 22 giờ đêm 20/12.",
+          "clueId": "H6"
+        },
+        {
+          "id": "camera",
+          "label": "Camera hành lang",
+          "x": 70,
+          "y": 14,
+          "note": "Camera bị xoay lệch, ống kính ngước lên trần. Ốc giá đỡ có vết tua vít mới, sáng bóng. Muốn với tới phải có thang hoặc ghế cao.",
+          "clueId": "H7"
+        },
+        {
+          "id": "thang-hang",
+          "label": "Cửa thang hàng",
+          "x": 40,
+          "y": 54,
+          "note": "Biển ghi: \"Thang hàng · Chỉ dành cho nhân viên · Quẹt thẻ.\" Cạnh cửa có một chiếc thang nhôm gấp của bên kỹ thuật dựng sẵn."
+        },
+        {
+          "id": "thang-khach",
+          "label": "Thang khách",
+          "x": 60,
+          "y": 54,
+          "note": "Thang khách có camera trong buồng thang. Ban quản lý nói đêm đó không ai đi thang khách lên tầng 27."
+        }
+      ]
+    },
+    {
+      "id": "phong-ky-thuat",
+      "name": "Phòng kỹ thuật hầm B2",
+      "description": "Căn phòng ồn tiếng máy bơm dưới hầm B2. Bàn làm việc, tủ đồ nhân viên và tủ điều khiển bơm nước.",
+      "hotspots": [
+        {
+          "id": "may-ghi-the",
+          "label": "Máy ghi thẻ từ",
+          "x": 30,
+          "y": 56,
+          "note": "Máy ghi thẻ cho khóa căn hộ, cạnh đó là hộp thẻ trắng in \"20 thẻ\". Bạn đếm: còn 19. Sổ xuất thẻ không ghi tờ nào được phát ra.",
+          "clueId": "H8"
+        },
+        {
+          "id": "giay",
+          "label": "Giày bảo hộ",
+          "x": 72,
+          "y": 82,
+          "note": "Đôi giày bảo hộ dưới tủ đồ có dòng bút lông \"VŨ\". Đế răng cưa, trong kẽ đế còn kẹt mấy sợi thảm xanh.",
+          "clueId": "H9"
+        },
+        {
+          "id": "so-ca",
+          "label": "Sổ ca trực và tủ bơm",
+          "x": 50,
+          "y": 36,
+          "note": "Sổ ca đêm 20/12, nét chữ của Vũ: \"02:00–02:40 kiểm tra bơm nước B2.\" Ngay bên cạnh, màn hình tủ điều khiển bơm ghi lần mở tủ gần nhất: 20/12 17:05. Cả đêm không ai mở tủ.",
+          "clueId": "H10"
+        },
+        {
+          "id": "bang-the",
+          "label": "Bảng móc thẻ thang hàng",
+          "x": 92,
+          "y": 30,
+          "note": "Ba móc treo thẻ thang hàng: KT-01, KT-02, KT-03. Móc KT-03 trống, ghi chú bên dưới: \"Thẻ ca đêm, người trực giữ.\""
+        }
+      ]
+    }
+  ],
+  "clues": [
+    {
+      "id": "H1",
+      "title": "Két mở lúc 02:19, đúng mã lần đầu",
+      "description": "Lịch sử két: mở 21/12 02:19, nhập mã 1 lần, đúng. Lần mở trước: 20/12 11:07.",
+      "source": "scene"
+    },
+    {
+      "id": "H2",
+      "title": "Két nguyên vẹn",
+      "description": "Không trầy, không khoan. Ổ chìa cơ khẩn cấp còn nguyên tem niêm của hãng.",
+      "source": "scene"
+    },
+    {
+      "id": "H3",
+      "title": "Mã két đổi ngày 10/12",
+      "description": "Sổ bảo hành: \"Đổi mã 10/12, sau tin nhắn của B.\"",
+      "source": "scene"
+    },
+    {
+      "id": "H4",
+      "title": "Khóa cửa nguyên, tem bảo trì 06/12",
+      "description": "Không vết nạy. Tem BQL Riverlight bảo trì ngày 06/12. Khóa nhận vân tay, mã số và thẻ từ.",
+      "source": "scene"
+    },
+    {
+      "id": "H5",
+      "title": "Ban công chốt trong, bụi nguyên",
+      "description": "Cửa ban công chốt từ trong, bụi trên lan can không dấu tay. Tầng 27, không ban công kề sát.",
+      "source": "scene"
+    },
+    {
+      "id": "H6",
+      "title": "Dấu giày đế răng cưa trên thảm",
+      "description": "Từ cửa thang hàng tới cửa 27.08 và quay lại. Thảm được hút bụi lúc 22:00.",
+      "source": "scene"
+    },
+    {
+      "id": "H7",
+      "title": "Camera hành lang bị xoay lên trần",
+      "description": "Ốc giá đỡ có vết tua vít mới. Phải có thang mới với tới.",
+      "source": "scene"
+    },
+    {
+      "id": "H8",
+      "title": "Hộp thẻ trắng thiếu một thẻ",
+      "description": "Hộp 20 thẻ còn 19, sổ xuất thẻ không ghi thẻ nào. Cạnh máy ghi thẻ cho khóa căn hộ.",
+      "source": "scene"
+    },
+    {
+      "id": "H9",
+      "title": "Giày bảo hộ của Vũ dính sợi thảm xanh",
+      "description": "Đế răng cưa, trong kẽ đế kẹt sợi thảm xanh.",
+      "source": "scene"
+    },
+    {
+      "id": "H10",
+      "title": "Sổ ca ghi kiểm tra bơm, tủ bơm không ai mở",
+      "description": "Vũ ghi \"02:00–02:40 kiểm tra bơm\". Tủ bơm mở lần cuối 20/12 17:05.",
+      "source": "scene"
+    },
+    {
+      "id": "P1",
+      "title": "Hợp đồng bảo hiểm nhà và tài sản giá trị cao",
+      "description": "Bảo hiểm trộm cắp có dấu hiệu đột nhập, hoặc kẻ trộm dùng chìa, thẻ, mã có được trái phép. Loại trừ: người nhà, người giúp việc lấy. Không có điều khoản giảm trừ vì để lộ mã.",
+      "source": "file"
+    },
+    {
+      "id": "P2",
+      "title": "Đơn yêu cầu bồi thường",
+      "description": "Rolex Daytona 1,1 tỷ, Patek Philippe Aquanaut 1,4 tỷ, bộ trang sức kim cương 0,7 tỷ. Tổng 3,2 tỷ.",
+      "source": "file"
+    },
+    {
+      "id": "P3",
+      "title": "Vé máy bay và xác nhận khách sạn",
+      "description": "20/12 bay SGN–HAN 16:40. Ở khách sạn Hà Nội 19:20 đến 05:10. 21/12 bay HAN–SGN 06:05, hạ cánh 08:15.",
+      "source": "file"
+    },
+    {
+      "id": "P4",
+      "title": "Biên bản công an phường",
+      "description": "Cửa chính, két, ban công không dấu hiệu cạy phá. Ghi chú: \"người lấy có mã hoặc có chìa\".",
+      "source": "file"
+    },
+    {
+      "id": "P5",
+      "title": "Nhật ký khóa cửa 27.08",
+      "description": "Hãng khóa trích xuất: 21/12 02:14 thẻ #09 mở cửa, 02:28 đóng. Thẻ #09 được thêm vào khóa ngày 06/12 lúc 15:42. Vân tay của Bảo bị xóa 15/10.",
+      "source": "file"
+    },
+    {
+      "id": "P6",
+      "title": "Phiếu bảo trì 06/12",
+      "description": "KTV Trịnh Hoàng Vũ thay pin khóa căn 27.08 từ 15:30 đến 16:10. Người ký nhận: Nguyễn Thị Hai.",
+      "source": "file"
+    },
+    {
+      "id": "P7",
+      "title": "Nhật ký thẻ thang máy đêm 20–21/12",
+      "description": "Thang khách: không ai lên tầng 27 từ 23:00 đến 09:00. Thang hàng: thẻ KT-03 lên tầng 27 lúc 02:09, xuống B2 lúc 02:31.",
+      "source": "file"
+    },
+    {
+      "id": "P8",
+      "title": "Hóa đơn và giấy giám định đồng hồ",
+      "description": "Patek mua 15/11, giám định 17/11 theo yêu cầu của An Tín. Rolex Daytona số máy 7Y3K2109.",
+      "source": "file"
+    },
+    {
+      "id": "P9",
+      "title": "Bảng phân thẻ kỹ thuật",
+      "description": "KT-03: thẻ ca đêm. Ca đêm 20/12: Trịnh Hoàng Vũ ký nhận lúc 21:55.",
+      "source": "file"
+    },
+    {
+      "id": "P10",
+      "title": "Biên bản tiệm đồng hồ cũ Minh Quang",
+      "description": "23/12, tiệm ở Lê Văn Sỹ, Tân Bình mua một Rolex Daytona số máy 7Y3K2109 giá 650 triệu. Người bán: Trịnh Hoàng Vũ, có bản sao CCCD.",
+      "source": "file"
+    },
+    {
+      "id": "P11",
+      "title": "Tin nhắn đòi nợ của app vay",
+      "description": "Vũ nợ app vay 310 triệu, bị nhắn đòi từ tháng 11. Ngày 24/12 tất toán toàn bộ.",
+      "source": "file"
+    },
+    {
+      "id": "X1",
+      "title": "Thư nhắc nợ của ngân hàng",
+      "description": "Khoản vay kinh doanh 1,2 tỷ của chị Ngọc quá hạn 45 ngày.",
+      "source": "decoy"
+    },
+    {
+      "id": "X2",
+      "title": "Phụ lục bảo hiểm tài sản giá trị cao",
+      "description": "18/11: chị Ngọc mua thêm bảo hiểm 3,2 tỷ cho đồng hồ và trang sức. Một tháng sau thì mất trộm.",
+      "source": "decoy"
+    },
+    {
+      "id": "X4",
+      "title": "Tin nhắn của Bảo ngày 9/12",
+      "description": "\"Anh vẫn nhớ mã két của em đó.\"",
+      "source": "decoy"
+    },
+    {
+      "id": "X3",
+      "title": "Livestream trưa 20/12",
+      "description": "11:05, chị Ngọc cất từng chiếc đồng hồ vào két trước mặt người xem, rồi ra sân bay.",
+      "source": "testimony"
+    },
+    {
+      "id": "X5",
+      "title": "Ảnh Bảo ở bar lúc 02:10",
+      "description": "Bảo và bạn bè ở bar Quận 1, ảnh có giờ trên máy.",
+      "source": "testimony"
+    },
+    {
+      "id": "X6",
+      "title": "Ảnh chụp livestream 12/12",
+      "description": "Chị Hai chụp màn hình lúc chị Ngọc mở két trên sóng. Soi bàn tay, bàn phím và phần bình luận.",
+      "source": "testimony"
+    },
+    {
+      "id": "P12",
+      "title": "Camera hầm xe B1 ngày 18/12",
+      "description": "Xe máy của Bảo vào hầm Riverlight 19:40, ra 20:15 ngày 18/12, hai đêm trước vụ trộm. Bảo nói từ tháng 10 chưa bước chân vô tòa nhà.",
+      "source": "decoy"
+    },
+    {
+      "id": "H11",
+      "title": "Lịch live \"xả kho Tết\" 22/12",
+      "description": "Tờ lịch dán cạnh đèn livestream: \"22/12 · Xả kho đồng hồ hiệu, giảm 40%\". Hai ngày sau đêm mất trộm, chị Ngọc định bán rẻ chính mấy món trong két?",
+      "source": "decoy"
+    }
+  ],
+  "envelopes": [
+    {
+      "id": "pb1",
+      "number": 1,
+      "title": "Hồ sơ yêu cầu bồi thường",
+      "unlockedBy": null,
+      "documents": [
+        "P1",
+        "P2",
+        "P3",
+        "P4",
+        "X1",
+        "X2",
+        "X4"
+      ]
+    },
+    {
+      "id": "pb2",
+      "number": 2,
+      "title": "Nhật ký điện tử của tòa nhà",
+      "unlockedBy": "q2",
+      "documents": [
+        "P5",
+        "P6",
+        "P7",
+        "P8",
+        "P12"
+      ]
+    },
+    {
+      "id": "pb3",
+      "number": 3,
+      "title": "Thẻ ca đêm và chiếc Rolex",
+      "unlockedBy": "q4",
+      "documents": [
+        "P9",
+        "P10",
+        "P11"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "number": 1,
+      "prompt": "Đồ trong két mất lúc nào?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Trước 13:00 ngày 20/12, khi chị Ngọc còn ở nhà"
+        },
+        {
+          "id": "b",
+          "text": "Đêm 21/12, khi chị Ngọc đang ở Hà Nội"
+        },
+        {
+          "id": "c",
+          "text": "Sáng 21/12, sau khi chị Ngọc về tới nhà"
+        }
+      ],
+      "correctOptionId": "b",
+      "requiredClues": [
+        "X3",
+        "H1"
+      ],
+      "supportingClues": [
+        "P3"
+      ],
+      "hints": [
+        "Hỏi chị Ngọc lần cuối chị thấy đồng hồ trong két là khi nào. Chị có đưa ra bằng chứng gì không?",
+        "Vào Phòng ngủ soi màn hình két. Két được mở lần cuối lúc mấy giờ, và lúc đó chị Ngọc ở đâu?"
+      ]
+    },
+    {
+      "id": "q2",
+      "number": 2,
+      "prompt": "Két được mở bằng cách nào?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Bị cạy hoặc khoan"
+        },
+        {
+          "id": "b",
+          "text": "Bằng chìa cơ khẩn cấp"
+        },
+        {
+          "id": "c",
+          "text": "Bấm đúng mã ngay lần đầu"
+        }
+      ],
+      "correctOptionId": "c",
+      "requiredClues": [
+        "H2",
+        "P4"
+      ],
+      "supportingClues": [
+        "H1"
+      ],
+      "hints": [
+        "Soi Cửa két sắt: có vết cạy không, tem niêm ở ổ chìa cơ còn hay mất?",
+        "Biên bản công an trong phong bì 1 ghi két không bị phá. Vậy người mở biết mã. Màn hình két còn cho biết họ nhập mấy lần."
+      ]
+    },
+    {
+      "id": "q3",
+      "number": 3,
+      "prompt": "Kẻ trộm vào căn hộ bằng đường nào?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Phá khóa cửa chính"
+        },
+        {
+          "id": "b",
+          "text": "Leo qua ban công"
+        },
+        {
+          "id": "c",
+          "text": "Mở cửa chính bằng thẻ từ #09"
+        },
+        {
+          "id": "d",
+          "text": "Dùng vân tay của chị Hai"
+        }
+      ],
+      "correctOptionId": "c",
+      "requiredClues": [
+        "P5",
+        "H5"
+      ],
+      "supportingClues": [
+        "H4",
+        "P4"
+      ],
+      "hints": [
+        "Ra Phòng khách soi cửa ban công. Có ai leo vào từ đó được không?",
+        "Phong bì 2 có nhật ký khóa cửa. Đêm 21/12, cửa được mở bằng gì, lúc mấy giờ?"
+      ]
+    },
+    {
+      "id": "q4",
+      "number": 4,
+      "prompt": "Thẻ #09 được cài vào khóa khi nào?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Từ lúc lắp khóa năm 2023"
+        },
+        {
+          "id": "b",
+          "text": "Do anh Bảo cài trước khi dọn đi"
+        },
+        {
+          "id": "c",
+          "text": "Chiều 06/12, trong lúc thay pin khóa"
+        }
+      ],
+      "correctOptionId": "c",
+      "requiredClues": [
+        "P5",
+        "P6"
+      ],
+      "supportingClues": [
+        "H4",
+        "H8"
+      ],
+      "hints": [
+        "Nhật ký khóa ghi thẻ #09 được thêm vào ngày nào, lúc mấy giờ?",
+        "Đặt giờ đó cạnh Phiếu bảo trì 06/12 trong phong bì 2. Ai đang cầm cái khóa lúc ấy?"
+      ]
+    },
+    {
+      "id": "q5",
+      "number": 5,
+      "prompt": "Kẻ trộm biết mã két nhờ đâu?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Anh Bảo nhớ mã từ hồi ở chung"
+        },
+        {
+          "id": "b",
+          "text": "Chị Hai lén nhìn chị Ngọc bấm"
+        },
+        {
+          "id": "c",
+          "text": "Lộ trên sóng livestream sau khi đổi mã"
+        },
+        {
+          "id": "d",
+          "text": "Chị Ngọc tự đưa mã cho người lấy"
+        }
+      ],
+      "correctOptionId": "c",
+      "requiredClues": [
+        "H3",
+        "X6"
+      ],
+      "supportingClues": [
+        "X4",
+        "P11"
+      ],
+      "hints": [
+        "Soi Sổ bảo hành két ở Phòng ngủ. Mã hiện tại có từ ngày nào? Ai đã rời căn hộ trước ngày đó?",
+        "Hỏi chị Hai có biết mã két không. Tấm ảnh chị đưa ra chụp gì, và trong phần bình luận có ai?"
+      ]
+    },
+    {
+      "id": "q6",
+      "number": 6,
+      "prompt": "Ai lên tầng 27 lúc 2 giờ sáng ngày 21/12?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Huỳnh Gia Bảo"
+        },
+        {
+          "id": "b",
+          "text": "Lương Văn Sang"
+        },
+        {
+          "id": "c",
+          "text": "Trịnh Hoàng Vũ"
+        },
+        {
+          "id": "d",
+          "text": "Nguyễn Thị Hai"
+        }
+      ],
+      "correctOptionId": "c",
+      "requiredClues": [
+        "P7",
+        "P9",
+        "H10"
+      ],
+      "supportingClues": [
+        "H6",
+        "H9",
+        "X5"
+      ],
+      "hints": [
+        "Thang khách không ai lên tầng 27. Nhật ký thang hàng trong phong bì 2 ghi thẻ nào?",
+        "Phong bì 3 có bảng phân thẻ kỹ thuật. Đêm đó ai cầm thẻ KT-03?",
+        "Thẻ thì có thể cho người khác mượn. Vào Phòng kỹ thuật soi sổ ca trực: lúc KT-03 đi thang hàng lên tầng 27, Vũ ghi mình đang làm gì, và việc đó có thật không?"
+      ]
+    },
+    {
+      "id": "q7",
+      "number": 7,
+      "prompt": "Hồ sơ của chị Ngọc có gian lận không?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Có, chị dàn dựng vụ trộm để trả nợ"
+        },
+        {
+          "id": "b",
+          "text": "Không, đồ là thật và bị trộm thật"
+        }
+      ],
+      "correctOptionId": "b",
+      "requiredClues": [
+        "P8",
+        "P10"
+      ],
+      "supportingClues": [
+        "X1",
+        "X2",
+        "P3"
+      ],
+      "hints": [
+        "Chị Ngọc mua thêm bảo hiểm vì sao? Hóa đơn và giấy giám định trong phong bì 2 trả lời câu đó.",
+        "Chiếc Rolex số máy 7Y3K2109 xuất hiện lại ở đâu, và ai mang nó đi bán?"
+      ]
+    }
+  ],
+  "verdict": [
+    {
+      "id": "thief",
+      "prompt": "Ai lấy đồ trong két đêm 21/12?",
+      "options": [
+        {
+          "id": "vu",
+          "text": "Trịnh Hoàng Vũ"
+        },
+        {
+          "id": "ngoc",
+          "text": "Lâm Bảo Ngọc, tự dàn dựng"
+        },
+        {
+          "id": "bao",
+          "text": "Huỳnh Gia Bảo"
+        },
+        {
+          "id": "hai",
+          "text": "Nguyễn Thị Hai"
+        },
+        {
+          "id": "sang",
+          "text": "Lương Văn Sang"
+        }
+      ],
+      "correctOptionId": "vu"
+    },
+    {
+      "id": "code",
+      "prompt": "Mã két lọt ra ngoài bằng cách nào?",
+      "options": [
+        {
+          "id": "live",
+          "text": "Qua buổi livestream 12/12"
+        },
+        {
+          "id": "bao",
+          "text": "Anh Bảo nhớ mã cũ"
+        },
+        {
+          "id": "hai",
+          "text": "Chị Hai lén nhìn"
+        },
+        {
+          "id": "ngoc",
+          "text": "Không lọt, chị Ngọc tự mở"
+        }
+      ],
+      "correctOptionId": "live"
+    },
+    {
+      "id": "decision",
+      "prompt": "Đề xuất của bạn",
+      "options": [
+        {
+          "id": "pay",
+          "text": "Chi trả đủ 3,2 tỷ, chuyển hồ sơ kẻ trộm cho công an"
+        },
+        {
+          "id": "cut",
+          "text": "Chi 1,6 tỷ vì chị Ngọc tự để lộ mã két"
+        },
+        {
+          "id": "deny",
+          "text": "Từ chối vì chị Ngọc dàn dựng"
+        }
+      ],
+      "correctOptionId": "pay"
+    }
+  ],
+  "endings": [
+    {
+      "id": "full",
+      "title": "Trọn vẹn",
+      "text": "An Tín chi đủ 3,2 tỷ cho chị Ngọc rồi đứng ra đòi lại từ kẻ trộm. Vũ bị khởi tố. Công an tìm thấy chiếc Patek và bộ kim cương trong tủ đồ ở phòng trọ của anh, chuộc lại chiếc Rolex ở Lê Văn Sỹ. Riverlight thu hồi toàn bộ thẻ kỹ thuật và rà lại từng ổ khóa."
+    },
+    {
+      "id": "half",
+      "title": "Đúng một nửa",
+      "text": "Chị Ngọc được chi trả, Vũ bị bắt. Nhưng hồ sơ ghi sai đường lọt mã két. Tối hôm sau, chị lại mở két ngay trước ống kính livestream."
+    },
+    {
+      "id": "wrong",
+      "title": "Sai người",
+      "text": "Chị Ngọc được chi trả đúng, nhưng người bạn chỉ ra có ngoại phạm vững. Hồ sơ hình sự bị trả về. Đến Tết, chiếc Patek được rao bán trong một nhóm đồng hồ cũ."
+    },
+    {
+      "id": "cut",
+      "title": "Cắt xén",
+      "text": "Bạn trừ một nửa vì chị Ngọc tự để lộ mã két. Hợp đồng không có điều khoản nào như vậy. Chị khiếu nại lên Cục Quản lý bảo hiểm, An Tín phải chi đủ kèm lãi chậm trả, còn bạn bị phê bình."
+    },
+    {
+      "id": "unjust",
+      "title": "Oan cho người ngay",
+      "text": "Bạn từ chối vì cho rằng chị Ngọc dàn dựng. Chị mang vé máy bay, nhật ký khóa và hóa đơn đi kiện. An Tín thua, phải chi đủ kèm án phí. Clip \"bảo hiểm quỵt tiền\" của chị đạt hai triệu lượt xem, còn kẻ trộm thật vẫn trực ca đêm."
+    }
+  ],
+  "endingRules": [
+    {
+      "ending": "unjust",
+      "picks": {
+        "decision": "deny"
+      }
+    },
+    {
+      "ending": "cut",
+      "picks": {
+        "decision": "cut"
+      }
+    },
+    {
+      "ending": "full",
+      "correct": [
+        "thief",
+        "code"
+      ]
+    },
+    {
+      "ending": "half",
+      "correct": [
+        "thief"
+      ]
+    },
+    {
+      "ending": "wrong"
+    }
+  ]
+}

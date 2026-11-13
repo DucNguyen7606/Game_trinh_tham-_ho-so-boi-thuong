@@ -1,0 +1,566 @@
+{
+  "id": "tiem-vang-kim-thanh",
+  "title": "Hồ sơ bồi thường số 0212",
+  "intro": "Tối 2/12, giữa trận mưa lớn, hai tên đội mũ bảo hiểm cầm dao xông vào tiệm vàng Kim Thành trên đường Quang Trung, Gò Vấp, đúng lúc bà chủ Huỳnh Thị Kim Loan kéo cửa cuốn. Bà khai chúng ôm đi 45 lượng vàng trong tủ kính và két sắt, đòi bồi thường 6,3 tỷ đồng. Bạn có 10 ngày để đề xuất chi trả hay từ chối. Mỗi ngày khám được 1 khu hiện trường. Hỏi chuyện thì không giới hạn.",
+  "player": {
+    "name": "Lê Thu Hạnh",
+    "role": "Chuyên viên giám định bồi thường, Bảo hiểm An Tín",
+    "portrait": {
+      "skin": 0,
+      "hair": "bun",
+      "hairColor": "black",
+      "build": "normal",
+      "outfit": "shirt",
+      "outfitColor": "navy",
+      "age": "young",
+      "backdrop": "teal"
+    }
+  },
+  "photoDate": "03 12 '25",
+  "days": 10,
+  "limitsPerDay": {
+    "talk": 2,
+    "explore": 1
+  },
+  "suspects": [
+    {
+      "id": "loan",
+      "name": "Huỳnh Thị Kim Loan",
+      "age": 54,
+      "role": "Chủ tiệm vàng Kim Thành, người đòi bồi thường",
+      "interrogation": "loan",
+      "portrait": {
+        "skin": 1,
+        "hair": "bun",
+        "hairColor": "black",
+        "build": "heavy",
+        "outfit": "blouse",
+        "outfitColor": "maroon",
+        "accessory": ["earrings", "gold-chain"],
+        "age": "mid",
+        "backdrop": "rust",
+        "mood": "worried"
+      },
+      "profile": {
+        "traits": ["Khéo ăn nói", "Sĩ diện", "Tính toán"],
+        "habit": "Ngồi quầy từ 7 giờ sáng tới 9 giờ tối, tối nào cũng tự tay kéo cửa cuốn.",
+        "relation": "Chồng mất sáu năm, một mình giữ tiệm vàng hai chục năm tuổi. Làm đầu thảo hai dây hụi lớn nhất khu Quang Trung.",
+        "quote": "\"Hai chục năm buôn vàng, lần đầu bị dao kề cổ.\"",
+        "note": "Người duy nhất ở trong tiệm lúc cướp vào. Đơn bồi thường kê 45 lượng."
+      }
+    },
+    {
+      "id": "tai",
+      "name": "Lâm Văn Tài",
+      "age": 27,
+      "role": "Cháu bà Loan, tài xế xe công nghệ",
+      "interrogation": "tai",
+      "portrait": {
+        "skin": 2,
+        "hair": "cap",
+        "hairColor": "black",
+        "build": "thin",
+        "outfit": "polo",
+        "outfitColor": "olive",
+        "age": "young",
+        "backdrop": "night",
+        "mood": "neutral"
+      },
+      "profile": {
+        "traits": ["Lanh lợi", "Nóng vội", "Hay nợ nần"],
+        "habit": "Chạy xe ôm công nghệ GoXe bằng chiếc Exciter đỏ, tối nào cũng ghé tiệm dì ăn cơm.",
+        "relation": "Con chị gái bà Loan. Hồi nhỏ ở với dì, thuộc từng cánh cửa trong tiệm.",
+        "quote": "\"Dì con làm ăn đàng hoàng, ai mà nỡ.\"",
+        "note": "Đang nợ mấy app cho vay trên điện thoại. Không có mặt ở tiệm tối 2/12, theo lời anh."
+      }
+    },
+    {
+      "id": "hung",
+      "name": "Trịnh Quốc Hùng",
+      "age": 41,
+      "role": "Thợ kim hoàn cũ của tiệm, bị cho nghỉ tháng 10",
+      "interrogation": "hung",
+      "portrait": {
+        "skin": 2,
+        "hair": "short",
+        "hairColor": "black",
+        "build": "normal",
+        "outfit": "shirt",
+        "outfitColor": "khaki",
+        "accessory": ["glasses"],
+        "age": "mid",
+        "backdrop": "amber",
+        "mood": "stern"
+      },
+      "profile": {
+        "traits": ["Khéo tay", "Thẳng tính", "Ít nói"],
+        "habit": "Nhìn món vàng nào cũng lật mặt sau tìm dấu khắc, thói quen mười lăm năm làm thợ.",
+        "relation": "Làm thợ cho tiệm Kim Thành 9 năm. Bị bà Loan cho nghỉ ngày 10/10 vì \"làm hao vàng\".",
+        "quote": "\"Vàng thật cầm lên tay là biết, nó nặng khác.\"",
+        "note": "Biết chỗ đặt két, biết giờ đóng cửa, và có lý do để hận bà Loan."
+      }
+    },
+    {
+      "id": "lanh",
+      "name": "Nguyễn Thị Lành (bà Ba Lành)",
+      "age": 63,
+      "role": "Bán tạp hóa đầu hẻm, chơi hụi của bà Loan",
+      "interrogation": "lanh",
+      "portrait": {
+        "skin": 1,
+        "hair": "bun",
+        "hairColor": "gray",
+        "build": "thin",
+        "outfit": "blouse",
+        "outfitColor": "sky",
+        "age": "old",
+        "backdrop": "teal",
+        "mood": "angry"
+      },
+      "profile": {
+        "traits": ["Nóng nảy", "Thẳng thắn", "Thương con"],
+        "habit": "Ngồi sạp tạp hóa đầu hẻm 514 từ sáng tới chiều, ai đi ngang cũng biết.",
+        "relation": "Chơi hai dây hụi của bà Loan, góp hơn 300 triệu dành cưới vợ cho con trai.",
+        "quote": "\"Tiền mồ hôi nước mắt, bả mà ôm thì tui làm tới cùng.\"",
+        "note": "Giữa tháng 11 tới tiệm la lối, nhắn tin dọa \"cho người tới tiệm\"."
+      }
+    },
+    {
+      "id": "thao",
+      "name": "Võ Ngọc Thảo",
+      "age": 38,
+      "role": "Dược sĩ, chủ nhà thuốc đối diện tiệm vàng",
+      "interrogation": "thao",
+      "portrait": {
+        "skin": 0,
+        "hair": "long",
+        "hairColor": "black",
+        "build": "normal",
+        "outfit": "shirt",
+        "outfitColor": "white",
+        "accessory": ["glasses"],
+        "age": "mid",
+        "backdrop": "teal",
+        "mood": "smile"
+      },
+      "profile": {
+        "traits": ["Cẩn thận", "Để ý", "Thật thà"],
+        "habit": "Mở nhà thuốc tới 10 giờ đêm. Lắp camera sau một lần bị trộm két tiền.",
+        "relation": "Hàng xóm mười năm của tiệm Kim Thành, hay mua vàng của bà Loan dịp Tết.",
+        "quote": "\"Camera nhà tôi quay ra đường suốt, {xco} cần đoạn nào cũng có.\"",
+        "note": "Nhà thuốc nằm thẳng đối diện cửa trước tiệm vàng và đầu hẻm 514."
+      }
+    }
+  ],
+  "zones": [
+    {
+      "id": "tiem",
+      "name": "Trong tiệm vàng",
+      "description": "Gian tiệm hẹp sơn đỏ, ba tủ kính chữ U. Tủ giữa bị đập vỡ, khay nhung trống trơn. Công an đã khám xong, còn để nguyên hiện trường.",
+      "hotspots": [
+        {
+          "id": "nhan-roi",
+          "label": "Chiếc nhẫn dưới gầm tủ",
+          "x": 36,
+          "y": 88,
+          "note": "Một chiếc nhẫn tròn trơn lăn vào gầm tủ kính, chắc rơi lúc cướp vơ khay. Mặt trong khắc \"KT 9999 · 1 chỉ\". Bạn đặt lên cân tiểu ly trên quầy: 2,1 g. Một chỉ vàng 9999 phải nặng 3,75 g.",
+          "clueId": "H1"
+        },
+        {
+          "id": "san",
+          "label": "Dấu dép trên nền gạch",
+          "x": 72,
+          "y": 84,
+          "note": "Hai hàng dấu dép bùn đỏ bắt đầu ngay ngưỡng cửa sau, mũi dép hướng vào trong, đi thẳng tới tủ giữa rồi quay ra cửa cuốn phía trước. Bùn đỏ là đất của hẻm 514 đang đào cống. Mặt đường Quang Trung trước tiệm trải nhựa.",
+          "clueId": "H2"
+        },
+        {
+          "id": "ket",
+          "label": "Két sắt sau quầy",
+          "x": 14,
+          "y": 62,
+          "note": "Két điện tử cao ngang hông, cửa két còn hé. Không một vết cạy, bàn phím nguyên. Nhãn bên hông: \"Két có bộ nhớ đóng mở 500 lần\".",
+          "clueId": "H3"
+        },
+        {
+          "id": "tu-kinh",
+          "label": "Tủ kính bị đập",
+          "x": 52,
+          "y": 58,
+          "note": "Mặt kính tủ giữa vỡ nát, mảnh kính rơi cả vào trong lẫn ra ngoài. Khay nhung bị lấy đi cả khay."
+        },
+        {
+          "id": "ban-tho",
+          "label": "Bàn thờ Thần Tài",
+          "x": 30,
+          "y": 26,
+          "note": "Bàn thờ Thần Tài, Ông Địa, nhang còn mới thắp sáng nay. Không có gì lạ."
+        }
+      ]
+    },
+    {
+      "id": "hem",
+      "name": "Hẻm 514 sau tiệm",
+      "description": "Con hẻm đất đỏ chạy dọc sau dãy nhà mặt tiền Quang Trung. Phường đang đào cống, đất bùn lầy sau mưa.",
+      "hotspots": [
+        {
+          "id": "cua-sau",
+          "label": "Cửa sau của tiệm",
+          "x": 30,
+          "y": 50,
+          "note": "Cánh cửa sắt bọc tôn, mặt ngoài không có ổ khóa, không tay nắm. Chỉ mở được bằng chốt ngang phía trong. Bản lề, chốt, khung cửa nguyên vẹn. Sáng 3/12 công an thấy chốt đã kéo ra.",
+          "clueId": "H4"
+        },
+        {
+          "id": "den-hau",
+          "label": "Mảnh nhựa đỏ trên đất",
+          "x": 56,
+          "y": 86,
+          "note": "Mấy mảnh nhựa đỏ trong vỡ còn sắc cạnh, cạnh một vệt bánh xe sâu. Một mảnh còn in chữ nổi \"EXCITER\". Bên cạnh là cột điện có vết trầy mới, ngang tầm đuôi xe máy.",
+          "clueId": "H5"
+        },
+        {
+          "id": "thung-rac",
+          "label": "Thùng rác chung",
+          "x": 80,
+          "y": 62,
+          "note": "Dưới mấy bịch rác là một bộ áo mưa đen dính bùn đỏ, nhét vội. Sau lưng áo có in mờ logo xanh lá \"GoXe\", loại áo mưa hãng phát cho tài xế.",
+          "clueId": "H6"
+        },
+        {
+          "id": "camera-hem",
+          "label": "Camera đầu nhà 514/3",
+          "x": 62,
+          "y": 18,
+          "note": "Một chiếc camera gắn trên cột, dây điện đứt lủng lẳng. Chủ nhà nói hư từ hồi tháng 6, để đó cho trộm sợ. Ai ở khu này cũng biết.",
+          "clueId": "X9"
+        },
+        {
+          "id": "vung-nuoc",
+          "label": "Ổ gà ngập nước",
+          "x": 16,
+          "y": 84,
+          "note": "Ổ gà đầy nước đục ngầu. Chỉ là hẻm đang đào cống."
+        }
+      ]
+    },
+    {
+      "id": "lau",
+      "name": "Phòng trên lầu",
+      "description": "Gác trên của tiệm là chỗ bà Loan ở. Bàn thờ chồng, tủ gỗ, chiếc bàn nhỏ đầy sổ sách.",
+      "hotspots": [
+        {
+          "id": "so-hui",
+          "label": "Sổ hụi trong ngăn kéo",
+          "x": 66,
+          "y": 64,
+          "note": "Cuốn sổ bìa xanh ghi hai dây hụi, 36 người. Trang 15/10 gạch đỏ chữ \"BỂ\". Từ 10/11 tới 28/11, từng tên được gạch xóa, ghi \"đã trả đủ\", cộng dồn hơn 5,5 tỷ. Ngoài tiệm, bà Loan vẫn nói với mọi người là hụi đang \"chờ gom\".",
+          "clueId": "H7"
+        },
+        {
+          "id": "hop-ma",
+          "label": "Thùng giấy trong góc",
+          "x": 18,
+          "y": 72,
+          "note": "Một thùng giấy dán băng keo, bên trong còn 14 chiếc nhẫn tròn trơn bọc nilon, giống hệt chiếc nhẫn dưới gầm tủ, kể cả chữ khắc \"KT 9999\". Mặt thùng in: \"Xưởng mạ Thành Công, Q.5\".",
+          "clueId": "H8"
+        },
+        {
+          "id": "ban-tho-chong",
+          "label": "Bàn thờ chồng",
+          "x": 46,
+          "y": 30,
+          "note": "Ảnh ông Lâm Kim Thành, người lập tiệm, mất năm 2019. Tên tiệm là tên ông."
+        },
+        {
+          "id": "lich",
+          "label": "Lịch treo tường",
+          "x": 84,
+          "y": 32,
+          "note": "Lịch tháng 12. Ô ngày 2 trống trơn. Ô ngày 5 có chữ nhỏ: \"T.\""
+        }
+      ]
+    },
+    {
+      "id": "thuoc",
+      "name": "Nhà thuốc đối diện",
+      "description": "Nhà thuốc của chị Thảo, bên kia đường Quang Trung. Từ quầy nhìn thẳng sang cửa cuốn tiệm vàng.",
+      "hotspots": [
+        {
+          "id": "goc-camera",
+          "label": "Camera dưới mái hiên",
+          "x": 14,
+          "y": 16,
+          "note": "Camera quay ra đường, khung hình lấy trọn cửa cuốn tiệm Kim Thành và cả đầu hẻm 514 bên hông tiệm. Ai vào tiệm bằng cửa trước, hay ra vào đầu hẻm, đều lọt khung.",
+          "clueId": "H9"
+        },
+        {
+          "id": "so-ban",
+          "label": "Sổ bán hàng",
+          "x": 80,
+          "y": 80,
+          "note": "Sổ ghi tay. Tối 2/12 vắng khách vì mưa, đơn cuối lúc 20:40."
+        },
+        {
+          "id": "mai-hien",
+          "label": "Máng xối",
+          "x": 50,
+          "y": 10,
+          "note": "Máng xối tràn nước. Chị Thảo nói mưa từ 7 giờ rưỡi tới gần 11 giờ không ngớt."
+        },
+        {
+          "id": "tiem-vang",
+          "label": "Tiệm vàng bên kia đường",
+          "x": 64,
+          "y": 48,
+          "note": "Bảng hiệu \"KIM THÀNH\" vàng chữ đỏ. Cửa cuốn đang kéo xuống một nửa, giống tối hôm đó."
+        }
+      ]
+    }
+  ],
+  "clues": [
+    { "id": "H1", "title": "Nhẫn \"1 chỉ\" chỉ nặng 2,1 g", "description": "Nhẫn khắc \"KT 9999 · 1 chỉ\" rơi dưới gầm tủ. Vàng 9999 một chỉ phải nặng 3,75 g.", "source": "scene" },
+    { "id": "H2", "title": "Dấu dép bùn đỏ từ cửa sau", "description": "Dấu dép bắt đầu ở ngưỡng cửa sau, mũi hướng vào trong. Bùn đỏ của hẻm 514.", "source": "scene" },
+    { "id": "H3", "title": "Két không vết cạy, có bộ nhớ", "description": "Két điện tử mở bằng mã, không bị phá. Két lưu lại giờ mỗi lần đóng mở.", "source": "scene" },
+    { "id": "H4", "title": "Cửa sau chỉ mở được từ trong", "description": "Mặt ngoài không ổ khóa, không tay nắm. Chốt trong được kéo ra, cửa không bị phá.", "source": "scene" },
+    { "id": "H5", "title": "Mảnh đèn hậu Exciter đỏ", "description": "Mảnh vỡ còn mới trong hẻm sau tiệm, cạnh cột điện trầy ngang tầm đuôi xe.", "source": "scene" },
+    { "id": "H6", "title": "Áo mưa GoXe trong thùng rác", "description": "Áo mưa đen dính bùn đỏ, logo hãng xe công nghệ GoXe sau lưng.", "source": "scene" },
+    { "id": "H7", "title": "Sổ hụi: bể từ 15/10", "description": "Hai dây hụi bể từ 15/10. Từ 10/11 đến 28/11 bà Loan trả đủ hơn 5,5 tỷ cho hụi viên.", "source": "scene" },
+    { "id": "H8", "title": "Thùng nhẫn mạ trên lầu", "description": "14 nhẫn giống hệt chiếc dưới gầm tủ, khắc \"KT 9999\". Thùng của xưởng mạ ở Quận 5.", "source": "scene" },
+    { "id": "H9", "title": "Camera nhà thuốc", "description": "Thấy trọn cửa cuốn tiệm vàng và đầu hẻm 514.", "source": "scene" },
+    { "id": "P1", "title": "Hợp đồng bảo hiểm tiệm vàng", "description": "Bảo hiểm vàng trong tủ và két trước rủi ro cướp, trộm có đột nhập. Loại trừ: hành vi cố ý của chủ tiệm hoặc người thân.", "source": "file" },
+    { "id": "P2", "title": "Đơn yêu cầu bồi thường", "description": "Bà Loan kê 45 lượng: 30 lượng trong tủ kính, 15 lượng trong két. 6,3 tỷ đồng.", "source": "file" },
+    { "id": "P3", "title": "Biên bản công an phường 10", "description": "Nhận tin báo lúc 21:19. Tủ kính vỡ, két mở, cửa sau không bị phá.", "source": "file" },
+    { "id": "P4", "title": "Lời khai của bà Loan", "description": "\"21:02 hai tên chui vào cửa cuốn phía trước. Trong tiệm chỉ có mình tôi. Chúng kề dao bắt tôi mở két.\"", "source": "file" },
+    { "id": "P5", "title": "Số liệu mưa trạm Gò Vấp", "description": "Mưa to liên tục từ 19:30 đến 22:40 ngày 2/12.", "source": "file" },
+    { "id": "P6", "title": "Camera nhà thuốc tối 2/12", "description": "20:55 một xe máy chở hai người chạy vào hẻm 514. 20:58 cửa cuốn kéo xuống còn nửa, không ai vào cửa trước. 21:05 hai người áo mưa đen chạy ra, rẽ vào hẻm. 21:18 bà Loan mới bước ra.", "source": "file" },
+    { "id": "P7", "title": "Bộ nhớ két sắt", "description": "Mở bằng mã chủ lúc 20:41. Không có lần mở nào khác cho tới khi công an tới.", "source": "file" },
+    { "id": "P8", "title": "Giám định chiếc nhẫn", "description": "Lõi đồng thau, mạ vàng dày 2 micromet. Không phải vàng 9999.", "source": "file" },
+    { "id": "P9", "title": "Phiếu mua lại vàng tiệm Ngọc Phát", "description": "Ba lần trong tháng 11, bà Loan bán tổng cộng 42 lượng vàng nhẫn ở Phú Nhuận, 5,8 tỷ.", "source": "file" },
+    { "id": "P10", "title": "Hóa đơn xưởng mạ Thành Công", "description": "12/11: tiệm Kim Thành đặt 300 nhẫn tròn trơn mạ vàng, khắc \"KT 9999\", và 40 dây chuyền mạ.", "source": "file" },
+    { "id": "P11", "title": "Sao kê của Tài", "description": "5/12: nhận 150 triệu từ Huỳnh Thị Kim Loan. Cùng ngày trả 120 triệu cho ba app cho vay.", "source": "file" },
+    { "id": "X1", "title": "Tin nhắn của bà Ba Lành", "description": "16/11: \"Không trả hụi thì đừng trách tui cho người tới tiệm.\"", "source": "decoy" },
+    { "id": "X2", "title": "Quyết định cho thôi việc thợ Hùng", "description": "10/10: bà Loan cho Hùng nghỉ vì \"làm hao vàng khi chế tác\". Hùng không ký.", "source": "decoy" },
+    { "id": "X3", "title": "Ảnh của Hùng ở bệnh viện", "description": "Hùng bế con mới sinh ở bệnh viện phụ sản. Xem giờ trên ảnh.", "source": "testimony" },
+    { "id": "X4", "title": "Ảnh đám giỗ của bà Ba Lành", "description": "Bà Lành ngồi mâm giỗ ở nhà em gái tại Hóc Môn. Xem giờ trên ảnh.", "source": "testimony" },
+    { "id": "X5", "title": "Lịch sử chuyến xe của Tài", "description": "Tài đưa ứng dụng GoXe ra làm chứng tối 2/12 anh chạy xe ở Phú Nhuận.", "source": "testimony" },
+    { "id": "X6", "title": "Phiếu bảo trì két sắt", "description": "25/11: thợ két Đinh Văn Phú tới tiệm thay pin và cài lại két điện tử. Ba tuần trước vụ cướp, có người ngoài đụng tay vào két.", "source": "decoy" },
+    { "id": "X7", "title": "Hóa đơn Hùng mua 2 lượng vàng", "description": "4/12, hai ngày sau vụ cướp: Hùng mua 2 lượng vàng nhẫn ở một tiệm vàng Gò Vấp, trả tiền mặt 280 triệu.", "source": "decoy" },
+    { "id": "X8", "title": "Sổ tiết kiệm của Hùng", "description": "Hùng đưa sổ tiết kiệm ra làm chứng cho số tiền mua vàng. Xem ngày tất toán.", "source": "testimony" },
+    { "id": "X9", "title": "Camera hẻm hư từ tháng 6", "description": "Camera trên cột đầu hẻm 514 đứt dây từ tháng 6, để đó cho trộm sợ. Người trong khu ai cũng biết nó không quay.", "source": "scene" }
+  ],
+  "envelopes": [
+    {
+      "id": "pb1",
+      "number": 1,
+      "title": "Hồ sơ yêu cầu bồi thường",
+      "unlockedBy": null,
+      "documents": ["P1", "P2", "P3", "P4", "P5", "X1", "X2"]
+    },
+    {
+      "id": "pb2",
+      "number": 2,
+      "title": "Giám định bổ sung",
+      "unlockedBy": "q1",
+      "documents": ["P6", "P7", "P8", "X6"]
+    },
+    {
+      "id": "pb3",
+      "number": 3,
+      "title": "Vàng đi đâu, tiền về đâu",
+      "unlockedBy": "q4",
+      "documents": ["P9", "P10", "P11", "X7"]
+    }
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "number": 1,
+      "prompt": "Hai tên cướp vào tiệm bằng lối nào?",
+      "options": [
+        { "id": "a", "text": "Chui qua cửa cuốn phía trước, như bà Loan khai" },
+        { "id": "b", "text": "Cửa sau thông ra hẻm 514" },
+        { "id": "c", "text": "Trèo qua mái từ nhà bên cạnh" }
+      ],
+      "correctOptionId": "b",
+      "requiredClues": ["H2", "H4"],
+      "supportingClues": ["P4", "P5", "H9"],
+      "hints": [
+        "Mưa to suốt buổi tối, ai bước vào tiệm cũng để lại dấu. Vào Trong tiệm vàng soi nền gạch: dấu dép bắt đầu từ đâu?",
+        "Ra Hẻm 514 sau tiệm xem cánh cửa sau. Nó mở được từ phía nào?"
+      ]
+    },
+    {
+      "id": "q2",
+      "number": 2,
+      "prompt": "Két sắt được mở lúc nào?",
+      "options": [
+        { "id": "a", "text": "Khoảng 21:02, khi bà Loan bị dao kề cổ" },
+        { "id": "b", "text": "20:41, hai mươi phút trước khi có người vào" },
+        { "id": "c", "text": "Lúc công an tới khám" }
+      ],
+      "correctOptionId": "b",
+      "requiredClues": ["P7", "P4"],
+      "supportingClues": ["H3", "P6"],
+      "hints": [
+        "Két ở tiệm có bộ nhớ đóng mở. Phong bì 2 có bản in bộ nhớ đó.",
+        "Đặt giờ trong bộ nhớ két cạnh lời khai của bà Loan: hai giờ đó có khớp không?"
+      ]
+    },
+    {
+      "id": "q3",
+      "number": 3,
+      "prompt": "Lúc \"bị cướp\", trong tủ kính và két có gì?",
+      "options": [
+        { "id": "a", "text": "45 lượng vàng thật, đúng như đơn" },
+        { "id": "b", "text": "Phần lớn là nhẫn và dây chuyền mạ vàng giả" },
+        { "id": "c", "text": "Trống trơn, không có món nào" }
+      ],
+      "correctOptionId": "b",
+      "requiredClues": ["H1", "P8"],
+      "supportingClues": ["H8", "P10"],
+      "hints": [
+        "Chiếc nhẫn rơi dưới gầm tủ ghi \"1 chỉ\". Cân của nó nói gì? Vàng nặng hơn đồng rất nhiều.",
+        "Phong bì 2 có kết quả giám định chiếc nhẫn. Lên Phòng trên lầu xem thử có món nào giống nó không."
+      ]
+    },
+    {
+      "id": "q4",
+      "number": 4,
+      "prompt": "Ai mở chốt cửa sau cho hai người kia vào?",
+      "options": [
+        { "id": "a", "text": "Huỳnh Thị Kim Loan" },
+        { "id": "b", "text": "Trịnh Quốc Hùng" },
+        { "id": "c", "text": "Võ Ngọc Thảo" },
+        { "id": "d", "text": "Không ai, cửa bị phá" }
+      ],
+      "correctOptionId": "a",
+      "requiredClues": ["H4", "P4"],
+      "supportingClues": ["P3", "P7", "H2"],
+      "hints": [
+        "Cửa sau chỉ mở được bằng chốt bên trong. Vậy lúc đó ai đang ở trong tiệm?",
+        "Đọc lại lời khai của bà Loan trong phong bì 1: bà nói trong tiệm có mấy người?"
+      ]
+    },
+    {
+      "id": "q5",
+      "number": 5,
+      "prompt": "Ai là người cầm dao vào tiệm?",
+      "options": [
+        { "id": "a", "text": "Lâm Văn Tài" },
+        { "id": "b", "text": "Trịnh Quốc Hùng" },
+        { "id": "c", "text": "Người bà Ba Lành thuê" },
+        { "id": "d", "text": "Hai kẻ lạ mặt" }
+      ],
+      "correctOptionId": "a",
+      "requiredClues": ["H5", "X5"],
+      "supportingClues": ["H6", "P11", "H2"],
+      "hints": [
+        "Xe của cướp đậu trong hẻm sau tiệm. Ra Hẻm 514 tìm thứ xe để lại. Ai trong hồ sơ đi chiếc xe đó?",
+        "Hỏi chuyện Tài, xem lịch sử chuyến xe anh đưa ra. Giữa hai chuyến có khoảng trống nào không?"
+      ]
+    },
+    {
+      "id": "q6",
+      "number": 6,
+      "prompt": "Vì sao bà Loan dựng lên vụ cướp?",
+      "options": [
+        { "id": "a", "text": "Để đổ tội cho thợ Hùng, người bà vừa đuổi" },
+        { "id": "b", "text": "Để bảo hiểm đền cho số vàng bà đã lén bán đi trả hụi bể" },
+        { "id": "c", "text": "Bà Ba Lành ép bà phải trả hụi" }
+      ],
+      "correctOptionId": "b",
+      "requiredClues": ["H7", "P9"],
+      "supportingClues": ["P10", "X1", "H8"],
+      "hints": [
+        "Lên Phòng trên lầu mở ngăn kéo. Hai dây hụi ra sao, và tiền trả hụi lấy từ đâu?",
+        "Phong bì 3 có phiếu mua lại vàng ở Phú Nhuận. Đếm số lượng và để ý ngày bán."
+      ]
+    },
+    {
+      "id": "q7",
+      "number": 7,
+      "prompt": "Lời khai tối 2/12 của ai đứng vững?",
+      "options": [
+        { "id": "a", "text": "Tất cả đều vững" },
+        { "id": "b", "text": "Hùng và bà Ba Lành vững. Tài vỡ." },
+        { "id": "c", "text": "Tài vững. Hùng vỡ." }
+      ],
+      "correctOptionId": "b",
+      "requiredClues": ["X3", "X4", "X5"],
+      "supportingClues": ["H5", "P6"],
+      "hints": [
+        "Cướp ở trong tiệm từ khoảng 21:00 tới 21:05. Hỏi chuyện từng người, xem ảnh họ đưa và so giờ.",
+        "Ứng dụng GoXe của Tài ghi giờ trả khách và giờ nhận chuyến kế. Khoảng giữa đó rơi vào lúc nào?"
+      ]
+    }
+  ],
+  "verdict": [
+    {
+      "id": "plan",
+      "prompt": "Ai dựng lên vụ cướp tiệm Kim Thành?",
+      "options": [
+        { "id": "loan", "text": "Huỳnh Thị Kim Loan" },
+        { "id": "hung", "text": "Trịnh Quốc Hùng" },
+        { "id": "lanh", "text": "Nguyễn Thị Lành" },
+        { "id": "tai", "text": "Lâm Văn Tài, một mình" },
+        { "id": "none", "text": "Không ai, đó là vụ cướp thật" }
+      ],
+      "correctOptionId": "loan"
+    },
+    {
+      "id": "robber",
+      "prompt": "Ai cầm dao vào tiệm?",
+      "options": [
+        { "id": "tai", "text": "Lâm Văn Tài" },
+        { "id": "hung", "text": "Trịnh Quốc Hùng" },
+        { "id": "stranger", "text": "Hai kẻ lạ mặt" }
+      ],
+      "correctOptionId": "tai"
+    },
+    {
+      "id": "decision",
+      "prompt": "Đề xuất của bạn",
+      "options": [
+        { "id": "pay", "text": "Chi trả đủ 6,3 tỷ cho bà Loan" },
+        { "id": "partial", "text": "Chi 2,1 tỷ cho 15 lượng trong két" },
+        { "id": "deny", "text": "Từ chối toàn bộ, chuyển hồ sơ công an" }
+      ],
+      "correctOptionId": "deny"
+    }
+  ],
+  "endings": [
+    {
+      "id": "full",
+      "title": "Trọn vẹn",
+      "text": "An Tín từ chối bồi thường và chuyển hồ sơ cho công an. Bà Loan và Tài bị khởi tố về tội lừa đảo chiếm đoạt tài sản. Túi \"vàng cướp\" tìm thấy dưới gầm giường phòng trọ của Tài: 286 chiếc nhẫn mạ, đúng 3 lượng vàng thật."
+    },
+    {
+      "id": "half",
+      "title": "Đúng một nửa",
+      "text": "Bạn từ chối đúng, bà Loan bị khởi tố. Nhưng người cầm dao tối đó vẫn chạy xe trên đường Quang Trung, áo mưa mới, đèn hậu mới."
+    },
+    {
+      "id": "wrong",
+      "title": "Sai người",
+      "text": "Bạn từ chối chi trả, nhưng người bạn chỉ ra có ngoại phạm vững. Bà Loan thuê luật sư, kiện An Tín đòi đủ 6,3 tỷ. Hồ sơ phải làm lại từ đầu."
+    },
+    {
+      "id": "partpaid",
+      "title": "Trả nhầm một phần",
+      "text": "An Tín chuyển 2,1 tỷ cho 15 lượng \"trong két\", trong khi bộ nhớ két cho thấy chính bà mở két từ trước khi có ai vào tiệm. Bà Loan đóng cửa tiệm, chuyển đi đâu không ai biết. Bạn bị kỷ luật."
+    },
+    {
+      "id": "paid",
+      "title": "Chi trả",
+      "text": "Công ty chuyển 6,3 tỷ cho 45 lượng vàng mà phần lớn chưa bao giờ nằm trong tủ kính. Bà Loan treo lại bảng hiệu, khai trương lại trước Tết. Bạn bị kỷ luật."
+    }
+  ],
+  "endingRules": [
+    { "ending": "paid", "picks": { "decision": "pay" } },
+    { "ending": "partpaid", "picks": { "decision": "partial" } },
+    { "ending": "full", "correct": ["plan", "robber"] },
+    { "ending": "half", "correct": ["plan"] },
+    { "ending": "wrong" }
+  ]
+}

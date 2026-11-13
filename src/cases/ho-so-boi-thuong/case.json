@@ -1,7 +1,7 @@
 {
   "id": "ho-so-boi-thuong",
   "title": "Hồ sơ bồi thường số 0714",
-  "intro": "Kho vải Thịnh Phát ở Bình Tân cháy lúc 2 giờ 38 sáng. Chủ kho đòi bồi thường 4 tỷ đồng. Bạn có 6 ngày để đề xuất chi trả hay từ chối. Mỗi ngày chỉ hỏi được 2 người và khám được 1 khu.",
+  "intro": "Kho vải Thịnh Phát ở Bình Tân cháy lúc 2 giờ 38 sáng. Chủ kho đòi bồi thường 4 tỷ đồng. Bạn có 10 ngày để đề xuất chi trả hay từ chối. Mỗi ngày khám được 1 khu hiện trường. Hỏi chuyện thì không giới hạn.",
   "player": {
     "name": "Lê Thu Hạnh",
     "role": "Chuyên viên giám định bồi thường, Bảo hiểm An Tín",
@@ -16,8 +16,11 @@
       "backdrop": "teal"
     }
   },
-  "days": 6,
-  "limitsPerDay": { "talk": 2, "explore": 1 },
+  "days": 10,
+  "limitsPerDay": {
+    "talk": 2,
+    "explore": 1
+  },
   "suspects": [
     {
       "id": "thinh",
@@ -80,7 +83,7 @@
         ],
         "habit": "Lúc nào cũng mang sẵn tập giấy photo. Trả lời trước khi bị hỏi xong.",
         "relation": "Cháu vợ ông Thịnh. Quen ông Rô từ hồi mới vào làm, hay mang đồ quê lên biếu.",
-        "quote": "\"Chị cần giấy tờ gì em đưa liền.\"",
+        "quote": "\"{Xchi} cần giấy tờ gì em đưa liền.\"",
         "note": "Giữ chìa khóa và toàn bộ sổ sách. Người duy nhất ngoài ông Thịnh biết chuyện kho Long An."
       }
     },
@@ -113,7 +116,8 @@
         "relation": "Bị đuổi việc tháng 5 sau khi tố Bảo sửa sổ chấm công.",
         "quote": "\"Tui ghét cái kho đó thiệt. Nhưng tui đâu có ngu.\"",
         "note": "Từng đăng bài \"cái kho đó cháy cho rồi\". Động cơ rõ nhất, nhưng nói chuyện như người không có gì phải giấu."
-      }
+      },
+      "interrogation": "ngan"
     },
     {
       "id": "huy",
@@ -140,7 +144,8 @@
         "relation": "Hàng xóm sát vách. Muốn mua đất kho để mở rộng tiệm, bị ông Thịnh từ chối.",
         "quote": "\"Tui ngủ trên lầu, nghe la mới dậy.\"",
         "note": "Có camera nhìn ra hẻm nhưng chưa chịu đưa. Giấu vì sợ bị nghi, hay vì có gì khác?"
-      }
+      },
+      "interrogation": "huy"
     },
     {
       "id": "ro",
@@ -202,6 +207,14 @@
           "x": 52,
           "y": 72,
           "note": "Sổ trực ghi đều tay mỗi đêm. Đêm 14/7 chỉ có một dòng: \"22h, kiểm tra cổng\"."
+        },
+        {
+          "id": "cong-o-cam",
+          "label": "Ổ cắm cháy sém",
+          "x": 14,
+          "y": 34,
+          "note": "Ổ cắm nhựa trong chòi cháy sém, dây quạt chảy nhựa dính vào vách. Lần theo dây: chòi lấy điện từ một bình ắc-quy và bộ đổi điện đặt dưới gầm bàn, không đi qua cầu dao tổng của kho. Văn phòng cách chòi gần 30 m.",
+          "clueId": "H9"
         }
       ]
     },
@@ -231,6 +244,14 @@
           "x": 78,
           "y": 62,
           "note": "Xe nâng tay dựng ở góc, bánh cao su chảy nhựa."
+        },
+        {
+          "id": "hang-can",
+          "label": "Can nhựa",
+          "x": 62,
+          "y": 82,
+          "note": "Can nhựa 5 lít, nắp mở, bên trong rỗng. Miệng can còn mùi xăng. Hông can dán tem \"Vật tư Gia Huy\", tiệm sát vách.",
+          "clueId": "H10"
         }
       ]
     },
@@ -269,6 +290,13 @@
           "x": 80,
           "y": 25,
           "note": "Tờ lịch tháng 7 cháy sém. Ngày 20 được khoanh bút đỏ, không ghi chú gì."
+        },
+        {
+          "id": "vp-thung-rac",
+          "label": "Sọt rác",
+          "x": 44,
+          "y": 82,
+          "note": "Sọt rác nhựa chảy méo. Dưới đáy còn mẩu giấy cháy dở, đọc được chữ \"...gia hạn...\" và logo ngân hàng Phương Nam. Chắc là thư từ chối gia hạn mà ông Thịnh vứt đi."
         }
       ]
     },
@@ -299,6 +327,14 @@
           "x": 50,
           "y": 80,
           "note": "Đôi dép tổ ong của ông Rô, để ngay bậc cửa."
+        },
+        {
+          "id": "sau-bat-lua",
+          "label": "Bật lửa nhựa",
+          "x": 20,
+          "y": 78,
+          "note": "Một cái bật lửa nhựa đỏ in chữ \"Ngân Store\", rơi cạnh bậc cửa hông, phủ một lớp tro mỏng. Ngân Store là shop bán quần áo online của Võ Thị Kim Ngân.",
+          "clueId": "H8"
         }
       ]
     }
@@ -344,6 +380,24 @@
       "id": "H7",
       "title": "Cầu dao tổng đã tắt",
       "description": "Điện bị cúp từ 22h. Không thể là chập điện.",
+      "source": "scene"
+    },
+    {
+      "id": "H8",
+      "title": "Bật lửa \"Ngân Store\" ở cửa hông",
+      "description": "Bật lửa nhựa in tên shop của Ngân, rơi cạnh bậc cửa hông, phủ tro mỏng.",
+      "source": "scene"
+    },
+    {
+      "id": "H9",
+      "title": "Ổ cắm cháy sém trong chòi",
+      "description": "Ổ cắm và dây quạt trong chòi bị chập. Chòi chạy điện ắc-quy riêng, cách văn phòng gần 30 m.",
+      "source": "scene"
+    },
+    {
+      "id": "H10",
+      "title": "Can xăng của tiệm Gia Huy",
+      "description": "Can nhựa 5 lít rỗng, còn mùi xăng, dán tem tiệm vật tư sát vách.",
       "source": "scene"
     },
     {
@@ -435,6 +489,54 @@
       "title": "Thư hỏi mua đất của Huy",
       "description": "Huy đề nghị mua đất kho với giá 9 tỷ, Thịnh từ chối.",
       "source": "decoy"
+    },
+    {
+      "id": "X3",
+      "title": "Ảnh đám cưới ở Vũng Tàu",
+      "description": "Ông Thịnh cho xem ảnh tiệc cưới cháu ở Vũng Tàu. Ảnh cuối chụp lúc 01:47 ngày 15/7, cách kho khoảng 2 giờ xe. Soi kỹ phông cưới và cổ tay ông.",
+      "source": "testimony"
+    },
+    {
+      "id": "X4",
+      "title": "Ảnh karaoke của Bảo",
+      "description": "Bảo nói hát từ 1 giờ và gửi ảnh lúc 02:10. Soi kỹ mặt bàn và cổ tay áo của anh.",
+      "source": "testimony"
+    },
+    {
+      "id": "X5",
+      "title": "Ảnh chụp livestream của Ngân",
+      "description": "Ngân đang phát trực tiếp lúc 01:10 với 214 người xem. Đọc kỹ phần bình luận.",
+      "source": "testimony"
+    },
+    {
+      "id": "X6",
+      "title": "Ảnh đám cháy của anh Huy",
+      "description": "Anh Huy chụp từ gác tiệm lúc 02:40. Soi kỹ chỗ lửa bùng, cổng kho và chòi bảo vệ.",
+      "source": "testimony"
+    },
+    {
+      "id": "X7",
+      "title": "Biên bản kiểm tra an toàn điện 2024",
+      "description": "Tháng 9/2024: dây dẫn khu văn phòng xuống cấp, đề nghị thay trước tháng 12. Chưa thấy biên bản khắc phục.",
+      "source": "decoy"
+    },
+    {
+      "id": "X8",
+      "title": "Sổ bán hàng tiệm Gia Huy",
+      "description": "Anh Huy chụp trang sổ bán chịu tháng 7. Đọc kỹ ngày, món hàng và tên người lấy.",
+      "source": "testimony"
+    },
+    {
+      "id": "X9",
+      "title": "Biên nhận cầm sổ đỏ của ông Thịnh",
+      "description": "11/7/2025: ông Thịnh cầm sổ đỏ nhà Quận 6, vay 300 triệu, lãi tính theo ngày.",
+      "source": "decoy"
+    },
+    {
+      "id": "X10",
+      "title": "Đơn khiếu nại của Ngân",
+      "description": "Tháng 5/2025, Ngân gửi Phòng Lao động: tố kế toán Bảo ghi khống công nhân để ăn lương. Đơn bị trả về vì thiếu chứng cứ.",
+      "source": "decoy"
     }
   ],
   "envelopes": [
@@ -449,7 +551,8 @@
         "P3",
         "P4",
         "X1",
-        "X2"
+        "X2",
+        "X7"
       ]
     },
     {
@@ -463,7 +566,8 @@
         "P7",
         "P10",
         "P11",
-        "P12"
+        "P12",
+        "X10"
       ]
     },
     {
@@ -474,7 +578,8 @@
       "documents": [
         "P8",
         "P9",
-        "P13"
+        "P13",
+        "X9"
       ]
     }
   ],
@@ -484,14 +589,33 @@
       "number": 1,
       "prompt": "Tai nạn hay cố ý?",
       "options": [
-        { "id": "a", "text": "Chập điện" },
-        { "id": "b", "text": "Cố ý đốt" }
+        {
+          "id": "a",
+          "text": "Chập điện ở dây cũ văn phòng"
+        },
+        {
+          "id": "c",
+          "text": "Chập ổ cắm chòi bảo vệ rồi lan sang"
+        },
+        {
+          "id": "b",
+          "text": "Cố ý đốt"
+        }
       ],
       "correctOptionId": "b",
       "requiredClues": [
         "H1",
         "H2",
         "H7"
+      ],
+      "supportingClues": [
+        "P4",
+        "X6",
+        "H9"
+      ],
+      "hints": [
+        "Chập điện thì phải có điện. Ra Sân sau xem Tủ điện: cầu dao tổng đang bật hay tắt?",
+        "Vào Văn phòng soi Vết cháy trên tường và Vật kim loại dưới tủ: lửa bắt đầu ở đâu, bằng cái gì?"
       ]
     },
     {
@@ -499,14 +623,28 @@
       "number": 2,
       "prompt": "Hàng kê khai có thật không?",
       "options": [
-        { "id": "a", "text": "Đủ 412 cuộn" },
-        { "id": "b", "text": "Phần lớn đã bị chuyển đi" }
+        {
+          "id": "a",
+          "text": "Đủ 412 cuộn"
+        },
+        {
+          "id": "b",
+          "text": "Phần lớn đã bị chuyển đi"
+        }
       ],
       "correctOptionId": "b",
       "requiredClues": [
         "H4",
         "P2",
         "P5"
+      ],
+      "supportingClues": [
+        "P1",
+        "P10"
+      ],
+      "hints": [
+        "Mở phong bì 1, đọc Danh mục hàng kê khai rồi ra Khu hàng xem những cuộn vải cháy dở.",
+        "Hàng thật đi đâu? Phong bì 2 có hợp đồng thuê kho ở Long An, xem ai ký nhận xe tải."
       ]
     },
     {
@@ -514,14 +652,31 @@
       "number": 3,
       "prompt": "Lửa được châm lúc nào?",
       "options": [
-        { "id": "a", "text": "Khoảng 02:38" },
-        { "id": "b", "text": "Giữa 01:02 và 01:21" },
-        { "id": "c", "text": "Trước 22:00" }
+        {
+          "id": "a",
+          "text": "Khoảng 02:38"
+        },
+        {
+          "id": "b",
+          "text": "Giữa 01:02 và 01:21"
+        },
+        {
+          "id": "c",
+          "text": "Trước 22:00"
+        }
       ],
       "correctOptionId": "b",
       "requiredClues": [
         "H2",
         "P6"
+      ],
+      "supportingClues": [
+        "P7",
+        "X4"
+      ],
+      "hints": [
+        "Đế nhang muỗi cháy 1 đến 1,5 giờ mới chạm xăng. Lửa bùng lúc 02:38, vậy nhang được châm khoảng mấy giờ?",
+        "Camera tiệm anh Huy (phong bì 2) ghi lại một chiếc xe ra vào hẻm. Nối nó với cái ngòi hẹn giờ."
       ]
     },
     {
@@ -529,13 +684,32 @@
       "number": 4,
       "prompt": "Ai vào được kho?",
       "options": [
-        { "id": "a", "text": "Người lạ phá khóa" },
-        { "id": "b", "text": "Người có chìa và quen ông Rô" }
+        {
+          "id": "a",
+          "text": "Người lạ phá khóa"
+        },
+        {
+          "id": "c",
+          "text": "Cựu công nhân quen đường, lẻn vào"
+        },
+        {
+          "id": "b",
+          "text": "Người có chìa và quen ông Rô"
+        }
       ],
       "correctOptionId": "b",
       "requiredClues": [
         "H5",
         "H6"
+      ],
+      "supportingClues": [
+        "P12",
+        "X4",
+        "X6"
+      ],
+      "hints": [
+        "Ra Sân sau xem Ổ khóa cửa hông: có dấu phá không? Ai có chìa?",
+        "Ra Cổng và chòi bảo vệ xem Hai cái ly, rồi hỏi chuyện ông Tư Rô xem đêm đó ai ghé."
       ]
     },
     {
@@ -543,13 +717,27 @@
       "number": 5,
       "prompt": "Kẻ đốt muốn mất cái gì?",
       "options": [
-        { "id": "a", "text": "Hàng hóa" },
-        { "id": "b", "text": "Sổ sách và dữ liệu kế toán" }
+        {
+          "id": "a",
+          "text": "Hàng hóa"
+        },
+        {
+          "id": "b",
+          "text": "Sổ sách và dữ liệu kế toán"
+        }
       ],
       "correctOptionId": "b",
       "requiredClues": [
         "H1",
         "H3"
+      ],
+      "supportingClues": [
+        "P8",
+        "P10"
+      ],
+      "hints": [
+        "Lửa bắt đầu ở góc văn phòng, dưới tủ sổ sách, không phải ở chỗ chứa vải.",
+        "Trong Văn phòng, mở Thùng máy tính: có thứ gì bị tháo ra trước khi cháy?"
       ]
     },
     {
@@ -557,13 +745,26 @@
       "number": 6,
       "prompt": "Vì sao đêm 14 mà không phải đêm 20?",
       "options": [
-        { "id": "a", "text": "Thịnh đổi ý làm sớm" },
-        { "id": "b", "text": "Thịnh đã hủy, kiểm kê ngày 16 sẽ lộ người khác" }
+        {
+          "id": "a",
+          "text": "Thịnh đổi ý làm sớm"
+        },
+        {
+          "id": "b",
+          "text": "Thịnh đã hủy, kiểm kê ngày 16 sẽ lộ người khác"
+        }
       ],
       "correctOptionId": "b",
       "requiredClues": [
         "P3",
         "P9"
+      ],
+      "supportingClues": [
+        "P13"
+      ],
+      "hints": [
+        "Ngân hàng hẹn kiểm kê kho ngày nào? Xem thông báo trong phong bì 1.",
+        "Phong bì 3 có tin Zalo ông Thịnh nhắn Bảo về \"vụ 20\". Ai mới là người sợ kiểm kê?"
       ]
     },
     {
@@ -571,15 +772,39 @@
       "number": 7,
       "prompt": "Ngoại phạm của ai đứng vững?",
       "options": [
-        { "id": "a", "text": "Tất cả đều vững" },
-        { "id": "b", "text": "Thịnh, Ngân, Huy vững. Bảo vỡ." },
-        { "id": "c", "text": "Thịnh vỡ" }
+        {
+          "id": "a",
+          "text": "Tất cả đều vững"
+        },
+        {
+          "id": "b",
+          "text": "Thịnh, Ngân, Huy vững. Bảo vỡ."
+        },
+        {
+          "id": "c",
+          "text": "Thịnh vỡ"
+        },
+        {
+          "id": "d",
+          "text": "Ngân vỡ, Bảo vững"
+        }
       ],
       "correctOptionId": "b",
       "requiredClues": [
         "P6",
         "P7",
         "X1"
+      ],
+      "supportingClues": [
+        "X3",
+        "X4",
+        "X5",
+        "P11",
+        "P13"
+      ],
+      "hints": [
+        "Giờ châm lửa là khoảng 01:02 đến 01:21. Hỏi chuyện từng người, xem ảnh họ đưa, rồi so với giờ đó.",
+        "Bài Facebook của Ngân cho biết giờ cô livestream. Bảo khai hát từ 1 giờ, nhưng Grab (phong bì 2) đón anh lúc 01:34 gần kho."
       ]
     }
   ],
@@ -666,6 +891,33 @@
       "id": "paid",
       "title": "Chi trả",
       "text": "Ba tháng sau, kiểm toán phát hiện kho Long An. Bạn bị kỷ luật."
+    }
+  ],
+  "endingRules": [
+    {
+      "ending": "paid",
+      "picks": {
+        "decision": "pay"
+      }
+    },
+    {
+      "ending": "full",
+      "correct": [
+        "fraud",
+        "arson"
+      ]
+    },
+    {
+      "ending": "half",
+      "correct": [
+        "fraud"
+      ],
+      "picks": {
+        "arson": "thinh"
+      }
+    },
+    {
+      "ending": "wrong"
     }
   ]
 }

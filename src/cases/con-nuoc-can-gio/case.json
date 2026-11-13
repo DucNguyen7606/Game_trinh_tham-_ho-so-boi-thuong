@@ -1,0 +1,960 @@
+{
+  "id": "con-nuoc-can-gio",
+  "title": "Hồ sơ bồi thường số 0909",
+  "intro": "Đêm 9/9, ông Trương Văn Lực, chủ vựa hải sản ở Cần Giờ, ra thăm đáy rồi không về. Sáng ra người ta thấy chiếc ghe úp ở Vàm Sát. Ba ngày sau, một thi thể dạt vào bãi bồi Cần Thạnh. Vợ ông đòi bồi thường bảo hiểm nhân thọ 5 tỷ đồng, hợp đồng mới ký bốn tháng. Bạn có 10 ngày để đề xuất chi trả hay từ chối. Mỗi ngày khám được 1 khu hiện trường. Hỏi chuyện thì không giới hạn.",
+  "player": {
+    "name": "Lê Thu Hạnh",
+    "role": "Chuyên viên giám định bồi thường, Bảo hiểm An Tín",
+    "portrait": {
+      "skin": 0,
+      "hair": "bun",
+      "hairColor": "black",
+      "build": "normal",
+      "outfit": "shirt",
+      "outfitColor": "navy",
+      "age": "young",
+      "backdrop": "teal"
+    }
+  },
+  "photoDate": "14 09 '25",
+  "days": 10,
+  "limitsPerDay": {
+    "talk": 2,
+    "explore": 1
+  },
+  "suspects": [
+    {
+      "id": "hong",
+      "name": "Phạm Thị Hồng",
+      "age": 44,
+      "role": "Vợ ông Lực, người thụ hưởng",
+      "interrogation": "hong",
+      "portrait": {
+        "skin": 1,
+        "hair": "bun",
+        "hairColor": "black",
+        "build": "normal",
+        "outfit": "blouse",
+        "outfitColor": "white",
+        "accessory": [
+          "earrings"
+        ],
+        "age": "mid",
+        "backdrop": "night",
+        "mood": "worried"
+      },
+      "profile": {
+        "traits": [
+          "Chịu thương chịu khó",
+          "Ít nói",
+          "Giữ ý"
+        ],
+        "habit": "Thức khuya xem phim bộ với con gái. Hay gửi hình cho em gái ở Bình Dương.",
+        "relation": "Vợ ông Lực 20 năm, cùng ông gầy dựng vựa. Đứng tên người thụ hưởng hợp đồng 5 tỷ.",
+        "quote": "\"Chồng tôi chết rồi, {xco} còn muốn hỏi gì nữa?\"",
+        "note": "Nhận dạng thi thể chỉ qua bộ đồ và chiếc nhẫn, rồi từ chối khám nghiệm. Người hưởng lợi rõ nhất."
+      }
+    },
+    {
+      "id": "tam",
+      "name": "Nguyễn Văn Tâm (Sáu Tâm)",
+      "age": 52,
+      "role": "Tài công của vựa, người báo tin",
+      "interrogation": "tam",
+      "portrait": {
+        "skin": 3,
+        "hair": "buzz",
+        "hairColor": "gray",
+        "build": "thin",
+        "outfit": "tank",
+        "outfitColor": "khaki",
+        "age": "old",
+        "backdrop": "teal",
+        "mood": "stern"
+      },
+      "profile": {
+        "traits": [
+          "Lầm lì",
+          "Thạo sông nước",
+          "Trung thành, ai cũng nói vậy"
+        ],
+        "habit": "Hút thuốc rê tự cuốn bằng giấy quyến, điếu này nối điếu kia. Đi đâu cũng mang ủng cao su.",
+        "relation": "Lái ghe cho ông Lực 12 năm. Con trai đang nằm viện ở thành phố chờ mổ tim.",
+        "quote": "\"Tui theo anh Lực mười hai năm. Tui còn đau hơn ai hết.\"",
+        "note": "Người đầu tiên thấy ghe úp và báo tin. Nói đêm đó ngủ ở chòi ngoài bến, không ai làm chứng."
+      }
+    },
+    {
+      "id": "khang",
+      "name": "Lý Minh Khang",
+      "age": 38,
+      "role": "Chủ nợ, cho vay nóng",
+      "interrogation": "khang",
+      "portrait": {
+        "skin": 1,
+        "hair": "side-part",
+        "hairColor": "black",
+        "build": "heavy",
+        "outfit": "polo",
+        "outfitColor": "charcoal",
+        "accessory": [
+          "gold-chain"
+        ],
+        "age": "mid",
+        "backdrop": "rust",
+        "mood": "angry"
+      },
+      "profile": {
+        "traits": [
+          "Nói to",
+          "Sòng phẳng theo kiểu của mình",
+          "Thích khoe"
+        ],
+        "habit": "Đêm nào cũng nhậu ở quán ốc đầu phà Bình Khánh, chụp hình đăng mạng.",
+        "relation": "Cho ông Lực vay 1,8 tỷ từ đầu năm, lãi ngày. Hạn chót là 10/9.",
+        "quote": "\"Nó chết rồi thì tui đòi ai?\"",
+        "note": "Nhắn đe dọa ông Lực ba ngày trước vụ chìm ghe. Động cơ rõ nhất trên giấy."
+      }
+    },
+    {
+      "id": "vinh",
+      "name": "Võ Thanh Vinh",
+      "age": 35,
+      "role": "Thương lái, bạn hàng của vựa",
+      "interrogation": "vinh",
+      "portrait": {
+        "skin": 0,
+        "hair": "short",
+        "hairColor": "black",
+        "build": "normal",
+        "outfit": "shirt",
+        "outfitColor": "sky",
+        "accessory": [
+          "pen"
+        ],
+        "age": "young",
+        "backdrop": "amber",
+        "mood": "neutral"
+      },
+      "profile": {
+        "traits": [
+          "Khéo ăn nói",
+          "Tính toán",
+          "Không thích rủi ro"
+        ],
+        "habit": "Đêm nào cũng ở chợ đầu mối Bình Điền từ nửa đêm tới sáng để cân hàng.",
+        "relation": "Mua tôm của vựa Lực Phát 6 năm. Từng đề nghị mua lại cả vựa.",
+        "quote": "\"Ảnh chết thì vựa thành đống nợ, tui mua làm chi?\"",
+        "note": "Đặt cọc 600 triệu tiền tôm mà chưa nhận hàng. Có lý do để giận, và có lý do để muốn vựa đổi chủ."
+      }
+    },
+    {
+      "id": "luc",
+      "name": "Trương Văn Lực",
+      "age": 49,
+      "role": "Người được bảo hiểm, đã chết",
+      "unavailable": "Đã mất. Chỉ còn hồ sơ và đồ đạc của ông.",
+      "portrait": {
+        "skin": 2,
+        "hair": "short",
+        "hairColor": "gray",
+        "build": "heavy",
+        "outfit": "polo",
+        "outfitColor": "olive",
+        "age": "mid",
+        "backdrop": "night",
+        "mood": "smile"
+      },
+      "profile": {
+        "traits": [
+          "Xởi lởi",
+          "Ham làm lớn",
+          "Hay hứa"
+        ],
+        "habit": "Đêm nào cũng tự lái ghe ra thăm đáy, mặc bộ bà ba đen. Uống thuốc huyết áp mỗi sáng.",
+        "relation": "Chủ vựa hải sản Lực Phát ở Long Hòa, Cần Giờ. Nợ khoảng 3 tỷ sau hai vụ tôm thất.",
+        "quote": "\"Ráng chờ tới tháng Chạp, anh trả đủ.\"",
+        "note": "Mua bảo hiểm nhân thọ 5 tỷ ngày 12/5. Bốn tháng sau thì chết. Hồ sơ này xoay quanh câu hỏi: ông có thật sự chết đuối?"
+      }
+    }
+  ],
+  "zones": [
+    {
+      "id": "ben-ghe",
+      "name": "Bến ghe",
+      "description": "Chiếc ghe được kéo về bến vựa, nằm nghiêng trên bãi bùn xám lúc nước ròng.",
+      "hotspots": [
+        {
+          "id": "ghe-lu",
+          "label": "Lỗ lù dưới đáy ghe",
+          "x": 46,
+          "y": 74,
+          "note": "Nút lù, cái nút gỗ bịt lỗ thoát nước dưới đáy ghe, đã bị rút ra. Ren lỗ còn nguyên, vỏ ghe không nứt, không trầy. Ghe không đâm vào đâu cả: nước vào từ cái lỗ này.",
+          "clueId": "H1"
+        },
+        {
+          "id": "ghe-may",
+          "label": "Máy ghe",
+          "x": 66,
+          "y": 52,
+          "note": "Cần ga kéo về số 0, công tắc ở vị trí TẮT, ổ chìa khóa trống. Máy được tắt bằng tay và chìa được rút ra trước khi ghe chìm.",
+          "clueId": "H3"
+        },
+        {
+          "id": "ghe-moc",
+          "label": "Móc treo áo phao",
+          "x": 30,
+          "y": 46,
+          "note": "Hai cái móc trên mui ghe. Một móc còn áo phao xanh của ông Tâm, móc kia trống. Ai cũng nói ông Lực chưa bao giờ chịu mặc áo phao.",
+          "clueId": "H2"
+        },
+        {
+          "id": "ghe-luoi",
+          "label": "Đống lưới",
+          "x": 82,
+          "y": 76,
+          "note": "Lưới đáy cuộn gọn, khô cong. Đêm đó không ai thả lưới."
+        },
+        {
+          "id": "ghe-bun",
+          "label": "Bùn ở bến",
+          "x": 14,
+          "y": 86,
+          "note": "Bùn bến vựa lỏng và xám như tro bếp. Từ đây lên tới Vàm Sát đều là thứ bùn này."
+        },
+        {
+          "id": "ghe-son",
+          "label": "Vết sơn xanh trên mạn",
+          "x": 60,
+          "y": 64,
+          "note": "Một vệt sơn xanh dương dài gần mét cọ trên mạn trái, như bị một chiếc ghe khác cặp sát. Ghe của Vinh sơn xanh dương. Nhìn kỹ: mép vệt sơn đã bạc nắng, có hà con bám lên.",
+          "clueId": "H11"
+        }
+      ]
+    },
+    {
+      "id": "van-phong",
+      "name": "Văn phòng vựa",
+      "description": "Gian nhà gỗ sát bến, mùi tôm khô và dầu máy. Bàn làm việc của ông Lực vẫn để nguyên.",
+      "hotspots": [
+        {
+          "id": "vp-ket",
+          "label": "Két sắt",
+          "x": 24,
+          "y": 62,
+          "note": "Két sắt mở, bên trong chỉ có mấy xấp giấy nợ và một hộp nhung đỏ của tiệm vàng Kim Hưng. Hộp có 30 khe đựng vàng miếng, khe nào cũng trống.",
+          "clueId": "H4"
+        },
+        {
+          "id": "vp-lich",
+          "label": "Lịch con nước",
+          "x": 56,
+          "y": 30,
+          "note": "Tờ lịch con nước tháng 9 dán trên vách. Ngày 9 được khoanh bút bi, bên cạnh ghi tay: \"23g40 đứng · ròng → R.Đước\".",
+          "clueId": "H5"
+        },
+        {
+          "id": "vp-so",
+          "label": "Sổ hàng",
+          "x": 42,
+          "y": 66,
+          "note": "Sổ ghi hàng ra vào. Từ giữa tháng 8 vựa gần như không nhập tôm, chỉ xuất. Dòng cuối: \"Vinh cọc 600tr, giao 15/9\"."
+        },
+        {
+          "id": "vp-can",
+          "label": "Bàn cân",
+          "x": 80,
+          "y": 66,
+          "note": "Cái cân đồng hồ 100 ký, kim nằm ở số 0. Không có gì đáng chú ý."
+        },
+        {
+          "id": "vp-ao",
+          "label": "Áo mưa treo vách",
+          "x": 88,
+          "y": 34,
+          "note": "Bộ áo mưa vàng của vựa, còn khô, bụi bám trên vai áo. Đêm 9/9 trời lặng, không ai cần tới nó."
+        }
+      ]
+    },
+    {
+      "id": "nha",
+      "name": "Nhà ông Lực",
+      "description": "Căn nhà tường vàng sau vựa. Bàn thờ đã đặt di ảnh, nhang khói chưa tắt.",
+      "hotspots": [
+        {
+          "id": "nha-thuoc",
+          "label": "Hộp thuốc huyết áp",
+          "x": 70,
+          "y": 52,
+          "note": "Hộp thuốc huyết áp ông Lực uống mỗi sáng. Đơn thuốc mới lĩnh ngày 5/9 cho 30 ngày, nhưng trong hộp không còn vỉ nào, chỉ còn tờ hướng dẫn.",
+          "clueId": "H6"
+        },
+        {
+          "id": "nha-dt",
+          "label": "Điện thoại trên đầu giường",
+          "x": 36,
+          "y": 64,
+          "note": "Điện thoại của ông Lực, vẫn cắm sạc. Bà Hồng nói ông đi thăm đáy thì để ở nhà cho khỏi ướt. Máy khóa mật khẩu, bà đưa luôn cho bạn mang đi khôi phục."
+        },
+        {
+          "id": "nha-tho",
+          "label": "Bàn thờ",
+          "x": 50,
+          "y": 26,
+          "note": "Di ảnh ông Lực cười hiền. Nhang mới thắp, đĩa trái cây còn tươi."
+        },
+        {
+          "id": "nha-tu",
+          "label": "Tủ quần áo",
+          "x": 16,
+          "y": 46,
+          "note": "Đồ của ông Lực còn đủ, chỉ thiếu bộ bà ba đen và đôi dép nhựa ông mặc đêm đó."
+        },
+        {
+          "id": "nha-so",
+          "label": "Sổ tiết kiệm",
+          "x": 84,
+          "y": 76,
+          "note": "Trong ngăn kéo bàn trang điểm có một sổ tiết kiệm đứng tên Phạm Thị Hồng, mở ngày 20/5/2025, gửi 200 triệu. Tám ngày sau khi chồng bà ký hợp đồng bảo hiểm 5 tỷ.",
+          "clueId": "H12"
+        }
+      ]
+    },
+    {
+      "id": "rach",
+      "name": "Rạch Đước",
+      "description": "Con rạch hẹp giữa rừng đước, cách bến 2 km về phía biển. Chỉ vào được bằng xuồng.",
+      "hotspots": [
+        {
+          "id": "rach-phao",
+          "label": "Mảnh vải cam trên rễ đước",
+          "x": 28,
+          "y": 52,
+          "note": "Một mảnh áo phao màu cam mắc trên rễ đước, mép rách tưa như bị giật mạnh. Trên mảnh vải còn chữ viết tay bằng sơn: \"LỰC PH...\"",
+          "clueId": "H7"
+        },
+        {
+          "id": "rach-thuoc",
+          "label": "Mẩu thuốc trên gốc đước",
+          "x": 62,
+          "y": 70,
+          "note": "Năm mẩu thuốc rê cuốn giấy quyến, xếp thành hàng trên gốc đước khô. Người hút ngồi chờ ở đây khá lâu.",
+          "clueId": "H8"
+        },
+        {
+          "id": "rach-bun",
+          "label": "Vệt kéo trên bùn",
+          "x": 46,
+          "y": 82,
+          "note": "Bùn ở rạch này đỏ quánh như gạch non, dính vào đâu là khó rửa. Có dấu mũi xuồng tì vào bờ, và một vệt dài như ai kéo vật nặng từ bờ xuống nước.",
+          "clueId": "H9"
+        },
+        {
+          "id": "rach-sao",
+          "label": "Đoạn sào tre",
+          "x": 80,
+          "y": 58,
+          "note": "Nửa cây sào chống xuồng bằng tre già kẹt giữa rễ đước. Chỗ gãy còn trắng, mới gãy chưa lâu. Nửa kia không thấy đâu.",
+          "clueId": "H10"
+        },
+        {
+          "id": "rach-cua",
+          "label": "Hang cua",
+          "x": 12,
+          "y": 76,
+          "note": "Hang cua đước lỗ chỗ dưới gốc cây. Không có gì đáng chú ý."
+        },
+        {
+          "id": "rach-lon",
+          "label": "Vỏ lon bia",
+          "x": 90,
+          "y": 84,
+          "note": "Hai vỏ lon bia nhãn đã bạc màu, đáy lon rỉ sét, bùn lấp nửa. Nằm ở đây ít nhất cả tháng."
+        }
+      ]
+    }
+  ],
+  "clues": [
+    {
+      "id": "H1",
+      "title": "Nút lù bị rút",
+      "description": "Ghe chìm vì nước vào từ lỗ lù dưới đáy. Vỏ ghe không va đập gì.",
+      "source": "scene"
+    },
+    {
+      "id": "H2",
+      "title": "Áo phao của ông Lực biến mất",
+      "description": "Móc áo phao của ông Lực trống. Người chưa bao giờ mặc áo phao lại mang nó theo.",
+      "source": "scene"
+    },
+    {
+      "id": "H3",
+      "title": "Máy tắt, chìa đã rút",
+      "description": "Máy ghe được tắt bằng tay và rút chìa trước khi chìm.",
+      "source": "scene"
+    },
+    {
+      "id": "H4",
+      "title": "Hộp vàng Kim Hưng trống",
+      "description": "Hộp đựng 30 lượng vàng miếng trong két trống trơn.",
+      "source": "scene"
+    },
+    {
+      "id": "H5",
+      "title": "Lịch con nước khoanh ngày 9",
+      "description": "Ghi tay: \"23g40 đứng · ròng → R.Đước\".",
+      "source": "scene"
+    },
+    {
+      "id": "H6",
+      "title": "Thuốc huyết áp cả tháng biến mất",
+      "description": "Ông Lực mang theo thuốc đủ 30 ngày. Người đi thăm đáy một đêm không cần nhiêu đó.",
+      "source": "scene"
+    },
+    {
+      "id": "H7",
+      "title": "Mảnh áo phao \"LỰC PH...\" ở Rạch Đước",
+      "description": "Ông Lực tới được Rạch Đước, còn mặc áo phao. Áo bị giật rách ở đây.",
+      "source": "scene"
+    },
+    {
+      "id": "H8",
+      "title": "Năm mẩu thuốc rê",
+      "description": "Ai đó ngồi chờ rất lâu ở Rạch Đước, hút thuốc rê cuốn giấy quyến.",
+      "source": "scene"
+    },
+    {
+      "id": "H9",
+      "title": "Vệt kéo trên bùn đỏ",
+      "description": "Dấu xuồng tì bờ và vệt kéo vật nặng xuống nước. Bùn Rạch Đước màu đỏ, khác hẳn bùn xám ở bến.",
+      "source": "scene"
+    },
+    {
+      "id": "H10",
+      "title": "Sào tre gãy mới",
+      "description": "Nửa cây sào chống xuồng, chỗ gãy còn trắng.",
+      "source": "scene"
+    },
+    {
+      "id": "H11",
+      "title": "Vết sơn xanh trên mạn ghe",
+      "description": "Sơn xanh dương cọ trên mạn trái, như bị ghe khác cặp sát. Mép sơn đã bạc, có hà bám.",
+      "source": "scene"
+    },
+    {
+      "id": "H12",
+      "title": "Sổ tiết kiệm 200 triệu của bà Hồng",
+      "description": "Mở 20/5/2025, tám ngày sau khi ông Lực mua bảo hiểm 5 tỷ.",
+      "source": "scene"
+    },
+    {
+      "id": "P1",
+      "title": "Hợp đồng bảo hiểm nhân thọ",
+      "description": "Ký 12/5/2025, số tiền 5 tỷ, chi trả khi tử vong. Chỉ từ chối nếu tự tử trong 2 năm đầu, hoặc người thụ hưởng cố ý gây ra cái chết. Người thụ hưởng: Phạm Thị Hồng.",
+      "source": "file"
+    },
+    {
+      "id": "P2",
+      "title": "Biên bản của công an xã",
+      "description": "Ghe úp ở Vàm Sát, 3 km phía thượng nguồn. Thi thể dạt ở Cần Thạnh, 9 km phía biển. Đêm 9/9 trời lặng, gió nhẹ.",
+      "source": "file"
+    },
+    {
+      "id": "P3",
+      "title": "Biên bản nhận dạng",
+      "description": "Bà Hồng nhận dạng qua bộ bà ba đen và nhẫn cưới, từ chối khám nghiệm, xin an táng sớm.",
+      "source": "file"
+    },
+    {
+      "id": "P4",
+      "title": "Bảng con nước 9 đến 10/9",
+      "description": "Nước lên, chảy vào sông tới 23:40. Sau đó nước ròng, chảy ra biển tới 06:10.",
+      "source": "file"
+    },
+    {
+      "id": "P5",
+      "title": "Kết quả giám định ADN và pháp y",
+      "description": "ADN khớp con gái ông Lực. Phổi gần như không có nước, sau gáy có vết nứt do vật tày dạng thanh tròn: chết trước khi xuống nước.",
+      "source": "file"
+    },
+    {
+      "id": "P6",
+      "title": "Hóa đơn tiệm vàng Kim Hưng",
+      "description": "8/9: ông Lực mua 30 lượng vàng miếng, 2,46 tỷ, số sê-ri KH-091201 đến KH-091230.",
+      "source": "file"
+    },
+    {
+      "id": "P7",
+      "title": "Vé xe đi Châu Đốc",
+      "description": "Khách \"Trần Văn Lâm\", 06:00 ngày 10/9, ghế A7, không lên xe. Đặt từ số 0939 ••• 471.",
+      "source": "file"
+    },
+    {
+      "id": "P8",
+      "title": "Nhật ký cuộc gọi số 0939 ••• 471",
+      "description": "Sim đăng ký tên người khác. 22:58 gọi bà Hồng 12 giây; 23:47 và 00:21 gọi ông Tâm, máy bắt trạm Rạch Đước. Sau đó tắt hẳn.",
+      "source": "file"
+    },
+    {
+      "id": "P9",
+      "title": "Camera phà Bình Khánh",
+      "description": "02:16 ngày 10/9, xe của ông Tâm qua phà về thành phố, chở một thùng xốp. 04:41 quay về.",
+      "source": "file"
+    },
+    {
+      "id": "P10",
+      "title": "Tin Zalo khôi phục",
+      "description": "Lực nhắn Tâm 7/9: \"Mày chờ ở Rạch Đước. Đừng cho bả biết gì hết, bả không biết thì khóc mới thiệt.\" Bà Hồng tự giao nộp điện thoại của chồng.",
+      "source": "file"
+    },
+    {
+      "id": "P11",
+      "title": "Biên nhận tiệm vàng Quận 8",
+      "description": "15/9: Nguyễn Văn Tâm bán 3 lượng vàng miếng, sê-ri KH-091207 đến KH-091209.",
+      "source": "file"
+    },
+    {
+      "id": "X1",
+      "title": "Giấy nợ và tin nhắn của Khang",
+      "description": "Nợ 1,8 tỷ, hạn 10/9. Khang nhắn ngày 6/9: \"Không trả thì đừng trách.\"",
+      "source": "decoy"
+    },
+    {
+      "id": "X2",
+      "title": "Thư hỏi mua vựa của Vinh",
+      "description": "Vinh đề nghị mua lại vựa Lực Phát với giá 3,2 tỷ, ông Lực chưa trả lời.",
+      "source": "decoy"
+    },
+    {
+      "id": "X3",
+      "title": "Ảnh nhậu của Khang",
+      "description": "Khang cho xem ảnh ở quán ốc đầu phà Bình Khánh lúc 00:15. Soi kỹ màn hình tivi và cái đồng hồ trên vách.",
+      "source": "testimony"
+    },
+    {
+      "id": "X4",
+      "title": "Ảnh ghe úp ông Tâm gửi",
+      "description": "Ông Tâm chụp chiếc ghe úp ở Vàm Sát lúc 05:42. Soi kỹ đôi ủng và chiếc xuồng của ông.",
+      "source": "testimony"
+    },
+    {
+      "id": "X5",
+      "title": "Ảnh bà Hồng gửi em gái",
+      "description": "Hai mẹ con xem phim ở nhà lúc 00:28. Soi kỹ cái kệ phía sau và dòng tin bà gửi kèm.",
+      "source": "testimony"
+    },
+    {
+      "id": "X6",
+      "title": "Ảnh Vinh ở chợ Bình Điền",
+      "description": "Vinh đứng cạnh bàn cân ở chợ đầu mối lúc 01:30, cách Cần Giờ hơn 50 km.",
+      "source": "testimony"
+    },
+    {
+      "id": "X7",
+      "title": "Biên bản hòa giải nợ Khang và Lực",
+      "description": "8/8/2025 tại UBND xã: Lực xin khất nợ 1,8 tỷ tới 10/9. Khang ghi thêm tay: \"Quá hạn tôi tự xử.\"",
+      "source": "decoy"
+    },
+    {
+      "id": "X8",
+      "title": "Sổ hụi của bà Hồng",
+      "description": "Bà Hồng chụp sổ hụi cho bạn xem. Đọc kỹ ngày hốt hụi và kỳ đóng chót.",
+      "source": "testimony"
+    },
+    {
+      "id": "X9",
+      "title": "Tin nhắn bà Hồng gửi em gái 21:15",
+      "description": "Đêm 9/9: \"Ảnh đi rồi. Mai là xong hết rồi, em đừng lo cho chị nữa.\"",
+      "source": "decoy"
+    }
+  ],
+  "envelopes": [
+    {
+      "id": "pb1",
+      "number": 1,
+      "title": "Hồ sơ yêu cầu bồi thường",
+      "unlockedBy": null,
+      "documents": [
+        "P1",
+        "P2",
+        "P3",
+        "P4",
+        "X1",
+        "X2",
+        "X7"
+      ]
+    },
+    {
+      "id": "pb2",
+      "number": 2,
+      "title": "Giám định bổ sung",
+      "unlockedBy": "q1",
+      "documents": [
+        "P5",
+        "P6",
+        "P7",
+        "P8",
+        "P9",
+        "X9"
+      ]
+    },
+    {
+      "id": "pb3",
+      "number": 3,
+      "title": "Truy vết số vàng",
+      "unlockedBy": "q5",
+      "documents": [
+        "P10",
+        "P11"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "number": 1,
+      "prompt": "Ghe chìm vì tai nạn hay bị cố ý đánh chìm?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Tai nạn, sóng đánh úp"
+        },
+        {
+          "id": "c",
+          "text": "Bị ghe khác đâm lật"
+        },
+        {
+          "id": "b",
+          "text": "Bị cố ý đánh chìm"
+        }
+      ],
+      "correctOptionId": "b",
+      "requiredClues": [
+        "H1",
+        "H3"
+      ],
+      "supportingClues": [
+        "H2",
+        "P2"
+      ],
+      "hints": [
+        "Ra Bến ghe xem chiếc ghe: nước vào từ đâu? Soi Lỗ lù dưới đáy ghe.",
+        "Ghe gặp nạn khi đang chạy thì máy vẫn nổ, chìa vẫn cắm. Xem Máy ghe."
+      ]
+    },
+    {
+      "id": "q2",
+      "number": 2,
+      "prompt": "Ông Lực xuống nước lúc nào, ở đâu?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Cùng lúc ghe chìm, khoảng 23:00"
+        },
+        {
+          "id": "b",
+          "text": "Sau 23:40, ở Rạch Đước"
+        }
+      ],
+      "correctOptionId": "b",
+      "requiredClues": [
+        "P2",
+        "P4",
+        "H7"
+      ],
+      "supportingClues": [
+        "H5",
+        "P8"
+      ],
+      "hints": [
+        "Đọc Biên bản công an xã: ghe trôi về phía nào, thi thể dạt về phía nào? Rồi so với Bảng con nước.",
+        "Nước lên đẩy mọi thứ vào sông, nước ròng kéo ra biển. Thi thể trôi ngược chiều chiếc ghe, vậy ông xuống nước sau khi nước đổi chiều. Ra Rạch Đước tìm dấu vết ông."
+      ]
+    },
+    {
+      "id": "q3",
+      "number": 3,
+      "prompt": "Ông Lực định làm gì đêm đó?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ra thăm đáy như mọi đêm"
+        },
+        {
+          "id": "b",
+          "text": "Tự tử vì nợ"
+        },
+        {
+          "id": "c",
+          "text": "Giả chết, trốn đi với số vàng"
+        }
+      ],
+      "correctOptionId": "c",
+      "requiredClues": [
+        "H6",
+        "P6",
+        "P7"
+      ],
+      "supportingClues": [
+        "H2",
+        "H4",
+        "H5",
+        "X1"
+      ],
+      "hints": [
+        "Người định chết không mang thuốc huyết áp cho cả tháng. Ra Nhà ông Lực xem Hộp thuốc.",
+        "Phong bì 2 có hóa đơn tiệm vàng ngày 8/9 và một vé xe đi Châu Đốc sáng 10/9. Ai mua, đặt từ số nào?"
+      ]
+    },
+    {
+      "id": "q4",
+      "number": 4,
+      "prompt": "Ông Lực chết như thế nào?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Đuối nước khi ghe chìm"
+        },
+        {
+          "id": "b",
+          "text": "Thi thể là người khác, ông Lực còn sống"
+        },
+        {
+          "id": "c",
+          "text": "Bị đánh chết rồi thả xuống nước"
+        }
+      ],
+      "correctOptionId": "c",
+      "requiredClues": [
+        "P5",
+        "H10"
+      ],
+      "supportingClues": [
+        "H7",
+        "H9"
+      ],
+      "hints": [
+        "Đọc Kết quả giám định trong phong bì 2: thi thể là ai, và trong phổi có nước không?",
+        "Vết nứt sau gáy do vật tày dạng thanh tròn. Ở Rạch Đước có thứ gì như vậy vừa bị gãy?"
+      ]
+    },
+    {
+      "id": "q5",
+      "number": 5,
+      "prompt": "Ai chờ ông Lực ở Rạch Đước?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Lý Minh Khang"
+        },
+        {
+          "id": "b",
+          "text": "Võ Thanh Vinh"
+        },
+        {
+          "id": "c",
+          "text": "Nguyễn Văn Tâm"
+        },
+        {
+          "id": "d",
+          "text": "Phạm Thị Hồng"
+        }
+      ],
+      "correctOptionId": "c",
+      "requiredClues": [
+        "H8",
+        "P8"
+      ],
+      "supportingClues": [
+        "X4",
+        "H9",
+        "P10"
+      ],
+      "hints": [
+        "Ở Rạch Đước có người ngồi chờ lâu và hút thuốc. Xem hồ sơ nhân vật: ai hút thuốc rê cuốn tay?",
+        "Nhật ký cuộc gọi của số sim lạ (phong bì 2): trước khi tắt máy, ông Lực gọi cho ai hai lần?"
+      ]
+    },
+    {
+      "id": "q6",
+      "number": 6,
+      "prompt": "Bà Hồng có biết kế hoạch không?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Không biết gì, bà chỉ là người vợ mất chồng"
+        },
+        {
+          "id": "b",
+          "text": "Biết và tiếp tay"
+        },
+        {
+          "id": "c",
+          "text": "Biết trước, đã chuẩn bị tiền riêng"
+        }
+      ],
+      "correctOptionId": "a",
+      "requiredClues": [
+        "X5",
+        "P10"
+      ],
+      "supportingClues": [
+        "P3",
+        "P8",
+        "X8"
+      ],
+      "hints": [
+        "Hỏi chuyện bà Hồng xem ảnh bà gửi em gái. Điện thoại của ai đang sạc trên kệ? Bà nhắn em gái là sáng mai tính làm gì?",
+        "Phong bì 3 có tin Zalo khôi phục từ điện thoại ông Lực để ở nhà. Ông dặn Tâm giấu ai?"
+      ]
+    },
+    {
+      "id": "q7",
+      "number": 7,
+      "prompt": "Ngoại phạm của ai đứng vững?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Tất cả đều vững"
+        },
+        {
+          "id": "b",
+          "text": "Khang, Vinh, Hồng vững. Tâm vỡ."
+        },
+        {
+          "id": "c",
+          "text": "Khang vỡ"
+        }
+      ],
+      "correctOptionId": "b",
+      "requiredClues": [
+        "P9",
+        "X3",
+        "X6"
+      ],
+      "supportingClues": [
+        "X4",
+        "X5",
+        "P8",
+        "P11"
+      ],
+      "hints": [
+        "Ông Lực chết sau 00:21 ở Rạch Đước, nơi chỉ tới được bằng xuồng. Hỏi chuyện từng người, xem ảnh họ đưa và so với giờ đó.",
+        "Ông Tâm khai ngủ ở chòi từ 9 giờ tới 5 giờ sáng. Camera phà Bình Khánh (phong bì 2) nói gì?"
+      ]
+    }
+  ],
+  "verdict": [
+    {
+      "id": "plan",
+      "prompt": "Ai dựng vụ chìm ghe?",
+      "options": [
+        {
+          "id": "luc",
+          "text": "Trương Văn Lực"
+        },
+        {
+          "id": "hong",
+          "text": "Phạm Thị Hồng"
+        },
+        {
+          "id": "tam",
+          "text": "Nguyễn Văn Tâm"
+        },
+        {
+          "id": "khang",
+          "text": "Lý Minh Khang"
+        }
+      ],
+      "correctOptionId": "luc"
+    },
+    {
+      "id": "killer",
+      "prompt": "Ai giết ông Lực?",
+      "options": [
+        {
+          "id": "tam",
+          "text": "Nguyễn Văn Tâm"
+        },
+        {
+          "id": "khang",
+          "text": "Lý Minh Khang"
+        },
+        {
+          "id": "vinh",
+          "text": "Võ Thanh Vinh"
+        },
+        {
+          "id": "hong",
+          "text": "Phạm Thị Hồng"
+        },
+        {
+          "id": "none",
+          "text": "Không ai, ông chết đuối"
+        }
+      ],
+      "correctOptionId": "tam"
+    },
+    {
+      "id": "decision",
+      "prompt": "Đề xuất của bạn",
+      "options": [
+        {
+          "id": "pay",
+          "text": "Chi trả 5 tỷ cho bà Hồng, chuyển hồ sơ án mạng cho công an"
+        },
+        {
+          "id": "deny",
+          "text": "Từ chối vì ông Lực dựng chuyện giả chết, chuyển hồ sơ cho công an"
+        }
+      ],
+      "correctOptionId": "pay"
+    }
+  ],
+  "endings": [
+    {
+      "id": "full",
+      "title": "Trọn vẹn",
+      "text": "An Tín chi 5 tỷ cho bà Hồng: ông Lực đã chết thật, và người thụ hưởng không hề biết kế hoạch của chồng. Ông Tâm bị khởi tố tội giết người và cướp tài sản. 27 lượng vàng thu hồi được trả cho Khang và Vinh."
+    },
+    {
+      "id": "half",
+      "title": "Đúng một nửa",
+      "text": "Bà Hồng được chi trả và Tâm bị bắt. Nhưng hồ sơ ghi sai người bày vụ chìm ghe, luật sư của Tâm bám vào đó, nói thân chủ chỉ là người làm thuê bị ép."
+    },
+    {
+      "id": "wrong",
+      "title": "Sai người",
+      "text": "Bà Hồng được chi trả đúng, nhưng người bạn chỉ ra là kẻ giết ông Lực có ngoại phạm vững. Hồ sơ hình sự bị trả về. Sáu Tâm vẫn lái ghe ở Long Hòa."
+    },
+    {
+      "id": "unjust",
+      "title": "Oan cho người ngay",
+      "text": "Bạn từ chối vì ông Lực định giả chết. Nhưng ông chết thật, bị người khác giết, còn bà Hồng không biết gì. Bà kiện, chỉ cần đọc đúng Điều 9. An Tín thua, chi đủ 5 tỷ kèm lãi chậm trả."
+    }
+  ],
+  "endingRules": [
+    {
+      "ending": "unjust",
+      "picks": {
+        "decision": "deny"
+      }
+    },
+    {
+      "ending": "full",
+      "correct": [
+        "plan",
+        "killer"
+      ]
+    },
+    {
+      "ending": "half",
+      "correct": [
+        "killer"
+      ]
+    },
+    {
+      "ending": "wrong"
+    }
+  ]
+}

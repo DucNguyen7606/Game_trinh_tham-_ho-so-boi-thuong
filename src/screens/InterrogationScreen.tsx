@@ -1,24 +1,31 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Compiler, Story } from 'inkjs/full'
-import { useGame } from '@/game/store'
+import { useGame, type TranscriptLine } from '@/game/store'
 import { getInkSource } from '@/game/caseLoader'
+import { PhotoLightbox, ShownPhoto } from '@/components/SuspectPhoto'
 import { Button } from '@/components/ui/button'
 import { Portrait } from '@/art/Portrait'
+import { addressInk, useProfile } from '@/series/profile'
 
-interface Line {
-  text: string
-  fromPlayer?: boolean
-}
+// A line can carry a photo the suspect shows (ink tag `#photo:X3`).
+type Line = TranscriptLine
 
 export default function InterrogationScreen() {
-  const { data, activeSuspect, foundClues, go } = useGame()
+  const { data, activeSuspect, foundClues, go, pinClue, saveTranscript } = useGame()
+  // Questions asked in earlier interviews, marked so the player can skip them.
+  const [askedBefore] = useState(() => {
+    const sessions = useGame.getState().transcripts[activeSuspect ?? ''] ?? []
+    return new Set(sessions.slice(0, -1).flatMap((x) => x.lines.filter((l) => l.fromPlayer).map((l) => l.text.trim())))
+  })
+  const [zoomed, setZoomed] = useState<string | null>(null)
   const suspect = data.suspects.find((s) => s.id === activeSuspect)
 
   const story = useMemo(() => {
     if (!suspect?.interrogation) return null
     const source = getInkSource(data.id, suspect.interrogation)
     if (!source) return null
-    const s = new Compiler(source).Compile() as Story
+    // How people address the investigator ({xco}, {xchi}…) depends on the chosen character.
+    const s = new Compiler(`${addressInk(useProfile.getState().gender)}\n${source}`).Compile() as Story
     // Scripts declare `VAR has_<clue> = false` for each clue that opens a new line of questioning.
     for (const clue of data.clues) {
       const name = `has_${clue.id}`
@@ -69,7 +76,14 @@ export default function InterrogationScreen() {
     const out = [...prefix]
     while (s.canContinue) {
       const t = s.Continue()?.trim()
-      if (t) out.push({ text: t })
+      const photo = s.currentTags
+        ?.map((tag) => tag.trim())
+        .find((tag) => tag.startsWith('photo:'))
+        ?.slice('photo:'.length)
+        .trim()
+      if (t) out.push({ text: t, photo })
+      // Whatever a suspect shows you becomes a card on the board.
+      if (photo) pinClue(photo)
     }
     setLines((prev) => [...prev, ...out])
     setChoices(s.currentChoices.map((c) => ({ index: c.index, text: c.text })))
@@ -81,6 +95,11 @@ export default function InterrogationScreen() {
     setChars(0)
     if (story) advance(story)
   }, [story])
+
+  // Keep the interview on record so it can be reread from the desk.
+  useEffect(() => {
+    if (suspect && lines.length) saveTranscript(suspect.id, lines)
+  }, [lines])
 
   if (!suspect || !story) {
     return <p className="p-6 text-muted-foreground">Không có kịch bản thẩm vấn cho người này.</p>
@@ -99,6 +118,7 @@ export default function InterrogationScreen() {
           <p key={i} className={l.fromPlayer ? 'text-right text-primary' : isSpeech(l) ? '' : 'italic text-muted-foreground'}>
             {i === shown ? l.text.slice(0, l.fromPlayer ? undefined : chars) : l.text}
             {i === shown && !l.fromPlayer && <span className="ml-0.5 inline-block w-2 animate-pulse text-amber">▍</span>}
+            {l.photo && i < shown && <ShownPhoto clueId={l.photo} onOpen={() => setZoomed(l.photo!)} />}
           </p>
         ))}
       </div>
@@ -113,12 +133,14 @@ export default function InterrogationScreen() {
               advance(story, [{ text: c.text, fromPlayer: true }])
             }}
           >
-            {c.text}
+            <span className={askedBefore.has(c.text.trim()) ? 'opacity-55' : ''}>{c.text}</span>
+            {askedBefore.has(c.text.trim()) && <span className="ml-auto pl-2 text-[11px] text-muted-foreground">đã hỏi</span>}
           </Button>
         ))}
         {!typing && choices.length === 0 && <Button onClick={() => go('desk')}>Về bàn làm việc</Button>}
       </div>
       </div>
+      {zoomed && <PhotoLightbox clueId={zoomed} shownBy={suspect.name} onClose={() => setZoomed(null)} />}
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { DndContext, DragOverlay, useDraggable, useDroppable, type DragEndEvent } from '@dnd-kit/core'
-import { Lock, Mail, MailOpen, Maximize2 } from 'lucide-react'
+import { Lock, Mail, MailOpen, Maximize2, Pin } from 'lucide-react'
 import { Lightbox } from '@/components/Lightbox'
 import { questionOrder, useGame } from '@/game/store'
 import { clueById, getDocumentArt } from '@/game/caseLoader'
@@ -99,6 +99,10 @@ export default function CaseFileScreen() {
           {data.envelopes.map((env) => {
             const open = isEnvelopeOpen(env.id)
             const unlockQ = data.questions.find((q) => q.id === env.unlockedBy)
+            // How many papers here the board will actually ask for, so the player
+            // knows how many to pin without being told which ones.
+            const needed = env.documents.filter((d) => data.questions.some((q) => q.requiredClues.includes(d))).length
+            const pinnedHere = env.documents.filter((d) => foundClues.includes(d)).length
             return (
               <div key={env.id}>
                 <div className="mb-2 flex items-center gap-2">
@@ -106,6 +110,15 @@ export default function CaseFileScreen() {
                   <h2 className="font-semibold">
                     Phong bì {env.number}: {env.title}
                   </h2>
+                  {open && needed > 0 && (
+                    <Badge
+                      variant="outline"
+                      className={cn('gap-1', pinnedHere >= needed && 'border-teal text-teal')}
+                      title={`Trong ${env.documents.length} giấy tờ của phong bì này, bàn suy luận cần ${needed} tờ làm manh mối. Không phải tờ nào cũng đáng ghim.`}
+                    >
+                      <Pin className="size-3" /> Cần ghim {needed}/{env.documents.length} tờ · đã ghim {pinnedHere}
+                    </Badge>
+                  )}
                   {!open && (
                     <Badge variant="outline">
                       <Lock className="mr-1 size-3" />{' '}

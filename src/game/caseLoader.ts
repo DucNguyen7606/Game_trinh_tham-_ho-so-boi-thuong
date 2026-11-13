@@ -1,10 +1,32 @@
-import type { CaseData } from './types'
-import hoSoBoiThuong from '@/cases/ho-so-boi-thuong/case.json'
-import { sceneArt as hoSoBoiThuongScenes } from '@/cases/ho-so-boi-thuong/scenes'
-import { closeups as hoSoBoiThuongCloseups } from '@/cases/ho-so-boi-thuong/closeups'
-import { documents as hoSoBoiThuongDocuments } from '@/cases/ho-so-boi-thuong/documents'
-import { reconstruction as hoSoBoiThuongReconstruction, theoryPanels as hoSoBoiThuongTheory, verdictPreview as hoSoBoiThuongPreview } from '@/cases/ho-so-boi-thuong/reconstruction'
-import type { ReconstructionPanel } from './types'
+import type { CaseData, ReconstructionPanel } from './types'
+import type { EpiloguePanel } from '@/cases/ho-so-boi-thuong/epilogue'
+import * as ch1 from '@/cases/ho-so-boi-thuong'
+import * as ch2 from '@/cases/con-nuoc-can-gio'
+import * as ch3 from '@/cases/buc-son-mai'
+import * as ch4 from '@/cases/chuyen-xe-dem'
+import * as ch5 from '@/cases/dem-thu-thiem'
+import * as ch6 from '@/cases/dem-trieu-cuong'
+import * as ch7 from '@/cases/tiem-vang-kim-thanh'
+import * as ch8 from '@/cases/lo-sua-0601'
+import * as ch9 from '@/cases/can-ho-tang-27'
+import * as ch10 from '@/cases/ba-muoi-ba-do'
+import * as ch11 from '@/cases/ho-ban-nguyet'
+import * as ch12 from '@/cases/dong-ho-dung'
+
+/** Everything one case folder provides. Each case's index.ts re-exports its modules in this shape. */
+interface CaseModule {
+  data: CaseData
+  sceneArt: Record<string, () => JSX.Element>
+  closeups: Record<string, () => JSX.Element>
+  documents: Record<string, () => JSX.Element>
+  reconstruction: ReconstructionPanel[]
+  theoryPanels: (picks: Record<string, string>) => ReconstructionPanel[]
+  verdictPreview: (slotId: string, optionId: string) => { Art: () => JSX.Element; note: string } | undefined
+  epilogue: Record<string, EpiloguePanel[]>
+}
+
+const modules: CaseModule[] = [ch1, ch2, ch3, ch4, ch5, ch6, ch7, ch8, ch9, ch10, ch11, ch12]
+const byId = Object.fromEntries(modules.map((m) => [m.data.id, m])) as Record<string, CaseModule | undefined>
 
 // Interrogation scripts are plain .ink text, compiled at runtime by inkjs.
 const inkFiles = import.meta.glob('/src/cases/*/thamvan/*.ink', {
@@ -13,47 +35,27 @@ const inkFiles = import.meta.glob('/src/cases/*/thamvan/*.ink', {
   eager: true,
 }) as Record<string, string>
 
-export const cases: CaseData[] = [hoSoBoiThuong as CaseData]
+export const cases: CaseData[] = modules.map((m) => m.data)
 
 // Scene backdrops are drawn in code (see src/art), one module per case.
-const sceneArt: Record<string, Record<string, () => JSX.Element>> = {
-  'ho-so-boi-thuong': hoSoBoiThuongScenes,
-}
-
 export function getSceneArt(caseId: string, zoneId: string) {
-  return sceneArt[caseId]?.[zoneId]
+  return byId[caseId]?.sceneArt[zoneId]
 }
 
 // Close-up photos shown when the player inspects a hotspot.
-const closeupArt: Record<string, Record<string, () => JSX.Element>> = {
-  'ho-so-boi-thuong': hoSoBoiThuongCloseups,
-}
-
 export function getCloseup(caseId: string, hotspotId: string) {
-  return closeupArt[caseId]?.[hotspotId]
+  return byId[caseId]?.closeups[hotspotId]
 }
 
 // What each case-file document looks like, keyed by clue id.
-const documentArt: Record<string, Record<string, () => JSX.Element>> = {
-  'ho-so-boi-thuong': hoSoBoiThuongDocuments,
-}
-
 export function getDocumentArt(caseId: string, clueId: string) {
-  return documentArt[caseId]?.[clueId]
-}
-
-// The true sequence of events, shown after the verdict.
-const reconstructions: Record<string, ReconstructionPanel[]> = {
-  'ho-so-boi-thuong': hoSoBoiThuongReconstruction,
-}
-
-const theories: Record<string, (picks: Record<string, string>) => ReconstructionPanel[]> = {
-  'ho-so-boi-thuong': hoSoBoiThuongTheory,
+  return byId[caseId]?.documents[clueId]
 }
 
 /** The player's verdict as a story, the evidence against wrong picks, then the truth. */
 export function getReconstruction(caseId: string, picks: Record<string, string> = {}) {
-  return [...(theories[caseId]?.(picks) ?? []), ...(reconstructions[caseId] ?? [])]
+  const m = byId[caseId]
+  return m ? [...m.theoryPanels(picks), ...m.reconstruction] : []
 }
 
 export function getInkSource(caseId: string, key: string): string | undefined {
@@ -64,11 +66,12 @@ export function clueById(data: CaseData, id: string) {
   return data.clues.find((c) => c.id === id)
 }
 
-const previews: Record<string, (slotId: string, optionId: string) => { Art: () => JSX.Element; note: string } | undefined> = {
-  'ho-so-boi-thuong': hoSoBoiThuongPreview,
-}
-
 /** Picture and note shown on a verdict card once the player picks an option. */
 export function getVerdictPreview(caseId: string, slotId: string, optionId?: string) {
-  return optionId ? previews[caseId]?.(slotId, optionId) : undefined
+  return optionId ? byId[caseId]?.verdictPreview(slotId, optionId) : undefined
+}
+
+/** Pictures of what became of everyone, shown with an ending. */
+export function getEpilogue(caseId: string, endingId: string) {
+  return byId[caseId]?.epilogue[endingId] ?? []
 }

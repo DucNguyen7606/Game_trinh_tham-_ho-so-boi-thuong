@@ -2,7 +2,11 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import {
   ReactFlow,
   Background,
+  BaseEdge,
   Controls,
+  EdgeLabelRenderer,
+  getBezierPath,
+  type EdgeProps,
   Handle,
   Position,
   useNodesState,
@@ -12,8 +16,8 @@ import {
   type Node,
   type NodeProps,
 } from '@xyflow/react'
-import { CheckCircle2 } from 'lucide-react'
-import { questionOrder, useGame } from '@/game/store'
+import { CheckCircle2, ChevronLeft, ChevronRight, Lightbulb, Lock, X } from 'lucide-react'
+import { hintGate, questionOrder, useGame } from '@/game/store'
 import { clueById } from '@/game/caseLoader'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
@@ -30,32 +34,72 @@ function ClueNode({ data }: NodeProps<Node<ClueNodeData>>) {
       <p className="text-[10px] font-semibold uppercase opacity-60">{clue.id}</p>
       <p className="text-sm font-semibold leading-tight">{clue.title}</p>
       <p className="mt-1 text-xs opacity-80">{clue.description}</p>
-      <Handle type="source" position={Position.Right} className="!size-3 !bg-string" />
+      <Handle type="source" position={Position.Right} className="!size-3.5 !bg-string after:absolute after:-inset-2.5 after:rounded-full after:content-['']" />
     </div>
   )
 }
 
 function QuestionNode({ data }: NodeProps<Node<QuestionNodeData>>) {
-  const { data: caseData, answers, solvedQuestions, setAnswerOption, checkAnswer } = useGame()
+  const { data: caseData, answers, solvedQuestions, setAnswerOption, checkAnswer, hintLevel, showHint } = useGame()
   const [feedback, setFeedback] = useState<string | null>(null)
   const q = caseData.questions.find((x) => x.id === data.questionId)!
   const answer = answers[q.id]
   const solved = solvedQuestions.includes(q.id)
 
+  const hints = q.hints ?? []
+  const shownHints = hints.slice(0, hintLevel[q.id] ?? 0)
+  const gate = useGame((st) => hintGate(st, q.id))
+  // Which unlocked hint is on show; follows the newest one until the player pages back.
+  const [hintPage, setHintPage] = useState<number | null>(null)
+  const page = Math.min(hintPage ?? shownHints.length - 1, shownHints.length - 1)
+
   const onCheck = () => {
     const result = checkAnswer(q.id)
+    // A miss no longer opens a hint by itself: hints are one per step of progress (see hintGate).
     setFeedback(
       result === 'solved'
         ? null
         : result === 'missing-clues'
-          ? 'Hướng đúng, nhưng chưa đủ bằng chứng.'
+          ? (() => {
+              // Say how many key cards are still missing, so a board full of supporting cards doesn't look complete.
+              const linked = useGame.getState().answers[q.id]?.clueIds ?? []
+              const missing = q.requiredClues.filter((c) => !linked.includes(c)).length
+              return `Đáp án đúng, nhưng còn thiếu ${missing} thẻ bằng chứng chính. Dây "Liên quan" có ích nhưng chưa đủ để chứng minh.`
+            })()
           : 'Trưởng phòng không tin lập luận này. Uy tín giảm.',
     )
   }
 
   return (
-    <div className={cn('w-72 rounded-lg border bg-card p-3 shadow-lg', solved ? 'border-primary' : 'border-border')}>
-      <Handle type="target" position={Position.Left} className="!size-3 !bg-string" />
+    <div className="w-72">
+      {!solved && shownHints.length > 0 && (
+        <div className="document relative z-10 mx-2 -mb-1 rotate-[-1deg] space-y-1 p-2.5 text-xs shadow-lg [animation:fadeIn_.3s_ease]">
+          <div className="flex items-center gap-1 text-[10px] font-semibold uppercase tracking-widest">
+            <Lightbulb className="size-3.5 opacity-70" />
+            <span className="opacity-70">
+              Gợi ý {page + 1}/{hints.length}
+            </span>
+            {shownHints.length > 1 && (
+              <span className="nodrag ml-auto flex gap-0.5">
+                <button className="rounded p-0.5 hover:bg-black/10 disabled:opacity-25" disabled={page === 0} onClick={() => setHintPage(page - 1)} aria-label="Gợi ý trước">
+                  <ChevronLeft className="size-3.5" />
+                </button>
+                <button
+                  className="rounded p-0.5 hover:bg-black/10 disabled:opacity-25"
+                  disabled={page >= shownHints.length - 1}
+                  onClick={() => setHintPage(page + 1)}
+                  aria-label="Gợi ý sau"
+                >
+                  <ChevronRight className="size-3.5" />
+                </button>
+              </span>
+            )}
+          </div>
+          <p>{shownHints[page]}</p>
+        </div>
+      )}
+    <div className={cn('w-72 rounded-lg border bg-card p-3 shadow-lg transition-opacity', solved ? 'border-primary/50 opacity-45 saturate-50 hover:opacity-80' : 'border-border')}>
+      <Handle type="target" position={Position.Left} className="!size-3.5 !bg-string after:absolute after:-inset-2.5 after:rounded-full after:content-['']" />
       <p className="text-xs text-muted-foreground">Câu {questionOrder(caseData, solvedQuestions).indexOf(q.id) + 1}</p>
       <p className="display text-lg leading-tight">{q.prompt}</p>
       <div className="nodrag mt-2 flex flex-col gap-1">
@@ -75,16 +119,16 @@ function QuestionNode({ data }: NodeProps<Node<QuestionNodeData>>) {
       </div>
       <div className="mt-2 flex items-center justify-between text-xs text-muted-foreground">
         {/* How many cards the proof needs, so the player can rule cards out. */}
-        <span className="flex items-center gap-1.5" title={`Câu này cần ${q.requiredClues.length} thẻ manh mối`}>
+        <span className="flex items-center gap-1.5" title={`Câu này cần ít nhất ${q.requiredClues.length} thẻ manh mối`}>
           <span className="flex gap-0.5">
             {q.requiredClues.map((_, i) => (
               <span
                 key={i}
-                className={cn('size-2.5 rounded-sm border border-string', i < (answer?.clueIds.length ?? 0) ? 'bg-string' : 'bg-transparent')}
+                className={cn('size-2.5 rounded-sm border border-string', i < Math.min(answer?.clueIds.length ?? 0, q.requiredClues.length) ? 'bg-string' : 'bg-transparent')}
               />
             ))}
           </span>
-          Nối {answer?.clueIds.length ?? 0}/{q.requiredClues.length} thẻ
+          Nối {answer?.clueIds.length ?? 0} thẻ · cần {q.requiredClues.length}
         </span>
         {solved ? (
           <span className="flex items-center gap-1 text-primary">
@@ -97,28 +141,89 @@ function QuestionNode({ data }: NodeProps<Node<QuestionNodeData>>) {
         )}
       </div>
       {feedback && <p className="mt-2 text-xs text-destructive">{feedback}</p>}
+      {!solved && gate === 'available' && (
+        <button className="nodrag mt-2 flex items-center gap-1 text-xs text-muted-foreground hover:text-amber" onClick={() => {
+            if (showHint(q.id)) setHintPage(null)
+          }}>
+          <Lightbulb className="size-3.5" /> {shownHints.length === 0 ? 'Xem gợi ý' : 'Gợi ý tiếp'}
+        </button>
+      )}
+      {!solved && gate === 'locked' && (
+        <p className="mt-2 flex items-start gap-1 text-xs text-muted-foreground" title="Mỗi câu chỉ mở một gợi ý cho đến khi bạn có tiến triển">
+          <Lock className="mt-0.5 size-3.5 shrink-0" />
+          Gợi ý tiếp bị khóa: nối thêm một manh mối khớp hoặc liên quan tới câu này rồi bấm Kiểm tra để mở.
+        </p>
+      )}
+    </div>
     </div>
   )
 }
 
 const nodeTypes = { clue: ClueNode, question: QuestionNode }
 
+type StringEdgeData = { clueId: string; questionId: string; status?: 'key' | 'match' | 'mismatch'; locked?: boolean }
+
+/** A string between a card and a question, with its check result and a button to take it off. */
+function StringEdge({ id, sourceX, sourceY, targetX, targetY, sourcePosition, targetPosition, data, style }: EdgeProps<Edge<StringEdgeData>>) {
+  const unlinkClue = useGame((s) => s.unlinkClue)
+  const [path, labelX, labelY] = getBezierPath({ sourceX, sourceY, targetX, targetY, sourcePosition, targetPosition })
+  if (!data) return null
+  const { status, locked } = data
+  return (
+    <>
+      <BaseEdge id={id} path={path} style={style} interactionWidth={18} />
+      <EdgeLabelRenderer>
+        <div
+          className="nodrag nopan pointer-events-auto absolute flex items-center gap-1"
+          style={{ transform: `translate(-50%, -50%) translate(${labelX}px, ${labelY}px)` }}
+        >
+          {status && (
+            <span
+              className="rounded px-1.5 py-0.5 text-[11px] font-semibold text-[#fff8e8]"
+              style={{ background: status === 'mismatch' ? 'var(--mismatch)' : 'var(--match)' }}
+            >
+              {status === 'key' ? '✓ Khớp' : status === 'match' ? '✓ Liên quan' : '✕ Chưa khớp'}
+            </span>
+          )}
+          {!locked && (
+            <button
+              onClick={() => unlinkClue(data.questionId, data.clueId)}
+              className="flex size-5 items-center justify-center rounded-full border border-border bg-background/90 text-muted-foreground shadow transition hover:scale-110 hover:border-[var(--mismatch)] hover:text-[var(--mismatch)]"
+              title="Gỡ dây nối này"
+              aria-label={`Gỡ dây nối ${data.clueId}`}
+            >
+              <X className="size-3" />
+            </button>
+          )}
+        </div>
+      </EdgeLabelRenderer>
+    </>
+  )
+}
+
+const edgeTypes = { string: StringEdge }
+
+// Cards go back where the player left them; new ones get a grid slot.
+const saved = (id: string) => useGame.getState().boardLayout[id]
+
 const clueNode = (clueId: string, index: number): Node => ({
   id: `clue-${clueId}`,
   type: 'clue',
-  position: { x: (index % 3) * 240, y: Math.floor(index / 3) * 140 },
+  position: saved(`clue-${clueId}`) ?? { x: (index % 3) * 240, y: Math.floor(index / 3) * 140 },
   data: { clueId },
 })
 
 const questionNode = (q: { id: string }, index: number): Node => ({
   id: `q-${q.id}`,
   type: 'question',
-  position: { x: 860, y: index * 230 },
+  position: saved(`q-${q.id}`) ?? { x: 860, y: index * 380 },
   data: { questionId: q.id },
 })
 
 export default function BoardScreen() {
-  const { data, foundClues, answers, linkClue, unlinkClue, solvedQuestions, isQuestionOpen } = useGame()
+  const { data, foundClues, answers, checkedLinks, linkClue, unlinkClue, solvedQuestions, isQuestionOpen, saveBoardLayout, saveBoardViewport } = useGame()
+  // Read once: the board opens at the pan and zoom the player left it.
+  const [boardViewport] = useState(() => useGame.getState().boardViewport)
   // Recomputed when a question is solved, since that can open an envelope.
   const openQuestions = useMemo(
     () => questionOrder(data, solvedQuestions).map((id) => data.questions.find((q) => q.id === id)!).filter((q) => isQuestionOpen(q.id)),
@@ -155,17 +260,28 @@ export default function BoardScreen() {
   }, [openQuestions, setNodes])
 
   // The red strings are derived from the store, so they survive leaving the screen.
+  // After Kiểm tra, each string that was checked turns green if the card belongs to the proof, red if not.
   const edges = useMemo<Edge[]>(
     () =>
-      Object.entries(answers).flatMap(([qId, a]) =>
-        a.clueIds.map((c) => ({
-          id: `${c}->${qId}`,
-          source: `clue-${c}`,
-          target: `q-${qId}`,
-          style: { stroke: 'var(--string)', strokeWidth: 2.5 },
-        })),
-      ),
-    [answers],
+      Object.entries(answers).flatMap(([qId, a]) => {
+        const q = data.questions.find((x) => x.id === qId)
+        const checked = checkedLinks[qId] ?? []
+        const locked = solvedQuestions.includes(qId)
+        return a.clueIds.map((c): Edge<StringEdgeData> => {
+          const base = { id: `${c}->${qId}`, source: `clue-${c}`, target: `q-${qId}`, type: 'string' }
+          const data: StringEdgeData = { clueId: c, questionId: qId, locked }
+          if (!q || !checked.includes(c)) return { ...base, data, style: { stroke: 'var(--string)', strokeWidth: 2.5 } }
+          const ok = q.requiredClues.includes(c) || (q.supportingClues ?? []).includes(c)
+          const color = ok ? 'var(--match)' : 'var(--mismatch)'
+          return {
+            ...base,
+            animated: !ok,
+            data: { ...data, status: q.requiredClues.includes(c) ? 'key' : ok ? 'match' : 'mismatch' },
+            style: { stroke: color, strokeWidth: 3.5, filter: `drop-shadow(0 0 4px ${color})` },
+          }
+        })
+      }),
+    [answers, checkedLinks, data, solvedQuestions],
   )
 
   const onConnect = useCallback(
@@ -203,11 +319,15 @@ export default function BoardScreen() {
         nodes={nodes}
         edges={edges}
         nodeTypes={nodeTypes}
+        edgeTypes={edgeTypes}
         onNodesChange={onNodesChange}
+        onNodeDragStop={(_, __, dragged) => saveBoardLayout(Object.fromEntries(dragged.map((n) => [n.id, n.position])))}
+        onMoveEnd={(_, vp) => saveBoardViewport(vp)}
+        defaultViewport={boardViewport}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
         colorMode="dark"
-        fitView
+        fitView={!boardViewport}
       >
         <Background />
         <Controls />

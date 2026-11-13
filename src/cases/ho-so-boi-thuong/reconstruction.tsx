@@ -300,8 +300,8 @@ const fraudTheory: Record<string, { text: string; docs: string[] }> = {
 }
 
 const arsonRefute: Record<string, { text: string; docs: string[] }> = {
-  thinh: { text: 'Ông Thịnh đã nhắn hủy "vụ 20" từ tối 13/7 và muốn chở hàng thật về cho ngân hàng kiểm kê. Đêm cháy, chính anh Huy gọi báo ông mới biết, lúc 02:45.', docs: ['P9', 'P13'] },
-  ngan: { text: 'Từ 00:58 đến 03:05 Ngân đang phát trực tiếp với hơn 200 người xem. Chiếc Wave đứng tên cô đã bán cho "anh Bảo" từ tháng 6, chưa sang tên.', docs: ['X1', 'P11'] },
+  thinh: { text: 'Ông Thịnh đã nhắn hủy "vụ 20" từ tối 13/7 và muốn chở hàng thật về cho ngân hàng kiểm kê. Đêm cháy ông ở tiệc cưới tại Vũng Tàu, ảnh cuối chụp lúc 01:47, và chính anh Huy gọi báo ông mới biết, lúc 02:45.', docs: ['P9', 'X3'] },
+  ngan: { text: 'Từ 00:58 đến 03:05 Ngân đang phát trực tiếp với hơn 200 người xem. Chiếc Wave đứng tên cô đã bán cho "anh Bảo" từ tháng 6, chưa sang tên.', docs: ['X5', 'P11'] },
   huy: { text: 'Anh Huy không có chìa, mà ổ khóa không bị phá. Camera của chính tiệm anh ghi lại chiếc Wave che biển số, và anh là người gọi báo ông Thịnh.', docs: ['P6', 'P13'] },
 }
 

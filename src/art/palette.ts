@@ -37,6 +37,7 @@ export const clothColors = {
   charcoal: '#3a332f',
   sky: '#7a9fb0',
   mustard: '#cf9a32',
+  leather: '#6a4029',
 } as const
 
 /** Darken (amount < 0) or lighten (amount > 0) a hex colour. Used for flat shadow planes. */
