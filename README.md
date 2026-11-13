@@ -74,17 +74,17 @@ Thêm component shadcn/ui khác: `npx shadcn@latest add <tên>` (cấu hình n�
 
 Toàn bộ nhạc và hiệu ứng được tổng hợp bằng Web Audio API ngay lúc chạy (`src/audio/`), không dùng file thu âm nào nên không vướng bản quyền. Nhạc là dạng sinh tự động: mỗi ô nhịp được soạn lại từ một bộ quy tắc nên không bao giờ lặp y hệt.
 
-| Màn hình | Chủ đề nhạc |
+| Màn hình | Chủ đề nhạc (phong cách piano + dàn dây điện ảnh) |
 | --- | --- |
-| Bàn làm việc, Hồ sơ, Bàn suy luận | Lo-fi hip-hop: Rhodes, sub bass, trống nhẹ, đàn tranh điểm xuyết |
-| Hiện trường | Lo-fi trầm hơn, thưa hơn: Rhodes, pad tối, trống nhẹ, đàn tranh và đàn bầu luyến |
-| Thẩm vấn | Căng thẳng hiện đại: ostinato synth, nhịp tim, đồng hồ tích tắc, đàn bầu trượt xuống |
-| Màn hình chính | Chủ đề series: pad chậm, nhịp tim, đàn bầu hát motif D–F–G–A |
-| Kết luận | Màu Việt: đàn bầu hát giai điệu ngũ cung, đàn tranh rải, pad ấm |
+| Màn hình chính | Chủ đề series: piano dạo motif D–A–F–E, dàn dây vào dần, cello rồi violin hát lại, timpani, đàn tranh vuốt |
+| Bàn làm việc, Hồ sơ, Bàn suy luận, Thư viện | Tò mò, nhẹ chân: pizzicato, piano "nghĩ thành tiếng", violin đối âm, chuông celesta, đàn tranh đáp |
+| Hiện trường | Buồn kiểu nhạc phim: piano rải hợp âm, giai điệu piano rồi cello, dàn dây mỏng, đàn tranh nhấn |
+| Thẩm vấn | Căng: dàn dây spiccato nhịp 3+3+2, timpani, cụm piano trầm, violin rung tremolo, đồng hồ tích tắc |
+| Kết luận | Lắng đọng: piano và dàn dây giọng Fa trưởng, violin hát giai điệu ngũ cung, đàn bầu hoà theo |
 
 Hiệu ứng gắn tự động theo trạng thái game (không phải sửa từng màn hình): chụp ảnh khi tìm manh mối ở hiện trường, nhặt và thả giấy khi kéo hồ sơ, ghim, lật trang, kéo và nối dây đỏ, cắt dây, xé phong bì khi mở khoá, suy luận đúng / sai / thiếu chứng cứ, bước chân khi vào khu, đóng dấu khi qua ngày, gõ phím khi chọn lời thoại.
 
-- `themes.ts`: 4 chủ đề nhạc. `instruments.ts`: đàn tranh, đàn bầu, bass, Rhodes, pad, trống. `sfx.ts`: hiệu ứng.
+- `themes.ts`: 5 chủ đề nhạc. `orchestral.ts`: piano, dàn dây, cello/violin solo, pizzicato, timpani. `instruments.ts`: đàn tranh, đàn bầu, chuông. `sfx.ts`: hiệu ứng.
 - `bindings.ts`: nối âm thanh với store của game. `AudioControls.tsx`: nút loa trên thanh trên cùng (âm lượng nhạc, hiệu ứng, tắt tiếng; tự nhớ giữa các lần chơi).
 - Phòng thu: khi `npm run dev` đang chạy, mở `http://localhost:5173/audio-lab.html` trong trình duyệt để nghe thử từng bản nhạc, từng hiệu ứng và tải về dạng WAV.
 

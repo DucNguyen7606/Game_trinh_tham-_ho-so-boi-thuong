@@ -1,13 +1,26 @@
 /**
- * Original, generative music themes. Each theme schedules one bar at a time
- * from a seeded random source, so it never loops audibly yet stays in style.
+ * Original, generative music in a cinematic piano-and-strings style.
+ * Each theme schedules one bar at a time from a seeded random source, so
+ * it follows a composed form yet never repeats note for note.
  *
- * Everything sits around D minor / F major so themes crossfade smoothly, and
- * the Vietnamese colour comes from the pentatonic modes (điệu Bắc: D F G A C,
- * điệu Nam/oán-flavoured bends) played on synthesised đàn tranh and đàn bầu.
+ * Everything is in or around D minor so themes crossfade smoothly. The
+ * series motif (D – A – F – E | D – C – Bb – A) recurs in several themes,
+ * and đàn tranh / đàn bầu add a Vietnamese accent at phrase ends.
  */
 import { pick, type Out, type Rnd } from './core'
-import { bass, bell, danBau, danTranh, epiano, hat, kick, pad, pulseSynth, rim, riser, snare, subBass, tick } from './instruments'
+import { danBau, danTranh, bell, riser, tick } from './instruments'
+import {
+  bowedLine,
+  line,
+  piano,
+  pianoChord,
+  pizz,
+  spiccato,
+  stringChord,
+  strings,
+  timpani,
+  timpaniRoll,
+} from './orchestral'
 
 export type ThemeId = 'menu' | 'desk' | 'scene' | 'interrogation' | 'verdict'
 
@@ -22,240 +35,305 @@ export interface Theme {
   bar(o: Out, t: number, bar: number, r: Rnd): void
 }
 
-// D minor pentatonic (điệu Bắc on D): D F G A C
-const PENTA = [62, 65, 67, 69, 72, 74, 77, 79, 81, 84]
+interface Chord {
+  root: number // bass note
+  tones: number[] // mid-register voicing
+}
 
-// ---------------------------------------------------------------- 1. Lo-fi bàn làm việc (desk, case file, board)
-
-// ii – V – I – vi in F, all extended chords: Gm9 – C13 – Fmaj9 – Dm9
-const DESK_CHORDS = [
-  { root: 43, voicing: [53, 57, 58, 62, 65] },
-  { root: 36, voicing: [52, 57, 58, 62] },
-  { root: 41, voicing: [52, 55, 57, 60, 64] },
-  { root: 38, voicing: [53, 57, 60, 64] },
+// The series motif, two bars of [midi, beats].
+const MOTIF_A: [number, number][] = [
+  [74, 1],
+  [69, 1],
+  [77, 1.5],
+  [76, 0.5],
 ]
+const MOTIF_B: [number, number][] = [
+  [74, 1],
+  [72, 1],
+  [70, 1],
+  [69, 1],
+]
+const shift = (m: [number, number][], by: number) => m.map(([n, b]) => [n + by, b] as [number, number])
 
-/** Laid-back hip-hop kit: kick, snare a hair late, swung hats. */
-function lofiDrums(o: Out, t: number, beat: number, r: Rnd, light: boolean) {
-  const swing = beat * 0.5 + beat * 0.08
-  kick(o, t, light ? 0.3 : 0.42, 45)
-  if (r() < 0.6) kick(o, t + beat * 1.5 + beat * 0.08, light ? 0.18 : 0.26, 45)
-  else kick(o, t + beat * 2.5 + beat * 0.08, light ? 0.18 : 0.26, 45)
-  if (!light) {
-    snare(o, t + beat + 0.02, 0.16)
-    snare(o, t + beat * 3 + 0.02, 0.16)
-  } else {
-    rim(o, t + beat * 3 + 0.02, 0.06)
-  }
-  for (let i = 0; i < 4; i++) {
-    hat(o, t + i * beat, light ? 0.018 : 0.03)
-    if (r() < 0.85) hat(o, t + i * beat + swing, light ? 0.012 : 0.02)
+/** Plays [midi, beats] pairs on the piano, right hand. */
+function pianoMelody(o: Out, t: number, beat: number, notes: [number, number][], gain = 0.26) {
+  let pos = 0
+  for (const [m, b] of notes) {
+    piano(o, t + pos * beat, m, b * beat * 0.95, gain)
+    pos += b
   }
 }
 
-const desk: Theme = {
-  id: 'desk',
-  title: 'Bàn làm việc (lo-fi)',
-  bpm: 76,
-  beats: 4,
-  level: 0.8,
-  bar(o, t, bar, r) {
-    const beat = 60 / this.bpm
-    const ch = DESK_CHORDS[bar % 4]
-    // Keys: a lazy roll into each chord, sometimes a pickup stab.
-    ch.voicing.forEach((m, i) => epiano(o, t + i * 0.018, m, beat * 3.4, 0.045, -0.2))
-    if (r() < 0.4) ch.voicing.slice(1).forEach((m, i) => epiano(o, t + beat * 3.5 + i * 0.015, m, beat * 0.4, 0.03, -0.2))
-    // Round sub bass.
-    subBass(o, t, ch.root, beat * 1.4, 0.22)
-    subBass(o, t + beat * 2.5, ch.root + (r() < 0.5 ? 7 : 12), beat * 1.2, 0.16)
-    if (bar >= 2) lofiDrums(o, t, beat, r, false)
-    // A small đàn tranh hook every other bar keeps the Vietnamese colour.
-    if (bar % 2 === 1 && r() < 0.75) {
-      let idx = 3 + Math.floor(r() * 4)
-      let pos = 0.5 + Math.floor(r() * 2) * 0.5
-      for (let i = 0; i < 3 + Math.floor(r() * 2) && pos < 4; i++) {
-        const m = PENTA[Math.max(0, Math.min(PENTA.length - 1, idx))]
-        danTranh(o, t + pos * beat, m, { gain: 0.13, pan: 0.35, bend: i === 0 && r() < 0.3 ? 2 : 0, bendAt: 0.25 })
-        idx += pick(r, [-1, -1, 1, -2])
-        pos += pick(r, [0.5, 0.5, 1, 0.75])
-      }
-    }
-  },
+/** Left-hand broken chord in eighths: root, fifth, tenth, fifth... */
+function brokenChord(o: Out, t: number, beat: number, c: Chord, gain = 0.14, eighths = 8) {
+  const pattern = [c.root, c.root + 7, c.tones[1] ?? c.root + 15, c.root + 7 + 12, c.tones[2] ?? c.root + 19, c.root + 7 + 12, c.tones[1] ?? c.root + 15, c.root + 7]
+  for (let i = 0; i < eighths; i++) piano(o, t + i * beat * 0.5, pattern[i % 8], undefined, gain * (i % 4 === 0 ? 1.15 : 0.85))
 }
 
-// ---------------------------------------------------------------- 2. Lo-fi hiện trường (crime scene)
+// ---------------------------------------------------------------- 1. Màn hình chính (series title)
 
-// Same style, darker and sparser: Dm9 – Bbmaj7 – Gm9 – A7sus
-const SCENE_CHORDS = [
-  { root: 38, voicing: [53, 57, 60, 64] },
-  { root: 46, voicing: [53, 57, 62, 65] },
-  { root: 43, voicing: [53, 57, 58, 62] },
-  { root: 45, voicing: [55, 57, 62, 64] },
-]
-
-const scene: Theme = {
-  id: 'scene',
-  title: 'Hiện trường (lo-fi trầm)',
-  bpm: 70,
-  beats: 4,
-  level: 0.8,
-  bar(o, t, bar, r) {
-    const beat = 60 / this.bpm
-    const ch = SCENE_CHORDS[bar % 4]
-    ch.voicing.forEach((m, i) => epiano(o, t + i * 0.025, m, beat * 3.8, 0.04, 0.2))
-    if (bar % 4 === 0) pad(o, t, [50, 57, 62], beat * 16, 0.02, 650)
-    subBass(o, t, ch.root, beat * 2.5, 0.22)
-    if (bar >= 1) lofiDrums(o, t, beat, r, true)
-    // Đàn bầu answers with one sliding phrase every fourth bar.
-    if (bar % 4 === 3) {
-      danBau(o, t + beat, { midi: pick(r, [69, 72, 67]), dur: beat * 2, from: -2, vibrato: 0.4, gain: 0.14 }, -0.2)
-      danBau(o, t + beat * 3, { midi: pick(r, [65, 62]), dur: beat, to: -1, gain: 0.11 }, -0.2)
-    } else if (r() < 0.5) {
-      // Sparse đàn tranh notes, like someone thinking aloud.
-      const n = 1 + Math.floor(r() * 2)
-      for (let i = 0; i < n; i++)
-        danTranh(o, t + (1 + i * 1.5 + r() * 0.5) * beat, pick(r, PENTA.slice(3, 8)), { gain: 0.12, vibrato: r() < 0.5 ? 0.25 : 0, pan: 0.3 })
-    }
-  },
-}
-
-// ---------------------------------------------------------------- 3. Thẩm vấn (interrogation)
-
-const interrogation: Theme = {
-  id: 'interrogation',
-  title: 'Phòng thẩm vấn (căng thẳng)',
-  level: 2,
-  bpm: 92,
-  beats: 4,
-  bar(o, t, bar, r) {
-    const beat = 60 / this.bpm
-    const phase = bar % 8
-    // Ostinato roots: D – D – Eb – D | D – C – Eb – (Eb, rising)
-    const root = [38, 38, 39, 38, 38, 36, 39, 39][phase]
-
-    // Sixteenth pulse with accents; filter opens through the phrase.
-    for (let i = 0; i < 16; i++) {
-      const acc = i % 4 === 0 ? 1 : i % 4 === 3 ? 0.6 : 0.3
-      const open = 0.25 + 0.6 * (phase / 7) * acc
-      const m = i === 14 && r() < 0.5 ? root + 12 : root
-      pulseSynth(o, t + i * beat * 0.25, m, beat * 0.22, 0.05 + 0.04 * acc, open)
-    }
-    // Heartbeat on beat 1 (lub-dub), and on 3 in the second half.
-    kick(o, t, 0.35)
-    kick(o, t + beat * 0.28, 0.22)
-    if (phase >= 4) {
-      kick(o, t + beat * 2, 0.3)
-      kick(o, t + beat * 2.28, 0.18)
-    }
-    // Clock on the wall.
-    for (let i = 0; i < 4; i++) tick(o, t + i * beat, i % 2 === 1, 0.04)
-
-    // Dark cluster drone with a minor second rubbing at the top.
-    if (phase % 4 === 0) pad(o, t, [50, 57, 63], beat * 16, 0.03, 1200)
-    // A đàn bầu glides down like a doubt creeping in.
-    if (phase === 3 || (phase === 7 && r() < 0.5))
-      danBau(o, t + beat * 2, { midi: pick(r, [75, 74, 72]), dur: beat * 2, to: -3, vibrato: 0.25, gain: 0.1 }, -0.3)
-    // Stinger bell and a riser into the top of the phrase.
-    if (phase === 6) riser(o, t + beat * 0.5, beat * 7.5, 0.04)
-    if (phase === 0 && bar > 0) bell(o, t, 87, 0.035, 3, 0.4)
-  },
-}
-
-// ---------------------------------------------------------------- 4. Kết luận (verdict, Vietnamese colour)
-
-// F major pentatonic over a slow, bittersweet progression.
-const VERDICT_CHORDS = [
-  [41, 53, 57, 60, 64], // Fmaj7
-  [40, 52, 55, 60, 62], // C/E
-  [38, 50, 57, 60, 65], // Dm7
-  [46, 53, 58, 62, 65], // Bb(add9)
-]
-const VERDICT_MELODY: { m: number; d: number; from?: number; to?: number }[][] = [
-  [{ m: 72, d: 2, from: -2 }, { m: 69, d: 1 }, { m: 67, d: 1 }],
-  [{ m: 69, d: 3, from: -2 }, { m: 72, d: 1 }],
-  [{ m: 74, d: 2 }, { m: 72, d: 1 }, { m: 69, d: 1, to: -2 }],
-  [{ m: 67, d: 4, from: 2 }],
-]
-
-const verdict: Theme = {
-  id: 'verdict',
-  title: 'Kết luận hồ sơ (màu Việt)',
-  level: 1.4,
-  bpm: 63,
-  beats: 4,
-  bar(o, t, bar, r) {
-    const beat = 60 / this.bpm
-    const chord = VERDICT_CHORDS[bar % 4]
-    pad(o, t, chord.slice(1), beat * 4, 0.03, 1100)
-    bass(o, t, chord[0], 0.3)
-    // Đàn tranh "rải" arpeggio, the accompaniment.
-    const arp = [chord[1] + 12, chord[2] + 12, chord[3] + 12, chord[4] + 12]
-    for (let i = 0; i < 8; i++) {
-      if (i > 0 && r() < 0.2) continue
-      danTranh(o, t + i * beat * 0.5, arp[i % 4], { gain: 0.09, pan: -0.35 })
-    }
-    // Đàn bầu sings the melody in the second half of every 8 bars.
-    if (bar % 8 >= 4) {
-      let pos = 0
-      for (const n of VERDICT_MELODY[bar % 4]) {
-        danBau(o, t + pos * beat, { midi: n.m, dur: n.d * beat, from: n.from, to: n.to, vibrato: 0.4, gain: 0.17 }, 0.15)
-        pos += n.d
-      }
-    } else if (bar % 2 === 1) {
-      bell(o, t + beat * 3, pick(r, [77, 79, 81]), 0.03, 3, 0.3)
-    }
-  },
-}
-
-// ---------------------------------------------------------------- 5. Màn hình chính (series title)
-
-// Slow and cinematic: Dm – Bb – Gm – A, with the series motif on đàn bầu.
-const MENU_CHORDS = [
-  { root: 38, voicing: [50, 57, 62, 65] },
-  { root: 34, voicing: [50, 53, 58, 62] },
-  { root: 43, voicing: [50, 55, 58, 62] },
-  { root: 33, voicing: [49, 52, 57, 61] },
-]
-// The motif: D – F – G – A(slide) ... C – A, answered a step lower.
-const MENU_MOTIF: { m: number; d: number; from?: number; to?: number }[][] = [
-  [{ m: 62, d: 1 }, { m: 65, d: 1 }, { m: 67, d: 2, from: -2 }],
-  [{ m: 69, d: 3, from: -2 }, { m: 72, d: 1 }],
-  [{ m: 69, d: 2 }, { m: 67, d: 1 }, { m: 65, d: 1 }],
-  [{ m: 64, d: 4, from: 1, to: 0 }],
+const MENU_CHORDS: Chord[] = [
+  { root: 38, tones: [57, 62, 65] }, // Dm
+  { root: 36, tones: [57, 60, 65] }, // Dm/C
+  { root: 34, tones: [58, 62, 65] }, // Bb
+  { root: 33, tones: [57, 61, 64] }, // A
 ]
 
 const menu: Theme = {
   id: 'menu',
   title: 'Màn hình chính (chủ đề series)',
-  bpm: 62,
+  bpm: 66,
   beats: 4,
-  level: 0.7,
+  level: 0.6,
   bar(o, t, bar, r) {
     const beat = 60 / this.bpm
-    const ch = MENU_CHORDS[bar % 4]
-    pad(o, t, ch.voicing, beat * 4, 0.028, 800)
-    subBass(o, t, ch.root, beat * 3.5, 0.2)
-    // Low piano-like tolls on the downbeat.
-    epiano(o, t, ch.root + 12, beat * 3, 0.05, 0)
-    // Heartbeat pulse once the intro has settled.
-    if (bar >= 4) {
-      kick(o, t, 0.22, 42)
-      kick(o, t + beat * 0.3, 0.14, 42)
-    }
-    // Motif on đàn bầu in bars 4–7 of every 8, đàn tranh ripples otherwise.
-    if (bar % 8 >= 4) {
-      let pos = 0
-      for (const n of MENU_MOTIF[bar % 4]) {
-        danBau(o, t + pos * beat, { midi: n.m + 12, dur: n.d * beat, from: n.from, to: n.to, vibrato: 0.4, gain: 0.16 }, 0.1)
-        pos += n.d
-      }
+    const phase = bar % 16
+    const c = MENU_CHORDS[bar % 4]
+    const motif = bar % 2 === 0 ? MOTIF_A : MOTIF_B
+
+    // Low piano octave pedal on every bar.
+    piano(o, t, c.root, beat * 4, 0.2)
+    piano(o, t, c.root + 12, beat * 4, 0.14)
+
+    if (phase < 4) {
+      // Intro: the motif alone on piano.
+      pianoMelody(o, t, beat, motif, 0.28)
+    } else if (phase < 8) {
+      stringChord(o, t, c.tones, beat * 4, { gain: 0.03, attack: 1.2 })
+      pianoMelody(o, t, beat, motif, 0.26)
+      brokenChord(o, t, beat, c, 0.08)
+    } else if (phase < 12) {
+      // The cello takes the tune; piano accompanies.
+      stringChord(o, t, c.tones, beat * 4, { gain: 0.03, attack: 0.8 })
+      bowedLine(o, t, line(beat, shift(motif, -24)), 'cello', 0.1, -0.2)
+      brokenChord(o, t, beat, c, 0.1)
     } else {
-      const notes = ch.voicing.map((m) => m + 12)
-      for (let i = 0; i < 4; i++) if (r() < 0.75) danTranh(o, t + (1 + i * 0.5) * beat, notes[i], { gain: 0.08, pan: -0.3 })
+      // Full: violins sing the motif up high over timpani.
+      stringChord(o, t, [...c.tones, c.root + 12], beat * 4, { gain: 0.035, attack: 0.5, bright: 0.7 })
+      bowedLine(o, t, line(beat, motif), 'violin', 0.08, 0.2)
+      brokenChord(o, t, beat, c, 0.1)
+      timpani(o, t, c.root + 12, 0.25)
+      if (phase === 15) {
+        timpaniRoll(o, t + beat * 2, 38, beat * 2, 0.18)
+        // Đàn tranh glissando down into the return of the theme.
+        for (let i = 0; i < 6; i++) danTranh(o, t + beat * 3 + i * 0.07, [86, 84, 81, 79, 77, 74][i], { gain: 0.12, pan: 0.4 })
+      }
     }
-    if (bar % 8 === 7) riser(o, t + beat * 2, beat * 2, 0.025)
+    if (phase === 7 && r() < 0.8) danBau(o, t + beat * 2, { midi: 69, dur: beat * 2, from: -2, vibrato: 0.4, gain: 0.12 }, 0.3)
+  },
+}
+
+// ---------------------------------------------------------------- 2. Bàn làm việc (reading files, deducing)
+
+// Light-footed and curious, like a mind ticking over: pizzicato, piano, strings.
+const DESK_CHORDS: Chord[] = [
+  { root: 38, tones: [57, 62, 65] }, // Dm
+  { root: 38, tones: [57, 62, 65] }, // Dm
+  { root: 34, tones: [58, 62, 65] }, // Bb
+  { root: 34, tones: [58, 62, 65] }, // Bb
+  { root: 43, tones: [58, 62, 67] }, // Gm
+  { root: 45, tones: [57, 61, 64] }, // A
+  { root: 38, tones: [57, 62, 65] }, // Dm
+  { root: 45, tones: [55, 61, 64] }, // A7
+]
+// D harmonic minor for the piano's thoughts.
+const D_HARM = [62, 64, 65, 67, 69, 70, 73, 74, 76, 77, 79, 81]
+
+function deskPhrase(r: Rnd, start: number): [number, number][] {
+  const out: [number, number][] = []
+  let idx = start
+  let beats = 0
+  while (beats < 4) {
+    const b = pick(r, [0.5, 0.5, 1, 1, 1.5]) as number
+    const len = Math.min(b, 4 - beats)
+    out.push([D_HARM[idx], len])
+    beats += len
+    idx = Math.max(0, Math.min(D_HARM.length - 1, idx + pick(r, [-2, -1, -1, 1, 1, 2])))
+  }
+  return out
+}
+
+const desk: Theme = {
+  id: 'desk',
+  title: 'Bàn làm việc (piano, pizzicato)',
+  bpm: 92,
+  beats: 4,
+  level: 1.5,
+  bar(o, t, bar, r) {
+    const beat = 60 / this.bpm
+    const section = Math.floor(bar / 8) % 4
+    const c = DESK_CHORDS[bar % 8]
+
+    // Pizzicato ostinato: root, fifth, octave, fifth in eighths.
+    const pat = [c.root + 12, c.root + 19, c.root + 24, c.root + 19]
+    for (let i = 0; i < 8; i++) pizz(o, t + i * beat * 0.5, pat[i % 4], i % 2 ? 0.16 : 0.22, -0.3)
+    pizz(o, t, c.root, 0.3, 0)
+
+    // Soft string bed, and offbeat staccato chords in later sections.
+    stringChord(o, t, c.tones, beat * 4, { gain: 0.018, attack: 0.6 })
+    if (section >= 2) for (const off of [1.5, 3.5]) c.tones.forEach((m) => spiccato(o, t + off * beat, m + 12, 0.03))
+
+    // Piano thinks aloud in sections 1 and 3, in two-bar phrases.
+    if ((section === 1 || section === 3) && bar % 2 === 0) pianoMelody(o, t, beat, deskPhrase(r, 4 + Math.floor(r() * 4)), 0.22)
+    if ((section === 1 || section === 3) && bar % 2 === 1 && r() < 0.6) pianoMelody(o, t, beat, [[c.tones[2] + 12, 2], [c.tones[1] + 12, 2]], 0.16)
+
+    // Violin countermelody in section 2: long notes over the bustle.
+    if (section === 2 && bar % 2 === 0) {
+      const top = c.tones[2] + 12
+      bowedLine(o, t, line(beat, [[top, 3], [top - pick(r, [1, 2]), 1], [top - 3, 4]]), 'violin', 0.06, 0.25)
+    }
+    // A glint of celesta, and a đàn tranh answer at the end of each 8 bars.
+    if (r() < 0.25) bell(o, t + beat * pick(r, [1.5, 2.5, 3.5]), pick(r, [81, 86, 89]), 0.025, 1.5, 0.4)
+    if (bar % 8 === 7 && r() < 0.7) [74, 72, 69].forEach((m, i) => danTranh(o, t + (2 + i * 0.5) * beat, m, { gain: 0.12, pan: 0.35 }))
+  },
+}
+
+// ---------------------------------------------------------------- 3. Hiện trường (crime scene)
+
+// Melancholic solo piano with strings, in the spirit of a sad film score.
+const SCENE_CHORDS: Chord[] = [
+  { root: 38, tones: [57, 62, 65] }, // Dm
+  { root: 34, tones: [58, 62, 65] }, // Bb
+  { root: 41, tones: [57, 60, 65] }, // F
+  { root: 36, tones: [55, 60, 64] }, // C
+  { root: 43, tones: [58, 62, 67] }, // Gm
+  { root: 38, tones: [57, 62, 65] }, // Dm
+  { root: 34, tones: [58, 62, 65] }, // Bb
+  { root: 33, tones: [57, 61, 64] }, // A
+]
+const SCENE_MELODY: [number, number][][] = [
+  [[77, 3], [76, 1]],
+  [[74, 2], [72, 1], [74, 1]],
+  [[72, 3], [69, 1]],
+  [[67, 4]],
+  [[70, 2], [69, 1], [67, 1]],
+  [[65, 2], [69, 2]],
+  [[74, 3], [72, 1]],
+  [[73, 4]],
+]
+
+const scene: Theme = {
+  id: 'scene',
+  title: 'Hiện trường (piano buồn, dàn dây)',
+  bpm: 60,
+  beats: 4,
+  level: 1,
+  bar(o, t, bar, r) {
+    const beat = 60 / this.bpm
+    const phase = bar % 16
+    const c = SCENE_CHORDS[bar % 8]
+
+    brokenChord(o, t, beat, c, 0.12)
+    if (phase >= 4) stringChord(o, t, c.tones, beat * 4, { gain: 0.022, attack: 1.5, release: 1.5 })
+    // Piano melody in the first half, the cello answers in the second.
+    if (phase >= 4 && phase < 12) pianoMelody(o, t, beat, SCENE_MELODY[bar % 8], 0.24)
+    if (phase >= 12 && bar % 2 === 0) {
+      const a = SCENE_MELODY[bar % 8]
+      const b = SCENE_MELODY[(bar + 1) % 8]
+      bowedLine(o, t, line(beat, shift([...a, ...b], -12)), 'cello', 0.085, -0.2)
+    }
+    // A single đàn tranh note with a sliding bend at some phrase ends.
+    if ((phase === 3 || phase === 11) && r() < 0.8)
+      danTranh(o, t + beat * 2.5, pick(r, [67, 72]), { gain: 0.14, bend: 2, bendAt: 0.35, bendTime: 0.25, pan: 0.35 })
+  },
+}
+
+// ---------------------------------------------------------------- 4. Thẩm vấn (interrogation)
+
+const interrogation: Theme = {
+  id: 'interrogation',
+  title: 'Phòng thẩm vấn (dàn dây căng)',
+  bpm: 100,
+  beats: 4,
+  level: 0.8,
+  bar(o, t, bar, r) {
+    const beat = 60 / this.bpm
+    const phase = bar % 8
+    // Ostinato roots: D – D – Eb – D | D – C – Eb – Eb
+    const root = [38, 38, 39, 38, 38, 36, 39, 39][phase]
+
+    // Low strings spiccato in driving eighths, with an accent pattern 3+3+2.
+    for (let i = 0; i < 8; i++) {
+      const acc = i === 0 || i === 3 || i === 6
+      spiccato(o, t + i * beat * 0.5, root + 12, acc ? 0.09 : 0.05)
+      if (acc) spiccato(o, t + i * beat * 0.5, root, 0.07)
+    }
+    timpani(o, t, root, 0.32)
+    if (phase >= 4) timpani(o, t + beat * 1.5, root, 0.2)
+
+    // High violins: a sustained, uneasy minor second, trembling.
+    if (phase === 4) {
+      strings(o, t, 81, beat * 16, { gain: 0.022, attack: 2, tremolo: 11, bright: 0.8, pan: 0.3 })
+      strings(o, t, 82, beat * 16, { gain: 0.018, attack: 3, tremolo: 11, bright: 0.8, pan: 0.4 })
+    }
+    // Piano: a dark low cluster that lands like a question.
+    if (phase === 0 || phase === 6) pianoChord(o, t, [26, 38, 39, 45], beat * 2, 0.2, 0.004)
+    // A cello line creeping upward in the second half.
+    if (phase === 4) bowedLine(o, t, line(beat, [[50, 2], [51, 2], [53, 4], [54, 4], [55, 4]]), 'cello', 0.07, -0.25)
+
+    // Clock on the wall, quietly.
+    for (let i = 0; i < 4; i++) tick(o, t + i * beat, i % 2 === 1, 0.025)
+    if (phase === 7) riser(o, t + beat, beat * 3, 0.03)
+    if (phase === 3 && r() < 0.6) danBau(o, t + beat * 2, { midi: pick(r, [75, 74]), dur: beat * 2, to: -3, vibrato: 0.25, gain: 0.08 }, -0.3)
+  },
+}
+
+// ---------------------------------------------------------------- 5. Kết luận (verdict)
+
+const VERDICT_CHORDS: Chord[] = [
+  { root: 41, tones: [57, 60, 65] }, // F
+  { root: 40, tones: [55, 60, 64] }, // C/E
+  { root: 38, tones: [57, 62, 65] }, // Dm
+  { root: 34, tones: [58, 62, 65] }, // Bb
+  { root: 45, tones: [57, 60, 65] }, // F/A
+  { root: 43, tones: [58, 62, 67] }, // Gm
+  { root: 36, tones: [55, 60, 64] }, // C
+  { root: 36, tones: [58, 60, 64] }, // C7
+]
+// F major pentatonic tune; ends of phrases slide like đàn bầu.
+const VERDICT_MELODY: [number, number][][] = [
+  [[72, 2], [69, 1], [67, 1]],
+  [[69, 3], [72, 1]],
+  [[74, 2], [72, 1], [69, 1]],
+  [[67, 4]],
+  [[69, 2], [72, 1], [74, 1]],
+  [[77, 2], [74, 2]],
+  [[72, 2], [70, 1], [69, 1]],
+  [[67, 4]],
+]
+
+const verdict: Theme = {
+  id: 'verdict',
+  title: 'Kết luận hồ sơ (piano, dàn dây, đàn bầu)',
+  bpm: 58,
+  beats: 4,
+  level: 1.1,
+  bar(o, t, bar, r) {
+    const beat = 60 / this.bpm
+    const phase = bar % 16
+    const c = VERDICT_CHORDS[bar % 8]
+    const mel = VERDICT_MELODY[bar % 8]
+
+    brokenChord(o, t, beat, c, 0.11)
+    stringChord(o, t, c.tones, beat * 4, { gain: phase < 8 ? 0.02 : 0.032, attack: 1.2, release: 1.4 })
+    if (phase >= 8) strings(o, t, c.root, beat * 4, { gain: 0.03, attack: 0.8 })
+
+    if (phase < 8) pianoMelody(o, t, beat, mel, 0.24)
+    else if (bar % 2 === 0) {
+      // Violins take the tune, doubled now and then by đàn bầu.
+      const two = [...mel, ...VERDICT_MELODY[(bar + 1) % 8]]
+      bowedLine(o, t, line(beat, two), 'violin', 0.07, 0.2)
+      if (phase >= 12) {
+        let pos = 0
+        for (const [m, b] of two) {
+          danBau(o, t + pos * beat, { midi: m, dur: b * beat, vibrato: 0.4, gain: 0.08, from: b >= 3 ? -2 : undefined }, -0.25)
+          pos += b
+        }
+      }
+    }
+    if (phase === 15) timpaniRoll(o, t + beat * 2, 41, beat * 2, 0.12)
+    if (phase === 7 && r() < 0.7) bell(o, t + beat * 3, 84, 0.03, 3, 0.3)
   },
 }
 
 export const THEMES: Record<ThemeId, Theme> = { menu, desk, scene, interrogation, verdict }
-

@@ -1,7 +1,7 @@
 /**
- * Synthesised instruments. Plucked strings (đàn tranh, upright bass) use
+ * Vietnamese instruments and small voices. Plucked strings (đàn tranh) use
  * Karplus-Strong; đàn bầu is a near-pure harmonic tone shaped by the rod's
- * pitch bends and wide vibrato; the rest are small subtractive / FM patches.
+ * pitch bends and wide vibrato. Piano and strings live in orchestral.ts.
  */
 import { env, filter, midiToFreq, noise, toOut, type Out } from './core'
 
@@ -103,11 +103,6 @@ export function danTranh(o: Out, t: number, midi: number, opts: PluckOpts = {}) 
   pluck(o, t, midi, { bright: 0.95, sustain: 0.9975, seconds: 3, tone: 7000, gain: 0.22, ...opts })
 }
 
-/** Upright bass: dark, round pluck. */
-export function bass(o: Out, t: number, midi: number, gain = 0.5) {
-  pluck(o, t, midi, { bright: 0.25, sustain: 0.994, seconds: 1.6, tone: 900, gain })
-}
-
 // ---------------------------------------------------------------- đàn bầu
 
 export interface DanBauNote {
@@ -178,97 +173,7 @@ export function danBau(o: Out, t: number, n: DanBauNote, pan = 0) {
   }
 }
 
-// ---------------------------------------------------------------- keys / pads / leads
-
-/** Electric piano (Rhodes-like) from two-operator FM. */
-export function epiano(o: Out, t: number, midi: number, dur: number, gain = 0.09, pan = 0) {
-  const { ctx } = o
-  const f = midiToFreq(midi)
-  const car = ctx.createOscillator()
-  car.frequency.value = f
-  const mod = ctx.createOscillator()
-  mod.frequency.value = f
-  const idx = ctx.createGain()
-  idx.gain.setValueAtTime(f * 1.6, t)
-  idx.gain.exponentialRampToValueAtTime(f * 0.15, t + 0.6)
-  mod.connect(idx).connect(car.frequency)
-  const g = ctx.createGain()
-  g.gain.setValueAtTime(0.0001, t)
-  g.gain.linearRampToValueAtTime(gain, t + 0.006)
-  g.gain.exponentialRampToValueAtTime(gain * 0.4, t + 0.5)
-  g.gain.exponentialRampToValueAtTime(0.0001, t + dur + 0.6)
-  // Tremolo, the classic suitcase-amp wobble.
-  const trem = ctx.createOscillator()
-  trem.frequency.value = 4.2
-  const td = ctx.createGain()
-  td.gain.value = gain * 0.25
-  trem.connect(td).connect(g.gain)
-  car.connect(g)
-  toOut(g, o, pan)
-  for (const s of [car, mod, trem]) {
-    s.start(t)
-    s.stop(t + dur + 0.7)
-  }
-}
-
-/** Slow, dark string/synth pad of detuned saws. */
-export function pad(o: Out, t: number, midis: number[], dur: number, gain = 0.05, cutoff = 900) {
-  const { ctx } = o
-  const g = ctx.createGain()
-  const attack = Math.min(2, dur * 0.4)
-  g.gain.setValueAtTime(0.0001, t)
-  g.gain.linearRampToValueAtTime(gain, t + attack)
-  g.gain.setValueAtTime(gain, t + dur - 0.2)
-  g.gain.linearRampToValueAtTime(0.0001, t + dur + 2)
-  const lp = filter(ctx, 'lowpass', cutoff, 0.5)
-  const lfo = ctx.createOscillator()
-  lfo.frequency.value = 0.12
-  const ld = ctx.createGain()
-  ld.gain.value = cutoff * 0.35
-  lfo.connect(ld).connect(lp.frequency)
-  lfo.start(t)
-  lfo.stop(t + dur + 2.1)
-  lp.connect(g)
-  midis.forEach((m, i) => {
-    for (const det of [-7, 6]) {
-      const osc = ctx.createOscillator()
-      osc.type = 'sawtooth'
-      osc.frequency.value = midiToFreq(m)
-      osc.detune.value = det + i
-      const og = ctx.createGain()
-      og.gain.value = 1 / midis.length
-      osc.connect(og).connect(lp)
-      osc.start(t)
-      osc.stop(t + dur + 2.1)
-    }
-  })
-  toOut(g, o, 0)
-}
-
-/** Filtered saw pulse for tense ostinatos. */
-export function pulseSynth(o: Out, t: number, midi: number, dur: number, gain = 0.1, open = 1) {
-  const { ctx } = o
-  const osc = ctx.createOscillator()
-  osc.type = 'sawtooth'
-  osc.frequency.value = midiToFreq(midi)
-  const sub = ctx.createOscillator()
-  sub.type = 'square'
-  sub.frequency.value = midiToFreq(midi - 12)
-  const sg = ctx.createGain()
-  sg.gain.value = 0.35
-  const lp = filter(ctx, 'lowpass', 300, 6)
-  lp.frequency.setValueAtTime(300 + 1500 * open, t)
-  lp.frequency.exponentialRampToValueAtTime(220, t + dur)
-  const g = env(ctx, t, gain, 0.004, dur)
-  osc.connect(lp)
-  sub.connect(sg).connect(lp)
-  lp.connect(g)
-  toOut(g, o, 0)
-  for (const s of [osc, sub]) {
-    s.start(t)
-    s.stop(t + dur + 0.05)
-  }
-}
+// ---------------------------------------------------------------- bells
 
 /** Glassy sine bell used in stingers. */
 export function bell(o: Out, t: number, midi: number, gain = 0.08, decay = 2.5, pan = 0) {
@@ -287,58 +192,6 @@ export function bell(o: Out, t: number, midi: number, gain = 0.08, decay = 2.5, 
 }
 
 // ---------------------------------------------------------------- percussion
-
-/** Round sine sub bass with a soft attack. */
-export function subBass(o: Out, t: number, midi: number, dur: number, gain = 0.2) {
-  const { ctx } = o
-  const osc = ctx.createOscillator()
-  osc.frequency.value = midiToFreq(midi)
-  const g = ctx.createGain()
-  g.gain.setValueAtTime(0.0001, t)
-  g.gain.linearRampToValueAtTime(gain, t + 0.02)
-  g.gain.setValueAtTime(gain, t + dur * 0.7)
-  g.gain.exponentialRampToValueAtTime(0.0001, t + dur)
-  osc.connect(g)
-  toOut(g, o, 0)
-  osc.start(t)
-  osc.stop(t + dur + 0.05)
-}
-
-/** Dusty, soft snare: noise body plus a short tone. */
-export function snare(o: Out, t: number, gain = 0.15) {
-  const { ctx } = o
-  const src = noise(ctx, t, 0.25)
-  const g = env(ctx, t, gain, 0.002, 0.18)
-  src.connect(filter(ctx, 'bandpass', 1800, 0.7)).connect(filter(ctx, 'lowpass', 5000)).connect(g)
-  toOut(g, o, 0.05)
-  const osc = ctx.createOscillator()
-  osc.frequency.setValueAtTime(220, t)
-  osc.frequency.exponentialRampToValueAtTime(160, t + 0.08)
-  const og = env(ctx, t, gain * 0.6, 0.002, 0.09)
-  osc.connect(og)
-  toOut(og, o, 0)
-  osc.start(t)
-  osc.stop(t + 0.15)
-}
-
-/** Side-stick click. */
-export function rim(o: Out, t: number, gain = 0.06) {
-  const { ctx } = o
-  const src = noise(ctx, t, 0.05)
-  const g = env(ctx, t, gain, 0.001, 0.04)
-  src.connect(filter(ctx, 'bandpass', 2400, 5)).connect(g)
-  toOut(g, o, 0.1)
-}
-
-/** Closed hi-hat, kept dark so it sits back in the mix. */
-export function hat(o: Out, t: number, gain = 0.03) {
-  const { ctx } = o
-  const src = noise(ctx, t, 0.08)
-  const g = env(ctx, t, gain, 0.001, 0.05)
-  src.connect(filter(ctx, 'highpass', 6000)).connect(filter(ctx, 'lowpass', 9000)).connect(g)
-  toOut(g, o, 0.25)
-}
-
 
 export function kick(o: Out, t: number, gain = 0.4, low = 42) {
   const { ctx } = o
