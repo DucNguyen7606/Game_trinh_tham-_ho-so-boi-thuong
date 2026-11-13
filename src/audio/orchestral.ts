@@ -1,13 +1,12 @@
 /**
- * Cinematic instruments: acoustic piano, string section, solo cello/violin
- * lines, pizzicato and timpani. All synthesised; nothing is sampled.
+ * Film-score instruments: acoustic piano, string section and solo
+ * cello/violin lines. All synthesised; nothing is sampled.
  *
  * The piano is rendered note by note into buffers with additive synthesis
  * (slightly stretched partials, two detuned strings, a hammer knock) and
  * cached, so playing it later costs no more than a sample player.
  */
-import { env, filter, midiToFreq, noise, toOut, type Out } from './core'
-import { pluck } from './instruments'
+import { filter, midiToFreq, noise, toOut, type Out } from './core'
 
 // ---------------------------------------------------------------- piano
 
@@ -29,12 +28,12 @@ function pianoBuffer(ctx: BaseAudioContext, midi: number, hard: boolean) {
   const L = buf.getChannelData(0)
   const R = buf.getChannelData(1)
   const B = 0.00012 * Math.pow(2, (midi - 60) / 18) // inharmonicity
-  const bright = hard ? 0.22 : 0.42 // higher = darker
+  const bright = hard ? 0.35 : 0.6 // higher = darker
   const baseTau = seconds * 0.3
 
   for (let k = 1; k <= 14; k++) {
     const fk = k * f0 * Math.sqrt(1 + B * k * k)
-    if (fk > 9000) break
+    if (fk > 5000) break
     const amp = Math.exp(-bright * (k - 1)) / Math.pow(k, 0.6)
     const tau = baseTau / (1 + 0.35 * (k - 1))
     // Two strings per note, a few tenths of a cent apart, for the shimmer.
@@ -74,7 +73,7 @@ function pianoBuffer(ctx: BaseAudioContext, midi: number, hard: boolean) {
   let lp = 0
   for (let i = 0; i < knock; i++) {
     lp += 0.25 * (Math.random() * 2 - 1 - lp)
-    const e = (1 - i / knock) ** 3 * (hard ? 0.35 : 0.2)
+    const e = (1 - i / knock) ** 3 * (hard ? 0.2 : 0.1)
     L[i] += lp * e
     R[i] += lp * e
   }
@@ -113,9 +112,6 @@ export function piano(o: Out, t: number, midi: number, dur?: number, gain = 0.25
   toOut(g, o, (midi - 60) / 60)
 }
 
-export const pianoChord = (o: Out, t: number, midis: number[], dur?: number, gain = 0.16, roll = 0.012) =>
-  midis.forEach((m, i) => piano(o, t + i * roll, m, dur, gain))
-
 // ---------------------------------------------------------------- string section
 
 export interface StringOpts {
@@ -138,11 +134,11 @@ export function strings(o: Out, t: number, midi: number, dur: number, opts: Stri
   const f = midiToFreq(midi)
   const end = t + dur
 
-  const lp = filter(ctx, 'lowpass', Math.min(7000, 1200 + 2600 * (opts.bright ?? 0.5) + f * 1.5), 0.5)
+  const lp = filter(ctx, 'lowpass', Math.min(5000, 800 + 2000 * (opts.bright ?? 0.2) + f * 1.2), 0.5)
   const body = filter(ctx, 'peaking', 420, 1)
   body.gain.value = 4
   const air = filter(ctx, 'highshelf', 3500)
-  air.gain.value = -8
+  air.gain.value = -12
   const g = ctx.createGain()
   g.gain.setValueAtTime(0.0001, t)
   g.gain.linearRampToValueAtTime(gain, t + attack)
@@ -184,14 +180,6 @@ export function strings(o: Out, t: number, midi: number, dur: number, opts: Stri
 
 export const stringChord = (o: Out, t: number, midis: number[], dur: number, opts: StringOpts = {}) =>
   midis.forEach((m) => strings(o, t, m, dur, { ...opts, pan: opts.pan ?? (m - 60) / 40 }))
-
-/** Short, bouncing spiccato stroke. */
-export const spiccato = (o: Out, t: number, midi: number, gain = 0.06) =>
-  strings(o, t, midi, 0.07, { gain, attack: 0.012, release: 0.12, bright: 0.7 })
-
-/** Pizzicato: a plucked violin or cello string. */
-export const pizz = (o: Out, t: number, midi: number, gain = 0.25, pan = 0) =>
-  pluck(o, t, midi, { bright: 0.55, sustain: midi < 48 ? 0.992 : 0.985, seconds: 0.9, tone: 2600, gain, pan })
 
 // ---------------------------------------------------------------- solo bowed line
 
@@ -252,7 +240,7 @@ export function bowedLine(o: Out, t: number, notes: LineNote[], voice: 'cello' |
           [1100, 2],
           [2900, 5],
         ]
-  let chain: AudioNode = filter(ctx, 'lowpass', voice === 'cello' ? 3200 : 6500, 0.6)
+  let chain: AudioNode = filter(ctx, 'lowpass', voice === 'cello' ? 2200 : 3800, 0.6)
   const head = chain
   for (const [fq, gdb] of formants) {
     const pk = filter(ctx, 'peaking', fq, 1.2)
@@ -280,7 +268,7 @@ export function bowedLine(o: Out, t: number, notes: LineNote[], voice: 'cello' |
   // Rosin: a little bow noise riding on the tone.
   const bow = noise(ctx, t, total + 0.3)
   const bg = ctx.createGain()
-  bg.gain.value = 0.05
+  bg.gain.value = 0.025
   bow.connect(filter(ctx, 'bandpass', voice === 'cello' ? 1500 : 3500, 1)).connect(bg).connect(g)
   toOut(g, o, pan)
   for (const s of [...oscs, lfo]) {
@@ -291,31 +279,3 @@ export function bowedLine(o: Out, t: number, notes: LineNote[], voice: 'cello' |
 
 /** Builds a line from beat lengths: [[midi, beats], ...]. */
 export const line = (beat: number, spec: [number, number][]): LineNote[] => spec.map(([midi, b]) => ({ midi, dur: b * beat }))
-
-// ---------------------------------------------------------------- percussion
-
-/** Timpani hit, tuned. */
-export function timpani(o: Out, t: number, midi: number, gain = 0.3) {
-  const { ctx } = o
-  const f = midiToFreq(midi)
-  const g = ctx.createGain()
-  ;[1, 1.5, 1.98].forEach((r, i) => {
-    const osc = ctx.createOscillator()
-    osc.frequency.setValueAtTime(f * r * 1.02, t)
-    osc.frequency.exponentialRampToValueAtTime(f * r, t + 0.08)
-    const e = env(ctx, t, gain / (i + 1), 0.004, 1.6 / (i + 1))
-    osc.connect(e).connect(g)
-    osc.start(t)
-    osc.stop(t + 1.8)
-  })
-  const skin = noise(ctx, t, 0.15)
-  const se = env(ctx, t, gain * 0.5, 0.002, 0.08)
-  skin.connect(filter(ctx, 'lowpass', 900)).connect(se).connect(g)
-  toOut(g, o, -0.15)
-}
-
-/** Timpani roll swelling over `dur` seconds. */
-export function timpaniRoll(o: Out, t: number, midi: number, dur: number, peak = 0.2) {
-  const hits = Math.floor(dur / 0.07)
-  for (let i = 0; i < hits; i++) timpani(o, t + i * 0.07 + Math.random() * 0.01, midi, peak * (0.15 + 0.85 * (i / hits) ** 2))
-}

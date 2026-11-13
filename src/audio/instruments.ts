@@ -204,28 +204,3 @@ export function kick(o: Out, t: number, gain = 0.4, low = 42) {
   osc.start(t)
   osc.stop(t + 0.4)
 }
-
-/** Clock tick: alternate `tock` for the second of each pair. */
-export function tick(o: Out, t: number, tock = false, gain = 0.05) {
-  const { ctx } = o
-  const src = noise(ctx, t, 0.03)
-  const bp = filter(ctx, 'bandpass', tock ? 2200 : 3200, 8)
-  const g = env(ctx, t, gain, 0.001, 0.025)
-  src.connect(bp).connect(g)
-  toOut(g, o, tock ? -0.3 : 0.3)
-}
-
-/** Rising noise swell, for tension before a phrase turns. */
-export function riser(o: Out, t: number, dur = 2, gain = 0.05) {
-  const { ctx } = o
-  const src = noise(ctx, t, dur)
-  const bp = filter(ctx, 'bandpass', 400, 2)
-  bp.frequency.setValueAtTime(300, t)
-  bp.frequency.exponentialRampToValueAtTime(5000, t + dur)
-  const g = ctx.createGain()
-  g.gain.setValueAtTime(0.0001, t)
-  g.gain.exponentialRampToValueAtTime(gain, t + dur * 0.95)
-  g.gain.linearRampToValueAtTime(0.0001, t + dur)
-  src.connect(bp).connect(g)
-  toOut(g, o, 0)
-}
