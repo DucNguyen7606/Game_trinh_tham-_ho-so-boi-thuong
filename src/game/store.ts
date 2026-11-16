@@ -53,6 +53,12 @@ interface GameState {
   /** Where the player left each card on the board, and the board's pan and zoom, kept across tabs. */
   boardLayout: Record<string, { x: number; y: number }>
   boardViewport?: { x: number; y: number; zoom: number }
+  /** Per document, what the player has marked with the highlighter: key phrases and their own marks. */
+  marks: Record<string, string[]>
+  solvedPuzzles: string[]
+  /** Per puzzle, wrong attempts so far, and how many hints were seen and at how many attempts the last one opened. */
+  puzzleAttempts: Record<string, number>
+  puzzleHints: Record<string, { level: number; attempts: number }>
   activeSuspect?: string
   log: string[]
 
@@ -73,6 +79,16 @@ interface GameState {
   saveTranscript: (suspectId: string, lines: TranscriptLine[]) => void
   /** Opens the question's next hint if hintGate allows it. Returns whether one opened. */
   showHint: (questionId: string) => boolean
+  /**
+   * Marks a stretch of a document and pins its card to the board. A stroke that covers most
+   * of a key phrase snaps to the whole phrase. Returns the phrase it snapped to, if any.
+   */
+  markText: (clueId: string, text: string) => string | undefined
+  /** Checks a puzzle answer (kind answer) or a click on its picture (kind spots, x/y in percent). */
+  tryPuzzle: (puzzleId: string, attempt: string | { x: number; y: number }) => 'solved' | 'found' | 'wrong'
+  /** Spots found so far on a spots puzzle. */
+  foundSpots: Record<string, string[]>
+  showPuzzleHint: (puzzleId: string) => boolean
   saveBoardLayout: (positions: Record<string, { x: number; y: number }>) => void
   saveBoardViewport: (viewport: { x: number; y: number; zoom: number }) => void
   isEnvelopeOpen: (envelopeId: string) => boolean
@@ -108,6 +124,11 @@ const initial = (data: CaseData) => ({
   checkCount: {} as Record<string, number>,
   boardLayout: {} as Record<string, { x: number; y: number }>,
   boardViewport: undefined as { x: number; y: number; zoom: number } | undefined,
+  marks: {} as Record<string, string[]>,
+  solvedPuzzles: [] as string[],
+  puzzleAttempts: {} as Record<string, number>,
+  puzzleHints: {} as Record<string, { level: number; attempts: number }>,
+  foundSpots: {} as Record<string, string[]>,
   activeSuspect: undefined as string | undefined,
   log: [] as string[],
 })
@@ -172,6 +193,52 @@ export function hintGate(
   const nothingLeft = relevant.every((c) => basis.matched.includes(c))
   if (nothingLeft && (st.checkCount[questionId] ?? 0) > basis.checks) return 'available'
   return 'locked'
+}
+
+/** Lower case, no accents or spaces, "," read as ".": how puzzle answers and highlights are compared. */
+export function normalize(text: string) {
+  return text
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/đ/gi, 'd')
+    .toLowerCase()
+    .replace(/,/g, '.')
+    .replace(/[\s"“”'‘’«»()]/g, '')
+    .replace(/[.]+$/, '')
+}
+
+/** The puzzle that locks a clue, if any. */
+export function puzzleFor(data: CaseData, clueId: string) {
+  return data.puzzles?.find((p) => p.clueId === clueId)
+}
+
+/** A clue is locked while its puzzle is unsolved: its card is on the board but proves nothing. */
+export function clueLocked(st: Pick<GameState, 'data' | 'solvedPuzzles'>, clueId: string) {
+  const p = puzzleFor(st.data, clueId)
+  return !!p && !st.solvedPuzzles.includes(p.id)
+}
+
+/**
+ * Which key phrase a highlighter stroke hits: the stroke must cover the phrase, or most of it,
+ * without running far past it (marking a whole page doesn't count).
+ */
+export function phraseHit(phrases: string[], text: string) {
+  const t = normalize(text)
+  if (!t) return undefined
+  return phrases.find((p) => {
+    const k = normalize(p)
+    return (t.includes(k) && t.length <= k.length * 1.6 + 8) || (k.includes(t) && t.length >= k.length * 0.6)
+  })
+}
+
+/** Puzzle hints: the first is free, each further one needs a new wrong attempt since the last. */
+export function puzzleHintGate(st: Pick<GameState, 'data' | 'puzzleHints' | 'puzzleAttempts'>, puzzleId: string): HintGate {
+  const p = st.data.puzzles?.find((x) => x.id === puzzleId)
+  const seen = st.puzzleHints[puzzleId]
+  const level = seen?.level ?? 0
+  if (!p || level >= (p.hints?.length ?? 0)) return 'none-left'
+  if (!seen || level === 0) return 'available'
+  return (st.puzzleAttempts[puzzleId] ?? 0) > seen.attempts ? 'available' : 'locked'
 }
 
 const addUnique = (list: string[], id: string) => (list.includes(id) ? list : [...list, id])
@@ -246,7 +313,8 @@ export const useGame = create<GameState>((set, get) => ({
       checkedLinks: { ...s.checkedLinks, [questionId]: [...a.clueIds] },
       checkCount: { ...s.checkCount, [questionId]: (s.checkCount[questionId] ?? 0) + 1 },
     }))
-    const hasAllClues = q.requiredClues.every((c) => a.clueIds.includes(c))
+    // A card whose puzzle is unsolved is on the board but proves nothing yet.
+    const hasAllClues = q.requiredClues.every((c) => a.clueIds.includes(c) && !clueLocked(get(), c))
     if (a.optionId === q.correctOptionId && hasAllClues) {
       set({ solvedQuestions: addUnique(solvedQuestions, questionId) })
       return 'solved'
@@ -265,6 +333,55 @@ export const useGame = create<GameState>((set, get) => ({
       activeSuspect: suspectId,
       screen: 'interrogation',
       transcripts: { ...st.transcripts, [suspectId]: [...(st.transcripts[suspectId] ?? []), { day: st.day, lines: [] }] },
+    }))
+    return true
+  },
+
+  markText: (clueId, text) => {
+    const clue = get().data.clues.find((c) => c.id === clueId)
+    const stroke = text.replace(/\s+/g, ' ').trim()
+    if (!clue || !stroke) return undefined
+    const hit = phraseHit(clue.highlights ?? [], stroke)
+    set((s) => ({
+      marks: { ...s.marks, [clueId]: addUnique(s.marks[clueId] ?? [], hit ?? stroke) },
+      // Any mark pins the card, so marking never tells the player which words matter.
+      foundClues: addUnique(s.foundClues, clueId),
+    }))
+    return hit
+  },
+
+  tryPuzzle: (puzzleId, attempt) => {
+    const st = get()
+    const p = st.data.puzzles?.find((x) => x.id === puzzleId)
+    if (!p || st.solvedPuzzles.includes(p.id)) return 'solved'
+    const miss = () => {
+      set((s) => ({ puzzleAttempts: { ...s.puzzleAttempts, [p.id]: (s.puzzleAttempts[p.id] ?? 0) + 1 } }))
+      return 'wrong' as const
+    }
+    const solve = () => {
+      set((s) => ({ solvedPuzzles: addUnique(s.solvedPuzzles, p.id) }))
+      return 'solved' as const
+    }
+    if (p.kind === 'answer') {
+      if (typeof attempt !== 'string') return 'wrong'
+      return (p.answers ?? []).some((a) => normalize(a) === normalize(attempt)) ? solve() : miss()
+    }
+    if (typeof attempt === 'string') return 'wrong'
+    const spot = (p.spots ?? []).find((sp) => Math.hypot(sp.x - attempt.x, sp.y - attempt.y) <= (sp.r ?? 6))
+    if (!spot) return miss()
+    const found = addUnique(st.foundSpots[p.id] ?? [], spot.label)
+    set((s) => ({ foundSpots: { ...s.foundSpots, [p.id]: found } }))
+    return found.length >= (p.spots ?? []).length ? solve() : 'found'
+  },
+
+  showPuzzleHint: (puzzleId) => {
+    const st = get()
+    if (puzzleHintGate(st, puzzleId) !== 'available') return false
+    set((s) => ({
+      puzzleHints: {
+        ...s.puzzleHints,
+        [puzzleId]: { level: (s.puzzleHints[puzzleId]?.level ?? 0) + 1, attempts: s.puzzleAttempts[puzzleId] ?? 0 },
+      },
     }))
     return true
   },

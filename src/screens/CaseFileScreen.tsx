@@ -2,8 +2,11 @@ import { useState } from 'react'
 import { DndContext, DragOverlay, useDraggable, useDroppable, type DragEndEvent } from '@dnd-kit/core'
 import { Lock, Mail, MailOpen, Maximize2, Pin } from 'lucide-react'
 import { Lightbox } from '@/components/Lightbox'
-import { questionOrder, useGame } from '@/game/store'
-import { clueById, getDocumentArt } from '@/game/caseLoader'
+import { clueLocked, puzzleFor, questionOrder, useGame } from '@/game/store'
+import { HighlightText } from '@/components/Highlighter'
+import { AudioEvidence } from '@/components/AudioEvidence'
+import { PuzzlePanel } from '@/components/PuzzlePanel'
+import { clueById, docCode, getDocumentArt } from '@/game/caseLoader'
 import type { Clue } from '@/game/types'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
@@ -22,6 +25,7 @@ function PushPin() {
 }
 
 function DocumentCard({ clue, pinned, read, dragging }: { clue: Clue; pinned: boolean; read?: boolean; dragging?: boolean }) {
+  const data = useGame((s) => s.data)
   return (
     <div className="relative">
       {pinned && <PushPin />}
@@ -34,7 +38,7 @@ function DocumentCard({ clue, pinned, read, dragging }: { clue: Clue; pinned: bo
         )}
       >
         <div className="flex items-center justify-between text-[10px] font-semibold uppercase opacity-60">
-          <span>{clue.id}</span>
+          <span>{docCode(data, clue.id)}</span>
           {read && !dragging && <span className="normal-case">đã đọc</span>}
         </div>
         <p className="mt-1 text-sm font-semibold leading-tight">{clue.title}</p>
@@ -91,6 +95,8 @@ export default function CaseFileScreen() {
   const dragged = dragId ? clueById(data, dragId) : undefined
   const ReadingArt = reading ? getDocumentArt(data.id, reading.id) : undefined
   const [zoomed, setZoomed] = useState(false)
+  const readingPuzzle = reading ? puzzleFor(data, reading.id) : undefined
+  const readingLocked = useGame((st) => (reading ? clueLocked(st, reading.id) : false))
 
   return (
     <DndContext onDragStart={(e) => setDragId(String(e.active.id))} onDragEnd={onDragEnd} onDragCancel={() => setDragId(null)}>
@@ -147,10 +153,16 @@ export default function CaseFileScreen() {
           <DropZone id="reading-desk" title="Bàn đọc" hint="Kéo giấy tờ vào đây để đọc kỹ.">
             {reading ? (
               <div className="document p-4">
-                <p className="text-xs font-semibold opacity-60">{reading.id}</p>
+                <p className="text-xs font-semibold opacity-60">Mã {docCode(data, reading.id)}</p>
                 <h3 className="text-lg font-semibold">{reading.title}</h3>
                 <div className="my-2 h-px bg-paper-ink/30" />
-                <p className="mt-2 text-sm">{reading.description}</p>
+                {readingLocked ? (
+                  <p className="mt-2 whitespace-pre-line font-mono text-sm">{readingPuzzle!.lockedText}</p>
+                ) : (
+                  <HighlightText key={reading.id} clueId={reading.id} text={reading.description} className="mt-2 text-sm" />
+                )}
+                {readingPuzzle && <PuzzlePanel puzzle={readingPuzzle} />}
+                {reading.audio && <AudioEvidence caseId={data.id} audio={reading.audio} />}
               </div>
             ) : null}
             {reading && ReadingArt ? (
@@ -177,9 +189,9 @@ export default function CaseFileScreen() {
           onClose={() => setZoomed(false)}
           note={
             <>
-              <p className="text-[10px] uppercase tracking-widest opacity-60">Giấy tờ {reading.id}</p>
+              <p className="text-[10px] uppercase tracking-widest opacity-60">Giấy tờ {docCode(data, reading.id)}</p>
               <h3 className="title text-xl">{reading.title}</h3>
-              <p className="text-sm">{reading.description}</p>
+              <p className="text-sm">{readingLocked ? readingPuzzle!.lockedText : reading.description}</p>
               <p className="text-xs opacity-70">
                 {data.envelopes.find((e) => e.documents.includes(reading.id))?.title ?? ''}
               </p>

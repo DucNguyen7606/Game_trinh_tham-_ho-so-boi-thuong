@@ -361,13 +361,18 @@ export default function SaigonMap({
               {c.number}
             </text>
             <g transform={`translate(${x} ${y + 14}) rotate(${i % 2 ? 1.5 : -1.5})`}>
-              <rect className="sm-tag" x="-120" y="0" width="240" height="56" fill="#f3e4c4" stroke={on ? accent.red : INK} strokeWidth={on ? 3 : 1.2} />
+              <rect className="sm-tag" x="-120" y="0" width="240" height={open && c.difficulty ? 76 : 56} fill="#f3e4c4" stroke={on ? accent.red : INK} strokeWidth={on ? 3 : 1.2} />
               <text y="21" textAnchor="middle" className="display" fontSize="13" fill={shade(INK, 0.3)} letterSpacing="2">
                 {open ? `CHƯƠNG ${c.number}` : `CHƯƠNG ${c.number} · NIÊM PHONG`}
               </text>
               <text y="44" textAnchor="middle" className="title" fontSize="19" fill={INK}>
                 {c.title}
               </text>
+              {open && c.difficulty && (
+                <text y="66" textAnchor="middle" className="display" fontSize="12" fill={shade(INK, 0.3)} letterSpacing="1.5">
+                  {[c.difficulty.toUpperCase(), c.playTime].filter(Boolean).join(' · ')}
+                </text>
+              )}
             </g>
           </g>
         )

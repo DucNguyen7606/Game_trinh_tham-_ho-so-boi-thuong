@@ -51,6 +51,19 @@ export default function VerdictScreen() {
             </figure>
           ))}
         </div>
+        {data.timeline && data.timeline.length > 0 && (
+          <section className="document mt-8 p-5">
+            <h3 className="title text-xl">Tóm tắt dòng thời gian</h3>
+            <ol className="mt-3 space-y-1.5 border-l-2 border-string/60 pl-4">
+              {data.timeline.map((t, i) => (
+                <li key={i} className="text-sm">
+                  <span className="mr-2 font-mono text-xs font-semibold">{t.time}</span>
+                  {t.text}
+                </li>
+              ))}
+            </ol>
+          </section>
+        )}
         <p className="mt-4 text-sm text-muted-foreground">
           Bạn đã giải {solvedQuestions.length}/{data.questions.length} câu trên bàn suy luận.
         </p>

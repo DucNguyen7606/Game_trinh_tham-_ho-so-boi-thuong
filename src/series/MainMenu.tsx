@@ -295,6 +295,12 @@ function CaseCard({ chapter: c, onOpen, current }: { chapter: Chapter; onOpen?: 
         </span>
         <h3 className="title mt-1 text-xl leading-tight">{c.title}</h3>
         <p className="mt-2 font-sans text-sm leading-snug text-paper-ink/85">{c.blurb}</p>
+        {c.difficulty && (
+          <p className="display mt-2 text-xs tracking-widest text-paper-ink/60">
+            Độ khó: {c.difficulty}
+            {c.playTime && ` · ${c.playTime}`}
+          </p>
+        )}
         {locked ? (
           <div className="absolute inset-x-[-8px] top-1/2 flex h-8 -rotate-3 items-center justify-center bg-string/85 text-white">
             <Lock className="mr-2 size-4" />

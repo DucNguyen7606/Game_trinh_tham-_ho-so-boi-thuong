@@ -13,6 +13,10 @@ export interface Chapter {
   area?: string
   /** Exact spot of the case on the map (1000 x 900 map units); defaults to the area's middle. */
   spot?: [number, number]
+  /** Shown on the map tag and the case folder. */
+  difficulty?: 'Dễ' | 'Vừa' | 'Khó' | 'Rất khó'
+  /** Rough play time, like "60–75 phút". */
+  playTime?: string
 }
 
 export const SERIES = {
@@ -21,6 +25,8 @@ export const SERIES = {
   chapters: [
     {
       number: 1,
+      difficulty: 'Dễ',
+      playTime: '60–75 phút',
       caseId: 'ho-so-boi-thuong',
       area: 'binh-tan',
       spot: [335, 575],
@@ -30,6 +36,8 @@ export const SERIES = {
     },
     {
       number: 2,
+      difficulty: 'Vừa',
+      playTime: '75–90 phút',
       caseId: 'con-nuoc-can-gio',
       area: 'can-gio',
       spot: [740, 805],
@@ -39,6 +47,8 @@ export const SERIES = {
     },
     {
       number: 3,
+      difficulty: 'Vừa',
+      playTime: '75–90 phút',
       caseId: 'buc-son-mai',
       area: 'trung-tam',
       spot: [560, 545],
@@ -48,6 +58,8 @@ export const SERIES = {
     },
     {
       number: 4,
+      difficulty: 'Vừa',
+      playTime: '90 phút',
       caseId: 'chuyen-xe-dem',
       area: 'binh-thuan',
       spot: [815, 300],
@@ -57,6 +69,8 @@ export const SERIES = {
     },
     {
       number: 5,
+      difficulty: 'Khó',
+      playTime: '90–105 phút',
       caseId: 'dem-thu-thiem',
       area: 'thu-duc',
       title: 'Đêm Thủ Thiêm',
@@ -65,6 +79,8 @@ export const SERIES = {
     },
     {
       number: 6,
+      difficulty: 'Vừa',
+      playTime: '75–90 phút',
       caseId: 'dem-trieu-cuong',
       area: 'cho-lon',
       title: 'Đêm triều cường',
@@ -73,6 +89,8 @@ export const SERIES = {
     },
     {
       number: 7,
+      difficulty: 'Vừa',
+      playTime: '75–90 phút',
       caseId: 'tiem-vang-kim-thanh',
       area: 'go-vap',
       spot: [570, 468],
@@ -82,6 +100,8 @@ export const SERIES = {
     },
     {
       number: 8,
+      difficulty: 'Khó',
+      playTime: '90–105 phút',
       caseId: 'lo-sua-0601',
       area: 'quan-12',
       title: 'Lô sữa 0601',
@@ -90,6 +110,8 @@ export const SERIES = {
     },
     {
       number: 9,
+      difficulty: 'Vừa',
+      playTime: '90 phút',
       caseId: 'can-ho-tang-27',
       area: 'binh-thanh',
       title: 'Căn hộ tầng 27',
@@ -98,6 +120,8 @@ export const SERIES = {
     },
     {
       number: 10,
+      difficulty: 'Khó',
+      playTime: '90–105 phút',
       caseId: 'ba-muoi-ba-do',
       area: 'tan-binh',
       spot: [445, 455],
@@ -107,6 +131,8 @@ export const SERIES = {
     },
     {
       number: 11,
+      difficulty: 'Khó',
+      playTime: '105 phút',
       caseId: 'ho-ban-nguyet',
       area: 'quan-7',
       title: 'Đêm bên hồ Bán Nguyệt',
@@ -115,6 +141,8 @@ export const SERIES = {
     },
     {
       number: 12,
+      difficulty: 'Rất khó',
+      playTime: '105–120 phút',
       caseId: 'dong-ho-dung',
       area: 'quan-3',
       spot: [518, 540],

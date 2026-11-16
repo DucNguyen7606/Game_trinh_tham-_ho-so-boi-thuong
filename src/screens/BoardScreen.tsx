@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import { createPortal } from 'react-dom'
 import {
   ReactFlow,
   Background,
@@ -17,8 +18,11 @@ import {
   type NodeProps,
 } from '@xyflow/react'
 import { CheckCircle2, ChevronLeft, ChevronRight, Lightbulb, Lock, X } from 'lucide-react'
-import { hintGate, questionOrder, useGame } from '@/game/store'
-import { clueById } from '@/game/caseLoader'
+import { clueLocked, hintGate, puzzleFor, questionOrder, useGame } from '@/game/store'
+import { PuzzlePanel } from '@/components/PuzzlePanel'
+import { Lightbox } from '@/components/Lightbox'
+import { MarkedQuotes } from '@/components/Highlighter'
+import { clueById, docCode, getCloseup, getDocumentArt } from '@/game/caseLoader'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
@@ -28,12 +32,46 @@ type QuestionNodeData = { questionId: string }
 function ClueNode({ data }: NodeProps<Node<ClueNodeData>>) {
   const caseData = useGame((s) => s.data)
   const clue = clueById(caseData, data.clueId)
+  const locked = useGame((st) => clueLocked(st, data.clueId))
+  const [solving, setSolving] = useState(false)
   if (!clue) return null
+  const puzzle = puzzleFor(caseData, clue.id)
+  // The picture beside the puzzle: the document itself, or the close-up of the scene spot that gave this clue.
+  const spot = caseData.zones.flatMap((z) => z.hotspots).find((h) => h.clueId === clue.id)
+  const Art = getDocumentArt(caseData.id, clue.id) ?? (spot ? getCloseup(caseData.id, spot.id) : undefined)
   return (
     <div className="document w-52 p-2 shadow-md">
-      <p className="text-[10px] font-semibold uppercase opacity-60">{clue.id}</p>
+      <p className="text-[10px] font-semibold uppercase opacity-60">{docCode(caseData, clue.id)}</p>
       <p className="text-sm font-semibold leading-tight">{clue.title}</p>
-      <p className="mt-1 text-xs opacity-80">{clue.description}</p>
+      {locked ? (
+        <button
+          className="nodrag mt-1 flex items-start gap-1 text-left text-xs text-string underline-offset-2 hover:underline"
+          onClick={() => setSolving(true)}
+        >
+          <Lock className="mt-0.5 size-3 shrink-0" /> Chưa giải mã. Bấm để giải.
+        </button>
+      ) : (
+        <p className="mt-1 text-xs opacity-80">{clue.description}</p>
+      )}
+      <MarkedQuotes clueId={clue.id} />
+      {solving && puzzle && createPortal(
+        <Lightbox
+          label={puzzle.title}
+          onClose={() => setSolving(false)}
+          note={
+            <>
+              <p className="text-[10px] uppercase tracking-widest opacity-60">Giấy tờ {docCode(caseData, clue.id)}</p>
+              <h3 className="title text-xl">{clue.title}</h3>
+              {locked && <p className="whitespace-pre-line font-mono text-sm">{puzzle.lockedText}</p>}
+              <PuzzlePanel puzzle={puzzle} />
+            </>
+          }
+        >
+          {Art ? <Art /> : <div />}
+        </Lightbox>,
+        // The board pans and zooms its cards, so the viewer has to live outside it.
+        document.body,
+      )}
       <Handle type="source" position={Position.Right} className="!size-3.5 !bg-string after:absolute after:-inset-2.5 after:rounded-full after:content-['']" />
     </div>
   )
