@@ -1,4 +1,6 @@
-import { Home, Briefcase, FolderOpen, Network, Search, Gavel, Palette } from 'lucide-react'
+import { useState } from 'react'
+import { Home, Briefcase, FolderOpen, Network, Search, Gavel, Palette, CircleHelp } from 'lucide-react'
+import { Guide, guideSeen } from '@/components/Guide'
 import { useGame, type Screen } from '@/game/store'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -25,6 +27,8 @@ const nav: { screen: Screen; label: string; icon: typeof Briefcase }[] = [
 
 export default function App() {
   const { screen, go, day, left, reputation, data, solvedQuestions } = useGame()
+  // The guide opens by itself the first time a case is opened on this computer.
+  const [guide, setGuide] = useState(() => !guideSeen())
 
   if (screen === 'menu') return <MainMenu />
 
@@ -50,6 +54,9 @@ export default function App() {
           ))}
         </nav>
         <div className="ml-auto flex items-center gap-2 text-sm">
+          <Button size="sm" variant="ghost" title="Hướng dẫn" onClick={() => setGuide(true)}>
+            <CircleHelp />
+          </Button>
           <AudioControls />
           <Badge variant="outline">Ngày {day}/{data.days}</Badge>
           <Badge variant="outline">Khám: {left.explore}/{data.limitsPerDay.explore}</Badge>
@@ -59,6 +66,7 @@ export default function App() {
           </Badge>
         </div>
       </header>
+      {guide && <Guide onClose={() => setGuide(false)} />}
       <main className="relative min-h-0 flex-1 overflow-hidden">
         {/* Screen change: the old desk is swept off toward the top-right corner, the new one slides in. */}
         <AnimatePresence mode="wait" initial={false}>

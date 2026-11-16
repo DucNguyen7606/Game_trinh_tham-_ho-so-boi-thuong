@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { ArrowLeft, Lock, Map as MapIcon, Play, Power, Settings, UserRound } from 'lucide-react'
+import { ArrowLeft, BookOpen, Lock, Map as MapIcon, Play, Power, Settings, UserRound } from 'lucide-react'
+import { Guide } from '@/components/Guide'
 import { useGame } from '@/game/store'
 import { cn } from '@/lib/utils'
 import AudioControls from '@/audio/AudioControls'
@@ -43,6 +44,7 @@ function Home({ onMap: showMap }: { onMap: () => void }) {
   const profile = useProfile()
   // The character window: opened from the menu, or before the map the very first time.
   const [setup, setSetup] = useState<'edit' | 'first' | null>(null)
+  const [guide, setGuide] = useState(false)
   const onMap = () => (profile.created ? showMap() : setSetup('first'))
   const roleTitle = ROLES.find((r) => r.id === profile.roleId)?.title
   const go = useGame((s) => s.go)
@@ -92,11 +94,13 @@ function Home({ onMap: showMap }: { onMap: () => void }) {
             sub={profile.created ? `${profile.name} · ${roleTitle}` : 'Chọn tên, giới tính và nghề'}
             onClick={() => setSetup('edit')}
           />
+          <MenuItem icon={BookOpen} label="Hướng dẫn" sub="Cách điều tra, bút highlight, ghi âm, giải mã" onClick={() => setGuide(true)} />
           <SettingsItem />
           <MenuItem icon={Power} label="Thoát" onClick={() => window.close()} />
         </nav>
       </div>
 
+      {guide && <Guide onClose={() => setGuide(false)} />}
       {setup && <CharacterSetup onClose={() => setSetup(null)} onDone={setup === 'first' ? showMap : undefined} />}
 
       <p className="display absolute bottom-4 left-[8vw] text-xs text-muted-foreground/70">
