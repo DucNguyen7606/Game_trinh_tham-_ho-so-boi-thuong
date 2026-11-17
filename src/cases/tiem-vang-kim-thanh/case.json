@@ -17,7 +17,7 @@
     }
   },
   "photoDate": "03 12 '25",
-  "days": 10,
+  "days": 9,
   "limitsPerDay": {
     "talk": 2,
     "explore": 1
@@ -163,7 +163,7 @@
           "label": "Chiếc nhẫn dưới gầm tủ",
           "x": 36,
           "y": 88,
-          "note": "Một chiếc nhẫn tròn trơn lăn vào gầm tủ kính, chắc rơi lúc cướp vơ khay. Mặt trong khắc \"KT 9999 · 1 chỉ\". Bạn đặt lên cân tiểu ly trên quầy: 2,1 g. Một chỉ vàng 9999 phải nặng 3,75 g.",
+          "note": "Một chiếc nhẫn tròn trơn lăn vào gầm tủ kính, chắc rơi lúc cướp vơ khay. Mặt trong khắc \"KT 9999 · 1 chỉ\". Bạn đặt lên cân tiểu ly trên quầy. Cạnh cân có bảng quy đổi dán sẵn.",
           "clueId": "H1"
         },
         {
@@ -319,7 +319,7 @@
     }
   ],
   "clues": [
-    { "id": "H1", "title": "Nhẫn \"1 chỉ\" chỉ nặng 2,1 g", "description": "Nhẫn khắc \"KT 9999 · 1 chỉ\" rơi dưới gầm tủ. Vàng 9999 một chỉ phải nặng 3,75 g.", "source": "scene" },
+    { "id": "H1", "title": "Nhẫn \"1 chỉ\" dưới gầm tủ", "description": "Nhẫn khắc \"KT 9999 · 1 chỉ\" rơi dưới gầm tủ. Vàng 9999 một chỉ phải nặng 3,75 g.", "source": "scene" },
     { "id": "H2", "title": "Dấu dép bùn đỏ từ cửa sau", "description": "Dấu dép bắt đầu ở ngưỡng cửa sau, mũi hướng vào trong. Bùn đỏ của hẻm 514.", "source": "scene" },
     { "id": "H3", "title": "Két không vết cạy, có bộ nhớ", "description": "Két điện tử mở bằng mã, không bị phá. Két lưu lại giờ mỗi lần đóng mở.", "source": "scene" },
     { "id": "H4", "title": "Cửa sau chỉ mở được từ trong", "description": "Mặt ngoài không ổ khóa, không tay nắm. Chốt trong được kéo ra, cửa không bị phá.", "source": "scene" },
@@ -330,11 +330,11 @@
     { "id": "H9", "title": "Camera nhà thuốc", "description": "Thấy trọn cửa cuốn tiệm vàng và đầu hẻm 514.", "source": "scene" },
     { "id": "P1", "title": "Hợp đồng bảo hiểm tiệm vàng", "description": "Bảo hiểm vàng trong tủ và két trước rủi ro cướp, trộm có đột nhập. Loại trừ: hành vi cố ý của chủ tiệm hoặc người thân.", "source": "file" },
     { "id": "P2", "title": "Đơn yêu cầu bồi thường", "description": "Bà Loan kê 45 lượng: 30 lượng trong tủ kính, 15 lượng trong két. 6,3 tỷ đồng.", "source": "file" },
-    { "id": "P3", "title": "Biên bản công an phường 10", "description": "Nhận tin báo lúc 21:19. Tủ kính vỡ, két mở, cửa sau không bị phá.", "source": "file" },
-    { "id": "P4", "title": "Lời khai của bà Loan", "description": "\"21:02 hai tên chui vào cửa cuốn phía trước. Trong tiệm chỉ có mình tôi. Chúng kề dao bắt tôi mở két.\"", "source": "file" },
+    { "id": "P3", "title": "Biên bản công an phường 10", "description": "Nhận tin báo lúc 21:19. Tủ kính vỡ, két mở, cửa sau không bị phá.", "source": "file", "audio": {"length": "0:20", "lines": [{"who": "Tổng đài 113", "text": "113 xin nghe."}, {"who": "Bà Loan", "text": "Cướp! Tiệm vàng Kim Thành trên Quang Trung, Gò Vấp. Hai thằng cầm dao, tụi nó vừa chạy!"}, {"who": "Tổng đài 113", "text": "Chị có bị thương không? Trong tiệm còn ai không?"}, {"who": "Bà Loan", "text": "Tôi không sao, có mình tôi. Tụi nó ôm hết vàng rồi, mấy anh tới lẹ giùm."}, {"text": "[Giờ tổng đài nhận cuộc gọi: 21:19.]"}]} },
+    { "id": "P4", "title": "Lời khai của bà Loan", "description": "\"21:02 hai tên chui vào cửa cuốn phía trước. Trong tiệm chỉ có mình tôi. Chúng kề dao bắt tôi mở két.\"", "source": "file", "highlights": ["chui vào cửa cuốn phía trước"] },
     { "id": "P5", "title": "Số liệu mưa trạm Gò Vấp", "description": "Mưa to liên tục từ 19:30 đến 22:40 ngày 2/12.", "source": "file" },
-    { "id": "P6", "title": "Camera nhà thuốc tối 2/12", "description": "20:55 một xe máy chở hai người chạy vào hẻm 514. 20:58 cửa cuốn kéo xuống còn nửa, không ai vào cửa trước. 21:05 hai người áo mưa đen chạy ra, rẽ vào hẻm. 21:18 bà Loan mới bước ra.", "source": "file" },
-    { "id": "P7", "title": "Bộ nhớ két sắt", "description": "Mở bằng mã chủ lúc 20:41. Không có lần mở nào khác cho tới khi công an tới.", "source": "file" },
+    { "id": "P6", "title": "Camera nhà thuốc tối 2/12", "description": "20:55 một xe máy chở hai người chạy vào hẻm 514. 20:58 cửa cuốn kéo xuống còn nửa, không ai vào cửa trước. 21:05 hai người áo mưa đen chạy ra, rẽ vào hẻm. 21:18 bà Loan mới bước ra.", "source": "file", "highlights": ["20:58 cửa cuốn kéo xuống còn nửa, không ai vào cửa trước"] },
+    { "id": "P7", "title": "Bộ nhớ két sắt", "description": "Mở bằng mã chủ lúc 20:41. Không có lần mở nào khác cho tới khi công an tới.", "source": "file", "highlights": ["Mở bằng mã chủ lúc 20:41"] },
     { "id": "P8", "title": "Giám định chiếc nhẫn", "description": "Lõi đồng thau, mạ vàng dày 2 micromet. Không phải vàng 9999.", "source": "file" },
     { "id": "P9", "title": "Phiếu mua lại vàng tiệm Ngọc Phát", "description": "Ba lần trong tháng 11, bà Loan bán tổng cộng 42 lượng vàng nhẫn ở Phú Nhuận, 5,8 tỷ.", "source": "file" },
     { "id": "P10", "title": "Hóa đơn xưởng mạ Thành Công", "description": "12/11: tiệm Kim Thành đặt 300 nhẫn tròn trơn mạ vàng, khắc \"KT 9999\", và 40 dây chuyền mạ.", "source": "file" },
@@ -562,5 +562,61 @@
     { "ending": "full", "correct": ["plan", "robber"] },
     { "ending": "half", "correct": ["plan"] },
     { "ending": "wrong" }
+  ],
+  "puzzles": [
+    {
+      "id": "z1",
+      "clueId": "H1",
+      "kind": "answer",
+      "title": "Cân tiểu ly",
+      "prompt": "Đọc số trên cân trong ảnh cận cảnh, rồi đối chiếu bảng quy đổi dán trên quầy. Chiếc nhẫn \"1 chỉ\" này nhẹ hơn một chỉ vàng thật bao nhiêu gam?",
+      "lockedText": "Khắc trong lòng nhẫn: KT 9999 · 1 chỉ\nCân tiểu ly trên quầy: xem ảnh cận cảnh\nBảng quy đổi dán quầy: 1 lượng = 10 chỉ = 37,5 g",
+      "answers": ["1,65", "1,65 g", "1,65 gam", "1,65 gram"],
+      "placeholder": "gam",
+      "solvedText": "Một chỉ vàng 9999 nặng 37,5 ÷ 10 = 3,75 g. Chiếc nhẫn chỉ nặng 2,1 g, nhẹ hơn 1,65 g, gần một nửa. Không thể là vàng 9999.",
+      "hints": ["Bảng trên quầy cho biết một lượng nặng bao nhiêu và có mấy chỉ. Từ đó tính một chỉ nặng bao nhiêu.", "Một chỉ = 37,5 ÷ 10 = 3,75 g. Lấy 3,75 trừ đi số trên cân."]
+    }
+  ],
+  "timeline": [
+    {
+      "time": "15/10",
+      "text": "Hai dây hụi do bà Loan làm đầu thảo bị bể."
+    },
+    {
+      "time": "10/11–28/11",
+      "text": "Bà Loan trả đủ hơn 5,5 tỷ cho hụi viên."
+    },
+    {
+      "time": "Tháng 11",
+      "text": "Ba lần bán tổng cộng 42 lượng vàng ở tiệm Ngọc Phát, Phú Nhuận, được 5,8 tỷ."
+    },
+    {
+      "time": "12/11",
+      "text": "Đặt xưởng mạ Thành Công 300 nhẫn mạ khắc \"KT 9999\" để bày lại tủ kính."
+    },
+    {
+      "time": "2/12 20:41",
+      "text": "Bà Loan mở két bằng mã chủ."
+    },
+    {
+      "time": "20:55",
+      "text": "Tài chở một người bạn vào hẻm 514 sau tiệm."
+    },
+    {
+      "time": "20:58",
+      "text": "Cửa cuốn kéo xuống còn nửa, không ai vào cửa trước. Bà Loan kéo chốt cửa sau cho hai người vào."
+    },
+    {
+      "time": "21:05",
+      "text": "Hai người áo mưa đen chạy ra, rẽ vào hẻm."
+    },
+    {
+      "time": "21:19",
+      "text": "Bà Loan gọi báo công an: \"tụi nó vừa chạy\"."
+    },
+    {
+      "time": "5/12",
+      "text": "Tài nhận 150 triệu từ bà Loan, cùng ngày trả ba app cho vay."
+    }
   ]
 }

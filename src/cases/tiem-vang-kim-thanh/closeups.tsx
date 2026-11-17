@@ -25,7 +25,7 @@ function DroppedRing() {
       </text>
       <Ring x={200} y={152} r={34} fake />
       <Label x={200} y={40} t={'khắc trong: "KT 9999 · 1 chỉ"'} c={ink.night} size={13} />
-      <Label x={200} y={62} t="1 chỉ vàng 9999 = 3,75 g" c={accent.red} size={13} />
+      <Label x={200} y={62} t="bảng dán quầy: 1 lượng = 10 chỉ = 37,5 g" c={accent.red} size={13} />
     </g>
   )
 }
