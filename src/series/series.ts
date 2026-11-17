@@ -153,10 +153,36 @@ export const SERIES = {
   ] satisfies Chapter[],
 }
 
-/** One colour and level per difficulty, so a tag reads at a glance. Level 1–4 fills the pips. */
-export const DIFFICULTY: Record<NonNullable<Chapter['difficulty']>, { level: number; bg: string; fg: string }> = {
-  'Dễ': { level: 1, bg: '#3f8a4f', fg: '#f4fbe9' },
-  'Vừa': { level: 2, bg: '#d9a21b', fg: '#2b1d10' },
-  'Khó': { level: 3, bg: '#d0612a', fg: '#fff4e6' },
-  'Rất khó': { level: 4, bg: '#9b1d2a', fg: '#ffe9e6' },
+/**
+ * One colour, level and rule set per difficulty. Harder cases give fewer days, a smaller
+ * hint pool, ask for more supporting cards and say less about what is missing.
+ * - days: investigation days (every case has 4 scene zones and 1 visit a day, so 7 is enough).
+ * - hints: hints for the whole case, questions and puzzles together; null = no cap.
+ * - related: supporting ("Liên quan") cards each question needs, never more than it has.
+ * - reputation: reputation at the start; a wrong answer costs 1.
+ * - exactMissing: a right answer with too few cards says how many of each kind are missing.
+ * - showNeeded: question boxes show how many cards are needed, not only how many are proven.
+ */
+export const DIFFICULTY: Record<
+  NonNullable<Chapter['difficulty']>,
+  { level: number; bg: string; fg: string; days: number; hints: number | null; related: number; reputation: number; exactMissing: boolean; showNeeded: boolean }
+> = {
+  'Dễ': { level: 1, bg: '#3f8a4f', fg: '#f4fbe9', days: 10, hints: null, related: 1, reputation: 4, exactMissing: true, showNeeded: true },
+  'Vừa': { level: 2, bg: '#d9a21b', fg: '#2b1d10', days: 9, hints: 10, related: 1, reputation: 3, exactMissing: true, showNeeded: true },
+  'Khó': { level: 3, bg: '#d0612a', fg: '#fff4e6', days: 8, hints: 7, related: 2, reputation: 3, exactMissing: false, showNeeded: true },
+  'Rất khó': { level: 4, bg: '#9b1d2a', fg: '#ffe9e6', days: 7, hints: 4, related: 2, reputation: 2, exactMissing: false, showNeeded: false },
+}
+
+export type Rules = (typeof DIFFICULTY)[keyof typeof DIFFICULTY]
+
+/** The rules a case is played under, from its chapter's difficulty (a case with none plays as Vừa). */
+export function rulesFor(caseId: string): Rules & { difficulty: NonNullable<Chapter['difficulty']> } {
+  const difficulty = SERIES.chapters.find((c) => c.caseId === caseId)?.difficulty ?? 'Vừa'
+  return { ...DIFFICULTY[difficulty], difficulty }
+}
+
+/** "8 ngày · 7 gợi ý": the limits of a difficulty, for badges. */
+export function limitsLabel(difficulty: NonNullable<Chapter['difficulty']>) {
+  const r = DIFFICULTY[difficulty]
+  return `${r.days} ngày · ${r.hints === null ? 'gợi ý không giới hạn' : `${r.hints} gợi ý`}`
 }

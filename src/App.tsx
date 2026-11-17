@@ -70,7 +70,7 @@ export default function App() {
           <Badge
             variant="outline"
             className={cn('gap-1', hints.now > 0 && 'border-amber/70 text-amber')}
-            title={`Bạn mở được ${hints.now} gợi ý ngay lúc này (mỗi câu hỏi hoặc câu đố đang mở được một gợi ý khi đủ điều kiện). Cả vụ còn ${hints.left} gợi ý chưa xem.`}
+            title={`Bạn mở được ${hints.now} gợi ý ngay lúc này (mỗi câu hỏi hoặc câu đố đang mở được một gợi ý khi đủ điều kiện). Cả vụ còn ${hints.left} gợi ý ${hints.capped ? 'trong quỹ gợi ý của mức độ khó này' : 'chưa xem'}.`}
           >
             <Lightbulb className="size-3.5" /> Gợi ý {hints.now} · còn {hints.left}
           </Badge>

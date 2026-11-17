@@ -1,7 +1,7 @@
 import { useId } from 'react'
 import { accent, ink, shade } from '@/art/palette'
 import { AREAS, OFF_MAP, QL1A, RIVER, areaLabel, roughOutline, type Area } from './areas'
-import { DIFFICULTY, SERIES, type Chapter } from './series'
+import { DIFFICULTY, SERIES, limitsLabel, type Chapter } from './series'
 
 // The case map: a paper map of Saigon pinned to the desk. Areas with a case get
 // a red pin, and a red string runs from pin to pin in chapter order.
@@ -361,7 +361,7 @@ export default function SaigonMap({
               {c.number}
             </text>
             <g transform={`translate(${x} ${y + 14}) rotate(${i % 2 ? 1.5 : -1.5})`}>
-              <rect className="sm-tag" x="-120" y="0" width="240" height={open && c.difficulty ? 76 : 56} fill="#f3e4c4" stroke={on ? accent.red : INK} strokeWidth={on ? 3 : 1.2} />
+              <rect className="sm-tag" x="-120" y="0" width="240" height={open && c.difficulty ? 92 : 56} fill="#f3e4c4" stroke={on ? accent.red : INK} strokeWidth={on ? 3 : 1.2} />
               <text y="21" textAnchor="middle" className="display" fontSize="13" fill={shade(INK, 0.3)} letterSpacing="2">
                 {open ? `CHƯƠNG ${c.number}` : `CHƯƠNG ${c.number} · NIÊM PHONG`}
               </text>
@@ -387,6 +387,9 @@ export default function SaigonMap({
                         {c.playTime}
                       </text>
                     )}
+                    <text y="86" textAnchor="middle" className="display" fontSize="11" fill={shade(INK, 0.3)} letterSpacing="1">
+                      {limitsLabel(c.difficulty)}
+                    </text>
                   </g>
                 )
               })()}

@@ -302,7 +302,7 @@ function CaseCard({ chapter: c, onOpen, current }: { chapter: Chapter; onOpen?: 
         <h3 className="title mt-1 text-xl leading-tight">{c.title}</h3>
         <p className="mt-2 font-sans text-sm leading-snug text-paper-ink/85">{c.blurb}</p>
         {c.difficulty && (
-          <DifficultyBadge difficulty={c.difficulty} playTime={c.playTime} className="mt-2" />
+          <DifficultyBadge difficulty={c.difficulty} playTime={c.playTime} limits className="mt-2" />
         )}
         {locked ? (
           <div className="absolute inset-x-[-8px] top-1/2 flex h-8 -rotate-3 items-center justify-center bg-string/85 text-white">

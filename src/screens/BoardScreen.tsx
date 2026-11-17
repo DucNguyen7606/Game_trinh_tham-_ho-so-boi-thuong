@@ -20,6 +20,7 @@ import {
 } from '@xyflow/react'
 import { CheckCircle2, ChevronLeft, ChevronRight, Lightbulb, Lock, X } from 'lucide-react'
 import { clueLocked, hintGate, matchedClues, puzzleFor, questionOrder, supportingNeeded, useGame } from '@/game/store'
+import { rulesFor } from '@/series/series'
 import { PuzzlePanel } from '@/components/PuzzlePanel'
 import { Lightbox } from '@/components/Lightbox'
 import { MarkedQuotes } from '@/components/Highlighter'
@@ -99,7 +100,8 @@ function QuestionNode({ data }: NodeProps<Node<QuestionNodeData>>) {
   const proven = useGame(useShallow((st) => matchedClues(st.data, st.checkedLinks, q.id)))
   const keyProven = proven.filter((c) => q.requiredClues.includes(c)).length
   const relProven = proven.filter((c) => (q.supportingClues ?? []).includes(c)).length
-  const relNeeded = supportingNeeded(q)
+  const relNeeded = supportingNeeded(caseData, q)
+  const rules = rulesFor(caseData.id)
 
   const onCheck = () => {
     const result = checkAnswer(q.id)
@@ -115,7 +117,8 @@ function QuestionNode({ data }: NodeProps<Node<QuestionNodeData>>) {
               const rel = (q.supportingClues ?? []).filter((c) => linked.includes(c)).length
               const missingRel = Math.max(0, relNeeded - rel)
               const parts = [missing && `${missing} thẻ khớp (bằng chứng chính)`, missingRel && `${missingRel} thẻ liên quan`].filter(Boolean)
-              return `Đáp án đúng, nhưng còn thiếu ${parts.join(' và ')}.`
+              // Harder cases don't say how many cards are missing.
+              return rules.exactMissing ? `Đáp án đúng, nhưng còn thiếu ${parts.join(' và ')}.` : 'Đáp án đúng, nhưng chưa đủ bằng chứng.'
             })()
           : 'Trưởng phòng không tin lập luận này. Uy tín giảm.',
     )
@@ -174,14 +177,23 @@ function QuestionNode({ data }: NodeProps<Node<QuestionNodeData>>) {
       <div className="mt-2 flex items-center justify-between text-xs text-muted-foreground">
         {/* How many cards the proof needs, in two kinds; boxes fill as checks prove cards. */}
         <span className="flex flex-col gap-0.5">
-          <span className="flex items-center gap-1.5" title={`Bằng chứng chính: cần đủ ${q.requiredClues.length} thẻ khớp trực tiếp với câu hỏi`}>
-            <Boxes total={q.requiredClues.length} filled={solved ? q.requiredClues.length : keyProven} />
-            Khớp {solved ? q.requiredClues.length : keyProven}/{q.requiredClues.length}
-          </span>
-          {relNeeded > 0 && (
-            <span className="flex items-center gap-1.5" title={`Bằng chứng liên quan: cần ít nhất ${relNeeded} thẻ củng cố thêm cho câu trả lời`}>
-              <Boxes total={relNeeded} filled={solved ? relNeeded : Math.min(relProven, relNeeded)} soft />
-              Liên quan {solved ? relNeeded : Math.min(relProven, relNeeded)}/{relNeeded}
+          {rules.showNeeded || solved ? (
+            <>
+              <span className="flex items-center gap-1.5" title={`Bằng chứng chính: cần đủ ${q.requiredClues.length} thẻ khớp trực tiếp với câu hỏi`}>
+                <Boxes total={q.requiredClues.length} filled={solved ? q.requiredClues.length : keyProven} />
+                Khớp {solved ? q.requiredClues.length : keyProven}/{q.requiredClues.length}
+              </span>
+              {relNeeded > 0 && (
+                <span className="flex items-center gap-1.5" title={`Bằng chứng liên quan: cần ít nhất ${relNeeded} thẻ củng cố thêm cho câu trả lời`}>
+                  <Boxes total={relNeeded} filled={solved ? relNeeded : Math.min(relProven, relNeeded)} soft />
+                  Liên quan {solved ? relNeeded : Math.min(relProven, relNeeded)}/{relNeeded}
+                </span>
+              )}
+            </>
+          ) : (
+            // Rất khó: only what is proven so far, not how many cards the question needs.
+            <span title="Ở mức Rất khó, câu hỏi không cho biết cần bao nhiêu thẻ">
+              Khớp {keyProven} · Liên quan {relProven}
             </span>
           )}
           <span className="opacity-70">Đang nối {answer?.clueIds.length ?? 0} thẻ</span>
@@ -203,6 +215,12 @@ function QuestionNode({ data }: NodeProps<Node<QuestionNodeData>>) {
           }}>
           <Lightbulb className="size-3.5" /> {shownHints.length === 0 ? 'Xem gợi ý' : 'Gợi ý tiếp'}
         </button>
+      )}
+      {!solved && gate === 'spent' && (
+        <p className="mt-2 flex items-start gap-1 text-xs text-muted-foreground">
+          <Lock className="mt-0.5 size-3.5 shrink-0" />
+          Đã dùng hết gợi ý của vụ này ({rules.difficulty}: {rules.hints} gợi ý).
+        </p>
       )}
       {!solved && gate === 'locked' && (
         <p className="mt-2 flex items-start gap-1 text-xs text-muted-foreground" title="Mỗi câu chỉ mở một gợi ý cho đến khi bạn có tiến triển">

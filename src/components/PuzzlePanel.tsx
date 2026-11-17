@@ -97,7 +97,8 @@ export function PuzzlePanel({ puzzle }: { puzzle: Puzzle }) {
               <Lightbulb className="size-3.5 shrink-0 opacity-70" /> {h}
             </p>
           ))}
-          {gate !== 'none-left' && (
+          {gate === 'spent' && <p className="mt-2 text-xs opacity-70">Đã dùng hết gợi ý của vụ này.</p>}
+          {gate !== 'none-left' && gate !== 'spent' && (
             <button
               className="mt-2 text-xs underline opacity-70 hover:opacity-100 disabled:no-underline disabled:opacity-40"
               disabled={gate === 'locked'}
