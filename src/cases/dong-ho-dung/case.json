@@ -1,7 +1,7 @@
 {
   "id": "dong-ho-dung",
   "title": "Hồ sơ bồi thường số 1304",
-  "intro": "Sáng 14/4, ông Trần Đình Hiển, 79 tuổi, kiến trúc sư về hưu, được tìm thấy dưới chân cầu thang gỗ trong căn biệt thự Pháp ở hẻm Tú Xương, Quận 3. Chiếc đồng hồ trên tay ông vỡ kính, dừng lúc 22:47. Cháu trai ông, người thụ hưởng hợp đồng bảo hiểm tai nạn, đòi 7 tỷ đồng. Công an ghi nhận ban đầu là té ngã. Bạn có 10 ngày để đề xuất chi trả hay từ chối. Mỗi ngày khám được 1 khu hiện trường. Hỏi chuyện thì không giới hạn.",
+  "intro": "Sáng 14/4, ông Trần Đình Hiển, 79 tuổi, kiến trúc sư về hưu, được tìm thấy dưới chân cầu thang gỗ trong căn biệt thự Pháp ở hẻm Tú Xương, Quận 3. Chiếc đồng hồ trên tay ông vỡ kính, dừng lúc 22:47. Cháu trai ông, người thụ hưởng hợp đồng bảo hiểm tai nạn, đòi 7 tỷ đồng. Công an ghi nhận ban đầu là té ngã. Bạn có 7 ngày để đề xuất chi trả hay từ chối. Mỗi ngày khám được 1 khu hiện trường. Hỏi chuyện thì không giới hạn.",
   "player": {
     "name": "Lê Thu Hạnh",
     "role": "Chuyên viên giám định bồi thường, Bảo hiểm An Tín",
@@ -17,7 +17,7 @@
     }
   },
   "photoDate": "14 04 '26",
-  "days": 10,
+  "days": 7,
   "limitsPerDay": {
     "talk": 2,
     "explore": 1
@@ -263,7 +263,7 @@
           "label": "Hộp chia thuốc bảy ngày",
           "x": 30,
           "y": 62,
-          "note": "Hộp nhựa 7 ngày × 3 cữ. Ô \"T2 · Sáng\" và \"T2 · Trưa\" đã trống. Ô \"T2 · Tối 21:00\" vẫn còn nguyên ba viên thuốc tim. Ô ngày thứ Ba còn đầy đủ.",
+          "note": "Hộp nhựa 7 ngày × 3 cữ, nắp in ký hiệu thứ và cữ. Vài ô đã trống, các ô còn lại đầy thuốc.",
           "clueId": "H4"
         },
         {
@@ -395,7 +395,7 @@
     },
     {
       "id": "H4",
-      "title": "Cữ thuốc 21:00 thứ Hai còn nguyên",
+      "title": "Hộp chia thuốc bảy ngày",
       "description": "Ô sáng và trưa thứ Hai đã trống. Ô \"Tối 21:00\" còn ba viên.",
       "source": "scene"
     },
@@ -403,7 +403,20 @@
       "id": "H5",
       "title": "Hai cuộc gọi nhỡ lúc 20:00 và 20:14",
       "description": "Máy bàn trong phòng ông Hiển: tối 13/4 chị Châu gọi hai lần, không ai nhấc máy.",
-      "source": "scene"
+      "source": "scene",
+      "audio": {
+        "length": "0:16",
+        "lines": [
+          {
+            "who": "Máy bàn · 20:00",
+            "text": "Chuông đổ tám hồi, không ai nhấc máy. Màn hình hiện: Châu."
+          },
+          {
+            "who": "Máy bàn · 20:14",
+            "text": "Chuông lại đổ tám hồi. Không ai nhấc máy."
+          }
+        ]
+      }
     },
     {
       "id": "H6",
@@ -439,7 +452,10 @@
       "id": "P1",
       "title": "Hợp đồng bảo hiểm tai nạn cá nhân",
       "description": "7 tỷ nếu chết do tai nạn. Điều 7 loại trừ chết do bệnh lý (nhồi máu cơ tim, đột quỵ). Điều 9: hồ sơ gian dối thì từ chối và chuyển cơ quan chức năng.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "Điều 7 loại trừ chết do bệnh lý"
+      ]
     },
     {
       "id": "P2",
@@ -463,7 +479,11 @@
       "id": "P5",
       "title": "Camera hẻm đêm 13/4",
       "description": "19:30 chú Tư về, ông Hiển đứng ở cửa sổ lầu. 20:42 Khoa đi. 21:35 Thắng bấm chuông, đèn lầu sáng. 00:38 Khoa về. 01:12 đèn phòng làm việc trên lầu tắt.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "00:38 Khoa về",
+        "01:12 đèn phòng làm việc trên lầu tắt"
+      ]
     },
     {
       "id": "P6",
@@ -475,7 +495,11 @@
       "id": "P7",
       "title": "Phụ lục pháp y: thương tích sau khi chết",
       "description": "Gãy cổ và vết trầy không có phản ứng sống: xảy ra sau khi chết. Hoen tử thi ở mông, mặt sau đùi: ông chết khi đang ngồi và ngồi nguyên nhiều giờ. Vết hằn ngón tay dưới hai nách. Kết luận: chết do nhồi máu cơ tim.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "không có phản ứng sống",
+        "ông chết khi đang ngồi"
+      ]
     },
     {
       "id": "P8",
@@ -487,13 +511,45 @@
       "id": "P9",
       "title": "Ghi âm tổng đài An Tín ngày 06/4",
       "description": "Khoa hỏi: nếu chú tôi mất vì bệnh tim thì có được chi không. Tổng đài: không, bệnh lý bị loại trừ, chỉ chi khi tai nạn như té ngã.",
-      "source": "file"
+      "source": "file",
+      "audio": {
+        "length": "0:30",
+        "lines": [
+          {
+            "who": "Tổng đài An Tín",
+            "text": "An Tín xin nghe, em có thể hỗ trợ gì cho anh ạ?"
+          },
+          {
+            "who": "Khoa",
+            "text": "Chú tôi có hợp đồng bảo hiểm tai nạn bên chị. Nếu chú tôi mất vì bệnh tim thì có được chi không?"
+          },
+          {
+            "who": "Tổng đài An Tín",
+            "text": "Dạ không anh. Theo điều 7, chết do bệnh lý như nhồi máu cơ tim, đột quỵ bị loại trừ."
+          },
+          {
+            "who": "Khoa",
+            "text": "Còn nếu chú tôi té, ví dụ té cầu thang?"
+          },
+          {
+            "who": "Tổng đài An Tín",
+            "text": "Té ngã là tai nạn, hợp đồng chi trả đủ số tiền bảo hiểm ạ."
+          },
+          {
+            "who": "Khoa",
+            "text": "Ừ. Vậy thôi, cảm ơn chị."
+          }
+        ]
+      }
     },
     {
       "id": "P10",
       "title": "Giám định hai con ốc đồng",
       "description": "Hai con ốc trong hộp đồ nghề của Khoa khớp ren và chiều dài với lỗ ốc thanh chặn thảm. Vụn gỗ trong ren là gỗ lim của cầu thang.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "khớp ren và chiều dài với lỗ ốc thanh chặn thảm"
+      ]
     },
     {
       "id": "X1",
@@ -935,6 +991,88 @@
     },
     {
       "ending": "wrong"
+    }
+  ],
+  "puzzles": [
+    {
+      "id": "hop-thuoc",
+      "clueId": "H4",
+      "title": "Đọc hộp chia thuốc",
+      "kind": "answer",
+      "prompt": "Tìm cữ thuốc đầu tiên ông Hiển không uống. Gõ thứ và giờ, ví dụ T4 12:00.",
+      "lockedText": "Hộp nhựa 7 cột × 3 hàng. Nắp in cột T2 · T3 · T4 · T5 · T6 · T7 · CN, hàng S (07:00) · T (12:00) · Tối (21:00).\nChị Liên chia đầy hộp tối Chủ nhật 12/4, cho cả tuần mới.\nHàng S: trống · đầy · đầy · đầy · đầy · đầy · đầy\nHàng T: trống · đầy · đầy · đầy · đầy · đầy · đầy\nHàng Tối: đầy · đầy · đầy · đầy · đầy · đầy · đầy",
+      "answers": [
+        "T2 21:00",
+        "T2 21h",
+        "T2 21h00",
+        "T2 21g",
+        "T2 21 giờ",
+        "T2 tối",
+        "thứ Hai 21:00",
+        "thứ 2 21:00",
+        "thứ hai 21h",
+        "thứ 2 21h",
+        "21:00 T2",
+        "21:00 thứ Hai",
+        "21h T2",
+        "tối thứ Hai",
+        "tối thứ 2",
+        "T2 Tối 21:00",
+        "thứ Hai tối 21:00"
+      ],
+      "placeholder": "thứ và giờ",
+      "solvedText": "Hộp chia từ tối Chủ nhật 12/4, nên cột T2 là ngày 13/4. Ông uống cữ sáng và cữ trưa thứ Hai, còn cữ tối 21:00 vẫn nguyên ba viên. Hai năm chưa bỏ cữ nào: tới 21:00 tối 13/4, ông đã không còn sống.",
+      "hints": [
+        "Chị Liên chia hộp tối Chủ nhật 12/4 cho cả tuần mới. Vậy cột T2 là ngày nào?",
+        "Trong cột T2, hàng nào đã trống và hàng nào còn thuốc?",
+        "Cữ đầu tiên còn nguyên là T2, cữ tối 21:00."
+      ]
+    }
+  ],
+  "timeline": [
+    {
+      "time": "06/4",
+      "text": "Khoa gọi tổng đài An Tín: bệnh tim bị loại trừ theo Điều 7, té ngã thì được chi."
+    },
+    {
+      "time": "13/4 17:45",
+      "text": "Ông Hiển ăn hết bát cháo, rồi lên phòng làm việc vẽ tiếp."
+    },
+    {
+      "time": "13/4 19:30",
+      "text": "Chú Tư về. Ông Hiển còn đứng ở cửa sổ lầu."
+    },
+    {
+      "time": "13/4 19:30–21:00",
+      "text": "Ông Hiển lên cơn nhồi máu cơ tim khi đang ngồi vẽ, nét chì trượt dài xuống mép giấy."
+    },
+    {
+      "time": "13/4 20:00, 20:14",
+      "text": "Chị Châu gọi máy bàn hai lần, không ai bắt."
+    },
+    {
+      "time": "13/4 20:42",
+      "text": "Khoa đi tiệc cưới ở Quận 10."
+    },
+    {
+      "time": "13/4 21:00",
+      "text": "Cữ thuốc tối còn nguyên trong hộp."
+    },
+    {
+      "time": "13/4 21:35",
+      "text": "Thắng bấm chuông, đèn phòng vẫn sáng, không ai ra mở cổng."
+    },
+    {
+      "time": "14/4 00:38",
+      "text": "Khoa về. Anh kéo thi thể ra đầu cầu thang, tháo ốc thanh chặn thảm, kéo núm đồng hồ chỉnh về 22:47."
+    },
+    {
+      "time": "14/4 01:12",
+      "text": "Đèn phòng làm việc tắt."
+    },
+    {
+      "time": "14/4 06:25",
+      "text": "Chú Tư mở cửa và phát hiện ông Hiển dưới chân cầu thang."
     }
   ]
 }

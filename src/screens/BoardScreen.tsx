@@ -18,11 +18,13 @@ import {
   type Node,
   type NodeProps,
 } from '@xyflow/react'
-import { CheckCircle2, ChevronLeft, ChevronRight, Lightbulb, Lock, X } from 'lucide-react'
+import { CheckCircle2, ChevronLeft, ChevronRight, Lightbulb, Lock, Volume2, X } from 'lucide-react'
 import { clueLocked, hintGate, matchedClues, puzzleFor, questionOrder, supportingNeeded, useGame } from '@/game/store'
 import { rulesFor } from '@/series/series'
 import { PuzzlePanel } from '@/components/PuzzlePanel'
+import { AudioEvidence } from '@/components/AudioEvidence'
 import { Lightbox } from '@/components/Lightbox'
+import { EvidencePhoto } from '@/art/EvidencePhoto'
 import { MarkedQuotes } from '@/components/Highlighter'
 import { clueById, docCode, getCloseup, getDocumentArt } from '@/game/caseLoader'
 import { Button } from '@/components/ui/button'
@@ -35,12 +37,23 @@ function ClueNode({ data }: NodeProps<Node<ClueNodeData>>) {
   const caseData = useGame((s) => s.data)
   const clue = clueById(caseData, data.clueId)
   const locked = useGame((st) => clueLocked(st, data.clueId))
-  const [solving, setSolving] = useState(false)
+  // The viewer over the board: the puzzle while the card is locked, and the recording if it has one.
+  const [viewing, setViewing] = useState(false)
   if (!clue) return null
   const puzzle = puzzleFor(caseData, clue.id)
   // The picture beside the puzzle: the document itself, or the close-up of the scene spot that gave this clue.
   const spot = caseData.zones.flatMap((z) => z.hotspots).find((h) => h.clueId === clue.id)
-  const Art = getDocumentArt(caseData.id, clue.id) ?? (spot ? getCloseup(caseData.id, spot.id) : undefined)
+  const Closeup = spot ? getCloseup(caseData.id, spot.id) : undefined
+  // A close-up is drawn as SVG parts, so it needs its photo frame around it.
+  const Art =
+    getDocumentArt(caseData.id, clue.id) ??
+    (Closeup && spot
+      ? () => (
+          <EvidencePhoto stamp={caseData.photoDate ?? ''} caption={`${spot.label} · ${clue.id}`} showRuler={false}>
+            <Closeup />
+          </EvidencePhoto>
+        )
+      : undefined)
   return (
     <div className="document w-52 p-2 shadow-md">
       <p className="text-[10px] font-semibold uppercase opacity-60">{docCode(caseData, clue.id)}</p>
@@ -48,7 +61,7 @@ function ClueNode({ data }: NodeProps<Node<ClueNodeData>>) {
       {locked ? (
         <button
           className="nodrag mt-1 flex items-start gap-1 text-left text-xs text-string underline-offset-2 hover:underline"
-          onClick={() => setSolving(true)}
+          onClick={() => setViewing(true)}
         >
           <Lock className="mt-0.5 size-3 shrink-0" /> Chưa giải mã. Bấm để giải.
         </button>
@@ -56,16 +69,29 @@ function ClueNode({ data }: NodeProps<Node<ClueNodeData>>) {
         <p className="mt-1 text-xs opacity-80">{clue.description}</p>
       )}
       <MarkedQuotes clueId={clue.id} />
-      {solving && puzzle && createPortal(
+      {clue.audio && (
+        <button
+          className="nodrag mt-1 flex items-center gap-1 text-xs text-amber underline-offset-2 hover:underline"
+          onClick={() => setViewing(true)}
+        >
+          <Volume2 className="size-3 shrink-0" /> Nghe ghi âm
+        </button>
+      )}
+      {viewing && (puzzle || clue.audio) && createPortal(
         <Lightbox
-          label={puzzle.title}
-          onClose={() => setSolving(false)}
+          label={puzzle?.title ?? clue.title}
+          onClose={() => setViewing(false)}
           note={
             <>
               <p className="text-[10px] uppercase tracking-widest opacity-60">Giấy tờ {docCode(caseData, clue.id)}</p>
               <h3 className="title text-xl">{clue.title}</h3>
-              {locked && <p className="whitespace-pre-line font-mono text-sm">{puzzle.lockedText}</p>}
-              <PuzzlePanel puzzle={puzzle} />
+              {locked && puzzle ? (
+                <p className="whitespace-pre-line font-mono text-sm">{puzzle.lockedText}</p>
+              ) : (
+                !puzzle && <p className="text-sm">{clue.description}</p>
+              )}
+              {puzzle && <PuzzlePanel puzzle={puzzle} />}
+              {clue.audio && <AudioEvidence caseId={caseData.id} audio={clue.audio} />}
             </>
           }
         >
