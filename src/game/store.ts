@@ -111,8 +111,11 @@ interface GameState {
 /** The case as the chosen investigator plays it: their name, job and portrait in place of the case's default. */
 const withPlayer = (data: CaseData): CaseData => ({ ...data, player: playerOf(useProfile.getState()) })
 
-/** The case under its difficulty's rules: the number of days comes from the difficulty. */
-const underRules = (data: CaseData): CaseData => ({ ...data, days: rulesFor(data.id).days })
+/** The case under its difficulty's rules: the number of days comes from the difficulty, also in the intro. */
+const underRules = (data: CaseData): CaseData => {
+  const days = rulesFor(data.id).days
+  return { ...data, days, intro: data.intro.replace(/Bạn có \d+ ngày/, `Bạn có ${days} ngày`) }
+}
 
 const initial = (data: CaseData) => ({
   data: withPlayer(underRules(data)),

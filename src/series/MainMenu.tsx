@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ArrowLeft, BookOpen, Lock, Map as MapIcon, Play, Power, Settings, UserRound } from 'lucide-react'
 import { Guide } from '@/components/Guide'
 import { useGame } from '@/game/store'
@@ -35,8 +35,17 @@ function Desk() {
 }
 
 /** The series' main menu: shown on launch, outside every chapter. */
+// Set by "Đóng hồ sơ" at the end of a case, so the menu opens straight on the map.
+let mapNext = false
+export function openMapOnMenu() {
+  mapNext = true
+}
+
 export default function MainMenu() {
-  const [view, setView] = useState<View>('home')
+  const [view, setView] = useState<View>(() => (mapNext ? 'map' : 'home'))
+  useEffect(() => {
+    mapNext = false
+  }, [])
   return view === 'home' ? <Home onMap={() => setView('map')} /> : <CaseMap onBack={() => setView('home')} />
 }
 
@@ -146,6 +155,7 @@ function CaseMap({ onBack }: { onBack: () => void }) {
   const started = useStarted()
   const { go, startCase } = useGame()
   const currentId = useGame((s) => s.data.id)
+  const closed = useProfile((s) => s.closed)
   const [area, setArea] = useState<string | undefined>()
   // Case picked on the zoomed-in area.
   const [chosen, setChosen] = useState<number | undefined>()
@@ -214,7 +224,10 @@ function CaseMap({ onBack }: { onBack: () => void }) {
                     className="grid w-full grid-cols-[2rem_1fr_auto] items-center gap-3 px-2 py-2.5 text-left transition-colors hover:bg-string/20 disabled:opacity-50"
                   >
                     <span className="flex size-7 items-center justify-center rounded-full bg-string text-sm font-semibold text-white">{c.number}</span>
-                    <span className="text-[15px] leading-snug text-foreground">{c.title}</span>
+                    <span className="text-[15px] leading-snug text-foreground">
+                      {c.title}
+                      {c.caseId && closed.includes(c.caseId) && <span className="display ml-2 text-xs tracking-wider text-[var(--match)]">✓ Đã đóng</span>}
+                    </span>
                     <span className="display text-xs tracking-wider text-muted-foreground">{areaName(c.area) ?? '?'}</span>
                   </button>
                 </li>
@@ -238,6 +251,7 @@ function CaseMap({ onBack }: { onBack: () => void }) {
                 key={picked.number}
                 chapter={picked}
                 current={picked.caseId === currentId && started}
+                closed={!!picked.caseId && closed.includes(picked.caseId)}
                 onOpen={picked.caseId ? () => begin(picked.caseId!) : undefined}
               />
             ) : (
@@ -286,7 +300,7 @@ function CaseMap({ onBack }: { onBack: () => void }) {
 }
 
 /** A case in the area panel, drawn as a manila file; unfinished ones are sealed with tape. */
-function CaseCard({ chapter: c, onOpen, current }: { chapter: Chapter; onOpen?: () => void; current?: boolean }) {
+function CaseCard({ chapter: c, onOpen, current, closed }: { chapter: Chapter; onOpen?: () => void; current?: boolean; closed?: boolean }) {
   const locked = !onOpen
   return (
     <button
@@ -296,6 +310,11 @@ function CaseCard({ chapter: c, onOpen, current }: { chapter: Chapter; onOpen?: 
     >
       <div className="ml-3 h-4 w-20 rounded-t-md bg-paper" />
       <div className="document relative flex flex-col p-4">
+        {closed && (
+          <span className="display absolute right-3 top-3 rotate-6 rounded-sm border-2 border-[var(--match)] px-2 text-xs tracking-widest text-[var(--match)]">
+            Đã đóng hồ sơ
+          </span>
+        )}
         <span className="display text-xs tracking-widest text-paper-ink/60">
           Chương {c.number} · {c.place}
         </span>
@@ -311,7 +330,7 @@ function CaseCard({ chapter: c, onOpen, current }: { chapter: Chapter; onOpen?: 
           </div>
         ) : (
           <span className="display mt-3 self-end rounded-sm border-2 border-string px-2 text-sm text-string transition-transform group-hover:-rotate-6">
-            {current ? 'Đang điều tra' : 'Mở hồ sơ'}
+            {current ? 'Đang điều tra' : closed ? 'Điều tra lại' : 'Mở hồ sơ'}
           </span>
         )}
       </div>

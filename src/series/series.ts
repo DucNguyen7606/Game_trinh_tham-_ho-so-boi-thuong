@@ -181,6 +181,12 @@ export function rulesFor(caseId: string): Rules & { difficulty: NonNullable<Chap
   return { ...DIFFICULTY[difficulty], difficulty }
 }
 
+/** The next chapter after a case that is already made, if any. */
+export function nextChapter(caseId: string) {
+  const at = SERIES.chapters.findIndex((c) => c.caseId === caseId)
+  return at < 0 ? undefined : SERIES.chapters.slice(at + 1).find((c) => c.caseId)
+}
+
 /** "8 ngày · 7 gợi ý": the limits of a difficulty, for badges. */
 export function limitsLabel(difficulty: NonNullable<Chapter['difficulty']>) {
   const r = DIFFICULTY[difficulty]

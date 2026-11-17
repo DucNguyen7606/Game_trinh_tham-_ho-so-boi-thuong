@@ -84,6 +84,9 @@ interface ProfileState extends Profile {
   /** False until the player has confirmed a character once. */
   created: boolean
   save: (p: Profile) => void
+  /** Case ids the player has signed off and closed, shown as closed on the map. */
+  closed: string[]
+  closeCase: (caseId: string) => void
 }
 
 export const useProfile = create<ProfileState>()(
@@ -94,8 +97,10 @@ export const useProfile = create<ProfileState>()(
       roleId: 'giam-dinh',
       created: false,
       save: (p) => set({ ...p, created: true }),
+      closed: [],
+      closeCase: (caseId) => set((s) => ({ closed: s.closed.includes(caseId) ? s.closed : [...s.closed, caseId] })),
     }),
-    { name: 'hssg-profile', partialize: ({ name, gender, roleId, created }) => ({ name, gender, roleId, created }) },
+    { name: 'hssg-profile', partialize: ({ name, gender, roleId, created, closed }) => ({ name, gender, roleId, created, closed }) },
   ),
 )
 

@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react'
-import { ChevronLeft, ChevronRight, CheckCircle2, CircleHelp, RotateCcw } from 'lucide-react'
+import { ChevronLeft, ChevronRight, CheckCircle2, CircleHelp, FolderCheck, RotateCcw } from 'lucide-react'
+import { nextChapter } from '@/series/series'
+import { useProfile } from '@/series/profile'
+import { openMapOnMenu } from '@/series/MainMenu'
 import { questionOrder, useGame } from '@/game/store'
 import { getEpilogue, getReconstruction, getVerdictPreview } from '@/game/caseLoader'
 import { Button } from '@/components/ui/button'
@@ -17,7 +20,20 @@ function pickEnding(data: CaseData, picks: Record<string, string>) {
 }
 
 export default function VerdictScreen() {
-  const { data, solvedQuestions, reset } = useGame()
+  const { data, solvedQuestions, reset, go, startCase } = useGame()
+  const closeCase = useProfile((s) => s.closeCase)
+  const next = nextChapter(data.id)
+  // Closing files the case as done and returns to the map; the next chapter opens straight at its desk.
+  const close = () => {
+    closeCase(data.id)
+    openMapOnMenu()
+    go('menu')
+  }
+  const goNext = () => {
+    if (!next?.caseId) return
+    closeCase(data.id)
+    startCase(next.caseId)
+  }
   const [picks, setPicks] = useState<Record<string, string>>({})
   const [endingId, setEndingId] = useState<string | null>(null)
 
@@ -67,13 +83,23 @@ export default function VerdictScreen() {
         <p className="mt-4 text-sm text-muted-foreground">
           Bạn đã giải {solvedQuestions.length}/{data.questions.length} câu trên bàn suy luận.
         </p>
-        <div className="mt-8 flex gap-3">
+        <div className="mt-8 flex flex-wrap items-center gap-3">
+          {next?.caseId && (
+            <Button onClick={goNext}>
+              Sang chương {next.number}: {next.title} <ChevronRight />
+            </Button>
+          )}
+          <Button variant={next?.caseId ? 'outline' : 'default'} onClick={close}>
+            <FolderCheck /> Đóng hồ sơ
+          </Button>
           {panels.length > 0 && (
             <Button variant="outline" onClick={() => setStep(0)}>
               Xem lại vụ án
             </Button>
           )}
-          <Button onClick={reset}>{ending.id === 'full' ? 'Chơi lại' : 'Điều tra lại từ đầu'}</Button>
+          <Button variant="ghost" onClick={reset}>
+            <RotateCcw /> {ending.id === 'full' ? 'Chơi lại' : 'Điều tra lại từ đầu'}
+          </Button>
         </div>
       </div>
     )
