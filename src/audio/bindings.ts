@@ -10,6 +10,7 @@ import type { ThemeId } from './themes'
 
 const THEME_FOR: Record<Screen, ThemeId> = {
   menu: 'menu',
+  intro: 'scene',
   desk: 'desk',
   casefile: 'desk',
   board: 'desk',

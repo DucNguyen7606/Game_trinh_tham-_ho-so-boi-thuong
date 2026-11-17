@@ -16,6 +16,8 @@ import VerdictScreen from '@/screens/VerdictScreen'
 import GalleryScreen from '@/screens/GalleryScreen'
 import AudioControls from '@/audio/AudioControls'
 import MainMenu from '@/series/MainMenu'
+import { CutscenePlayer } from '@/components/Cutscene'
+import { getIntro } from '@/game/caseLoader'
 import { AnimatePresence, motion, MotionConfig } from 'framer-motion'
 
 const nav: { screen: Screen; label: string; icon: typeof Briefcase }[] = [
@@ -36,6 +38,7 @@ export default function App() {
   const hints = useGame(useShallow(hintSummary))
 
   if (screen === 'menu') return <MainMenu />
+  if (screen === 'intro') return <CaseIntro />
 
   return (
     <MotionConfig reducedMotion="user">
@@ -105,4 +108,15 @@ export default function App() {
     </div>
     </MotionConfig>
   )
+}
+
+/** The chapter's opening film, then its desk. */
+function CaseIntro() {
+  const { data, go } = useGame()
+  const [scene] = useState(() => getIntro(data))
+  if (!scene) {
+    queueMicrotask(() => go('desk'))
+    return null
+  }
+  return <CutscenePlayer scene={scene} onDone={() => go('desk')} />
 }

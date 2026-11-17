@@ -1,5 +1,6 @@
 import type { CaseData, ReconstructionPanel } from './types'
 import type { EpiloguePanel } from '@/cases/ho-so-boi-thuong/epilogue'
+import type { Cutscene } from '@/components/Cutscene'
 import * as ch1 from '@/cases/ho-so-boi-thuong'
 import * as ch2 from '@/cases/con-nuoc-can-gio'
 import * as ch3 from '@/cases/buc-son-mai'
@@ -23,6 +24,10 @@ interface CaseModule {
   theoryPanels: (picks: Record<string, string>) => ReconstructionPanel[]
   verdictPreview: (slotId: string, optionId: string) => { Art: () => JSX.Element; note: string } | undefined
   epilogue: Record<string, EpiloguePanel[]>
+  /** Optional film played when the case is opened, before the desk. */
+  intro?: (data: CaseData) => Cutscene
+  /** Optional film played after the verdict for an ending, in place of the list of epilogue pictures. */
+  outro?: (endingId: string) => Cutscene | undefined
 }
 
 const modules: CaseModule[] = [ch1, ch2, ch3, ch4, ch5, ch6, ch7, ch8, ch9, ch10, ch11, ch12]
@@ -85,4 +90,18 @@ export function getVerdictPreview(caseId: string, slotId: string, optionId?: str
 /** Pictures of what became of everyone, shown with an ending. */
 export function getEpilogue(caseId: string, endingId: string) {
   return byId[caseId]?.epilogue[endingId] ?? []
+}
+
+/** The opening film of a case, if it has one. Takes the case as played (player, days). */
+export function getIntro(data: CaseData) {
+  return byId[data.id]?.intro?.(data)
+}
+
+export function hasIntro(caseId: string) {
+  return !!byId[caseId]?.intro
+}
+
+/** The after-the-verdict film for an ending, if the case has one. */
+export function getOutro(caseId: string, endingId: string) {
+  return byId[caseId]?.outro?.(endingId)
 }

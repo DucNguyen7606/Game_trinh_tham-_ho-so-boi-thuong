@@ -3,6 +3,7 @@ import { accent, ink, shade } from '@/art/palette'
 import { AREAS, OFF_MAP, QL1A, RIVER, areaLabel, roughOutline, type Area } from './areas'
 import { DIFFICULTY, SERIES, limitsLabel, type Chapter } from './series'
 import { useProfile } from './profile'
+import { unlockedCases } from './progress'
 
 // The case map: a paper map of Saigon pinned to the desk. Areas with a case get
 // a red pin, and a red string runs from pin to pin in chapter order.
@@ -120,13 +121,14 @@ export default function SaigonMap({
 }) {
   const id = useId().replace(/:/g, '')
   const closed = useProfile((s) => s.closed)
+  const unlocked = unlockedCases(closed)
   const counts = caseCounts()
   const pick = interactive ? onSelect : undefined
 
   // Pins in chapter order, for the red string.
   const pins = SERIES.chapters
     .filter((c) => c.area && c.caseId)
-    .map((c) => ({ chapter: c.number, at: spotOf(c)! }))
+    .map((c) => ({ chapter: c.number, at: spotOf(c)!, done: closed.includes(c.caseId!), open: unlocked.has(c.caseId!) }))
     .filter((p) => p.at)
 
   const zoomed = interactive && !!selected && !!boundsOf(selected)
@@ -319,13 +321,14 @@ export default function SaigonMap({
         />
       )}
       {pins.map((p, i) => (
-        <g key={p.chapter} pointerEvents="none">
+        // Closed files: faded pin. Files not opened yet: grey pin.
+        <g key={p.chapter} pointerEvents="none" opacity={p.done ? 0.5 : p.open ? 1 : 0.75} style={p.done ? { filter: 'saturate(0.3)' } : undefined}>
           <g className={interactive ? 'sm-pin' : undefined} style={{ animationDelay: `${i * 120}ms` }}>
             <ellipse cx={p.at[0] + 3} cy={p.at[1] + 2} rx="7" ry="3" fill="#000" opacity="0.25" />
             <line x1={p.at[0]} y1={p.at[1]} x2={p.at[0]} y2={p.at[1] - 14} stroke={ink.steel} strokeWidth="2" />
-            <circle cx={p.at[0]} cy={p.at[1] - 18} r="10" fill={accent.red} stroke={shade(accent.red, -0.4)} strokeWidth="1.5" />
+            <circle cx={p.at[0]} cy={p.at[1] - 18} r="10" fill={p.open ? accent.red : ink.steel} stroke={shade(p.open ? accent.red : ink.steel, -0.4)} strokeWidth="1.5" />
             <circle cx={p.at[0] - 3} cy={p.at[1] - 21} r="3" fill="#fff" opacity="0.5" />
-            <text x={p.at[0] + 14} y={p.at[1] - 26} className="display" fontSize="14" fill={accent.red} fontWeight="700">
+            <text x={p.at[0] + 14} y={p.at[1] - 26} className="display" fontSize="14" fill={p.open ? accent.red : ink.steel} fontWeight="700">
               {p.chapter}
             </text>
           </g>
@@ -346,14 +349,15 @@ export default function SaigonMap({
         const x = at[0] * z.s + z.tx
         const y = at[1] * z.s + z.ty
         const on = c.number === chosen
-        const open = !!c.caseId
+        const open = !!c.caseId && unlocked.has(c.caseId)
+        const done = !!c.caseId && closed.includes(c.caseId)
         return (
           <g
             key={c.number}
             className="sm-case"
-            style={{ animationDelay: `${600 + i * 120}ms` }}
             onClick={onChoose && (() => onChoose(c.number))}
-            opacity={open ? 1 : 0.7}
+            opacity={done && !on ? 0.6 : open ? 1 : 0.7}
+            style={{ animationDelay: `${600 + i * 120}ms`, filter: done && !on ? 'saturate(0.35) sepia(0.3)' : undefined }}
           >
             <title>{c.title}</title>
             <ellipse cx={x + 5} cy={y + 3} rx="12" ry="5" fill="#000" opacity="0.3" />
@@ -365,7 +369,7 @@ export default function SaigonMap({
             <g transform={`translate(${x} ${y + 14}) rotate(${i % 2 ? 1.5 : -1.5})`}>
               <rect className="sm-tag" x="-120" y="0" width="240" height={open && c.difficulty ? 92 : 56} fill="#f3e4c4" stroke={on ? accent.red : INK} strokeWidth={on ? 3 : 1.2} />
               <text y="21" textAnchor="middle" className="display" fontSize="13" fill={shade(INK, 0.3)} letterSpacing="2">
-                {open ? `CHƯƠNG ${c.number}${c.caseId && closed.includes(c.caseId) ? ' · ✓ ĐÃ ĐÓNG' : ''}` : `CHƯƠNG ${c.number} · NIÊM PHONG`}
+                {open ? `CHƯƠNG ${c.number}${done ? ' · ✓ ĐÃ ĐÓNG' : ''}` : `CHƯƠNG ${c.number} · NIÊM PHONG`}
               </text>
               <text y="44" textAnchor="middle" className="title" fontSize="19" fill={INK}>
                 {c.title}

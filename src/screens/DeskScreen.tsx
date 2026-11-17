@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { FileText, MessageSquare } from 'lucide-react'
+import { Clapperboard, FileText, MessageSquare } from 'lucide-react'
+import { hasIntro } from '@/game/caseLoader'
 import { useGame } from '@/game/store'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -9,7 +10,7 @@ import { Transcript } from '@/components/Transcript'
 import { unaskedCount } from '@/game/interviewTopics'
 
 export default function DeskScreen() {
-  const { data, startInterrogation, endDay, left, day, log, transcripts, foundClues } = useGame()
+  const { data, startInterrogation, endDay, left, day, log, transcripts, foundClues, go } = useGame()
   const [profileId, setProfileId] = useState<string | null>(null)
   const profile = data.suspects.find((s) => s.id === profileId)
   const [transcriptId, setTranscriptId] = useState<string | null>(null)
@@ -26,6 +27,11 @@ export default function DeskScreen() {
               {data.player.name} · {data.player.role}
             </CardDescription>
             <p className="mt-3">{data.intro}</p>
+            {hasIntro(data.id) && (
+              <Button size="sm" variant="ghost" className="mt-2 -ml-2 text-muted-foreground" onClick={() => go('intro')}>
+                <Clapperboard /> Xem lại đoạn mở đầu
+              </Button>
+            )}
           </div>
         </Card>
 
