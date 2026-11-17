@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
-import { ChevronLeft, ChevronRight, CheckCircle2, CircleHelp, FolderCheck, RotateCcw } from 'lucide-react'
+import { ChevronLeft, ChevronRight, CheckCircle2, CircleHelp, Clapperboard, FolderCheck, RotateCcw } from 'lucide-react'
+import { CutscenePlayer } from '@/components/Cutscene'
 import { nextChapter } from '@/series/series'
 import { useProfile } from '@/series/profile'
 import { openMapOnMenu } from '@/series/MainMenu'
 import { questionOrder, useGame } from '@/game/store'
-import { getEpilogue, getReconstruction, getVerdictPreview } from '@/game/caseLoader'
+import { getEpilogue, getOutro, getReconstruction, getVerdictPreview } from '@/game/caseLoader'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
@@ -43,9 +44,17 @@ export default function VerdictScreen() {
   const panels = getReconstruction(data.id, picks)
   // After signing, the case is replayed panel by panel; null = show the ending card.
   const [step, setStep] = useState<number | null>(null)
+  // The film of what happened after the verdict plays once, between the replay and the ending card.
+  const outro = ending ? getOutro(data.id, ending.id) : undefined
+  const [outroPlaying, setOutroPlaying] = useState(false)
+  const [outroSeen, setOutroSeen] = useState(false)
 
   if (ending && step !== null && panels[step]) {
-    return <Reconstruction step={step} setStep={setStep} picks={picks} />
+    return <Reconstruction step={step} setStep={(n) => { setStep(n); if (n === null && outro && !outroSeen) setOutroPlaying(true) }} picks={picks} />
+  }
+
+  if (ending && outro && outroPlaying) {
+    return <CutscenePlayer scene={outro} onDone={() => { setOutroPlaying(false); setOutroSeen(true) }} />
   }
 
   if (ending) {
@@ -54,7 +63,12 @@ export default function VerdictScreen() {
         <p className="text-sm text-muted-foreground">Kết thúc</p>
         <h2 className="title text-3xl text-amber">{ending.title}</h2>
         <p className="mt-4 max-w-2xl">{ending.text}</p>
-        {/* What became of everyone, one picture each. */}
+        {/* What became of everyone, one picture each. A case with an after-the-verdict film shows that instead. */}
+        {outro ? (
+          <Button variant="outline" className="mt-6" onClick={() => setOutroPlaying(true)}>
+            <Clapperboard /> Xem lại đoạn hậu truyện
+          </Button>
+        ) : (
         <div className="mt-8 grid grid-cols-2 gap-5 lg:grid-cols-3">
           {getEpilogue(data.id, ending.id).map((p, i) => (
             <figure
@@ -67,6 +81,7 @@ export default function VerdictScreen() {
             </figure>
           ))}
         </div>
+        )}
         {data.timeline && data.timeline.length > 0 && (
           <section className="document mt-8 p-5">
             <h3 className="title text-xl">Tóm tắt dòng thời gian</h3>
@@ -160,8 +175,10 @@ export default function VerdictScreen() {
       <Button
         disabled={!complete}
         onClick={() => {
-          setEndingId(pickEnding(data, picks))
+          const id = pickEnding(data, picks)
+          setEndingId(id)
           if (panels.length) setStep(0)
+          else if (getOutro(data.id, id)) setOutroPlaying(true)
         }}
       >
         Ký đề xuất

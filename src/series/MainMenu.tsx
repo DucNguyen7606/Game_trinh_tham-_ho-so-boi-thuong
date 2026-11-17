@@ -167,8 +167,8 @@ function CaseMap({ onBack }: { onBack: () => void }) {
       setConfirming(caseId)
       return
     }
+    // Opens on the chapter's opening film when it has one, otherwise on the desk.
     startCase(caseId)
-    go('desk')
   }
   const select = (id: string) => {
     setArea(id || undefined)

@@ -162,3 +162,39 @@ body {
 ::highlight(pen-mark) {
   background-color: rgb(245 217 74 / 0.7);
 }
+
+/* Cutscenes (components/Cutscene.tsx): rain, fire, embers, smoke, siren lights, film grain. */
+.cs-rain { top: -15%; animation: csRain linear infinite; transform: rotate(12deg); }
+@keyframes csRain { to { transform: translate(-12vh, 130vh) rotate(12deg); } }
+.cs-flame { transform-box: fill-box; transform-origin: 50% 100%; animation: csFlame ease-in-out infinite alternate; }
+@keyframes csFlame {
+  0% { transform: scale(1, 1) skewX(0deg); }
+  33% { transform: scale(1.06, 1.14) skewX(-4deg); }
+  66% { transform: scale(0.95, 0.92) skewX(3deg); }
+  100% { transform: scale(1.03, 1.08) skewX(-2deg); }
+}
+.cs-flicker { animation: csFlicker 0.9s steps(6) infinite; }
+@keyframes csFlicker { 0%, 100% { opacity: 0.2; } 20% { opacity: 0.32; } 45% { opacity: 0.16; } 70% { opacity: 0.28; } }
+.cs-ember { animation: csEmber linear infinite; }
+@keyframes csEmber {
+  0% { transform: translate(0, 0); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translate(var(--drift), -95vh); opacity: 0; }
+}
+.cs-smoke { animation: csSmoke ease-in-out infinite; }
+@keyframes csSmoke {
+  0% { transform: translate(0, 20%) scale(0.6); opacity: 0; }
+  30% { opacity: 1; }
+  100% { transform: translate(8%, -120%) scale(1.6); opacity: 0; }
+}
+.cs-siren-a { animation: csSiren 1.1s ease-in-out infinite; }
+.cs-siren-b { animation: csSiren 1.1s ease-in-out infinite; animation-delay: -0.55s; }
+@keyframes csSiren { 0%, 100% { opacity: 0; } 30%, 50% { opacity: 1; } }
+.cs-flash { animation: csFlash 0.7s ease-out both; }
+@keyframes csFlash { from { opacity: 0.9; } to { opacity: 0; } }
+.cs-grain {
+  opacity: 0.09;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: csGrain 0.5s steps(4) infinite;
+}
+@keyframes csGrain { 0% { background-position: 0 0; } 25% { background-position: -40px 20px; } 50% { background-position: 30px -30px; } 75% { background-position: -20px -50px; } }

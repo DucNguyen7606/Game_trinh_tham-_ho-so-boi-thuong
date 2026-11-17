@@ -1,10 +1,10 @@
 import { create } from 'zustand'
 import type { ActionKind, CaseData, DayLimits, Question } from './types'
-import { cases } from './caseLoader'
+import { cases, hasIntro } from './caseLoader'
 import { playerOf, useProfile } from '@/series/profile'
 import { rulesFor } from '@/series/series'
 
-export type Screen = 'menu' | 'desk' | 'scene' | 'casefile' | 'board' | 'interrogation' | 'verdict' | 'gallery'
+export type Screen = 'menu' | 'intro' | 'desk' | 'scene' | 'casefile' | 'board' | 'interrogation' | 'verdict' | 'gallery'
 
 export interface BoardAnswer {
   optionId?: string
@@ -479,7 +479,11 @@ export const useGame = create<GameState>((set, get) => ({
 
   reset: () => set(initial(get().data)),
 
-  startCase: (caseId) => set(initial(cases.find((c) => c.id === caseId) ?? get().data)),
+  // A case with an opening film starts with it; the film hands over to the desk.
+  startCase: (caseId) => {
+    const c = cases.find((x) => x.id === caseId) ?? get().data
+    set({ ...initial(c), screen: hasIntro(c.id) ? 'intro' : 'desk' })
+  },
 }))
 
 // A new or edited character takes over the case in progress too.
