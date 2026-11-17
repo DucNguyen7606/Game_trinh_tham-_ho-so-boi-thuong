@@ -10,6 +10,7 @@ import { SERIES, type Chapter } from './series'
 import CharacterSetup from './CharacterSetup'
 import { DifficultyBadge } from './DifficultyBadge'
 import { ROLES, useProfile } from './profile'
+import { chapterBefore, unlockedCases } from './progress'
 
 type View = 'home' | 'map'
 
@@ -97,7 +98,7 @@ function Home({ onMap: showMap }: { onMap: () => void }) {
               primary
             />
           )}
-          <MenuItem icon={MapIcon} label="Bản đồ vụ án" sub={`${playable} hồ sơ đang chờ`} onClick={onMap} primary={!started} />
+          <MenuItem icon={MapIcon} label="Bản đồ vụ án" sub={profile.closed.length ? `Đã đóng ${profile.closed.length}/${playable} hồ sơ` : `${playable} hồ sơ, mở lần lượt từng chương`} onClick={onMap} primary={!started} />
           <MenuItem
             icon={UserRound}
             label="Nhân vật điều tra"
@@ -156,6 +157,7 @@ function CaseMap({ onBack }: { onBack: () => void }) {
   const { go, startCase } = useGame()
   const currentId = useGame((s) => s.data.id)
   const closed = useProfile((s) => s.closed)
+  const unlocked = unlockedCases(closed)
   const [area, setArea] = useState<string | undefined>()
   // Case picked on the zoomed-in area.
   const [chosen, setChosen] = useState<number | undefined>()
@@ -221,9 +223,16 @@ function CaseMap({ onBack }: { onBack: () => void }) {
                       select(c.area)
                       choose(c.number)
                     }}
-                    className="grid w-full grid-cols-[2rem_1fr_auto] items-center gap-3 px-2 py-2.5 text-left transition-colors hover:bg-string/20 disabled:opacity-50"
+                    className={cn(
+                      'grid w-full grid-cols-[2rem_1fr_auto] items-center gap-3 px-2 py-2.5 text-left transition-colors hover:bg-string/20 disabled:opacity-50',
+                      // Closed files fade; files not yet opened stay sealed.
+                      c.caseId && closed.includes(c.caseId) && 'opacity-55 saturate-[0.35]',
+                      c.caseId && !unlocked.has(c.caseId) && 'opacity-45',
+                    )}
                   >
-                    <span className="flex size-7 items-center justify-center rounded-full bg-string text-sm font-semibold text-white">{c.number}</span>
+                    <span className={cn('flex size-7 items-center justify-center rounded-full text-sm font-semibold text-white', c.caseId && unlocked.has(c.caseId) ? 'bg-string' : 'bg-muted-foreground/50')}>
+                      {c.caseId && !unlocked.has(c.caseId) ? <Lock className="size-3.5" /> : c.number}
+                    </span>
                     <span className="text-[15px] leading-snug text-foreground">
                       {c.title}
                       {c.caseId && closed.includes(c.caseId) && <span className="display ml-2 text-xs tracking-wider text-[var(--match)]">✓ Đã đóng</span>}
@@ -252,7 +261,12 @@ function CaseMap({ onBack }: { onBack: () => void }) {
                 chapter={picked}
                 current={picked.caseId === currentId && started}
                 closed={!!picked.caseId && closed.includes(picked.caseId)}
-                onOpen={picked.caseId ? () => begin(picked.caseId!) : undefined}
+                onOpen={picked.caseId && unlocked.has(picked.caseId) ? () => begin(picked.caseId!) : undefined}
+                lockNote={
+                  picked.caseId && !unlocked.has(picked.caseId)
+                    ? `Đóng hồ sơ Chương ${chapterBefore(picked.caseId)?.number ?? ''} để mở chương này.`
+                    : undefined
+                }
               />
             ) : (
               <div className="space-y-2">
@@ -300,13 +314,18 @@ function CaseMap({ onBack }: { onBack: () => void }) {
 }
 
 /** A case in the area panel, drawn as a manila file; unfinished ones are sealed with tape. */
-function CaseCard({ chapter: c, onOpen, current, closed }: { chapter: Chapter; onOpen?: () => void; current?: boolean; closed?: boolean }) {
+function CaseCard({ chapter: c, onOpen, current, closed, lockNote }: { chapter: Chapter; onOpen?: () => void; current?: boolean; closed?: boolean; lockNote?: string }) {
   const locked = !onOpen
   return (
     <button
       onClick={onOpen}
       disabled={locked}
-      className={cn('group relative text-left transition-transform', locked ? 'cursor-not-allowed opacity-60' : 'hover:-translate-y-1 hover:rotate-[-0.5deg]')}
+      className={cn(
+        'group relative text-left transition',
+        locked ? 'cursor-not-allowed opacity-60' : 'hover:-translate-y-1 hover:rotate-[-0.5deg]',
+        // A closed file looks old: faded, yellowed and washed out, until hovered.
+        closed && !locked && 'opacity-70 sepia-[0.45] saturate-[0.4] hover:opacity-100 hover:sepia-0 hover:saturate-100',
+      )}
     >
       <div className="ml-3 h-4 w-20 rounded-t-md bg-paper" />
       <div className="document relative flex flex-col p-4">
@@ -328,6 +347,9 @@ function CaseCard({ chapter: c, onOpen, current, closed }: { chapter: Chapter; o
             <Lock className="mr-2 size-4" />
             <span className="display text-sm tracking-widest">Niêm phong</span>
           </div>
+        ) : null}
+        {locked ? (
+          lockNote && <p className="mt-10 font-sans text-xs italic text-paper-ink/70">{lockNote}</p>
         ) : (
           <span className="display mt-3 self-end rounded-sm border-2 border-string px-2 text-sm text-string transition-transform group-hover:-rotate-6">
             {current ? 'Đang điều tra' : closed ? 'Điều tra lại' : 'Mở hồ sơ'}
