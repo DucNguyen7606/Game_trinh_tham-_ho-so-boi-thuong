@@ -198,3 +198,5 @@ body {
   animation: csGrain 0.5s steps(4) infinite;
 }
 @keyframes csGrain { 0% { background-position: 0 0; } 25% { background-position: -40px 20px; } 50% { background-position: 30px -30px; } 75% { background-position: -20px -50px; } }
+/* A paused cutscene freezes its looping effects too. */
+.cs-paused * { animation-play-state: paused !important; }

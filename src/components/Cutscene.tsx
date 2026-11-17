@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ChevronsRight } from 'lucide-react'
+import { ChevronsRight, Pause, Play } from 'lucide-react'
 import { gameAudio } from '@/audio/engine'
 import type { SfxId } from '@/audio/sfx'
 import { rng } from '@/art/primitives'
@@ -54,7 +54,7 @@ const shotLength = (s: Shot) => Math.max(s.duration ?? 5, textTime(s.lines) + HO
 
 /**
  * Plays a cutscene full screen. Click, Space or → goes on (finishing the typing first),
- * Esc or the button skips to the end.
+ * P or the pause button stops everything so the player can read, Esc or the button skips to the end.
  */
 export function CutscenePlayer({ scene, onDone }: { scene: Cutscene; onDone: () => void }) {
   const [index, setIndex] = useState(0)
@@ -74,28 +74,39 @@ export function CutscenePlayer({ scene, onDone }: { scene: Cutscene; onDone: () 
     else setIndex((i) => i + 1)
   }, [index, scene.shots.length, finish])
 
-  // The clock: types the narration and moves on when the shot has had its time.
-  // startRef is when the shot began; moving it back jumps the typing ahead.
+  // Paused: the clock, typing, camera, sound cues and looping effects all hold still.
+  const [paused, setPaused] = useState(false)
+  const pausedRef = useRef(false)
+  pausedRef.current = paused
+  const togglePause = useCallback(() => setPaused((p) => !p), [])
+
+  // The clock: types the narration, moves the camera, plays sound cues and moves on when
+  // the shot has had its time. startRef is when the shot began; moving it back jumps ahead,
+  // and while paused it keeps moving forward so the shot's time stands still.
   const startRef = useRef(0)
   useEffect(() => {
     startRef.current = performance.now()
     setTyped(0)
+    const cues = [...(shot.sfx ?? [])]
     let raf = 0
+    let last = performance.now()
     const tick = (now: number) => {
+      if (pausedRef.current) startRef.current += now - last
+      last = now
       const t = (now - startRef.current) / 1000
       setTyped(t)
+      for (let i = cues.length - 1; i >= 0; i--) {
+        if ((cues[i].at ?? 0) <= t) {
+          gameAudio.sfx(cues[i].id)
+          cues.splice(i, 1)
+        }
+      }
       if (t >= length) next()
       else raf = requestAnimationFrame(tick)
     }
     raf = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(raf)
-  }, [index, length, next])
-
-  // Sound cues of the shot.
-  useEffect(() => {
-    const timers = (shot.sfx ?? []).map((s) => window.setTimeout(() => gameAudio.sfx(s.id), (s.at ?? 0) * 1000))
-    return () => timers.forEach(clearTimeout)
-  }, [shot])
+  }, [index, length, next, shot])
 
   const textDone = typed >= textTime(shot.lines)
   const advance = useCallback(() => {
@@ -106,6 +117,7 @@ export function CutscenePlayer({ scene, onDone }: { scene: Cutscene; onDone: () 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') finish()
+      else if (e.key === 'p' || e.key === 'P' || e.key === 'k' || e.key === 'K') togglePause()
       else if (e.key === ' ' || e.key === 'ArrowRight' || e.key === 'Enter') {
         e.preventDefault()
         advance()
@@ -113,13 +125,20 @@ export function CutscenePlayer({ scene, onDone }: { scene: Cutscene; onDone: () 
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [advance, finish])
+  }, [advance, finish, togglePause])
 
   const from = { zoom: 1.04, x: 0, y: 0, rotate: 0, ...shot.camera?.from }
   const to = { zoom: 1.12, x: 0, y: 0, rotate: 0, ...shot.camera?.to }
+  // Camera position follows the shot's clock, so it stops when paused. Eased in and out.
+  const k = Math.min(1, typed / (length + 1))
+  const e = k < 0.5 ? 2 * k * k : 1 - (-2 * k + 2) ** 2 / 2
+  const cam = (a: number, b: number) => a + (b - a) * e
 
   return (
-    <div className="fixed inset-0 z-50 flex select-none items-center justify-center bg-black" onClick={advance}>
+    <div
+      className={cn('fixed inset-0 z-50 flex select-none items-center justify-center bg-black', paused && 'cs-paused')}
+      onClick={paused ? togglePause : advance}
+    >
       <div className="relative aspect-video w-[min(100vw,177.78vh)] overflow-hidden bg-black">
         <AnimatePresence initial={false}>
           <motion.div
@@ -129,14 +148,14 @@ export function CutscenePlayer({ scene, onDone }: { scene: Cutscene; onDone: () 
             animate={{ opacity: 1, transition: { duration: shot.enter === 'black' ? 1.2 : 0.9, delay: shot.enter === 'black' ? 0.5 : 0 } }}
             exit={{ opacity: 0, transition: { duration: shot.enter === 'black' ? 0.5 : 0.9 } }}
           >
-            <motion.div
+            <div
               className="absolute inset-0"
-              initial={{ scale: from.zoom, x: `${from.x}%`, y: `${from.y}%`, rotate: from.rotate }}
-              animate={{ scale: to.zoom, x: `${to.x}%`, y: `${to.y}%`, rotate: to.rotate }}
-              transition={{ duration: length + 1, ease: [0.4, 0, 0.6, 1] }}
+              style={{
+                transform: `translate(${cam(from.x, to.x)}%, ${cam(from.y, to.y)}%) scale(${cam(from.zoom, to.zoom)}) rotate(${cam(from.rotate, to.rotate)}deg)`,
+              }}
             >
               <shot.Art />
-            </motion.div>
+            </div>
             {shot.enter === 'flash' && <div className="cs-flash pointer-events-none absolute inset-0 bg-[#fff6e0]" />}
           </motion.div>
         </AnimatePresence>
@@ -188,18 +207,37 @@ export function CutscenePlayer({ scene, onDone }: { scene: Cutscene; onDone: () 
         </div>
       </div>
 
+      {paused && (
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+          <span className="display flex items-center gap-2 rounded-full bg-black/60 px-5 py-2 text-lg text-white/85 backdrop-blur">
+            <Pause className="size-5" /> Tạm dừng · bấm để chạy tiếp
+          </span>
+        </div>
+      )}
+      <div className="absolute right-5 top-5 flex gap-2">
+      <button
+        onClick={(e) => {
+          e.stopPropagation()
+          togglePause()
+        }}
+        className="display flex items-center gap-1.5 rounded border border-white/25 bg-black/50 px-3 py-1.5 text-sm text-white/80 backdrop-blur transition hover:border-amber hover:text-amber"
+        title={paused ? 'Chạy tiếp (P)' : 'Tạm dừng (P)'}
+      >
+        {paused ? <Play className="size-4" /> : <Pause className="size-4" />} {paused ? 'Chạy tiếp' : 'Tạm dừng'}
+      </button>
       <button
         onClick={(e) => {
           e.stopPropagation()
           finish()
         }}
-        className="display absolute right-5 top-5 flex items-center gap-1.5 rounded border border-white/25 bg-black/50 px-3 py-1.5 text-sm text-white/80 backdrop-blur transition hover:border-amber hover:text-amber"
+        className="display flex items-center gap-1.5 rounded border border-white/25 bg-black/50 px-3 py-1.5 text-sm text-white/80 backdrop-blur transition hover:border-amber hover:text-amber"
         title="Bỏ qua (Esc)"
       >
         Bỏ qua <ChevronsRight className="size-4" />
       </button>
+      </div>
       <span className="pointer-events-none absolute bottom-3 left-1/2 -translate-x-1/2 text-[11px] text-white/35">
-        Bấm chuột hoặc phím cách để tiếp · Esc để bỏ qua
+        Bấm chuột hoặc phím cách để tiếp · P để tạm dừng · Esc để bỏ qua
       </span>
     </div>
   )
