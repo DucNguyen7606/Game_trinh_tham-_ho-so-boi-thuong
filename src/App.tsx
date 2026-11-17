@@ -24,7 +24,8 @@ const nav: { screen: Screen; label: string; icon: typeof Briefcase }[] = [
   { screen: 'casefile', label: 'Hồ sơ', icon: FolderOpen },
   { screen: 'board', label: 'Bàn suy luận', icon: Network },
   { screen: 'verdict', label: 'Kết luận', icon: Gavel },
-  { screen: 'gallery', label: 'Thư viện hình', icon: Palette },
+  // The art gallery is a design tool, not part of the game: it shows only while developing.
+  ...(import.meta.env.DEV ? [{ screen: 'gallery' as Screen, label: 'Thư viện hình', icon: Palette }] : []),
 ]
 
 export default function App() {
@@ -97,7 +98,7 @@ export default function App() {
             {screen === 'board' && <BoardScreen />}
             {screen === 'interrogation' && <InterrogationScreen />}
             {screen === 'verdict' && <VerdictScreen />}
-            {screen === 'gallery' && <GalleryScreen />}
+            {import.meta.env.DEV && screen === 'gallery' && <GalleryScreen />}
           </motion.div>
         </AnimatePresence>
       </main>
