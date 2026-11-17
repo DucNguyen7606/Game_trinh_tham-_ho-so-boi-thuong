@@ -1,7 +1,7 @@
 import { useId } from 'react'
 import { accent, ink, shade } from '@/art/palette'
 import { AREAS, OFF_MAP, QL1A, RIVER, areaLabel, roughOutline, type Area } from './areas'
-import { SERIES, type Chapter } from './series'
+import { DIFFICULTY, SERIES, type Chapter } from './series'
 
 // The case map: a paper map of Saigon pinned to the desk. Areas with a case get
 // a red pin, and a red string runs from pin to pin in chapter order.
@@ -368,11 +368,28 @@ export default function SaigonMap({
               <text y="44" textAnchor="middle" className="title" fontSize="19" fill={INK}>
                 {c.title}
               </text>
-              {open && c.difficulty && (
-                <text y="66" textAnchor="middle" className="display" fontSize="12" fill={shade(INK, 0.3)} letterSpacing="1.5">
-                  {[c.difficulty.toUpperCase(), c.playTime].filter(Boolean).join(' · ')}
-                </text>
-              )}
+              {open && c.difficulty && (() => {
+                const d = DIFFICULTY[c.difficulty]
+                const w = 44 + c.difficulty.length * 8.5
+                const total = w + (c.playTime ? 8 + c.playTime.length * 7.2 : 0)
+                const x0 = -total / 2
+                return (
+                  <g>
+                    <rect x={x0} y="53" width={w} height="18" rx="9" fill={d.bg} />
+                    {[1, 2, 3, 4].map((i) => (
+                      <circle key={i} cx={x0 + 10 + (i - 1) * 6} cy="62" r="2" fill={d.fg} opacity={i <= d.level ? 1 : 0.3} />
+                    ))}
+                    <text x={x0 + 34} y="66.5" className="display" fontSize="12" fontWeight="700" fill={d.fg} letterSpacing="1.2">
+                      {c.difficulty.toUpperCase()}
+                    </text>
+                    {c.playTime && (
+                      <text x={x0 + w + 8} y="66.5" className="display" fontSize="12" fill={shade(INK, 0.3)} letterSpacing="1">
+                        {c.playTime}
+                      </text>
+                    )}
+                  </g>
+                )
+              })()}
             </g>
           </g>
         )

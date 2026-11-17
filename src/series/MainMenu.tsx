@@ -8,6 +8,7 @@ import SaigonMap, { MAP_ASPECT } from './SaigonMap'
 import { AREAS, OFF_MAP, areaName } from './areas'
 import { SERIES, type Chapter } from './series'
 import CharacterSetup from './CharacterSetup'
+import { DifficultyBadge } from './DifficultyBadge'
 import { ROLES, useProfile } from './profile'
 
 type View = 'home' | 'map'
@@ -247,7 +248,8 @@ function CaseMap({ onBack }: { onBack: () => void }) {
                 {here.map((c) => (
                   <button key={c.number} onClick={() => choose(c.number)} className="flex w-full items-center gap-3 rounded-sm px-2 py-2 text-left text-[15px] hover:bg-string/20">
                     <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-string text-sm font-semibold text-white">{c.number}</span>
-                    {c.title}
+                    <span className="flex-1">{c.title}</span>
+                    {c.difficulty && <DifficultyBadge difficulty={c.difficulty} className="text-[10px]" />}
                   </button>
                 ))}
               </div>
@@ -300,10 +302,7 @@ function CaseCard({ chapter: c, onOpen, current }: { chapter: Chapter; onOpen?: 
         <h3 className="title mt-1 text-xl leading-tight">{c.title}</h3>
         <p className="mt-2 font-sans text-sm leading-snug text-paper-ink/85">{c.blurb}</p>
         {c.difficulty && (
-          <p className="display mt-2 text-xs tracking-widest text-paper-ink/60">
-            Độ khó: {c.difficulty}
-            {c.playTime && ` · ${c.playTime}`}
-          </p>
+          <DifficultyBadge difficulty={c.difficulty} playTime={c.playTime} className="mt-2" />
         )}
         {locked ? (
           <div className="absolute inset-x-[-8px] top-1/2 flex h-8 -rotate-3 items-center justify-center bg-string/85 text-white">

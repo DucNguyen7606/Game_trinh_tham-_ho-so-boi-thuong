@@ -152,3 +152,11 @@ export const SERIES = {
     },
   ] satisfies Chapter[],
 }
+
+/** One colour and level per difficulty, so a tag reads at a glance. Level 1–4 fills the pips. */
+export const DIFFICULTY: Record<NonNullable<Chapter['difficulty']>, { level: number; bg: string; fg: string }> = {
+  'Dễ': { level: 1, bg: '#3f8a4f', fg: '#f4fbe9' },
+  'Vừa': { level: 2, bg: '#d9a21b', fg: '#2b1d10' },
+  'Khó': { level: 3, bg: '#d0612a', fg: '#fff4e6' },
+  'Rất khó': { level: 4, bg: '#9b1d2a', fg: '#ffe9e6' },
+}
