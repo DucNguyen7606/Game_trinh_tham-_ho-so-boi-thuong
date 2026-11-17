@@ -3,7 +3,7 @@ import { DndContext, DragOverlay, useDraggable, useDroppable, type DragEndEvent 
 import { Lock, Mail, MailOpen, Maximize2, Pin } from 'lucide-react'
 import { Lightbox } from '@/components/Lightbox'
 import { clueLocked, puzzleFor, questionOrder, useGame } from '@/game/store'
-import { HighlightText } from '@/components/Highlighter'
+import { HighlightText, MarkableArea, PenButton } from '@/components/Highlighter'
 import { AudioEvidence } from '@/components/AudioEvidence'
 import { PuzzlePanel } from '@/components/PuzzlePanel'
 import { clueById, docCode, getDocumentArt } from '@/game/caseLoader'
@@ -56,7 +56,7 @@ function DraggableDocument({ clue, pinned, read }: { clue: Clue; pinned: boolean
   )
 }
 
-function DropZone({ id, title, hint, children }: { id: string; title: string; hint: string; children?: React.ReactNode }) {
+function DropZone({ id, title, hint, children, action }: { id: string; title: string; hint: string; children?: React.ReactNode; action?: React.ReactNode }) {
   const { isOver, setNodeRef } = useDroppable({ id })
   return (
     <div
@@ -66,8 +66,13 @@ function DropZone({ id, title, hint, children }: { id: string; title: string; hi
         isOver && 'border-primary bg-primary/10',
       )}
     >
-      <h3 className="font-semibold">{title}</h3>
-      <p className="text-xs text-muted-foreground">{hint}</p>
+      <div className="flex items-start justify-between gap-2">
+        <div>
+          <h3 className="font-semibold">{title}</h3>
+          <p className="text-xs text-muted-foreground">{hint}</p>
+        </div>
+        {action}
+      </div>
       <div className="mt-3 flex-1">{children}</div>
     </div>
   )
@@ -95,6 +100,7 @@ export default function CaseFileScreen() {
   const dragged = dragId ? clueById(data, dragId) : undefined
   const ReadingArt = reading ? getDocumentArt(data.id, reading.id) : undefined
   const [zoomed, setZoomed] = useState(false)
+  const pen = useGame((st) => st.pen)
   const readingPuzzle = reading ? puzzleFor(data, reading.id) : undefined
   const readingLocked = useGame((st) => (reading ? clueLocked(st, reading.id) : false))
 
@@ -150,7 +156,7 @@ export default function CaseFileScreen() {
         </section>
 
         <aside className="grid min-h-0 grid-rows-[minmax(0,3fr)_minmax(140px,1fr)] gap-4">
-          <DropZone id="reading-desk" title="Bàn đọc" hint="Kéo giấy tờ vào đây để đọc kỹ.">
+          <DropZone id="reading-desk" title="Bàn đọc" hint="Kéo giấy tờ vào đây để đọc kỹ." action={<PenButton />}>
             {reading ? (
               <div className="document p-4">
                 <p className="text-xs font-semibold opacity-60">Mã {docCode(data, reading.id)}</p>
@@ -166,18 +172,25 @@ export default function CaseFileScreen() {
               </div>
             ) : null}
             {reading && ReadingArt ? (
-              <button
-                className="group relative mt-4 block w-full px-2 pb-2 text-left"
-                onClick={() => setZoomed(true)}
-                aria-label={`Phóng to ${reading.title}`}
-              >
-                <div className="transition duration-200 group-hover:-translate-y-1 group-hover:brightness-110">
+              pen ? (
+                // Pen in hand: the drawing is a page to mark, not a button to zoom.
+                <MarkableArea key={reading.id} clueId={reading.id} className="mt-4 px-2 pb-2">
                   <ReadingArt />
-                </div>
-                <span className="display absolute right-3 top-1 flex items-center gap-1 rounded bg-background/80 px-2 py-0.5 text-xs text-amber opacity-0 transition group-hover:opacity-100">
-                  <Maximize2 className="size-3" /> Phóng to
-                </span>
-              </button>
+                </MarkableArea>
+              ) : (
+                <button
+                  className="group relative mt-4 block w-full px-2 pb-2 text-left"
+                  onClick={() => setZoomed(true)}
+                  aria-label={`Phóng to ${reading.title}`}
+                >
+                  <MarkableArea key={reading.id} clueId={reading.id} className="transition duration-200 group-hover:-translate-y-1 group-hover:brightness-110">
+                    <ReadingArt />
+                  </MarkableArea>
+                  <span className="display absolute right-3 top-1 flex items-center gap-1 rounded bg-background/80 px-2 py-0.5 text-xs text-amber opacity-0 transition group-hover:opacity-100">
+                    <Maximize2 className="size-3" /> Phóng to
+                  </span>
+                </button>
+              )
             ) : null}
           </DropZone>
           <DropZone id="pin-board" title="Ghim lên bàn suy luận" hint="Kéo giấy tờ vào đây để thêm thành thẻ manh mối." />
@@ -196,13 +209,14 @@ export default function CaseFileScreen() {
                 {data.envelopes.find((e) => e.documents.includes(reading.id))?.title ?? ''}
               </p>
               <p className="text-xs opacity-70">Chỗ tô vàng là chi tiết giám định viên đánh dấu.</p>
+              <PenButton className="mt-2" />
             </>
           }
         >
           {/* Documents are drawn in HTML at card size, so zoom scales text and layout together. */}
-          <div className="w-[360px] py-4" style={{ zoom: 1.7 }}>
+          <MarkableArea clueId={reading.id} className="w-[360px] py-4" style={{ zoom: 1.7 }}>
             <ReadingArt />
-          </div>
+          </MarkableArea>
         </Lightbox>
       )}
       <DragOverlay>{dragged ? <DocumentCard clue={dragged} pinned={false} dragging /> : null}</DragOverlay>

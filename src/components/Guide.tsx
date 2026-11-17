@@ -51,14 +51,14 @@ const PAGES: Page[] = [
   },
   {
     id: 'ho-so',
-    title: 'Hồ sơ và bút highlight',
+    title: 'Hồ sơ và bút lông',
     icon: FolderOpen,
     body: {
       lead: 'Giấy tờ nằm trong các phong bì. Phong bì sau mở ra khi bạn giải được một câu trên bàn suy luận.',
       points: [
         'Kéo một tờ vào "Bàn đọc" để đọc kỹ. Kéo vào "Ghim lên bàn suy luận" để biến nó thành thẻ manh mối.',
         'Mỗi tờ có một mã, ví dụ 0714/P05: số hồ sơ, rồi loại giấy tờ (H là hiện trường, P là hồ sơ, X là lời khai hoặc vật nhiễu) và số thứ tự.',
-        'Bút highlight: trên Bàn đọc, bôi chuột lên một câu thì câu đó được tô vàng, và tờ giấy được ghim lên bàn suy luận kèm câu trích. Bút không cho biết câu nào quan trọng, việc đó là của bạn.',
+        'Bút lông: bấm nút Bút lông (trên thanh trên cùng hoặc ở Bàn đọc) để cầm bút, con trỏ thành cây bút. Kéo chuột qua chữ trên giấy tờ, kể cả trong ảnh giấy tờ, thì chữ được tô vàng và tờ đó được ghim lên bàn suy luận kèm câu trích. Bấm nút lần nữa để cất bút. Bút không cho biết câu nào quan trọng, việc đó là của bạn.',
       ],
     },
   },
@@ -108,6 +108,7 @@ const PAGES: Page[] = [
       points: [
         'Mỗi câu hỏi được một gợi ý đầu miễn phí. Gợi ý tiếp theo chỉ mở khi lần Kiểm tra mới có thêm một dây xanh.',
         'Với câu đố giải mã, gợi ý tiếp theo mở sau mỗi lần bạn thử thêm một đáp án mới.',
+        'Ô "Gợi ý" trên thanh trên cùng cho biết bạn mở được bao nhiêu gợi ý ngay lúc này, và cả vụ còn bao nhiêu gợi ý chưa xem.',
       ],
     },
   },

@@ -55,6 +55,9 @@ interface GameState {
   boardViewport?: { x: number; y: number; zoom: number }
   /** Per document, what the player has marked with the highlighter: key phrases and their own marks. */
   marks: Record<string, string[]>
+  /** The highlighter pen is in hand: dragging over a document's words marks them. */
+  pen: boolean
+  setPen: (on: boolean) => void
   solvedPuzzles: string[]
   /** Per puzzle, wrong attempts so far, and how many hints were seen and at how many attempts the last one opened. */
   puzzleAttempts: Record<string, number>
@@ -125,6 +128,7 @@ const initial = (data: CaseData) => ({
   boardLayout: {} as Record<string, { x: number; y: number }>,
   boardViewport: undefined as { x: number; y: number; zoom: number } | undefined,
   marks: {} as Record<string, string[]>,
+  pen: false,
   solvedPuzzles: [] as string[],
   puzzleAttempts: {} as Record<string, number>,
   puzzleHints: {} as Record<string, { level: number; attempts: number }>,
@@ -241,6 +245,29 @@ export function puzzleHintGate(st: Pick<GameState, 'data' | 'puzzleHints' | 'puz
   return (st.puzzleAttempts[puzzleId] ?? 0) > seen.attempts ? 'available' : 'locked'
 }
 
+/**
+ * The hint count on the top bar: how many hints the player can open right now (one per
+ * open question or puzzle whose gate allows it) and how many are left in the case in all.
+ * Solved questions and puzzles, and questions not on the board yet, don't count.
+ */
+export function hintSummary(
+  st: Pick<GameState, 'data' | 'solvedQuestions' | 'hintLevel' | 'hintBasis' | 'checkedLinks' | 'checkCount' | 'solvedPuzzles' | 'puzzleHints' | 'puzzleAttempts'>,
+) {
+  let now = 0
+  let left = 0
+  for (const q of st.data.questions) {
+    if (st.solvedQuestions.includes(q.id) || !questionOpen(st.data, q.id, st.solvedQuestions)) continue
+    left += Math.max(0, (q.hints?.length ?? 0) - (st.hintLevel[q.id] ?? 0))
+    if (hintGate(st, q.id) === 'available') now++
+  }
+  for (const p of st.data.puzzles ?? []) {
+    if (st.solvedPuzzles.includes(p.id)) continue
+    left += Math.max(0, (p.hints?.length ?? 0) - (st.puzzleHints[p.id]?.level ?? 0))
+    if (puzzleHintGate(st, p.id) === 'available') now++
+  }
+  return { now, left }
+}
+
 const addUnique = (list: string[], id: string) => (list.includes(id) ? list : [...list, id])
 
 export const useGame = create<GameState>((set, get) => ({
@@ -336,6 +363,8 @@ export const useGame = create<GameState>((set, get) => ({
     }))
     return true
   },
+
+  setPen: (on) => set({ pen: on }),
 
   markText: (clueId, text) => {
     const clue = get().data.clues.find((c) => c.id === clueId)

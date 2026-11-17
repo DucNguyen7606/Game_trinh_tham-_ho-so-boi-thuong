@@ -94,7 +94,7 @@ function Home({ onMap: showMap }: { onMap: () => void }) {
             sub={profile.created ? `${profile.name} · ${roleTitle}` : 'Chọn tên, giới tính và nghề'}
             onClick={() => setSetup('edit')}
           />
-          <MenuItem icon={BookOpen} label="Hướng dẫn" sub="Cách điều tra, bút highlight, ghi âm, giải mã" onClick={() => setGuide(true)} />
+          <MenuItem icon={BookOpen} label="Hướng dẫn" sub="Cách điều tra, bút lông, ghi âm, giải mã" onClick={() => setGuide(true)} />
           <SettingsItem />
           <MenuItem icon={Power} label="Thoát" onClick={() => window.close()} />
         </nav>
