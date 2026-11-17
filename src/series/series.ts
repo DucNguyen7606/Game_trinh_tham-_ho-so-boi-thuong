@@ -13,6 +13,10 @@ export interface Chapter {
   area?: string
   /** Exact spot of the case on the map (1000 x 900 map units); defaults to the area's middle. */
   spot?: [number, number]
+  /** Shown on the map tag and the case folder. */
+  difficulty?: 'Dễ' | 'Vừa' | 'Khó' | 'Rất khó'
+  /** Rough play time, like "60–75 phút". */
+  playTime?: string
 }
 
 export const SERIES = {
@@ -21,6 +25,8 @@ export const SERIES = {
   chapters: [
     {
       number: 1,
+      difficulty: 'Dễ',
+      playTime: '60–75 phút',
       caseId: 'ho-so-boi-thuong',
       area: 'binh-tan',
       spot: [335, 575],
@@ -30,6 +36,8 @@ export const SERIES = {
     },
     {
       number: 2,
+      difficulty: 'Vừa',
+      playTime: '75–90 phút',
       caseId: 'con-nuoc-can-gio',
       area: 'can-gio',
       spot: [740, 805],
@@ -39,6 +47,8 @@ export const SERIES = {
     },
     {
       number: 3,
+      difficulty: 'Vừa',
+      playTime: '75–90 phút',
       caseId: 'buc-son-mai',
       area: 'trung-tam',
       spot: [560, 545],
@@ -48,6 +58,8 @@ export const SERIES = {
     },
     {
       number: 4,
+      difficulty: 'Vừa',
+      playTime: '90 phút',
       caseId: 'chuyen-xe-dem',
       area: 'binh-thuan',
       spot: [815, 300],
@@ -57,6 +69,8 @@ export const SERIES = {
     },
     {
       number: 5,
+      difficulty: 'Khó',
+      playTime: '90–105 phút',
       caseId: 'dem-thu-thiem',
       area: 'thu-duc',
       title: 'Đêm Thủ Thiêm',
@@ -65,6 +79,8 @@ export const SERIES = {
     },
     {
       number: 6,
+      difficulty: 'Vừa',
+      playTime: '75–90 phút',
       caseId: 'dem-trieu-cuong',
       area: 'cho-lon',
       title: 'Đêm triều cường',
@@ -73,6 +89,8 @@ export const SERIES = {
     },
     {
       number: 7,
+      difficulty: 'Vừa',
+      playTime: '75–90 phút',
       caseId: 'tiem-vang-kim-thanh',
       area: 'go-vap',
       spot: [570, 468],
@@ -82,6 +100,8 @@ export const SERIES = {
     },
     {
       number: 8,
+      difficulty: 'Khó',
+      playTime: '90–105 phút',
       caseId: 'lo-sua-0601',
       area: 'quan-12',
       title: 'Lô sữa 0601',
@@ -90,6 +110,8 @@ export const SERIES = {
     },
     {
       number: 9,
+      difficulty: 'Vừa',
+      playTime: '90 phút',
       caseId: 'can-ho-tang-27',
       area: 'binh-thanh',
       title: 'Căn hộ tầng 27',
@@ -98,6 +120,8 @@ export const SERIES = {
     },
     {
       number: 10,
+      difficulty: 'Khó',
+      playTime: '90–105 phút',
       caseId: 'ba-muoi-ba-do',
       area: 'tan-binh',
       spot: [445, 455],
@@ -107,6 +131,8 @@ export const SERIES = {
     },
     {
       number: 11,
+      difficulty: 'Khó',
+      playTime: '105 phút',
       caseId: 'ho-ban-nguyet',
       area: 'quan-7',
       title: 'Đêm bên hồ Bán Nguyệt',
@@ -115,6 +141,8 @@ export const SERIES = {
     },
     {
       number: 12,
+      difficulty: 'Rất khó',
+      playTime: '105–120 phút',
       caseId: 'dong-ho-dung',
       area: 'quan-3',
       spot: [518, 540],
@@ -123,4 +151,44 @@ export const SERIES = {
       place: 'Quận 3 · tháng 4',
     },
   ] satisfies Chapter[],
+}
+
+/**
+ * One colour, level and rule set per difficulty. Harder cases give fewer days, a smaller
+ * hint pool, ask for more supporting cards and say less about what is missing.
+ * - days: investigation days (every case has 4 scene zones and 1 visit a day, so 7 is enough).
+ * - hints: hints for the whole case, questions and puzzles together; null = no cap.
+ * - related: supporting ("Liên quan") cards each question needs, never more than it has.
+ * - reputation: reputation at the start; a wrong answer costs 1.
+ * - exactMissing: a right answer with too few cards says how many of each kind are missing.
+ * - showNeeded: question boxes show how many cards are needed, not only how many are proven.
+ */
+export const DIFFICULTY: Record<
+  NonNullable<Chapter['difficulty']>,
+  { level: number; bg: string; fg: string; days: number; hints: number | null; related: number; reputation: number; exactMissing: boolean; showNeeded: boolean }
+> = {
+  'Dễ': { level: 1, bg: '#3f8a4f', fg: '#f4fbe9', days: 10, hints: null, related: 1, reputation: 4, exactMissing: true, showNeeded: true },
+  'Vừa': { level: 2, bg: '#d9a21b', fg: '#2b1d10', days: 9, hints: 10, related: 1, reputation: 3, exactMissing: true, showNeeded: true },
+  'Khó': { level: 3, bg: '#d0612a', fg: '#fff4e6', days: 8, hints: 7, related: 2, reputation: 3, exactMissing: false, showNeeded: true },
+  'Rất khó': { level: 4, bg: '#9b1d2a', fg: '#ffe9e6', days: 7, hints: 4, related: 2, reputation: 2, exactMissing: false, showNeeded: false },
+}
+
+export type Rules = (typeof DIFFICULTY)[keyof typeof DIFFICULTY]
+
+/** The rules a case is played under, from its chapter's difficulty (a case with none plays as Vừa). */
+export function rulesFor(caseId: string): Rules & { difficulty: NonNullable<Chapter['difficulty']> } {
+  const difficulty = SERIES.chapters.find((c) => c.caseId === caseId)?.difficulty ?? 'Vừa'
+  return { ...DIFFICULTY[difficulty], difficulty }
+}
+
+/** The next chapter after a case that is already made, if any. */
+export function nextChapter(caseId: string) {
+  const at = SERIES.chapters.findIndex((c) => c.caseId === caseId)
+  return at < 0 ? undefined : SERIES.chapters.slice(at + 1).find((c) => c.caseId)
+}
+
+/** "8 ngày · 7 gợi ý": the limits of a difficulty, for badges. */
+export function limitsLabel(difficulty: NonNullable<Chapter['difficulty']>) {
+  const r = DIFFICULTY[difficulty]
+  return `${r.days} ngày · ${r.hints === null ? 'gợi ý không giới hạn' : `${r.hints} gợi ý`}`
 }

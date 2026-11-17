@@ -62,6 +62,17 @@ export function getInkSource(caseId: string, key: string): string | undefined {
   return inkFiles[`/src/cases/${caseId}/thamvan/${key}.ink`]
 }
 
+/** The case-file number, the last digits of the title: "Hồ sơ bồi thường số 0714" → "0714". */
+export function caseNumber(data: CaseData) {
+  return data.title.match(/(\d+)\s*$/)?.[1] ?? data.id
+}
+
+/** A document's code, printed on every sheet and card: case number / clue id with two digits, like "0714/P05". */
+export function docCode(data: CaseData, clueId: string) {
+  const id = clueId.replace(/^([A-Z]+)(\d)$/, '$10$2')
+  return `${caseNumber(data)}/${id}`
+}
+
 export function clueById(data: CaseData, id: string) {
   return data.clues.find((c) => c.id === id)
 }

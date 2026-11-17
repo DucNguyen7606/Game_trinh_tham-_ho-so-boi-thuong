@@ -1,5 +1,9 @@
-import { Home, Briefcase, FolderOpen, Network, Search, Gavel, Palette } from 'lucide-react'
-import { useGame, type Screen } from '@/game/store'
+import { useState } from 'react'
+import { Home, Briefcase, FolderOpen, Network, Search, Gavel, Palette, CircleHelp, Lightbulb } from 'lucide-react'
+import { Guide, guideSeen } from '@/components/Guide'
+import { PenButton, usePenCursor } from '@/components/Highlighter'
+import { hintSummary, useGame, type Screen } from '@/game/store'
+import { useShallow } from 'zustand/react/shallow'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
@@ -20,11 +24,16 @@ const nav: { screen: Screen; label: string; icon: typeof Briefcase }[] = [
   { screen: 'casefile', label: 'Hồ sơ', icon: FolderOpen },
   { screen: 'board', label: 'Bàn suy luận', icon: Network },
   { screen: 'verdict', label: 'Kết luận', icon: Gavel },
-  { screen: 'gallery', label: 'Thư viện hình', icon: Palette },
+  // The art gallery is a design tool, not part of the game: it shows only while developing.
+  ...(import.meta.env.DEV ? [{ screen: 'gallery' as Screen, label: 'Thư viện hình', icon: Palette }] : []),
 ]
 
 export default function App() {
   const { screen, go, day, left, reputation, data, solvedQuestions } = useGame()
+  // The guide opens by itself the first time a case is opened on this computer.
+  const [guide, setGuide] = useState(() => !guideSeen())
+  usePenCursor()
+  const hints = useGame(useShallow(hintSummary))
 
   if (screen === 'menu') return <MainMenu />
 
@@ -43,22 +52,35 @@ export default function App() {
               size="sm"
               variant={screen === s ? 'secondary' : 'ghost'}
               onClick={() => go(s)}
+              title={label}
               className={cn('display px-2.5 text-sm', screen === s && 'text-amber')}
             >
-              <Icon /> {label}
+              <Icon /> <span className="max-[1540px]:sr-only">{label}</span>
             </Button>
           ))}
         </nav>
-        <div className="ml-auto flex items-center gap-2 text-sm">
+        <div className="ml-auto flex shrink-0 items-center gap-1.5 whitespace-nowrap text-sm">
+          <PenButton label={false} />
+          <Button size="sm" variant="ghost" title="Hướng dẫn" onClick={() => setGuide(true)}>
+            <CircleHelp />
+          </Button>
           <AudioControls />
           <Badge variant="outline">Ngày {day}/{data.days}</Badge>
-          <Badge variant="outline">Khám: {left.explore}/{data.limitsPerDay.explore}</Badge>
-          <Badge variant="outline">Uy tín: {reputation}</Badge>
+          <Badge variant="outline">Khám {left.explore}/{data.limitsPerDay.explore}</Badge>
+          <Badge variant="outline">Uy tín {reputation}</Badge>
+          <Badge
+            variant="outline"
+            className={cn('gap-1', hints.now > 0 && 'border-amber/70 text-amber')}
+            title={`Bạn mở được ${hints.now} gợi ý ngay lúc này (mỗi câu hỏi hoặc câu đố đang mở được một gợi ý khi đủ điều kiện). Cả vụ còn ${hints.left} gợi ý ${hints.capped ? 'trong quỹ gợi ý của mức độ khó này' : 'chưa xem'}.`}
+          >
+            <Lightbulb className="size-3.5" /> Gợi ý {hints.now} · còn {hints.left}
+          </Badge>
           <Badge variant="outline">
-            Câu đã giải: {solvedQuestions.length}/{data.questions.length}
+            Đã giải {solvedQuestions.length}/{data.questions.length}
           </Badge>
         </div>
       </header>
+      {guide && <Guide onClose={() => setGuide(false)} />}
       <main className="relative min-h-0 flex-1 overflow-hidden">
         {/* Screen change: the old desk is swept off toward the top-right corner, the new one slides in. */}
         <AnimatePresence mode="wait" initial={false}>
@@ -76,7 +98,7 @@ export default function App() {
             {screen === 'board' && <BoardScreen />}
             {screen === 'interrogation' && <InterrogationScreen />}
             {screen === 'verdict' && <VerdictScreen />}
-            {screen === 'gallery' && <GalleryScreen />}
+            {import.meta.env.DEV && screen === 'gallery' && <GalleryScreen />}
           </motion.div>
         </AnimatePresence>
       </main>

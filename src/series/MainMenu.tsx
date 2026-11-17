@@ -1,5 +1,6 @@
-import { useState } from 'react'
-import { ArrowLeft, Lock, Map as MapIcon, Play, Power, Settings, UserRound } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { ArrowLeft, BookOpen, Lock, Map as MapIcon, Play, Power, Settings, UserRound } from 'lucide-react'
+import { Guide } from '@/components/Guide'
 import { useGame } from '@/game/store'
 import { cn } from '@/lib/utils'
 import AudioControls from '@/audio/AudioControls'
@@ -7,6 +8,7 @@ import SaigonMap, { MAP_ASPECT } from './SaigonMap'
 import { AREAS, OFF_MAP, areaName } from './areas'
 import { SERIES, type Chapter } from './series'
 import CharacterSetup from './CharacterSetup'
+import { DifficultyBadge } from './DifficultyBadge'
 import { ROLES, useProfile } from './profile'
 
 type View = 'home' | 'map'
@@ -33,8 +35,17 @@ function Desk() {
 }
 
 /** The series' main menu: shown on launch, outside every chapter. */
+// Set by "Đóng hồ sơ" at the end of a case, so the menu opens straight on the map.
+let mapNext = false
+export function openMapOnMenu() {
+  mapNext = true
+}
+
 export default function MainMenu() {
-  const [view, setView] = useState<View>('home')
+  const [view, setView] = useState<View>(() => (mapNext ? 'map' : 'home'))
+  useEffect(() => {
+    mapNext = false
+  }, [])
   return view === 'home' ? <Home onMap={() => setView('map')} /> : <CaseMap onBack={() => setView('home')} />
 }
 
@@ -43,6 +54,7 @@ function Home({ onMap: showMap }: { onMap: () => void }) {
   const profile = useProfile()
   // The character window: opened from the menu, or before the map the very first time.
   const [setup, setSetup] = useState<'edit' | 'first' | null>(null)
+  const [guide, setGuide] = useState(false)
   const onMap = () => (profile.created ? showMap() : setSetup('first'))
   const roleTitle = ROLES.find((r) => r.id === profile.roleId)?.title
   const go = useGame((s) => s.go)
@@ -92,11 +104,13 @@ function Home({ onMap: showMap }: { onMap: () => void }) {
             sub={profile.created ? `${profile.name} · ${roleTitle}` : 'Chọn tên, giới tính và nghề'}
             onClick={() => setSetup('edit')}
           />
+          <MenuItem icon={BookOpen} label="Hướng dẫn" sub="Cách điều tra, bút lông, ghi âm, giải mã" onClick={() => setGuide(true)} />
           <SettingsItem />
           <MenuItem icon={Power} label="Thoát" onClick={() => window.close()} />
         </nav>
       </div>
 
+      {guide && <Guide onClose={() => setGuide(false)} />}
       {setup && <CharacterSetup onClose={() => setSetup(null)} onDone={setup === 'first' ? showMap : undefined} />}
 
       <p className="display absolute bottom-4 left-[8vw] text-xs text-muted-foreground/70">
@@ -141,6 +155,7 @@ function CaseMap({ onBack }: { onBack: () => void }) {
   const started = useStarted()
   const { go, startCase } = useGame()
   const currentId = useGame((s) => s.data.id)
+  const closed = useProfile((s) => s.closed)
   const [area, setArea] = useState<string | undefined>()
   // Case picked on the zoomed-in area.
   const [chosen, setChosen] = useState<number | undefined>()
@@ -209,7 +224,10 @@ function CaseMap({ onBack }: { onBack: () => void }) {
                     className="grid w-full grid-cols-[2rem_1fr_auto] items-center gap-3 px-2 py-2.5 text-left transition-colors hover:bg-string/20 disabled:opacity-50"
                   >
                     <span className="flex size-7 items-center justify-center rounded-full bg-string text-sm font-semibold text-white">{c.number}</span>
-                    <span className="text-[15px] leading-snug text-foreground">{c.title}</span>
+                    <span className="text-[15px] leading-snug text-foreground">
+                      {c.title}
+                      {c.caseId && closed.includes(c.caseId) && <span className="display ml-2 text-xs tracking-wider text-[var(--match)]">✓ Đã đóng</span>}
+                    </span>
                     <span className="display text-xs tracking-wider text-muted-foreground">{areaName(c.area) ?? '?'}</span>
                   </button>
                 </li>
@@ -233,6 +251,7 @@ function CaseMap({ onBack }: { onBack: () => void }) {
                 key={picked.number}
                 chapter={picked}
                 current={picked.caseId === currentId && started}
+                closed={!!picked.caseId && closed.includes(picked.caseId)}
                 onOpen={picked.caseId ? () => begin(picked.caseId!) : undefined}
               />
             ) : (
@@ -243,7 +262,8 @@ function CaseMap({ onBack }: { onBack: () => void }) {
                 {here.map((c) => (
                   <button key={c.number} onClick={() => choose(c.number)} className="flex w-full items-center gap-3 rounded-sm px-2 py-2 text-left text-[15px] hover:bg-string/20">
                     <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-string text-sm font-semibold text-white">{c.number}</span>
-                    {c.title}
+                    <span className="flex-1">{c.title}</span>
+                    {c.difficulty && <DifficultyBadge difficulty={c.difficulty} className="text-[10px]" />}
                   </button>
                 ))}
               </div>
@@ -280,7 +300,7 @@ function CaseMap({ onBack }: { onBack: () => void }) {
 }
 
 /** A case in the area panel, drawn as a manila file; unfinished ones are sealed with tape. */
-function CaseCard({ chapter: c, onOpen, current }: { chapter: Chapter; onOpen?: () => void; current?: boolean }) {
+function CaseCard({ chapter: c, onOpen, current, closed }: { chapter: Chapter; onOpen?: () => void; current?: boolean; closed?: boolean }) {
   const locked = !onOpen
   return (
     <button
@@ -290,11 +310,19 @@ function CaseCard({ chapter: c, onOpen, current }: { chapter: Chapter; onOpen?: 
     >
       <div className="ml-3 h-4 w-20 rounded-t-md bg-paper" />
       <div className="document relative flex flex-col p-4">
+        {closed && (
+          <span className="display absolute right-3 top-3 rotate-6 rounded-sm border-2 border-[var(--match)] px-2 text-xs tracking-widest text-[var(--match)]">
+            Đã đóng hồ sơ
+          </span>
+        )}
         <span className="display text-xs tracking-widest text-paper-ink/60">
           Chương {c.number} · {c.place}
         </span>
         <h3 className="title mt-1 text-xl leading-tight">{c.title}</h3>
         <p className="mt-2 font-sans text-sm leading-snug text-paper-ink/85">{c.blurb}</p>
+        {c.difficulty && (
+          <DifficultyBadge difficulty={c.difficulty} playTime={c.playTime} limits className="mt-2" />
+        )}
         {locked ? (
           <div className="absolute inset-x-[-8px] top-1/2 flex h-8 -rotate-3 items-center justify-center bg-string/85 text-white">
             <Lock className="mr-2 size-4" />
@@ -302,7 +330,7 @@ function CaseCard({ chapter: c, onOpen, current }: { chapter: Chapter; onOpen?: 
           </div>
         ) : (
           <span className="display mt-3 self-end rounded-sm border-2 border-string px-2 text-sm text-string transition-transform group-hover:-rotate-6">
-            {current ? 'Đang điều tra' : 'Mở hồ sơ'}
+            {current ? 'Đang điều tra' : closed ? 'Điều tra lại' : 'Mở hồ sơ'}
           </span>
         )}
       </div>
