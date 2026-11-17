@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { useShallow } from 'zustand/react/shallow'
 import {
   ReactFlow,
   Background,
@@ -18,7 +19,7 @@ import {
   type NodeProps,
 } from '@xyflow/react'
 import { CheckCircle2, ChevronLeft, ChevronRight, Lightbulb, Lock, X } from 'lucide-react'
-import { clueLocked, hintGate, puzzleFor, questionOrder, useGame } from '@/game/store'
+import { clueLocked, hintGate, matchedClues, puzzleFor, questionOrder, supportingNeeded, useGame } from '@/game/store'
 import { PuzzlePanel } from '@/components/PuzzlePanel'
 import { Lightbox } from '@/components/Lightbox'
 import { MarkedQuotes } from '@/components/Highlighter'
@@ -72,7 +73,10 @@ function ClueNode({ data }: NodeProps<Node<ClueNodeData>>) {
         // The board pans and zooms its cards, so the viewer has to live outside it.
         document.body,
       )}
-      <Handle type="source" position={Position.Right} className="!size-3.5 !bg-string after:absolute after:-inset-2.5 after:rounded-full after:content-['']" />
+      <Handle id="right" type="source" position={Position.Right} className="!size-3.5 !bg-string after:absolute after:-inset-2.5 after:rounded-full after:content-['']" />
+      {/* Hidden anchors so a string can leave the card on the side facing its question. */}
+      <Handle id="left" type="source" position={Position.Left} isConnectable={false} className="!opacity-0" />
+      <Handle id="bottom" type="source" position={Position.Bottom} isConnectable={false} className="!opacity-0" />
     </div>
   )
 }
@@ -91,6 +95,12 @@ function QuestionNode({ data }: NodeProps<Node<QuestionNodeData>>) {
   const [hintPage, setHintPage] = useState<number | null>(null)
   const page = Math.min(hintPage ?? shownHints.length - 1, shownHints.length - 1)
 
+  // What the last check proved: key cards and supporting cards whose strings turned green.
+  const proven = useGame(useShallow((st) => matchedClues(st.data, st.checkedLinks, q.id)))
+  const keyProven = proven.filter((c) => q.requiredClues.includes(c)).length
+  const relProven = proven.filter((c) => (q.supportingClues ?? []).includes(c)).length
+  const relNeeded = supportingNeeded(q)
+
   const onCheck = () => {
     const result = checkAnswer(q.id)
     // A miss no longer opens a hint by itself: hints are one per step of progress (see hintGate).
@@ -102,7 +112,10 @@ function QuestionNode({ data }: NodeProps<Node<QuestionNodeData>>) {
               // Say how many key cards are still missing, so a board full of supporting cards doesn't look complete.
               const linked = useGame.getState().answers[q.id]?.clueIds ?? []
               const missing = q.requiredClues.filter((c) => !linked.includes(c)).length
-              return `Đáp án đúng, nhưng còn thiếu ${missing} thẻ bằng chứng chính. Dây "Liên quan" có ích nhưng chưa đủ để chứng minh.`
+              const rel = (q.supportingClues ?? []).filter((c) => linked.includes(c)).length
+              const missingRel = Math.max(0, relNeeded - rel)
+              const parts = [missing && `${missing} thẻ khớp (bằng chứng chính)`, missingRel && `${missingRel} thẻ liên quan`].filter(Boolean)
+              return `Đáp án đúng, nhưng còn thiếu ${parts.join(' và ')}.`
             })()
           : 'Trưởng phòng không tin lập luận này. Uy tín giảm.',
     )
@@ -137,7 +150,10 @@ function QuestionNode({ data }: NodeProps<Node<QuestionNodeData>>) {
         </div>
       )}
     <div className={cn('w-72 rounded-lg border bg-card p-3 shadow-lg transition-opacity', solved ? 'border-primary/50 opacity-45 saturate-50 hover:opacity-80' : 'border-border')}>
-      <Handle type="target" position={Position.Left} className="!size-3.5 !bg-string after:absolute after:-inset-2.5 after:rounded-full after:content-['']" />
+      {/* Strings can come in from the left, the right or the top, so cards can sit all around the question. */}
+      <Handle id="left" type="target" position={Position.Left} className="!size-3.5 !bg-string after:absolute after:-inset-2.5 after:rounded-full after:content-['']" />
+      <Handle id="right" type="target" position={Position.Right} className="!size-3.5 !bg-string after:absolute after:-inset-2.5 after:rounded-full after:content-['']" />
+      <Handle id="top" type="target" position={Position.Top} className="!size-3.5 !bg-string after:absolute after:-inset-2.5 after:rounded-full after:content-['']" />
       <p className="text-xs text-muted-foreground">Câu {questionOrder(caseData, solvedQuestions).indexOf(q.id) + 1}</p>
       <p className="display text-lg leading-tight">{q.prompt}</p>
       <div className="nodrag mt-2 flex flex-col gap-1">
@@ -156,17 +172,19 @@ function QuestionNode({ data }: NodeProps<Node<QuestionNodeData>>) {
         ))}
       </div>
       <div className="mt-2 flex items-center justify-between text-xs text-muted-foreground">
-        {/* How many cards the proof needs, so the player can rule cards out. */}
-        <span className="flex items-center gap-1.5" title={`Câu này cần ít nhất ${q.requiredClues.length} thẻ manh mối`}>
-          <span className="flex gap-0.5">
-            {q.requiredClues.map((_, i) => (
-              <span
-                key={i}
-                className={cn('size-2.5 rounded-sm border border-string', i < Math.min(answer?.clueIds.length ?? 0, q.requiredClues.length) ? 'bg-string' : 'bg-transparent')}
-              />
-            ))}
+        {/* How many cards the proof needs, in two kinds; boxes fill as checks prove cards. */}
+        <span className="flex flex-col gap-0.5">
+          <span className="flex items-center gap-1.5" title={`Bằng chứng chính: cần đủ ${q.requiredClues.length} thẻ khớp trực tiếp với câu hỏi`}>
+            <Boxes total={q.requiredClues.length} filled={solved ? q.requiredClues.length : keyProven} />
+            Khớp {solved ? q.requiredClues.length : keyProven}/{q.requiredClues.length}
           </span>
-          Nối {answer?.clueIds.length ?? 0} thẻ · cần {q.requiredClues.length}
+          {relNeeded > 0 && (
+            <span className="flex items-center gap-1.5" title={`Bằng chứng liên quan: cần ít nhất ${relNeeded} thẻ củng cố thêm cho câu trả lời`}>
+              <Boxes total={relNeeded} filled={solved ? relNeeded : Math.min(relProven, relNeeded)} soft />
+              Liên quan {solved ? relNeeded : Math.min(relProven, relNeeded)}/{relNeeded}
+            </span>
+          )}
+          <span className="opacity-70">Đang nối {answer?.clueIds.length ?? 0} thẻ</span>
         </span>
         {solved ? (
           <span className="flex items-center gap-1 text-primary">
@@ -194,6 +212,24 @@ function QuestionNode({ data }: NodeProps<Node<QuestionNodeData>>) {
       )}
     </div>
     </div>
+  )
+}
+
+/** A row of small boxes, filled as cards of one kind are proven. */
+function Boxes({ total, filled, soft }: { total: number; filled: number; soft?: boolean }) {
+  return (
+    <span className="flex gap-0.5">
+      {Array.from({ length: total }, (_, i) => (
+        <span
+          key={i}
+          className={cn(
+            'size-2.5 border',
+            soft ? 'rounded-full border-[var(--match)]' : 'rounded-sm border-string',
+            i < filled && (soft ? 'bg-[var(--match)]' : 'bg-string'),
+          )}
+        />
+      ))}
+    </span>
   )
 }
 
@@ -297,6 +333,27 @@ export default function BoardScreen() {
     })
   }, [openQuestions, setNodes])
 
+  // Which side of the card and of the question a string uses: whichever faces the other.
+  // Cards left of a question come in on its left, cards right of it on its right, cards above on its top.
+  const where = useMemo(() => Object.fromEntries(nodes.map((n) => [n.id, n])), [nodes])
+  const sides = useCallback(
+    (clueNodeId: string, qNodeId: string) => {
+      const c = where[clueNodeId]
+      const q = where[qNodeId]
+      if (!c || !q) return { sourceHandle: 'right', targetHandle: 'left' }
+      const cw = c.measured?.width ?? 208
+      const ch = c.measured?.height ?? 100
+      const qw = q.measured?.width ?? 288
+      const cx = c.position.x + cw / 2
+      const cBottom = c.position.y + ch
+      if (cx < q.position.x) return { sourceHandle: 'right', targetHandle: 'left' }
+      if (cx > q.position.x + qw) return { sourceHandle: 'left', targetHandle: 'right' }
+      if (cBottom <= q.position.y + 20) return { sourceHandle: 'bottom', targetHandle: 'top' }
+      return { sourceHandle: 'right', targetHandle: 'left' }
+    },
+    [where],
+  )
+
   // The red strings are derived from the store, so they survive leaving the screen.
   // After Kiểm tra, each string that was checked turns green if the card belongs to the proof, red if not.
   const edges = useMemo<Edge[]>(
@@ -306,7 +363,7 @@ export default function BoardScreen() {
         const checked = checkedLinks[qId] ?? []
         const locked = solvedQuestions.includes(qId)
         return a.clueIds.map((c): Edge<StringEdgeData> => {
-          const base = { id: `${c}->${qId}`, source: `clue-${c}`, target: `q-${qId}`, type: 'string' }
+          const base = { id: `${c}->${qId}`, source: `clue-${c}`, target: `q-${qId}`, type: 'string', ...sides(`clue-${c}`, `q-${qId}`) }
           const data: StringEdgeData = { clueId: c, questionId: qId, locked }
           if (!q || !checked.includes(c)) return { ...base, data, style: { stroke: 'var(--string)', strokeWidth: 2.5 } }
           const ok = q.requiredClues.includes(c) || (q.supportingClues ?? []).includes(c)
@@ -319,7 +376,7 @@ export default function BoardScreen() {
           }
         })
       }),
-    [answers, checkedLinks, data, solvedQuestions],
+    [answers, checkedLinks, data, solvedQuestions, sides],
   )
 
   const onConnect = useCallback(

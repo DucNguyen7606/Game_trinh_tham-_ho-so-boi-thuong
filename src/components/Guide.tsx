@@ -94,7 +94,9 @@ const PAGES: Page[] = [
     body: {
       lead: 'Mỗi câu hỏi cần một đáp án và đủ thẻ bằng chứng chính. Kéo dây từ chấm đỏ của thẻ sang câu hỏi để nối, chọn đáp án, rồi bấm "Kiểm tra".',
       points: [
-        'Dây chuyển xanh "Khớp" là thẻ chính. "Liên quan" là thẻ có ích nhưng chưa đủ để chứng minh.',
+        'Mỗi câu hỏi có điểm nối ở bên trái, bên phải và phía trên, nên bạn xếp thẻ quanh câu hỏi theo phía nào cũng được.',
+        'Có hai loại thẻ. Thẻ "Khớp" là bằng chứng chính, liên quan trực tiếp tới câu hỏi: phải nối đủ hết. Thẻ "Liên quan" củng cố thêm cho câu trả lời: phải nối đủ số ô tròn ghi trên câu hỏi. Có đủ cả hai loại thì câu hỏi mới được giải và phần tiếp theo mới mở.',
+        'Sau mỗi lần Kiểm tra, dây chuyển xanh và các ô đếm Khớp và Liên quan trên câu hỏi được tô dần theo số thẻ bạn đã chứng minh.',
         'Đáp án đúng mà thiếu thẻ thì không bị trừ uy tín. Game cho biết bạn còn thiếu bao nhiêu thẻ.',
       ],
     },

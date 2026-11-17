@@ -111,6 +111,11 @@ export interface Question {
   requiredClues: string[]
   /** Cards that also back the answer: their strings turn green, but they are not needed to solve it. */
   supportingClues?: string[]
+  /**
+   * How many of the supporting cards ("Liên quan") must also be linked for the answer to be
+   * accepted. Defaults to 1 when the question has supporting cards, 0 when it has none.
+   */
+  supportingNeeded?: number
   /** Nudges shown one at a time above the question: after a failed check, or when the player asks. */
   hints?: string[]
 }

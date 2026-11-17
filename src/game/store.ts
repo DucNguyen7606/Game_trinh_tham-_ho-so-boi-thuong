@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import type { ActionKind, CaseData, DayLimits } from './types'
+import type { ActionKind, CaseData, DayLimits, Question } from './types'
 import { cases } from './caseLoader'
 import { playerOf, useProfile } from '@/series/profile'
 
@@ -199,6 +199,11 @@ export function hintGate(
   return 'locked'
 }
 
+/** How many supporting ("Liên quan") cards a question needs besides all its key ("Khớp") cards. */
+export function supportingNeeded(q: Question) {
+  return Math.min(q.supportingNeeded ?? 1, q.supportingClues?.length ?? 0)
+}
+
 /** Lower case, no accents or spaces, "," read as ".": how puzzle answers and highlights are compared. */
 export function normalize(text: string) {
   return text
@@ -341,7 +346,10 @@ export const useGame = create<GameState>((set, get) => ({
       checkCount: { ...s.checkCount, [questionId]: (s.checkCount[questionId] ?? 0) + 1 },
     }))
     // A card whose puzzle is unsolved is on the board but proves nothing yet.
-    const hasAllClues = q.requiredClues.every((c) => a.clueIds.includes(c) && !clueLocked(get(), c))
+    const usable = (c: string) => a.clueIds.includes(c) && !clueLocked(get(), c)
+    // All the key cards, and enough of the supporting ones.
+    const hasAllClues =
+      q.requiredClues.every(usable) && (q.supportingClues ?? []).filter(usable).length >= supportingNeeded(q)
     if (a.optionId === q.correctOptionId && hasAllClues) {
       set({ solvedQuestions: addUnique(solvedQuestions, questionId) })
       return 'solved'
