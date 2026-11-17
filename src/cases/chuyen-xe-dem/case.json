@@ -1,7 +1,7 @@
 {
   "id": "chuyen-xe-dem",
   "title": "Hồ sơ bồi thường số 0311",
-  "intro": "Đêm 2/11, chiếc container chở 20 tấn hồ tiêu của công ty Tiêu Đất Đỏ chạy từ Buôn Ma Thuột về cảng Cát Lái. 4 giờ sáng, người ta thấy tài xế bị trói bên lề Quốc lộ 1A ở Hàm Thuận Nam. Anh khai bị ba người bịt mặt chặn xe cướp hàng. Sáng ra, chiếc xe được tìm thấy trên một con đường đất đỏ ở Hàm Tân, thùng container trống trơn. Chủ hàng đòi bồi thường 3,04 tỷ đồng theo hợp đồng bảo hiểm mới ký năm ngày trước. Bạn có 10 ngày để đề xuất chi trả hay từ chối. Mỗi ngày khám được 1 khu hiện trường. Hỏi chuyện thì không giới hạn.",
+  "intro": "Đêm 2/11, chiếc container chở 20 tấn hồ tiêu của công ty Tiêu Đất Đỏ chạy từ Buôn Ma Thuột về cảng Cát Lái. 4 giờ sáng, người ta thấy tài xế bị trói bên lề Quốc lộ 1A ở Hàm Thuận Nam. Anh khai bị ba người bịt mặt chặn xe cướp hàng. Sáng ra, chiếc xe được tìm thấy trên một con đường đất đỏ ở Hàm Tân, thùng container trống trơn. Chủ hàng đòi bồi thường 3,04 tỷ đồng theo hợp đồng bảo hiểm mới ký năm ngày trước. Bạn có 9 ngày để đề xuất chi trả hay từ chối. Mỗi ngày khám được 1 khu hiện trường. Hỏi chuyện thì không giới hạn.",
   "player": {
     "name": "Lê Thu Hạnh",
     "role": "Chuyên viên giám định bồi thường, Bảo hiểm An Tín",
@@ -17,7 +17,7 @@
     }
   },
   "photoDate": "03 11 '25",
-  "days": 10,
+  "days": 9,
   "limitsPerDay": {
     "talk": 2,
     "explore": 1
@@ -451,13 +451,33 @@
       "id": "P1",
       "title": "Hợp đồng bảo hiểm hàng hóa",
       "description": "Ký 28/10/2025: 20 tấn tiêu đen, 3,04 tỷ (152.000đ/kg). Lần đầu Đất Đỏ mua bảo hiểm cho chuyến nội địa, qua đại lý do nhà xe Kiều Phát giới thiệu.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "qua đại lý do nhà xe Kiều Phát giới thiệu"
+      ]
     },
     {
       "id": "P2",
       "title": "Biên bản của công an huyện",
       "description": "Đạt khai bị chặn lúc 02:40 ở Hàm Thuận Nam, được tìm thấy 04:10. Xe trống tìm thấy 06:30 ở Hàm Tân, chì bị cắt.",
-      "source": "file"
+      "source": "file",
+      "audio": {
+        "length": "0:24",
+        "lines": [
+          {
+            "who": "Cán bộ",
+            "text": "Anh kể lại lúc bị chặn xe."
+          },
+          {
+            "who": "Đạt",
+            "text": "Dạ khoảng hai giờ bốn mươi, tới Hàm Thuận Nam thì có chiếc xe bảy chỗ tạt đầu. Em phanh gấp, xe khựng lại."
+          },
+          {
+            "who": "Đạt",
+            "text": "Ba thằng bịt mặt nhảy lên cabin, quấn băng keo tay em rồi đẩy em xuống lề."
+          }
+        ]
+      }
     },
     {
       "id": "P3",
@@ -469,55 +489,84 @@
       "id": "P4",
       "title": "Dữ liệu hành trình xe 47H",
       "description": "Qua trạm Cà Ná 23:05. Mất sóng 23:52 gần Phan Rí, có sóng lại 01:04 đúng chỗ cũ. Qua trạm Sông Lũy 01:58.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "Mất sóng 23:52 gần Phan Rí, có sóng lại 01:04 đúng chỗ cũ"
+      ]
     },
     {
       "id": "P5",
       "title": "Phiếu cân tải trọng hai trạm",
       "description": "Cà Ná 23:05: 34,6 tấn. Sông Lũy 01:58: 14,5 tấn, đúng trọng lượng xe rỗng.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "Sông Lũy 01:58: 14,5 tấn, đúng trọng lượng xe rỗng"
+      ]
     },
     {
       "id": "P6",
       "title": "Hợp đồng xuất khẩu của Đất Đỏ",
       "description": "Ký tháng 2, bán 20 tấn giá 98.000đ/kg, giao trước 15/11. Hàng mất có xác nhận công an thì được miễn phạt.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "Hàng mất có xác nhận công an thì được miễn phạt"
+      ]
     },
     {
       "id": "P7",
       "title": "Lịch sử thu phí xe bán tải 47C",
       "description": "Xe bán tải trắng của nhà xe Kiều Phát qua trạm Cà Ná hướng Nam 23:31 đêm 2/11, hướng Bắc 03:22 sáng 3/11.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "hướng Nam 23:31 đêm 2/11",
+        "hướng Bắc 03:22 sáng 3/11"
+      ]
     },
     {
       "id": "P8",
       "title": "Giám định thương tích tài xế",
       "description": "Cổ tay không hằn, không trầy. Băng keo quấn ngoài tay áo khoác. Không thương tích nào.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "Cổ tay không hằn, không trầy",
+        "Băng keo quấn ngoài tay áo khoác"
+      ]
     },
     {
       "id": "P9",
       "title": "Giấy thuê kho Phan Rí",
       "description": "Người thuê \"Lê Văn Hùng\", 2 đến 5/11. Tiền cọc chuyển từ tài khoản Trần Thị Mai, kế toán nhà xe Kiều Phát.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "Tiền cọc chuyển từ tài khoản Trần Thị Mai, kế toán nhà xe Kiều Phát"
+      ]
     },
     {
       "id": "P10",
       "title": "Phiếu mua tiêu ở Long Khánh",
       "description": "6/11: mua 400 bao tiêu lô DD-1102 giá 141.000đ/kg. Tiền chuyển vào tài khoản Đoàn Thị Kiều.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "Tiền chuyển vào tài khoản Đoàn Thị Kiều"
+      ]
     },
     {
       "id": "P11",
       "title": "Sao kê chuyển khoản 250 triệu",
       "description": "Tài khoản bà Kiều: 4/11 chuyển 250 triệu cho Hồ Thị Liên, vợ anh Đạt, ghi \"tra tien hui\". 7/11 trả ngân hàng 2,1 tỷ nợ quá hạn.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "4/11 chuyển 250 triệu cho Hồ Thị Liên, vợ anh Đạt"
+      ]
     },
     {
       "id": "X1",
       "title": "Thông báo nợ quá hạn của Kiều Phát",
       "description": "Ngân hàng đòi 2,1 tỷ, dọa phát mãi hai xe container thế chấp.",
-      "source": "decoy"
+      "source": "decoy",
+      "highlights": [
+        "dọa phát mãi hai xe container thế chấp"
+      ]
     },
     {
       "id": "X2",
@@ -565,7 +614,10 @@
       "id": "X9",
       "title": "Cảnh báo cướp xe tải trên QL1A",
       "description": "Công an tỉnh Bình Thuận, 10/2025: ba vụ cướp xe tải đoạn Hàm Thuận Nam, nhóm ba người đi xe 7 chỗ. Các tài xế đều bị trói chặt và bị lấy điện thoại, tiền mặt.",
-      "source": "decoy"
+      "source": "decoy",
+      "highlights": [
+        "Các tài xế đều bị trói chặt và bị lấy điện thoại, tiền mặt"
+      ]
     },
     {
       "id": "X10",
@@ -956,6 +1008,84 @@
     },
     {
       "ending": "wrong"
+    }
+  ],
+  "puzzles": [
+    {
+      "id": "z1",
+      "clueId": "P5",
+      "kind": "answer",
+      "title": "Tính tải trọng",
+      "prompt": "Phiếu cân chỉ in tổng tải của xe ở hai trạm. Giữa Cà Ná và Sông Lũy, bao nhiêu tấn đã rời khỏi xe?",
+      "lockedText": "Phiếu cân tự động · xe 47H-•••\nCà Ná · 23:05 · tổng tải 34,6 t\nSông Lũy · 01:58 · tổng tải 14,5 t\nTự trọng xe (đăng kiểm): 14,4 t",
+      "answers": [
+        "20,1",
+        "20,1 tấn",
+        "20,1 t",
+        "20100 kg",
+        "20.100 kg",
+        "20100"
+      ],
+      "placeholder": "tấn",
+      "solvedText": "34,6 − 14,5 = 20,1 tấn, đúng 400 bao tiêu 50 kg cùng bao bì. Khi qua Sông Lũy, xe chỉ còn nặng như một chiếc xe rỗng.",
+      "hints": [
+        "Lấy tổng tải ở trạm trước trừ tổng tải ở trạm sau. Tự trọng xe chỉ để so sánh.",
+        "Tính 34,6 − 14,5, ghi kết quả bằng tấn với một chữ số sau dấu phẩy."
+      ]
+    }
+  ],
+  "timeline": [
+    {
+      "time": "28/10",
+      "text": "Bà Kiều thúc ông Tài mua bảo hiểm 3,04 tỷ cho chuyến hàng, giới thiệu đại lý."
+    },
+    {
+      "time": "2/11 15:20",
+      "text": "Đóng 400 bao tiêu lô DD-1102, kẹp chì AT-55120. Anh Đạt ký nhận thêm chì dự phòng 55190."
+    },
+    {
+      "time": "21:00",
+      "text": "Tới Phan Rang, anh Đạt cho phụ xe Phúc xuống chơi."
+    },
+    {
+      "time": "23:05",
+      "text": "Xe qua trạm Cà Ná, cân 34,6 tấn."
+    },
+    {
+      "time": "23:31",
+      "text": "Xe bán tải của Kiều Phát qua Cà Ná hướng Nam."
+    },
+    {
+      "time": "23:52 – 01:04",
+      "text": "Máy phá sóng bật. Xe rẽ vào kho cũ ở Phan Rí, dỡ 400 bao, kẹp chì 55190."
+    },
+    {
+      "time": "3/11 00:31",
+      "text": "Bà Kiều chụp màn hình định vị \"ở nhà\", nhưng chấm của bà nằm ở Phan Rí."
+    },
+    {
+      "time": "01:58",
+      "text": "Xe qua trạm Sông Lũy, cân 14,5 tấn: xe rỗng."
+    },
+    {
+      "time": "02:40",
+      "text": "\"Vụ cướp\" ở Hàm Thuận Nam: không vệt phanh, băng keo quấn ngoài áo."
+    },
+    {
+      "time": "03:22",
+      "text": "Xe bán tải của Kiều Phát qua Cà Ná hướng Bắc."
+    },
+    {
+      "time": "06:30",
+      "text": "Container trống được tìm thấy ở Hàm Tân, chì 55190 bị cắt."
+    },
+    {
+      "time": "4/11",
+      "text": "Bà Kiều chuyển 250 triệu cho vợ anh Đạt."
+    },
+    {
+      "time": "6/11 – 7/11",
+      "text": "Lô tiêu DD-1102 bán ở Long Khánh, tiền vào tài khoản bà Kiều. Hôm sau bà trả 2,1 tỷ nợ ngân hàng."
     }
   ]
 }

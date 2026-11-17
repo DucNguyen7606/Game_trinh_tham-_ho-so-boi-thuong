@@ -404,7 +404,10 @@
       "id": "P1",
       "title": "Phụ lục nâng mức bảo hiểm",
       "description": "03/6/2025: nâng mức bảo hiểm hàng hóa từ 1,5 tỷ lên 4 tỷ.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "nâng mức bảo hiểm hàng hóa từ 1,5 tỷ lên 4 tỷ"
+      ]
     },
     {
       "id": "P2",
@@ -416,7 +419,10 @@
       "id": "P3",
       "title": "Thông báo kiểm kê của ngân hàng",
       "description": "Kiểm kê kho ngày 16/7, không gia hạn.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "Kiểm kê kho ngày 16/7, không gia hạn"
+      ]
     },
     {
       "id": "P4",
@@ -428,37 +434,65 @@
       "id": "P5",
       "title": "Hợp đồng thuê kho Long An",
       "description": "Kèm ba biên nhận xe tải 28/6 đến 05/7, người ký nhận: Phan Quốc Bảo.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "người ký nhận: Phan Quốc Bảo"
+      ]
     },
     {
       "id": "P6",
       "title": "Camera tiệm anh Huy",
       "description": "Xe Wave che biển số vào hẻm 01:02, ra 01:21.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "vào hẻm 01:02, ra 01:21"
+      ]
     },
     {
       "id": "P7",
       "title": "Biên nhận Grab của Bảo",
       "description": "Đón 01:34 tại đầu hẻm cách kho 300 m, trả khách ở quán karaoke.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "Đón 01:34 tại đầu hẻm cách kho 300 m"
+      ]
     },
     {
       "id": "P8",
       "title": "Hóa đơn Công ty Hưng Long",
       "description": "Tổng 620 triệu. Tra mã số thuế: đại diện là bà Phan Thị Lựu, quê Mỏ Cày.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "đại diện là bà Phan Thị Lựu, quê Mỏ Cày"
+      ]
     },
     {
       "id": "P9",
       "title": "Tin Zalo 13/7 22:14",
       "description": "Thịnh nhắn Bảo: \"Hủy vụ 20. Ngân hàng không dời. Mai 15 kêu xe chở hàng về, kiểm kê cho đàng hoàng.\"",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "Hủy vụ 20",
+        "Ngân hàng không dời"
+      ],
+      "audio": {
+        "length": "0:09",
+        "lines": [
+          {
+            "who": "Thịnh",
+            "text": "Hủy vụ 20. Ngân hàng không dời. Mai 15 kêu xe chở hàng về, kiểm kê cho đàng hoàng."
+          }
+        ]
+      }
     },
     {
       "id": "P10",
       "title": "Ổ cứng gửi nặc danh",
       "description": "Chỉ còn thư mục kho Long An. Thư mục \"Hung Long\" bị xóa lúc 03:10 ngày 15/7.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "Thư mục \"Hung Long\" bị xóa lúc 03:10 ngày 15/7"
+      ]
     },
     {
       "id": "P11",
@@ -470,19 +504,28 @@
       "id": "P12",
       "title": "Sao kê của ông Rô",
       "description": "Nhận 5 triệu từ tài khoản Phan Quốc Bảo lúc 09:20 ngày 15/7, nội dung \"chu Tu uong ca phe\".",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "Nhận 5 triệu từ tài khoản Phan Quốc Bảo lúc 09:20 ngày 15/7"
+      ]
     },
     {
       "id": "P13",
       "title": "Nhật ký cuộc gọi",
       "description": "Huy gọi Thịnh 02:45; Thịnh gọi Bảo 02:51. Trạm phát sóng của Bảo ở gần nhà tại Quận 6.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "Trạm phát sóng của Bảo ở gần nhà tại Quận 6"
+      ]
     },
     {
       "id": "X1",
       "title": "Bài Facebook của Ngân",
       "description": "\"Cái kho đó cháy cho rồi.\" Livestream của Ngân chạy từ 00:58 đến 03:05.",
-      "source": "decoy"
+      "source": "decoy",
+      "highlights": [
+        "Livestream của Ngân chạy từ 00:58 đến 03:05"
+      ]
     },
     {
       "id": "X2",
@@ -518,7 +561,10 @@
       "id": "X7",
       "title": "Biên bản kiểm tra an toàn điện 2024",
       "description": "Tháng 9/2024: dây dẫn khu văn phòng xuống cấp, đề nghị thay trước tháng 12. Chưa thấy biên bản khắc phục.",
-      "source": "decoy"
+      "source": "decoy",
+      "highlights": [
+        "dây dẫn khu văn phòng xuống cấp"
+      ]
     },
     {
       "id": "X8",
@@ -530,7 +576,10 @@
       "id": "X9",
       "title": "Biên nhận cầm sổ đỏ của ông Thịnh",
       "description": "11/7/2025: ông Thịnh cầm sổ đỏ nhà Quận 6, vay 300 triệu, lãi tính theo ngày.",
-      "source": "decoy"
+      "source": "decoy",
+      "highlights": [
+        "vay 300 triệu, lãi tính theo ngày"
+      ]
     },
     {
       "id": "X10",
@@ -918,6 +967,75 @@
     },
     {
       "ending": "wrong"
+    }
+  ],
+  "puzzles": [
+    {
+      "id": "z1",
+      "clueId": "P8",
+      "kind": "answer",
+      "title": "Tra mã số thuế",
+      "prompt": "Hóa đơn chỉ in mã số thuế của bên bán. Dò mã đó trong bản trích tra cứu doanh nghiệp để tìm người đại diện của Hưng Long.",
+      "lockedText": "Bên bán: Công ty TNHH Vải Sợi Hưng Long\nMã số thuế bên bán: 0318 427 627\n7 hóa đơn, tổng cộng 620.000.000 đ\n\nTRÍCH TRA CỨU MÃ SỐ THUẾ\n0318 472 627 · Trần Văn Hưng · Tân Phú, TP.HCM\n0318 427 672 · Lê Thị Long · Đức Hòa, Long An\n0318 247 627 · Phan Văn Lộc · Quận 6, TP.HCM\n0318 427 627 · Phan Thị Lựu · Mỏ Cày Bắc, Bến Tre\n0318 427 267 · Đỗ Hưng Long · Bình Chánh, TP.HCM",
+      "answers": [
+        "Phan Thị Lựu",
+        "Bà Phan Thị Lựu",
+        "Thị Lựu",
+        "Lựu",
+        "Phan Lựu"
+      ],
+      "placeholder": "Họ tên người đại diện",
+      "solvedText": "Mã 0318 427 627 là của bà Phan Thị Lựu, địa chỉ Mỏ Cày Bắc, Bến Tre. Công ty đăng ký 0 lao động, nhưng xuất cho kho Thịnh Phát 620 triệu tiền hóa đơn.",
+      "hints": [
+        "Năm mã trong bản trích chỉ khác nhau ở vài chữ số. So từng nhóm ba số với mã in trên hóa đơn.",
+        "Mã của Hưng Long có nhóm giữa là 427 và kết thúc bằng 627."
+      ]
+    }
+  ],
+  "timeline": [
+    {
+      "time": "03/6",
+      "text": "Ông Thịnh nâng mức bảo hiểm hàng hóa từ 1,5 tỷ lên 4 tỷ."
+    },
+    {
+      "time": "28/6 – 05/7",
+      "text": "Ba chuyến xe tải chở vải thật về kho thuê ở Long An, Bảo ký nhận. Ở Bình Tân chỉ còn cuộn lõi giấy."
+    },
+    {
+      "time": "13/7 22:14",
+      "text": "Ngân hàng không dời buổi kiểm kê 16/7. Ông Thịnh nhắn Bảo hủy \"vụ 20\"."
+    },
+    {
+      "time": "14/7 22:00",
+      "text": "Ông Rô tắt cầu dao tổng như mọi đêm. Kho mất điện."
+    },
+    {
+      "time": "15/7 01:02",
+      "text": "Bảo chạy chiếc Wave che biển số vào hẻm, mang rượu Mỏ Cày tới chòi bảo vệ."
+    },
+    {
+      "time": "01:05 – 01:20",
+      "text": "Bảo tháo ổ cứng máy kế toán, đặt khoanh nhang muỗi lên giẻ tẩm xăng dưới tủ sổ sách."
+    },
+    {
+      "time": "01:21 – 01:34",
+      "text": "Chiếc Wave ra khỏi hẻm. Bảo gọi xe ở đầu hẻm đi quán karaoke."
+    },
+    {
+      "time": "02:38",
+      "text": "Nhang cháy tới giẻ xăng, lửa bùng ở góc văn phòng. 02:41 có người báo cháy."
+    },
+    {
+      "time": "02:51",
+      "text": "Ông Thịnh gọi Bảo. Máy Bảo bắt trạm gần nhà ở Quận 6."
+    },
+    {
+      "time": "03:10",
+      "text": "Bảo xóa thư mục \"Hung Long\" trên ổ cứng."
+    },
+    {
+      "time": "09:20",
+      "text": "Bảo chuyển cho ông Rô 5 triệu \"uống cà phê\"."
     }
   ]
 }

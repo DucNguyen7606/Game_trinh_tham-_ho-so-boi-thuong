@@ -1,7 +1,7 @@
 {
   "id": "con-nuoc-can-gio",
   "title": "Hồ sơ bồi thường số 0909",
-  "intro": "Đêm 9/9, ông Trương Văn Lực, chủ vựa hải sản ở Cần Giờ, ra thăm đáy rồi không về. Sáng ra người ta thấy chiếc ghe úp ở Vàm Sát. Ba ngày sau, một thi thể dạt vào bãi bồi Cần Thạnh. Vợ ông đòi bồi thường bảo hiểm nhân thọ 5 tỷ đồng, hợp đồng mới ký bốn tháng. Bạn có 10 ngày để đề xuất chi trả hay từ chối. Mỗi ngày khám được 1 khu hiện trường. Hỏi chuyện thì không giới hạn.",
+  "intro": "Đêm 9/9, ông Trương Văn Lực, chủ vựa hải sản ở Cần Giờ, ra thăm đáy rồi không về. Sáng ra người ta thấy chiếc ghe úp ở Vàm Sát. Ba ngày sau, một thi thể dạt vào bãi bồi Cần Thạnh. Vợ ông đòi bồi thường bảo hiểm nhân thọ 5 tỷ đồng, hợp đồng mới ký bốn tháng. Bạn có 9 ngày để đề xuất chi trả hay từ chối. Mỗi ngày khám được 1 khu hiện trường. Hỏi chuyện thì không giới hạn.",
   "player": {
     "name": "Lê Thu Hạnh",
     "role": "Chuyên viên giám định bồi thường, Bảo hiểm An Tín",
@@ -17,7 +17,7 @@
     }
   },
   "photoDate": "14 09 '25",
-  "days": 10,
+  "days": 9,
   "limitsPerDay": {
     "talk": 2,
     "explore": 1
@@ -451,13 +451,20 @@
       "id": "P1",
       "title": "Hợp đồng bảo hiểm nhân thọ",
       "description": "Ký 12/5/2025, số tiền 5 tỷ, chi trả khi tử vong. Chỉ từ chối nếu tự tử trong 2 năm đầu, hoặc người thụ hưởng cố ý gây ra cái chết. Người thụ hưởng: Phạm Thị Hồng.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "Chỉ từ chối nếu tự tử trong 2 năm đầu, hoặc người thụ hưởng cố ý gây ra cái chết"
+      ]
     },
     {
       "id": "P2",
       "title": "Biên bản của công an xã",
       "description": "Ghe úp ở Vàm Sát, 3 km phía thượng nguồn. Thi thể dạt ở Cần Thạnh, 9 km phía biển. Đêm 9/9 trời lặng, gió nhẹ.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "Ghe úp ở Vàm Sát, 3 km phía thượng nguồn",
+        "Thi thể dạt ở Cần Thạnh, 9 km phía biển"
+      ]
     },
     {
       "id": "P3",
@@ -469,55 +476,97 @@
       "id": "P4",
       "title": "Bảng con nước 9 đến 10/9",
       "description": "Nước lên, chảy vào sông tới 23:40. Sau đó nước ròng, chảy ra biển tới 06:10.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "Nước lên, chảy vào sông tới 23:40",
+        "Sau đó nước ròng, chảy ra biển tới 06:10"
+      ]
     },
     {
       "id": "P5",
       "title": "Kết quả giám định ADN và pháp y",
       "description": "ADN khớp con gái ông Lực. Phổi gần như không có nước, sau gáy có vết nứt do vật tày dạng thanh tròn: chết trước khi xuống nước.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "Phổi gần như không có nước",
+        "chết trước khi xuống nước"
+      ]
     },
     {
       "id": "P6",
       "title": "Hóa đơn tiệm vàng Kim Hưng",
       "description": "8/9: ông Lực mua 30 lượng vàng miếng, 2,46 tỷ, số sê-ri KH-091201 đến KH-091230.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "số sê-ri KH-091201 đến KH-091230"
+      ]
     },
     {
       "id": "P7",
       "title": "Vé xe đi Châu Đốc",
       "description": "Khách \"Trần Văn Lâm\", 06:00 ngày 10/9, ghế A7, không lên xe. Đặt từ số 0939 ••• 471.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "06:00 ngày 10/9, ghế A7, không lên xe"
+      ]
     },
     {
       "id": "P8",
       "title": "Nhật ký cuộc gọi số 0939 ••• 471",
       "description": "Sim đăng ký tên người khác. 22:58 gọi bà Hồng 12 giây; 23:47 và 00:21 gọi ông Tâm, máy bắt trạm Rạch Đước. Sau đó tắt hẳn.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "23:47 và 00:21 gọi ông Tâm, máy bắt trạm Rạch Đước"
+      ]
     },
     {
       "id": "P9",
       "title": "Camera phà Bình Khánh",
       "description": "02:16 ngày 10/9, xe của ông Tâm qua phà về thành phố, chở một thùng xốp. 04:41 quay về.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "xe của ông Tâm qua phà về thành phố, chở một thùng xốp"
+      ]
     },
     {
       "id": "P10",
       "title": "Tin Zalo khôi phục",
       "description": "Lực nhắn Tâm 7/9: \"Mày chờ ở Rạch Đước. Đừng cho bả biết gì hết, bả không biết thì khóc mới thiệt.\" Bà Hồng tự giao nộp điện thoại của chồng.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "Mày chờ ở Rạch Đước",
+        "Đừng cho bả biết gì hết"
+      ],
+      "audio": {
+        "length": "0:12",
+        "lines": [
+          {
+            "text": "(Tiếng máy ghe nổ đều phía sau, sóng vỗ mạn.)"
+          },
+          {
+            "who": "Lực",
+            "text": "Mày chờ ở Rạch Đước. Đừng cho bả biết gì hết, bả không biết thì khóc mới thiệt."
+          }
+        ]
+      }
     },
     {
       "id": "P11",
       "title": "Biên nhận tiệm vàng Quận 8",
       "description": "15/9: Nguyễn Văn Tâm bán 3 lượng vàng miếng, sê-ri KH-091207 đến KH-091209.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "sê-ri KH-091207 đến KH-091209"
+      ]
     },
     {
       "id": "X1",
       "title": "Giấy nợ và tin nhắn của Khang",
       "description": "Nợ 1,8 tỷ, hạn 10/9. Khang nhắn ngày 6/9: \"Không trả thì đừng trách.\"",
-      "source": "decoy"
+      "source": "decoy",
+      "highlights": [
+        "Nợ 1,8 tỷ, hạn 10/9"
+      ]
     },
     {
       "id": "X2",
@@ -565,7 +614,10 @@
       "id": "X9",
       "title": "Tin nhắn bà Hồng gửi em gái 21:15",
       "description": "Đêm 9/9: \"Ảnh đi rồi. Mai là xong hết rồi, em đừng lo cho chị nữa.\"",
-      "source": "decoy"
+      "source": "decoy",
+      "highlights": [
+        "Mai là xong hết rồi"
+      ]
     }
   ],
   "envelopes": [
@@ -955,6 +1007,86 @@
     },
     {
       "ending": "wrong"
+    }
+  ],
+  "puzzles": [
+    {
+      "id": "z1",
+      "clueId": "H5",
+      "kind": "answer",
+      "title": "Dịch ghi chú con nước",
+      "prompt": "Ông Lực ghi tắt con nước cạnh ngày 9. Đối chiếu với bảng con nước và biên bản của công an xã: thứ gì thả trôi từ chỗ ông ghi tắt, sau 23g40, sẽ dạt về đâu?",
+      "lockedText": "Lịch con nước tháng 9, ô ngày 9 khoanh bút bi.\nGhi tay: \"23g40 đứng · ròng → R.Đước\"\nChưa rõ nghĩa.",
+      "answers": [
+        "Cần Thạnh",
+        "bãi Cần Thạnh",
+        "về Cần Thạnh",
+        "bãi bồi Cần Thạnh",
+        "phía biển",
+        "ra biển",
+        "biển",
+        "về phía biển"
+      ],
+      "placeholder": "Tên nơi",
+      "solvedText": "23g40 nước đứng, rồi ròng chảy ra biển. Ông Lực canh đúng lúc nước đổi chiều để tới Rạch Đước. Sau giờ đó, thứ gì thả trôi ở Rạch Đước cũng bị nước ròng kéo xuôi về phía biển, về Cần Thạnh, chứ không ngược lên Vàm Sát.",
+      "hints": [
+        "\"Đứng\" và \"ròng\" là tên con nước. Bảng con nước 0909/P04 cho biết sau 23:40 nước chảy về hướng nào.",
+        "Biên bản 0909/P02 có hai địa danh: một ở phía thượng nguồn, một ở phía biển."
+      ]
+    }
+  ],
+  "timeline": [
+    {
+      "time": "12/5",
+      "text": "Ông Lực mua bảo hiểm nhân thọ 5 tỷ, bà Hồng đứng tên thụ hưởng."
+    },
+    {
+      "time": "7/9",
+      "text": "Ông Lực nhắn Tâm chờ ở Rạch Đước và dặn giấu bà Hồng."
+    },
+    {
+      "time": "8/9",
+      "text": "Ông Lực mua 30 lượng vàng Kim Hưng, đặt vé đi Châu Đốc dưới tên giả."
+    },
+    {
+      "time": "9/9 22:30",
+      "text": "Ông giao ba lô vàng cho Tâm mang trước bằng xuồng, rồi ra ghe với áo phao và thuốc cả tháng."
+    },
+    {
+      "time": "22:58 – 23:00",
+      "text": "Gọi bà Hồng 12 giây không nói gì. Tắt máy, rút chìa, rút nút lù."
+    },
+    {
+      "time": "23:40",
+      "text": "Nước đứng rồi ròng. Ghe ngập đã trôi vào sông, mắc ở Vàm Sát."
+    },
+    {
+      "time": "23:47",
+      "text": "Ông Lực gọi Tâm, rồi thả trôi xuôi về Rạch Đước."
+    },
+    {
+      "time": "10/9 00:21",
+      "text": "Ông Lực gọi Tâm lần nữa: tới rồi. Tâm kéo ông lên bờ bùn đỏ."
+    },
+    {
+      "time": "00:25 – 00:34",
+      "text": "Tâm đánh ông bằng cây sào tre, kéo ông xuống nước ròng, tắt sim."
+    },
+    {
+      "time": "02:16 – 04:41",
+      "text": "Xe Tâm chở thùng xốp đựng vàng qua phà Bình Khánh rồi quay về."
+    },
+    {
+      "time": "05:42",
+      "text": "Tâm chụp ảnh chiếc ghe úp gửi bà Hồng."
+    },
+    {
+      "time": "13/9",
+      "text": "Thi thể dạt vào Cần Thạnh."
+    },
+    {
+      "time": "15/9",
+      "text": "Tâm bán 3 lượng vàng ở Quận 8."
     }
   ]
 }
