@@ -1,5 +1,6 @@
 import { Mark, Phone, Row, Sheet, Signature, Stamp } from '@/art/docParts'
 import { accent, ink } from '@/art/palette'
+import { clueLocked, useGame } from '@/game/store'
 import { C, Carton, Logger } from './scenes'
 
 // What each document in the case-file envelopes looks like, keyed by clue id.
@@ -94,9 +95,12 @@ const P2 = () => (
   </Sheet>
 )
 
-const P3 = () => (
+function P3() {
+  // Until the raw data is read (puzzle "do-thi-tla"), the print has no light-sensor row.
+  const locked = useGame((s) => clueLocked(s, 'P3'))
+  return (
   <Sheet org="Phần mềm đọc nhiệt kế · Bản in của Minh Tâm" title="Báo cáo nhiệt kế TL-A · nắp thùng 1">
-    <TempChart curve={TLA_CURVE} title="15/11 12:00 → 16/11 06:00" lights />
+    <TempChart curve={TLA_CURVE} title="15/11 12:00 → 16/11 06:00" lights={!locked} />
     <div className="grid grid-cols-[5rem_1fr] gap-x-2 font-mono text-[9.5px]">
       <span>13:30</span>
       <span>cao nhất 7,8° (trong ngưỡng)</span>
@@ -113,7 +117,8 @@ const P3 = () => (
     </div>
     <p className="text-[10px] font-bold text-[#b23a2e]">BÁO ĐỘNG: vượt 8°C liên tục 2 giờ 48 phút.</p>
   </Sheet>
-)
+  )
+}
 
 const P4 = () => (
   <Sheet org="Công ty Dược phẩm Minh Tâm · Phòng đảm bảo chất lượng" title="Biên bản cách ly lô HZ-2509">

@@ -1,7 +1,7 @@
 {
   "id": "can-ho-tang-27",
   "title": "Hồ sơ bồi thường số 2112",
-  "intro": "Sáng 21/12, chị Lâm Bảo Ngọc bay từ Hà Nội về căn hộ 27.08 chung cư Riverlight, Bình Thạnh, thì thấy két sắt trong phòng ngủ mở toang. Hai chiếc đồng hồ và một bộ trang sức kim cương biến mất, tổng 3,2 tỷ đồng. Cửa không bị phá, két không bị cạy, và chị đang nợ ngân hàng. Bạn có 10 ngày để đề xuất chi trả hay từ chối. Mỗi ngày khám được 1 khu hiện trường. Hỏi chuyện thì không giới hạn.",
+  "intro": "Sáng 21/12, chị Lâm Bảo Ngọc bay từ Hà Nội về căn hộ 27.08 chung cư Riverlight, Bình Thạnh, thì thấy két sắt trong phòng ngủ mở toang. Hai chiếc đồng hồ và một bộ trang sức kim cương biến mất, tổng 3,2 tỷ đồng. Cửa không bị phá, két không bị cạy, và chị đang nợ ngân hàng. Bạn có 9 ngày để đề xuất chi trả hay từ chối. Mỗi ngày khám được 1 khu hiện trường. Hỏi chuyện thì không giới hạn.",
   "player": {
     "name": "Lê Thu Hạnh",
     "role": "Chuyên viên giám định bồi thường, Bảo hiểm An Tín",
@@ -17,7 +17,7 @@
     }
   },
   "photoDate": "22 12 '25",
-  "days": 10,
+  "days": 9,
   "limitsPerDay": {
     "talk": 2,
     "explore": 1
@@ -403,7 +403,10 @@
       "id": "P1",
       "title": "Hợp đồng bảo hiểm nhà và tài sản giá trị cao",
       "description": "Bảo hiểm trộm cắp có dấu hiệu đột nhập, hoặc kẻ trộm dùng chìa, thẻ, mã có được trái phép. Loại trừ: người nhà, người giúp việc lấy. Không có điều khoản giảm trừ vì để lộ mã.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "Không có điều khoản giảm trừ vì để lộ mã"
+      ]
     },
     {
       "id": "P2",
@@ -427,7 +430,11 @@
       "id": "P5",
       "title": "Nhật ký khóa cửa 27.08",
       "description": "Hãng khóa trích xuất: 21/12 02:14 thẻ #09 mở cửa, 02:28 đóng. Thẻ #09 được thêm vào khóa ngày 06/12 lúc 15:42. Vân tay của Bảo bị xóa 15/10.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "Thẻ #09 được thêm vào khóa ngày 06/12 lúc 15:42",
+        "21/12 02:14 thẻ #09 mở cửa"
+      ]
     },
     {
       "id": "P6",
@@ -439,7 +446,11 @@
       "id": "P7",
       "title": "Nhật ký thẻ thang máy đêm 20–21/12",
       "description": "Thang khách: không ai lên tầng 27 từ 23:00 đến 09:00. Thang hàng: thẻ KT-03 lên tầng 27 lúc 02:09, xuống B2 lúc 02:31.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "thẻ KT-03 lên tầng 27 lúc 02:09",
+        "không ai lên tầng 27 từ 23:00 đến 09:00"
+      ]
     },
     {
       "id": "P8",
@@ -457,7 +468,10 @@
       "id": "P10",
       "title": "Biên bản tiệm đồng hồ cũ Minh Quang",
       "description": "23/12, tiệm ở Lê Văn Sỹ, Tân Bình mua một Rolex Daytona số máy 7Y3K2109 giá 650 triệu. Người bán: Trịnh Hoàng Vũ, có bản sao CCCD.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "Người bán: Trịnh Hoàng Vũ"
+      ]
     },
     {
       "id": "P11",
@@ -499,7 +513,32 @@
       "id": "X6",
       "title": "Ảnh chụp livestream 12/12",
       "description": "Chị Hai chụp màn hình lúc chị Ngọc mở két trên sóng. Soi bàn tay, bàn phím và phần bình luận.",
-      "source": "testimony"
+      "source": "testimony",
+      "audio": {
+        "length": "0:22",
+        "lines": [
+          {
+            "who": "Chị Ngọc",
+            "text": "Rồi, giờ mở két cho cả nhà coi chiếc mới về nha."
+          },
+          {
+            "who": "Âm phím két",
+            "text": "Bíp cao. Bíp trầm. Bíp vừa. Bíp rất trầm. Bíp trầm. Bíp cao."
+          },
+          {
+            "who": "Bình luận đọc to",
+            "text": "Vũ KT Riverlight: mở chậm thôi chị."
+          },
+          {
+            "who": "Bình luận đọc to",
+            "text": "Chị ơi lộ mã kìa!"
+          },
+          {
+            "who": "Chị Ngọc",
+            "text": "Lộ gì đâu, ai mà nhìn kịp. Mở rồi nè!"
+          }
+        ]
+      }
     },
     {
       "id": "P12",
@@ -917,6 +956,70 @@
     },
     {
       "ending": "wrong"
+    }
+  ],
+  "puzzles": [
+    {
+      "id": "ma-ket-live",
+      "clueId": "X6",
+      "title": "Đọc mã két từ livestream",
+      "kind": "answer",
+      "prompt": "Ghép vị trí ngón tay trong sáu tấm ảnh với tiếng bíp trong đoạn clip để đọc ra mã chị Ngọc bấm trên sóng. Gõ 6 chữ số.",
+      "lockedText": "Chị Hai chụp liên tiếp sáu tấm, mỗi tấm đúng một lần bấm. Góc máy chéo, chỉ thấy ngón trỏ nằm ở cột nào:\ntấm 1 cột trái · tấm 2 cột giữa · tấm 3 cột phải · tấm 4 cột giữa · tấm 5 cột trái · tấm 6 cột giữa\nSách hướng dẫn két, trang 4, âm phím:\nhàng 1 2 3: bíp cao · hàng 4 5 6: bíp vừa · hàng 7 8 9: bíp trầm · hàng * 0 #: bíp rất trầm\nĐoạn clip của buổi live có tiếng bíp, bấm nghe ở dưới.",
+      "answers": [
+        "186072",
+        "1-8-6-0-7-2",
+        "1.8.6.0.7.2"
+      ],
+      "placeholder": "6 chữ số",
+      "solvedText": "Mã 186072. Cột của ngón tay ghép với cao độ tiếng bíp là ra trọn mã mới đổi ngày 10/12. Ai xem kỹ buổi live 12/12 cũng đọc được mã két, không cần ai đưa.",
+      "hints": [
+        "Mỗi tấm ảnh cho biết cột phím, mỗi tiếng bíp cho biết hàng phím. Ghép một cột với một hàng là ra một nút.",
+        "Lần bấm đầu: cột trái và bíp cao, tức hàng 1 2 3, vậy là phím 1.",
+        "Hàng bíp rất trầm chỉ có *, 0 và #. Cột giữa của hàng đó là phím 0."
+      ]
+    }
+  ],
+  "timeline": [
+    {
+      "time": "18/11",
+      "text": "Chị Ngọc mua thêm bảo hiểm 3,2 tỷ cho đồng hồ và trang sức."
+    },
+    {
+      "time": "06/12 15:42",
+      "text": "Khi thay pin khóa căn 27.08, Vũ cài thêm thẻ trắng #09 vào khóa."
+    },
+    {
+      "time": "10/12",
+      "text": "Chị Ngọc đổi mã két, sau tin nhắn của Bảo."
+    },
+    {
+      "time": "12/12 21:34",
+      "text": "Chị mở két trên livestream. Mã mới lộ qua bàn tay và tiếng bíp, Vũ đang xem."
+    },
+    {
+      "time": "20/12 16:40",
+      "text": "Chị Ngọc bay ra Hà Nội. Tối đó Vũ nhận thẻ thang hàng KT-03 ca đêm."
+    },
+    {
+      "time": "21/12 02:09",
+      "text": "Vũ đi thang hàng lên tầng 27, xoay camera hành lang lên trần."
+    },
+    {
+      "time": "21/12 02:14",
+      "text": "Thẻ #09 mở cửa căn 27.08."
+    },
+    {
+      "time": "21/12 02:19",
+      "text": "Két mở bằng đúng mã, lần nhập đầu tiên."
+    },
+    {
+      "time": "23/12",
+      "text": "Vũ bán chiếc Rolex số máy 7Y3K2109 cho tiệm Minh Quang, Lê Văn Sỹ."
+    },
+    {
+      "time": "24/12",
+      "text": "Vũ tất toán 310 triệu nợ app vay."
     }
   ]
 }
