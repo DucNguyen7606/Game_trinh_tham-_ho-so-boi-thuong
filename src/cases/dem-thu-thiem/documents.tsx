@@ -1,5 +1,6 @@
 import { Mark, Phone, Row, Sheet, Signature, Stamp } from '@/art/docParts'
 import { ink } from '@/art/palette'
+import { clueLocked, useGame } from '@/game/store'
 import { Suv, Wave } from './scenes'
 
 // What each document in the case-file envelopes looks like, keyed by clue id.
@@ -52,7 +53,7 @@ const P3 = () => (
   </Sheet>
 )
 
-const P4 = () => (
+const P4Decoded = () => (
   <Sheet org="Đại lý Mercedes-Benz · Trích xuất cho An Tín" title="Hộp ghi sự kiện túi khí (EDR)">
     <p className="text-[10px]">Xe 51K-686.68 · Sự kiện va chạm duy nhất được ghi nhận:</p>
     <Row k="Thời điểm" v="07/12/2025 02:34:11" strong />
@@ -73,6 +74,29 @@ const P4 = () => (
     <p className="pt-1 text-[10px] italic">Không có sự kiện va chạm nào khác trong bộ nhớ (bộ nhớ chỉ ghi khi va chạm đủ mạnh hoặc khi khởi động lại hệ thống).</p>
   </Sheet>
 )
+
+/** The raw printout the recorder gives before it is decoded with the maker's code table (puzzle z1). */
+const P4Raw = () => (
+  <Sheet org="Đại lý Mercedes-Benz · Trích xuất cho An Tín" title="Hộp ghi sự kiện túi khí (EDR) · bản in máy">
+    <pre className="whitespace-pre rounded bg-[#eef0ea] p-2 font-mono text-[10px] leading-snug">
+      {['EDR DUMP · 51K-686.68 · EVT 01', '2025-12-07 02:34:11', '', 'SPD     0x070', 'GEAR    2', 'BRK     0', 'THR     000', 'BELT_D  0', 'DOOR_D  1', 'AB_DEP  0'].join('\n')}
+    </pre>
+    <div className="mt-1 border-t border-dashed border-black/30 pt-1 text-[9px] leading-snug">
+      <p className="font-semibold">Bảng mã của hãng</p>
+      <p>SPD: số hệ mười sáu (0x…), chia 16 ra km/h</p>
+      <p>GEAR: 0 P · 1 R · 2 N · 3 D</p>
+      <p>BRK 1 = có đạp phanh · THR = % bàn đạp ga</p>
+      <p>BELT_D 1 = dây ghế lái đã cài · DOOR_D 1 = cửa ghế lái mở</p>
+      <p>AB_DEP 1 = túi khí bung</p>
+    </div>
+  </Sheet>
+)
+
+/** Shows the raw printout until the player decodes it, then the dealer's plain reading. */
+const P4 = () => {
+  const locked = useGame((s) => clueLocked(s, 'P4'))
+  return locked ? <P4Raw /> : <P4Decoded />
+}
 
 const P5 = () => (
   <Sheet org="Công an phường Thảo Điền" title="Biên bản vụ tai nạn, xe gây tai nạn bỏ chạy">

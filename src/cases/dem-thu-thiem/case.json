@@ -17,7 +17,7 @@
     }
   },
   "photoDate": "08 12 '25",
-  "days": 10,
+  "days": 8,
   "limitsPerDay": {
     "talk": 2,
     "explore": 1
@@ -350,12 +350,12 @@
     { "id": "H10", "title": "Chuồng bò khóa, đường khô", "description": "Bò được lùa vào chuồng từ 6 giờ chiều. Mặt đường và đất dưới gầm xe khô ráo.", "source": "scene" },
     { "id": "P1", "title": "Hợp đồng bảo hiểm vật chất xe", "description": "Mercedes GLC 300, 51K-686.68, giá trị 2,1 tỷ. Không bồi thường thiệt hại do cố ý, hay thiệt hại không do sự cố được khai báo gây ra.", "source": "file" },
     { "id": "P2", "title": "Tường trình của ông Khải", "description": "Ăn tiệc ở Vũng Tàu, 0:30 lái về một mình qua cao tốc Long Thành. 02:30 ở Thủ Thiêm, mưa to, tránh con bò, xe lao xuống kênh.", "source": "file" },
-    { "id": "P3", "title": "Biên bản hiện trường Thủ Thiêm", "description": "Ông Khải gọi 113 lúc 02:52. CSGT tới 03:10, ông đứng trên đường, trầy hai lòng bàn tay. Nồng độ cồn 0.", "source": "file" },
-    { "id": "P4", "title": "Dữ liệu hộp ghi sự kiện túi khí", "description": "02:34:11: tốc độ 7 km/h, số N, không đạp phanh, ga 0%. Dây an toàn ghế lái chưa cài, cửa lái đang mở.", "source": "file" },
+    { "id": "P3", "title": "Biên bản hiện trường Thủ Thiêm", "description": "Ông Khải gọi 113 lúc 02:52. CSGT tới 03:10, ông đứng trên đường, trầy hai lòng bàn tay. Nồng độ cồn 0.", "source": "file", "audio": {"length": "0:24", "lines": [{"who": "Tổng đài 113", "text": "113 xin nghe."}, {"who": "Ông Khải", "text": "Tôi bị tai nạn ở đường số 9, khu Thủ Thiêm. Xe lao xuống bờ kênh rồi."}, {"who": "Tổng đài 113", "text": "Anh có bị thương không? Trên xe còn ai không?"}, {"who": "Ông Khải", "text": "Tôi trầy tay thôi, đi có một mình. Mưa to quá, con bò băng ngang, tôi đánh lái không kịp."}, {"who": "Tổng đài 113", "text": "Anh đứng yên trên đường, CSGT tới ngay."}, {"text": "[02:52 · Nền cuộc gọi yên ắng, nghe rõ tiếng dế. Không có tiếng mưa rơi.]"}]} },
+    { "id": "P4", "title": "Dữ liệu hộp ghi sự kiện túi khí", "description": "02:34:11: tốc độ 7 km/h, số N, không đạp phanh, ga 0%. Dây an toàn ghế lái chưa cài, cửa lái đang mở.", "source": "file", "highlights": ["tốc độ 7 km/h, số N", "cửa lái đang mở"] },
     { "id": "P5", "title": "Biên bản vụ tông xe bỏ chạy", "description": "22:47 ngày 6/12, đường Nguyễn Văn Hưởng. Ô tô màu đen tông chiếc Wave đỏ của chị Hoa rồi chạy về phía đường Thảo Điền. Thu được mảnh kính đèn sương mù.", "source": "file" },
-    { "id": "P6", "title": "Camera nhà thuốc Nguyễn Văn Hưởng", "description": "22:47: SUV đen, đèn sương mù phải vỡ ngay sau va chạm. Người lái thò đầu ra nhìn: áo hoodie trắng.", "source": "file" },
+    { "id": "P6", "title": "Camera nhà thuốc Nguyễn Văn Hưởng", "description": "22:47: SUV đen, đèn sương mù phải vỡ ngay sau va chạm. Người lái thò đầu ra nhìn: áo hoodie trắng.", "source": "file", "highlights": ["áo hoodie trắng"] },
     { "id": "P7", "title": "Phiếu tra mã phụ tùng", "description": "Mảnh kính công an thu được là kính đèn sương mù PHẢI của Mercedes GLC đời 2020 đến 2023.", "source": "file" },
-    { "id": "P8", "title": "Tra soát hành trình và thời tiết", "description": "Thu phí tự động: không có giao dịch nào của 51K-686.68 đêm 6 rạng 7/12. Lần cuối: 5/12 lúc 23:40. Trạm đo mưa Thủ Thiêm: không mưa sau 21:10.", "source": "file" },
+    { "id": "P8", "title": "Tra soát hành trình và thời tiết", "description": "Thu phí tự động: không có giao dịch nào của 51K-686.68 đêm 6 rạng 7/12. Lần cuối: 5/12 lúc 23:40. Trạm đo mưa Thủ Thiêm: không mưa sau 21:10.", "source": "file", "highlights": ["không có giao dịch nào của 51K-686.68", "không mưa sau 21:10"] },
     { "id": "P9", "title": "Quyết định tước bằng lái của Khoa", "description": "Tháng 9/2025: lái ô tô sau khi uống rượu bia, tước giấy phép lái xe 22 tháng.", "source": "file" },
     { "id": "P10", "title": "Lời khai chị Hoa tại Chợ Rẫy", "description": "11/12: \"Xe đen, đèn rất sáng. Người lái là thanh niên, áo trắng có mũ, mở cửa nhìn tôi rồi đóng cửa chạy.\"", "source": "file" },
     { "id": "X1", "title": "Công văn nhắc nhở gara Toàn Phát", "description": "Năm 2023, An Tín nhắc nhở gara Toàn Phát vì báo giá sửa chữa đội lên 30% ở hai hồ sơ.", "source": "decoy" },
@@ -363,7 +363,7 @@
     { "id": "X3", "title": "Ảnh tiệc ở Vũng Tàu", "description": "Ông Khải đưa ảnh bàn tiệc hải sản ven biển làm bằng chứng. Xem kỹ ngày chụp.", "source": "testimony" },
     { "id": "X4", "title": "Story của Hân lúc 22:20", "description": "Khoa áo hoodie trắng, ly bia, chìa khóa Mercedes trên bàn ở quán Bến Gỗ.", "source": "testimony" },
     { "id": "X5", "title": "Story của Hân lúc 22:52", "description": "Hân vẫn ở Bến Gỗ với hai người bạn. Ghế của Khoa trống.", "source": "testimony" },
-    { "id": "X6", "title": "Tin nhắn ông Khải gửi Toàn", "description": "23:15: \"Xe anh bể đầu bên phải, sửa kín giúp anh trong đêm nay, giá nào cũng được.\"", "source": "testimony" },
+    { "id": "X6", "title": "Tin nhắn ông Khải gửi Toàn", "description": "23:15: \"Xe anh bể đầu bên phải, sửa kín giúp anh trong đêm nay, giá nào cũng được.\"", "source": "testimony", "highlights": ["sửa kín giúp anh trong đêm nay"] },
     { "id": "X7", "title": "Sổ nhận phòng khách sạn", "description": "22:45 đoàn khách Hà Nội nhận phòng, ông Khải ra cổng đón. 02:40 chú Sơn nhận một khách lẻ.", "source": "testimony" },
     { "id": "X8", "title": "Lịch sử đặt xe của Khoa", "description": "Khoa nói đi taxi về lúc 22:30. Ứng dụng chỉ có một chuyến tối đó.", "source": "testimony" },
     { "id": "X9", "title": "Tin rao bán chiếc Mercedes", "description": "15/11: ông Khải rao bán GLC 300 51K-686.68 giá 1,75 tỷ trên chợ xe. Gần một tháng không ai hỏi mua. Bảo hiểm đền 2,1 tỷ.", "source": "decoy" },
@@ -574,5 +574,53 @@
     { "ending": "full", "correct": ["crash", "driver"] },
     { "ending": "half", "correct": ["crash"] },
     { "ending": "wrong" }
+  ],
+  "puzzles": [
+    {
+      "id": "z1",
+      "clueId": "P4",
+      "kind": "answer",
+      "title": "Bản in hộp đen",
+      "prompt": "Hộp ghi sự kiện chỉ in mã và số thô. Dùng bảng mã của hãng ở cuối tờ: lúc 02:34:11, chiếc xe chạy bao nhiêu km/h?",
+      "lockedText": "EDR DUMP · 51K-686.68 · EVT 01\n2025-12-07 02:34:11\nSPD 0x070\nGEAR 2\nBRK 0\nTHR 000\nBELT_D 0\nDOOR_D 1\nAB_DEP 0\n— Bảng mã của hãng —\nSPD: số hệ mười sáu (0x…), chia 16 ra km/h\nGEAR: 0 P · 1 R · 2 N · 3 D\nBRK 1 = có đạp phanh · THR = % bàn đạp ga\nBELT_D 1 = dây ghế lái đã cài\nDOOR_D 1 = cửa ghế lái đang mở\nAB_DEP 1 = túi khí bung",
+      "answers": ["7", "7 km/h", "7km/h", "7 kmh", "7 km", "bảy", "bảy km/h"],
+      "placeholder": "km/h",
+      "solvedText": "0x070 = 112, chia 16 ra 7 km/h. Cần số ở N, không phanh, không ga, dây an toàn ghế lái chưa cài, cửa lái đang mở. Không ai cầm lái: chiếc xe lăn chậm xuống kênh như bị thả trôi.",
+      "hints": ["0x070 là số viết theo hệ mười sáu. Đổi sang hệ mười: 7 × 16 + 0.", "0x070 = 112. Bảng mã nói chia 16 thì ra km/h."]
+    }
+  ],
+  "timeline": [
+    {
+      "time": "15/11",
+      "text": "Ông Khải rao bán chiếc Mercedes 51K-686.68 giá 1,75 tỷ. Gần một tháng không ai hỏi mua."
+    },
+    {
+      "time": "6/12 22:20",
+      "text": "Khoa uống bia với Hân ở quán Bến Gỗ, áo hoodie trắng, chìa khóa Mercedes trên bàn."
+    },
+    {
+      "time": "22:47",
+      "text": "Khoa lái chiếc Mercedes tông chị Hoa trên đường Nguyễn Văn Hưởng rồi bỏ chạy về phía Thảo Điền."
+    },
+    {
+      "time": "22:58",
+      "text": "Chiếc xe vỡ đầu bên phải về gara khách sạn Sông Xanh. Chú Sơn ghi vào sổ trực."
+    },
+    {
+      "time": "23:15",
+      "text": "Ông Khải nhắn gara Toàn: \"sửa kín giúp anh trong đêm nay\"."
+    },
+    {
+      "time": "7/12 02:15",
+      "text": "Ông Khải một mình lái chiếc Mercedes ra khỏi khách sạn."
+    },
+    {
+      "time": "02:34",
+      "text": "Ở bờ kênh Thủ Thiêm, ông về số N, mở cửa lái và đẩy xe xuống kênh. Hộp đen ghi 7 km/h."
+    },
+    {
+      "time": "02:52",
+      "text": "Ông gọi 113, khai trời mưa to và tránh con bò. Đêm đó không mưa sau 21:10."
+    }
   ]
 }
