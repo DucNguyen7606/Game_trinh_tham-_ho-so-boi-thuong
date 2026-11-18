@@ -140,9 +140,9 @@
         "traits": [
           "Chịu khó",
           "Thật thà",
-          "Mê coi live"
+          "Mê xem live"
         ],
-        "habit": "Sáng nào cũng lên dọn ba tiếng, tối về Gò Vấp coi chị Ngọc livestream.",
+        "habit": "Sáng nào cũng lên dọn ba tiếng, tối về Gò Vấp xem chị Ngọc livestream.",
         "relation": "Làm cho chị Ngọc hai năm. Có vân tay mở cửa căn hộ.",
         "quote": "\"Cô Ngọc dễ thương lắm, chỉ có cái tật khoe.\"",
         "note": "Người duy nhất ngoài chị Ngọc mở được cửa căn hộ bằng vân tay."
@@ -466,8 +466,8 @@
     },
     {
       "id": "P10",
-      "title": "Biên bản tiệm đồng hồ cũ Minh Quang",
-      "description": "23/12, tiệm ở Lê Văn Sỹ, Tân Bình mua một Rolex Daytona số máy 7Y3K2109 giá 650 triệu. Người bán: Trịnh Hoàng Vũ, có bản sao CCCD.",
+      "title": "Biên bản cửa hàng đồng hồ cũ Minh Quang",
+      "description": "23/12, cửa hàng ở Lê Văn Sỹ, Tân Bình mua một Rolex Daytona số máy 7Y3K2109 giá 650 triệu. Người bán: Trịnh Hoàng Vũ, có bản sao CCCD.",
       "source": "file",
       "highlights": [
         "Người bán: Trịnh Hoàng Vũ"
@@ -519,7 +519,7 @@
         "lines": [
           {
             "who": "Chị Ngọc",
-            "text": "Rồi, giờ mở két cho cả nhà coi chiếc mới về nha."
+            "text": "Rồi, giờ mở két cho cả nhà xem chiếc mới về nhé."
           },
           {
             "who": "Âm phím két",
@@ -535,7 +535,7 @@
           },
           {
             "who": "Chị Ngọc",
-            "text": "Lộ gì đâu, ai mà nhìn kịp. Mở rồi nè!"
+            "text": "Lộ gì đâu, ai mà nhìn kịp. Mở rồi đây!"
           }
         ]
       }
@@ -543,7 +543,7 @@
     {
       "id": "P12",
       "title": "Camera hầm xe B1 ngày 18/12",
-      "description": "Xe máy của Bảo vào hầm Riverlight 19:40, ra 20:15 ngày 18/12, hai đêm trước vụ trộm. Bảo nói từ tháng 10 chưa bước chân vô tòa nhà.",
+      "description": "Xe máy của Bảo vào hầm Riverlight 19:40, ra 20:15 ngày 18/12, hai đêm trước vụ trộm. Bảo nói từ tháng 10 chưa bước chân vào tòa nhà.",
       "source": "decoy"
     },
     {
@@ -1015,7 +1015,7 @@
     },
     {
       "time": "23/12",
-      "text": "Vũ bán chiếc Rolex số máy 7Y3K2109 cho tiệm Minh Quang, Lê Văn Sỹ."
+      "text": "Vũ bán chiếc Rolex số máy 7Y3K2109 cho cửa hàng Minh Quang, Lê Văn Sỹ."
     },
     {
       "time": "24/12",

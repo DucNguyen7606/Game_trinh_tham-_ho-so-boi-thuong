@@ -51,7 +51,7 @@ const P3 = () => (
 const P4 = () => (
   <Sheet org="Công an Phường 10 · Biên bản ghi lời khai" title="Huỳnh Thị Kim Loan · 02/12, 22:10">
     <p>
-      Khoảng 21 giờ tôi kéo cửa cuốn. Mới xuống được một nửa thì <Mark>21:02 hai thanh niên chui vào cửa cuốn phía trước</Mark>, đội nón bảo hiểm trùm kín, mặc áo mưa đen.
+      Khoảng 21 giờ tôi kéo cửa cuốn. Mới xuống được một nửa thì <Mark>21:02 hai thanh niên chui vào cửa cuốn phía trước</Mark>, đội mũ bảo hiểm trùm kín, mặc áo mưa đen.
     </p>
     <p>
       <Mark>Trong tiệm chỉ có mình tôi.</Mark> Cửa sau tôi chốt từ chiều. Một tên kề dao vào cổ, <Mark>bắt tôi mở két</Mark>. Tên kia đập tủ kính lấy khay vàng.
@@ -188,7 +188,7 @@ const P10 = () => (
     <Row k="Kèm" v="40 dây chuyền mạ" />
     <Row k="Thành tiền" v="27.500.000 đ" />
     <p className="pt-1 text-[10px]">
-      Ghi chú của xưởng: <Mark>khách dặn khắc y chữ tiệm, giao trong tuần</Mark>.
+      Ghi chú của xưởng: <Mark>khách dặn khắc y chữ của tiệm, giao trong tuần</Mark>.
     </p>
     <Stamp text="Đã giao 18/11" className="bottom-2 right-3" />
     <div className="h-6" />
@@ -224,9 +224,9 @@ const Bubble = ({ me, children, time }: { me?: boolean; children: React.ReactNod
 const X1 = () => (
   <Phone header="Ba Lành tạp hóa">
     <p className="text-center text-[9px] opacity-50">16/11/2025</p>
-    <Bubble time="19:20">Bà Loan, hụi bể cả tháng rồi mà bà cứ khất hoài</Bubble>
-    <Bubble time="19:21">Không trả hụi thì đừng trách tui cho người tới tiệm</Bubble>
-    <Bubble me time="21:02">Chị bình tĩnh, em lo được, chờ em ít bữa</Bubble>
+    <Bubble time="19:20">Bà Loan, vỡ hụi cả tháng rồi mà bà cứ khất mãi</Bubble>
+    <Bubble time="19:21">Không trả hụi thì đừng trách tôi cho người đến tiệm</Bubble>
+    <Bubble me time="21:02">Chị bình tĩnh, em lo được, chờ em ít hôm</Bubble>
   </Phone>
 )
 

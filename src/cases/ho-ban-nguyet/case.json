@@ -115,7 +115,7 @@
         ],
         "habit": "Đòi nợ thì tới tận nhà, đòi xong thì đi hát karaoke ở Quận 4.",
         "relation": "Cho ông Hưng vay 2 tỷ hồi tháng 12 để trả lương công nhân.",
-        "quote": "\"Người chết rồi thì ai trả nợ cho tôi? Tôi là người muốn ổng sống nhất.\"",
+        "quote": "\"Người chết rồi thì ai trả nợ cho tôi? Tôi là người muốn ông ấy sống nhất.\"",
         "note": "Khoản vay quá hạn từ 10/3. Có mặt ở căn 21.05 tối 14/3, hai người cãi to."
       }
     },
@@ -176,7 +176,7 @@
         ],
         "habit": "Ca đêm lái xe nâng trong kho, để chiếc Wave đỏ ở bãi xe nhân viên, chìa móc trên bảng.",
         "relation": "Quê Sóc Trăng, làm cho Hưng Toàn Logistics hai năm. Anh Toàn xin việc cho.",
-        "quote": "\"Em làm tới sáng, đâu có đi đâu.\"",
+        "quote": "\"Em làm đến sáng, có đi đâu đâu.\"",
         "note": "Chiếc xe máy biển 59P2-418.36 đứng tên Phúc."
       }
     }
@@ -414,7 +414,7 @@
           },
           {
             "who": "Bảo vệ Lộc",
-            "text": "Chung cư Sen Hồng, tòa B, Phú Mỹ Hưng. Có người rơi từ trên lầu xuống vườn phía Đông."
+            "text": "Chung cư Sen Hồng, tòa B, Phú Mỹ Hưng. Có người rơi từ trên tầng cao xuống vườn phía Đông."
           },
           {
             "who": "Tổng đài 115",
@@ -430,7 +430,7 @@
           },
           {
             "who": "Bảo vệ Lộc",
-            "text": "Không... không thấy thở. Anh cho xe tới liền giùm."
+            "text": "Không... không thấy thở. Anh cho xe đến ngay giúp tôi."
           }
         ]
       }
@@ -560,7 +560,7 @@
     {
       "id": "X6",
       "title": "Tin nhắn Toàn gửi Phúc lúc 22:49",
-      "description": "\"Phúc, anh mượn xe đi mua đồ ăn khuya. Chìa móc ở bảng hả?\"",
+      "description": "\"Phúc, anh mượn xe đi mua đồ ăn khuya. Chìa móc ở bảng à?\"",
       "source": "testimony"
     },
     {
@@ -1019,7 +1019,7 @@
     },
     {
       "time": "14/3 21:28–22:16",
-      "text": "Ông Khả ghé đòi nợ rồi về, đi karaoke ở Quận 4."
+      "text": "Ông Khả đến đòi nợ rồi về, đi karaoke ở Quận 4."
     },
     {
       "time": "14/3 22:49",

@@ -259,7 +259,7 @@ function OrderBoard() {
     <g>
       <rect width="400" height="300" fill="#f6f4ee" />
       <text x="200" y="40" textAnchor="middle" fontSize="18" fontWeight="700" fill={accent.red} fontFamily="Barlow Condensed, sans-serif">ĐƠN TẾT · TỪ 1/12</text>
-      {['Tiệm Nguyễn Kim 1: 40 thùng', 'Tiệm Nguyễn Kim 2: 30 thùng', 'Cần Thơ: 50 thùng', 'Long An: 30 thùng'].map((t, i) => (
+      {['Cửa hàng Nguyễn Kim 1: 40 thùng', 'Cửa hàng Nguyễn Kim 2: 30 thùng', 'Cần Thơ: 50 thùng', 'Long An: 30 thùng'].map((t, i) => (
         <text key={i} x="40" y={90 + i * 40} fontSize="15" fill="#2f4258" fontFamily={mono}>
           {t}
         </text>

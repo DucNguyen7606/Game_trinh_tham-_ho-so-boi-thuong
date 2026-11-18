@@ -82,7 +82,7 @@ export const reconstruction: ReconstructionPanel[] = (
     {
       time: '6/12, 22:20',
       title: 'Ba chai bia và một chiếc chìa khóa',
-      text: 'Khoa ngồi quán Bến Gỗ với Hân, mặc áo hoodie trắng. Chìa khóa chiếc Mercedes của cha nằm trên bàn. Cậu đang bị tước bằng lái vì lái xe sau khi uống rượu. Hân đòi lái giùm, Khoa không chịu.',
+      text: 'Khoa ngồi quán Bến Gỗ với Hân, mặc áo hoodie trắng. Chìa khóa chiếc Mercedes của cha nằm trên bàn. Cậu đang bị tước bằng lái vì lái xe sau khi uống rượu. Hân đòi lái hộ, Khoa không chịu.',
       questionId: 'q5',
       Art: () => <OnDesk ids={['X4', 'P9']} />,
     },
@@ -105,7 +105,7 @@ export const reconstruction: ReconstructionPanel[] = (
     {
       time: '22:58',
       title: 'Về gara nhà',
-      text: 'Chiếc xe nhỏ nước làm mát màu hồng suốt đường về khách sạn Sông Xanh. Chú Sơn ghi sổ: "cậu Khoa lái, đầu xe bể". Lúc đó ông Khải còn đang ở cổng tiếp đoàn khách Hà Nội.',
+      text: 'Chiếc xe nhỏ nước làm mát màu hồng suốt đường về khách sạn Sông Xanh. Chú Sơn ghi sổ: "cậu Khoa lái, đầu xe vỡ". Lúc đó ông Khải còn đang ở cổng tiếp đoàn khách Hà Nội.',
       questionId: 'q4',
       Art: () => (
         <Staged zone="gara">
@@ -198,7 +198,7 @@ const PanelStamp = ({ text, color }: { text: string; color: string }) => (
 )
 
 const crashTheory: Record<string, string> = {
-  khai: 'Theo bạn, chính ông Khải lái chiếc xe đã bể đầu lên Thủ Thiêm, về số N rồi đẩy nó xuống kênh để che vết tông người và đòi tiền bảo hiểm.',
+  khai: 'Theo bạn, chính ông Khải lái chiếc xe đã vỡ đầu lên Thủ Thiêm, về số N rồi đẩy nó xuống kênh để che vết tông người và đòi tiền bảo hiểm.',
   khoa: 'Theo bạn, Khoa tự đưa xe lên Thủ Thiêm đẩy xuống kênh để xóa dấu vết.',
   toan: 'Theo bạn, Toàn bày cho ông Khải dựng tai nạn và tự tay đẩy xe để ăn tiền sửa.',
   son: 'Theo bạn, chú Sơn được ông chủ sai đưa xe đi phi tang.',
@@ -208,7 +208,7 @@ const crashTheory: Record<string, string> = {
 const driverTheory: Record<string, { text: string; docs: string[] }> = {
   khoa: { text: 'Theo bạn, Khoa say rượu lái xe của cha, tông chị Hoa lúc 22:47 rồi bỏ chạy về khách sạn.', docs: ['X4', 'P6'] },
   khai: { text: 'Theo bạn, ông Khải tự lái xe tông chị Hoa rồi bỏ chạy.', docs: ['P5'] },
-  han: { text: 'Theo bạn, Hân lái xe giùm Khoa và tông chị Hoa.', docs: ['X4'] },
+  han: { text: 'Theo bạn, Hân lái xe hộ Khoa và tông chị Hoa.', docs: ['X4'] },
   son: { text: 'Theo bạn, chú Sơn lấy xe ông chủ đi và tông chị Hoa.', docs: ['P5'] },
   none: { text: 'Theo bạn, chiếc xe tông chị Hoa là một chiếc khác, không phải xe ông Khải.', docs: ['P7'] },
 }

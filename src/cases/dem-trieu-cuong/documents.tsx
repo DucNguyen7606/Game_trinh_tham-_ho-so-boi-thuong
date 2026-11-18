@@ -103,7 +103,7 @@ const P5 = () => (
 
 const P6 = () => (
   <Sheet org="Bảo hiểm An Tín · Giám định hiện trường" title="Biên bản kiểm đếm · 16/11">
-    <Row k="Tầng 1–2" v="60 thùng, ngập bùn, hư toàn bộ" strong />
+    <Row k="Tầng 1–2" v="60 thùng, ngập bùn, hỏng toàn bộ" strong />
     <Row k="Tầng 3–5" v="Trống, khô, không vết bùn" strong />
     <Row k="Giá trị hàng ngập" v="600 máy · 1.800.000.000 đ" />
     <p className="pt-1 text-[10px]">
@@ -178,7 +178,7 @@ const P10 = () => (
         <span className="text-right">{v}</span>
       </div>
     ))}
-    <p className="pt-1 text-[10px] italic">Phùng Gia Hưng: chủ tiệm Gia Hưng Mobile, đường Nguyễn Kim, Quận 10.</p>
+    <p className="pt-1 text-[10px] italic">Phùng Gia Hưng: chủ cửa hàng Gia Hưng Mobile, đường Nguyễn Kim, Quận 10.</p>
   </Sheet>
 )
 
@@ -209,8 +209,8 @@ const Bubble = ({ me, children, time }: { me?: boolean; children: React.ReactNod
 const X1 = () => (
   <Phone header="Nhật 🐯">
     <p className="text-center text-[9px] opacity-50">02/11/2025</p>
-    <Bubble time="23:41">Má bán cái kho đi, con kẹt 400 triệu rồi</Bubble>
-    <Bubble time="23:42">Tụi nó tới nhà là má biết</Bubble>
+    <Bubble time="23:41">Mẹ bán cái kho đi, con kẹt 400 triệu rồi</Bubble>
+    <Bubble time="23:42">Bọn nó đến nhà là mẹ biết</Bubble>
     <Bubble me time="06:15">Mày cá độ nữa thì đừng về</Bubble>
   </Phone>
 )
@@ -302,7 +302,7 @@ const X4 = () => (
       </svg>
     </div>
     <PhotoMeta when="15/11/2025 · 01:45" where="Phú Mỹ Hưng, Q.7" />
-    <p className="text-[10px]">"Ngập thì ngập, bóng vẫn phải coi ⚽" · được 4 người gắn thẻ</p>
+    <p className="text-[10px]">"Ngập thì ngập, bóng vẫn phải xem ⚽" · được 4 người gắn thẻ</p>
   </Phone>
 )
 
@@ -321,7 +321,7 @@ const X5 = () => (
       </svg>
     </div>
     <PhotoMeta when="14/11/2025 · 21:05" where="Bến Bình Đông, Q.8" />
-    <p className="text-[10px]">"Ba ngủ ghe nha, nước lớn đừng chạy."</p>
+    <p className="text-[10px]">"Bố ngủ ghe nhé, nước lớn đừng chạy."</p>
   </Phone>
 )
 
@@ -349,8 +349,8 @@ const X7 = () => (
     <p className="text-center text-[9px] opacity-50">20/11/2025 · 14:02</p>
     <div className="rounded bg-white p-2">
       <p className="font-semibold">Trần Minh Nhật</p>
-      <p>Thanh lý 30 máy iPhone mới nguyên seal, rẻ hơn tiệm 15%. Lấy số lượng có giá tốt, inbox.</p>
-      <p className="text-[10px] opacity-60">12 bình luận · "Hàng gì mà rẻ vậy bạn?"</p>
+      <p>Thanh lý 30 máy iPhone mới nguyên seal, rẻ hơn cửa hàng 15%. Lấy số lượng có giá tốt, inbox.</p>
+      <p className="text-[10px] opacity-60">12 bình luận · "Hàng gì mà rẻ thế bạn?"</p>
     </div>
     <p className="text-[10px] opacity-60">Khu vực: Quận 7 · Giao tận nơi</p>
   </Phone>

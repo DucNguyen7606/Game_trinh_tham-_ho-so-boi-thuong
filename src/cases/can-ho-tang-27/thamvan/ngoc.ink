@@ -9,21 +9,21 @@ VAR has_H11 = false
 VAR has_P12 = false
 
 Chị Ngọc ngồi xuống sofa, điện thoại úp trên đùi, mắt còn đỏ.
-"Tôi bay đi có một đêm. Một đêm thôi. {Xchi} giúp tôi giải quyết lẹ, tôi còn phải live bán hàng Tết."
+"Tôi bay đi có một đêm. Một đêm thôi. {Xchi} giúp tôi giải quyết nhanh, tôi còn phải live bán hàng Tết."
 -> hoi
 
 === hoi ===
 * [Chị phát hiện mất đồ lúc nào?]
-    "Hơn 9 giờ sáng 21/12. Tôi bay chuyến sớm từ Hà Nội về, mở cửa bằng vân tay, vô phòng ngủ thì thấy két mở hé."
+    "Hơn 9 giờ sáng 21/12. Tôi bay chuyến sớm từ Hà Nội về, mở cửa bằng vân tay, vào phòng ngủ thì thấy két mở hé."
     -> hoi
 * [Lần cuối chị thấy đồng hồ trong két là khi nào?]
-    "Trưa 20/12, trước khi ra sân bay. Tôi đang live, cất từng chiếc vô két ngay trước mặt khán giả. Video còn lưu đây." #photo:X3
+    "Trưa 20/12, trước khi ra sân bay. Tôi đang live, cất từng chiếc vào két ngay trước mặt khán giả. Video còn lưu đây." #photo:X3
     -> hoi
 * [Ai biết mã két?]
-    "Chỉ mình tôi. Tháng này tôi mới đổi mã, không ghi ra đâu hết."
+    "Chỉ mình tôi. Tháng này tôi mới đổi mã, không ghi ra đâu cả."
     -> hoi
 * {has_H3} [Sổ bảo hành ghi chị đổi mã ngày 10/12 "sau tin nhắn của B."]
-    "B là anh Bảo. Ảnh nhắn là ảnh vẫn nhớ mã két, tôi sợ quá nên đổi liền hôm sau."
+    "B là anh Bảo. Anh ấy nhắn là vẫn nhớ mã két, tôi sợ quá nên đổi ngay hôm sau."
     -> hoi
 * {has_H1} [Két được mở lúc 02:19, đúng mã ngay lần đầu.]
     "Lúc đó tôi đang ngủ ở khách sạn ngoài Hà Nội. Người mở biết đúng mã mới của tôi... Sao có thể chứ?"
@@ -36,16 +36,16 @@ Chị Ngọc ngồi xuống sofa, điện thoại úp trên đùi, mắt còn đ
     "Vì tôi mới mua chiếc Patek giữa tháng 11. Bên {xchi} bắt mang đi giám định rồi mới cho mua. Hóa đơn, giấy giám định tôi nộp đủ."
     -> hoi
 * {has_P5} [Đêm đó cửa nhà chị được mở bằng thẻ từ #09.]
-    "Thẻ gì? Tôi đâu có dùng thẻ, tôi mở bằng vân tay. Trong app của tôi chỉ có vân tay tôi với chị Hai."
+    "Thẻ gì? Tôi có dùng thẻ đâu, tôi mở bằng vân tay. Trong app của tôi chỉ có vân tay tôi với chị Hai."
     -> hoi
-* {has_P10} [Chiếc Rolex của chị bị bán ở tiệm đồng hồ cũ trên Lê Văn Sỹ ngày 23/12.]
+* {has_P10} [Chiếc Rolex của chị bị bán ở cửa hàng đồng hồ cũ trên Lê Văn Sỹ ngày 23/12.]
     Chị Ngọc nhìn tờ biên bản rất lâu.
-    "Vũ... cậu kỹ thuật hay lên sửa đồ cho tôi. Cậu còn vô live của tôi bình luận hoài."
+    "Vũ... cậu kỹ thuật hay lên sửa đồ cho tôi. Cậu còn vào live của tôi bình luận suốt."
     "Tôi khoe đồ quen rồi, chưa bao giờ nghĩ có người ngồi đếm từng ngón tay tôi bấm."
     -> hoi
 * {has_H11} [Chị định live "xả kho đồng hồ hiệu, giảm 40%" ngày 22/12. Là mấy chiếc trong két?]
     "Đúng. Hai chiếc đó là món chốt của buổi live Tết. Ba khách đã đặt cọc, tôi còn giữ tin nhắn."
-    "Giờ mất rồi, tôi phải hoàn cọc, còn bị chửi lừa đảo. {Xchi} nghĩ coi, tự dựng vụ trộm hai ngày trước buổi bán lớn nhất năm thì tôi được gì?"
+    "Giờ mất rồi, tôi phải hoàn cọc, còn bị chửi lừa đảo. {Xchi} nghĩ mà xem, tự dựng vụ trộm hai ngày trước buổi bán lớn nhất năm thì tôi được gì?"
     -> hoi
 * {has_P12} [Ngày 18/12 anh Bảo có tới tòa nhà.]
     Chị Ngọc sững người.

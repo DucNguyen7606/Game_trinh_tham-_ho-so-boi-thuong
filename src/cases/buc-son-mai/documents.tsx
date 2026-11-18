@@ -234,7 +234,7 @@ const X1 = () => (
   <div className="space-y-2">
     <Phone header="Chị Thảo · An Tín">
       <p className="text-center text-[9px] opacity-50">12/11/2025</p>
-      <Bubble time="16:02">Chị ơi tranh mà bị mất thì bảo hiểm trả bao nhiêu vậy chị?</Bubble>
+      <Bubble time="16:02">Chị ơi tranh mà bị mất thì bảo hiểm trả bao nhiêu thế chị?</Bubble>
       <Bubble me time="16:20">Theo giá trị trên hợp đồng em, nhưng phải giám định đã.</Bubble>
     </Phone>
     <div className="bg-[#f6efe2] p-2 font-sans text-[10px] text-[#2d1f18] shadow">
@@ -367,7 +367,7 @@ const X5 = () => (
       </svg>
     </div>
     <div className="space-y-0.5 rounded bg-white/10 p-1.5 text-[10px]">
-      <p><b>hoc_son_mai</b>: thầy mài nhẹ tay vậy hả thầy</p>
+      <p><b>hoc_son_mai</b>: thầy mài nhẹ tay thế ạ thầy</p>
       <p><b>Tí (học trò)</b>: 1g45 rồi mà thầy chưa cho em về 😭</p>
     </div>
     <PhotoMeta when="20/11/2025 · 01:00–02:20" where="Xưởng Bình Thạnh" />
@@ -404,7 +404,7 @@ const X7 = () => (
     <p className="rounded-md bg-white/70 p-2">
       "Chào anh Vĩnh, chị xin dời buổi kiểm định ngày 21/11 sang đầu tháng 12 được không? Chị muốn có mặt khi các anh lấy mẫu." · 15/11 08:12
     </p>
-    <p className="rounded-md bg-[#d7ecd9] p-2 text-right">"Dạ không dời được chị, lịch chuyên gia đã chốt. Bên em vẫn lấy mẫu ngày 21 ạ." · 15/11 10:40</p>
+    <p className="rounded-md bg-[#d7ecd9] p-2 text-right">"Dạ không dời được đâu chị, lịch chuyên gia đã chốt. Bên em vẫn lấy mẫu ngày 21 ạ." · 15/11 10:40</p>
     <p className="rounded-md bg-white/70 p-2">"Ok em, cứ làm theo lịch." · 15/11 10:52</p>
   </Phone>
 )
@@ -421,7 +421,7 @@ const X8 = () => (
       </p>
       <p className="text-[10px]">Khách sạn Fullerton, Singapore</p>
     </div>
-    <p className="text-[10px]">Lời nhắn của Mai: "Mẹ bay sáng 21 nha, con đặt vé rồi đó." · 02/11</p>
+    <p className="text-[10px]">Lời nhắn của Mai: "Mẹ bay sáng 21 nhé, con đặt vé rồi đấy." · 02/11</p>
   </Phone>
 )
 

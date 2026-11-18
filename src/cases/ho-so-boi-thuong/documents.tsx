@@ -176,9 +176,9 @@ const P9 = () => (
   <Phone header="Bảo (cháu)">
     <p className="text-center text-[9px] opacity-50">13/07/2025</p>
     <Bubble me time="22:14">
-      Hủy vụ 20. Ngân hàng không dời. Mai 15 kêu xe chở hàng về, kiểm kê cho đàng hoàng.
+      Hủy vụ 20. Ngân hàng không dời. Mai 15 gọi xe chở hàng về, kiểm kê cho đàng hoàng.
     </Bubble>
-    <Bubble time="22:15">Dạ chú.</Bubble>
+    <Bubble time="22:15">Vâng chú.</Bubble>
     <p className="text-right text-[8px] opacity-50">Đã xem</p>
   </Phone>
 )
@@ -213,7 +213,7 @@ const P11 = () => (
       <div className="rounded bg-black/5 p-1.5 text-[10px]">
         <p className="opacity-60">Tin nhắn riêng</p>
         <p>
-          <Mark>Anh Bảo</Mark>: Mai anh qua lấy, trả tiền mặt nha em. Giấy tờ để từ từ sang tên.
+          <Mark>Anh Bảo</Mark>: Mai anh qua lấy, trả tiền mặt nhé em. Giấy tờ để từ từ sang tên.
         </p>
       </div>
     </Phone>
@@ -279,7 +279,7 @@ const X1 = () => (
 )
 
 const X2 = () => (
-  <Sheet org="Tiệm vật tư Gia Huy" title="Thư đề nghị chuyển nhượng">
+  <Sheet org="Cửa hàng vật tư Gia Huy" title="Thư đề nghị chuyển nhượng">
     <p>Gửi anh Thịnh,</p>
     <p>
       Tôi xin đề nghị mua lại mảnh đất kho với giá <b>9 tỷ đồng</b>, thanh toán một lần.
@@ -425,7 +425,7 @@ const X4 = () => (
         <g transform="rotate(-8 265 197)">
           <circle cx="259" cy="197" r="4" fill="none" stroke="#f2e6b8" strokeWidth="1" />
           <circle cx="259" cy="197" r="2" fill="none" stroke="#f2e6b8" strokeWidth="0.8" />
-          <text x="270" y="199" fontSize="5" fill="#f2e6b8" fontFamily="IBM Plex Mono, monospace">NHANG</text>
+          <text x="270" y="199" fontSize="5" fill="#f2e6b8" fontFamily="IBM Plex Mono, monospace">HƯƠNG</text>
         </g>
         <rect x="8" y="8" width="104" height="18" rx="4" fill="#000" opacity="0.45" />
         <text x="14" y="21" fontSize="11" fill="#fff" fontFamily="IBM Plex Mono, monospace">15/07 02:10</text>
@@ -433,7 +433,7 @@ const X4 = () => (
     </div>
     <PhotoMeta when="15/07/2025 · 02:10" where="Karaoke Hoàng Gia, Q.6" />
     <p className="text-[10px]">
-      "Quẩy tới sáng nha mấy ông 🎤" · gửi lúc <Mark><span className="text-[#1c130f]">02:11</span></Mark>
+      "Quẩy đến sáng nhé các ông 🎤" · gửi lúc <Mark><span className="text-[#1c130f]">02:11</span></Mark>
     </p>
   </Phone>
 )
@@ -467,8 +467,8 @@ const X5 = () => (
     </div>
     <div className="space-y-0.5 rounded bg-white/10 p-1.5 text-[10px]">
       <p><b>thuha.98</b>: chị ơi cái áo hồng còn size M hông</p>
-      <p><b>minhkhoa</b>: chiếc Wave đỏ chị pass hồi tháng 6 còn hông 😆</p>
-      <p><b>Kim Ngân</b>: bán cho anh Bảo ở kho cũ rồi nha, giấy tờ chưa sang tên nè</p>
+      <p><b>minhkhoa</b>: chiếc Wave đỏ chị pass hồi tháng 6 còn không 😆</p>
+      <p><b>Kim Ngân</b>: bán cho anh Bảo ở kho cũ rồi nhé, giấy tờ chưa sang tên đâu</p>
     </div>
     <PhotoMeta when="15/07/2025 · 01:10" where="Phòng trọ, Bình Tân" />
   </Phone>
@@ -507,8 +507,8 @@ const X6 = () => (
         <text x="14" y="21" fontSize="11" fill="#fff" fontFamily="IBM Plex Mono, monospace">15/07 02:40</text>
       </svg>
     </div>
-    <PhotoMeta when="15/07/2025 · 02:40" where="Gác tiệm Gia Huy" />
-    <p className="text-[10px]">Chụp từ cửa sổ lầu, 5 phút trước khi gọi ông Thịnh.</p>
+    <PhotoMeta when="15/07/2025 · 02:40" where="Gác cửa hàng Gia Huy" />
+    <p className="text-[10px]">Chụp từ cửa sổ trên gác, 5 phút trước khi gọi ông Thịnh.</p>
   </Phone>
 )
 
@@ -545,9 +545,9 @@ const X8 = () => (
           <span>{c}</span>
         </div>
       ))}
-      <p className="pt-1 text-[9px] opacity-70">Kho xài máy phát lúc cúp điện, tháng nào cũng mua.</p>
+      <p className="pt-1 text-[9px] opacity-70">Kho dùng máy phát lúc mất điện, tháng nào cũng mua.</p>
     </div>
-    <PhotoMeta when="16/07/2025 · 10:05" where="Tiệm vật tư Gia Huy" />
+    <PhotoMeta when="16/07/2025 · 10:05" where="Cửa hàng vật tư Gia Huy" />
   </Phone>
 )
 

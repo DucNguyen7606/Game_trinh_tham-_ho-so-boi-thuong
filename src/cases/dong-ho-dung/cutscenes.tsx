@@ -32,7 +32,7 @@ export function intro(data: CaseData): Cutscene {
       },
       {
         kicker: 'Đêm 13/4',
-        lines: ['Trên lầu, đèn phòng làm việc sáng tới khuya.'],
+        lines: ['Trên gác, đèn phòng làm việc sáng tới khuya.'],
         camera: { from: { zoom: 1.05 }, to: { zoom: 1.18, x: -2, y: 1 } },
         Art: () => (
           <>
@@ -51,7 +51,7 @@ export function intro(data: CaseData): Cutscene {
       },
       {
         kicker: '22:47',
-        lines: ['Chiếc Seiko trên tay ông vỡ kính, kim dừng lúc 22:47.', 'Công an ghi nhận ban đầu: té ngã.'],
+        lines: ['Chiếc Seiko trên tay ông vỡ kính, kim dừng lúc 22:47.', 'Công an ghi nhận ban đầu: ngã.'],
         sfx: [{ id: 'shutter', at: 1.4 }, { id: 'shutter', at: 2.6 }],
         camera: { from: { zoom: 1.02 }, to: { zoom: 1.12, y: -2 } },
         Art: () => (

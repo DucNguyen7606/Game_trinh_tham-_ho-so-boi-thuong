@@ -96,7 +96,7 @@ export const reconstruction: ReconstructionPanel[] = (
     },
     {
       time: '20/12, 11:05 đến 16:40',
-      title: '"Cất hết vô két rồi nha"',
+      title: '"Cất hết vào két rồi nhé"',
       text: 'Chị Ngọc cất ba món vào két trên sóng livestream, khóa cửa lúc 13:02 rồi ra Tân Sơn Nhất bay đi Hà Nội. Tối đó Vũ nhận thẻ thang hàng KT-03 lúc 21:55.',
       questionId: 'q1',
       Art: () => <OnDesk ids={['X3', 'P3']} />,
@@ -138,7 +138,7 @@ export const reconstruction: ReconstructionPanel[] = (
     {
       time: '23/12 đến 24/12',
       title: 'Chiếc Rolex ở Lê Văn Sỹ',
-      text: 'Vũ mang chiếc Rolex số máy 7Y3K2109 tới tiệm đồng hồ cũ ở Tân Bình, bán 650 triệu và đưa luôn CCCD. Hôm sau khoản nợ app vay 310 triệu của anh được tất toán.',
+      text: 'Vũ mang chiếc Rolex số máy 7Y3K2109 đến cửa hàng đồng hồ cũ ở Tân Bình, bán 650 triệu và đưa luôn CCCD. Hôm sau khoản nợ app vay 310 triệu của anh được tất toán.',
       questionId: 'q7',
       Art: () => <OnDesk ids={['P10', 'P11']} />,
     },

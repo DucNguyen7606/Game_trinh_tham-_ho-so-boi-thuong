@@ -80,7 +80,7 @@
         ],
         "habit": "Đi đâu cũng mang theo cáp đọc nhiệt kế tự ghi trong túi áo blouse.",
         "relation": "Ký nhận mọi lô thuốc lạnh của Minh Tâm ở sân bay.",
-        "quote": "\"Nhiệt kế báo đỏ thì tôi phải niêm phong. Quy định là vậy.\"",
+        "quote": "\"Nhiệt kế báo đỏ thì tôi phải niêm phong. Quy định là thế.\"",
         "note": "Người đọc nhiệt kế TL-A, tuyên bố cả lô không đạt và lập biên bản cách ly."
       }
     },
@@ -107,7 +107,7 @@
           "Xởi lởi",
           "Mê bóng đá"
         ],
-        "habit": "Ca đêm thì ngồi phòng nghỉ coi bóng đá, khoác áo phao vì cứ vài tiếng lại vào phòng lạnh.",
+        "habit": "Ca đêm thì ngồi phòng nghỉ xem bóng đá, khoác áo phao vì cứ vài tiếng lại vào phòng lạnh.",
         "relation": "Giữ chìa khóa và thẻ từ phòng lạnh số 3 từ năm 2021.",
         "quote": "\"Phòng lạnh của em chưa bao giờ trật một độ.\"",
         "note": "Một mình trực kho lạnh đêm 15/11. Chính anh lập biên bản đề xuất tiêu hủy lô thuốc."
@@ -138,7 +138,7 @@
         ],
         "habit": "Kéo hàng từ bụng máy bay vào kho từ sáng tới chiều, trưa nào cũng ăn cơm hộp ngay trên ghế lái.",
         "relation": "Lái xe kéo ở Tân Sơn Nhất hai mươi năm.",
-        "quote": "\"Bữa đó tôi để cái pallet ngoài nắng có chút xíu, {xco} thông cảm.\"",
+        "quote": "\"Hôm đó tôi để cái pallet ngoài nắng có một tí, {xco} thông cảm.\"",
         "note": "Trưa 15/11 để pallet thuốc nằm giữa sân đỗ 45 phút dưới nắng 34 độ, bị lập biên bản."
       }
     },
@@ -170,7 +170,7 @@
         ],
         "habit": "Tự lái xe đi gặp khách, luôn mang theo xấp biên bản tiêu hủy in sẵn.",
         "relation": "Hưng Thịnh nhận đốt hàng hỏng, thuốc hết hạn cho Tân Sơn Cargo từ năm 2022.",
-        "quote": "\"Hàng đã vô lò của tôi thì chỉ còn tro.\"",
+        "quote": "\"Hàng đã vào lò của tôi thì chỉ còn tro.\"",
         "note": "Sẽ nhận 40 thùng thuốc đem về lò đốt ở Bình Chánh ngày 28/11."
       }
     }
@@ -186,7 +186,7 @@
           "label": "Thùng trên cùng",
           "x": 48,
           "y": 37,
-          "note": "Cả pallet dán băng keo xanh dương in chữ PHARMA-LOGISTIK của bên gửi hàng ở Đức. Riêng thùng trên cùng, nơi đặt nhiệt kế TL-A, bị rạch rồi dán lại bằng băng keo xanh lá của Tân Sơn Cargo.",
+          "note": "Cả pallet dán băng dính xanh dương in chữ PHARMA-LOGISTIK của bên gửi hàng ở Đức. Riêng thùng trên cùng, nơi đặt nhiệt kế TL-A, bị rạch rồi dán lại bằng băng dính xanh lá của Tân Sơn Cargo.",
           "clueId": "H1"
         },
         {
@@ -194,7 +194,7 @@
           "label": "Thùng số 17",
           "x": 60,
           "y": 64,
-          "note": "Thùng ở tầng giữa, băng keo Đức còn nguyên. Dưới lớp túi giữ lạnh có một nhiệt kế tự ghi thứ hai, nhãn TL-B. Màn hình hiện dấu tích xanh: thấp nhất 2,1 độ, cao nhất 6,4 độ từ lúc đóng hàng ở Frankfurt tới giờ.",
+          "note": "Thùng ở tầng giữa, băng dính Đức còn nguyên. Dưới lớp túi giữ lạnh có một nhiệt kế tự ghi thứ hai, nhãn TL-B. Màn hình hiện dấu tích xanh: thấp nhất 2,1 độ, cao nhất 6,4 độ từ lúc đóng hàng ở Frankfurt tới giờ.",
           "clueId": "H2"
         },
         {
@@ -232,7 +232,7 @@
           "label": "Áo phao trong tủ đồ",
           "x": 82,
           "y": 42,
-          "note": "Tủ đồ dán tên \"TÙNG\". Chiếc áo phao kho lạnh có túi trong sát ngực. Trong túi còn dính một mẩu băng keo xanh dương vo tròn, in nửa chữ PHARMA-LOG.",
+          "note": "Tủ đồ dán tên \"TÙNG\". Chiếc áo phao kho lạnh có túi trong sát ngực. Trong túi còn dính một mẩu băng dính xanh dương vo tròn, in nửa chữ PHARMA-LOG.",
           "clueId": "H4"
         },
         {
@@ -263,7 +263,7 @@
           "label": "Bàn nhựa",
           "x": 40,
           "y": 74,
-          "note": "Ly cà phê, hộp cơm, một cuộn băng keo xanh lá của Tân Sơn Cargo. Cuộn này phòng nào trong kho cũng có."
+          "note": "Cốc cà phê, hộp cơm, một cuộn băng dính xanh lá của Tân Sơn Cargo. Cuộn này phòng nào trong kho cũng có."
         }
       ]
     },
@@ -306,7 +306,7 @@
     {
       "id": "hung-thinh",
       "name": "Bãi xe Hưng Thịnh, Bình Chánh",
-      "description": "Khu xử lý chất thải ở Bình Chánh: nhà xưởng mái tôn, lò đốt khói đen, dãy thùng phuy và bãi đậu xe tải.",
+      "description": "Khu xử lý chất thải ở Bình Chánh: nhà xưởng mái tôn, lò đốt khói đen, dãy thùng phuy và bãi đỗ xe tải.",
       "hotspots": [
         {
           "id": "xe-lanh",
@@ -344,14 +344,14 @@
   "clues": [
     {
       "id": "H1",
-      "title": "Thùng trên cùng bị dán lại bằng băng keo Tân Sơn Cargo",
-      "description": "Cả pallet dán băng keo Đức PHARMA-LOGISTIK, riêng thùng chứa TL-A bị rạch và dán lại bằng băng keo xanh lá của kho.",
+      "title": "Thùng trên cùng bị dán lại bằng băng dính Tân Sơn Cargo",
+      "description": "Cả pallet dán băng dính Đức PHARMA-LOGISTIK, riêng thùng chứa TL-A bị rạch và dán lại bằng băng dính xanh lá của kho.",
       "source": "scene"
     },
     {
       "id": "H2",
       "title": "Nhiệt kế thứ hai TL-B trong thùng 17",
-      "description": "Nằm dưới lớp túi giữ lạnh, băng keo Đức còn nguyên. Thấp nhất 2,1 độ, cao nhất 6,4 độ suốt chuyến hàng.",
+      "description": "Nằm dưới lớp túi giữ lạnh, băng dính Đức còn nguyên. Thấp nhất 2,1 độ, cao nhất 6,4 độ suốt chuyến hàng.",
       "source": "scene"
     },
     {
@@ -362,8 +362,8 @@
     },
     {
       "id": "H4",
-      "title": "Mẩu băng keo Đức trong túi áo phao của Tùng",
-      "description": "Túi trong sát ngực, mẩu băng keo xanh dương vo tròn in nửa chữ PHARMA-LOG.",
+      "title": "Mẩu băng dính Đức trong túi áo phao của Tùng",
+      "description": "Túi trong sát ngực, mẩu băng dính xanh dương vo tròn in nửa chữ PHARMA-LOG.",
       "source": "scene"
     },
     {
@@ -490,7 +490,7 @@
     {
       "id": "X3",
       "title": "Ảnh Linh chụp lúc nhận hàng",
-      "description": "17/11 09:03: TL-A báo đỏ, thùng trên cùng có đoạn băng keo khác màu.",
+      "description": "17/11 09:03: TL-A báo đỏ, thùng trên cùng có đoạn băng dính khác màu.",
       "source": "testimony"
     },
     {
@@ -503,7 +503,7 @@
         "lines": [
           {
             "who": "Anh Hưng · 12/11 21:40",
-            "text": "Lô Herzena của Minh Tâm về thứ bảy hả em? Một pallet?"
+            "text": "Lô Herzena của Minh Tâm về thứ bảy à em? Một pallet?"
           },
           {
             "who": "Tùng · 12/11 21:42",
@@ -519,7 +519,7 @@
           },
           {
             "who": "Anh Hưng · 16/11 07:15",
-            "text": "Sáng nay anh gửi trước một trăm. Nhớ đề xuất bên anh đốt nha."
+            "text": "Sáng nay anh gửi trước một trăm. Nhớ đề xuất bên anh đốt nhé."
           }
         ]
       }
@@ -527,7 +527,7 @@
     {
       "id": "H10",
       "title": "Giấy nhớ của Linh dán trên kệ",
-      "description": "\"Anh Tùng để riêng thùng 1 ra mép kệ giùm em. Sáng 17 em tới đọc nhiệt kế sớm, đừng báo chị Thư.\" Chữ Linh, đề ngày 16/11.",
+      "description": "\"Anh Tùng để riêng thùng 1 ra mép kệ hộ em. Sáng 17 em đến đọc nhiệt kế sớm, đừng báo chị Thư.\" Chữ Linh, đề ngày 16/11.",
       "source": "decoy"
     },
     {
@@ -1010,7 +1010,7 @@
     },
     {
       "time": "16/11 02:43",
-      "text": "Tùng đặt TL-A lại, dán thùng bằng băng keo xanh lá của kho."
+      "text": "Tùng đặt TL-A lại, dán thùng bằng băng dính xanh lá của kho."
     },
     {
       "time": "16/11",

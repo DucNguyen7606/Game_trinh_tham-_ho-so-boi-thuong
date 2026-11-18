@@ -262,7 +262,7 @@ function Logbook() {
       <rect x="70" y="70" width="290" height="150" fill="#6b6660" opacity="0.4" />
       <g fill="#f6efe2" fontFamily={mono} fontSize="12">
         <text x="80" y="100">22:58 Mercedes 51K vào</text>
-        <text x="80" y="120">  cậu Khoa lái, đầu xe bể</text>
+        <text x="80" y="120">  cậu Khoa lái, đầu xe vỡ</text>
         <text x="80" y="170">02:15 ông Khải lái</text>
         <text x="80" y="190">  Mercedes ra, một mình</text>
       </g>
@@ -279,7 +279,7 @@ function GateCamera() {
       <rect x="110" y="40" width="200" height="90" rx="20" fill="#e8e2d4" {...O} />
       <circle cx="150" cy="85" r="28" fill={ink.night} />
       <rect x="120" y="160" width="180" height="90" fill="#fff8c4" {...O} strokeWidth={1.5} />
-      <text x="210" y="196" textAnchor="middle" fontSize="12" fill={ink.night} fontFamily={mono}>hư từ 20/11</text>
+      <text x="210" y="196" textAnchor="middle" fontSize="12" fill={ink.night} fontFamily={mono}>hỏng từ 20/11</text>
       <text x="210" y="216" textAnchor="middle" fontSize="12" fill={ink.night} fontFamily={mono}>đã báo ông chủ</text>
     </g>
   )

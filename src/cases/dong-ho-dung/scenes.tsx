@@ -94,7 +94,7 @@ export const stepAt = (i: number) => ({ x: 1100 - i * 70, y: 200 + i * 80 })
 
 function Hall() {
   return (
-    <Frame label="Sảnh lát gạch bông và cầu thang gỗ lim lên lầu">
+    <Frame label="Sảnh lát gạch hoa và cầu thang gỗ lim lên gác">
       <rect width="1600" height="900" fill={C.wall} />
       {/* Wainscot */}
       <rect y="560" width="1600" height="200" fill={C.wallDark} />

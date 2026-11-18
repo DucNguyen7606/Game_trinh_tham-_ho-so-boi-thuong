@@ -199,7 +199,7 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
     },
     {
       id: 'manh',
-      caption: 'Ông Mạnh nhận lời xin lỗi và tiền thuốc. Tối nào ông vẫn đậu xe trước Hiệp Thành Mart, và giờ ông để ý cả người mặc áo mưa trong đêm khô.',
+      caption: 'Ông Mạnh nhận lời xin lỗi và tiền thuốc. Tối nào ông vẫn đỗ xe trước Hiệp Thành Mart, và giờ ông để ý cả người mặc áo mưa trong đêm khô.',
       Art: () => (
         <Panel people={[{ id: 'manh', x: 70, mood: 'smile', size: 42 }]}>
           <XeOm />

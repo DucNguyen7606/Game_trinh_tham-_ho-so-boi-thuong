@@ -14,7 +14,7 @@ const P1 = () => (
     <Row k="Người được BH" v="Trần Đình Hiển, 79 tuổi" />
     <Row k="Người thụ hưởng" v="Trần Đình Khoa (cháu)" strong />
     <Row k="Số tiền BH" v="7.000.000.000 đ" strong />
-    <p className="pt-1 text-[10px]">Điều 3: chi trả khi người được bảo hiểm chết do tai nạn, gồm cả té ngã.</p>
+    <p className="pt-1 text-[10px]">Điều 3: chi trả khi người được bảo hiểm chết do tai nạn, gồm cả ngã.</p>
     <p className="text-[10px]">
       Điều 7, loại trừ: tự tử; <Mark>chết do bệnh lý như nhồi máu cơ tim, đột quỵ</Mark>, kể cả khi sau đó có thương tích khác.
     </p>
@@ -32,7 +32,7 @@ const P2 = () => (
   <Sheet org="Gửi Công ty Bảo hiểm An Tín" title="Đơn yêu cầu bồi thường">
     <Row k="Ngày" v="16/04/2026" />
     <Row k="Người yêu cầu" v="Trần Đình Khoa" />
-    <Row k="Sự cố" v="Ông Trần Đình Hiển té cầu thang" />
+    <Row k="Sự cố" v="Ông Trần Đình Hiển ngã cầu thang" />
     <Row k="Số tiền yêu cầu" v="7.000.000.000 đ" strong />
     <p className="pt-1 text-[10px]">
       Chú tôi trượt chân trên thảm cầu thang <Mark>khoảng 22:47, giờ trên đồng hồ của chú</Mark>. Thanh chặn thảm đã lỏng từ lâu. Lúc đó tôi đang dự tiệc cưới ở Quận 10, có nhiều người làm chứng.
@@ -49,7 +49,7 @@ const P3 = () => (
     <Row k="Cầu thang" v="Thanh chặn thảm bậc 3 bung" />
     <Row k="Cửa, cổng" v="Không dấu hiệu cạy phá" />
     <p className="pt-1 text-[10px]">
-      Nhận định ban đầu: <Mark>tai nạn té ngã</Mark>. Chờ kết luận giám định pháp y.
+      Nhận định ban đầu: <Mark>tai nạn ngã</Mark>. Chờ kết luận giám định pháp y.
     </p>
     <Signature name="Thiếu tá N. H. Phong" />
     <Stamp text="CA P. Võ Thị Sáu" className="bottom-2 left-6" />
@@ -78,12 +78,12 @@ const P5 = () => (
       ['18:05', 'Đào Thị Liên ra cổng, đi bộ'],
       ['18:20', 'Trần Đình Khoa về, dắt xe vào sân'],
       ['19:30', 'Phạm Văn Tư ra cổng, khóa cổng'],
-      ['19:31', 'Ông Hiển ở cửa sổ lầu, đèn sáng'],
+      ['19:31', 'Ông Hiển ở cửa sổ trên gác, đèn sáng'],
       ['20:42', 'Khoa dắt xe ra, mặc vest'],
-      ['21:35', 'Lâm Quốc Thắng bấm chuông. Đèn lầu sáng'],
+      ['21:35', 'Lâm Quốc Thắng bấm chuông. Đèn trên gác sáng'],
       ['21:41', 'Thắng rời đi, không vào'],
       ['00:38', 'Khoa về'],
-      ['01:12', 'Đèn phòng làm việc trên lầu tắt'],
+      ['01:12', 'Đèn phòng làm việc trên gác tắt'],
       ['06:25', 'Phạm Văn Tư mở cổng'],
     ].map(([t, e]) => (
       <div key={t} className="grid grid-cols-[3rem_1fr] gap-x-2 border-b border-dotted border-black/20 font-mono text-[10px]">
@@ -184,16 +184,16 @@ const P9 = () => (
         <b>KH:</b> Cho tôi hỏi, chú tôi bị tim. <Mark>Nếu chú mất vì bệnh tim</Mark> thì có được chi không em?
       </p>
       <p>
-        <b>TĐV:</b> Dạ không ạ. <Mark>Bệnh lý bị loại trừ theo Điều 7</Mark>. Hợp đồng chỉ chi khi tai nạn, như té ngã chẳng hạn.
+        <b>TĐV:</b> Dạ không ạ. <Mark>Bệnh lý bị loại trừ theo Điều 7</Mark>. Hợp đồng chỉ chi khi tai nạn, như ngã chẳng hạn.
       </p>
       <p>
-        <b>KH:</b> Té ngã trong nhà cũng được hả? Cầu thang chẳng hạn?
+        <b>KH:</b> Ngã trong nhà cũng được à? Cầu thang chẳng hạn?
       </p>
       <p>
         <b>TĐV:</b> Dạ được ạ, nếu giám định xác nhận là tai nạn.
       </p>
       <p>
-        <b>KH:</b> Ừ, vậy được rồi.
+        <b>KH:</b> Ừ, thế được rồi.
       </p>
     </div>
     <div className="h-16" />
@@ -231,7 +231,7 @@ const X1 = () => (
     <Row k="Bệnh nhân" v="Trần Đình Hiển, 79 tuổi" />
     <Row k="Chẩn đoán" v="Suy tim độ II (NYHA)" strong />
     <Row k="Thuốc" v="3 cữ/ngày, cữ tối 21:00" />
-    <p className="pt-1 text-[10px]">Lời dặn: đề phòng chóng mặt, té ngã. Nên dọn xuống sống ở tầng trệt, hạn chế đi cầu thang.</p>
+    <p className="pt-1 text-[10px]">Lời dặn: đề phòng chóng mặt, ngã. Nên dọn xuống sống ở tầng trệt, hạn chế đi cầu thang.</p>
     <p className="text-[10px] italic">18/03: cơn đau thắt ngực. Tái khám: 14/04/2026, 08:00.</p>
     <Signature name="BS. P. Q. Bình" />
   </Sheet>
@@ -249,7 +249,7 @@ const X2 = () => (
     <p className="text-center text-[9px] opacity-50">Tin nhắn gửi ông Hiển</p>
     <Bubble time="12/02">Chủ đầu tư trả 80 tỷ, giữ nguyên mặt tiền Pháp. Ông cân nhắc giúp tôi.</Bubble>
     <Bubble time="14/03">85 tỷ. Giá này cả Quận 3 không ai trả.</Bubble>
-    <Bubble time="08/04">92 tỷ, lần chót. Ông đừng để tới lúc hối hận.</Bubble>
+    <Bubble time="08/04">92 tỷ, lần cuối. Ông đừng để tới lúc hối hận.</Bubble>
   </Phone>
 )
 
@@ -257,11 +257,11 @@ const X4 = () => (
   <Sheet org="Thư tay" title="Gửi Châu">
     <div className="space-y-1.5 text-[12px] italic leading-snug text-[#1d3a6a]" style={{ fontFamily: 'Bitter, serif' }}>
       <p>Châu,</p>
-      <p>Con nhắc chuyện bán nhà lần thứ tư rồi. Nhà này ông nội con xây năm 1930, ba lớn lên trong đó, mẹ con mất trong đó.</p>
+      <p>Con nhắc chuyện bán nhà lần thứ tư rồi. Nhà này ông nội con xây năm 1930, bố lớn lên trong đó, mẹ con mất trong đó.</p>
       <p>
-        Ba không bán. <Mark>Con muốn nhà thì đợi ba chết.</Mark>
+        Bố không bán. <Mark>Con muốn nhà thì đợi bố chết.</Mark>
       </p>
-      <p className="text-right">Ba, tháng 3.2026</p>
+      <p className="text-right">Bố, tháng 3.2026</p>
     </div>
   </Sheet>
 )
@@ -271,7 +271,7 @@ const P11 = () => (
     <div className="space-y-1.5 text-[12px] italic leading-snug text-[#1d3a6a]" style={{ fontFamily: 'Bitter, serif' }}>
       <p>Tôi, Trần Đình Hiển, dặn lại các con cháu:</p>
       <p>
-        Nếu tôi mất, <Mark>chú Phạm Văn Tư được ở căn phòng sau bếp trọn đời</Mark> và nhận 500 triệu đồng, coi như trả ơn ba mươi năm chú lo cho nhà này.
+        Nếu tôi mất, <Mark>chú Phạm Văn Tư được ở căn phòng sau bếp trọn đời</Mark> và nhận 500 triệu đồng, xem như trả ơn ba mươi năm chú lo cho nhà này.
       </p>
       <p className="text-right">Hiển, 02.2024</p>
     </div>
@@ -337,10 +337,10 @@ const X3 = () => (
 const X5 = () => (
   <Phone header="Nhật ký cuộc gọi · Châu">
     {[
-      ['Ba (máy bàn)', '13/04 20:14', 'Không trả lời'],
-      ['Ba (máy bàn)', '13/04 20:00', 'Không trả lời'],
-      ['Ba (máy bàn)', '12/04 20:00', '6 phút 12 giây'],
-      ['Ba (máy bàn)', '11/04 20:01', '4 phút 40 giây'],
+      ['Bố (máy bàn)', '13/04 20:14', 'Không trả lời'],
+      ['Bố (máy bàn)', '13/04 20:00', 'Không trả lời'],
+      ['Bố (máy bàn)', '12/04 20:00', '6 phút 12 giây'],
+      ['Bố (máy bàn)', '11/04 20:01', '4 phút 40 giây'],
     ].map(([who, t, r], i) => (
       <div key={t} className="flex items-center justify-between border-b border-black/10 py-1">
         <div>
@@ -357,7 +357,7 @@ const X5 = () => (
 const X6 = () => (
   <Phone header="Zalo · Ông Hiển">
     <p className="text-center text-[9px] opacity-50">13/04/2026</p>
-    <Bubble me time="21:37">Tôi đang đứng ở cổng, ông mở cửa giùm. Tôi mang bản hợp đồng mới.</Bubble>
+    <Bubble me time="21:37">Tôi đang đứng ở cổng, ông mở cửa hộ. Tôi mang bản hợp đồng mới.</Bubble>
     <Bubble me time="21:40">Đèn phòng ông còn sáng mà. Thôi mai tôi quay lại.</Bubble>
     <p className="text-right text-[9px] opacity-60">Đã gửi · chưa xem</p>
   </Phone>

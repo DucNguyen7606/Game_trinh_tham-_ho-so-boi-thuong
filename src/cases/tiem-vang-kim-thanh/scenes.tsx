@@ -309,7 +309,7 @@ function Alley() {
 
 function Upstairs() {
   return (
-    <Frame label="Phòng trên lầu của bà Loan, bàn thờ chồng và bàn sổ sách">
+    <Frame label="Phòng trên gác của bà Loan, bàn thờ chồng và bàn sổ sách">
       <rect width="1600" height="900" fill="#b49470" />
       <path d="M0,700 L1600,700 L1600,900 L0,900 Z" fill={C.wood} />
       {Array.from({ length: 12 }, (_, i) => (

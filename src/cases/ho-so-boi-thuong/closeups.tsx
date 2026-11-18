@@ -65,7 +65,7 @@ function Fan() {
 }
 
 function LogBook() {
-  const lines = ['12/7  22h  kiểm tra cổng, cúp cầu dao', '13/7  22h  kiểm tra cổng, cúp cầu dao', '14/7  22h  kiểm tra cổng']
+  const lines = ['12/7  22h  kiểm tra cổng, ngắt cầu dao', '13/7  22h  kiểm tra cổng, ngắt cầu dao', '14/7  22h  kiểm tra cổng']
   return (
     <g>
       <Table y={40} />

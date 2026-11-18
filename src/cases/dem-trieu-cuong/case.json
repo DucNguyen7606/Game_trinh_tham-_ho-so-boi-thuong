@@ -50,8 +50,8 @@
           "Cả tin",
           "Nói nhanh"
         ],
-        "habit": "Ngồi tiệm ở đường Nguyễn Kim, Quận 10 từ sáng tới tối, việc kho giao hết cho quản lý.",
-        "relation": "Hai mươi năm buôn điện thoại, từ sạp nhỏ thành ba tiệm và một kho ở Quận 8.",
+        "habit": "Ngồi cửa hàng ở đường Nguyễn Kim, Quận 10 từ sáng tới tối, việc kho giao hết cho quản lý.",
+        "relation": "Hai mươi năm buôn điện thoại, từ sạp nhỏ thành ba cửa hàng và một kho ở Quận 8.",
         "quote": "\"Nước năm nào cũng lên, mà chưa năm nào mất sạch như năm nay.\"",
         "note": "Tháng 9 nâng giá trị bảo hiểm từ 3 lên 4,5 tỷ. Hai tháng sau thì kho ngập."
       }
@@ -112,11 +112,11 @@
         "traits": [
           "Ăn nói khéo",
           "Ham vui",
-          "Tiêu xài rộng"
+          "Tiêu pha rộng rãi"
         ],
         "habit": "Tối nào có bóng đá là ngồi quán nhậu ở Phú Mỹ Hưng tới khuya.",
         "relation": "Không làm gì ở kho, nhưng thuộc từng ngóc ngách vì hồi sinh viên từng phụ mẹ trông hàng.",
-        "quote": "\"Má cứ ôm cái kho đó làm gì cho mệt.\"",
+        "quote": "\"Mẹ cứ ôm cái kho ấy làm gì cho mệt.\"",
         "note": "Nợ cá độ khoảng 400 triệu. Mấy tháng nay cứ nhắn mẹ bán kho."
       }
     },
@@ -206,7 +206,7 @@
           "label": "Hai tầng kệ dưới",
           "x": 34,
           "y": 80,
-          "note": "Tầng 1 và 2 vẫn còn đủ 60 thùng carton, nhũn nước, bùn bám tới nắp. Mỗi thùng 10 máy. Đây là phần hư thật."
+          "note": "Tầng 1 và 2 vẫn còn đủ 60 thùng carton, nhũn nước, bùn bám tới nắp. Mỗi thùng 10 máy. Đây là phần hỏng thật."
         },
         {
           "id": "bao-cat",
@@ -265,7 +265,7 @@
           "label": "Mạn ghe của Tư",
           "x": 46,
           "y": 60,
-          "note": "Mạn trái chiếc ghe sơn xanh dương viền đỏ bị trầy một vệt dài, lớp sơn bong ra, dính vụn vữa xám. Mắc ở đầu đinh mạn ghe là một mẩu băng keo in chữ \"MỸ LỆ\".",
+          "note": "Mạn trái chiếc ghe sơn xanh dương viền đỏ bị trầy một vệt dài, lớp sơn bong ra, dính vụn vữa xám. Mắc ở đầu đinh mạn ghe là một mẩu băng dính in chữ \"MỸ LỆ\".",
           "clueId": "H6"
         },
         {
@@ -325,7 +325,7 @@
           "label": "Bảng đơn hàng",
           "x": 86,
           "y": 30,
-          "note": "Bảng trắng ghi lịch giao hàng Tết cho các tiệm ở Quận 10 và miền Tây, bắt đầu từ 1/12."
+          "note": "Bảng trắng ghi lịch giao hàng Tết cho các cửa hàng ở Quận 10 và miền Tây, bắt đầu từ 1/12."
         }
       ]
     }
@@ -364,7 +364,7 @@
     {
       "id": "H6",
       "title": "Mạn ghe của Tư bị trầy",
-      "description": "Ghe xanh dương viền đỏ, vụn vữa xám trong vết trầy, mắc mẩu băng keo \"MỸ LỆ\".",
+      "description": "Ghe xanh dương viền đỏ, vụn vữa xám trong vết trầy, mắc mẩu băng dính \"MỸ LỆ\".",
       "source": "scene"
     },
     {
@@ -428,7 +428,7 @@
         "lines": [
           {
             "who": "Giám định viên",
-            "text": "Chị Bông, chị kể lại giùm đêm 14/11 chị thấy gì bên kia kênh."
+            "text": "Chị Bông, chị kể lại giúp đêm 14/11 chị thấy gì bên kia kênh."
           },
           {
             "who": "Chị Bông",
@@ -436,7 +436,7 @@
           },
           {
             "who": "Chị Bông",
-            "text": "Có người trong kho đưa thùng ra, người trên ghe đỡ lấy. Tui tưởng người ta cứu hàng cho khỏi ngập."
+            "text": "Có người trong kho đưa thùng ra, người trên ghe đỡ lấy. Tôi tưởng người ta cứu hàng cho khỏi ngập."
           },
           {
             "who": "Chị Bông",
@@ -466,13 +466,13 @@
     {
       "id": "P11",
       "title": "Tra cứu IMEI",
-      "description": "214 máy trong lô \"bị nước cuốn\" đã gắn sim từ 17/11. Máy đầu tiên bán ra tại tiệm Gia Hưng, Quận 10.",
+      "description": "214 máy trong lô \"bị nước cuốn\" đã gắn sim từ 17/11. Máy đầu tiên bán ra tại cửa hàng Gia Hưng, Quận 10.",
       "source": "file"
     },
     {
       "id": "X1",
       "title": "Tin nhắn của Nhật",
-      "description": "Nhật nhắn mẹ: \"Má bán cái kho đi, con kẹt 400 triệu rồi.\" Ngày 2/11.",
+      "description": "Nhật nhắn mẹ: \"Mẹ bán cái kho đi, con kẹt 400 triệu rồi.\" Ngày 2/11.",
       "source": "decoy"
     },
     {
@@ -508,7 +508,7 @@
     {
       "id": "X7",
       "title": "Nhật rao bán 30 iPhone",
-      "description": "20/11: Nhật đăng bán 30 máy iPhone \"mới nguyên seal, rẻ hơn tiệm 15%\" trong một nhóm mua bán trên mạng.",
+      "description": "20/11: Nhật đăng bán 30 máy iPhone \"mới nguyên seal, rẻ hơn cửa hàng 15%\" trong một nhóm mua bán trên mạng.",
       "source": "decoy"
     },
     {
@@ -861,7 +861,7 @@
     {
       "id": "full",
       "title": "Trọn vẹn",
-      "text": "An Tín chi 1,8 tỷ cho 600 máy ngập nước. Khải và Tư bị khởi tố tội trộm cắp tài sản. Công an thu hồi hơn 600 máy từ tiệm Gia Hưng ở Quận 10 và trả lại cho bà Lệ."
+      "text": "An Tín chi 1,8 tỷ cho 600 máy ngập nước. Khải và Tư bị khởi tố tội trộm cắp tài sản. Công an thu hồi hơn 600 máy từ cửa hàng Gia Hưng ở Quận 10 và trả lại cho bà Lệ."
     },
     {
       "id": "half",

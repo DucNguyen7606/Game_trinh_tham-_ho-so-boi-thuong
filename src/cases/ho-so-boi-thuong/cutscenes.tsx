@@ -232,7 +232,7 @@ const notes: Record<string, Record<string, EpilogueNote>> = {
     },
     ro: {
       kicker: 'Kho Thịnh Phát · một buổi sáng',
-      lines: ['Ông Tư Rô được giữ lại làm bảo vệ, nhờ bạn nói giùm một tiếng.', 'Bình trà thay cho chai rượu. Sổ trực ca ghi đủ từng giờ.'],
+      lines: ['Ông Tư Rô được giữ lại làm bảo vệ, nhờ bạn nói đỡ một tiếng.', 'Bình trà thay cho chai rượu. Sổ trực ca ghi đủ từng giờ.'],
     },
     ngan: {
       kicker: 'Tối hôm đó',
