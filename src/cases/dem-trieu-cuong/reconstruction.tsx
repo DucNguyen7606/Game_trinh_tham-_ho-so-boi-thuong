@@ -1,50 +1,37 @@
-import { accent, clothColors, ink, shade } from '@/art/palette'
-import { P } from '@/art/primitives'
 import { Portrait, type PortraitSpec } from '@/art/Portrait'
+import { IsoFigure } from '@/art/iso/figure'
+import { Box, Face, iso, type V3 } from '@/art/iso/iso'
 import caseData from './case.json'
-import { Boat, C, sceneArt } from './scenes'
+import { at, isoSceneArt as sceneArt } from './iso/scenes'
 import { documents } from './documents'
 import type { ReconstructionPanel } from '@/game/types'
 
 // "Dựng lại vụ án": the true sequence of events, shown after the player signs.
 
-/** Flat, faceless figure in the scene's 1600x900 space. (x, y) is where the feet touch the ground. */
-function Person({ x, y, h = 260, color, flip = false, hold, raincoat }: { x: number; y: number; h?: number; color: string; flip?: boolean; hold?: 'box' | 'can'; raincoat?: boolean }) {
-  const s = h / 260
-  const body = raincoat ? C.raincoat : color
-  const dark = shade(body, -0.35)
-  const skin = '#c58f63'
+const spec = (id: string) => caseData.suspects.find((x) => x.id === id)!.portrait as PortraitSpec
+
+/** A carton of phones with the shop's name. */
+const Carton = ({ p }: { p: V3 }) => <Box at={p} size={[24, 20, 18]} color="#d9a86a" />
+
+/** Someone as a block figure at a world point; `raincoat` dresses them in the yellow MỸ LỆ raincoat, `hold` puts a carton or a fuel can in their hands. */
+function Fig({ who, p, facing = 'y', raincoat, hold, mood }: { who: string; p: V3; facing?: 'x' | 'y' | '-x' | '-y'; raincoat?: boolean; hold?: 'box' | 'can'; mood?: PortraitSpec['mood'] }) {
+  const sp = { ...spec(who), mood: mood ?? spec(who).mood, ...(raincoat ? { hair: 'cap' as const } : {}) }
+  const [x, y, z] = p
   return (
-    <g transform={`translate(${x} ${y}) scale(${flip ? -s : s} ${s})`}>
-      <ellipse cx="0" cy="2" rx="46" ry="10" fill={ink.night} opacity="0.45" />
-      <polygon points={P([[-22, -120], [-14, 0], [-2, 0], [0, -96], [2, 0], [14, 0], [22, -120]])} fill={raincoat ? body : dark} />
-      {raincoat && <polygon points={P([[-21, -50], [-14, 0], [14, 0], [21, -50]])} fill={C.mud} />}
-      <polygon points={P([[-34, -200], [34, -200], [26, -116], [-26, -116]])} fill={body} />
-      <polygon points={P([[34, -196], [48, -130], [38, -128], [24, -180]])} fill={body} />
-      <polygon points={P([[-34, -196], [-48, -130], [-38, -128], [-24, -180]])} fill={dark} />
-      <rect x="-8" y="-218" width="16" height="20" fill={skin} />
-      <polygon points={P([[-20, -262], [20, -262], [22, -226], [0, -212], [-22, -226]])} fill={skin} />
-      {raincoat ? (
-        <path d="M-28,-226 Q-30,-276 0,-278 Q30,-276 28,-226 L22,-240 Q0,-266 -22,-240 Z" fill={body} />
-      ) : (
-        <polygon points={P([[-22, -264], [22, -264], [20, -246], [-22, -244]])} fill={ink.night} />
-      )}
-      {hold === 'box' && (
-        <g>
-          <rect x="30" y="-200" width="90" height="70" fill={C.carton} stroke={ink.night} strokeWidth="3" />
-          <text x="75" y="-158" textAnchor="middle" fontSize="16" fontWeight="700" fill={accent.red} fontFamily="Barlow Condensed, sans-serif">MỸ LỆ</text>
-        </g>
-      )}
-      {hold === 'can' && <rect x="40" y="-150" width="50" height="70" rx="8" fill="#c23a2c" stroke={ink.night} strokeWidth="3" />}
+    <g>
+      <IsoFigure at={[x - 13, y - 9, z]} spec={sp} facing={facing} size={1.15} cloth={raincoat ? '#f2c443' : undefined} />
+      {hold === 'box' && <Carton p={[x - 10, y + 18, z + 44]} />}
+      {hold === 'can' && <Box at={[x + 8, y + 20, z + 22]} size={[16, 12, 24]} color="#d6453a" />}
     </g>
   )
 }
 
-function Staged({ zone, children }: { zone: string; children: React.ReactNode }) {
+/** A zone diorama with people and boats added in, and markers drawn over it. */
+function Staged({ zone, extra, flooded, children }: { zone: string; extra?: React.ReactNode; flooded?: boolean; children?: React.ReactNode }) {
   const Art = sceneArt[zone]
   return (
     <div className="absolute inset-0">
-      <Art />
+      <Art extra={extra} flooded={flooded} />
       <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" className="absolute inset-0 h-full w-full">
         {children}
       </svg>
@@ -52,9 +39,37 @@ function Staged({ zone, children }: { zone: string; children: React.ReactNode })
   )
 }
 
+/** Tư's boat moored along the canal wall, riding the flood up to the window sill, its hold filling with cartons. */
+function BoatAtWindow({ helper = 'tu', loader = 'khai' }: { helper?: string; loader?: string }) {
+  const Y0 = 240
+  const y = Y0 + 16
+  const z = 30
+  return (
+    <g>
+      {/* the hull along the wall */}
+      <Box at={[60, y, z - 30]} size={[420, 90, 34]} color="#3f78b0" />
+      <Box at={[60, y, z + 4]} size={[420, 90, 6]} color={iso.coral} top="#b9875d" />
+      <Box at={[80, y + 10, z + 10]} size={[70, 70, 46]} color="#e9e1cf" />
+      <Box at={[74, y + 4, z + 56]} size={[82, 82, 6]} color={iso.blue} />
+      <Box at={[100, y + 30, z + 62]} size={[8, 8, 8]} color="#7fe0c0" />
+      {/* cartons already in the hold */}
+      {[[200, 0], [228, 0], [256, 0], [214, 24], [242, 24], [300, 10], [328, 10]].map(([ox, oy], i) => (
+        <Carton key={i} p={[ox, y + 20 + oy, z + 10 + (i === 3 || i === 4 ? 18 : 0)]} />
+      ))}
+      {/* Tư on deck reaching for the next carton */}
+      <Fig who={helper} p={[260, y + 60, z + 10]} hold="box" />
+      {/* Khải in the yellow raincoat behind the bars, handing a carton through */}
+      <Fig who={loader} p={[240, Y0 - 14, -10]} raincoat hold="box" mood="stern" />
+      {Array.from({ length: 7 }, (_, i) => (
+        <Face key={i} points={[[182 + i * 19, Y0 + 1.2, 40], [186 + i * 19, Y0 + 1.2, 40], [186 + i * 19, Y0 + 1.2, 190], [182 + i * 19, Y0 + 1.2, 190]]} fill={iso.metal} />
+      ))}
+    </g>
+  )
+}
+
 function OnDesk({ ids }: { ids: string[] }) {
   return (
-    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[radial-gradient(circle_at_40%_30%,#5a3a24,#1c130f_75%)] p-6">
+    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[linear-gradient(180deg,#d9d2ee,#f6dccb)] p-6">
       {ids.map((id, i) => {
         const Doc = documents[id]
         return (
@@ -69,34 +84,15 @@ function OnDesk({ ids }: { ids: string[] }) {
 
 const Marker = ({ x, y, n }: { x: number; y: number; n: string }) => (
   <g transform={`translate(${x} ${y})`}>
-    <circle r="26" fill={accent.amber} stroke={ink.night} strokeWidth="4" />
-    <text y="10" textAnchor="middle" fontSize="30" fontWeight="700" fill={ink.night} fontFamily="Barlow Condensed, sans-serif">
+    <circle r="26" fill={iso.coral} stroke="#ffffff" strokeWidth="5" />
+    <text y="10" textAnchor="middle" fontSize="28" fontWeight="800" fill="#ffffff" fontFamily="'Be Vietnam Pro', sans-serif">
       {n}
     </text>
   </g>
 )
 
-const Night = () => <rect width="1600" height="900" fill="#141a2a" opacity="0.55" />
-const TU = clothColors.charcoal
-
-/** Flood water standing at the window: the boat rides high enough to touch the sill. */
-function HighWater() {
-  return (
-    <>
-      <Night />
-      <rect y="560" width="1600" height="340" fill={C.canal} opacity="0.92" />
-      {Array.from({ length: 8 }, (_, i) => (
-        <path key={i} d={`M${i * 220 - 40},${600 + (i % 3) * 40} q50,-10 100,0`} stroke="#6e8a86" strokeWidth="4" fill="none" />
-      ))}
-      <g transform="translate(900 540) scale(0.9)">
-        <Boat x={0} y={0} light cargo="none" />
-        {[-220, -150, -80, -185, -115].map((bx, i) => (
-          <rect key={i} x={bx} y={i < 3 ? -46 : -92} width="66" height="46" fill={C.carton} stroke={ink.night} strokeWidth="3" />
-        ))}
-      </g>
-    </>
-  )
-}
+/** Night: a soft violet wash over the diorama. */
+const Night = () => <rect width="1600" height="900" fill="#3b3a6a" opacity="0.25" />
 
 export const reconstruction: ReconstructionPanel[] = (
   [
@@ -113,8 +109,7 @@ export const reconstruction: ReconstructionPanel[] = (
       text: 'Tư ghe đổ đầy 60 lít dầu ở cây dầu ven bến. Khải đã hẹn ông: đêm nay nước lớn, ghe sẽ nổi ngang cửa sổ kho.',
       questionId: 'q4',
       Art: () => (
-        <Staged zone="ben">
-          <Person x={1020} y={830} h={300} color={TU} hold="can" flip />
+        <Staged zone="ben" extra={<Fig who="tu" p={[...at('ben', 66, 92), 18] as V3} hold="can" />}>
           <Marker x={1184} y={690} n="1" />
         </Staged>
       ),
@@ -132,9 +127,8 @@ export const reconstruction: ReconstructionPanel[] = (
       text: 'Nước đã lên gần 0,8 m. Khải mặc áo mưa vàng, lội trong kho, kéo chốt cửa sổ từ bên trong. Ghe của Tư cập vào, mạn ghe cạ sơn xanh đỏ lên bậu cửa. Gần một tiếng, 90 thùng ở ba tầng trên chuyền qua song sắt xuống khoang ghe.',
       questionId: 'q5',
       Art: () => (
-        <Staged zone="cua-so">
-          <Person x={760} y={520} h={220} color={C.raincoat} raincoat hold="box" />
-          <HighWater />
+        <Staged zone="cua-so" flooded extra={<BoatAtWindow />}>
+          <Night />
           <Marker x={800} y={300} n="2" />
           <Marker x={1056} y={380} n="3" />
         </Staged>
@@ -174,11 +168,10 @@ export const reconstruction: ReconstructionPanel[] = (
 
 type Picks = Record<string, string>
 const suspect = (id: string) => caseData.suspects.find((s) => s.id === id)!
-const colorOf = (id: string) => clothColors[suspect(id).portrait.outfitColor as keyof typeof clothColors]
 
 function Pinned({ who, ids }: { who: string; ids: string[] }) {
   return (
-    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[radial-gradient(circle_at_40%_30%,#3b4250,#15161b_75%)] p-6">
+    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[linear-gradient(180deg,#d9d2ee,#f6dccb)] p-6">
       <div className="shrink-0 bg-[#f3e4c4] p-1.5 shadow-lg" style={{ rotate: '-3deg' }}>
         <Portrait spec={suspect(who).portrait as PortraitSpec} size={190} />
         <p className="pt-1 text-center font-mono text-xs text-[#2d1f18]">{suspect(who).name}</p>
@@ -242,10 +235,9 @@ function TakerArt({ who }: { who: string }) {
     )
   return (
     <>
-      <Staged zone="cua-so">
-        <rect width="1600" height="900" fill="#3b4a66" opacity="0.35" style={{ mixBlendMode: 'color' }} />
-        <Person x={800} y={520} h={240} color={colorOf(who)} hold="box" />
-        <text x="1100" y="380" textAnchor="middle" fontSize="120" fontWeight="700" fill="#9fb4c8" opacity="0.5" fontFamily="Bitter, serif">?</text>
+      <Staged zone="cua-so" flooded extra={<BoatAtWindow loader={who} />}>
+        <rect width="1600" height="900" fill="#8f86c0" opacity="0.25" />
+        <text x="1100" y="380" textAnchor="middle" fontSize="120" fontWeight="700" fill="#ffffff" opacity="0.7" fontFamily="'Be Vietnam Pro', sans-serif">?</text>
       </Staged>
       <PanelStamp text="Giả thuyết" color="#9fb4c8" />
     </>

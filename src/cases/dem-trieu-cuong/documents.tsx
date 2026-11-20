@@ -1,11 +1,30 @@
 import { Mark, Phone, PlayerSignature, Row, Sheet, Signature, Stamp } from '@/art/docParts'
 import { ink } from '@/art/palette'
-import { Boat, C, Carton } from './scenes'
+import type { PortraitSpec } from '@/art/Portrait'
+import { iso } from '@/art/iso/iso'
+import { Fb, TimeStamp, makeGuest } from '@/art/iso/photo'
+import type { CaseData } from '@/game/types'
+import caseJson from './case.json'
 
 // What each document in the case-file envelopes looks like, keyed by clue id.
 
 const LINE = ink.night
 const mono = 'IBM Plex Mono, monospace'
+
+
+/** Tư's cargo boat seen side-on in blocks, bow to the right: blue hull, red rail, a cabin at the stern. (x, y) is the waterline at the stern; s scales it. */
+const BoatFb = ({ x, y, s = 1, cargo = 'none', light = false, dim = false }: { x: number; y: number; s?: number; cargo?: 'rice' | 'tarp' | 'none'; light?: boolean; dim?: boolean }) => (
+  <g transform={`translate(${x} ${y}) scale(${s})`} opacity={dim ? 0.85 : 1}>
+    <polygon points="0,-30 200,-30 240,-40 210,4 10,4" fill="#3f78b0" />
+    <rect x="0" y="-36" width="232" height="7" fill={iso.coral} />
+    <Fb x={14} y={-80} w={60} h={44} d={20} c="#e9e1cf" />
+    <Fb x={8} y={-88} w={74} h={8} d={22} c={iso.blue} />
+    <rect x="44" y="-72" width="22" height="16" fill="#3d3446" />
+    {light && <Fb x={30} y={-98} w={8} h={8} d={6} c="#7fe0c0" />}
+    {cargo === 'rice' && [90, 124, 158, 107, 141].map((bx, i) => <Fb key={i} x={bx} y={i > 2 ? -74 : -56} w={32} h={20} d={16} c="#efe6d4" />)}
+    {cargo === 'tarp' && <Fb x={88} y={-70} w={110} h={34} d={20} c="#3c7a8f" />}
+  </g>
+)
 
 const P1 = () => (
   <Sheet org="Công ty Bảo hiểm An Tín" title="Hợp đồng bảo hiểm hàng hóa trong kho">
@@ -114,16 +133,14 @@ const P6 = () => (
 )
 
 const P7 = () => (
-  <div className="bg-[#1c130f] p-2 shadow-[0_6px_16px_rgb(0_0_0/0.45)]">
+  <div className="rounded-xl bg-[#2e2a4a] p-2 shadow-[0_6px_16px_rgb(46_42_74/0.35)]">
     <svg viewBox="0 0 320 180" className="block w-full">
       <rect width="320" height="180" fill="#1d2428" />
       <rect y="110" width="320" height="70" fill="#26393a" />
       {/* The warehouse wall across the canal, with the window */}
-      <rect x="40" y="40" width="240" height="80" fill="#4a4740" />
+      <Fb x={40} y={40} w={240} h={80} d={16} c="#4a4740" />
       <rect x="150" y="62" width="40" height="34" fill="#141a20" />
-      <g transform="translate(150 132) scale(0.18)">
-        <Boat x={0} y={0} light cargo="tarp" />
-      </g>
+      <BoatFb x={120} y={128} s={0.42} light cargo="tarp" dim />
       <rect width="320" height="180" fill="#9ad0c0" opacity="0.05" />
       <text x="8" y="14" fontSize="9" fill="#e8e8e8" fontFamily={mono}>CAM QUÁN NHẬU BA KHÍA · HƯỚNG KÊNH</text>
       <text x="312" y="172" fontSize="9" fill="#e8e8e8" textAnchor="end" fontFamily={mono}>15/11/2025 02:41:07</text>
@@ -141,11 +158,9 @@ const P8 = () => (
     <Row k="Màu sơn" v="Thân xanh dương, viền mạn đỏ" strong />
     <Row k="Bến đăng ký" v="Bến Bình Đông, Q.8" />
     <svg viewBox="0 0 300 90" className="mt-1 block w-full">
-      <rect width="300" height="90" fill="#9fb0b0" />
-      <rect y="62" width="300" height="28" fill={C.canal} />
-      <g transform="translate(150 62) scale(0.4)">
-        <Boat x={0} y={0} cargo="none" />
-      </g>
+      <rect width="300" height="90" fill="#cfd3e6" />
+      <rect y="62" width="300" height="28" fill="#86a4b2" />
+      <BoatFb x={84} y={66} s={0.55} />
     </svg>
     <Stamp text="Đã đăng ký" className="bottom-2 right-3" />
   </Sheet>
@@ -236,46 +251,29 @@ const PhotoMeta = ({ when, where }: { when: string; where: string }) => (
   </p>
 )
 
-const TimeTag = ({ t }: { t: string }) => (
-  <>
-    <rect x="8" y="8" width="104" height="18" rx="4" fill="#000" opacity="0.45" />
-    <text x="14" y="21" fontSize="11" fill="#fff" fontFamily={mono}>
-      {t}
-    </text>
-  </>
-)
-
-const Guest = ({ x, y, s = 1, skin = '#efc39b', hair = '#1a1a1f', shirt }: { x: number; y: number; s?: number; skin?: string; hair?: string; shirt: string }) => (
-  <g transform={`translate(${x} ${y}) scale(${s})`} stroke={LINE} strokeWidth="1.6" strokeLinejoin="round">
-    <path d="M-26,40 Q-24,0 -8,-6 L8,-6 Q24,0 26,40 Z" fill={shirt} />
-    <rect x="-4" y="-14" width="8" height="10" fill={skin} />
-    <ellipse cx="0" cy="-30" rx="13" ry="16" fill={skin} />
-    <path d="M-14,-32 Q-14,-50 0,-48 Q14,-50 14,-32 Q8,-40 0,-40 Q-8,-40 -14,-32 Z" fill={hair} />
-    <circle cx="-5" cy="-30" r="1.6" fill={LINE} stroke="none" />
-    <circle cx="5" cy="-30" r="1.6" fill={LINE} stroke="none" />
-    <path d="M-5,-22 Q0,-18 5,-22" fill="none" strokeWidth="1.4" />
-  </g>
-)
+const TimeTag = TimeStamp
+const cast = Object.fromEntries((caseJson as CaseData).suspects.map((x) => [x.id, x.portrait])) as Record<string, PortraitSpec>
+const Guest = makeGuest(cast)
 
 /** Khải's photo at 23:58: water at the shins, the top three tiers still full. */
 const X3 = () => (
   <Phone header="Zalo · Khải kho">
-    <div className="overflow-hidden rounded-md">
+    <div className="overflow-hidden rounded-xl">
       <svg viewBox="0 0 320 220" className="block w-full">
-        <rect width="320" height="220" fill={C.wall} />
-        {[30, 290].map((x) => (
-          <rect key={x} x={x - 4} y="10" width="8" height="200" fill={C.steel} />
+        <rect width="320" height="220" fill="#e3cfae" />
+        {[26, 286].map((x) => (
+          <Fb key={x} x={x} y={10} w={8} h={200} d={10} c={iso.metal} />
         ))}
         {[196, 158, 110, 62, 14].map((y, i) => (
           <g key={y}>
-            <rect x="26" y={y + 14} width="268" height="5" fill={C.steel} />
+            <Fb x={26} y={y + 14} w={268} h={5} d={14} c="#b0b8c6" />
             {Array.from({ length: 6 }, (_, c) => (
-              <Carton key={c} x={34 + c * 43} y={y - 6} w={38} h={20} wet={i < 1} />
+              <Fb key={c} x={34 + c * 43} y={y - 6} w={36} h={20} d={12} c={i < 1 ? '#9c7d5c' : '#d9a86a'} />
             ))}
           </g>
         ))}
-        <rect y="186" width="320" height="34" fill="#5d6b66" opacity="0.85" />
-        <path d="M0,188 q40,-6 80,0 t80,0 t80,0 t80,0" stroke="#9fb0b0" strokeWidth="2" fill="none" />
+        <rect y="186" width="320" height="34" fill="#8c8a6a" opacity="0.85" />
+        <rect y="186" width="320" height="3" fill="#cfd3c0" />
         <TimeTag t="14/11 23:58" />
       </svg>
     </div>
@@ -286,18 +284,23 @@ const X3 = () => (
 
 const X4 = () => (
   <Phone header="Story · nhat.tran.93">
-    <div className="overflow-hidden rounded-md">
+    <div className="overflow-hidden rounded-xl">
       <svg viewBox="0 0 320 220" className="block w-full">
-        <rect width="320" height="220" fill="#1f2a1d" />
-        <rect x="70" y="20" width="180" height="80" fill="#2f7a4f" stroke={LINE} strokeWidth="3" />
-        <line x1="160" y1="20" x2="160" y2="100" stroke="#e8e8e8" strokeWidth="1.5" />
-        <circle cx="160" cy="60" r="14" fill="none" stroke="#e8e8e8" strokeWidth="1.5" />
-        <rect x="190" y="24" width="56" height="14" fill="#000" opacity="0.6" />
-        <text x="218" y="35" textAnchor="middle" fontSize="9" fill="#fff" fontFamily={mono}>H2 71'</text>
-        <Guest x={80} y={170} shirt="#cf9a32" />
-        <Guest x={160} y={164} s={1.25} shirt="#7a9fb0" hair="#4a3426" />
-        <Guest x={240} y={170} shirt="#ece2cf" />
-        <rect x="0" y="196" width="320" height="24" fill="#7a4f32" />
+        <rect width="320" height="220" fill="#4a4870" />
+        {/* the big screen with the match */}
+        <Fb x={70} y={20} w={180} h={80} d={12} c="#2e2a4a" />
+        <rect x="76" y="26" width="168" height="68" fill="#4f9a6b" />
+        <rect x="159" y="26" width="2" height="68" fill="#e8e8e8" />
+        <rect x="150" y="52" width="20" height="16" fill="none" stroke="#e8e8e8" strokeWidth="1.5" />
+        <rect x="190" y="28" width="52" height="14" rx="3" fill={iso.ink} opacity="0.7" />
+        <text x="216" y="38.5" textAnchor="middle" fontSize="9" fill="#fff" fontFamily={mono}>H2 71'</text>
+        <Guest x={80} y={170} look={{ hair: 'short', mood: 'smile' }} shirt="#e2a63b" />
+        <Guest x={160} y={164} s={1.25} who="nhat" look={{ mood: 'smile' }} />
+        <Guest x={240} y={170} look={{ hair: 'buzz', mood: 'smile', skin: 2 }} shirt="#ece2cf" />
+        <Fb x={-4} y={196} w={330} h={26} d={22} c="#b9875d" />
+        {[40, 120, 210, 280].map((x) => (
+          <Fb key={x} x={x} y={180} w={10} h={18} d={6} c="#d9a441" />
+        ))}
         <TimeTag t="15/11 01:45" />
       </svg>
     </div>
@@ -309,14 +312,17 @@ const X4 = () => (
 /** Tư's photo of the boat at the pier, taken early in the evening. */
 const X5 = () => (
   <Phone header="Thư viện ảnh · con gái ông Tư">
-    <div className="overflow-hidden rounded-md">
+    <div className="overflow-hidden rounded-xl">
       <svg viewBox="0 0 320 220" className="block w-full">
-        <rect width="320" height="220" fill="#2a3448" />
-        <rect y="130" width="320" height="90" fill={C.canalDark} />
-        <g transform="translate(160 140) scale(0.36)">
-          <Boat x={0} y={0} cargo="rice" />
-        </g>
-        <circle cx="270" cy="40" r="16" fill="#e8e0c8" opacity="0.8" />
+        <rect width="320" height="220" fill="#5b6a9a" />
+        <Fb x={0} y={86} w={90} h={44} d={10} c="#7d86ad" />
+        <Fb x={100} y={70} w={70} h={60} d={10} c="#6d779f" />
+        <Fb x={230} y={80} w={90} h={50} d={10} c="#7d86ad" />
+        <rect x="16" y="96" width="10" height="10" fill="#ffe1a0" />
+        <rect x="250" y="92" width="10" height="10" fill="#ffe1a0" />
+        <rect y="130" width="320" height="90" fill="#6f8fa3" />
+        <BoatFb x={44} y={170} s={0.95} cargo="rice" />
+        <Fb x={262} y={30} w={18} h={18} d={8} c="#fbf0c8" />
         <TimeTag t="14/11 21:05" />
       </svg>
     </div>

@@ -53,8 +53,9 @@ const judge = (hair: PortraitSpec['hair'], hairColor: PortraitSpec['hairColor'],
 export const officer: PortraitSpec = { skin: 2, hair: 'cap', hairColor: 'black', build: 'normal', outfit: 'uniform', outfitColor: 'olive', age: 'young', mood: 'stern' }
 
 /** Courtroom: three judges at the bench under the emblem, the accused in the dock between two officers. */
-export function Court({ accused, mood = 'worried' }: { accused: string; mood?: PortraitSpec['mood'] }) {
+export function Court({ accused, mood = 'worried', also, alsoMood = 'stern' }: { accused: string; mood?: PortraitSpec['mood']; also?: string; alsoMood?: PortraitSpec['mood'] }) {
   const spec = useSpec(accused, mood)
+  const spec2 = useSpec(also ?? accused, alsoMood)
   const star = (x: number, z: number, r: number) =>
     Array.from({ length: 10 }, (_, i) => {
       const a = -Math.PI / 2 + (i * Math.PI) / 5
@@ -83,7 +84,8 @@ export function Court({ accused, mood = 'worried' }: { accused: string; mood?: P
       <WallText at={[135, 80.6, 24]} plane="R" text="TÒA ÁN NHÂN DÂN" size={26} color="#ffe7b8" />
       <IsoFigure at={[40, 160, 0]} spec={officer} facing="y" />
       <Box at={[104, 150, 0]} size={[5, 50, 46]} color="#8a5c38" />
-      {spec && <IsoFigure at={[122, 165, 0]} spec={spec} facing="y" />}
+      {spec && <IsoFigure at={[also ? 108 : 122, 165, 0]} spec={spec} facing="y" />}
+      {also && spec2 && <IsoFigure at={[138, 168, 0]} spec={spec2} facing="y" />}
       <Box at={[166, 150, 0]} size={[5, 50, 46]} color="#8a5c38" />
       <Box at={[104, 196, 0]} size={[67, 6, 46]} color="#8a5c38" />
       <Box at={[102, 195, 46]} size={[71, 8, 4]} color="#a3714b" />
