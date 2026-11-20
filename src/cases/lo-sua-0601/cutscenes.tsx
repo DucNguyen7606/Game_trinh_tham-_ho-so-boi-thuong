@@ -3,7 +3,7 @@
 import { GradeFx, TitleCard, type Cutscene, type EpilogueNote } from '@/components/Cutscene'
 import { ClaimDesk, Investigator, Lineup, OnDesk, lineupPins, lower, outroFrom, stampAt } from '@/components/cutsceneParts'
 import type { CaseData } from '@/game/types'
-import { sceneArt } from './scenes'
+import { isoSceneArt as sceneArt } from './iso/scenes'
 import { documents } from './documents'
 import { epilogue } from './epilogue'
 

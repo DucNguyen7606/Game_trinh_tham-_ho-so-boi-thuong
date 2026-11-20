@@ -9,7 +9,21 @@ import { isoSceneArt } from './scenes'
 
 /** Close-ups whose photo must show a reading: a small card laid over the corner, like a label in the evidence photo. */
 const readings: Record<string, string[]> = {
-  'pallet-0601': ['Mã in trên nắp: 0601-L2 · Đ255'],
+  'nhiet-ke': ['Kim đỏ (thấp nhất): 97°C · chuẩn 121°C', 'Thẻ: chỉnh kim 22:00 · 6/1'],
+  'so-van-hanh': ['Ca đêm 6/1 · 02:10: "121°C bình thường"', 'Vết tẩy, nét cũ còn hằn: "98°C · báo động nhiệt"'],
+  'van-hoi': ['Thẻ: bảo trì 8/1 · thay van kẹt'],
+  'bang-chuyen': ['Mã lô + giờ chiết in trên nắp'],
+  'pallet-0601': ['0601-L2 · Đ255 · niêm phong 7/1', 'Nắp phồng · màng seal nguyên · không lỗ kim'],
+  'pallet-0701': ['Lô 0701-L1 · line 1 · nắp phẳng'],
+  'bang-giao': ['8/1 · 0601-L2 · 14 điểm bán (Q.12, Gò Vấp, Hóc Môn)', '9/1 · 0701-L1 · 12 điểm bán · THU HỒI 11/1'],
+  'hop-kim': ['Kim insulin 31G · 0,25 mm', 'Thay hộp 5/1 · hơn 30 kim'],
+  'khay-giay': ['Mặt sau tờ giấy: "…KIỂM NGHIỆM LÔ ______"'],
+  'phieu-xuat': ['Phiếu xuất xưởng · lô 0601-L2 · ĐẠT', '08:00 · 07/01/2026 · L. V. Thuận'],
+  'tu-mau': ['Mẫu lưu: 0601-L2 · đã gửi kiểm nghiệm 11/1'],
+  'ke-sua': ['4 chai 0701-L1: có lỗ, vẫn ngon', '2 chai 0601-L2: chua'],
+  'so-giu-xe': ['Sổ giữ xe 10/01', '59-V1 268.41 · 19:02 → 19:20 · áo mưa xám'],
+  camera: ['Ghi hình lưu ở máy của chị Trang'],
+  'thung-tra': ['Khách trả từ 9/1 · nắp phồng · không lỗ'],
 }
 
 const W = 420
