@@ -88,6 +88,9 @@ function SourPallet() {
       ))}
       <rect x="10" y="200" width="380" height="60" fill={C.crate} {...O} />
       <Label x={200} y={30} t="nắp phồng · màng seal nguyên · không lỗ kim" c={ink.night} />
+      {/* Code printed on every cap: day/month of the shift, line, shift letter and minutes into the shift. */}
+      <rect x="120" y="52" width="160" height="26" rx="4" fill="#fbf4e4" {...O} strokeWidth={1.5} />
+      <text x="200" y="70" textAnchor="middle" fontSize="13" fontWeight="700" fill={ink.night} fontFamily={mono}>0601-L2 · Đ255</text>
       <rect x="130" y="266" width="140" height="24" fill="#fbf4e4" {...O} strokeWidth={1.5} />
       <text x="200" y="283" textAnchor="middle" fontSize="12" fontWeight="700" fill={accent.red} fontFamily={mono}>NIÊM PHONG 7/1</text>
     </g>
