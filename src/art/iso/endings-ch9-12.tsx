@@ -57,8 +57,9 @@ export const officer: PortraitSpec = { skin: 2, hair: 'cap', hairColor: 'black',
  * person stands in the dock between two officers; without it, they stand at
  * the lectern as the one bringing the case.
  */
-export function Court({ who, mood, dock = true }: { who: string; mood: Mood; dock?: boolean }) {
+export function Court({ who, mood, dock = true, also }: { who: string; mood: Mood; dock?: boolean; also?: { who: string; mood: Mood } }) {
   const spec = useSpec(who, mood)
+  const second = useSpec(also?.who ?? '', also?.mood)
   const star = (x: number, z: number, r: number) =>
     Array.from({ length: 10 }, (_, i) => {
       const a = -Math.PI / 2 + (i * Math.PI) / 5
@@ -89,7 +90,8 @@ export function Court({ who, mood, dock = true }: { who: string; mood: Mood; doc
         <>
           <IsoFigure at={[40, 160, 0]} spec={officer} facing="y" />
           <Box at={[104, 150, 0]} size={[5, 50, 46]} color="#8a5c38" />
-          {spec && <IsoFigure at={[122, 165, 0]} spec={spec} facing="y" />}
+          {spec && <IsoFigure at={[second ? 104 : 122, second ? 156 : 165, 0]} spec={spec} facing="y" />}
+          {second && <IsoFigure at={[142, 172, 0]} spec={second} facing="y" />}
           <Box at={[166, 150, 0]} size={[5, 50, 46]} color="#8a5c38" />
           <Box at={[104, 196, 0]} size={[67, 6, 46]} color="#8a5c38" />
           <Box at={[102, 195, 46]} size={[71, 8, 4]} color="#a3714b" />
