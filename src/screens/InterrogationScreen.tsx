@@ -22,6 +22,7 @@ export default function InterrogationScreen() {
   })
   const [zoomed, setZoomed] = useState<string | null>(null)
   const style = useArtStyle()
+  const [asking, setAsking] = useState(false)
   const suspect = data.suspects.find((s) => s.id === activeSuspect)
 
   const story = useMemo(() => {
@@ -119,6 +120,9 @@ export default function InterrogationScreen() {
           onClick={() => {
             story.ChooseChoiceIndex(c.index)
             advance(story, [{ text: c.text, fromPlayer: true }])
+            // The investigator gestures while asking.
+            setAsking(true)
+            setTimeout(() => setAsking(false), 1600)
           }}
         >
           <span className={askedBefore.has(c.text.trim()) ? 'opacity-55' : ''}>{c.text}</span>
@@ -134,7 +138,9 @@ export default function InterrogationScreen() {
     return (
       <div className="grid h-full grid-cols-[1fr_min(560px,40%)] gap-4 p-4">
         <div className="relative min-h-0 overflow-hidden rounded-[28px] shadow-[0_14px_40px_rgb(46_42_74/0.18)]">
-          {suspect.portrait && <InterviewRoom spec={suspect.portrait} talking={talking} label={`Phòng hỏi chuyện với ${suspect.name}`} />}
+          {suspect.portrait && (
+            <InterviewRoom spec={suspect.portrait} talking={talking} interviewer={data.player.portrait} asking={asking} label={`Phòng hỏi chuyện với ${suspect.name}`} />
+          )}
           <div className="absolute left-5 top-5 flex items-center gap-3 rounded-full bg-white/90 py-1.5 pl-1.5 pr-5 shadow-md">
             <div className="size-12 overflow-hidden rounded-full">
               {suspect.portrait && <Portrait spec={suspect.portrait} size={48} />}

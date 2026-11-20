@@ -296,3 +296,22 @@ export function Smudge({ points, color = iso.soot, opacity = 0.5 }: { points: V3
     </g>
   )
 }
+
+/**
+ * Flat drawing (text, outlines) laid on a plane, in world units: 'top' lies on
+ * a horizontal surface at height at[2] with u along x and v along y; 'R' lies on
+ * a plane of constant y (the front of a box, the right wall) with u along x and
+ * v going down; 'L' on a plane of constant x with u along -y (so it reads left to right) and v going down.
+ */
+export function OnPlane({ at, plane, children }: { at: V3; plane: 'top' | 'R' | 'L'; children: ReactNode }) {
+  const p = useContext(ProjCtx)
+  const [X, Y] = project(p, ...at)
+  const s = p.s
+  const m =
+    plane === 'top'
+      ? [COS * s, SIN * s, -COS * s, SIN * s]
+      : plane === 'R'
+        ? [COS * s, SIN * s, 0, s]
+        : [COS * s, -SIN * s, 0, s]
+  return <g transform={`matrix(${m.map((v) => v.toFixed(4)).join(',')},${X.toFixed(1)},${Y.toFixed(1)})`}>{children}</g>
+}

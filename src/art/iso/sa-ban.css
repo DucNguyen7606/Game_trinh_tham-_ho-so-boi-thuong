@@ -100,3 +100,16 @@ html[data-art='sa-ban'] header {
 
 /* The deduction board: a pale pegboard instead of the dark canvas. */
 html[data-art='sa-ban'] .react-flow { --xy-background-color: transparent; --xy-controls-button-background-color: #ffffff; }
+
+/* Front-facing portraits blink now and then. */
+.iso-blink { animation: isoBlink 4.4s infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes isoBlink { 0%, 94%, 100% { transform: scaleY(1); } 96% { transform: scaleY(0.1); } }
+
+/* Gestures while a block figure talks: the right arm comes up now and then, the brows lift. */
+.iso-arm-up { opacity: 0; }
+.iso-talking .iso-arm-up { animation: isoArm 1.6s steps(1, end) infinite; }
+.iso-talking .iso-arm-down { animation: isoArmDown 1.6s steps(1, end) infinite; }
+@keyframes isoArm { 0% { opacity: 0; } 35% { opacity: 1; } 85% { opacity: 0; } }
+@keyframes isoArmDown { 0% { opacity: 1; } 35% { opacity: 0; } 85% { opacity: 1; } }
+.iso-talking .iso-brows { animation: isoBrows 1.2s ease-in-out infinite; }
+@keyframes isoBrows { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(-3px); } }

@@ -1,6 +1,11 @@
-// Illustrated epilogue shown on the ending card: one picture per person's fate.
-import { Portrait, type Mood, type PortraitSpec } from '@/art/Portrait'
-import { accent, ink } from '@/art/palette'
+// Illustrated epilogue shown on the ending card and in the outro: one small
+// diorama per person's fate, in the same block style as the rest of chapter 1.
+import type { ReactNode } from 'react'
+import type { Mood, PortraitSpec } from '@/art/Portrait'
+import { BackWalls, Box, Cyl, Face, IsoStage, OnPlane, Slab, WallText, iso, tone } from '@/art/iso/iso'
+import { IsoFigure } from '@/art/iso/figure'
+import { Cup, Rack, Stool, Table } from '@/art/iso/props'
+import { InterviewRoom } from '@/art/iso/rooms'
 import { useGame } from '@/game/store'
 
 export interface EpiloguePanel {
@@ -9,261 +14,305 @@ export interface EpiloguePanel {
   Art: () => JSX.Element
 }
 
-const LINE = ink.night
+const FONT = "'Be Vietnam Pro', sans-serif"
+const MONO = 'IBM Plex Mono, monospace'
 
-/** A scene drawn in SVG with people standing in it, cut off at the bottom like a photo. */
-function Panel({ children, people = [] }: { children: React.ReactNode; people?: { id: string; x: number; mood?: Mood; size?: number }[] }) {
+function useSpec(id: string, mood?: Mood): PortraitSpec | undefined {
   const data = useGame((s) => s.data)
-  const specOf = (id: string): PortraitSpec | undefined =>
-    id === 'player' ? data.player.portrait : data.suspects.find((s) => s.id === id)?.portrait
-  return (
-    <div className="relative aspect-[3/2] overflow-hidden rounded-sm bg-[#2d1f18]">
-      <svg viewBox="0 0 360 240" className="absolute inset-0 size-full" preserveAspectRatio="xMidYMid slice">
-        {children}
-      </svg>
-      {people.map((p) => {
-        const spec = specOf(p.id)
-        if (!spec) return null
-        const w = p.size ?? 38
-        return (
-          <div key={p.id} className="absolute bottom-0" style={{ left: `${p.x}%`, width: `${w}%`, transform: 'translateX(-50%) translateY(18%)' }}>
-            <Portrait spec={{ ...spec, mood: p.mood ?? spec.mood }} size={240} bare className="h-auto w-full" />
-          </div>
-        )
-      })}
-    </div>
-  )
+  const spec = id === 'player' ? data.player.portrait : data.suspects.find((s) => s.id === id)?.portrait
+  return spec && { ...spec, mood: mood ?? spec.mood }
 }
 
-/** Foreground layer drawn over the people (a rail, a table edge). */
-function Front({ children }: { children: React.ReactNode }) {
-  return (
-    <svg viewBox="0 0 360 240" className="pointer-events-none absolute inset-0 size-full" preserveAspectRatio="xMidYMid slice">
-      {children}
-    </svg>
-  )
+/** The frame: a 3:2 card with the diorama filling it. */
+function Panel({ children }: { children: ReactNode }) {
+  return <div className="relative aspect-[3/2] overflow-hidden rounded-xl">{children}</div>
 }
+
+const judge = (hair: PortraitSpec['hair'], hairColor: PortraitSpec['hairColor'], skin: PortraitSpec['skin']): PortraitSpec => ({
+  skin, hair, hairColor, build: 'normal', outfit: 'suit', outfitColor: 'charcoal', age: 'mid', mood: 'stern',
+})
+const officer: PortraitSpec = { skin: 2, hair: 'cap', hairColor: 'black', build: 'normal', outfit: 'uniform', outfitColor: 'olive', age: 'young', mood: 'stern' }
+const cardboard = '#d9a86a'
 
 // --- Scenes ---------------------------------------------------------------
 
-const Courtroom = () => (
-  <>
-    <rect width="360" height="240" fill="#5a3a26" />
-    {Array.from({ length: 10 }, (_, i) => (
-      <rect key={i} x={i * 36} y="0" width="34" height="240" fill="#61402a" />
-    ))}
-    {/* Red backdrop behind the bench, a plain gold seal and the court's name */}
-    <rect x="100" y="14" width="160" height="96" fill="#9e2b22" stroke={LINE} strokeWidth="2" />
-    <text x="180" y="31" textAnchor="middle" fontSize="11" fill="#ffe7b8" fontFamily="Bitter, serif" letterSpacing="1.5">TÒA ÁN NHÂN DÂN</text>
-    <circle cx="180" cy="62" r="20" fill={accent.gold} stroke={LINE} strokeWidth="2" />
-    <path d="M180,47 l4.2,9.5 10.3,0.9 -7.8,6.6 2.4,10.2 -9.1,-5.6 -9.1,5.6 2.4,-10.2 -7.8,-6.6 10.3,-0.9 Z" fill="#9e2b22" />
-    {/* Judges' bench */}
-    <rect x="40" y="110" width="280" height="40" fill="#7b5233" stroke={LINE} strokeWidth="2" />
-    {[110, 180, 250].map((x) => (
-      <g key={x}>
-        <circle cx={x} cy="100" r="9" fill="#d9a47a" stroke={LINE} strokeWidth="1.5" />
-        <path d={`M${x - 14},112 Q${x},96 ${x + 14},112 Z`} fill="#20242c" stroke={LINE} strokeWidth="1.5" />
-      </g>
-    ))}
-
-  </>
-)
-
-const DockRail = () => (
-  <Front>
-    <rect x="96" y="196" width="168" height="10" fill="#8a5c38" stroke={LINE} strokeWidth="2" />
-    {[110, 140, 170, 200, 230, 250].map((x) => (
-      <rect key={x} x={x} y="206" width="6" height="34" fill="#7b5233" stroke={LINE} strokeWidth="1.2" />
-    ))}
-    {/* Two officers at the sides of the dock */}
-    {[50, 310].map((x) => (
-      <g key={x} stroke={LINE} strokeWidth="2">
-        <path d={`M${x - 30},240 Q${x - 28},178 ${x},172 Q${x + 28},178 ${x + 30},240 Z`} fill="#4f5e3a" />
-        <circle cx={x} cy="152" r="17" fill="#c98f63" />
-        <path d={`M${x - 20},146 Q${x},126 ${x + 20},146 L${x + 22},150 L${x - 22},150 Z`} fill="#4f5e3a" />
-        <rect x={x - 5} y="134" width="10" height="7" fill={accent.red} strokeWidth="1" />
-      </g>
-    ))}
-  </Front>
-)
-
-const InterviewRoom = () => (
-  <>
-    <rect width="360" height="240" fill="#59606a" />
-    <rect x="0" y="0" width="360" height="22" fill="#4a5058" />
-    <rect x="236" y="34" width="90" height="56" fill="#2a2f36" stroke={LINE} strokeWidth="2" />
-    <text x="281" y="68" textAnchor="middle" fontSize="9" fill="#9aa4ae" fontFamily="IBM Plex Mono, monospace">CÔNG AN Q.BÌNH TÂN</text>
-    <circle cx="60" cy="50" r="16" fill="#e8e2d4" stroke={LINE} strokeWidth="2" />
-    <path d="M60,50 V40 M60,50 L67,53" stroke={LINE} strokeWidth="2" strokeLinecap="round" />
-  </>
-)
-
-const InterviewTable = () => (
-  <Front>
-    <rect x="0" y="198" width="360" height="42" fill="#8a7a66" stroke={LINE} strokeWidth="2" />
-    {/* The signed confession, and the gold watch he has taken off */}
-    <rect x="40" y="204" width="70" height="30" fill={ink.bone} stroke={LINE} strokeWidth="1.5" transform="rotate(-5 75 219)" />
-    {[0, 1, 2].map((i) => (
-      <rect key={i} x="48" y={210 + i * 6} width="50" height="2" fill="#9a8a72" transform="rotate(-5 75 219)" />
-    ))}
-    <path d="M86,228 q8,-6 16,0" fill="none" stroke="#2a3a7a" strokeWidth="1.5" />
-    <g transform="translate(270 216)" stroke={LINE} strokeWidth="1.5">
-      <rect x="-26" y="-4" width="52" height="8" rx="3" fill={accent.gold} />
-      <circle r="11" fill={accent.gold} />
-      <circle r="8" fill="#fff6e2" />
-      <path d="M0,0 V-5 M0,0 L4,2" strokeWidth="1.2" />
-    </g>
-  </Front>
-)
-
-const Dawn = () => (
-  <>
-    <defs>
-      <linearGradient id="ep-dawn" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stopColor="#f6c27a" />
-        <stop offset="0.6" stopColor="#f2a96b" />
-        <stop offset="1" stopColor="#d98a5a" />
-      </linearGradient>
-    </defs>
-    <rect width="360" height="240" fill="url(#ep-dawn)" />
-    <circle cx="300" cy="96" r="30" fill="#fff1c8" opacity="0.9" />
-    {/* The rebuilt warehouse and its gate */}
-    <path d="M0,150 L120,112 L240,150 Z" fill="#8a6a54" stroke={LINE} strokeWidth="2" />
-    <rect x="10" y="150" width="220" height="90" fill="#a07e62" stroke={LINE} strokeWidth="2" />
-    <rect x="40" y="166" width="70" height="74" fill="#7a5a44" stroke={LINE} strokeWidth="1.5" />
-    <text x="160" y="176" textAnchor="middle" fontSize="10" fill={ink.night} fontFamily="Bitter, serif">KHO THỊNH PHÁT</text>
-    <rect x="128" y="182" width="64" height="10" fill={ink.bone} stroke={LINE} strokeWidth="1" />
-    <text x="160" y="190" textAnchor="middle" fontSize="6.5" fill={accent.red} fontFamily="IBM Plex Mono, monospace">ĐANG SỬA CHỮA</text>
-    {/* Guard hut with a new logbook */}
-    <rect x="252" y="150" width="96" height="90" fill="#d7b07a" stroke={LINE} strokeWidth="2" />
-    <path d="M246,150 h108 l-10,-14 h-88 Z" fill="#6b4a36" stroke={LINE} strokeWidth="2" />
-  </>
-)
-
-const HutTable = () => (
-  <Front>
-    <rect x="230" y="214" width="130" height="26" fill="#8a6a44" stroke={LINE} strokeWidth="2" />
-    <rect x="320" y="186" width="14" height="30" rx="4" fill={accent.teal} stroke={LINE} strokeWidth="1.5" />
-    <rect x="248" y="206" width="44" height="12" fill={ink.bone} stroke={LINE} strokeWidth="1.2" />
-    <text x="270" y="215" textAnchor="middle" fontSize="6" fill={ink.night} fontFamily="IBM Plex Mono, monospace">SỔ TRỰC CA</text>
-  </Front>
-)
-
-const LiveRoom = () => (
-  <>
-    <rect width="360" height="240" fill="#e7d2bf" />
-    <rect y="170" width="360" height="70" fill="#c9ab8e" />
-    <path d="M20,40 H130" stroke={LINE} strokeWidth="3" />
-    {['#cf9a32', '#7a9fb0', '#b23a2e', '#f6efe2', '#f2a7a0'].map((c, i) => (
-      <path key={i} d={`M${32 + i * 22},40 l-9,14 v44 h18 v-44 Z`} fill={c} stroke={LINE} strokeWidth="1.4" />
-    ))}
-    <circle cx="300" cy="80" r="40" fill="none" stroke="#fff8e8" strokeWidth="10" />
-    <rect x="12" y="132" width="132" height="44" rx="6" fill="#1c130f" opacity="0.85" />
-    <text x="20" y="150" fontSize="8" fill="#fff" fontFamily="IBM Plex Mono, monospace">● LIVE · 1.208 người xem</text>
-    <text x="20" y="166" fontSize="8" fill="#ffd2c8" fontFamily="Be Vietnam Pro, sans-serif">❤ chị Ngân bị oan rồi!</text>
-  </>
-)
-
-const Desk = ({ stamp, sub, color = accent.red }: { stamp: string; sub: string; color?: string }) => (
-  <>
-    <rect width="360" height="240" fill="#4a3326" />
-    {Array.from({ length: 8 }, (_, i) => (
-      <path key={i} d={`M0,${20 + i * 30} Q180,${10 + i * 30} 360,${24 + i * 30}`} stroke="#3e2a1f" strokeWidth="3" fill="none" />
-    ))}
-    <ellipse cx="300" cy="40" rx="120" ry="80" fill={accent.amber} opacity="0.18" />
-    <g transform="rotate(-4 180 120)">
-      <rect x="70" y="34" width="220" height="170" fill={ink.paper} stroke={LINE} strokeWidth="2" />
-      <rect x="70" y="34" width="220" height="24" fill="#d8bf8e" stroke={LINE} strokeWidth="2" />
-      <text x="82" y="51" fontSize="11" fill={ink.night} fontFamily="Bitter, serif">HỒ SƠ BỒI THƯỜNG SỐ 0714</text>
-      {Array.from({ length: 5 }, (_, i) => (
-        <rect key={i} x="86" y={74 + i * 14} width={i % 2 ? 150 : 180} height="3" fill="#b89b6c" />
+/** Courtroom: three judges at the bench under the emblem, the accused in the dock between two officers. */
+function Court({ accused, mood }: { accused: string; mood: Mood }) {
+  const spec = useSpec(accused, mood)
+  // A five-pointed star on the wall plane y = 1.5, centred at (x, z).
+  const star = (x: number, z: number, r: number) =>
+    Array.from({ length: 10 }, (_, i) => {
+      const a = -Math.PI / 2 + (i * Math.PI) / 5
+      const rr = i % 2 ? r * 0.42 : r
+      return [x + Math.cos(a) * rr, 1.6, z - Math.sin(a) * rr] as [number, number, number]
+    })
+  return (
+    <IsoStage label="Phiên tòa" origin={[780, 250]} scale={2.15} sky={['#d9cbe8', '#f6dccb']}>
+      <Slab w={270} d={250} floor="#d8c2ad" depth={22} />
+      <Face points={[[60, 120, 0.3], [230, 120, 0.3], [230, 240, 0.3], [60, 240, 0.3]]} fill="#c9a99a" />
+      <BackWalls w={270} d={250} h={135} left="#d6b897" right="#e2c6a6" edge="#a07c5a" t={7} />
+      {[30, 70, 110, 150, 190, 230].map((y) => (
+        <Face key={y} points={[[0.5, y, 0], [0.5, y + 3, 0], [0.5, y + 3, 135], [0.5, y, 135]]} fill="#c8a582" />
       ))}
-      <g transform="rotate(-10 180 160)">
-        <rect x="96" y="132" width="168" height="48" rx="4" fill="none" stroke={color} strokeWidth="3.5" />
-        <text x="180" y="156" textAnchor="middle" fontSize="15" fontWeight="700" fill={color} fontFamily="Bitter, serif">{stamp}</text>
-        <text x="180" y="172" textAnchor="middle" fontSize="7.5" fill={color} fontFamily="IBM Plex Mono, monospace">{sub}</text>
-      </g>
-    </g>
-    <rect x="300" y="170" width="30" height="50" rx="4" fill="#5b3a2a" stroke={LINE} strokeWidth="2" />
-    <rect x="296" y="214" width="38" height="10" rx="2" fill={color} stroke={LINE} strokeWidth="1.5" />
-  </>
-)
+      {/* red backdrop, the gold emblem and the court's name */}
+      <Face points={[[70, 0.5, 40], [200, 0.5, 40], [200, 0.5, 132], [70, 0.5, 132]]} fill="#cf4d3d" />
+      <Cyl at={[135, 0, 98]} r={20} len={2} axis="y" color={iso.gold} cap={iso.gold} />
+      <Face points={star(135, 98, 14)} fill="#cf4d3d" />
+      {/* the judges, then the bench in front of them */}
+      <IsoFigure at={[78, 26, 0]} spec={judge('bun', 'black', 0)} facing="y" pose="sit" />
+      <IsoFigure at={[122, 26, 0]} spec={judge('side-part', 'gray', 1)} facing="y" pose="sit" />
+      <IsoFigure at={[166, 26, 0]} spec={judge('short', 'black', 2)} facing="y" pose="sit" />
+      <Box at={[60, 58, 0]} size={[150, 22, 56]} color="#a3714b" />
+      <Box at={[60, 58, 56]} size={[150, 24, 4]} color="#b9875d" />
+      {[90, 135, 180].map((x) => (
+        <Box key={x} at={[x - 6, 62, 60]} size={[12, 8, 3]} color={iso.cream} />
+      ))}
+      <WallText at={[135, 80.6, 24]} plane="R" text="TÒA ÁN NHÂN DÂN" size={26} color="#ffe7b8" />
+      {/* officer on the left, the dock, officer on the right */}
+      <IsoFigure at={[40, 160, 0]} spec={officer} facing="y" />
+      <Box at={[104, 150, 0]} size={[5, 50, 46]} color="#8a5c38" />
+      {spec && <IsoFigure at={[122, 165, 0]} spec={spec} facing="y" talking={false} />}
+      <Box at={[166, 150, 0]} size={[5, 50, 46]} color="#8a5c38" />
+      <Box at={[104, 196, 0]} size={[67, 6, 46]} color="#8a5c38" />
+      <Box at={[102, 195, 46]} size={[71, 8, 4]} color="#a3714b" />
+      <IsoFigure at={[206, 150, 0]} spec={officer} facing="y" />
+    </IsoStage>
+  )
+}
 
-const EmptyFlat = () => (
-  <>
-    <rect width="360" height="240" fill="#b8a48a" />
-    <rect x="130" y="40" width="100" height="200" fill="#6e4c34" stroke={LINE} strokeWidth="2" />
-    <rect x="138" y="48" width="84" height="192" fill="#2d1f18" />
-    <rect x="236" y="60" width="72" height="42" fill="#fff6e2" stroke={LINE} strokeWidth="1.5" transform="rotate(4 272 81)" />
-    <text x="272" y="80" textAnchor="middle" fontSize="11" fontWeight="700" fill={accent.red} fontFamily="Bitter, serif" transform="rotate(4 272 81)">CHO THUÊ</text>
-    <text x="272" y="94" textAnchor="middle" fontSize="6.5" fill={ink.night} fontFamily="IBM Plex Mono, monospace" transform="rotate(4 272 81)">P.304 · trống</text>
-    {[
-      [30, 176, 70, 64],
-      [60, 140, 56, 40],
-      [262, 186, 78, 54],
-    ].map(([x, y, w, h], i) => (
-      <g key={i} stroke={LINE} strokeWidth="1.8">
-        <rect x={x} y={y} width={w} height={h} fill="#c9a26a" />
-        <path d={`M${x},${y + 10} H${x + w}`} />
-      </g>
-    ))}
-    <text x="58" y="210" fontSize="7" fill={ink.night} fontFamily="IBM Plex Mono, monospace">ĐỒ BẢO</text>
-    <rect x="0" y="232" width="360" height="8" fill="#8a7458" />
-  </>
-)
-
-const Boxing = () => (
-  <>
-    <rect width="360" height="240" fill="#3a2a22" />
-    <rect x="20" y="20" width="120" height="80" fill="#2d1f18" stroke={LINE} strokeWidth="2" />
-    <text x="80" y="64" textAnchor="middle" fontSize="9" fill={ink.fog} fontFamily="IBM Plex Mono, monospace">PHÒNG GIÁM ĐỊNH</text>
-    <rect x="236" y="30" width="96" height="56" fill={ink.bone} stroke={LINE} strokeWidth="1.5" transform="rotate(5 284 58)" />
-    <text x="284" y="52" textAnchor="middle" fontSize="8" fill={ink.night} fontFamily="Bitter, serif" transform="rotate(5 284 58)">QUYẾT ĐỊNH</text>
-    <text x="284" y="66" textAnchor="middle" fontSize="8" fontWeight="700" fill={accent.red} fontFamily="Bitter, serif" transform="rotate(5 284 58)">RÚT KHỎI VỤ VIỆC</text>
-  </>
-)
-
-const Box = () => (
-  <Front>
-    <g stroke={LINE} strokeWidth="2">
-      <rect x="220" y="176" width="120" height="64" fill="#c9a26a" />
-      <path d="M220,176 l-12,-16 h120 l12,16" fill="#b08a54" />
-      <rect x="236" y="150" width="40" height="30" fill={ink.paper} transform="rotate(-8 256 165)" />
-      <circle cx="306" cy="162" r="12" fill={accent.teal} />
-    </g>
-  </Front>
-)
-
-const Transfer = () => (
-  <>
-    <rect width="360" height="240" fill="#2d3a44" />
-    <rect x="110" y="16" width="140" height="210" rx="16" fill="#1c130f" stroke={LINE} strokeWidth="2" />
-    <rect x="118" y="30" width="124" height="184" rx="6" fill="#f3efe6" />
-    <circle cx="180" cy="70" r="18" fill="#3f8a7e" />
-    <path d="M171,70 l6,6 12,-13" stroke="#fff" strokeWidth="3" fill="none" />
-    <text x="180" y="104" textAnchor="middle" fontSize="9" fill={ink.night} fontFamily="Be Vietnam Pro, sans-serif">Chuyển tiền thành công</text>
-    <text x="180" y="124" textAnchor="middle" fontSize="14" fontWeight="700" fill={ink.night} fontFamily="IBM Plex Mono, monospace">4.000.000.000 đ</text>
-    <text x="180" y="144" textAnchor="middle" fontSize="7" fill="#6b6b6b" fontFamily="IBM Plex Mono, monospace">Bảo hiểm An Tín → Quách Thịnh</text>
-    <text x="180" y="158" textAnchor="middle" fontSize="7" fill="#6b6b6b" fontFamily="IBM Plex Mono, monospace">ND: Boi thuong HS 0714</text>
-  </>
-)
-
-const LongAn = () => (
-  <>
-    <rect width="360" height="240" fill="#151820" />
-    <path d="M60,0 L20,240 H340 L300,0 Z" fill="#f2e2b0" opacity="0.12" />
-    {Array.from({ length: 4 }, (_, row) =>
-      Array.from({ length: 9 }, (_, i) => (
-        <g key={`${row}-${i}`} stroke={LINE} strokeWidth="1.5">
-          <rect x={14 + i * 38} y={64 + row * 40} width="34" height="36" rx="4" fill={['#b23a2e', '#3f6b8a', '#cf9a32', '#6a4a7a'][(i + row) % 4]} />
-          <circle cx={31 + i * 38} cy={82 + row * 40} r="6" fill="#e7d2a8" />
+/** Thịnh signs his confession in the interview room, his gold watch taken off beside the paper. */
+function Confession() {
+  const spec = useSpec('thinh', 'worried')
+  const player = useSpec('player')
+  if (!spec) return <></>
+  return (
+    <InterviewRoom
+      spec={spec}
+      talking={false}
+      interviewer={player}
+      label="Phòng làm việc của công an"
+      extra={
+        <g>
+          <Box at={[122, 104, 56]} size={[30, 38, 1]} color={iso.cream} />
+          <OnPlane at={[126, 108, 57.1]} plane="top">
+            {[0, 1, 2, 3, 4].map((i) => (
+              <rect key={i} x={0} y={i * 5} width={i === 4 ? 12 : 22} height={1.4} fill="#b8a98f" />
+            ))}
+            <path d="M8,29 q4,-4 8,0 t8,0" fill="none" stroke="#2a3a7a" strokeWidth="1.2" />
+          </OnPlane>
+          <Box at={[134, 150, 56]} size={[22, 4, 1.5]} color={iso.gold} />
+          <Cyl at={[145, 152, 56]} r={6} len={3} axis="z" color={iso.gold} cap="#fff6e2" />
         </g>
-      )),
-    )}
-    <rect x="96" y="16" width="168" height="26" fill="#f6efe2" stroke={LINE} strokeWidth="1.5" />
-    <text x="180" y="33" textAnchor="middle" fontSize="10" fill={ink.night} fontFamily="Bitter, serif">KHO THUÊ · ĐỨC HÒA, LONG AN</text>
-  </>
-)
+      }
+    />
+  )
+}
+
+/** Dawn at the warehouse under repair; Tư Rô on duty by the hut with tea and the shift log. */
+function Dawn() {
+  const spec = useSpec('ro', 'smile')
+  return (
+    <IsoStage label="Kho Thịnh Phát lúc bình minh" origin={[760, 230]} scale={2.0} sky={['#f8c98a', '#f7dccb']}>
+      <Slab w={300} d={260} floor="#d8c2ad" depth={22} />
+      {/* the rebuilt warehouse, scaffolding still up */}
+      <Box at={[10, 10, 0]} size={[190, 70, 110]} color="#c7ab92" />
+      <Face points={[[10, 10, 110], [200, 10, 110], [200, 45, 140], [10, 45, 140]]} fill="#a98f7a" />
+      <Face points={[[10, 45, 140], [200, 45, 140], [200, 80, 110], [10, 80, 110]]} fill="#bfa58d" />
+      <Face points={[[200, 10, 110], [200, 45, 140], [200, 80, 110]]} fill="#9d826c" />
+      <Box at={[60, 80, 0]} size={[80, 1, 72]} color="#9aa3b5" />
+      {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
+        <Face key={i} points={[[62, 81.2, 6 + i * 8.6], [138, 81.2, 6 + i * 8.6], [138, 81.2, 7.4 + i * 8.6], [62, 81.2, 7.4 + i * 8.6]]} fill="#7f889a" />
+      ))}
+      <Box at={[40, 80, 82]} size={[120, 2, 18]} color={iso.cream} />
+      <WallText at={[100, 82.2, 95]} plane="R" text="KHO THỊNH PHÁT" size={30} color={iso.ink} />
+      <Box at={[150, 80, 40]} size={[44, 2, 12]} color={iso.coral} />
+      <WallText at={[172, 82.2, 43.5]} plane="R" text="ĐANG SỬA CHỮA" size={14} color="#fff" />
+      {[16, 196].map((x) => (
+        <Box key={x} at={[x, 84, 0]} size={[3, 3, 118]} color={iso.gold} />
+      ))}
+      <Box at={[16, 84, 62]} size={[183, 3, 3]} color={iso.gold} />
+      <Box at={[16, 84, 108]} size={[183, 3, 3]} color={iso.gold} />
+      {/* guard hut */}
+      <Box at={[225, 40, 0]} size={[60, 55, 72]} color="#f2c46d" />
+      <Box at={[219, 34, 72]} size={[72, 67, 8]} color="#9a6b4a" />
+      <Face points={[[240, 95.5, 30], [275, 95.5, 30], [275, 95.5, 58], [240, 95.5, 58]]} fill="#fbe3a6" />
+      {/* Tư Rô on a stool, tea and the new log on a small table */}
+      <Stool at={[205, 150, 0]} h={26} color={iso.blue} />
+      {spec && <IsoFigure at={[192, 138, 0]} spec={spec} facing="y" pose="sit" />}
+      <Table at={[236, 130, 0]} w={44} d={40} h={44} color={iso.wood} />
+      <Cyl at={[250, 142, 44]} r={7} len={12} axis="z" color={iso.blue} cap="#a9c8d4" />
+      <Box at={[262, 150, 44]} size={[14, 18, 2]} color={iso.cream} />
+      <Cup at={[244, 162, 44]} fill="#c99a52" />
+      <Cyl at={[40, 220, 0]} r={14} len={18} axis="z" color="#c98a5c" />
+      <Box at={[31, 211, 18]} size={[18, 18, 26]} color={iso.leaf} />
+    </IsoStage>
+  )
+}
+
+/** Ngân's room, live again, five times the usual viewers. */
+function LiveRoom() {
+  const spec = useSpec('ngan', 'smile')
+  return (
+    <IsoStage
+      label="Phòng livestream của Ngân"
+      origin={[780, 250]}
+      scale={2.15}
+      sky={['#f3c9c0', '#f7e3d6']}
+      overlay={
+        <g fontFamily={MONO}>
+          <rect x="190" y="70" width="330" height="96" rx="22" fill={iso.ink} opacity="0.82" />
+          <circle cx="226" cy="104" r="9" fill="#ff5b4a" />
+          <text x="246" y="113" fontSize="26" fill="#fff">LIVE · 1.208 xem</text>
+          <text x="214" y="148" fontSize="22" fill="#ffd2c8" fontFamily={FONT}>❤ chị Ngân bị oan rồi!</text>
+        </g>
+      }
+    >
+      <Slab w={270} d={240} floor="#e9d3be" depth={22} />
+      <BackWalls w={270} d={240} h={125} left="#f0d2c4" right="#f7e0d2" edge="#d39c8c" t={7} />
+      {/* clothes rack against the right wall */}
+      <Box at={[24, 10, 0]} size={[4, 4, 92]} color={iso.inkSoft} />
+      <Box at={[146, 10, 0]} size={[4, 4, 92]} color={iso.inkSoft} />
+      <Box at={[24, 10, 92]} size={[126, 4, 4]} color={iso.inkSoft} />
+      {['#e2a63b', '#7a9fb0', iso.coral, '#fbf4e8', '#f4aaa3'].map((c, i) => (
+        <Box key={i} at={[32 + i * 23, 6, 40]} size={[18, 12, 50]} color={c} />
+      ))}
+      {/* ring light on a stand */}
+      <Box at={[218, 60, 0]} size={[4, 4, 80]} color={iso.inkSoft} />
+      <Cyl at={[220, 60, 104]} r={24} len={3} axis="y" color="#fffaf0" cap="#fffaf0" />
+      <Cyl at={[220, 63.2, 104]} r={17} len={0.5} axis="y" color="#f7e0d2" cap="#f7e0d2" />
+      {/* Ngân holding up a blouse, the phone on its tripod in front of her */}
+      {spec && <IsoFigure at={[110, 100, 0]} spec={spec} facing="y" talking />}
+      <Box at={[140, 132, 36]} size={[26, 4, 32]} color="#f4aaa3" />
+      <Box at={[60, 150, 0]} size={[70, 44, 40]} color="#b98f6e" />
+      <Box at={[66, 156, 40]} size={[24, 18, 10]} color="#fbf4e8" />
+      <Box at={[96, 158, 40]} size={[24, 16, 6]} color="#7a9fb0" />
+      <Box at={[160, 205, 0]} size={[3, 3, 70]} color={iso.ink} />
+      <Box at={[152, 200, 70]} size={[18, 3, 30]} color={iso.ink} />
+    </IsoStage>
+  )
+}
+
+/** The claim folder on the investigator's desk with the final stamp on it. */
+function Desk({ stamp, sub, color = '#d6453a' }: { stamp: string; sub: string; color?: string }) {
+  return (
+    <IsoStage label="Hồ sơ bồi thường 0714" origin={[700, 150]} scale={2.6} sky={['#d6cfee', '#f7dccb']}>
+      <Box at={[0, 0, 0]} size={[300, 220, 20]} color="#b8927a" />
+      <Box at={[40, 34, 20]} size={[180, 140, 3]} color="#e8cf98" />
+      <Box at={[48, 40, 23]} size={[166, 128, 1]} color="#fffaf0" />
+      <OnPlane at={[56, 48, 24.2]} plane="top">
+        <rect x="0" y="0" width="150" height="16" fill="#e8cf98" />
+        <text x="6" y="11.5" fontSize="9.5" fontWeight="800" fill={iso.ink} fontFamily={FONT}>HỒ SƠ BỒI THƯỜNG SỐ 0714</text>
+        {[0, 1, 2, 3].map((i) => (
+          <rect key={i} x="6" y={24 + i * 9} width={i % 2 ? 100 : 130} height="2.4" fill="#cdbb9c" />
+        ))}
+        <g transform="rotate(-8 75 86)">
+          <rect x="8" y="66" width="134" height="40" rx="4" fill="none" stroke={color} strokeWidth="3" />
+          <text x="75" y="86" textAnchor="middle" fontSize="12" fontWeight="800" fill={color} fontFamily={FONT}>{stamp}</text>
+          <text x="75" y="99" textAnchor="middle" fontSize="6.5" fill={color} fontFamily={MONO}>{sub}</text>
+        </g>
+      </OnPlane>
+      {/* rubber stamp and ink pad, coffee */}
+      <Box at={[238, 120, 20]} size={[40, 30, 5]} color={color} />
+      <Box at={[244, 60, 20]} size={[22, 22, 8]} color={tone(color, -0.2)} />
+      <Box at={[251, 67, 28]} size={[8, 8, 18]} color={iso.woodDark} />
+      <Cyl at={[255, 71, 46]} r={8} len={8} axis="z" color={iso.woodDark} cap={iso.wood} />
+      <Cup at={[258, 186, 20]} fill="#7b5236" />
+      <Box at={[60, 186, 20]} size={[40, 6, 3]} color={iso.ink} />
+    </IsoStage>
+  )
+}
+
+/** Bảo's rented room a week later: empty, his things boxed up, a "for rent" note on the wall. */
+function EmptyFlat() {
+  return (
+    <IsoStage label="Phòng trọ trống" origin={[780, 250]} scale={2.15} sky={['#cfd3e6', '#f1e1d2']}>
+      <Slab w={270} d={250} floor="#ddcbb6" depth={22} />
+      <BackWalls w={270} d={250} h={125} left="#d9cbb8" right="#e6d9c7" edge="#a8957e" t={7} />
+      {/* open door onto the dark corridor */}
+      <Face points={[[90, 0.5, 0], [150, 0.5, 0], [150, 0.5, 110], [90, 0.5, 110]]} fill="#3d3446" />
+      <Face points={[[150, 0.5, 0], [150, 40, 0], [150, 40, 110], [150, 0.5, 110]]} fill="#a07c5a" />
+      {/* the note */}
+      <Face points={[[172, 0.6, 66], [244, 0.6, 66], [244, 0.6, 104], [172, 0.6, 104]]} fill="#fffaf0" />
+      <WallText at={[208, 0.8, 84]} plane="R" text="CHO THUÊ" size={26} color="#d6453a" />
+      <WallText at={[208, 0.8, 74]} plane="R" text="P.304 · trống" size={14} color={iso.ink} weight={500} />
+      <Face points={[[0.5, 60, 50], [0.5, 140, 50], [0.5, 140, 100], [0.5, 60, 100]]} fill="#c5b59f" />
+      {/* boxes */}
+      <Box at={[24, 120, 0]} size={[64, 54, 44]} color={cardboard} />
+      <Box at={[32, 128, 44]} size={[44, 36, 32]} color={tone(cardboard, 0.08)} />
+      <WallText at={[56, 174.5, 18]} plane="R" text="ĐỒ BẢO" size={18} color={iso.ink} />
+      <Box at={[180, 168, 0]} size={[58, 52, 38]} color={cardboard} />
+      <Box at={[186, 172, 38]} size={[30, 24, 3]} color={iso.cream} />
+      <Box at={[100, 40, 0]} size={[40, 70, 10]} color="#c5b59f" />
+    </IsoStage>
+  )
+}
+
+/** The player taken off the case, carrying their things out in a box. */
+function Boxing() {
+  const spec = useSpec('player', 'worried')
+  return (
+    <IsoStage label="Bị rút khỏi vụ việc" origin={[780, 250]} scale={2.15} sky={['#cfc8ea', '#f6dccb']}>
+      <Slab w={270} d={250} floor="#e2d3c6" depth={22} />
+      <BackWalls w={270} d={250} h={125} left="#cbbfe0" right="#ddd0e6" edge="#9a8fb0" t={7} />
+      <Face points={[[0.5, 50, 84], [0.5, 160, 84], [0.5, 160, 108], [0.5, 50, 108]]} fill={iso.blue} />
+      <WallText at={[1, 105, 92]} plane="L" text="PHÒNG GIÁM ĐỊNH" size={20} />
+      {/* the decision pinned to the wall */}
+      <Face points={[[150, 0.6, 50], [230, 0.6, 50], [230, 0.6, 106], [150, 0.6, 106]]} fill="#fffaf0" />
+      <WallText at={[190, 0.8, 92]} plane="R" text="QUYẾT ĐỊNH" size={20} color={iso.ink} />
+      <WallText at={[190, 0.8, 74]} plane="R" text="RÚT KHỎI VỤ VIỆC" size={19} color="#d6453a" />
+      {/* the emptied desk */}
+      <Box at={[150, 40, 0]} size={[100, 60, 50]} color="#b8927a" />
+      <Box at={[160, 50, 50]} size={[30, 22, 26]} color={iso.ink} />
+      {spec && <IsoFigure at={[96, 140, 0]} spec={spec} facing="y" />}
+      <Box at={[94, 168, 30]} size={[32, 28, 26]} color={cardboard} />
+      <Box at={[100, 172, 56]} size={[12, 16, 8]} color={iso.cream} />
+      <Cyl at={[120, 182, 56]} r={6} len={10} axis="z" color={iso.leaf} />
+      <Cyl at={[30, 228, 0]} r={12} len={20} axis="z" color="#c98a5c" />
+      <Box at={[22, 220, 20]} size={[16, 16, 22]} color={iso.leaf} />
+    </IsoStage>
+  )
+}
+
+/** The payout notification on a phone lying on the desk. */
+function Transfer() {
+  return (
+    <IsoStage label="Chuyển tiền bồi thường" origin={[700, 150]} scale={2.6} sky={['#c8d3e6', '#f1e1d2']}>
+      <Box at={[0, 0, 0]} size={[300, 220, 20]} color="#b8927a" />
+      <Box at={[90, 30, 20]} size={[100, 170, 6]} color={iso.ink} />
+      <Box at={[95, 36, 26]} size={[90, 158, 0.6]} color="#fffaf0" />
+      <OnPlane at={[95, 36, 26.8]} plane="top">
+        <circle cx="45" cy="34" r="13" fill="#3f8a7e" />
+        <path d="M38,34 l5,5 9,-10" stroke="#fff" strokeWidth="2.6" fill="none" />
+        <text x="45" y="66" textAnchor="middle" fontSize="7.5" fill={iso.ink} fontFamily={FONT}>Chuyển tiền thành công</text>
+        <text x="45" y="84" textAnchor="middle" fontSize="8.4" fontWeight="800" fill={iso.ink} fontFamily={MONO}>4.000.000.000 đ</text>
+        <text x="45" y="100" textAnchor="middle" fontSize="5.6" fill={iso.inkSoft} fontFamily={MONO}>An Tín → Quách Thịnh</text>
+        <text x="45" y="110" textAnchor="middle" fontSize="5.6" fill={iso.inkSoft} fontFamily={MONO}>ND: Boi thuong HS 0714</text>
+      </OnPlane>
+      <Cup at={[240, 60, 20]} fill="#7b5236" />
+      <Box at={[220, 120, 20]} size={[50, 70, 3]} color="#e8cf98" />
+    </IsoStage>
+  )
+}
+
+/** The rented warehouse in Long An: 412 rolls of fabric, never burnt. */
+function LongAn() {
+  const player = useSpec('player')
+  const rows = (k: number) => Array.from({ length: 3 }, (_, l) => Array.from({ length: 4 }, (_, i) => ['#e46b4f', '#5d8ea3', '#f2c46d', '#8f7aa3'][(i + l + k) % 4]))
+  return (
+    <IsoStage label="Kho thuê ở Long An" origin={[790, 300]} scale={1.5} sky={['#b9bfd6', '#e6dbe6']}>
+      <Slab w={320} d={280} floor="#cfc6bf" depth={22} />
+      <BackWalls w={320} d={280} h={210} left="#b7b9cf" right="#c7c8db" edge="#8d8fa8" t={8} />
+      <Face points={[[60, 0.5, 168], [270, 0.5, 168], [270, 0.5, 198], [60, 0.5, 198]]} fill="#fffaf0" />
+      <WallText at={[165, 0.8, 177]} plane="R" text="KHO THUÊ · ĐỨC HÒA, LONG AN" size={20} color={iso.ink} />
+      <Rack at={[30, 20, 0]} rolls={rows(0)} len={120} />
+      <Rack at={[170, 20, 0]} rolls={rows(1)} len={120} />
+      <Rack at={[30, 160, 0]} rolls={rows(2)} len={120} />
+      <Face points={[[180, 170, 0.4], [320, 150, 0.4], [320, 280, 0.4], [180, 280, 0.4]]} fill="#fff4c8" opacity={0.55} />
+      {player && <IsoFigure at={[230, 210, 0]} spec={player} facing="-x" />}
+      <Box at={[250, 240, 0]} size={[30, 24, 30]} color={cardboard} />
+    </IsoStage>
+  )
+}
 
 // --- Endings ---------------------------------------------------------------
 
@@ -273,43 +322,34 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
       id: 'court',
       caption: 'Tòa án nhân dân TP.HCM đưa Phan Quốc Bảo ra xét xử về tội hủy hoại tài sản và tham ô 620 triệu qua Công ty Hưng Long.',
       Art: () => (
-        <div className="relative">
-          <Panel people={[{ id: 'bao', x: 50, mood: 'worried', size: 44 }]}>
-            <Courtroom />
-          </Panel>
-          <DockRail />
-        </div>
+        <Panel>
+          <Court accused="bao" mood="worried" />
+        </Panel>
       ),
     },
     {
       id: 'thinh',
       caption: 'Ông Thịnh ký biên bản nhận tội gian lận bảo hiểm. Lần đầu tiên người ta thấy ông tháo chiếc đồng hồ vàng.',
       Art: () => (
-        <div className="relative">
-          <Panel people={[{ id: 'thinh', x: 52, mood: 'worried', size: 52 }]}>
-            <InterviewRoom />
-          </Panel>
-          <InterviewTable />
-        </div>
+        <Panel>
+          <Confession />
+        </Panel>
       ),
     },
     {
       id: 'ro',
       caption: 'Ông Tư Rô được giữ lại làm bảo vệ nhờ bạn nói giùm. Bình trà thay cho chai rượu, sổ trực ca ghi đủ từng giờ.',
       Art: () => (
-        <div className="relative">
-          <Panel people={[{ id: 'ro', x: 60, mood: 'smile', size: 48 }]}>
-            <Dawn />
-          </Panel>
-          <HutTable />
-        </div>
+        <Panel>
+          <Dawn />
+        </Panel>
       ),
     },
     {
       id: 'ngan',
       caption: 'Ngân được minh oan. Buổi livestream tối đó đông gấp năm lần thường lệ.',
       Art: () => (
-        <Panel people={[{ id: 'ngan', x: 60, mood: 'smile', size: 54 }]}>
+        <Panel>
           <LiveRoom />
         </Panel>
       ),
@@ -338,12 +378,9 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
       id: 'thinh',
       caption: 'Ông Thịnh bị khởi tố cả tội đốt kho. Ông vẫn thề rằng mình đã hủy "vụ 20".',
       Art: () => (
-        <div className="relative">
-          <Panel people={[{ id: 'thinh', x: 50, mood: 'angry', size: 44 }]}>
-            <Courtroom />
-          </Panel>
-          <DockRail />
-        </div>
+        <Panel>
+          <Court accused="thinh" mood="angry" />
+        </Panel>
       ),
     },
     {
@@ -370,12 +407,9 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
       id: 'player',
       caption: 'Bạn bị rút khỏi vụ việc. Thùng giấy trên bàn đựng hết đồ của bạn.',
       Art: () => (
-        <div className="relative">
-          <Panel people={[{ id: 'player', x: 36, mood: 'worried', size: 52 }]}>
-            <Boxing />
-          </Panel>
-          <Box />
-        </div>
+        <Panel>
+          <Boxing />
+        </Panel>
       ),
     },
   ],
