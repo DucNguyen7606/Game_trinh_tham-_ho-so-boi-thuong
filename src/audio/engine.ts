@@ -80,7 +80,7 @@ class GameAudio {
     const t = this.ctx!.currentTime + 0.05
     this.fadeOut(t)
 
-    const out = mixer.out(mixer.music, id === 'interrogation' ? 0.18 : 0.32)
+    const out = mixer.out(mixer.music, 0.32)
     const theme = THEMES[id]
     for (const f of out.faders) {
       f.gain.setValueAtTime(0.0001, t)

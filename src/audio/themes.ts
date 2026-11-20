@@ -8,7 +8,7 @@
  */
 import type { Out, Rnd } from './core'
 import { danBau } from './instruments'
-import { bowedLine, line, piano, stringChord, strings } from './orchestral'
+import { bowedLine, line, piano, stringChord } from './orchestral'
 
 export type ThemeId = 'menu' | 'desk' | 'scene' | 'interrogation' | 'verdict'
 
@@ -126,27 +126,81 @@ const scene: Theme = {
   },
 }
 
-// ---------------------------------------------------------------- 4. Thẩm vấn: dàn dây trầm, piano
+// ---------------------------------------------------------------- 4. Thẩm vấn (three gentle options)
 
-const interrogation: Theme = {
+// No steady pulse and no clashing intervals: tension comes from space and
+// slow minor harmony instead, so long interviews don't tire the ear.
+const INTERRO_CHORDS = [Dm, Dm, Bb, Bb, Gm, Gm, A, A]
+
+/** A. "Lặng": soft strings, a few low piano notes, lots of silence. */
+const interrogationQuiet: Theme = {
   id: 'interrogation',
-  title: 'Phòng thẩm vấn (dàn dây trầm, piano)',
-  bpm: 84,
+  title: 'Thẩm vấn A: Lặng (dàn dây, piano)',
+  bpm: 60,
   beats: 4,
-  level: 1.45,
+  level: 1.8,
   bar(o, t, bar) {
     const beat = 60 / this.bpm
-    const phase = bar % 8
-    const root = [38, 38, 39, 38, 38, 36, 39, 39][phase]
-    // Low strings pulse in quarter notes, dark and steady like a held breath.
-    for (let i = 0; i < 4; i++) strings(o, t + i * beat, root + 12, beat * 0.6, { gain: i === 0 ? 0.05 : 0.035, attack: 0.03, release: 0.25, bright: 0.05 })
-    // One high, quiet held note in the second half: the question hanging.
-    if (phase === 4) strings(o, t, 69, beat * 16, { gain: 0.015, attack: 3, release: 2, bright: 0.1 })
-    // Piano: single low notes, a minor second apart, every other bar.
-    if (phase % 2 === 0) piano(o, t, root, beat * 3, 0.2)
-    if (phase === 3 || phase === 7) piano(o, t + beat * 2, root + 13, beat * 2, 0.12)
+    const c = INTERRO_CHORDS[bar % 8]
+    if (bar % 2 === 0) bed(o, t, c, beat * 8, 0.02)
+    if (bar % 2 === 0) piano(o, t, c.root + 12, beat * 6, 0.15)
+    // Every four bars, a two-note question: up a fourth, then left hanging.
+    if (bar % 4 === 1) {
+      piano(o, t + beat, c.tones[1], beat * 2, 0.12)
+      piano(o, t + beat * 3, c.tones[2], beat * 3, 0.1)
+    }
   },
 }
+
+/** B. "Nhịp tim": a faint low heartbeat every other bar under a slow cello. */
+const interrogationHeart: Theme = {
+  id: 'interrogation',
+  title: 'Thẩm vấn B: Nhịp tim (dàn dây, cello, piano trầm)',
+  bpm: 64,
+  beats: 4,
+  level: 1.7,
+  bar(o, t, bar) {
+    const beat = 60 / this.bpm
+    const c = INTERRO_CHORDS[bar % 8]
+    if (bar % 2 === 0) {
+      bed(o, t, c, beat * 8, 0.018)
+      // Heartbeat: two soft, muffled low notes, then a long rest.
+      piano(o, t, c.root, beat * 0.6, 0.13)
+      piano(o, t + beat * 0.45, c.root, beat * 0.6, 0.08)
+    }
+    if (bar % 16 === 4)
+      bowedLine(o, t, line(beat, [[57, 4], [58, 4], [57, 3], [55, 1], [53, 4], [55, 4], [57, 8]]), 'cello', 0.07, 0)
+  },
+}
+
+/** C. "Đàn bầu": strings hold still while đàn bầu asks short, sliding phrases. */
+const interrogationDanBau: Theme = {
+  id: 'interrogation',
+  title: 'Thẩm vấn C: Đàn bầu (dàn dây, đàn bầu)',
+  bpm: 58,
+  beats: 4,
+  level: 2.2,
+  bar(o, t, bar) {
+    const beat = 60 / this.bpm
+    const c = INTERRO_CHORDS[bar % 8]
+    if (bar % 2 === 0) bed(o, t, c, beat * 8, 0.022)
+    const phrases: [number, number, number?][][] = [
+      [[69, 2, -2], [67, 1], [65, 3]],
+      [[62, 2], [65, 2, -1], [62, 4]],
+    ]
+    // One phrase every four bars, then quiet.
+    if (bar % 4 === 1) {
+      let pos = 0
+      for (const [m, b, from] of phrases[(bar >> 2) % 2]) {
+        danBau(o, t + pos * beat, { midi: m, dur: b * beat, from, vibrato: 0.3, gain: 0.1 }, 0)
+        pos += b
+      }
+    }
+  },
+}
+
+export const INTERROGATION_VARIANTS = { A: interrogationQuiet, B: interrogationHeart, C: interrogationDanBau }
+const interrogation = interrogationQuiet
 
 // ---------------------------------------------------------------- 5. Kết luận: piano, dàn dây, đàn bầu
 

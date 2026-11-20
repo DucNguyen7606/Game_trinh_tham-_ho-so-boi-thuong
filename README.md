@@ -79,7 +79,7 @@ Toàn bộ nhạc và hiệu ứng được tổng hợp bằng Web Audio API ng
 | Màn hình chính | Piano nói motif series D–A–F, dàn dây nền, rồi cello hát lại |
 | Bàn làm việc, Hồ sơ, Bàn suy luận, Thư viện | Piano hai nốt chậm như đang nghĩ, dàn dây nền |
 | Hiện trường | Piano rải hợp âm chậm, cello hát một câu dài |
-| Thẩm vấn | Dàn dây trầm nhịp đều, piano nốt thấp cách nửa cung |
+| Thẩm vấn | Lặng: dàn dây nền và vài nốt piano trầm, nhiều khoảng lặng (có sẵn 2 phương án khác trong `INTERROGATION_VARIANTS`) |
 | Kết luận | Dàn dây nền, giai điệu ngũ cung trên piano rồi đàn bầu |
 
 Hiệu ứng gắn tự động theo trạng thái game (không phải sửa từng màn hình): chụp ảnh khi tìm manh mối ở hiện trường, nhặt và thả giấy khi kéo hồ sơ, ghim, lật trang, kéo và nối dây đỏ, cắt dây, xé phong bì khi mở khoá, suy luận đúng / sai / thiếu chứng cứ, bước chân khi vào khu, đóng dấu khi qua ngày, gõ phím khi chọn lời thoại.
