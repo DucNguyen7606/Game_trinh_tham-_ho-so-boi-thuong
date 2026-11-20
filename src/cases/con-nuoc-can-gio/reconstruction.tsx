@@ -1,8 +1,8 @@
-import { accent, clothColors, ink, shade } from '@/art/palette'
-import { P } from '@/art/primitives'
+import { clothColors } from '@/art/palette'
 import { Portrait, type PortraitSpec } from '@/art/Portrait'
 import caseData from './case.json'
-import { sceneArt } from './scenes'
+import { isoSceneArt as sceneArt } from './iso/scenes'
+import { Held, Marker, Night, StandIn } from '@/art/iso/kit'
 import { documents } from './documents'
 import type { ReconstructionPanel } from '@/game/types'
 
@@ -10,43 +10,13 @@ import type { ReconstructionPanel } from '@/game/types'
 
 type Pose = 'stand' | 'crouch' | 'swing'
 
-/** Flat, faceless figure in the scene's 1600x900 space. (x, y) is where the feet touch the ground. */
+/** A block stand-in in the scene's 1600x900 space. (x, y) is where the feet touch the ground. */
 function Person({ x, y, h = 260, color, pose = 'stand', flip = false, hold, jacket }: { x: number; y: number; h?: number; color: string; pose?: Pose; flip?: boolean; hold?: 'bag' | 'pole'; jacket?: boolean }) {
-  const s = h / 260
-  const dark = shade(color, -0.35)
-  const skin = '#b98a68'
-  const tf = `translate(${x} ${y}) scale(${flip ? -s : s} ${s})`
-  const torso = jacket ? accent.ember : color
   return (
-    <g transform={tf}>
-      <ellipse cx="0" cy="2" rx="46" ry="10" fill={ink.night} opacity="0.45" />
-      {pose === 'crouch' ? (
-        <>
-          <polygon points={P([[-30, -70], [30, -70], [44, -30], [40, 0], [26, 0], [24, -26], [-10, -36], [-20, 0], [-34, 0]])} fill={dark} />
-          <polygon points={P([[-36, -150], [26, -136], [34, -70], [-30, -66]])} fill={torso} />
-          <polygon points={P([[24, -132], [70, -86], [62, -78], [18, -110]])} fill={torso} />
-          <polygon points={P([[-12, -186], [26, -176], [24, -142], [0, -132], [-18, -146]])} fill={skin} />
-          <polygon points={P([[-14, -188], [28, -178], [24, -164], [-16, -170]])} fill={ink.night} />
-        </>
-      ) : (
-        <>
-          <polygon points={P([[-22, -120], [-14, 0], [-2, 0], [0, -96], [2, 0], [14, 0], [22, -120]])} fill={dark} />
-          <polygon points={P([[-34, -200], [34, -200], [26, -116], [-26, -116]])} fill={torso} />
-          {pose === 'swing' ? (
-            <polygon points={P([[30, -196], [70, -250], [62, -258], [20, -210]])} fill={color} />
-          ) : (
-            <polygon points={P([[34, -196], [48, -130], [38, -128], [24, -180]])} fill={torso} />
-          )}
-          <polygon points={P([[-34, -196], [-48, -130], [-38, -128], [-24, -180]])} fill={dark} />
-          <rect x="-8" y="-218" width="16" height="20" fill={skin} />
-          <polygon points={P([[-20, -262], [20, -262], [22, -226], [0, -212], [-22, -226]])} fill={skin} />
-          <polygon points={P([[-22, -264], [22, -264], [20, -246], [-22, -244]])} fill={ink.night} />
-        </>
-      )}
-      {hold === 'bag' && <rect x="36" y="-150" width="40" height="52" rx="8" fill="#2f4258" stroke={ink.night} strokeWidth="3" />}
-      {hold === 'pole' && pose === 'swing' && <line x1="66" y1="-254" x2="10" y2="-420" stroke="#c9b27a" strokeWidth="12" strokeLinecap="round" />}
-      {hold === 'pole' && pose !== 'swing' && <line x1="44" y1="-140" x2="60" y2="0" stroke="#c9b27a" strokeWidth="12" strokeLinecap="round" />}
-    </g>
+    <StandIn x={x} y={y} h={h} color={jacket ? '#f08a3c' : color} pose={pose} flip={flip} spec={{ hair: 'short', hairColor: 'gray' }}>
+      {hold === 'bag' && <Held.Bag />}
+      {hold === 'pole' && <Held.Pole />}
+    </StandIn>
   )
 }
 
@@ -64,7 +34,7 @@ function Staged({ zone, children }: { zone: string; children: React.ReactNode })
 
 function OnDesk({ ids }: { ids: string[] }) {
   return (
-    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[radial-gradient(circle_at_40%_30%,#5a3a24,#1c130f_75%)] p-6">
+    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[linear-gradient(180deg,#d9d2ee,#f6dccb)] p-6">
       {ids.map((id, i) => {
         const Doc = documents[id]
         return (
@@ -76,18 +46,6 @@ function OnDesk({ ids }: { ids: string[] }) {
     </div>
   )
 }
-
-const Marker = ({ x, y, n }: { x: number; y: number; n: string }) => (
-  <g transform={`translate(${x} ${y})`}>
-    <circle r="26" fill={accent.amber} stroke={ink.night} strokeWidth="4" />
-    <text y="10" textAnchor="middle" fontSize="30" fontWeight="700" fill={ink.night} fontFamily="Barlow Condensed, sans-serif">
-      {n}
-    </text>
-  </g>
-)
-
-/** Night grade over a dawn scene. */
-const Night = () => <rect width="1600" height="900" fill="#141a2a" opacity="0.55" />
 
 const LUC = '#2a2622' // the black bà ba
 const TAM = clothColors.khaki
@@ -195,7 +153,7 @@ const colorOf = (id: string) => clothColors[suspect(id).portrait.outfitColor as 
 
 function Pinned({ who, ids }: { who: string; ids: string[] }) {
   return (
-    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[radial-gradient(circle_at_40%_30%,#3b4250,#15161b_75%)] p-6">
+    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[linear-gradient(180deg,#d9d2ee,#f6dccb)] p-6">
       <div className="shrink-0 bg-[#f3e4c4] p-1.5 shadow-lg" style={{ rotate: '-3deg' }}>
         <Portrait spec={suspect(who).portrait as PortraitSpec} size={190} />
         <p className="pt-1 text-center font-mono text-xs text-[#2d1f18]">{suspect(who).name}</p>
@@ -262,7 +220,7 @@ function KillerArt({ who }: { who: string }) {
   return (
     <>
       <Staged zone="rach">
-        <rect width="1600" height="900" fill="#3b4a66" opacity="0.35" style={{ mixBlendMode: 'color' }} />
+        <rect width="1600" height="900" fill="#8f7aa3" opacity="0.3" style={{ mixBlendMode: 'color' }} />
         {who === 'none' ? (
           <text x="800" y="500" textAnchor="middle" fontSize="140" fontWeight="700" fill="#9fb4c8" opacity="0.5" fontFamily="Bitter, serif">~ ~ ~</text>
         ) : (

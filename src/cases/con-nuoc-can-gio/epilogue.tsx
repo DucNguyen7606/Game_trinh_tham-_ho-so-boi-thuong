@@ -1,143 +1,85 @@
-// Illustrated epilogue shown on the ending card: one picture per person's fate.
-import { Portrait, type Mood, type PortraitSpec } from '@/art/Portrait'
-import { accent, ink } from '@/art/palette'
-import { useGame } from '@/game/store'
+// Illustrated epilogue shown on the ending card: one small diorama per person's fate.
+import { Box, Cyl, Face, WallText, iso } from '@/art/iso/iso'
+import { IsoFigure } from '@/art/iso/figure'
+import { EpiBoxing, EpiCourt, EpiDesk, EpiPanel as Panel, EpiRoom, EpiTransfer, Plant, useCaseSpec } from '@/art/iso/kit'
 import type { EpiloguePanel } from '@/cases/ho-so-boi-thuong/epilogue'
 
-const LINE = ink.night
-const mono = 'IBM Plex Mono, monospace'
+const Transfer = () => <EpiTransfer amount="5.000.000.000 đ" to="Phạm Thị Hồng" note="Chi tra HD AT-NT-0512" />
+const File = ({ stamp, sub, color }: { stamp: string; sub: string; color?: string }) => <EpiDesk file="0909" stamp={stamp} sub={sub} color={color} />
 
-function Panel({ children, people = [] }: { children: React.ReactNode; people?: { id: string; x: number; mood?: Mood; size?: number }[] }) {
-  const data = useGame((s) => s.data)
-  const specOf = (id: string): PortraitSpec | undefined =>
-    id === 'player' ? data.player.portrait : data.suspects.find((s) => s.id === id)?.portrait
+/** The landing at sunrise: someone standing on the jetty, the boat tied up behind. */
+function Riverbank({ who }: { who: string }) {
+  const spec = useCaseSpec(who, who === 'hong' ? 'worried' : 'stern')
   return (
-    <div className="relative aspect-[3/2] overflow-hidden rounded-sm bg-[#2d1f18]">
-      <svg viewBox="0 0 360 240" className="absolute inset-0 size-full" preserveAspectRatio="xMidYMid slice">
-        {children}
-      </svg>
-      {people.map((p) => {
-        const spec = specOf(p.id)
-        if (!spec) return null
-        const w = p.size ?? 38
-        return (
-          <div key={p.id} className="absolute bottom-0" style={{ left: `${p.x}%`, width: `${w}%`, transform: 'translateX(-50%) translateY(18%)' }}>
-            <Portrait spec={{ ...spec, mood: p.mood ?? spec.mood }} size={240} bare className="h-auto w-full" />
-          </div>
-        )
-      })}
-    </div>
-  )
-}
-
-const Courtroom = () => (
-  <>
-    <rect width="360" height="240" fill="#5a3a26" />
-    {Array.from({ length: 10 }, (_, i) => (
-      <rect key={i} x={i * 36} y="0" width="34" height="240" fill="#61402a" />
-    ))}
-    <rect x="100" y="14" width="160" height="96" fill="#9e2b22" stroke={LINE} strokeWidth="2" />
-    <text x="180" y="31" textAnchor="middle" fontSize="11" fill="#ffe7b8" fontFamily="Bitter, serif" letterSpacing="1.5">TÒA ÁN NHÂN DÂN</text>
-    <circle cx="180" cy="62" r="20" fill={accent.gold} stroke={LINE} strokeWidth="2" />
-    <path d="M180,47 l4.2,9.5 10.3,0.9 -7.8,6.6 2.4,10.2 -9.1,-5.6 -9.1,5.6 2.4,-10.2 -7.8,-6.6 10.3,-0.9 Z" fill="#9e2b22" />
-    <rect x="40" y="110" width="280" height="34" fill="#7a4f32" stroke={LINE} strokeWidth="2" />
-  </>
-)
-
-/** Rail of the dock drawn over the defendant. */
-const DockRail = () => (
-  <svg viewBox="0 0 360 240" className="pointer-events-none absolute inset-0 size-full" preserveAspectRatio="xMidYMid slice">
-    <rect x="90" y="190" width="180" height="12" fill="#7a4f32" stroke={LINE} strokeWidth="2" />
-    {[100, 140, 180, 220, 260].map((x) => (
-      <rect key={x} x={x - 4} y="200" width="8" height="40" fill="#573721" stroke={LINE} strokeWidth="1.5" />
-    ))}
-  </svg>
-)
-
-const Riverbank = () => (
-  <>
-    <rect width="360" height="240" fill="#c98a5a" />
-    <rect width="360" height="100" fill="#4a4558" />
-    <path d="M0,110 Q90,90 180,104 T360,100 L360,130 L0,130 Z" fill="#2b4229" />
-    <rect y="128" width="360" height="112" fill="#3e5a5e" />
-    <circle cx="280" cy="112" r="20" fill="#ffd98f" opacity="0.8" />
-    {[30, 60, 320].map((x) => (
-      <line key={x} x1={x} y1="130" x2={x + 3} y2="60" stroke="#9a6a44" strokeWidth="4" />
-    ))}
-  </>
-)
-
-const Market = () => (
-  <>
-    <rect width="360" height="240" fill="#2f3a3e" />
-    {Array.from({ length: 6 }, (_, i) => (
-      <rect key={i} x={14 + i * 58} y="20" width="40" height="28" fill="#f2c46b" opacity="0.7" />
-    ))}
-    <rect y="150" width="360" height="90" fill="#3a3f44" />
-    <rect x="230" y="120" width="100" height="40" fill="#3f8a7e" stroke={LINE} strokeWidth="1.5" />
-    <text x="280" y="145" textAnchor="middle" fontSize="11" fill="#fff" fontFamily="Barlow Condensed, sans-serif">VỰA SỐ 14</text>
-  </>
-)
-
-const Hospital = () => (
-  <>
-    <rect width="360" height="240" fill="#d9e4d6" />
-    <rect x="20" y="20" width="110" height="80" fill="#9fbfd0" stroke={LINE} strokeWidth="2" />
-    <rect x="160" y="140" width="190" height="50" rx="6" fill="#f6efe2" stroke={LINE} strokeWidth="2" />
-    <rect x="300" y="40" width="10" height="100" fill="#6f7477" />
-    <rect x="290" y="40" width="30" height="40" rx="6" fill="#cfe0ef" stroke={LINE} strokeWidth="1.5" />
-    <text x="75" y="130" textAnchor="middle" fontSize="10" fill={LINE} fontFamily={mono}>KHOA TIM MẠCH</text>
-  </>
-)
-
-function Desk({ stamp, sub }: { stamp: string; sub: string }) {
-  return (
-    <>
-      <rect width="360" height="240" fill="#5a3a24" />
-      <rect x="70" y="30" width="220" height="180" fill="#fbf4e4" stroke={LINE} strokeWidth="2" transform="rotate(-3 180 120)" />
-      <text x="180" y="60" textAnchor="middle" fontSize="10" fill={LINE} fontFamily={mono}>HỒ SƠ BỒI THƯỜNG 0909</text>
-      {Array.from({ length: 5 }, (_, i) => (
-        <rect key={i} x="96" y={76 + i * 14} width={150 - (i % 2) * 30} height="5" fill="#c4b494" />
+    <EpiRoom label="Bến ghe lúc bình minh" sky={['#f8c98a', '#f7dccb']} floor="#bdb5ab">
+      <Face points={[[0, 0, 0.3], [270, 0, 0.3], [270, 90, 0.3], [0, 90, 0.3]]} fill="#8fb8c9" />
+      <Cyl at={[230, -10, 40]} r={22} len={2} axis="y" color="#ffd98f" cap="#ffe7b8" />
+      <Box at={[30, 20, 0]} size={[150, 50, 18]} color="#3f6b6a" top="#6f5a48" />
+      <Box at={[60, 26, 18]} size={[60, 38, 26]} color="#5d8ea3" />
+      {[200, 240].map((x) => (
+        <Box key={x} at={[x, 70, 0]} size={[4, 4, 110]} color="#d4bf8a" />
       ))}
-      <g transform="rotate(-12 180 160)">
-        <rect x="80" y="140" width="200" height="44" fill="none" stroke={accent.red} strokeWidth="4" />
-        <text x="180" y="162" textAnchor="middle" fontSize="15" fontWeight="700" fill={accent.red} fontFamily="Barlow Condensed, sans-serif">{stamp}</text>
-        <text x="180" y="177" textAnchor="middle" fontSize="8" fill={accent.red} fontFamily={mono}>{sub}</text>
-      </g>
-    </>
+      <Box at={[60, 110, 0]} size={[150, 60, 14]} color="#b98f6e" />
+      {spec && <IsoFigure at={[118, 128, 14]} spec={spec} facing="y" />}
+      <Plant at={[30, 220]} />
+    </EpiRoom>
   )
 }
 
-const Office = () => (
-  <>
-    <rect width="360" height="240" fill="#3d4a52" />
-    <rect x="20" y="20" width="120" height="90" fill="#7f8f9c" stroke={LINE} strokeWidth="2" />
-    <rect x="190" y="150" width="150" height="70" fill="#c9a274" stroke={LINE} strokeWidth="2" />
-    <path d="M200,150 L215,128 L325,128 L340,150 Z" fill="#a8844f" stroke={LINE} strokeWidth="2" />
-  </>
-)
+/** Vinh's stall at Bình Điền market. */
+function Market() {
+  const spec = useCaseSpec('vinh', 'neutral')
+  return (
+    <EpiRoom label="Vựa số 14, chợ Bình Điền" left="#c6c3d8" right="#d6d2e4" sky={['#b8c3dd', '#dcd6ee']}>
+      <Face points={[[60, 0.5, 80], [230, 0.5, 80], [230, 0.5, 112], [60, 0.5, 112]]} fill={iso.blue} />
+      <WallText at={[145, 0.8, 90]} plane="R" text="VỰA SỐ 14" size={24} />
+      {[0, 1, 2].map((i) => (
+        <Box key={i} at={[150 + i * 30, 30, 0]} size={[26, 40, 22 + i * 4]} color="#3f8a7e" />
+      ))}
+      <Box at={[60, 120, 0]} size={[70, 60, 10]} color={iso.metal} />
+      <Box at={[66, 126, 10]} size={[56, 48, 20]} color="#3f8a7e" />
+      {[0, 1, 2, 3].map((i) => (
+        <Box key={i} at={[72 + i * 12, 140, 30]} size={[8, 6, 3]} color="#ff8a5c" />
+      ))}
+      {spec && <IsoFigure at={[150, 150, 0]} spec={spec} facing="y" />}
+    </EpiRoom>
+  )
+}
 
-const Transfer = () => (
-  <>
-    <rect width="360" height="240" fill="#5a3a24" />
-    <rect x="110" y="20" width="140" height="200" rx="16" fill="#1c130f" />
-    <rect x="120" y="36" width="120" height="170" rx="6" fill="#f6efe2" />
-    <text x="180" y="70" textAnchor="middle" fontSize="10" fill={LINE} fontFamily={mono}>Chuyển khoản thành công</text>
-    <text x="180" y="110" textAnchor="middle" fontSize="18" fontWeight="700" fill="#3f8a7e" fontFamily={mono}>5.000.000.000đ</text>
-    <text x="180" y="140" textAnchor="middle" fontSize="9" fill={LINE} fontFamily={mono}>→ PHAM THI HONG</text>
-  </>
-)
+/** Tâm's son's heart ward, the player by the bed. */
+function Hospital() {
+  const spec = useCaseSpec('player', 'smile')
+  const boy = { skin: 3, hair: 'buzz', hairColor: 'black', build: 'thin', outfit: 'shirt', outfitColor: 'sky', age: 'young', mood: 'smile' } as const
+  return (
+    <EpiRoom label="Khoa tim mạch" left="#cfe0d2" right="#dfeae0" edge="#8fae9c" floor="#eef1ec">
+      <Face points={[[0.5, 40, 60], [0.5, 140, 60], [0.5, 140, 110], [0.5, 40, 110]]} fill="#bfdbe6" />
+      <Face points={[[60, 0.5, 92], [210, 0.5, 92], [210, 0.5, 112], [60, 0.5, 112]]} fill={iso.blue} />
+      <WallText at={[135, 0.8, 97]} plane="R" text="KHOA TIM MẠCH" size={18} />
+      <Box at={[120, 20, 0]} size={[90, 120, 40]} color="#d6dde6" top="#fffaf0" />
+      <Box at={[124, 22, 40]} size={[82, 30, 8]} color="#fffaf0" />
+      <IsoFigure at={[150, 36, 18]} spec={boy} facing="y" pose="sit" />
+      <Box at={[124, 70, 40]} size={[82, 66, 6]} color="#a9c8d4" />
+      <Box at={[230, 30, 0]} size={[4, 4, 100]} color={iso.metal} />
+      <Box at={[224, 24, 90]} size={[16, 16, 20]} color="#cfe6f2" />
+      {spec && <IsoFigure at={[80, 120, 0]} spec={spec} facing="x" />}
+    </EpiRoom>
+  )
+}
 
-const Gold = () => (
-  <>
-    <rect width="360" height="240" fill="#2a2522" />
-    <rect x="60" y="80" width="240" height="120" fill="#ece6da" stroke={LINE} strokeWidth="2" />
-    {Array.from({ length: 9 }, (_, i) => (
-      <rect key={i} x={80 + (i % 3) * 70} y={96 + Math.floor(i / 3) * 32} width="56" height="24" rx="2" fill={accent.gold} stroke={LINE} strokeWidth="1.5" />
-    ))}
-    <text x="180" y="50" textAnchor="middle" fontSize="12" fill="#f3e4c4" fontFamily={mono}>THÙNG XỐP · QUẬN 8</text>
-  </>
-)
+/** The gold found in a styrofoam box in Quận 8. */
+function Gold() {
+  return (
+    <EpiRoom label="Thùng xốp đựng vàng" left="#c9c3d9" right="#d9d3e6" sky={['#cfc8ea', '#f6dccb']}>
+      <WallText at={[135, 0.8, 90]} plane="R" text="QUẬN 8" size={22} color={iso.ink} />
+      <Box at={[70, 70, 0]} size={[120, 90, 50]} color="#f6efe3" />
+      <Box at={[78, 78, 50]} size={[104, 74, 1]} color="#e9e1d4" />
+      {Array.from({ length: 9 }, (_, i) => (
+        <Box key={i} at={[86 + (i % 3) * 32, 84 + Math.floor(i / 3) * 22, 51]} size={[26, 16, 5]} color={iso.gold} />
+      ))}
+      <Box at={[200, 150, 0]} size={[50, 30, 6]} color="#f6efe3" />
+    </EpiRoom>
+  )
+}
 
 export const epilogue: Record<string, EpiloguePanel[]> = {
   full: [
@@ -154,12 +96,9 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
       id: 'court',
       caption: 'Nguyễn Văn Tâm bị đưa ra xét xử về tội giết người và cướp tài sản. Ông nhận tội ngay phiên đầu.',
       Art: () => (
-        <div className="relative">
-          <Panel people={[{ id: 'tam', x: 50, mood: 'worried', size: 44 }]}>
-            <Courtroom />
-          </Panel>
-          <DockRail />
-        </div>
+        <Panel>
+          <EpiCourt accused={['tam']} mood="worried" />
+        </Panel>
       ),
     },
     {
@@ -175,7 +114,7 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
       id: 'vinh',
       caption: 'Vinh lấy lại được phần lớn tiền cọc. Anh không còn nhắc chuyện mua vựa.',
       Art: () => (
-        <Panel people={[{ id: 'vinh', x: 40, mood: 'neutral', size: 48 }]}>
+        <Panel>
           <Market />
         </Panel>
       ),
@@ -184,8 +123,8 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
       id: 'hong',
       caption: 'Bà Hồng trả hết nợ cho vựa, giữ lại chiếc ghe. Sáng nào bà cũng ra bến, nơi chồng bà xuống ghe lần cuối.',
       Art: () => (
-        <Panel people={[{ id: 'hong', x: 40, mood: 'worried', size: 50 }]}>
-          <Riverbank />
+        <Panel>
+          <Riverbank who="hong" />
         </Panel>
       ),
     },
@@ -193,7 +132,7 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
       id: 'son',
       caption: 'Con trai ông Tâm vẫn được mổ tim nhờ một quỹ từ thiện. Bạn là người gửi hồ sơ cho quỹ.',
       Art: () => (
-        <Panel people={[{ id: 'player', x: 30, mood: 'smile', size: 44 }]}>
+        <Panel>
           <Hospital />
         </Panel>
       ),
@@ -203,7 +142,7 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
       caption: 'Hồ sơ 0909 đóng lại. Kế hoạch giả chết là của ông Lực, cái chết là thật, và tiền về đúng người thụ hưởng ngay tình.',
       Art: () => (
         <Panel>
-          <Desk stamp="CHI TRẢ BỒI THƯỜNG" sub="CHUYỂN HỒ SƠ ÁN MẠNG CHO CÔNG AN" />
+          <File stamp="CHI TRẢ BỒI THƯỜNG" sub="CHUYỂN HỒ SƠ ÁN MẠNG CHO CÔNG AN" color="#3f8a7e" />
         </Panel>
       ),
     },
@@ -222,12 +161,9 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
       id: 'tam',
       caption: 'Nhưng hồ sơ ghi sai người bày vụ chìm ghe. Luật sư của Tâm nói thân chủ chỉ là người làm thuê bị ép, và bản án nhẹ đi nhiều.',
       Art: () => (
-        <div className="relative">
-          <Panel people={[{ id: 'tam', x: 50, mood: 'stern', size: 44 }]}>
-            <Courtroom />
-          </Panel>
-          <DockRail />
-        </div>
+        <Panel>
+          <EpiCourt accused={['tam']} mood="stern" />
+        </Panel>
       ),
     },
   ],
@@ -245,8 +181,8 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
       id: 'tam',
       caption: 'Nhưng người bạn chỉ ra là kẻ giết ông Lực có ngoại phạm vững, hồ sơ hình sự bị trả về. Sáu Tâm vẫn lái ghe ở Long Hòa. Mỗi tháng ông lên thành phố một lần, mang theo một thùng xốp.',
       Art: () => (
-        <Panel people={[{ id: 'tam', x: 55, mood: 'stern', size: 46 }]}>
-          <Riverbank />
+        <Panel>
+          <Riverbank who="tam" />
         </Panel>
       ),
     },
@@ -257,7 +193,7 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
       caption: 'Bạn từ chối hồ sơ vì ông Lực định giả chết để trục lợi.',
       Art: () => (
         <Panel>
-          <Desk stamp="TỪ CHỐI BỒI THƯỜNG" sub="LÝ DO: GIẢ CHẾT TRỤC LỢI" />
+          <File stamp="TỪ CHỐI BỒI THƯỜNG" sub="LÝ DO: GIẢ CHẾT TRỤC LỢI" />
         </Panel>
       ),
     },
@@ -265,8 +201,8 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
       id: 'court',
       caption: 'Bà Hồng kiện An Tín. Luật sư của bà chỉ đọc Điều 9: ông Lực không tự tử, và người thụ hưởng không gây ra cái chết. An Tín thua, chi đủ 5 tỷ kèm lãi chậm trả và án phí.',
       Art: () => (
-        <Panel people={[{ id: 'hong', x: 50, mood: 'worried', size: 44 }]}>
-          <Courtroom />
+        <Panel>
+          <EpiCourt accused={['hong']} mood="worried" dock={false} />
         </Panel>
       ),
     },
@@ -274,8 +210,8 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
       id: 'player',
       caption: 'Bạn bị rút khỏi vụ việc. Sếp giao hồ sơ 0909 cho người khác.',
       Art: () => (
-        <Panel people={[{ id: 'player', x: 40, mood: 'worried', size: 52 }]}>
-          <Office />
+        <Panel>
+          <EpiBoxing />
         </Panel>
       ),
     },
