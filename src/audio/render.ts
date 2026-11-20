@@ -7,7 +7,7 @@ export async function renderTheme(id: ThemeId, seconds: number, seed = 1) {
   const ctx = new OfflineAudioContext(2, Math.ceil(44100 * (seconds + 3)), 44100)
   const mixer = new Mixer(ctx)
   mixer.music.gain.value = 0.8
-  const out = mixer.out(mixer.music, id === 'interrogation' ? 0.18 : 0.32)
+  const out = mixer.out(mixer.music, 0.32)
   const theme = THEMES[id]
   const r = rng(seed)
   const barLen = (60 / theme.bpm) * theme.beats
