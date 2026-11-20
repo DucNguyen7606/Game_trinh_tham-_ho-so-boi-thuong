@@ -16,19 +16,19 @@ Quân lau tay vào chiếc tạp dề đầy vệt sơn, ngồi xuống ghế đ
 
 === hoi ===
 * [Đêm 19/11 anh ở đâu?]
-    "Ở xưởng, livestream dạy mài sơn đến hơn 2 giờ. Thằng Tí học trò ngồi ngay bên cạnh."
-    "Video còn đây, {xchi} xem." #photo:X5
+    "Ở xưởng, livestream dạy mài sơn tới hơn 2 giờ. Thằng Tí học trò ngồi kế bên."
+    "Video còn đây, {xchi} coi." #photo:X5
     -> hoi
 * [Hồi tháng 6 anh phục chế bức tranh thế nào?]
-    "Xử lý vết rạn chân chim ở góc dưới bên trái. Mài, trám, phủ lại. Mất gần bốn tuần."
+    "Xử lý vết rạn chân chim ở góc dưới trái. Mài, trám, phủ lại. Mất gần bốn tuần."
     -> hoi
 * {has_H9} [Kính lúp của ông Phong nằm dưới gầm bàn mài của anh.]
-    "Ông Phong qua đây hồi đầu tháng 6, bà Diệp nhờ ông ấy xem vết rạn trước khi tôi làm. Ông ấy để quên, tôi cất đấy chờ ông ấy lấy."
-    "Ông ấy soi có mười phút rồi đi. Ông ấy làm gì rảnh mà ngồi với thợ."
+    "Ông Phong ghé hồi đầu tháng 6, bà Diệp nhờ ổng coi vết rạn trước khi tôi làm. Ổng để quên, tôi cất đó chờ ổng lấy."
+    "Ổng soi có mười phút rồi đi. Ổng đâu có rảnh ngồi với thợ."
     -> hoi
 * {has_H7} [Giấy can nét bức "Thiếu nữ bên sen", tỉ lệ 1:1.]
     Quân không nhìn cuộn giấy.
-    "Thợ phục chế phải can lại để giữ nét. Nghề nó thế."
+    "Thợ phục chế phải can lại để giữ nét. Nghề nó vậy."
     -> hoi
 * {has_P5} [Sau khi anh trả tranh, con chuồn chuồn đổi từ đỏ sang vàng, chữ ký thành "Khuê 1962".]
     "Lớp sơn son bị xỉn, tôi đánh lại thì nó lên màu khác. Còn chữ ký... chắc ảnh chụp không rõ."
@@ -42,13 +42,13 @@ Quân lau tay vào chiếc tạp dề đầy vệt sơn, ngồi xuống ghế đ
     -> doi_thanh
 * {has_P10} [Ngày 16/10 và 20/11 anh chuyển cho Ngọc 300 triệu.]
     Quân cúi xuống nhìn hai bàn tay.
-    "Con bé nợ thẻ. Tôi cho vay."
+    "Con nhỏ nợ thẻ. Tôi cho mượn."
     -> hoi
 * {(vo_mau || vo_mdf) && vo_thanh} [Bức anh trả về tháng 6 là bức anh làm. Bức thật đang treo nhà ông Thành.]
     Quân đặt hai bàn tay lên đùi, các ngón tay đen bóng sơn.
     "Tôi làm cho người ta mười lăm năm, mỗi bức được vài triệu. Họ bán một bức được mấy tỷ."
-    "Bà Diệp treo nó mười sáu năm mà không nhận ra. Thế thì nó có khác gì đâu."
-    "Đến khi con Ngọc gọi hỏi vì sao sơn là acrylic, tôi biết ngày 21 là hết. Tôi chỉ nói với nó một câu: bức ấy mà biến mất thì chẳng ai thiệt."
+    "Bà Diệp treo nó mười sáu năm mà không nhận ra. Vậy thì nó có khác gì đâu."
+    "Tới khi con Ngọc gọi hỏi vì sao sơn là acrylic, tôi biết ngày 21 là hết. Tôi chỉ nói với nó một câu: bức đó mà biến mất thì không ai thiệt."
     -> hoi
 * [Cảm ơn anh.]
     -> END
@@ -68,24 +68,24 @@ Quân lau tay vào chiếc tạp dề đầy vệt sơn, ngồi xuống ghế đ
 === doi_mdf ===
 + {has_H2} [Trong khung tranh ở phòng tranh còn kẹt một mảnh MDF dính sơn đen, đúng loại ván này.]
     Quân liếc tấm ván dựng tường, rồi nhìn đi chỗ khác.
-    "MDF thì chỗ nào bán chẳng có."
+    "MDF thì chỗ nào bán chả có."
     Nhưng mảnh ván trong khung và tấm ván trong xưởng anh cùng loại, cùng lớp sơn đen phủ dở.
     ~ vo_mdf = true
     -> hoi
 + [Khách đặt tranh MDF mà sao đúng cỡ 90 × 120 của bức sen?]
-    "Cỡ ấy là cỡ phổ biến, {xchi} ra Bình Thạnh hỏi xưởng nào cũng có."
+    "Cỡ đó là cỡ phổ biến, {xchi} ra Bình Thạnh hỏi xưởng nào cũng có."
     -> hoi
 
 === doi_thanh ===
-+ {has_P11} [Ảnh phòng khách nhà ông Thành: bức sen có chuồn chuồn đỏ son và vết rạn góc dưới bên trái.]
++ {has_P11} [Ảnh phòng khách nhà ông Thành: bức sen có chuồn chuồn đỏ son và vết rạn góc dưới trái.]
     Quân nhìn tấm ảnh rất lâu.
-    "Vết rạn ấy tôi cố ý để lại. Tranh của ông Khuê thì phải có vết thời gian."
+    "Vết rạn đó tôi cố ý để lại. Tranh của ông Khuê thì phải có vết thời gian."
     ~ vo_thanh = true
     -> hoi
-+ {has_H9} [Ông Phong qua xưởng anh tháng 6. Ông ấy với anh làm chung?]
++ {has_H9} [Ông Phong ghé xưởng anh tháng 6. Ông ấy với anh làm chung?]
     Quân bật cười.
-    "Ông Phong mà làm chung với tôi thì tháng 7 đã chẳng chê bức tôi trả không phải bức ông ấy thẩm định. {Xchi} cứ hỏi ông ấy xem."
+    "Ông Phong mà làm chung với tôi thì tháng 7 đâu có chê bức tôi trả là không phải bức ổng thẩm định. {Xchi} hỏi ổng coi."
     -> hoi
 + [Hai tỷ rưỡi cho một bức tranh của thợ?]
-    "Tranh tôi có giá. {Xchi} không biết đấy thôi."
+    "Tranh tôi có giá. {Xchi} không biết thôi."
     -> hoi
