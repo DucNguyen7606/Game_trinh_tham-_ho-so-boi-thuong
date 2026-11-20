@@ -168,6 +168,8 @@ export interface EndingRule {
 
 export interface CaseData {
   id: string
+  /** How the case is drawn: 'sa-ban' is the isometric diorama style (src/art/iso). Default 'classic'. */
+  artStyle?: 'classic' | 'sa-ban'
   title: string
   intro: string
   player: { name: string; role: string; portrait?: PortraitSpec }

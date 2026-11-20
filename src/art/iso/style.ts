@@ -1,18 +1,16 @@
 import { useGame } from '@/game/store'
+import type { CaseData } from '@/game/types'
 
-// Which art style each case is drawn in. Cases not listed keep the original
-// "desk under a lamp" look. 'sa-ban' is the isometric diorama style (src/art/iso).
-export type ArtStyle = 'classic' | 'sa-ban'
+// Which art style a case is drawn in, from the `artStyle` field of its case.json.
+// Cases without it keep the original "desk under a lamp" look. 'sa-ban' is the
+// isometric diorama style (src/art/iso).
+export type ArtStyle = NonNullable<CaseData['artStyle']>
 
-const byCase: Record<string, ArtStyle> = {
-  'ho-so-boi-thuong': 'sa-ban',
-}
-
-export function artStyleOf(caseId: string): ArtStyle {
-  return byCase[caseId] ?? 'classic'
+export function artStyleOf(data: CaseData): ArtStyle {
+  return data.artStyle ?? 'classic'
 }
 
 /** The style of the case being played; the main menu always uses the classic look. */
 export function useArtStyle(): ArtStyle {
-  return useGame((s) => (s.screen === 'menu' ? 'classic' : artStyleOf(s.data.id)))
+  return useGame((s) => (s.screen === 'menu' ? 'classic' : artStyleOf(s.data)))
 }
