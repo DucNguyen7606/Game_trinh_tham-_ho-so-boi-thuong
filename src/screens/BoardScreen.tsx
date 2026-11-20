@@ -1,3 +1,4 @@
+import { useArtStyle } from '@/art/iso/style'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useShallow } from 'zustand/react/shallow'
@@ -313,6 +314,7 @@ const questionNode = (q: { id: string }, index: number): Node => ({
 })
 
 export default function BoardScreen() {
+  const art = useArtStyle()
   const { data, foundClues, answers, checkedLinks, linkClue, unlinkClue, solvedQuestions, isQuestionOpen, saveBoardLayout, saveBoardViewport } = useGame()
   // Read once: the board opens at the pan and zoom the player left it.
   const [boardViewport] = useState(() => useGame.getState().boardViewport)
@@ -439,10 +441,10 @@ export default function BoardScreen() {
         defaultViewport={boardViewport}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
-        colorMode="dark"
+        colorMode={art === 'sa-ban' ? 'light' : 'dark'}
         fitView={!boardViewport}
       >
-        <Background />
+        {art === 'sa-ban' ? <Background color="#c9bddf" gap={28} size={2.4} style={{ background: 'transparent' }} /> : <Background />}
         <Controls />
       </ReactFlow>
     </div>

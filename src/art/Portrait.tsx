@@ -1,4 +1,6 @@
 import { useId } from 'react'
+import { IsoPortrait } from './iso/figure'
+import { useArtStyle } from './iso/style'
 import { accent, clothColors, hairColors, ink, shade, skinTones } from './palette'
 
 // Character portraits in a soft, flat editorial style: smooth curved shapes with
@@ -41,7 +43,14 @@ const shoulderHalf = { thin: 80, normal: 94, heavy: 108 }
  * `zoom` below 1 draws the figure smaller inside the same backdrop, anchored at
  * the bottom centre, which leaves headroom in small thumbnails.
  */
-export function Portrait({
+export function Portrait(props: Parameters<typeof FlatPortrait>[0]) {
+  // In a case drawn in the diorama style every portrait becomes a block figure.
+  const style = useArtStyle()
+  if (style === 'sa-ban') return <IsoPortrait {...props} />
+  return <FlatPortrait {...props} />
+}
+
+function FlatPortrait({
   spec,
   size = 200,
   zoom = 1,
