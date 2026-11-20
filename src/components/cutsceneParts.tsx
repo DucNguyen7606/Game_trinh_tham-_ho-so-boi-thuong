@@ -1,5 +1,6 @@
 // Ready-made shots and effects for chapter films, so a chapter's cutscenes.tsx only has to
 // say what happens. Used by Chapters 5–8; the player itself lives in Cutscene.tsx.
+// Chapters 5–8 are drawn in the diorama style, so the backdrops here are its pastel dusk sky.
 import { motion } from 'framer-motion'
 import { Portrait } from '@/art/Portrait'
 import { rng } from '@/art/primitives'
@@ -19,7 +20,7 @@ export function ClaimDesk({ docs, amount, line, title = 'YÊU CẦU BỒI THƯ�
     { left: '22%', top: '30%', rot: -1, from: -8 },
   ]
   return (
-    <div className="absolute inset-0 overflow-hidden bg-[radial-gradient(circle_at_42%_30%,#6a4630,#1c130f_75%)]">
+    <div className="absolute inset-0 overflow-hidden bg-[linear-gradient(180deg,#d6cfee,#f7dccb)]">
       <div className="absolute left-[6%] top-[-30%] size-[70%] rounded-full bg-amber/15 blur-3xl" />
       {docs.slice(0, 3).map((Doc, i) => (
         <motion.div
@@ -53,7 +54,7 @@ export function Lineup() {
   const suspects = useGame((s) => s.data.suspects)
   const w = suspects.length > 5 ? 14.5 : 17
   return (
-    <div className="absolute inset-0 flex items-center justify-center gap-[1.6%] bg-[radial-gradient(circle_at_50%_40%,#4a3326,#140d0a_75%)] px-[4%]">
+    <div className="absolute inset-0 flex items-center justify-center gap-[1.6%] bg-[linear-gradient(180deg,#d6cfee,#f7dccb)] px-[4%]">
       {suspects.map((s, i) => (
         <motion.figure
           key={s.id}
@@ -80,7 +81,7 @@ export const lineupPins = (count: number) => Array.from({ length: count }, (_, i
 export function Investigator({ file, choices = ['CHI TRẢ', 'TỪ CHỐI'] }: { file: string; choices?: string[] }) {
   const player = useGame((s) => s.data.player)
   return (
-    <div className="absolute inset-0 overflow-hidden bg-[radial-gradient(circle_at_30%_25%,#7a5236,#1c130f_70%)]">
+    <div className="absolute inset-0 overflow-hidden bg-[linear-gradient(180deg,#d6cfee,#f7dccb)]">
       <div className="absolute left-[18%] top-[-20%] size-[60%] rounded-full bg-amber/20 blur-3xl" />
       {player.portrait && (
         <div className="absolute bottom-[-6%] left-[12%] w-[34%]">
@@ -115,7 +116,7 @@ export function Investigator({ file, choices = ['CHI TRẢ', 'TỪ CHỐI'] }: {
 /** A drawing that is not 16:9 (a document, an evidence photo), centred on a dark desk. */
 export function OnDesk({ Art, width = 46 }: { Art: () => JSX.Element; width?: number }) {
   return (
-    <div className="absolute inset-0 flex items-center justify-center overflow-hidden bg-[radial-gradient(circle_at_50%_40%,#5a3e2c,#140d0a_75%)]">
+    <div className="absolute inset-0 flex items-center justify-center overflow-hidden bg-[linear-gradient(180deg,#d6cfee,#f7dccb)]">
       <motion.div style={{ width: `${width}%` }} initial={{ opacity: 0, y: 30, rotate: -3 }} animate={{ opacity: 1, y: 0, rotate: -1.5, transition: { delay: 0.3, duration: 0.7, ease } }}>
         <Art />
       </motion.div>
@@ -176,7 +177,7 @@ export function outroFrom(label: string, panels: EpilogueLike[] | undefined, not
         lines: ['Đề xuất của bạn đã được ký.', 'Và rồi...'],
         sfx: [{ id: 'stamp', at: 0.3 }],
         camera: { from: { zoom: 1 }, to: { zoom: 1.05 } },
-        Art: () => <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,#3a281c,#0d0907_70%)]" />,
+        Art: () => <div className="absolute inset-0 bg-[linear-gradient(180deg,#d6cfee,#f7dccb)]" />,
       },
       ...epilogueShots(panels, notes),
     ],
