@@ -297,9 +297,8 @@ export function FrontBust({
         </g>
       )}
       {fringe[spec.hair]}
-      {/* ears */}
-      {box(hd.a - 2, hd.y + 8, hd.z + 9, 2, 5, 6, tone(skin, -0.08))}
-      {acc.has('earrings') && box(hd.a - 2, hd.y + 9, hd.z + 6.6, 2, 2, 2.4, iso.gold)}
+      {/* no ears: on a block head they read as a smear on the cheek. Earrings hang just under the jaw line. */}
+      {acc.has('earrings') && box(hd.a - 1.2, hd.y, hd.z + 2, 2, 2, 3, iso.gold)}
       {brow(4.5, 10.5)}
       {brow(19.5, 13.5)}
       <g className="iso-blink">
