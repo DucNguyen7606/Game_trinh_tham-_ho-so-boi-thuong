@@ -1,40 +1,36 @@
-import { accent, clothColors, ink, shade } from '@/art/palette'
-import { P } from '@/art/primitives'
 import { Portrait, type PortraitSpec } from '@/art/Portrait'
+import { IsoFigure } from '@/art/iso/figure'
+import { Box, iso, type V3 } from '@/art/iso/iso'
+import { Scooter } from '@/art/iso/street'
 import caseData from './case.json'
-import { Bike, Poncho, sceneArt } from './scenes'
+import { at, isoSceneArt as sceneArt, scr } from './iso/scenes'
 import { documents } from './documents'
 import type { ReconstructionPanel } from '@/game/types'
 
 // "Dựng lại vụ án": the true sequence of events, shown after the player signs.
 
-/** Flat, faceless figure in the scene's 1600x900 space. (x, y) is where the feet touch the ground. */
-function Person({ x, y, h = 260, color, flip = false, hold }: { x: number; y: number; h?: number; color: string; flip?: boolean; hold?: 'bag' | 'phone' }) {
-  const s = h / 260
-  const dark = shade(color, -0.35)
-  const skin = '#c58f63'
+const spec = (id: string) => caseData.suspects.find((x) => x.id === id)!.portrait as PortraitSpec
+const friend: PortraitSpec = { skin: 2, hair: 'short', hairColor: 'black', build: 'thin', outfit: 'shirt', outfitColor: 'charcoal', age: 'young', mood: 'stern' }
+
+/** Someone as a block figure at a world point; `poncho` puts them in a black GoXe raincoat with the hood up, `bag` gives them the bag of loot. */
+function Fig({ who, p, facing = 'y', poncho, bag, mood }: { who?: string; p: V3; facing?: 'x' | 'y' | '-x' | '-y'; poncho?: boolean; bag?: boolean; mood?: PortraitSpec['mood'] }) {
+  const base = who ? spec(who) : friend
+  const sp = { ...base, mood: mood ?? base.mood, ...(poncho ? { hair: 'cap' as const, hairColor: 'black' as const } : {}) }
+  const [x, y, z] = p
   return (
-    <g transform={`translate(${x} ${y}) scale(${flip ? -s : s} ${s})`}>
-      <ellipse cx="0" cy="2" rx="46" ry="10" fill={ink.night} opacity="0.45" />
-      <polygon points={P([[-22, -120], [-14, 0], [-2, 0], [0, -96], [2, 0], [14, 0], [22, -120]])} fill={dark} />
-      <polygon points={P([[-34, -200], [34, -200], [26, -116], [-26, -116]])} fill={color} />
-      <polygon points={P([[34, -196], [48, -130], [38, -128], [24, -180]])} fill={color} />
-      <polygon points={P([[-34, -196], [-48, -130], [-38, -128], [-24, -180]])} fill={dark} />
-      <rect x="-8" y="-218" width="16" height="20" fill={skin} />
-      <polygon points={P([[-20, -262], [20, -262], [22, -226], [0, -212], [-22, -226]])} fill={skin} />
-      <path d="M-22,-250 Q-24,-284 0,-284 Q24,-284 22,-250 Q12,-268 0,-268 Q-12,-268 -22,-250 Z" fill={ink.night} />
-      <circle cx="0" cy="-280" r="12" fill={ink.night} />
-      {hold === 'bag' && <path d="M40,-150 L100,-140 L106,-70 L46,-76 Z" fill="#6b6a35" stroke={ink.night} strokeWidth="3" />}
-      {hold === 'phone' && <rect x="38" y="-190" width="20" height="34" rx="4" fill={ink.night} />}
+    <g>
+      <IsoFigure at={[x - 13, y - 9, z]} spec={sp} facing={facing} size={1.15} cloth={poncho ? '#2f3138' : undefined} />
+      {bag && <Box at={[x + 10, y + 16, z + 20]} size={[18, 10, 26]} color="#6b6a35" />}
     </g>
   )
 }
 
-function Staged({ zone, children }: { zone: string; children: React.ReactNode }) {
+/** A zone diorama with people and the motorbike added in, and markers drawn over it. */
+function Staged({ zone, extra, night, children }: { zone: string; extra?: React.ReactNode; night?: boolean; children?: React.ReactNode }) {
   const Art = sceneArt[zone]
   return (
     <div className="absolute inset-0">
-      <Art />
+      <Art extra={extra} night={night} />
       <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" className="absolute inset-0 h-full w-full">
         {children}
       </svg>
@@ -44,7 +40,7 @@ function Staged({ zone, children }: { zone: string; children: React.ReactNode })
 
 function OnDesk({ ids }: { ids: string[] }) {
   return (
-    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[radial-gradient(circle_at_40%_30%,#5a3a24,#1c130f_75%)] p-6">
+    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[linear-gradient(180deg,#d9d2ee,#f6dccb)] p-6">
       {ids.map((id, i) => {
         const Doc = documents[id]
         return (
@@ -57,16 +53,17 @@ function OnDesk({ ids }: { ids: string[] }) {
   )
 }
 
-const Marker = ({ x, y, n }: { x: number; y: number; n: string }) => (
+const Marker = ({ p: [x, y], n }: { p: [number, number]; n: string }) => (
   <g transform={`translate(${x} ${y})`}>
-    <circle r="26" fill={accent.amber} stroke={ink.night} strokeWidth="4" />
-    <text y="10" textAnchor="middle" fontSize="30" fontWeight="700" fill={ink.night} fontFamily="Barlow Condensed, sans-serif">
+    <circle r="26" fill={iso.coral} stroke="#ffffff" strokeWidth="5" />
+    <text y="10" textAnchor="middle" fontSize="28" fontWeight="800" fill="#ffffff" fontFamily="'Be Vietnam Pro', sans-serif">
       {n}
     </text>
   </g>
 )
 
-const Night = () => <rect width="1600" height="900" fill="#141a2a" opacity="0.5" />
+/** Night: a soft violet wash over the diorama. */
+const Night = () => <rect width="1600" height="900" fill="#3b3a6a" opacity="0.22" />
 const Rain = () => (
   <g>
     {Array.from({ length: 90 }, (_, i) => (
@@ -74,7 +71,9 @@ const Rain = () => (
     ))}
   </g>
 )
-const LOAN = clothColors.maroon
+const ring = at('tiem', 36, 88)
+const door = at('hem', 6, 50)
+const shop = 'tiem'
 
 export const reconstruction: ReconstructionPanel[] = (
   [
@@ -98,10 +97,9 @@ export const reconstruction: ReconstructionPanel[] = (
       text: 'Hai mươi phút trước giờ hẹn, bà Loan bấm mã chủ mở két và để nguyên cửa két hé. Bộ nhớ két ghi lại lần mở đó, và không có lần nào khác cho tới khi công an tới.',
       questionId: 'q2',
       Art: () => (
-        <Staged zone="tiem">
+        <Staged zone={shop} night extra={<Fig who="loan" p={[100, 420, 0]} facing="-x" />}>
           <Night />
-          <Person x={250} y={720} h={300} color={LOAN} />
-          <Marker x={224} y={400} n="1" />
+          <Marker p={scr(shop, 30, 425, 130)} n="1" />
         </Staged>
       ),
     },
@@ -111,13 +109,20 @@ export const reconstruction: ReconstructionPanel[] = (
       text: 'Tài và một người bạn chạy chiếc Exciter đỏ vào hẻm 514, nơi chiếc camera đã chết từ tháng 6. Bà Loan kéo cửa cuốn xuống một nửa rồi ra sau, kéo chốt cửa sau cho hai người vào. Dép họ mang theo bùn đỏ của con hẻm đang đào cống.',
       questionId: 'q4',
       Art: () => (
-        <Staged zone="hem">
+        <Staged
+          zone="hem"
+          night
+          extra={
+            <>
+              <Fig who="tai" p={[60, door[1] + 70, 0]} facing="-x" poncho />
+              <Fig p={[150, door[1] + 10, 0]} facing="-x" poncho />
+              <Scooter at={[...at('hem', 50, 78), 0] as V3} color="#d6453a" />
+            </>
+          }
+        >
           <Night />
           <Rain />
-          <Bike x={760} y={760} s={1.1} />
-          <Poncho x={560} y={680} h={280} />
-          <Poncho x={680} y={690} h={270} />
-          <Marker x={480} y={200} n="2" />
+          <Marker p={scr('hem', 0, door[1], 190)} n="2" />
         </Staged>
       ),
     },
@@ -127,12 +132,19 @@ export const reconstruction: ReconstructionPanel[] = (
       text: 'Trong tiệm, Tài đập vỡ tủ kính, vơ cả khay nhẫn mạ và túi đồ trong két. Một chiếc nhẫn lăn vào gầm tủ. Rồi hai người chui ra cửa cuốn phía trước, chạy dưới mưa cho camera bên kia đường thấy, và vòng vào hẻm lấy xe. Lúc lùi xe, đuôi xe quẹt cột điện, vỡ đèn hậu.',
       questionId: 'q1',
       Art: () => (
-        <Staged zone="tiem">
+        <Staged
+          zone={shop}
+          night
+          extra={
+            <>
+              <Fig who="tai" p={[280, 320, 0]} facing="x" poncho bag />
+              <Fig p={[ring[0] + 60, ring[1] - 110, 0]} facing="y" poncho />
+            </>
+          }
+        >
           <Night />
-          <Poncho x={900} y={860} h={300} bag />
-          <Poncho x={1180} y={800} h={290} flip />
-          <Marker x={576} y={740} n="3" />
-          <Marker x={1152} y={690} n="4" />
+          <Marker p={scr(shop, 270, 250, 110)} n="3" />
+          <Marker p={scr(shop, ring[0] + 6, ring[1] + 4, 30)} n="4" />
         </Staged>
       ),
     },
@@ -158,11 +170,10 @@ export const reconstruction: ReconstructionPanel[] = (
 
 type Picks = Record<string, string>
 const suspect = (id: string) => caseData.suspects.find((s) => s.id === id)!
-const colorOf = (id: string) => clothColors[suspect(id).portrait.outfitColor as keyof typeof clothColors]
 
 function Pinned({ who, ids }: { who: string; ids: string[] }) {
   return (
-    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[radial-gradient(circle_at_40%_30%,#3b4250,#15161b_75%)] p-6">
+    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[linear-gradient(180deg,#d9d2ee,#f6dccb)] p-6">
       <div className="shrink-0 bg-[#f3e4c4] p-1.5 shadow-lg" style={{ rotate: '-3deg' }}>
         <Portrait spec={suspect(who).portrait as PortraitSpec} size={190} />
         <p className="pt-1 text-center font-mono text-xs text-[#2d1f18]">{suspect(who).name}</p>
@@ -228,19 +239,17 @@ function RobberArt({ who }: { who: string }) {
   if (who === 'stranger')
     return (
       <>
-        <Staged zone="tiem">
-          <rect width="1600" height="900" fill="#3b4a66" opacity="0.35" style={{ mixBlendMode: 'color' }} />
-          <Poncho x={820} y={860} h={300} bag />
-          <text x="1100" y="420" textAnchor="middle" fontSize="120" fontWeight="700" fill="#9fb4c8" opacity="0.5" fontFamily="Bitter, serif">?</text>
+        <Staged zone={shop} extra={<Fig p={[280, 320, 0]} facing="x" poncho bag />}>
+          <rect width="1600" height="900" fill="#3b3a6a" opacity="0.25" />
+          <text x="1100" y="420" textAnchor="middle" fontSize="120" fontWeight="700" fill="#ffffff" opacity="0.8" fontFamily="'Be Vietnam Pro', sans-serif">?</text>
         </Staged>
         <PanelStamp text="Giả thuyết" color="#9fb4c8" />
       </>
     )
   return (
     <>
-      <Staged zone="tiem">
-        <rect width="1600" height="900" fill="#3b4a66" opacity="0.35" style={{ mixBlendMode: 'color' }} />
-        <Person x={860} y={860} h={300} color={colorOf(who)} hold="bag" />
+      <Staged zone={shop} extra={<Fig who={who} p={[280, 320, 0]} facing="x" bag />}>
+        <rect width="1600" height="900" fill="#3b3a6a" opacity="0.25" />
       </Staged>
       <PanelStamp text="Giả thuyết" color="#9fb4c8" />
     </>

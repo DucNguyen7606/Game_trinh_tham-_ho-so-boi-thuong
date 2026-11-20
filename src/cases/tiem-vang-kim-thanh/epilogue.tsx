@@ -1,179 +1,147 @@
-// Illustrated epilogue shown on the ending card: one picture per person's fate.
-import { Portrait, type Mood, type PortraitSpec } from '@/art/Portrait'
-import { accent, ink } from '@/art/palette'
-import { useGame } from '@/game/store'
-import { Bike, C, Ring, ShopFront, Tray } from './scenes'
+// Illustrated epilogue shown on the ending card and in the outro: one small
+// diorama per person's fate, in the block style of the rest of Chapter 7.
+import { Box, Cyl, Face, WallText, iso } from '@/art/iso/iso'
+import { IsoFigure } from '@/art/iso/figure'
+import { Boxing, Court, Desk as FileDesk, Panel, Plot, Room, Transfer as Paid, useSpec } from '@/art/iso/epilogueKit'
+import { Building, Scooter, StreetLamp } from '@/art/iso/street'
 import type { EpiloguePanel } from '@/cases/ho-so-boi-thuong/epilogue'
 
-const LINE = ink.night
-const mono = 'IBM Plex Mono, monospace'
-const display = 'Barlow Condensed, sans-serif'
+const gold = '#f2c46d'
+const shopRed = '#c94a3a'
 
-function Panel({ children, people = [] }: { children: React.ReactNode; people?: { id: string; x: number; mood?: Mood; size?: number }[] }) {
-  const data = useGame((s) => s.data)
-  const specOf = (id: string): PortraitSpec | undefined =>
-    id === 'player' ? data.player.portrait : data.suspects.find((s) => s.id === id)?.portrait
+/** Tiệm Kim Thành from the street: red sign, the shutter down with a notice taped on it, or open with full gold displays. */
+function GoldShop({ open = false, notice, who, mood }: { open?: boolean; notice?: string; who?: string; mood?: 'smile' | 'neutral' | 'worried' }) {
+  const spec = useSpec(who ?? 'loan', mood)
   return (
-    <div className="relative aspect-[3/2] overflow-hidden rounded-sm bg-[#2d1f18]">
-      <svg viewBox="0 0 360 240" className="absolute inset-0 size-full" preserveAspectRatio="xMidYMid slice">
-        {children}
-      </svg>
-      {people.map((p) => {
-        const spec = specOf(p.id)
-        if (!spec) return null
-        const w = p.size ?? 38
-        return (
-          <div key={p.id} className="absolute bottom-0" style={{ left: `${p.x}%`, width: `${w}%`, transform: 'translateX(-50%) translateY(18%)' }}>
-            <Portrait spec={{ ...spec, mood: p.mood ?? spec.mood }} size={240} bare className="h-auto w-full" />
-          </div>
-        )
-      })}
-    </div>
+    <Plot label="Tiệm vàng Kim Thành" floor="#9a9aa6" sky={open ? ['#f3c9b8', '#f9e6d2'] : ['#c4c6dc', '#ead8d0']}>
+      <Building at={[0, 0, 0]} size={[60, 40, 160]} color="#e2a37a" seed={2} lit={0.4} />
+      <Box at={[64, 0, 0]} size={[172, 40, 150]} color="#e9dcc6" />
+      <Building at={[240, 0, 0]} size={[60, 40, 130]} color="#a9c0b6" seed={4} lit={0.4} />
+      <Box at={[74, 40, 104]} size={[152, 4, 32]} color={shopRed} />
+      <WallText at={[150, 44.5, 112]} plane="R" text="KIM THÀNH" size={20} color={gold} />
+      {open ? (
+        <>
+          <Face points={[[84, 40.5, 0], [216, 40.5, 0], [216, 40.5, 96], [84, 40.5, 96]]} fill="#ffe7a8" />
+          <Box at={[90, 50, 0]} size={[120, 30, 40]} color="#8a5c38" />
+          {Array.from({ length: 8 }, (_, i) => (
+            <Cyl key={i} at={[98 + i * 14, 64, 40]} r={4} len={2} axis="z" color={gold} cap="#ffe1a0" />
+          ))}
+          <Box at={[60, 60, 0]} size={[6, 6, 70]} color={iso.metal} />
+          <Box at={[50, 58, 70]} size={[26, 10, 26]} color={iso.coral} />
+          <Box at={[234, 60, 0]} size={[6, 6, 70]} color={iso.metal} />
+          <Box at={[226, 58, 70]} size={[26, 10, 26]} color={iso.coral} />
+        </>
+      ) : (
+        <>
+          <Face points={[[84, 40.5, 0], [216, 40.5, 0], [216, 40.5, 96], [84, 40.5, 96]]} fill="#9a9792" />
+          {Array.from({ length: 12 }, (_, i) => (
+            <Face key={i} points={[[84, 40.8, 6 + i * 8], [216, 40.8, 6 + i * 8], [216, 40.8, 8 + i * 8], [84, 40.8, 8 + i * 8]]} fill="#7f7c77" />
+          ))}
+        </>
+      )}
+      {notice && (
+        <>
+          <Face points={[[126, 41.2, 40], [174, 41.2, 40], [174, 41.2, 72], [126, 41.2, 72]]} fill="#fffaf0" />
+          <WallText at={[150, 41.5, 52]} plane="R" text={notice} size={8} color="#d6453a" weight={800} />
+        </>
+      )}
+      {who && spec && <IsoFigure at={[160, 120, 0]} spec={spec} facing="y" />}
+      <StreetLamp at={[30, 200, 0]} />
+    </Plot>
   )
 }
 
-const Courtroom = () => (
-  <>
-    <rect width="360" height="240" fill="#5a3a26" />
-    {Array.from({ length: 10 }, (_, i) => (
-      <rect key={i} x={i * 36} y="0" width="34" height="240" fill="#61402a" />
-    ))}
-    <rect x="100" y="14" width="160" height="96" fill="#9e2b22" stroke={LINE} strokeWidth="2" />
-    <text x="180" y="31" textAnchor="middle" fontSize="11" fill="#ffe7b8" fontFamily="Bitter, serif" letterSpacing="1.5">TÒA ÁN NHÂN DÂN</text>
-    <circle cx="180" cy="62" r="20" fill={accent.gold} stroke={LINE} strokeWidth="2" />
-    <path d="M180,47 l4.2,9.5 10.3,0.9 -7.8,6.6 2.4,10.2 -9.1,-5.6 -9.1,5.6 2.4,-10.2 -7.8,-6.6 10.3,-0.9 Z" fill="#9e2b22" />
-    <rect x="40" y="110" width="280" height="34" fill="#7a4f32" stroke={LINE} strokeWidth="2" />
-  </>
-)
-
-const DockRail = () => (
-  <svg viewBox="0 0 360 240" className="pointer-events-none absolute inset-0 size-full" preserveAspectRatio="xMidYMid slice">
-    <rect x="50" y="190" width="260" height="12" fill="#7a4f32" stroke={LINE} strokeWidth="2" />
-    {[60, 110, 160, 210, 260, 300].map((x) => (
-      <rect key={x} x={x - 4} y="200" width="8" height="40" fill="#573721" stroke={LINE} strokeWidth="1.5" />
-    ))}
-  </svg>
-)
-
-/** The bag of "stolen gold" spilled out on an evidence table. */
-const EvidenceBag = () => (
-  <>
-    <rect width="360" height="240" fill="#3d4a52" />
-    <rect x="20" y="120" width="320" height="120" fill="#c9b99a" stroke={LINE} strokeWidth="2" />
-    <path d="M40,130 L120,120 L140,200 L50,210 Z" fill="#6b6a35" stroke={LINE} strokeWidth="2" />
-    {Array.from({ length: 24 }, (_, i) => (
-      <Ring key={i} x={150 + (i % 8) * 22} y={150 + Math.floor(i / 8) * 22} r={8} fake />
-    ))}
-    <rect x="70" y="40" width="220" height="44" fill="#fbf4e4" stroke={LINE} strokeWidth="2" />
-    <text x="180" y="60" textAnchor="middle" fontSize="11" fill={LINE} fontFamily={mono}>VẬT CHỨNG · HS 0212</text>
-    <text x="180" y="76" textAnchor="middle" fontSize="10" fill={accent.red} fontFamily={mono}>286 nhẫn mạ · 3 lượng thật</text>
-  </>
-)
-
-/** The shop with the shutter down and a notice taped on it. */
-const ShopClosed = ({ notice }: { notice: string }) => (
-  <>
-    <rect width="360" height="240" fill="#6f7f86" />
-    <g transform="translate(-180 -30) scale(0.34)">
-      <ShopFront shutter={1} />
-    </g>
-    <rect y="210" width="360" height="30" fill={C.asphalt} />
-    <rect x="150" y="150" width="60" height="40" fill="#fbf4e4" stroke={LINE} strokeWidth="1.5" transform="rotate(-4 180 170)" />
-    <text x="180" y="174" textAnchor="middle" fontSize="8" fontWeight="700" fill={accent.red} fontFamily={mono} transform="rotate(-4 180 170)">{notice}</text>
-  </>
-)
-
-/** The shop reopened, bright and full. */
-const ShopOpen = () => (
-  <>
-    <rect width="360" height="240" fill="#6f7f86" />
-    <g transform="translate(-180 -30) scale(0.34)">
-      <ShopFront shutter={0} night />
-    </g>
-    <rect y="210" width="360" height="30" fill={C.asphalt} />
-    <text x="70" y="232" textAnchor="middle" fontSize="14" fontWeight="700" fill={accent.gold} fontFamily={display}>KHAI TRƯƠNG LẠI</text>
-  </>
-)
-
-const Hospital = () => (
-  <>
-    <rect width="360" height="240" fill="#dfe8e6" />
-    <rect x="230" y="30" width="100" height="70" fill="#f6f4ee" stroke={LINE} strokeWidth="2" />
-    <text x="280" y="70" textAnchor="middle" fontSize="10" fill="#2f6aa8" fontFamily={mono}>KHOA SẢN</text>
-    <rect y="180" width="360" height="60" fill="#c9d6d4" />
-  </>
-)
-
-const Workbench = () => (
-  <>
-    <rect width="360" height="240" fill="#5a3a24" />
-    <rect x="0" y="150" width="360" height="90" fill="#7a4f32" stroke={LINE} strokeWidth="2" />
-    <Tray x={220} y={160} w={120} h={50} rings={6} />
-    <text x="180" y="40" textAnchor="middle" fontSize="14" fontWeight="700" fill={accent.gold} fontFamily={display}>TIỆM VÀNG HÙNG · NHẬN CHẾ TÁC</text>
-  </>
-)
-
-const Alley = () => (
-  <>
-    <rect width="360" height="240" fill="#8aa0a8" />
-    <rect x="0" y="30" width="360" height="130" fill={C.wall} stroke={LINE} strokeWidth="2" />
-    <rect y="160" width="360" height="80" fill={C.redMud} />
-    <rect x="20" y="70" width="110" height="90" fill="#d9c49a" stroke={LINE} strokeWidth="2" />
-    <text x="75" y="64" textAnchor="middle" fontSize="12" fontWeight="700" fill={accent.red} fontFamily={display}>TẠP HÓA BA LÀNH</text>
-  </>
-)
-
-const Road = () => (
-  <>
-    <rect width="360" height="240" fill="#2a3448" />
-    <rect y="170" width="360" height="70" fill={C.asphalt} />
-    {[0, 1, 2, 3].map((i) => (
-      <rect key={i} x={i * 100} y="200" width="50" height="5" fill="#e8dcc4" opacity="0.6" />
-    ))}
-    <g transform="translate(250 190) scale(0.45)">
-      <Bike x={0} y={0} />
-    </g>
-    <text x="100" y="60" textAnchor="middle" fontSize="12" fill="#cfe0e8" fontFamily={mono}>Quang Trung, 23:00</text>
-  </>
-)
-
-function Desk({ stamp, sub }: { stamp: string; sub: string }) {
+/** The bag of "stolen gold" spilled out on an evidence table: brass rings and three real taels. */
+function EvidenceBag() {
   return (
-    <>
-      <rect width="360" height="240" fill="#5a3a24" />
-      <rect x="70" y="30" width="220" height="180" fill="#fbf4e4" stroke={LINE} strokeWidth="2" transform="rotate(-3 180 120)" />
-      <text x="180" y="60" textAnchor="middle" fontSize="10" fill={LINE} fontFamily={mono}>HỒ SƠ BỒI THƯỜNG 0212</text>
-      {Array.from({ length: 5 }, (_, i) => (
-        <rect key={i} x="96" y={76 + i * 14} width={150 - (i % 2) * 30} height="5" fill="#c4b494" />
+    <Room label="Vật chứng: túi vàng cướp" walls={['#c9c6d6', '#d8d3e0']} floor="#d6cfd2">
+      <Face points={[[90, 0.5, 60], [220, 0.5, 60], [220, 0.5, 100], [90, 0.5, 100]]} fill="#fffaf0" />
+      <WallText at={[155, 0.8, 84]} plane="R" text="VẬT CHỨNG · HS 0212" size={12} color={iso.ink} />
+      <WallText at={[155, 0.8, 68]} plane="R" text="286 nhẫn mạ · 3 lượng thật" size={10} color="#d6453a" weight={700} />
+      <Box at={[40, 70, 0]} size={[200, 120, 50]} color="#a99a8c" />
+      <Box at={[60, 90, 50]} size={[50, 40, 34]} color="#6b6a35" />
+      {Array.from({ length: 24 }, (_, i) => (
+        <Cyl key={i} at={[128 + (i % 6) * 16, 86 + Math.floor(i / 6) * 22, 50]} r={5} len={2} axis="z" color={i < 3 ? '#ffd23a' : '#d9b34f'} cap={i < 3 ? '#fff0a0' : '#e6c46a'} />
       ))}
-      <g transform="rotate(-12 180 160)">
-        <rect x="70" y="140" width="220" height="44" fill="none" stroke={accent.red} strokeWidth="4" />
-        <text x="180" y="162" textAnchor="middle" fontSize="15" fontWeight="700" fill={accent.red} fontFamily={display}>{stamp}</text>
-        <text x="180" y="177" textAnchor="middle" fontSize="8" fill={accent.red} fontFamily={mono}>{sub}</text>
-      </g>
-    </>
+      <Box at={[124, 168, 50]} size={[40, 14, 1]} color="#ffd23a" />
+    </Room>
   )
 }
 
-const Office = () => (
-  <>
-    <rect width="360" height="240" fill="#3d4a52" />
-    <rect x="20" y="20" width="120" height="90" fill="#7f8f9c" stroke={LINE} strokeWidth="2" />
-    <rect x="190" y="150" width="150" height="70" fill="#c9a274" stroke={LINE} strokeWidth="2" />
-    <path d="M200,150 L215,128 L325,128 L340,150 Z" fill="#a8844f" stroke={LINE} strokeWidth="2" />
-  </>
-)
+/** Hùng's small workbench at home, a tray of his own rings. */
+function Workbench() {
+  const spec = useSpec('hung', 'smile')
+  return (
+    <Room label="Bàn chế tác của Hùng" walls={['#e6cfa8', '#efdcbc']} floor="#d9c3a6" edge="#a9865c">
+      <Face points={[[60, 0.5, 80], [230, 0.5, 80], [230, 0.5, 106], [60, 0.5, 106]]} fill={shopRed} />
+      <WallText at={[145, 0.8, 88]} plane="R" text="NHẬN CHẾ TÁC" size={14} color={gold} />
+      <Box at={[60, 20, 0]} size={[170, 50, 54]} color={iso.woodDark} />
+      <Box at={[80, 30, 54]} size={[60, 30, 4]} color="#7a2f35" />
+      {Array.from({ length: 6 }, (_, i) => (
+        <Cyl key={i} at={[88 + i * 9, 44, 58]} r={3} len={2} axis="z" color={gold} cap="#ffe1a0" />
+      ))}
+      <Box at={[170, 34, 54]} size={[14, 14, 20]} color={iso.metal} />
+      <Box at={[164, 30, 74]} size={[26, 8, 4]} color="#3d3446" />
+      {spec && <IsoFigure at={[110, 100, 0]} spec={spec} facing="-y" />}
+    </Room>
+  )
+}
 
-const Transfer = ({ amount }: { amount: string }) => (
-  <>
-    <rect width="360" height="240" fill="#5a3a24" />
-    <rect x="110" y="20" width="140" height="200" rx="16" fill="#1c130f" />
-    <rect x="120" y="36" width="120" height="170" rx="6" fill="#f6efe2" />
-    <text x="180" y="70" textAnchor="middle" fontSize="10" fill={LINE} fontFamily={mono}>Chuyển khoản thành công</text>
-    <text x="180" y="110" textAnchor="middle" fontSize="17" fontWeight="700" fill="#3f8a7e" fontFamily={mono}>{amount}</text>
-    <text x="180" y="140" textAnchor="middle" fontSize="9" fill={LINE} fontFamily={mono}>→ HUYNH THI KIM LOAN</text>
-  </>
-)
+/** Bà Ba Lành's grocery stall at the mouth of alley 514. */
+function Stall() {
+  const spec = useSpec('lanh', 'neutral')
+  return (
+    <Plot label="Tạp hóa Ba Lành, đầu hẻm 514" floor="#c47a5a">
+      <Box at={[0, 0, 0]} size={[200, 50, 130]} color="#e6d3b4" />
+      <Box at={[10, 50, 86]} size={[180, 30, 6]} color="#3f8a5b" />
+      <WallText at={[100, 50.5, 104]} plane="R" text="TẠP HÓA BA LÀNH" size={13} color={shopRed} />
+      {[0, 1, 2].map((l) => (
+        <Box key={l} at={[20, 52, 10 + l * 24]} size={[100, 26, 3]} color="#b9875d" />
+      ))}
+      {Array.from({ length: 9 }, (_, i) => (
+        <Box key={i} at={[24 + (i % 3) * 32, 56, 13 + Math.floor(i / 3) * 24]} size={[24, 18, 16]} color={['#e2a63b', '#7fae8a', '#d6453a'][i % 3]} />
+      ))}
+      <Cyl at={[160, 120, 0]} r={10} len={20} axis="z" color="#3f78b0" />
+      {spec && <IsoFigure at={[150, 108, 20]} spec={spec} facing="y" pose="sit" />}
+      <Box at={[220, 0, 0]} size={[80, 50, 110]} color="#e9dcc6" />
+      <Box at={[206, 0, 0]} size={[14, 260, 0.4]} color="#9a5a40" />
+    </Plot>
+  )
+}
+
+/** Quang Trung at night: Tài on the red Exciter, new tail-light. */
+function Road() {
+  const spec = useSpec('tai', 'neutral')
+  return (
+    <Plot label="Đường Quang Trung, 23:00" floor="#5d5f72" sky={['#8f8fbf', '#d9b8c4']}>
+      <Building at={[0, 0, 0]} size={[90, 40, 170]} color="#c9a274" seed={1} lit={0.7} />
+      <Building at={[96, 0, 0]} size={[80, 40, 130]} color="#a7b7c9" seed={3} lit={0.7} />
+      <Building at={[182, 0, 0]} size={[110, 40, 150]} color="#e2a37a" seed={6} lit={0.7} />
+      {[0, 1, 2, 3].map((i) => (
+        <Box key={i} at={[20 + i * 74, 150, 0]} size={[40, 6, 0.6]} color="#e8dcc4" />
+      ))}
+      <Scooter at={[130, 170, 0]} color="#d6453a" />
+      {spec && <IsoFigure at={[110, 196, 0]} spec={spec} facing="y" />}
+      <StreetLamp at={[40, 60, 0]} />
+    </Plot>
+  )
+}
+
+/** The maternity ward corridor: Hùng called away again, people whispering. */
+function Ward() {
+  const spec = useSpec('hung', 'angry')
+  return (
+    <Room label="Hành lang khoa sản" sky={['#c8e0e0', '#f1e6dc']} walls={['#d6e4e2', '#e4eeec']} edge="#9fb8b6" floor="#e6e2da">
+      <Face points={[[120, 0.5, 70], [230, 0.5, 70], [230, 0.5, 104], [120, 0.5, 104]]} fill="#fffaf0" />
+      <WallText at={[175, 0.8, 88]} plane="R" text="KHOA SẢN" size={14} color="#2f6aa8" />
+      <WallText at={[175, 0.8, 74]} plane="R" text="PHÒNG 412" size={11} color="#2f6aa8" />
+      <Face points={[[0.5, 60, 0], [0.5, 120, 0], [0.5, 120, 100], [0.5, 60, 100]]} fill="#bcd4d8" />
+      <Box at={[40, 150, 0]} size={[30, 90, 24]} color="#7a9fb0" />
+      {spec && <IsoFigure at={[130, 120, 0]} spec={spec} facing="y" />}
+      <Box at={[200, 60, 0]} size={[40, 30, 70]} color="#e8f2f4" />
+    </Room>
+  )
+}
 
 export const epilogue: Record<string, EpiloguePanel[]> = {
   full: [
@@ -182,10 +150,9 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
       caption: 'Huỳnh Thị Kim Loan và Lâm Văn Tài bị đưa ra xét xử về tội lừa đảo chiếm đoạt tài sản. Bà Loan nhận hết phần chủ mưu.',
       Art: () => (
         <div className="relative">
-          <Panel people={[{ id: 'loan', x: 36, mood: 'worried', size: 40 }, { id: 'tai', x: 66, mood: 'worried', size: 40 }]}>
-            <Courtroom />
+          <Panel>
+            <Court accused="loan" mood="worried" also="tai" alsoMood="worried" />
           </Panel>
-          <DockRail />
         </div>
       ),
     },
@@ -202,7 +169,7 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
       id: 'hung',
       caption: 'Hùng được trả lại tên. Ông mở một bàn chế tác nhỏ ở nhà, vài khách quen của tiệm Kim Thành tìm tới.',
       Art: () => (
-        <Panel people={[{ id: 'hung', x: 40, mood: 'smile', size: 46 }]}>
+        <Panel>
           <Workbench />
         </Panel>
       ),
@@ -211,8 +178,8 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
       id: 'lanh',
       caption: 'Bà Ba Lành vẫn ngồi sạp đầu hẻm 514. Khu Quang Trung không ai chơi hụi nữa.',
       Art: () => (
-        <Panel people={[{ id: 'lanh', x: 66, mood: 'neutral', size: 44 }]}>
-          <Alley />
+        <Panel>
+          <Stall />
         </Panel>
       ),
     },
@@ -221,7 +188,7 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
       caption: 'Hồ sơ 0212 đóng lại. An Tín không chi đồng nào, hồ sơ chuyển cơ quan điều tra.',
       Art: () => (
         <Panel>
-          <Desk stamp="TỪ CHỐI BỒI THƯỜNG" sub="CHUYỂN CƠ QUAN ĐIỀU TRA" />
+          <FileDesk file="0212" stamp="TỪ CHỐI BỒI THƯỜNG" sub="CHUYỂN CƠ QUAN ĐIỀU TRA" />
         </Panel>
       ),
     },
@@ -232,7 +199,7 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
       caption: 'An Tín từ chối bồi thường. Bà Loan bị khởi tố, nhưng một mực không khai ai đã vào tiệm tối đó.',
       Art: () => (
         <Panel>
-          <Desk stamp="TỪ CHỐI BỒI THƯỜNG" sub="KHỞI TỐ: HUỲNH THỊ KIM LOAN" />
+          <FileDesk file="0212" stamp="TỪ CHỐI BỒI THƯỜNG" sub="KHỞI TỐ: HUỲNH THỊ KIM LOAN" />
         </Panel>
       ),
     },
@@ -240,7 +207,7 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
       id: 'tai',
       caption: 'Trên đường Quang Trung, Tài vẫn chạy chiếc Exciter đỏ, áo mưa mới, đèn hậu mới.',
       Art: () => (
-        <Panel people={[{ id: 'tai', x: 30, mood: 'neutral', size: 42 }]}>
+        <Panel>
           <Road />
         </Panel>
       ),
@@ -252,7 +219,7 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
       caption: 'Người bạn chỉ ra có ngoại phạm vững. Luật sư của bà Loan kiện An Tín đòi đủ 6,3 tỷ.',
       Art: () => (
         <Panel>
-          <Desk stamp="KHIẾU NẠI" sub="YÊU CẦU GIÁM ĐỊNH LẠI" />
+          <FileDesk file="0212" stamp="KHIẾU NẠI" sub="YÊU CẦU GIÁM ĐỊNH LẠI" color="#cf9a32" />
         </Panel>
       ),
     },
@@ -260,8 +227,8 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
       id: 'hung',
       caption: 'Hùng bị gọi lên phường ba lần. Tin đồn "thợ cũ cướp tiệm" theo ông tới tận bệnh viện, nơi con gái ông vừa chào đời.',
       Art: () => (
-        <Panel people={[{ id: 'hung', x: 50, mood: 'angry', size: 44 }]}>
-          <Hospital />
+        <Panel>
+          <Ward />
         </Panel>
       ),
     },
@@ -272,7 +239,7 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
       caption: 'Bảo hiểm An Tín chuyển 2,1 tỷ đồng cho bà Huỳnh Thị Kim Loan.',
       Art: () => (
         <Panel>
-          <Transfer amount="2.100.000.000đ" />
+          <Paid amount="2.100.000.000đ" to="HUỲNH THỊ KIM LOAN" note="BT HS 0212" />
         </Panel>
       ),
     },
@@ -281,7 +248,7 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
       caption: 'Một tháng sau, tiệm Kim Thành dán giấy sang nhượng. Bà Loan chuyển đi, không để lại địa chỉ.',
       Art: () => (
         <Panel>
-          <ShopClosed notice="SANG NHƯỢNG" />
+          <GoldShop notice="SANG NHƯỢNG" />
         </Panel>
       ),
     },
@@ -289,8 +256,8 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
       id: 'player',
       caption: 'Bạn bị kỷ luật vì duyệt chi cho một chiếc két mà chính chủ đã mở sẵn.',
       Art: () => (
-        <Panel people={[{ id: 'player', x: 40, mood: 'worried', size: 52 }]}>
-          <Office />
+        <Panel>
+          <Boxing />
         </Panel>
       ),
     },
@@ -301,7 +268,7 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
       caption: 'Bảo hiểm An Tín chuyển 6,3 tỷ đồng cho bà Huỳnh Thị Kim Loan.',
       Art: () => (
         <Panel>
-          <Transfer amount="6.300.000.000đ" />
+          <Paid amount="6.300.000.000đ" to="HUỲNH THỊ KIM LOAN" note="BT HS 0212" />
         </Panel>
       ),
     },
@@ -309,8 +276,8 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
       id: 'shop',
       caption: 'Tiệm Kim Thành khai trương lại trước Tết, tủ kính đầy vàng thật. Hụi viên cũ còn khen bà Loan giữ chữ tín.',
       Art: () => (
-        <Panel people={[{ id: 'loan', x: 70, mood: 'smile', size: 42 }]}>
-          <ShopOpen />
+        <Panel>
+          <GoldShop open who="loan" mood="smile" />
         </Panel>
       ),
     },
@@ -319,7 +286,7 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
       caption: 'Bạn bị kỷ luật vì duyệt chi cho 45 lượng vàng chưa từng nằm trong tủ.',
       Art: () => (
         <Panel>
-          <Desk stamp="KỶ LUẬT" sub="DUYỆT CHI SAI · HS 0212" />
+          <FileDesk file="0212" stamp="KỶ LUẬT" sub="DUYỆT CHI SAI · HS 0212" />
         </Panel>
       ),
     },
