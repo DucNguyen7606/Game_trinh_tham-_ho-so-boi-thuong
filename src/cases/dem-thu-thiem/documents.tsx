@@ -341,7 +341,7 @@ const X5 = () => (
       </svg>
     </div>
     <PhotoMeta when="06/12/2025 · 22:52" where="Quán Bến Gỗ, Thảo Điền" />
-    <p className="text-[10px]">"Có người bỏ về sớm, tụi mình quẩy tiếp 💃" · gắn thẻ 2 người bạn</p>
+    <p className="text-[10px]">"Có người bỏ về sớm, bọn mình quẩy tiếp 💃" · gắn thẻ 2 người bạn</p>
   </Phone>
 )
 
@@ -356,9 +356,9 @@ const X6 = () => (
   <Phone header="Zalo · Anh Khải KS Sông Xanh">
     <p className="text-center text-[9px] opacity-50">06/12/2025</p>
     <p className="text-center text-[9px] opacity-60">📞 Cuộc gọi nhỡ · 23:12</p>
-    <Bubble time="23:15">Toàn, xe anh bể đầu bên phải, sửa kín giúp anh trong đêm nay, giá nào cũng được. Đừng hỏi gì hết.</Bubble>
-    <Bubble me time="07:02">Anh ơi em mới dậy. Bể kiểu gì anh? Đụng người thì em không dám đâu.</Bubble>
-    <Bubble time="07:30">Thôi khỏi. Xe anh bị tai nạn ở Thủ Thiêm rồi. Em kéo xe về gara em giám định giùm anh.</Bubble>
+    <Bubble time="23:15">Toàn, xe anh vỡ đầu bên phải, sửa kín giúp anh trong đêm nay, giá nào cũng được. Đừng hỏi gì cả.</Bubble>
+    <Bubble me time="07:02">Anh ơi em mới dậy. Vỡ kiểu gì anh? Đâm vào người thì em không dám đâu.</Bubble>
+    <Bubble time="07:30">Thôi khỏi. Xe anh bị tai nạn ở Thủ Thiêm rồi. Em kéo xe về gara em giám định hộ anh.</Bubble>
   </Phone>
 )
 

@@ -188,7 +188,7 @@ const P10 = () => (
         ))}
         <text x="60" y="10" fontSize="7" fill={LINE} fontFamily={mono}>CĂN CƯỚC</text>
       </svg>
-      <p className="text-[10px]">Bản sao CCCD người bán đính kèm. Nhân viên tiệm báo công an sau khi An Tín phát thông báo số máy.</p>
+      <p className="text-[10px]">Bản sao CCCD người bán đính kèm. Nhân viên cửa hàng báo công an sau khi An Tín phát thông báo số máy.</p>
     </div>
   </Sheet>
 )
@@ -233,7 +233,7 @@ const X2 = () => (
 const X4 = () => (
   <Phone header="Bảo">
     <p className="text-center text-[9px] opacity-50">09/12/2025</p>
-    <Bubble time="01:12">Em tưởng chặn anh là xong hả</Bubble>
+    <Bubble time="01:12">Em tưởng chặn anh là xong à</Bubble>
     <Bubble time="01:13">Anh vẫn nhớ mã két của em đó</Bubble>
     <Bubble me time="07:40">Anh say thì đi ngủ đi</Bubble>
   </Phone>
@@ -330,7 +330,7 @@ const X3 = () => (
         <LiveBadge viewers="1,2k" />
       </svg>
     </div>
-    <p className="text-[10px]">"Cất hết vô két rồi nha cả nhà, chiều Ngọc bay ra Hà Nội, mai live tiếp."</p>
+    <p className="text-[10px]">"Cất hết vào két rồi nhé cả nhà, chiều Ngọc bay ra Hà Nội, mai live tiếp."</p>
     <PhotoMeta when="20/12/2025 · 11:05" where="Riverlight, Bình Thạnh" />
   </Phone>
 )
@@ -379,7 +379,7 @@ const X6 = () => (
         <text x="10" y="208" fontSize="9" fill="#fff" fontFamily={mono}>tram.nguyen: chốt!</text>
       </svg>
     </div>
-    <p className="text-[10px]">"Cô Ngọc mở két khoe chiếc đồng hồ mới nè con." Bàn tay, bàn phím két rõ từng nút.</p>
+    <p className="text-[10px]">"Cô Ngọc mở két khoe chiếc đồng hồ mới đây con." Bàn tay, bàn phím két rõ từng nút.</p>
     <PhotoMeta when="12/12/2025 · 21:34" where="Live · ngoc.watch.live" />
   </Phone>
 )

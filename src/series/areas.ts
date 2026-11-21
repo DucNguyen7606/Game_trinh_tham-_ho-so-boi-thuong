@@ -94,7 +94,7 @@ export const AREAS: Area[] = [
   {
     id: 'cho-lon',
     name: 'Chợ Lớn',
-    note: 'Quận 5, 6, 8: hội quán, chợ sỉ và những tiệm vàng ba đời.',
+    note: 'Quận 5, 6, 8: hội quán, chợ sỉ và những hiệu vàng ba đời.',
     shape: [[440, 560], [510, 540], [510, 590], [560, 610], [570, 660], [470, 680], [420, 620]],
   },
   {

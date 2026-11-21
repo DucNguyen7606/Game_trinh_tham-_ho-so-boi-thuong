@@ -6,6 +6,7 @@ import type { CaseData } from '@/game/types'
 import caseJson from './case.json'
 
 const cast = Object.fromEntries((caseJson as CaseData).suspects.map((s) => [s.id, s.portrait])) as Record<string, PortraitSpec>
+import { clueLocked, useGame } from '@/game/store'
 
 // What each document in the case-file envelopes looks like, keyed by clue id.
 
@@ -94,7 +95,24 @@ const P5 = () => (
   </Sheet>
 )
 
-const P6 = () => (
+function P6() {
+  // Until the vouchers are matched against the port log (puzzle "phieu-chi"), the email shows only its attachments.
+  const locked = useGame((s) => clueLocked(s, 'P6'))
+  if (locked)
+    return (
+      <Phone header="Email · quyen.pt@hungtoan.vn">
+        <p className="text-[10px] font-semibold">Gửi: anh Hưng · 12/03/2026 18:20</p>
+        <p className="text-[10px] font-semibold">V/v: Chi phí Thành Đạt, chuẩn bị đối chiếu 15/3</p>
+        <div className="rounded bg-white p-2 text-[10px] leading-snug">
+          <p>Anh Hưng, em rà chi phí năm 2025 thấy các phiếu chi cho Thành Đạt có chỗ không ổn. Em gửi anh hai tệp để đối chiếu trước buổi 9:00 sáng 15/3.</p>
+          <div className="mt-1.5 grid grid-cols-2 gap-1.5 font-mono text-[9px]">
+            <span className="rounded border border-black/20 px-1 py-0.5">📎 phieu-chi-thanh-dat-2025.xlsx</span>
+            <span className="rounded border border-black/20 px-1 py-0.5">📎 nhat-ky-cong-cang.pdf</span>
+          </div>
+        </div>
+      </Phone>
+    )
+  return (
   <Phone header="Email · quyen.pt@hungtoan.vn">
     <p className="text-[10px] font-semibold">Gửi: anh Hưng · 12/03/2026 18:20</p>
     <p className="text-[10px] font-semibold">V/v: Chi phí Thành Đạt, chuẩn bị đối chiếu 15/3</p>
@@ -109,7 +127,8 @@ const P6 = () => (
       <p>Em chuẩn bị đủ chứng từ cho buổi đối chiếu 9:00 sáng chủ nhật 15/3.</p>
     </div>
   </Phone>
-)
+  )
+}
 
 const P7 = () => (
   <Sheet org="Phòng CSGT Công an TP.HCM · Trích xuất" title="Tra cứu đăng ký xe">
@@ -244,7 +263,7 @@ const X3 = () => (
 const X4 = () => (
   <Phone header="Anh Hưng (GĐ)">
     <p className="text-center text-[9px] opacity-50">Thứ bảy, 14/03/2026</p>
-    <Bubble me time="21:05">Anh ơi em gửi lại file Thành Đạt rồi nha</Bubble>
+    <Bubble me time="21:05">Anh ơi em gửi lại file Thành Đạt rồi nhé</Bubble>
     <Bubble time="23:02">Mai 9h chị mang đủ chứng từ. Tối nay tôi nói chuyện với Toàn.</Bubble>
     <Bubble time="23:02">Xong vụ này tôi đưa Vy đi Đà Nẵng 😊</Bubble>
     <Bubble me time="23:15">Dạ anh. Anh nói chuyện cẩn thận</Bubble>
@@ -293,9 +312,9 @@ const X5 = () => (
 const X6 = () => (
   <Phone header="Anh Toàn">
     <p className="text-center text-[9px] opacity-50">14/03/2026</p>
-    <Bubble time="22:49">Phúc, anh mượn xe đi mua đồ ăn khuya. Chìa móc ở bảng hả?</Bubble>
-    <Bubble me time="22:50">Dạ chìa trên bảng đó anh, xe đầu dãy</Bubble>
-    <Bubble me time="22:51">Anh mua giùm em ổ bánh mì nha 😁</Bubble>
+    <Bubble time="22:49">Phúc, anh mượn xe đi mua đồ ăn khuya. Chìa móc ở bảng à?</Bubble>
+    <Bubble me time="22:50">Dạ chìa trên bảng đấy anh, xe đầu dãy</Bubble>
+    <Bubble me time="22:51">Anh mua hộ em cái bánh mì nhé 😁</Bubble>
     <p className="text-center text-[9px] opacity-50">Đã xem 22:51</p>
   </Phone>
 )

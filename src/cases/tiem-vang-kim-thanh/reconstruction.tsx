@@ -79,8 +79,8 @@ export const reconstruction: ReconstructionPanel[] = (
   [
     {
       time: '15/10 đến 28/11',
-      title: 'Hụi bể, vàng ra đi',
-      text: 'Hai dây hụi bà Loan làm đầu thảo bể giữa tháng 10. Để giữ tiếng cho tiệm, bà lặng lẽ mang 42 lượng vàng nhẫn sang Phú Nhuận bán lấy 5,8 tỷ tiền mặt, trả đủ từng người. Ngoài tiệm, ai hỏi bà cũng nói hụi đang chờ gom.',
+      title: 'Vỡ hụi, vàng ra đi',
+      text: 'Hai dây hụi bà Loan làm chủ hụi vỡ giữa tháng 10. Để giữ tiếng cho tiệm, bà lặng lẽ mang 42 lượng vàng nhẫn sang Phú Nhuận bán lấy 5,8 tỷ tiền mặt, trả đủ từng người. Ngoài tiệm, ai hỏi bà cũng nói hụi đang chờ gom.',
       questionId: 'q6',
       Art: () => <OnDesk ids={['P9', 'X1']} />,
     },

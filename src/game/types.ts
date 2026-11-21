@@ -109,14 +109,9 @@ export interface Question {
   correctOptionId: string
   /** Clues that must be pinned to this question for the answer to be accepted. */
   requiredClues: string[]
-  /** Cards that also back the answer: their strings turn green, but they are not needed to solve it. */
+  /** Cards that also back the answer ("Liên quan"): their strings turn green, but they are never needed to solve it. */
   supportingClues?: string[]
-  /**
-   * How many of the supporting cards ("Liên quan") must also be linked for the answer to be
-   * accepted. Defaults to 1 when the question has supporting cards, 0 when it has none.
-   */
-  supportingNeeded?: number
-  /** Nudges shown one at a time above the question: after a failed check, or when the player asks. */
+  /** Nudges shown one at a time above the question. After these, the game names missing key cards, then the answer (see nextHint). */
   hints?: string[]
 }
 

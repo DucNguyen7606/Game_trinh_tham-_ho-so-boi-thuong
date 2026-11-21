@@ -29,7 +29,7 @@ Khoa đứng ở quầy lễ tân, hai tay đút túi áo hoodie trắng, mắt 
     "Sài Gòn thiếu gì người mặc áo trắng {xchi}."
     Giọng cậu run lên.
     -> hoi
-* {has_H9} [22:58 chú Sơn ghi: "Mercedes vào, cậu Khoa lái, đầu xe bể".]
+* {has_H9} [22:58 chú Sơn ghi: "Mercedes vào, cậu Khoa lái, đầu xe vỡ".]
     "Chú Sơn già rồi, đêm tối nhìn ai cũng ra em. Em nói rồi, em về taxi."
     -> hoi
 * {has_H9 && has_X8} [Chuyến xe duy nhất trong app của em là 23:41, đặt hộ Hân. Vậy 22:30 em về bằng gì, mà 22:58 chú Sơn thấy em lái?]

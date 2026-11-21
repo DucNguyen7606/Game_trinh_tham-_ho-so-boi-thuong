@@ -96,7 +96,7 @@
       "profile": {
         "traits": ["Hoạt bát", "Thẳng tính", "Mê chụp ảnh"],
         "habit": "Đăng story gần như mỗi giờ, đi đâu cũng chụp.",
-        "relation": "Quen Khoa hai năm. Có bằng lái ô tô từ năm ngoái, đôi khi lái xe giùm Khoa.",
+        "relation": "Quen Khoa hai năm. Có bằng lái ô tô từ năm ngoái, đôi khi lái xe hộ Khoa.",
         "quote": "\"Ảnh bỏ em lại một mình rồi về, em còn đang giận đây.\"",
         "note": "Ngồi cùng bàn với Khoa ở Bến Gỗ tối 6/12. Biết lái xe, nên cũng có thể là người cầm lái."
       }
@@ -146,10 +146,10 @@
       },
       "profile": {
         "traits": ["Khéo miệng", "Lanh lợi", "Biết điều"],
-        "habit": "Nhận sửa xe cả đêm cho khách quen. Xe nào vô gara cũng chụp hình trước.",
+        "habit": "Nhận sửa xe cả đêm cho khách quen. Xe nào vào gara cũng chụp ảnh trước.",
         "relation": "Sửa xe cho nhà ông Khải nhiều năm. Ông Khải muốn xe được kéo về gara Toàn để giám định.",
         "quote": "\"Xe đụng kiểu gì, nhìn cái đầu xe là tui biết.\"",
-        "note": "Gara từng bị An Tín nhắc nhở vì báo giá sửa chữa đội lên. Nếu có ai bày vụ này để ăn tiền bảo hiểm, ông là người rành nhất."
+        "note": "Gara từng bị An Tín nhắc nhở vì báo giá sửa chữa đội lên. Nếu có ai bày vụ này để ăn tiền bảo hiểm, ông là người thạo nhất."
       }
     },
     {
@@ -310,7 +310,7 @@
           "label": "Sổ trực",
           "x": 52,
           "y": 64,
-          "note": "Trang ngày 6/12 bị xé, còn sót mép giấy. Chú Sơn viết rất mạnh tay. Tô nhẹ bút chì lên trang kế tiếp, nét hằn hiện ra: \"22:58 xe Mercedes 51K vào, cậu Khoa lái, đầu xe bể\" và \"02:15 ông Khải lái Mercedes ra, một mình\".",
+          "note": "Trang ngày 6/12 bị xé, còn sót mép giấy. Chú Sơn viết rất mạnh tay. Tô nhẹ bút chì lên trang kế tiếp, nét hằn hiện ra: \"22:58 xe Mercedes 51K vào, cậu Khoa lái, đầu xe vỡ\" và \"02:15 ông Khải lái Mercedes ra, một mình\".",
           "clueId": "H9"
         },
         {
@@ -318,7 +318,7 @@
           "label": "Camera cổng",
           "x": 84,
           "y": 18,
-          "note": "Camera cổng tắt đèn. Tờ giấy dán bên dưới ghi \"hư từ 20/11, đã báo ông chủ\".",
+          "note": "Camera cổng tắt đèn. Tờ giấy dán bên dưới ghi \"hỏng từ 20/11, đã báo ông chủ\".",
           "clueId": "X12"
         },
         {
@@ -347,7 +347,7 @@
     { "id": "H6", "title": "Mảnh ốp xe Wave đỏ trong gara", "description": "Bị quét dồn vào góc gara khách sạn. Mặt trong dập chữ HONDA.", "source": "scene" },
     { "id": "H7", "title": "Vụn kính đèn sương mù dưới rãnh", "description": "Mảnh kính vân sọc ngang ở chỗ chị Hoa bị tông.", "source": "scene" },
     { "id": "H8", "title": "Vệt nước hồng về phía đường Thảo Điền", "description": "Chiếc xe bỏ chạy bị nứt két nước, nhỏ giọt về phía khách sạn Sông Xanh.", "source": "scene" },
-    { "id": "H9", "title": "Nét chữ hằn trong sổ trực", "description": "\"22:58 Mercedes vào, cậu Khoa lái, đầu xe bể\" · \"02:15 ông Khải lái Mercedes ra, một mình\".", "source": "scene" },
+    { "id": "H9", "title": "Nét chữ hằn trong sổ trực", "description": "\"22:58 Mercedes vào, cậu Khoa lái, đầu xe vỡ\" · \"02:15 ông Khải lái Mercedes ra, một mình\".", "source": "scene" },
     { "id": "H10", "title": "Chuồng bò khóa, đường khô", "description": "Bò được lùa vào chuồng từ 6 giờ chiều. Mặt đường và đất dưới gầm xe khô ráo.", "source": "scene" },
     { "id": "P1", "title": "Hợp đồng bảo hiểm vật chất xe", "description": "Mercedes GLC 300, 51K-686.68, giá trị 2,1 tỷ. Không bồi thường thiệt hại do cố ý, hay thiệt hại không do sự cố được khai báo gây ra.", "source": "file" },
     { "id": "P2", "title": "Tường trình của ông Khải", "description": "Ăn tiệc ở Vũng Tàu, 0:30 lái về một mình qua cao tốc Long Thành. 02:30 ở Thủ Thiêm, mưa to, tránh con bò, xe lao xuống kênh.", "source": "file" },
@@ -362,15 +362,15 @@
     { "id": "X1", "title": "Công văn nhắc nhở gara Toàn Phát", "description": "Năm 2023, An Tín nhắc nhở gara Toàn Phát vì báo giá sửa chữa đội lên 30% ở hai hồ sơ.", "source": "decoy" },
     { "id": "X2", "title": "Khoản vay sửa khách sạn", "description": "Ông Khải đang nợ ngân hàng 5 tỷ để sửa khách sạn, chậm trả hai kỳ.", "source": "decoy" },
     { "id": "X3", "title": "Ảnh tiệc ở Vũng Tàu", "description": "Ông Khải đưa ảnh bàn tiệc hải sản ven biển làm bằng chứng. Xem kỹ ngày chụp.", "source": "testimony" },
-    { "id": "X4", "title": "Story của Hân lúc 22:20", "description": "Khoa áo hoodie trắng, ly bia, chìa khóa Mercedes trên bàn ở quán Bến Gỗ.", "source": "testimony" },
+    { "id": "X4", "title": "Story của Hân lúc 22:20", "description": "Khoa áo hoodie trắng, cốc bia, chìa khóa Mercedes trên bàn ở quán Bến Gỗ.", "source": "testimony" },
     { "id": "X5", "title": "Story của Hân lúc 22:52", "description": "Hân vẫn ở Bến Gỗ với hai người bạn. Ghế của Khoa trống.", "source": "testimony" },
-    { "id": "X6", "title": "Tin nhắn ông Khải gửi Toàn", "description": "23:15: \"Xe anh bể đầu bên phải, sửa kín giúp anh trong đêm nay, giá nào cũng được.\"", "source": "testimony", "highlights": ["sửa kín giúp anh trong đêm nay"] },
+    { "id": "X6", "title": "Tin nhắn ông Khải gửi Toàn", "description": "23:15: \"Xe anh vỡ đầu bên phải, sửa kín giúp anh trong đêm nay, giá nào cũng được.\"", "source": "testimony", "highlights": ["sửa kín giúp anh trong đêm nay"] },
     { "id": "X7", "title": "Sổ nhận phòng khách sạn", "description": "22:45 đoàn khách Hà Nội nhận phòng, ông Khải ra cổng đón. 02:40 chú Sơn nhận một khách lẻ.", "source": "testimony" },
     { "id": "X8", "title": "Lịch sử đặt xe của Khoa", "description": "Khoa nói đi taxi về lúc 22:30. Ứng dụng chỉ có một chuyến tối đó.", "source": "testimony" },
     { "id": "X9", "title": "Tin rao bán chiếc Mercedes", "description": "15/11: ông Khải rao bán GLC 300 51K-686.68 giá 1,75 tỷ trên chợ xe. Gần một tháng không ai hỏi mua. Bảo hiểm đền 2,1 tỷ.", "source": "decoy" },
     { "id": "X10", "title": "Quyết định xử phạt gara Toàn Phát", "description": "Tháng 4/2022: gara Toàn Phát bị phạt vì nhận sửa một xe gây tai nạn mà không báo công an.", "source": "decoy" },
     { "id": "X11", "title": "Hân từng lái chiếc Mercedes", "description": "Hân có bằng B2. Ảnh Facebook 20/11: Hân cầm lái chiếc Mercedes 51K-686.68, Khoa ngồi ghế phụ.", "source": "decoy" },
-    { "id": "X12", "title": "Camera cổng hư từ 20/11", "description": "Camera cổng khách sạn tắt từ 20/11, có giấy ghi đã báo ông chủ. Đêm 6/12 cổng không có hình.", "source": "scene" }
+    { "id": "X12", "title": "Camera cổng hỏng từ 20/11", "description": "Camera cổng khách sạn tắt từ 20/11, có giấy ghi đã báo ông chủ. Đêm 6/12 cổng không có hình ảnh.", "source": "scene" }
   ],
   "envelopes": [
     {
@@ -431,7 +431,7 @@
     {
       "id": "q3",
       "number": 3,
-      "prompt": "Góc phải đầu xe bể vì đâu?",
+      "prompt": "Góc phải đầu xe vỡ vì đâu?",
       "options": [
         { "id": "a", "text": "Vì đâm gốc cây dưới kênh" },
         { "id": "b", "text": "Vì tông xe máy của chị Hoa ở Thảo Điền" }

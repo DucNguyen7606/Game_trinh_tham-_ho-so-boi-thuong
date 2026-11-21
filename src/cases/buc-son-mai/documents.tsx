@@ -1,4 +1,5 @@
 import { Mark, Phone, Row, Sheet, Signature, Stamp } from '@/art/docParts'
+import { useGame } from '@/game/store'
 import { LotusPainting } from './scenes'
 import type { PortraitSpec } from '@/art/Portrait'
 import type { CaseData } from '@/game/types'
@@ -10,23 +11,27 @@ import caseJson from './case.json'
 
 
 /** A photo of the painting with numbered call-outs. */
-function PaintingPhoto({ fake, caption, notes }: { fake?: boolean; caption: string; notes: string[] }) {
+function PaintingPhoto({ fake, caption, notes, plain }: { fake?: boolean; caption: string; notes: string[]; plain?: boolean }) {
   return (
     <div className="bg-[#f4ecdc] p-1.5 shadow">
       <svg viewBox="0 0 300 240" className="block w-full">
         <LotusPainting fake={fake} />
-        <g fill="none" stroke="#f2a93b" strokeWidth="2">
-          <circle cx="250" cy="46" r="22" />
-          <circle cx="262" cy="228" r="26" />
-          {!fake && <circle cx="22" cy="212" r="22" />}
-        </g>
+        {!plain && (
+          <g fill="none" stroke="#f2a93b" strokeWidth="2">
+            <circle cx="250" cy="46" r="22" />
+            <circle cx="262" cy="228" r="26" />
+            {!fake && <circle cx="22" cy="212" r="22" />}
+          </g>
+        )}
       </svg>
       <p className="pt-1 font-mono text-[9px] text-[#3a2a20]">{caption}</p>
-      <ul className="font-mono text-[9px] text-[#3a2a20]">
-        {notes.map((n) => (
-          <li key={n}>• {n}</li>
-        ))}
-      </ul>
+      {!plain && (
+        <ul className="font-mono text-[9px] text-[#3a2a20]">
+          {notes.map((n) => (
+            <li key={n}>• {n}</li>
+          ))}
+        </ul>
+      )}
     </div>
   )
 }
@@ -95,16 +100,22 @@ const P4 = () => (
   </Sheet>
 )
 
-const P5 = () => (
-  <div className="space-y-1">
-    <PaintingPhoto
-      fake
-      caption="Ảnh khai mạc triển lãm Sen Việt, Diệp Gallery, 05/07/2025"
-      notes={['Chuồn chuồn màu vàng', 'Chữ ký "Khuê 1962"', 'Góc dưới trái: không còn vết rạn']}
-    />
-    <p className="bg-[#f6efe2] p-1 font-mono text-[9px] text-[#3a2a20]">Nguồn: trang báo Mỹ Thuật Online. Tranh vừa phục chế xong.</p>
-  </div>
-)
+// Until the photo-comparison puzzle is solved the photo has no circles or notes: finding
+// the three changes is the player's job.
+const P5 = () => {
+  const solved = useGame((s) => s.solvedPuzzles.includes('z1'))
+  return (
+    <div className="space-y-1">
+      <PaintingPhoto
+        fake
+        plain={!solved}
+        caption="Ảnh khai mạc triển lãm Sen Việt, Diệp Gallery, 05/07/2025"
+        notes={['Chuồn chuồn màu vàng', 'Chữ ký "Khuê 1962"', 'Góc dưới trái: không còn vết rạn']}
+      />
+      <p className="bg-[#f6efe2] p-1 font-mono text-[9px] text-[#3a2a20]">Nguồn: trang báo Mỹ Thuật Online. Tranh vừa phục chế xong.</p>
+    </div>
+  )
+}
 
 const P6 = () => (
   <Sheet org="Diệp Gallery" title="Phiếu giao nhận tác phẩm">
@@ -229,7 +240,7 @@ const X1 = () => (
   <div className="space-y-2">
     <Phone header="Chị Thảo · An Tín">
       <p className="text-center text-[9px] opacity-50">12/11/2025</p>
-      <Bubble time="16:02">Chị ơi tranh mà bị mất thì bảo hiểm trả bao nhiêu vậy chị?</Bubble>
+      <Bubble time="16:02">Chị ơi tranh mà bị mất thì bảo hiểm trả bao nhiêu thế chị?</Bubble>
       <Bubble me time="16:20">Theo giá trị trên hợp đồng em, nhưng phải giám định đã.</Bubble>
     </Phone>
     <div className="bg-[#f6efe2] p-2 font-sans text-[10px] text-[#2d1f18] shadow">
@@ -347,7 +358,7 @@ const X5 = () => (
       </svg>
     </div>
     <div className="space-y-0.5 rounded bg-white/10 p-1.5 text-[10px]">
-      <p><b>hoc_son_mai</b>: thầy mài nhẹ tay vậy hả thầy</p>
+      <p><b>hoc_son_mai</b>: thầy mài nhẹ tay thế ạ thầy</p>
       <p><b>Tí (học trò)</b>: 1g45 rồi mà thầy chưa cho em về 😭</p>
     </div>
     <PhotoMeta when="20/11/2025 · 01:00–02:20" where="Xưởng Bình Thạnh" />
@@ -387,7 +398,7 @@ const X7 = () => (
     <p className="rounded-md bg-white/70 p-2">
       "Chào anh Vĩnh, chị xin dời buổi kiểm định ngày 21/11 sang đầu tháng 12 được không? Chị muốn có mặt khi các anh lấy mẫu." · 15/11 08:12
     </p>
-    <p className="rounded-md bg-[#d7ecd9] p-2 text-right">"Dạ không dời được chị, lịch chuyên gia đã chốt. Bên em vẫn lấy mẫu ngày 21 ạ." · 15/11 10:40</p>
+    <p className="rounded-md bg-[#d7ecd9] p-2 text-right">"Dạ không dời được đâu chị, lịch chuyên gia đã chốt. Bên em vẫn lấy mẫu ngày 21 ạ." · 15/11 10:40</p>
     <p className="rounded-md bg-white/70 p-2">"Ok em, cứ làm theo lịch." · 15/11 10:52</p>
   </Phone>
 )
@@ -404,7 +415,7 @@ const X8 = () => (
       </p>
       <p className="text-[10px]">Khách sạn Fullerton, Singapore</p>
     </div>
-    <p className="text-[10px]">Lời nhắn của Mai: "Mẹ bay sáng 21 nha, con đặt vé rồi đó." · 02/11</p>
+    <p className="text-[10px]">Lời nhắn của Mai: "Mẹ bay sáng 21 nhé, con đặt vé rồi đấy." · 02/11</p>
   </Phone>
 )
 

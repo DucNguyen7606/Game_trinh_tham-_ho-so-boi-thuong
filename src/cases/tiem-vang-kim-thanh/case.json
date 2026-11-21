@@ -45,7 +45,7 @@
       "profile": {
         "traits": ["Khéo ăn nói", "Sĩ diện", "Tính toán"],
         "habit": "Ngồi quầy từ 7 giờ sáng tới 9 giờ tối, tối nào cũng tự tay kéo cửa cuốn.",
-        "relation": "Chồng mất sáu năm, một mình giữ tiệm vàng hai chục năm tuổi. Làm đầu thảo hai dây hụi lớn nhất khu Quang Trung.",
+        "relation": "Chồng mất sáu năm, một mình giữ tiệm vàng hai chục năm tuổi. Làm chủ hụi hai dây hụi lớn nhất khu Quang Trung.",
         "quote": "\"Hai chục năm buôn vàng, lần đầu bị dao kề cổ.\"",
         "note": "Người duy nhất ở trong tiệm lúc cướp vào. Đơn bồi thường kê 45 lượng."
       }
@@ -69,7 +69,7 @@
       },
       "profile": {
         "traits": ["Lanh lợi", "Nóng vội", "Hay nợ nần"],
-        "habit": "Chạy xe ôm công nghệ GoXe bằng chiếc Exciter đỏ, tối nào cũng ghé tiệm dì ăn cơm.",
+        "habit": "Chạy xe ôm công nghệ GoXe bằng chiếc Exciter đỏ, tối nào cũng qua tiệm dì ăn cơm.",
         "relation": "Con chị gái bà Loan. Hồi nhỏ ở với dì, thuộc từng cánh cửa trong tiệm.",
         "quote": "\"Dì con làm ăn đàng hoàng, ai mà nỡ.\"",
         "note": "Đang nợ mấy app cho vay trên điện thoại. Không có mặt ở tiệm tối 2/12, theo lời anh."
@@ -123,7 +123,7 @@
         "habit": "Ngồi sạp tạp hóa đầu hẻm 514 từ sáng tới chiều, ai đi ngang cũng biết.",
         "relation": "Chơi hai dây hụi của bà Loan, góp hơn 300 triệu dành cưới vợ cho con trai.",
         "quote": "\"Tiền mồ hôi nước mắt, bả mà ôm thì tui làm tới cùng.\"",
-        "note": "Giữa tháng 11 tới tiệm la lối, nhắn tin dọa \"cho người tới tiệm\"."
+        "note": "Giữa tháng 11 đến tiệm làm ầm ĩ, nhắn tin dọa \"cho người đến tiệm\"."
       }
     },
     {
@@ -195,7 +195,7 @@
           "label": "Bàn thờ Thần Tài",
           "x": 30,
           "y": 26,
-          "note": "Bàn thờ Thần Tài, Ông Địa, nhang còn mới thắp sáng nay. Không có gì lạ."
+          "note": "Bàn thờ Thần Tài, Ông Địa, hương mới thắp sáng nay. Không có gì lạ."
         }
       ]
     },
@@ -233,7 +233,7 @@
           "label": "Camera đầu nhà 514/3",
           "x": 62,
           "y": 18,
-          "note": "Một chiếc camera gắn trên cột, dây điện đứt lủng lẳng. Chủ nhà nói hư từ hồi tháng 6, để đó cho trộm sợ. Ai ở khu này cũng biết.",
+          "note": "Một chiếc camera gắn trên cột, dây điện đứt lủng lẳng. Chủ nhà nói hỏng từ hồi tháng 6, để đó cho trộm sợ. Ai ở khu này cũng biết.",
           "clueId": "X9"
         },
         {
@@ -247,7 +247,7 @@
     },
     {
       "id": "lau",
-      "name": "Phòng trên lầu",
+      "name": "Phòng trên gác",
       "description": "Gác trên của tiệm là chỗ bà Loan ở. Bàn thờ chồng, tủ gỗ, chiếc bàn nhỏ đầy sổ sách.",
       "hotspots": [
         {
@@ -255,7 +255,7 @@
           "label": "Sổ hụi trong ngăn kéo",
           "x": 66,
           "y": 64,
-          "note": "Cuốn sổ bìa xanh ghi hai dây hụi, 36 người. Trang 15/10 gạch đỏ chữ \"BỂ\". Từ 10/11 tới 28/11, từng tên được gạch xóa, ghi \"đã trả đủ\", cộng dồn hơn 5,5 tỷ. Ngoài tiệm, bà Loan vẫn nói với mọi người là hụi đang \"chờ gom\".",
+          "note": "Cuốn sổ bìa xanh ghi hai dây hụi, 36 người. Trang 15/10 gạch đỏ chữ \"VỠ\". Từ 10/11 tới 28/11, từng tên được gạch xóa, ghi \"đã trả đủ\", cộng dồn hơn 5,5 tỷ. Ngoài tiệm, bà Loan vẫn nói với mọi người là hụi đang \"chờ gom\".",
           "clueId": "H7"
         },
         {
@@ -326,12 +326,12 @@
     { "id": "H4", "title": "Cửa sau chỉ mở được từ trong", "description": "Mặt ngoài không ổ khóa, không tay nắm. Chốt trong được kéo ra, cửa không bị phá.", "source": "scene" },
     { "id": "H5", "title": "Mảnh đèn hậu Exciter đỏ", "description": "Mảnh vỡ còn mới trong hẻm sau tiệm, cạnh cột điện trầy ngang tầm đuôi xe.", "source": "scene" },
     { "id": "H6", "title": "Áo mưa GoXe trong thùng rác", "description": "Áo mưa đen dính bùn đỏ, logo hãng xe công nghệ GoXe sau lưng.", "source": "scene" },
-    { "id": "H7", "title": "Sổ hụi: bể từ 15/10", "description": "Hai dây hụi bể từ 15/10. Từ 10/11 đến 28/11 bà Loan trả đủ hơn 5,5 tỷ cho hụi viên.", "source": "scene" },
-    { "id": "H8", "title": "Thùng nhẫn mạ trên lầu", "description": "14 nhẫn giống hệt chiếc dưới gầm tủ, khắc \"KT 9999\". Thùng của xưởng mạ ở Quận 5.", "source": "scene" },
+    { "id": "H7", "title": "Sổ hụi: vỡ từ 15/10", "description": "Hai dây hụi vỡ từ 15/10. Từ 10/11 đến 28/11 bà Loan trả đủ hơn 5,5 tỷ cho hụi viên.", "source": "scene" },
+    { "id": "H8", "title": "Thùng nhẫn mạ trên gác", "description": "14 nhẫn giống hệt chiếc dưới gầm tủ, khắc \"KT 9999\". Thùng của xưởng mạ ở Quận 5.", "source": "scene" },
     { "id": "H9", "title": "Camera nhà thuốc", "description": "Thấy trọn cửa cuốn tiệm vàng và đầu hẻm 514.", "source": "scene" },
     { "id": "P1", "title": "Hợp đồng bảo hiểm tiệm vàng", "description": "Bảo hiểm vàng trong tủ và két trước rủi ro cướp, trộm có đột nhập. Loại trừ: hành vi cố ý của chủ tiệm hoặc người thân.", "source": "file" },
     { "id": "P2", "title": "Đơn yêu cầu bồi thường", "description": "Bà Loan kê 45 lượng: 30 lượng trong tủ kính, 15 lượng trong két. 6,3 tỷ đồng.", "source": "file" },
-    { "id": "P3", "title": "Biên bản công an phường 10", "description": "Nhận tin báo lúc 21:19. Tủ kính vỡ, két mở, cửa sau không bị phá.", "source": "file", "audio": {"length": "0:20", "lines": [{"who": "Tổng đài 113", "text": "113 xin nghe."}, {"who": "Bà Loan", "text": "Cướp! Tiệm vàng Kim Thành trên Quang Trung, Gò Vấp. Hai thằng cầm dao, tụi nó vừa chạy!"}, {"who": "Tổng đài 113", "text": "Chị có bị thương không? Trong tiệm còn ai không?"}, {"who": "Bà Loan", "text": "Tôi không sao, có mình tôi. Tụi nó ôm hết vàng rồi, mấy anh tới lẹ giùm."}, {"text": "[Giờ tổng đài nhận cuộc gọi: 21:19.]"}]} },
+    { "id": "P3", "title": "Biên bản công an phường 10", "description": "Nhận tin báo lúc 21:19. Tủ kính vỡ, két mở, cửa sau không bị phá.", "source": "file", "audio": {"length": "0:20", "lines": [{"who": "Tổng đài 113", "text": "113 xin nghe."}, {"who": "Bà Loan", "text": "Cướp! Tiệm vàng Kim Thành trên Quang Trung, Gò Vấp. Hai thằng cầm dao, bọn nó vừa chạy!"}, {"who": "Tổng đài 113", "text": "Chị có bị thương không? Trong tiệm còn ai không?"}, {"who": "Bà Loan", "text": "Tôi không sao, có mình tôi. Bọn nó ôm hết vàng rồi, các anh đến nhanh giúp tôi."}, {"text": "[Giờ tổng đài nhận cuộc gọi: 21:19.]"}]} },
     { "id": "P4", "title": "Lời khai của bà Loan", "description": "\"21:02 hai tên chui vào cửa cuốn phía trước. Trong tiệm chỉ có mình tôi. Chúng kề dao bắt tôi mở két.\"", "source": "file", "highlights": ["chui vào cửa cuốn phía trước"] },
     { "id": "P5", "title": "Số liệu mưa trạm Gò Vấp", "description": "Mưa to liên tục từ 19:30 đến 22:40 ngày 2/12.", "source": "file" },
     { "id": "P6", "title": "Camera nhà thuốc tối 2/12", "description": "20:55 một xe máy chở hai người chạy vào hẻm 514. 20:58 cửa cuốn kéo xuống còn nửa, không ai vào cửa trước. 21:05 hai người áo mưa đen chạy ra, rẽ vào hẻm. 21:18 bà Loan mới bước ra.", "source": "file", "highlights": ["20:58 cửa cuốn kéo xuống còn nửa, không ai vào cửa trước"] },
@@ -340,7 +340,7 @@
     { "id": "P9", "title": "Phiếu mua lại vàng tiệm Ngọc Phát", "description": "Ba lần trong tháng 11, bà Loan bán tổng cộng 42 lượng vàng nhẫn ở Phú Nhuận, 5,8 tỷ.", "source": "file" },
     { "id": "P10", "title": "Hóa đơn xưởng mạ Thành Công", "description": "12/11: tiệm Kim Thành đặt 300 nhẫn tròn trơn mạ vàng, khắc \"KT 9999\", và 40 dây chuyền mạ.", "source": "file" },
     { "id": "P11", "title": "Sao kê của Tài", "description": "5/12: nhận 150 triệu từ Huỳnh Thị Kim Loan. Cùng ngày trả 120 triệu cho ba app cho vay.", "source": "file" },
-    { "id": "X1", "title": "Tin nhắn của bà Ba Lành", "description": "16/11: \"Không trả hụi thì đừng trách tui cho người tới tiệm.\"", "source": "decoy" },
+    { "id": "X1", "title": "Tin nhắn của bà Ba Lành", "description": "16/11: \"Không trả hụi thì đừng trách tôi cho người đến tiệm.\"", "source": "decoy" },
     { "id": "X2", "title": "Quyết định cho thôi việc thợ Hùng", "description": "10/10: bà Loan cho Hùng nghỉ vì \"làm hao vàng khi chế tác\". Hùng không ký.", "source": "decoy" },
     { "id": "X3", "title": "Ảnh của Hùng ở bệnh viện", "description": "Hùng bế con mới sinh ở bệnh viện phụ sản. Xem giờ trên ảnh.", "source": "testimony" },
     { "id": "X4", "title": "Ảnh đám giỗ của bà Ba Lành", "description": "Bà Lành ngồi mâm giỗ ở nhà em gái tại Hóc Môn. Xem giờ trên ảnh.", "source": "testimony" },
@@ -422,7 +422,7 @@
       "supportingClues": ["H8", "P10"],
       "hints": [
         "Chiếc nhẫn rơi dưới gầm tủ ghi \"1 chỉ\". Cân của nó nói gì? Vàng nặng hơn đồng rất nhiều.",
-        "Phong bì 2 có kết quả giám định chiếc nhẫn. Lên Phòng trên lầu xem thử có món nào giống nó không."
+        "Phong bì 2 có kết quả giám định chiếc nhẫn. Lên Phòng trên gác xem thử có món nào giống nó không."
       ]
     },
     {
@@ -457,7 +457,7 @@
       "requiredClues": ["H5", "X5"],
       "supportingClues": ["H6", "P11", "H2"],
       "hints": [
-        "Xe của cướp đậu trong hẻm sau tiệm. Ra Hẻm 514 tìm thứ xe để lại. Ai trong hồ sơ đi chiếc xe đó?",
+        "Xe của cướp đỗ trong hẻm sau tiệm. Ra Hẻm 514 tìm thứ xe để lại. Ai trong hồ sơ đi chiếc xe đó?",
         "Hỏi chuyện Tài, xem lịch sử chuyến xe anh đưa ra. Giữa hai chuyến có khoảng trống nào không?"
       ]
     },
@@ -467,14 +467,14 @@
       "prompt": "Vì sao bà Loan dựng lên vụ cướp?",
       "options": [
         { "id": "a", "text": "Để đổ tội cho thợ Hùng, người bà vừa đuổi" },
-        { "id": "b", "text": "Để bảo hiểm đền cho số vàng bà đã lén bán đi trả hụi bể" },
+        { "id": "b", "text": "Để bảo hiểm đền cho số vàng bà đã lén bán đi trả vỡ hụi" },
         { "id": "c", "text": "Bà Ba Lành ép bà phải trả hụi" }
       ],
       "correctOptionId": "b",
       "requiredClues": ["H7", "P9"],
       "supportingClues": ["P10", "X1", "H8"],
       "hints": [
-        "Lên Phòng trên lầu mở ngăn kéo. Hai dây hụi ra sao, và tiền trả hụi lấy từ đâu?",
+        "Lên Phòng trên gác mở ngăn kéo. Hai dây hụi ra sao, và tiền trả hụi lấy từ đâu?",
         "Phong bì 3 có phiếu mua lại vàng ở Phú Nhuận. Đếm số lượng và để ý ngày bán."
       ]
     },
@@ -581,7 +581,7 @@
   "timeline": [
     {
       "time": "15/10",
-      "text": "Hai dây hụi do bà Loan làm đầu thảo bị bể."
+      "text": "Hai dây hụi do bà Loan làm chủ hụi bị vỡ."
     },
     {
       "time": "10/11–28/11",
@@ -613,7 +613,7 @@
     },
     {
       "time": "21:19",
-      "text": "Bà Loan gọi báo công an: \"tụi nó vừa chạy\"."
+      "text": "Bà Loan gọi báo công an: \"bọn nó vừa chạy\"."
     },
     {
       "time": "5/12",

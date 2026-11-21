@@ -338,7 +338,7 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
     },
     {
       id: 'ro',
-      caption: 'Ông Tư Rô được giữ lại làm bảo vệ nhờ bạn nói giùm. Bình trà thay cho chai rượu, sổ trực ca ghi đủ từng giờ.',
+      caption: 'Ông Tư Rô được giữ lại làm bảo vệ nhờ bạn nói đỡ. Bình trà thay cho chai rượu, sổ trực ca ghi đủ từng giờ.',
       Art: () => (
         <Panel>
           <Dawn />

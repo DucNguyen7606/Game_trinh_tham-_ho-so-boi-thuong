@@ -19,11 +19,13 @@ import {
   type Node,
   type NodeProps,
 } from '@xyflow/react'
-import { CheckCircle2, ChevronLeft, ChevronRight, Lightbulb, Lock, X } from 'lucide-react'
-import { clueLocked, hintGate, matchedClues, puzzleFor, questionOrder, supportingNeeded, useGame } from '@/game/store'
+import { CheckCircle2, ChevronLeft, ChevronRight, Lightbulb, Lock, Volume2, X } from 'lucide-react'
+import { clueLocked, hintGate, matchedClues, puzzleFor, questionOrder, useGame } from '@/game/store'
 import { rulesFor } from '@/series/series'
 import { PuzzlePanel } from '@/components/PuzzlePanel'
+import { AudioEvidence } from '@/components/AudioEvidence'
 import { Lightbox } from '@/components/Lightbox'
+import { EvidencePhoto } from '@/art/EvidencePhoto'
 import { MarkedQuotes } from '@/components/Highlighter'
 import { clueById, docCode, getCloseup, getDocumentArt } from '@/game/caseLoader'
 import { Button } from '@/components/ui/button'
@@ -36,12 +38,23 @@ function ClueNode({ data }: NodeProps<Node<ClueNodeData>>) {
   const caseData = useGame((s) => s.data)
   const clue = clueById(caseData, data.clueId)
   const locked = useGame((st) => clueLocked(st, data.clueId))
-  const [solving, setSolving] = useState(false)
+  // The viewer over the board: the puzzle while the card is locked, and the recording if it has one.
+  const [viewing, setViewing] = useState(false)
   if (!clue) return null
   const puzzle = puzzleFor(caseData, clue.id)
   // The picture beside the puzzle: the document itself, or the close-up of the scene spot that gave this clue.
   const spot = caseData.zones.flatMap((z) => z.hotspots).find((h) => h.clueId === clue.id)
-  const Art = getDocumentArt(caseData.id, clue.id) ?? (spot ? getCloseup(caseData.id, spot.id) : undefined)
+  const Closeup = spot ? getCloseup(caseData.id, spot.id) : undefined
+  // A close-up is drawn as SVG parts, so it needs its photo frame around it.
+  const Art =
+    getDocumentArt(caseData.id, clue.id) ??
+    (Closeup && spot
+      ? () => (
+          <EvidencePhoto stamp={caseData.photoDate ?? ''} caption={`${spot.label} · ${clue.id}`} showRuler={false}>
+            <Closeup />
+          </EvidencePhoto>
+        )
+      : undefined)
   return (
     <div className="document w-52 p-2 shadow-md">
       <p className="text-[10px] font-semibold uppercase opacity-60">{docCode(caseData, clue.id)}</p>
@@ -49,7 +62,7 @@ function ClueNode({ data }: NodeProps<Node<ClueNodeData>>) {
       {locked ? (
         <button
           className="nodrag mt-1 flex items-start gap-1 text-left text-xs text-string underline-offset-2 hover:underline"
-          onClick={() => setSolving(true)}
+          onClick={() => setViewing(true)}
         >
           <Lock className="mt-0.5 size-3 shrink-0" /> Chưa giải mã. Bấm để giải.
         </button>
@@ -57,16 +70,29 @@ function ClueNode({ data }: NodeProps<Node<ClueNodeData>>) {
         <p className="mt-1 text-xs opacity-80">{clue.description}</p>
       )}
       <MarkedQuotes clueId={clue.id} />
-      {solving && puzzle && createPortal(
+      {clue.audio && (
+        <button
+          className="nodrag mt-1 flex items-center gap-1 text-xs text-amber underline-offset-2 hover:underline"
+          onClick={() => setViewing(true)}
+        >
+          <Volume2 className="size-3 shrink-0" /> Nghe ghi âm
+        </button>
+      )}
+      {viewing && (puzzle || clue.audio) && createPortal(
         <Lightbox
-          label={puzzle.title}
-          onClose={() => setSolving(false)}
+          label={puzzle?.title ?? clue.title}
+          onClose={() => setViewing(false)}
           note={
             <>
               <p className="text-[10px] uppercase tracking-widest opacity-60">Giấy tờ {docCode(caseData, clue.id)}</p>
               <h3 className="title text-xl">{clue.title}</h3>
-              {locked && <p className="whitespace-pre-line font-mono text-sm">{puzzle.lockedText}</p>}
-              <PuzzlePanel puzzle={puzzle} />
+              {locked && puzzle ? (
+                <p className="whitespace-pre-line font-mono text-sm">{puzzle.lockedText}</p>
+              ) : (
+                !puzzle && <p className="text-sm">{clue.description}</p>
+              )}
+              {puzzle && <PuzzlePanel puzzle={puzzle} />}
+              {clue.audio && <AudioEvidence caseId={caseData.id} audio={clue.audio} />}
             </>
           }
         >
@@ -84,24 +110,22 @@ function ClueNode({ data }: NodeProps<Node<ClueNodeData>>) {
 }
 
 function QuestionNode({ data }: NodeProps<Node<QuestionNodeData>>) {
-  const { data: caseData, answers, solvedQuestions, setAnswerOption, checkAnswer, hintLevel, showHint } = useGame()
+  const { data: caseData, answers, solvedQuestions, setAnswerOption, checkAnswer, shownHints: allHints, showHint } = useGame()
   const [feedback, setFeedback] = useState<string | null>(null)
   const q = caseData.questions.find((x) => x.id === data.questionId)!
   const answer = answers[q.id]
   const solved = solvedQuestions.includes(q.id)
 
-  const hints = q.hints ?? []
-  const shownHints = hints.slice(0, hintLevel[q.id] ?? 0)
+  const shownHints = (allHints[q.id] ?? []).map((h) => h.text)
   const gate = useGame((st) => hintGate(st, q.id))
   // Which unlocked hint is on show; follows the newest one until the player pages back.
   const [hintPage, setHintPage] = useState<number | null>(null)
   const page = Math.min(hintPage ?? shownHints.length - 1, shownHints.length - 1)
 
   // What the last check proved: key cards and supporting cards whose strings turned green.
-  const proven = useGame(useShallow((st) => matchedClues(st.data, st.checkedLinks, q.id)))
+  const proven = useGame(useShallow((st) => matchedClues(st, q.id)))
   const keyProven = proven.filter((c) => q.requiredClues.includes(c)).length
   const relProven = proven.filter((c) => (q.supportingClues ?? []).includes(c)).length
-  const relNeeded = supportingNeeded(caseData, q)
   const rules = rulesFor(caseData.id)
 
   const onCheck = () => {
@@ -113,15 +137,23 @@ function QuestionNode({ data }: NodeProps<Node<QuestionNodeData>>) {
         : result === 'missing-clues'
           ? (() => {
               // Say how many key cards are still missing, so a board full of supporting cards doesn't look complete.
-              const linked = useGame.getState().answers[q.id]?.clueIds ?? []
+              // A key card still locked by its puzzle is linked but doesn't count yet.
+              const st = useGame.getState()
+              const linked = st.answers[q.id]?.clueIds ?? []
               const missing = q.requiredClues.filter((c) => !linked.includes(c)).length
-              const rel = (q.supportingClues ?? []).filter((c) => linked.includes(c)).length
-              const missingRel = Math.max(0, relNeeded - rel)
-              const parts = [missing && `${missing} thẻ khớp (bằng chứng chính)`, missingRel && `${missingRel} thẻ liên quan`].filter(Boolean)
+              const locked = q.requiredClues.filter((c) => linked.includes(c) && clueLocked(st, c)).length
               // Harder cases don't say how many cards are missing.
-              return rules.exactMissing ? `Đáp án đúng, nhưng còn thiếu ${parts.join(' và ')}.` : 'Đáp án đúng, nhưng chưa đủ bằng chứng.'
+              if (!rules.exactMissing) return 'Đáp án đúng, nhưng chưa đủ bằng chứng.'
+              return [
+                missing > 0 && `Đáp án đúng, nhưng còn thiếu ${missing} thẻ khớp (bằng chứng chính).`,
+                locked > 0 && `${locked} thẻ khớp đã nối nhưng còn bị khóa: giải mã tài liệu của nó trước.`,
+              ]
+                .filter(Boolean)
+                .join(' ')
             })()
-          : 'Trưởng phòng không tin lập luận này. Uy tín giảm.',
+          : useGame.getState().reputation <= 0
+            ? 'Trưởng phòng không tin lập luận này. Uy tín đã về 0: dù kết luận đúng, cuối vụ bạn vẫn bị khiển trách.'
+            : `Trưởng phòng không tin lập luận này. Uy tín giảm, còn ${useGame.getState().reputation}.`,
     )
   }
 
@@ -132,7 +164,7 @@ function QuestionNode({ data }: NodeProps<Node<QuestionNodeData>>) {
           <div className="flex items-center gap-1 text-[10px] font-semibold uppercase tracking-widest">
             <Lightbulb className="size-3.5 opacity-70" />
             <span className="opacity-70">
-              Gợi ý {page + 1}/{hints.length}
+              Gợi ý {page + 1}/{shownHints.length}
             </span>
             {shownHints.length > 1 && (
               <span className="nodrag ml-auto flex gap-0.5">
@@ -184,10 +216,10 @@ function QuestionNode({ data }: NodeProps<Node<QuestionNodeData>>) {
                 <Boxes total={q.requiredClues.length} filled={solved ? q.requiredClues.length : keyProven} />
                 Khớp {solved ? q.requiredClues.length : keyProven}/{q.requiredClues.length}
               </span>
-              {relNeeded > 0 && (
-                <span className="flex items-center gap-1.5" title={`Bằng chứng liên quan: cần ít nhất ${relNeeded} thẻ củng cố thêm cho câu trả lời`}>
-                  <Boxes total={relNeeded} filled={solved ? relNeeded : Math.min(relProven, relNeeded)} soft />
-                  Liên quan {solved ? relNeeded : Math.min(relProven, relNeeded)}/{relNeeded}
+              {relProven > 0 && (
+                <span className="flex items-center gap-1.5" title="Bằng chứng liên quan: không bắt buộc, chỉ củng cố thêm cho câu trả lời">
+                  <Boxes total={relProven} filled={relProven} soft />
+                  Liên quan {relProven} (tùy chọn)
                 </span>
               )}
             </>
@@ -217,16 +249,10 @@ function QuestionNode({ data }: NodeProps<Node<QuestionNodeData>>) {
           <Lightbulb className="size-3.5" /> {shownHints.length === 0 ? 'Xem gợi ý' : 'Gợi ý tiếp'}
         </button>
       )}
-      {!solved && gate === 'spent' && (
-        <p className="mt-2 flex items-start gap-1 text-xs text-muted-foreground">
-          <Lock className="mt-0.5 size-3.5 shrink-0" />
-          Đã dùng hết gợi ý của vụ này ({rules.difficulty}: {rules.hints} gợi ý).
-        </p>
-      )}
       {!solved && gate === 'locked' && (
         <p className="mt-2 flex items-start gap-1 text-xs text-muted-foreground" title="Mỗi câu chỉ mở một gợi ý cho đến khi bạn có tiến triển">
           <Lock className="mt-0.5 size-3.5 shrink-0" />
-          Gợi ý tiếp bị khóa: nối thêm một manh mối khớp hoặc liên quan tới câu này rồi bấm Kiểm tra để mở.
+          Gợi ý tiếp bị khóa: nối thêm một manh mối khớp hoặc liên quan mới tới câu này rồi bấm Kiểm tra để mở. Cứ có dây xanh mới là mở thêm được gợi ý.
         </p>
       )}
     </div>
@@ -254,7 +280,7 @@ function Boxes({ total, filled, soft }: { total: number; filled: number; soft?: 
 
 const nodeTypes = { clue: ClueNode, question: QuestionNode }
 
-type StringEdgeData = { clueId: string; questionId: string; status?: 'key' | 'match' | 'mismatch'; locked?: boolean }
+type StringEdgeData = { clueId: string; questionId: string; status?: 'key' | 'match' | 'mismatch' | 'sealed'; locked?: boolean }
 
 /** A string between a card and a question, with its check result and a button to take it off. */
 function StringEdge({ id, sourceX, sourceY, targetX, targetY, sourcePosition, targetPosition, data, style }: EdgeProps<Edge<StringEdgeData>>) {
@@ -273,9 +299,10 @@ function StringEdge({ id, sourceX, sourceY, targetX, targetY, sourcePosition, ta
           {status && (
             <span
               className="rounded px-1.5 py-0.5 text-[11px] font-semibold text-[#fff8e8]"
-              style={{ background: status === 'mismatch' ? 'var(--mismatch)' : 'var(--match)' }}
+              style={{ background: status === 'mismatch' ? 'var(--mismatch)' : status === 'sealed' ? 'var(--string)' : 'var(--match)' }}
+              title={status === 'sealed' ? 'Tài liệu này còn bị mã hóa: giải mã trong Hồ sơ rồi bấm Kiểm tra lại' : undefined}
             >
-              {status === 'key' ? '✓ Khớp' : status === 'match' ? '✓ Liên quan' : '✕ Chưa khớp'}
+              {status === 'key' ? '✓ Khớp' : status === 'match' ? '✓ Liên quan' : status === 'sealed' ? '🔒 Cần giải mã' : '✕ Chưa khớp'}
             </span>
           )}
           {!locked && (
@@ -315,7 +342,7 @@ const questionNode = (q: { id: string }, index: number): Node => ({
 
 export default function BoardScreen() {
   const art = useArtStyle()
-  const { data, foundClues, answers, checkedLinks, linkClue, unlinkClue, solvedQuestions, isQuestionOpen, saveBoardLayout, saveBoardViewport } = useGame()
+  const { data, foundClues, answers, checkedLinks, linkClue, unlinkClue, solvedQuestions, solvedPuzzles, isQuestionOpen, saveBoardLayout, saveBoardViewport } = useGame()
   // Read once: the board opens at the pan and zoom the player left it.
   const [boardViewport] = useState(() => useGame.getState().boardViewport)
   // Recomputed when a question is solved, since that can open an envelope.
@@ -377,8 +404,9 @@ export default function BoardScreen() {
   // The red strings are derived from the store, so they survive leaving the screen.
   // After Kiểm tra, each string that was checked turns green if the card belongs to the proof, red if not.
   const edges = useMemo<Edge[]>(
-    () =>
-      Object.entries(answers).flatMap(([qId, a]) => {
+    () => {
+      const isSealed = (c: string) => clueLocked({ data, solvedPuzzles }, c)
+      return Object.entries(answers).flatMap(([qId, a]) => {
         const q = data.questions.find((x) => x.id === qId)
         const checked = checkedLinks[qId] ?? []
         const locked = solvedQuestions.includes(qId)
@@ -386,6 +414,8 @@ export default function BoardScreen() {
           const base = { id: `${c}->${qId}`, source: `clue-${c}`, target: `q-${qId}`, type: 'string', ...sides(`clue-${c}`, `q-${qId}`) }
           const data: StringEdgeData = { clueId: c, questionId: qId, locked }
           if (!q || !checked.includes(c)) return { ...base, data, style: { stroke: 'var(--string)', strokeWidth: 2.5 } }
+          // A card still locked by its puzzle proves nothing yet, so its string doesn't turn green.
+          if (isSealed(c)) return { ...base, data: { ...data, status: 'sealed' }, style: { stroke: 'var(--string)', strokeWidth: 2.5, strokeDasharray: '6 4' } }
           const ok = q.requiredClues.includes(c) || (q.supportingClues ?? []).includes(c)
           const color = ok ? 'var(--match)' : 'var(--mismatch)'
           return {
@@ -395,8 +425,9 @@ export default function BoardScreen() {
             style: { stroke: color, strokeWidth: 3.5, filter: `drop-shadow(0 0 4px ${color})` },
           }
         })
-      }),
-    [answers, checkedLinks, data, solvedQuestions, sides],
+      })
+    },
+    [answers, checkedLinks, data, solvedQuestions, solvedPuzzles, sides],
   )
 
   const onConnect = useCallback(

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { ChevronLeft, ChevronRight, CheckCircle2, CircleHelp, Clapperboard, FolderCheck, RotateCcw } from 'lucide-react'
 import { CutscenePlayer } from '@/components/Cutscene'
-import { nextChapter } from '@/series/series'
+import { nextChapter, rulesFor } from '@/series/series'
 import { useProfile } from '@/series/profile'
 import { openMapOnMenu } from '@/series/MainMenu'
 import { questionOrder, useGame } from '@/game/store'
@@ -20,8 +20,33 @@ function pickEnding(data: CaseData, picks: Record<string, string>) {
   return rule?.ending ?? data.endings[data.endings.length - 1].id
 }
 
+/**
+ * The head of department's assessment, shown with the ending: it depends on the verdict and on
+ * the reputation left. A wrong verdict, or reputation run down to 0 by wrong answers on the
+ * board, earns a reprimand; a right verdict with no wrong answer at all is excellent.
+ */
+export function caseGrade(data: CaseData, picks: Record<string, string>, reputation: number) {
+  const start = rulesFor(data.id).reputation
+  const verdictRight = data.verdict.every((v) => picks[v.id] === v.correctOptionId)
+  if (!verdictRight)
+    return { label: 'Bị khiển trách', tone: 'bad' as const, text: 'Kết luận sai. Trưởng phòng ghi một lần khiển trách vào hồ sơ của bạn.' }
+  if (reputation <= 0)
+    return {
+      label: 'Bị khiển trách',
+      tone: 'bad' as const,
+      text: 'Kết luận đúng, nhưng bạn đã trình quá nhiều lập luận sai trên đường đi. Uy tín về 0, trưởng phòng vẫn ghi khiển trách.',
+    }
+  if (reputation >= start)
+    return { label: 'Xuất sắc', tone: 'good' as const, text: 'Kết luận đúng, không trình sai lần nào. Trưởng phòng đề nghị khen thưởng.' }
+  return {
+    label: 'Đạt',
+    tone: 'ok' as const,
+    text: `Kết luận đúng. Bạn còn ${reputation}/${start} uy tín: vài lập luận sai khiến trưởng phòng phải nhắc nhở.`,
+  }
+}
+
 export default function VerdictScreen() {
-  const { data, solvedQuestions, reset, go, startCase } = useGame()
+  const { data, solvedQuestions, reset, go, startCase, reputation } = useGame()
   const closeCase = useProfile((s) => s.closeCase)
   const next = nextChapter(data.id)
   // Closing files the case as done and returns to the map; the next chapter opens straight at its desk.
@@ -63,6 +88,24 @@ export default function VerdictScreen() {
         <p className="text-sm text-muted-foreground">Kết thúc</p>
         <h2 className="title text-3xl text-amber">{ending.title}</h2>
         <p className="mt-4 max-w-2xl">{ending.text}</p>
+        {(() => {
+          const grade = caseGrade(data, picks, reputation)
+          const color = grade.tone === 'good' ? '#3f8a4f' : grade.tone === 'ok' ? '#d9a21b' : '#b23a2e'
+          return (
+            <div className="document mt-6 flex max-w-2xl items-center gap-4 p-4 [animation:fadeIn_.6s_ease_both]">
+              <span
+                className="display shrink-0 rotate-[-6deg] rounded border-[3px] px-3 py-1.5 text-lg font-bold uppercase tracking-widest"
+                style={{ borderColor: color, color }}
+              >
+                {grade.label}
+              </span>
+              <span className="text-sm">
+                <span className="block text-[10px] font-semibold uppercase tracking-widest opacity-60">Đánh giá của trưởng phòng · Uy tín {reputation}/{rulesFor(data.id).reputation}</span>
+                {grade.text}
+              </span>
+            </div>
+          )
+        })()}
         {/* What became of everyone, one picture each. A case with an after-the-verdict film shows that instead. */}
         {outro ? (
           <Button variant="outline" className="mt-6" onClick={() => setOutroPlaying(true)}>

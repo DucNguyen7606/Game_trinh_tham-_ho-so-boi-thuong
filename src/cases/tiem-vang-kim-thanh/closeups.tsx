@@ -95,7 +95,7 @@ function Altar() {
       <rect x="220" y="100" width="90" height="110" rx="12" fill={C.gold} {...O} />
       <rect x="186" y="150" width="28" height="60" fill="#d8cdb6" {...O} strokeWidth={1.5} />
       <path d="M200,150 q-8,-40 6,-70" stroke="#e8e0c8" strokeWidth="2" fill="none" />
-      <Label x={200} y={270} t="nhang thắp sáng nay" />
+      <Label x={200} y={270} t="hương thắp sáng nay" />
     </g>
   )
 }
@@ -183,7 +183,7 @@ function HuiBook() {
       <line x1="200" y1="20" x2="200" y2="280" stroke={LINE} strokeWidth="2" />
       <text x="40" y="60" fontSize="12" fill="#2f4258" fontFamily={mono}>DÂY 1 + DÂY 2</text>
       <text x="40" y="84" fontSize="12" fill="#2f4258" fontFamily={mono}>36 người</text>
-      <text x="40" y="130" fontSize="26" fontWeight="700" fill={accent.red} fontFamily={display} transform="rotate(-10 90 130)">15/10 BỂ</text>
+      <text x="40" y="130" fontSize="26" fontWeight="700" fill={accent.red} fontFamily={display} transform="rotate(-10 90 130)">15/10 VỠ</text>
       {rows.map((t, i) => (
         <g key={i}>
           <text x="210" y={60 + i * 34} fontSize="9" fill="#1d3a6a" fontFamily={mono} fontWeight={i === 4 ? 700 : 400}>

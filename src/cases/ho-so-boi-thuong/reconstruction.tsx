@@ -132,7 +132,7 @@ export const reconstruction: ReconstructionPanel[] = (
   },
   {
     time: '14/7, 22:00',
-    title: 'Cúp điện như mọi đêm',
+    title: 'Ngắt điện như mọi đêm',
     text: 'Ông Rô tắt cầu dao tổng cho đỡ tiền điện rồi ghi vào sổ trực, như suốt 9 năm nay. Từ lúc này cả kho không có điện. Đám cháy sau đó không thể là chập điện.',
     questionId: 'q1',
     Art: () => (
@@ -159,7 +159,7 @@ export const reconstruction: ReconstructionPanel[] = (
   {
     time: '01:05 – 01:20',
     title: 'Ngòi hẹn giờ dưới tủ sổ sách',
-    text: 'Trong văn phòng, Bảo tháo ổ cứng máy kế toán rồi đặt một khoanh nhang muỗi cạnh giẻ tẩm xăng ngay dưới tủ sổ sách. Nhang cháy khoảng một tiếng rưỡi mới chạm tới xăng, đủ để anh đi thật xa.',
+    text: 'Trong văn phòng, Bảo tháo ổ cứng máy kế toán rồi đặt một khoanh hương muỗi cạnh giẻ tẩm xăng ngay dưới tủ sổ sách. Hương cháy khoảng một tiếng rưỡi mới chạm tới xăng, đủ để anh đi thật xa.',
     questionId: 'q5',
     Art: () => (
       <Staged zone="van-phong">
@@ -172,14 +172,14 @@ export const reconstruction: ReconstructionPanel[] = (
   {
     time: '01:34',
     title: 'Dựng chứng cứ ngoại phạm',
-    text: 'Camera tiệm anh Huy thấy chiếc Wave ra khỏi hẻm lúc 01:21. Mười ba phút sau Bảo gọi xe ôm công nghệ ở đầu hẻm, đi tới quán karaoke ở Quận 6 cho nhiều người thấy mặt.',
+    text: 'Camera cửa hàng anh Huy thấy chiếc Wave ra khỏi hẻm lúc 01:21. Mười ba phút sau Bảo gọi xe ôm công nghệ ở đầu hẻm, đi tới quán karaoke ở Quận 6 cho nhiều người thấy mặt.',
     questionId: 'q7',
     Art: () => <OnDesk ids={['P6', 'P7']} />,
   },
   {
     time: '02:38',
     title: 'Lửa bén',
-    text: 'Nhang cháy tới giẻ xăng. Lửa bắt từ góc văn phòng, chạy theo tủ sổ sách rồi lan sang khu hàng. 02:41 có người báo cháy. Các cuộn lõi giấy cháy rất nhanh.',
+    text: 'Hương cháy tới giẻ xăng. Lửa bắt từ góc văn phòng, chạy theo tủ sổ sách rồi lan sang khu hàng. 02:41 có người báo cháy. Các cuộn lõi giấy cháy rất nhanh.',
     questionId: 'q3',
     Art: () => (
       <Staged zone="khu-hang">
@@ -256,7 +256,7 @@ const arsonTheory: Record<string, { text: string; place: string; x: number; y: n
     place: 'san-sau', x: 620, y: 760,
   },
   huy: {
-    text: 'Theo bạn, anh Huy đốt kho để ép ông Thịnh bán đất. Anh muốn mua mảnh đất 9 tỷ và bị từ chối, tiệm của anh lại sát vách.',
+    text: 'Theo bạn, anh Huy đốt kho để ép ông Thịnh bán đất. Anh muốn mua mảnh đất 9 tỷ và bị từ chối, cửa hàng của anh lại sát vách.',
     place: 'san-sau', x: 620, y: 760,
   },
 }
@@ -271,7 +271,7 @@ const fraudTheory: Record<string, { text: string; docs: string[] }> = {
 const arsonRefute: Record<string, { text: string; docs: string[] }> = {
   thinh: { text: 'Ông Thịnh đã nhắn hủy "vụ 20" từ tối 13/7 và muốn chở hàng thật về cho ngân hàng kiểm kê. Đêm cháy ông ở tiệc cưới tại Vũng Tàu, ảnh cuối chụp lúc 01:47, và chính anh Huy gọi báo ông mới biết, lúc 02:45.', docs: ['P9', 'X3'] },
   ngan: { text: 'Từ 00:58 đến 03:05 Ngân đang phát trực tiếp với hơn 200 người xem. Chiếc Wave đứng tên cô đã bán cho "anh Bảo" từ tháng 6, chưa sang tên.', docs: ['X5', 'P11'] },
-  huy: { text: 'Anh Huy không có chìa, mà ổ khóa không bị phá. Camera của chính tiệm anh ghi lại chiếc Wave che biển số, và anh là người gọi báo ông Thịnh.', docs: ['P6', 'P13'] },
+  huy: { text: 'Anh Huy không có chìa, mà ổ khóa không bị phá. Camera của chính cửa hàng anh ghi lại chiếc Wave che biển số, và anh là người gọi báo ông Thịnh.', docs: ['P6', 'P13'] },
 }
 
 const fraudRefute: Record<string, { text: string; docs: string[] }> = {

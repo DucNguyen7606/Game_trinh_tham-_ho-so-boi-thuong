@@ -2,7 +2,7 @@
   "id": "ho-ban-nguyet",
   "artStyle": "sa-ban",
   "title": "Hồ sơ bồi thường số 1403",
-  "intro": "Gần nửa đêm 14/3, ông Đặng Quốc Hưng, giám đốc Hưng Toàn Logistics, rơi từ ban công căn 21.05 chung cư Sen Hồng, nhìn xuống hồ Bán Nguyệt, Phú Mỹ Hưng. Công ty ông đang nợ ngân hàng 9 tỷ, công an nghiêng về tự tử. Em trai ông, người thụ hưởng hợp đồng nhân thọ 6 tỷ, khẳng định anh mình trượt chân. Hợp đồng mới 14 tháng: nếu là tự tử, An Tín chỉ hoàn phí. Bạn có 10 ngày để đề xuất chi trả, cho ai, hay từ chối. Mỗi ngày khám được 1 khu hiện trường. Hỏi chuyện thì không giới hạn.",
+  "intro": "Gần nửa đêm 14/3, ông Đặng Quốc Hưng, giám đốc Hưng Toàn Logistics, rơi từ ban công căn 21.05 chung cư Sen Hồng, nhìn xuống hồ Bán Nguyệt, Phú Mỹ Hưng. Công ty ông đang nợ ngân hàng 9 tỷ, công an nghiêng về tự tử. Em trai ông, người thụ hưởng hợp đồng nhân thọ 6 tỷ, khẳng định anh mình trượt chân. Hợp đồng mới 14 tháng: nếu là tự tử, An Tín chỉ hoàn phí. Bạn có 8 ngày để đề xuất chi trả, cho ai, hay từ chối. Mỗi ngày khám được 1 khu hiện trường. Hỏi chuyện thì không giới hạn.",
   "player": {
     "name": "Lê Thu Hạnh",
     "role": "Chuyên viên giám định bồi thường, Bảo hiểm An Tín",
@@ -18,7 +18,7 @@
     }
   },
   "photoDate": "15 03 '26",
-  "days": 10,
+  "days": 8,
   "limitsPerDay": {
     "talk": 2,
     "explore": 1
@@ -405,7 +405,36 @@
       "id": "H7",
       "title": "Sổ trực: tiếng rơi lúc 23:41",
       "description": "Bảo vệ Lộc nghe tiếng rơi 23:41, gọi 115 lúc 23:43.",
-      "source": "scene"
+      "source": "scene",
+      "audio": {
+        "length": "0:24",
+        "lines": [
+          {
+            "who": "Tổng đài 115",
+            "text": "Cấp cứu 115 xin nghe."
+          },
+          {
+            "who": "Bảo vệ Lộc",
+            "text": "Chung cư Sen Hồng, tòa B, Phú Mỹ Hưng. Có người rơi từ trên tầng cao xuống vườn phía Đông."
+          },
+          {
+            "who": "Tổng đài 115",
+            "text": "Rơi lúc nào anh?"
+          },
+          {
+            "who": "Bảo vệ Lộc",
+            "text": "Mới đây thôi, hai phút. Tôi nghe tiếng rơi lúc mười một giờ bốn mốt, đồng hồ trong chòi."
+          },
+          {
+            "who": "Tổng đài 115",
+            "text": "Người còn thở không?"
+          },
+          {
+            "who": "Bảo vệ Lộc",
+            "text": "Không... không thấy thở. Anh cho xe đến ngay giúp tôi."
+          }
+        ]
+      }
     },
     {
       "id": "H8",
@@ -435,7 +464,10 @@
       "id": "P1",
       "title": "Hợp đồng bảo hiểm nhân thọ",
       "description": "6 tỷ, hiệu lực 10/01/2025. Người thụ hưởng: Đặng Quốc Toàn. Tự tử trong 24 tháng đầu: chỉ hoàn phí. Người thụ hưởng cố ý gây ra cái chết: không trả cho người đó, trả cho người thừa kế.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "trả cho người thừa kế"
+      ]
     },
     {
       "id": "P2",
@@ -453,7 +485,11 @@
       "id": "P4",
       "title": "Kết luận giám định pháp y",
       "description": "Nồng độ cồn thấp. Cổ tay trái bầm hình bốn ngón tay. Kẽ móng tay phải có sợi polyester xanh navy, không phải áo thun trắng nạn nhân mặc.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "sợi polyester xanh navy",
+        "Cổ tay trái bầm hình bốn ngón tay"
+      ]
     },
     {
       "id": "P5",
@@ -477,13 +513,20 @@
       "id": "P8",
       "title": "Camera cổng phụ cảng Tân Thuận",
       "description": "Xe 59P2-418.36 ra cổng phụ 22:52, vào lại 00:09. Người lái đội mũ bảo hiểm trắng, mặc áo khoác đồng phục navy. Ca đêm đó Phúc mặc đồng phục kho màu olive.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "ra cổng phụ 22:52, vào lại 00:09",
+        "Ca đêm đó Phúc mặc đồng phục kho màu olive"
+      ]
     },
     {
       "id": "P9",
       "title": "Trích lục hộ tịch và hàng thừa kế",
       "description": "Ông Hưng ly hôn năm 2024, cha mẹ đã mất. Người thừa kế hàng thứ nhất duy nhất: con gái Đặng Bảo Vy, sinh 20/3/2009.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "Người thừa kế hàng thứ nhất duy nhất: con gái Đặng Bảo Vy"
+      ]
     },
     {
       "id": "X1",
@@ -518,7 +561,7 @@
     {
       "id": "X6",
       "title": "Tin nhắn Toàn gửi Phúc lúc 22:49",
-      "description": "\"Phúc, anh mượn xe đi mua đồ ăn khuya. Chìa móc ở bảng hả?\"",
+      "description": "\"Phúc, anh mượn xe đi mua đồ ăn khuya. Chìa móc ở bảng à?\"",
       "source": "testimony"
     },
     {
@@ -929,6 +972,83 @@
     },
     {
       "ending": "wrong"
+    }
+  ],
+  "puzzles": [
+    {
+      "id": "phieu-chi",
+      "clueId": "P6",
+      "title": "Đối chiếu phiếu chi với nhật ký cảng",
+      "kind": "answer",
+      "prompt": "Đánh dấu mọi phiếu chi không có chuyến hàng nào của Thành Đạt cùng ngày trong nhật ký cổng cảng, rồi cộng các phiếu đó lại. Gõ tổng số tiền.",
+      "lockedText": "Email chị Quyên gửi anh Hưng 12/3, kèm hai tệp: \"các phiếu chi cho Thành Đạt có chỗ không ổn\".\nPHIẾU CHI NĂM 2025 CHO VẬN TẢI THÀNH ĐẠT (người duyệt: Đặng Quốc Toàn)\n09/01 · 62 tr\n23/01 · 480 tr\n14/02 · 520 tr\n06/03 · 505 tr\n27/03 · 75 tr\n10/04 · 495 tr\n02/05 · 530 tr\n22/05 · 510 tr\n13/06 · 58 tr\n04/07 · 485 tr\n25/07 · 515 tr\n15/08 · 490 tr\n05/09 · 525 tr\n26/09 · 81 tr\n10/10 · 500 tr\n31/10 · 470 tr\n21/11 · 535 tr\n12/12 · 540 tr\nNHẬT KÝ CỔNG CẢNG TÂN THUẬN, XE THÀNH ĐẠT\n09/01 · container TTL-4471\n27/03 · container TTL-5108\n13/06 · container TTL-6022\n26/09 · container TTL-7315",
+      "answers": [
+        "7,1 tỷ",
+        "7,1",
+        "7.1",
+        "7,1 tỷ đồng",
+        "7.100.000.000",
+        "7.100.000.000 đ",
+        "7100000000",
+        "7100",
+        "7100 triệu",
+        "7.100 triệu",
+        "7100 tr",
+        "7.100 tr"
+      ],
+      "placeholder": "tỷ đồng",
+      "solvedText": "14 phiếu chi không khớp chuyến hàng nào, cộng lại đúng 7,1 tỷ. Cả 14 phiếu do anh Toàn duyệt, tiền chảy về công ty của vợ anh. Con số này khớp dòng \"7 tỷ\" ông Hưng ghi trong sổ tay.",
+      "hints": [
+        "Phiếu nào có cùng ngày với một chuyến hàng trong nhật ký cổng là phiếu thật. Gạch bốn phiếu đó đi.",
+        "Bốn phiếu thật là 09/01, 27/03, 13/06 và 26/09. Cộng 14 phiếu còn lại.",
+        "Mười bốn phiếu khống cộng lại được 7.100 triệu."
+      ]
+    }
+  ],
+  "timeline": [
+    {
+      "time": "10/01/2025",
+      "text": "Hợp đồng nhân thọ 6 tỷ của ông Hưng có hiệu lực, người thụ hưởng là Toàn."
+    },
+    {
+      "time": "2025",
+      "text": "14 phiếu chi khống cho Thành Đạt, công ty của vợ Toàn, tổng 7,1 tỷ."
+    },
+    {
+      "time": "12/3/2026",
+      "text": "Chị Quyên gửi email kiểm toán, hẹn đối chiếu sổ sách 9:00 sáng 15/3."
+    },
+    {
+      "time": "14/3 21:28–22:16",
+      "text": "Ông Khả đến đòi nợ rồi về, đi karaoke ở Quận 4."
+    },
+    {
+      "time": "14/3 22:49",
+      "text": "Toàn nhắn mượn chiếc Wave của Phúc, ô tô để lại trong cảng làm ngoại phạm."
+    },
+    {
+      "time": "14/3 22:52",
+      "text": "Toàn ra cổng phụ cảng Tân Thuận, đội mũ trắng, mặc áo khoác đồng phục navy."
+    },
+    {
+      "time": "14/3 23:02",
+      "text": "Ông Hưng nhắn chị Quyên: \"Tối nay tôi nói chuyện với Toàn.\""
+    },
+    {
+      "time": "14/3 23:08",
+      "text": "Ông Hưng mở thang từ hầm B2 cho Toàn lên căn 21.05."
+    },
+    {
+      "time": "14/3 23:41",
+      "text": "Toàn đẩy anh qua lan can. Bảo vệ Lộc nghe tiếng rơi, 23:43 gọi 115."
+    },
+    {
+      "time": "14/3 23:49",
+      "text": "Toàn lau ly rượu, rời hầm B2."
+    },
+    {
+      "time": "15/3 00:09",
+      "text": "Toàn về lại cảng bằng cổng phụ, giặt chiếc áo khoác rách cổ tay."
     }
   ]
 }

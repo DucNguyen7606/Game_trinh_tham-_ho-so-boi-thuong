@@ -2,7 +2,7 @@
   "id": "buc-son-mai",
   "artStyle": "sa-ban",
   "title": "Hồ sơ bồi thường số 1120",
-  "intro": "Đêm 19/11, bức sơn mài \"Thiếu nữ bên sen\" của danh họa Nguyễn Văn Khuê biến mất khỏi Diệp Gallery trên đường Đồng Khởi, ba ngày trước phiên đấu giá. Chủ phòng tranh đòi bồi thường 8 tỷ đồng. Bạn có 10 ngày để đề xuất chi trả hay từ chối. Mỗi ngày khám được 1 khu hiện trường. Hỏi chuyện thì không giới hạn.",
+  "intro": "Đêm 19/11, bức sơn mài \"Thiếu nữ bên sen\" của danh họa Nguyễn Văn Khuê biến mất khỏi Diệp Gallery trên đường Đồng Khởi, ba ngày trước phiên đấu giá. Chủ phòng tranh đòi bồi thường 8 tỷ đồng. Bạn có 9 ngày để đề xuất chi trả hay từ chối. Mỗi ngày khám được 1 khu hiện trường. Hỏi chuyện thì không giới hạn.",
   "player": {
     "name": "Lê Thu Hạnh",
     "role": "Chuyên viên giám định bồi thường, Bảo hiểm An Tín",
@@ -18,7 +18,7 @@
     }
   },
   "photoDate": "21 11 '25",
-  "days": 10,
+  "days": 9,
   "limitsPerDay": {
     "talk": 2,
     "explore": 1
@@ -52,7 +52,7 @@
           "Rất giữ thể diện"
         ],
         "habit": "Ban ngày chạy chiếc Vespa xanh ngọc, tối gửi xe ở phòng tranh rồi đi taxi về Thảo Điền. Cổ lúc nào cũng quấn khăn lụa, chân đi giày cao gót cỡ 38.",
-        "relation": "Mở Diệp Gallery 25 năm. Mua bức \"Thiếu nữ bên sen\" từ năm 2009, coi nó là \"linh hồn phòng tranh\".",
+        "relation": "Mở Diệp Gallery 25 năm. Mua bức \"Thiếu nữ bên sen\" từ năm 2009, xem nó là \"linh hồn phòng tranh\".",
         "quote": "\"Bức tranh đó là danh dự của tôi.\"",
         "note": "Bức tranh được bảo hiểm 8 tỷ từ tháng 3. Ba ngày trước phiên đấu giá thì mất. Mã báo động đêm đó là mã của chính bà."
       }
@@ -272,7 +272,7 @@
     {
       "id": "van-phong",
       "name": "Phòng làm việc bà Diệp",
-      "description": "Căn phòng nhỏ trên lầu lửng, kệ sách nghệ thuật và một chiếc bàn gỗ lim.",
+      "description": "Căn phòng nhỏ trên gác lửng, kệ sách nghệ thuật và một chiếc bàn gỗ lim.",
       "hotspots": [
         {
           "id": "may-huy",
@@ -411,19 +411,31 @@
       "id": "P1",
       "title": "Hợp đồng bảo hiểm tác phẩm",
       "description": "Hiệu lực 10/3/2025, giá trị 8 tỷ, theo biên bản thẩm định của ông Phong. Bảo hiểm mọi rủi ro mất mát, kể cả khi tranh rời phòng tranh để phục chế. Người được bảo hiểm: Đoàn Ngọc Diệp.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "kể cả khi tranh rời phòng tranh để phục chế"
+      ]
     },
     {
       "id": "P2",
       "title": "Biên bản thẩm định tháng 3",
       "description": "Vóc gỗ mít, 7 lớp sơn ta. Ảnh kèm: chuồn chuồn đỏ son góc trên phải, chữ ký \"Khuê 62\", vết rạn chân chim góc dưới trái.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "chuồn chuồn đỏ son góc trên phải",
+        "chữ ký \"Khuê 62\"",
+        "vết rạn chân chim góc dưới trái"
+      ]
     },
     {
       "id": "P3",
       "title": "Nhật ký báo động",
       "description": "20/11: tắt lúc 01:38 bằng mã #01, bật lại 01:57 bằng mã #01. Mã #01 là của bà Diệp.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "tắt lúc 01:38 bằng mã #01",
+        "Mã #01 là của bà Diệp"
+      ]
     },
     {
       "id": "P4",
@@ -435,13 +447,21 @@
       "id": "P5",
       "title": "Ảnh khai mạc triển lãm 5/7",
       "description": "Bức tranh treo sau khi phục chế: chuồn chuồn màu vàng, chữ ký \"Khuê 1962\", không còn vết rạn.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "chuồn chuồn màu vàng",
+        "chữ ký \"Khuê 1962\"",
+        "không còn vết rạn"
+      ]
     },
     {
       "id": "P6",
       "title": "Phiếu giao nhận phục chế",
       "description": "Tranh rời phòng tranh 2/6, về lại 28/6. Người nhận và giao: Tô Minh Quân.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "Tranh rời phòng tranh 2/6, về lại 28/6"
+      ]
     },
     {
       "id": "P7",
@@ -453,31 +473,48 @@
       "id": "P8",
       "title": "Email nhà đấu giá Hải Đăng",
       "description": "Gửi bà Diệp 28/10: chuyên gia sẽ kiểm định kỹ thuật bức tranh ngày 21/11, gồm lấy mẫu sơn.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "kiểm định kỹ thuật bức tranh ngày 21/11, gồm lấy mẫu sơn"
+      ]
     },
     {
       "id": "P9",
       "title": "Kết quả phân tích mẫu sơn",
       "description": "Gửi email Diệp Gallery ngày 14/10, người đặt làm: Trịnh Bảo Ngọc. Chất kết dính nhựa acrylic, không phải sơn ta. Không phù hợp niên đại 1962.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "người đặt làm: Trịnh Bảo Ngọc",
+        "Không phù hợp niên đại 1962"
+      ]
     },
     {
       "id": "P10",
       "title": "Sao kê của Quân",
       "description": "3/7/2025: nhận 2,5 tỷ từ Hứa Vĩnh Thành, \"thanh toan tac pham\". 16/10 và 20/11: chuyển cho Trịnh Bảo Ngọc tổng 300 triệu.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "nhận 2,5 tỷ từ Hứa Vĩnh Thành",
+        "chuyển cho Trịnh Bảo Ngọc tổng 300 triệu"
+      ]
     },
     {
       "id": "P11",
       "title": "Bài báo nhà sưu tầm Hứa Vĩnh Thành",
       "description": "Tạp chí nội thất tháng 9: phòng khách nhà ông Thành treo bức sen có chuồn chuồn đỏ son và vết rạn góc dưới trái.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "chuồn chuồn đỏ son và vết rạn góc dưới trái"
+      ]
     },
     {
       "id": "X1",
       "title": "Tin nhắn của Ngọc",
       "description": "Ngọc hỏi nhân viên An Tín: \"Tranh mất thì bảo hiểm trả bao nhiêu chị?\" Kèm thông báo nợ thẻ 180 triệu.",
-      "source": "decoy"
+      "source": "decoy",
+      "highlights": [
+        "nợ thẻ 180 triệu"
+      ]
     },
     {
       "id": "X2",
@@ -501,7 +538,27 @@
       "id": "X5",
       "title": "Livestream của Quân",
       "description": "Quân livestream mài sơn ở xưởng Bình Thạnh từ 01:00 tới 02:20, có học trò ngồi cạnh.",
-      "source": "testimony"
+      "source": "testimony",
+      "audio": {
+        "length": "0:20",
+        "lines": [
+          {
+            "text": "(Tiếng máy mài sơn rè rè, nước nhỏ giọt xuống khay.)"
+          },
+          {
+            "who": "Quân",
+            "text": "Lớp này mài nước, nhẹ tay thôi. Mài mạnh là thủng lớp vỏ trứng."
+          },
+          {
+            "who": "Học trò",
+            "text": "Thầy ơi, hai giờ kém hai mươi rồi. Mình mài đến bao giờ ạ?"
+          },
+          {
+            "who": "Quân",
+            "text": "Đến hai giờ hai mươi. Bà con còn xem thì mình còn mài."
+          }
+        ]
+      }
     },
     {
       "id": "X6",
@@ -513,7 +570,10 @@
       "id": "X7",
       "title": "Email bà Diệp xin hoãn kiểm định",
       "description": "15/11, bà Diệp gửi Hải Đăng: \"Xin dời buổi kiểm định ngày 21/11 sang đầu tháng 12 được không?\" Nhà đấu giá từ chối.",
-      "source": "decoy"
+      "source": "decoy",
+      "highlights": [
+        "Xin dời buổi kiểm định ngày 21/11 sang đầu tháng 12 được không?"
+      ]
     },
     {
       "id": "X8",
@@ -923,6 +983,87 @@
     },
     {
       "ending": "wrong"
+    }
+  ],
+  "puzzles": [
+    {
+      "id": "z1",
+      "clueId": "P5",
+      "kind": "spots",
+      "title": "So ảnh trước và sau phục chế",
+      "prompt": "Đặt ảnh khai mạc cạnh ảnh thẩm định tháng 3 (1120/P02). Khoanh đủ ba chỗ trên bức tranh đã khác đi.",
+      "lockedText": "Ảnh khai mạc triển lãm Sen Việt, Diệp Gallery, 05/07/2025.\nBức tranh treo lại sau đợt phục chế.\nChưa đối chiếu với ảnh thẩm định.",
+      "spots": [
+        {
+          "x": 82,
+          "y": 18,
+          "r": 9,
+          "label": "Chuồn chuồn đổi màu"
+        },
+        {
+          "x": 85,
+          "y": 79,
+          "r": 9,
+          "label": "Chữ ký \"Khuê 1962\""
+        },
+        {
+          "x": 9,
+          "y": 74,
+          "r": 9,
+          "label": "Vết rạn góc dưới trái biến mất"
+        }
+      ],
+      "solvedText": "Ba chỗ đã khác: chuồn chuồn đỏ son thành màu vàng, chữ ký \"Khuê 62\" thành \"Khuê 1962\", vết rạn góc dưới trái biến mất. Bức treo ngày 5/7 không còn giống bức ông Phong thẩm định tháng 3.",
+      "hints": [
+        "Ảnh thẩm định 1120/P02 ghi chú ba chi tiết của tranh gốc. Tìm đúng ba chỗ đó trên ảnh khai mạc.",
+        "Một chỗ ở góc trên bên phải, một ở góc dưới bên phải, một ở góc dưới bên trái."
+      ]
+    }
+  ],
+  "timeline": [
+    {
+      "time": "7/3 – 10/3",
+      "text": "Ông Phong thẩm định tranh gốc: vóc gỗ mít, chuồn chuồn đỏ, \"Khuê 62\", vết rạn. Bà Diệp mua bảo hiểm 8 tỷ."
+    },
+    {
+      "time": "2/6 – 28/6",
+      "text": "Tranh ở xưởng Quân. Quân can 1:1, chép bản acrylic trên MDF, giao bản chép về."
+    },
+    {
+      "time": "3/7",
+      "text": "Ông Hứa Vĩnh Thành chuyển cho Quân 2,5 tỷ. Tranh thật về Phú Mỹ Hưng."
+    },
+    {
+      "time": "5/7",
+      "text": "Bản chép treo lại trong buổi khai mạc. Chuồn chuồn vàng, \"Khuê 1962\", hết vết rạn."
+    },
+    {
+      "time": "14/10",
+      "text": "Kết quả mẫu sơn về hộp thư Ngọc: acrylic. Ngọc giấu bà Diệp, gọi cho Quân."
+    },
+    {
+      "time": "16/10",
+      "text": "Quân chuyển tiền cho Ngọc lần đầu."
+    },
+    {
+      "time": "28/10",
+      "text": "Nhà đấu giá báo kiểm định ngày 21/11, có lấy mẫu sơn."
+    },
+    {
+      "time": "20/11 01:36",
+      "text": "Ngọc quấn khăn, đi Vespa của bà Diệp vào hẻm sau."
+    },
+    {
+      "time": "01:38 – 01:57",
+      "text": "Báo động tắt bằng mã #01, camera tắt từ máy bà Diệp. Ngọc gỡ bản chép, nạy cửa từ trong."
+    },
+    {
+      "time": "01:59",
+      "text": "Chiếc Vespa ra khỏi hẻm, chở một túi dẹt."
+    },
+    {
+      "time": "07:40",
+      "text": "Ngọc \"phát hiện\" mất tranh. Bà Diệp nộp hồ sơ đòi 8 tỷ."
     }
   ]
 }

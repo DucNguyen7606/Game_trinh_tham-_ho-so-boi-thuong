@@ -67,7 +67,7 @@ export const reconstruction: ReconstructionPanel[] = (
     {
       time: '15/11, 23:52 đến 23:58',
       title: 'Rạch một thùng, lấy một cái nhiệt kế',
-      text: 'Một mình trực ca đêm, Tùng quẹt thẻ vào phòng lạnh 3. Anh rạch băng keo Đức trên thùng 1, lấy nhiệt kế TL-A ra, vo mẩu băng keo nhét túi, dán lại thùng bằng băng keo xanh lá của kho. Cảm biến ánh sáng của TL-A ghi lại khoảnh khắc nắp thùng mở lúc 23:55.',
+      text: 'Một mình trực ca đêm, Tùng quẹt thẻ vào phòng lạnh 3. Anh rạch băng dính Đức trên thùng 1, lấy nhiệt kế TL-A ra, vo mẩu băng dính nhét túi, dán lại thùng bằng băng dính xanh lá của kho. Cảm biến ánh sáng của TL-A ghi lại khoảnh khắc nắp thùng mở lúc 23:55.',
       questionId: 'q4',
       Art: () => (
         <Staged zone="phong-lanh">
@@ -80,7 +80,7 @@ export const reconstruction: ReconstructionPanel[] = (
     {
       time: '16/11, 00:00 đến 02:43',
       title: 'Ba mươi ba độ',
-      text: 'Tùng về phòng nghỉ coi hai trận bóng, TL-A nằm trong túi trong áo phao, sát ngực. Trong túi tối om, và nhiệt kế đo đúng hơi ấm của người: 32 đến 33 độ, đều đặn gần ba tiếng. Phòng nghỉ máy lạnh 24 độ, ngoài trời 26 độ, không nơi nào khác ấm đúng như vậy.',
+      text: 'Tùng về phòng nghỉ xem hai trận bóng, TL-A nằm trong túi trong áo phao, sát ngực. Trong túi tối om, và nhiệt kế đo đúng hơi ấm của người: 32 đến 33 độ, đều đặn gần ba tiếng. Phòng nghỉ máy lạnh 24 độ, ngoài trời 26 độ, không nơi nào khác ấm đúng như vậy.',
       questionId: 'q3',
       Art: () => (
         <Staged zone="phong-nghi">
@@ -113,7 +113,7 @@ export const reconstruction: ReconstructionPanel[] = (
     {
       time: '20/11',
       title: 'Cái nhiệt kế không ai nhớ tới',
-      text: 'Bên gửi hàng ở Đức luôn giấu thêm một nhiệt kế dự phòng. TL-B nằm dưới lớp túi lạnh của thùng 17, băng keo còn nguyên: 2,1 đến 6,4 độ suốt chuyến hàng. Viện Kiểm nghiệm lấy mẫu thùng 1 và thùng 17, kết luận đạt toàn bộ. Không lọ nào hỏng, và Minh Tâm cũng là người bị lừa.',
+      text: 'Bên gửi hàng ở Đức luôn giấu thêm một nhiệt kế dự phòng. TL-B nằm dưới lớp túi lạnh của thùng 17, băng dính còn nguyên: 2,1 đến 6,4 độ suốt chuyến hàng. Viện Kiểm nghiệm lấy mẫu thùng 1 và thùng 17, kết luận đạt toàn bộ. Không lọ nào hỏng, và Minh Tâm cũng là người bị lừa.',
       questionId: 'q5',
       Art: () => <OnDesk ids={['P6', 'P10']} />,
     },
@@ -173,7 +173,7 @@ const planTheory: Record<string, { text: string; docs: string[] }> = {
 const tamperRefute: Record<string, { text: string; docs: string[] }> = {
   loc: { text: 'Ông Lộc giao pallet vào kho lạnh lúc 13:55, và lúc nằm ngoài nắng TL-A chỉ lên 7,8 độ. Đêm đó chỉ thẻ của Tùng mở phòng lạnh 3.', docs: ['X2', 'P5'] },
   linh: { text: 'Linh chỉ tới kho sáng 17/11. Nhiệt kế bị lấy ra lúc 23:55 ngày 15/11, khi phòng lạnh 3 chỉ có thẻ của Tùng ra vào. Chính Linh xin giám định trước khi tiêu hủy.', docs: ['P5', 'P4'] },
-  hung: { text: 'Hưng không có thẻ vào phòng lạnh 3. Người mở cửa lúc 23:52 và 02:41 là Tùng, và mẩu băng keo Đức nằm trong túi áo phao của Tùng.', docs: ['P5', 'X4'] },
+  hung: { text: 'Hưng không có thẻ vào phòng lạnh 3. Người mở cửa lúc 23:52 và 02:41 là Tùng, và mẩu băng dính Đức nằm trong túi áo phao của Tùng.', docs: ['P5', 'X4'] },
   none: { text: 'Phòng lạnh không lên quá 5,6 độ. TL-A nóng lên 27 độ trong 8 phút và nguội lại trong 10 phút, còn TL-B nằm cùng pallet chưa bao giờ quá 6,4 độ.', docs: ['P3', 'P6'] },
 }
 

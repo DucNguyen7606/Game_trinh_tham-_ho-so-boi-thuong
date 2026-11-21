@@ -103,7 +103,7 @@ function Shelves() {
       <g transform="translate(-10 8) rotate(2 300 262)">
         <rect x="236" y="240" width="150" height="54" fill="#f6e27a" stroke={LINE} strokeWidth="1.5" />
         <text x="244" y="256" fontSize="9" fill={ink.night} fontFamily={mono}>16/11 · Anh Tùng để riêng</text>
-        <text x="244" y="268" fontSize="9" fill={ink.night} fontFamily={mono}>thùng 1 ra mép kệ giùm em.</text>
+        <text x="244" y="268" fontSize="9" fill={ink.night} fontFamily={mono}>thùng 1 ra mép kệ hộ em.</text>
         <text x="244" y="280" fontSize="9" fill="#b23a2e" fontFamily={mono}>Đừng báo chị Thư!</text>
         <text x="350" y="290" fontSize="10" fill={ink.night} fontFamily={mono} fontStyle="italic">Linh</text>
       </g>
@@ -195,7 +195,7 @@ function Table() {
       <circle cx="320" cy="200" r="54" fill={C.tapeVN} {...O} />
       <circle cx="320" cy="200" r="22" fill="#e9e3d2" {...O} strokeWidth={2} />
       <text x="320" y="164" textAnchor="middle" fontSize="9" fontWeight="700" fill="#fff" fontFamily={mono}>TÂN SƠN</text>
-      <Label x={150} y={222} t="băng keo xanh lá của kho" c={ink.night} />
+      <Label x={150} y={222} t="băng dính xanh lá của kho" c={ink.night} />
       <Label x={150} y={236} t="phòng nào cũng có" c={ink.night} />
     </g>
   )

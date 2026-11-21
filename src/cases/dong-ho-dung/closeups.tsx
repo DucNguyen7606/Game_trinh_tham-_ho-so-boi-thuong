@@ -1,5 +1,6 @@
 import { accent, ink } from '@/art/palette'
-import { C, LINE, PillBox, Toolbox, Watch } from './scenes'
+import { clueLocked, useGame } from '@/game/store'
+import { C, LINE, PILLS_EMPTY, PillBox, Toolbox, Watch } from './scenes'
 
 // Close-up photos for each hotspot, 400 x 300, framed by EvidencePhoto.
 
@@ -108,17 +109,30 @@ function Grandfather() {
 }
 
 function Pills() {
+  // The answer is circled only once the player has read the box (puzzle "hop-thuoc").
+  const locked = useGame((s) => clueLocked(s, 'H4'))
   return (
     <g>
       <rect width="400" height="300" fill={C.lim} />
-      <PillBox x={20} y={70} s={1.3} empty={[[0, 0], [0, 1]]} />
+      <PillBox x={20} y={70} s={1.3} empty={PILLS_EMPTY} />
       {['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'].map((d, i) => (
         <text key={d} x={52 + i * 49} y="60" textAnchor="middle" fontSize="12" fontWeight="700" fill="#f3e4c4" fontFamily={mono}>
           {d}
         </text>
       ))}
-      <rect x="28" y="179" width="48" height="48" fill="none" stroke={accent.amber} strokeWidth="4" />
-      <Label x={282} y={262} t="T2 · Tối 21:00: còn 3 viên" />
+      {['S', 'T', 'Tối'].map((r, i) => (
+        <text key={r} x="14" y={102 + i * 49} textAnchor="middle" fontSize="10" fontWeight="700" fill="#f3e4c4" fontFamily={mono}>
+          {r}
+        </text>
+      ))}
+      {locked ? (
+        <Label x={282} y={262} t="Chia thuốc: tối Chủ nhật 12/4" />
+      ) : (
+        <>
+          <rect x="28" y="179" width="48" height="48" fill="none" stroke={accent.amber} strokeWidth="4" />
+          <Label x={282} y={262} t="T2 · Tối 21:00: còn 3 viên" />
+        </>
+      )}
     </g>
   )
 }
@@ -165,7 +179,7 @@ function Tray() {
       <ellipse cx="170" cy="160" rx="70" ry="40" fill="#f4efe0" {...O} />
       <ellipse cx="170" cy="160" rx="50" ry="26" fill="#ece2cf" />
       <line x1="230" y1="150" x2="320" y2="130" stroke="#c9ccd0" strokeWidth="8" strokeLinecap="round" />
-      <Label x={280} y={262} t="chén cháo ăn hết" />
+      <Label x={280} y={262} t="bát cháo ăn hết" />
     </g>
   )
 }

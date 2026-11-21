@@ -156,7 +156,7 @@ export const reconstruction: ReconstructionPanel[] = (
     {
       time: '17/11',
       title: 'Máy lên kệ Quận 10',
-      text: 'Chủ tiệm Gia Hưng Mobile chuyển cho Khải 1,1 tỷ. Hôm sau Khải trả Tư 60 triệu tiền ghe. Cùng tuần, 214 máy trong lô "bị nước cuốn" được gắn sim, cách tiệm của bà Lệ hai dãy phố.',
+      text: 'Chủ cửa hàng Gia Hưng Mobile chuyển cho Khải 1,1 tỷ. Hôm sau Khải trả Tư 60 triệu tiền ghe. Cùng tuần, 214 máy trong lô "bị nước cuốn" được gắn sim, cách cửa hàng của bà Lệ hai dãy phố.',
       questionId: 'q6',
       Art: () => <OnDesk ids={['P10', 'P11']} />,
     },
@@ -221,7 +221,7 @@ const takerRefute: Record<string, { text: string; docs: string[] }> = {
 
 const helperRefute: Record<string, { text: string; docs: string[] }> = {
   nhat: { text: 'Nhật ở quán nhậu Phú Mỹ Hưng từ khuya tới hơn 3 giờ. Vệt sơn trên bậu cửa sổ đúng màu chiếc ghe đăng ký tên Lê Văn Tư.', docs: ['X4', 'P8'] },
-  bong: { text: 'Chị Bông ngồi trong quán suốt đêm và là người kể lại chuyện chiếc ghe. Sơn xanh dương viền đỏ và mẩu băng keo "MỸ LỆ" đều dẫn tới ghe của Tư.', docs: ['P8', 'P7'] },
+  bong: { text: 'Chị Bông ngồi trong quán suốt đêm và là người kể lại chuyện chiếc ghe. Sơn xanh dương viền đỏ và mẩu băng dính "MỸ LỆ" đều dẫn tới ghe của Tư.', docs: ['P8', 'P7'] },
   none: { text: 'Camera bên kia kênh thấy ghe đèn xanh cập cửa sổ kho lúc 01:52 và rời đi lúc 02:41, khoang chất đầy hàng phủ bạt.', docs: ['P7', 'P8'] },
 }
 
@@ -332,7 +332,7 @@ export function theoryPanels(picks: Picks): ReconstructionPanel[] {
   if (picks.decision === 'deny')
     wrong.push(
       refutePanel('Bà Lệ không gian lận', {
-        text: 'Ngập nước là có thật và nằm trong phạm vi bảo hiểm: 600 máy ở tầng 1–2 hư toàn bộ. Bà Lệ nâng giá trị bảo hiểm vì nhập thêm hàng thật, và tiền bán hàng bị lấy chảy vào túi Khải.',
+        text: 'Ngập nước là có thật và nằm trong phạm vi bảo hiểm: 600 máy ở tầng 1–2 hỏng toàn bộ. Bà Lệ nâng giá trị bảo hiểm vì nhập thêm hàng thật, và tiền bán hàng bị lấy chảy vào túi Khải.',
         docs: ['P9', 'P10'],
       }),
     )

@@ -2,6 +2,7 @@ import { Mark, Phone, Row, Sheet, Signature, Stamp } from '@/art/docParts'
 import { accent, ink } from '@/art/palette'
 import { iso } from '@/art/iso/iso'
 import { Fb, TimeTag } from '@/art/iso/props-ch9-12'
+import { clueLocked, useGame } from '@/game/store'
 
 // What each document in the case-file envelopes looks like, keyed by clue id.
 
@@ -95,9 +96,12 @@ const P2 = () => (
   </Sheet>
 )
 
-const P3 = () => (
+function P3() {
+  // Until the raw data is read (puzzle "do-thi-tla"), the print has no light-sensor row.
+  const locked = useGame((s) => clueLocked(s, 'P3'))
+  return (
   <Sheet org="Phần mềm đọc nhiệt kế · Bản in của Minh Tâm" title="Báo cáo nhiệt kế TL-A · nắp thùng 1">
-    <TempChart curve={TLA_CURVE} title="15/11 12:00 → 16/11 06:00" lights />
+    <TempChart curve={TLA_CURVE} title="15/11 12:00 → 16/11 06:00" lights={!locked} />
     <div className="grid grid-cols-[5rem_1fr] gap-x-2 font-mono text-[9.5px]">
       <span>13:30</span>
       <span>cao nhất 7,8° (trong ngưỡng)</span>
@@ -114,7 +118,8 @@ const P3 = () => (
     </div>
     <p className="text-[10px] font-bold text-[#b23a2e]">BÁO ĐỘNG: vượt 8°C liên tục 2 giờ 48 phút.</p>
   </Sheet>
-)
+  )
+}
 
 const P4 = () => (
   <Sheet org="Công ty Dược phẩm Minh Tâm · Phòng đảm bảo chất lượng" title="Biên bản cách ly lô HZ-2509">
@@ -158,7 +163,7 @@ const P6 = () => (
   <Sheet org="Pharma-Logistik GmbH · Frankfurt" title="Phiếu đóng gói · Packing list">
     <Row k="Lô" v="HZ-2509 · 40 thùng × 30 lọ" />
     <Row k="Đóng gói" v="14/11/2025, túi lạnh 4 lớp" />
-    <Row k="Băng keo niêm" v="Xanh dương, in PHARMA-LOGISTIK" />
+    <Row k="Băng dính niêm" v="Xanh dương, in PHARMA-LOGISTIK" />
     <p className="pt-1 text-[10px] font-bold">Nhiệt kế tự ghi (2 cái)</p>
     <Row k="TL-A" v="gắn ngoài, nắp thùng 1" />
     <div className="flex justify-between gap-3 border-b border-dotted border-black/20">
@@ -313,7 +318,7 @@ const X3 = () => (
         <TimeTag t="17/11 09:03" />
       </svg>
     </div>
-    <p className="text-[10px]">"TL-A báo đỏ. Thùng 1 có đoạn băng keo xanh lá, Tùng nói hải quan mở kiểm tra."</p>
+    <p className="text-[10px]">"TL-A báo đỏ. Thùng 1 có đoạn băng dính xanh lá, Tùng nói hải quan mở kiểm tra."</p>
     <PhotoMeta when="17/11/2025 · 09:03" where="Tân Sơn Cargo, Tân Bình" />
   </Phone>
 )
@@ -321,11 +326,11 @@ const X3 = () => (
 const X4 = () => (
   <Phone header="anh Hưng HT">
     <p className="text-center text-[9px] opacity-50">Tin nhắn trên máy của Tùng</p>
-    <Bubble time="12/11 21:40">Lô Herzena của Minh Tâm về thứ bảy hả em. Một pallet?</Bubble>
+    <Bubble time="12/11 21:40">Lô Herzena của Minh Tâm về thứ bảy à em. Một pallet?</Bubble>
     <Bubble me time="12/11 21:42">Dạ 40 thùng, chuyến Frankfurt trưa 15</Bubble>
     <Bubble time="12/11 21:45">Chỉ cần cái nhiệt kế báo đỏ. Thuốc em đừng đụng, giữ lạnh cho anh.</Bubble>
     <Bubble me time="16/11 03:02">Xong rồi anh. Đỏ rồi</Bubble>
-    <Bubble time="16/11 07:15">Sáng nay anh gửi trước 100. Nhớ đề xuất bên anh đốt nha.</Bubble>
+    <Bubble time="16/11 07:15">Sáng nay anh gửi trước 100. Nhớ đề xuất bên anh đốt nhé.</Bubble>
   </Phone>
 )
 

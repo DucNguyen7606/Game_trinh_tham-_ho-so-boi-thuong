@@ -94,7 +94,7 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
     },
     {
       id: 'le',
-      caption: 'Bà Lệ nhận 1,8 tỷ cho phần hàng ngập và lấy lại hơn 600 máy từ tiệm Gia Hưng. Đơn Tết vẫn giao kịp.',
+      caption: 'Bà Lệ nhận 1,8 tỷ cho phần hàng ngập và lấy lại hơn 600 máy từ cửa hàng Gia Hưng. Đơn Tết vẫn giao kịp.',
       Art: () => (
         <Panel>
           <PhoneShop who="le" mood="smile" />
@@ -190,7 +190,7 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
     },
     {
       id: 'khai',
-      caption: 'Khải xin nghỉ việc êm thấm, nói muốn về quê mở tiệm điện thoại.',
+      caption: 'Khải xin nghỉ việc êm thấm, nói muốn về quê mở cửa hàng điện thoại.',
       Art: () => (
         <Panel>
           <Pier who="khai" mood="smile" place="leave" />
@@ -210,7 +210,7 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
     },
     {
       id: 'shop',
-      caption: 'Cùng lúc đó, 900 máy "bị nước cuốn" được bán xả kho ở Quận 10, cách tiệm bà Lệ hai dãy phố.',
+      caption: 'Cùng lúc đó, 900 máy "bị nước cuốn" được bán xả kho ở Quận 10, cách cửa hàng bà Lệ hai dãy phố.',
       Art: () => (
         <Panel>
           <PhoneShop sale />

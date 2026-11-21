@@ -18,7 +18,7 @@ Sang khoanh tay, ngồi lệch ra mép ghế.
 * [Tối 10/1 anh ở đâu?]
     "Về Tây Ninh đám giỗ ông nội từ chiều 9/1, tới 11/1 mới lên. Hình đây, cả họ tôi làm chứng." #photo:X5
     -> hoi
-* {has_X1} [Anh đăng "Rồi tụi bây sẽ biết".]
+* {has_X1} [Anh đăng "Rồi chúng mày sẽ biết".]
     "Tôi nói là tôi sẽ đi khiếu nại lên phòng lao động. Chứ chích kim làm gì, má tôi cũng uống sữa đó."
     -> hoi
 * {has_H1} [Kim đỏ trên nhiệt kế line 2 dừng ở 97°C.]

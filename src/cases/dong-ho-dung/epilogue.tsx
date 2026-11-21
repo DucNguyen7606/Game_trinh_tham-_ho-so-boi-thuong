@@ -121,7 +121,7 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
     },
     {
       id: 'chau',
-      caption: 'Chị Châu không bán căn biệt thự. Bản vẽ dang dở của ba được đóng khung, giữ nguyên nét chì cuối cùng.',
+      caption: 'Chị Châu không bán căn biệt thự. Bản vẽ dang dở của bố được đóng khung, giữ nguyên nét chì cuối cùng.',
       Art: () => (
         <EpiPanel>
           <Study mood="neutral" />
@@ -237,7 +237,7 @@ export const epilogue: Record<string, EpiloguePanel[]> = {
     },
     {
       id: 'chau',
-      caption: 'Chị Châu không bao giờ biết ba mình ra đi bên bàn vẽ, chứ không phải dưới chân cầu thang.',
+      caption: 'Chị Châu không bao giờ biết bố mình ra đi bên bàn vẽ, chứ không phải dưới chân cầu thang.',
       Art: () => (
         <EpiPanel>
           <Study mood="worried" />

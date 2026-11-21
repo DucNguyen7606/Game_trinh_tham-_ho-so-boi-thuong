@@ -53,7 +53,7 @@ export const reconstruction: ReconstructionPanel[] = (
     {
       time: '06/04',
       title: '"Bệnh thì không chi"',
-      text: 'Nợ 2,3 tỷ, chủ nợ hẹn tới cuối tháng 4, còn ông chú bị tim thì không chịu bán nhà. Khoa gọi tổng đài An Tín hỏi: chú mất vì bệnh tim thì có được chi không. Tổng đài trả lời: không, bệnh lý bị loại trừ, chỉ chi khi tai nạn, như té ngã.',
+      text: 'Nợ 2,3 tỷ, chủ nợ hẹn tới cuối tháng 4, còn ông chú bị tim thì không chịu bán nhà. Khoa gọi tổng đài An Tín hỏi: chú mất vì bệnh tim thì có được chi không. Tổng đài trả lời: không, bệnh lý bị loại trừ, chỉ chi khi tai nạn, như ngã.',
       questionId: 'q7',
       Art: () => <OnDesk ids={['P9', 'P1']} />,
     },
@@ -92,7 +92,7 @@ export const reconstruction: ReconstructionPanel[] = (
     {
       time: '00:38 đến 01:12',
       title: 'Kéo ra cầu thang',
-      text: 'Khoa về thấy đèn phòng chú còn sáng, lên lầu thì ông đã lạnh. Nhớ câu "bệnh thì không chi", anh ta xốc nách kéo ông qua hành lang, hai gót chân để lại vệt trên thảm, rồi thả ông xuống cầu thang. Ông đã ngồi như vậy năm tiếng, hoen tử thi đã in ở mông và đùi.',
+      text: 'Khoa về thấy đèn phòng chú còn sáng, lên gác thì ông đã lạnh. Nhớ câu "bệnh thì không chi", anh ta xốc nách kéo ông qua hành lang, hai gót chân để lại vệt trên thảm, rồi thả ông xuống cầu thang. Ông đã ngồi như thế năm tiếng, hoen tử thi đã in ở mông và đùi.',
       questionId: 'q3',
       Art: () => (
         <Staged zone="cau-thang">
@@ -119,7 +119,7 @@ export const reconstruction: ReconstructionPanel[] = (
     {
       time: '14/04 đến 16/04',
       title: 'Một hồ sơ tai nạn',
-      text: 'Sáng 14/4 chú Tư phát hiện ông dưới chân cầu thang. Công an ghi nhận té ngã. Hai ngày sau Khoa nộp đơn đòi 7 tỷ, kèm tấm ảnh tiệc cưới lúc 22:46. Không có án mạng nào, chỉ có một cái chết vì bệnh bị dựng thành tai nạn.',
+      text: 'Sáng 14/4 chú Tư phát hiện ông dưới chân cầu thang. Công an ghi nhận ngã. Hai ngày sau Khoa nộp đơn đòi 7 tỷ, kèm tấm ảnh tiệc cưới lúc 22:46. Không có án mạng nào, chỉ có một cái chết vì bệnh bị dựng thành tai nạn.',
       questionId: 'q2',
       Art: () => <OnDesk ids={['P2', 'P7']} />,
     },
@@ -150,9 +150,9 @@ const causeTheory: Record<string, string> = {
 
 const stagerTheory: Record<string, string> = {
   khoa: 'Theo bạn, Khoa kéo thi thể ra cầu thang, tháo ốc thanh chặn thảm và chỉnh đồng hồ về lúc mình đang ở tiệc cưới.',
-  chau: 'Theo bạn, chị Châu đã dựng cảnh té cầu thang.',
-  tu: 'Theo bạn, chú Tư dựng cảnh té cầu thang trước khi khóa cổng ra về, hoặc sáng hôm sau.',
-  thang: 'Theo bạn, Thắng đã vào biệt thự và dựng cảnh té cầu thang.',
+  chau: 'Theo bạn, chị Châu đã dựng cảnh ngã cầu thang.',
+  tu: 'Theo bạn, chú Tư dựng cảnh ngã cầu thang trước khi khóa cổng ra về, hoặc sáng hôm sau.',
+  thang: 'Theo bạn, Thắng đã vào biệt thự và dựng cảnh ngã cầu thang.',
   none: 'Theo bạn, không ai dựng gì cả. Những gì ở chân cầu thang là thật.',
 }
 
@@ -162,7 +162,7 @@ const causeRefute: Record<string, { text: string; docs: string[] }> = {
 }
 
 const stagerRefute: Record<string, { text: string; docs: string[] }> = {
-  chau: { text: 'Đêm đó chị Châu ở nhà Quận 7, gọi cho ba lúc 20:00 và 20:14. Camera hẻm không ghi chị tới biệt thự.', docs: ['X5', 'P5'] },
+  chau: { text: 'Đêm đó chị Châu ở nhà Quận 7, gọi cho bố lúc 20:00 và 20:14. Camera hẻm không ghi chị tới biệt thự.', docs: ['X5', 'P5'] },
   tu: { text: 'Lúc chú Tư ra cổng 19:30, ông Hiển còn sống bên cửa sổ. Sáng 06:25 chú tới thì đèn phòng làm việc đã tắt từ 01:12, khi chú không có trong nhà.', docs: ['P5', 'P6'] },
   thang: { text: 'Thắng đứng ngoài cổng sáu phút rồi đi, không bước vào. Tường cao 3 m cắm mảnh chai.', docs: ['P5', 'X6'] },
   none: { text: 'Ốc thanh chặn thảm được vặn ra bằng tua vít và nằm trong hộp đồ nghề của Khoa. Đồng hồ bị kéo núm, thi thể bị dời khỏi ghế.', docs: ['P10', 'P7'] },
@@ -203,7 +203,7 @@ function StagerArt({ who }: { who: string }) {
 }
 
 const decisionText: Record<string, { title: string; note: string; stamp: string; color: string; docs: string[] }> = {
-  deny: { title: 'Từ chối, chuyển hồ sơ gian dối', note: 'Bạn cho rằng ông Hiển mất vì bệnh tim, thuộc Điều 7. Cảnh té cầu thang là dựng lên, nên theo Điều 9 hồ sơ bị từ chối và chuyển công an.', stamp: 'Từ chối', color: '#3f8a7e', docs: ['P1', 'P7'] },
+  deny: { title: 'Từ chối, chuyển hồ sơ gian dối', note: 'Bạn cho rằng ông Hiển mất vì bệnh tim, thuộc Điều 7. Cảnh ngã cầu thang là dựng lên, nên theo Điều 9 hồ sơ bị từ chối và chuyển công an.', stamp: 'Từ chối', color: '#3f8a7e', docs: ['P1', 'P7'] },
   heir: { title: 'Chi 7 tỷ cho chị Châu', note: 'Bạn cho rằng Khoa giết chú để lấy tiền nên mất quyền nhận, tiền chi cho người thừa kế là chị Châu.', stamp: 'Chi cho chị Châu', color: '#cf9a32', docs: ['P1', 'X4'] },
   pay: { title: 'Chi 7 tỷ cho Khoa', note: 'Bạn chi đủ 7 tỷ cho Khoa, người thụ hưởng có tên trên hợp đồng.', stamp: 'Chi cho Khoa', color: '#b23a2e', docs: ['P2', 'P3'] },
 }
