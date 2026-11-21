@@ -32,7 +32,8 @@ const PAGES: Page[] = [
       points: [
         'Mỗi ngày khám được một khu hiện trường. Hỏi chuyện nghi phạm không giới hạn.',
         'Bấm "Kết thúc ngày" ở Bàn làm việc để sang ngày mới. Hết số ngày thì phải nộp đề xuất.',
-        'Uy tín giảm mỗi lần bạn trả lời sai trên bàn suy luận.',
+        'Uy tín giảm mỗi lần bạn trả lời sai trên bàn suy luận, và quyết định đánh giá cuối vụ của trưởng phòng.',
+        'Cuối vụ: kết luận đúng và không sai lần nào là Xuất sắc; đúng nhưng có sai là Đạt; kết luận sai, hoặc uy tín về 0, là Bị khiển trách.',
         'Độ khó của mỗi chương quyết định số ngày (Dễ 10, Vừa 9, Khó 8, Rất khó 7), uy tín ban đầu và mức game nói rõ còn thiếu gì. Nhãn màu trên bản đồ ghi rõ những con số này.',
       ],
     },

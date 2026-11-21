@@ -125,7 +125,9 @@ function QuestionNode({ data }: NodeProps<Node<QuestionNodeData>>) {
                 .filter(Boolean)
                 .join(' ')
             })()
-          : 'Trưởng phòng không tin lập luận này. Uy tín giảm.',
+          : useGame.getState().reputation <= 0
+            ? 'Trưởng phòng không tin lập luận này. Uy tín đã về 0: dù kết luận đúng, cuối vụ bạn vẫn bị khiển trách.'
+            : `Trưởng phòng không tin lập luận này. Uy tín giảm, còn ${useGame.getState().reputation}.`,
     )
   }
 
