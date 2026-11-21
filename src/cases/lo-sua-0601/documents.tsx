@@ -1,6 +1,9 @@
 import { Mark, Phone, Row, Sheet, Signature, Stamp } from '@/art/docParts'
 import { accent, ink } from '@/art/palette'
-import { Bottle, C, Dial, MilkShelf } from './scenes'
+import type { PortraitSpec } from '@/art/Portrait'
+import { Fb, TimeStamp, makeGuest } from '@/art/iso/photo'
+import type { CaseData } from '@/game/types'
+import caseJson from './case.json'
 
 // What each document in the case-file envelopes looks like, keyed by clue id.
 
@@ -227,44 +230,35 @@ const PhotoMeta = ({ when, where }: { when: string; where: string }) => (
   </p>
 )
 
-const TimeTag = ({ t }: { t: string }) => (
-  <>
-    <rect x="8" y="8" width="104" height="18" rx="4" fill="#000" opacity="0.45" />
-    <text x="14" y="21" fontSize="11" fill="#fff" fontFamily={mono}>
-      {t}
-    </text>
-  </>
-)
+const TimeTag = TimeStamp
+const cast = Object.fromEntries((caseJson as CaseData).suspects.map((x) => [x.id, x.portrait])) as Record<string, PortraitSpec>
+const Guest = makeGuest(cast)
 
-const Guest = ({ x, y, s = 1, skin = '#efc39b', hair = '#1a1a1f', shirt, glasses }: { x: number; y: number; s?: number; skin?: string; hair?: string; shirt: string; glasses?: boolean }) => (
-  <g transform={`translate(${x} ${y}) scale(${s})`} stroke={LINE} strokeWidth="1.6" strokeLinejoin="round">
-    <path d="M-26,40 Q-24,0 -8,-6 L8,-6 Q24,0 26,40 Z" fill={shirt} />
-    <rect x="-4" y="-14" width="8" height="10" fill={skin} />
-    <ellipse cx="0" cy="-30" rx="13" ry="16" fill={skin} />
-    <path d="M-14,-32 Q-14,-50 0,-48 Q14,-50 14,-32 Q8,-40 0,-40 Q-8,-40 -14,-32 Z" fill={hair} />
-    <circle cx="-5" cy="-30" r="1.6" fill={LINE} stroke="none" />
-    <circle cx="5" cy="-30" r="1.6" fill={LINE} stroke="none" />
-    {glasses && (
-      <g fill="none" strokeWidth="1.2">
-        <circle cx="-5" cy="-30" r="4" />
-        <circle cx="5" cy="-30" r="4" />
-      </g>
-    )}
-    <path d="M-5,-22 Q0,-18 5,-22" fill="none" strokeWidth="1.4" />
+/** A soy-milk bottle seen straight on: white body, green cap; `sour` swells the cap. (x, y) is the bottom middle. */
+const BottleFb = ({ x, y, s = 1, sour = false }: { x: number; y: number; s?: number; sour?: boolean }) => (
+  <g transform={`translate(${x} ${y}) scale(${s})`}>
+    <Fb x={-10} y={-44} w={20} h={44} d={8} c="#f4f1ea" />
+    <rect x="-10" y="-30" width="20" height="14" fill="#5f9a5b" />
+    <Fb x={-6} y={-52} w={12} h={8} d={6} c="#e6e2d8" />
+    <Fb x={sour ? -8 : -7} y={sour ? -62 : -58} w={sour ? 16 : 14} h={sour ? 10 : 6} d={6} c={sour ? '#e9d36a' : '#5f9a5b'} />
   </g>
 )
 
 /** Sang's photo of the line 2 screen at 02:14, and Thuận's reply. */
 const X4 = () => (
   <Phone header="Zalo · Anh Thuận QC">
-    <div className="overflow-hidden rounded-md">
+    <div className="overflow-hidden rounded-xl">
       <svg viewBox="0 0 320 200" className="block w-full">
-        <rect width="320" height="200" fill={C.steelDark} />
-        <rect x="30" y="30" width="170" height="110" rx="8" fill={C.night} stroke={LINE} strokeWidth="3" />
-        <text x="115" y="88" textAnchor="middle" fontSize="34" fontWeight="700" fill="#ff6b5a" fontFamily={mono}>98°C</text>
-        <text x="115" y="118" textAnchor="middle" fontSize="12" fill="#ff6b5a" fontFamily={mono}>L2 · ALARM TEMP LOW</text>
-        <circle cx="240" cy="60" r="16" fill="#ff3b2e" stroke={LINE} strokeWidth="3" />
-        <Dial x={262} y={140} r={36} now={98} low={97} />
+        <rect width="320" height="200" fill="#9aa4ae" />
+        <Fb x={20} y={24} w={190} h={130} d={14} c="#7e8794" />
+        <rect x="32" y="36" width="166" height="106" rx="6" fill="#2e2a4a" />
+        <text x="115" y="94" textAnchor="middle" fontSize="34" fontWeight="700" fill="#ff6b5a" fontFamily={mono}>98°C</text>
+        <text x="115" y="122" textAnchor="middle" fontSize="12" fill="#ff6b5a" fontFamily={mono}>L2 · ALARM TEMP LOW</text>
+        <Fb x={232} y={40} w={34} h={24} d={10} c="#e2463a" />
+        <Fb x={226} y={110} w={70} h={70} d={10} c="#7e8794" />
+        <circle cx="261" cy="145" r="28" fill="#fbfaf6" />
+        <line x1="261" y1="145" x2="236" y2="152" stroke={LINE} strokeWidth="3" />
+        <line x1="261" y1="145" x2="238" y2="156" stroke="#e2463a" strokeWidth="2.4" />
         <TimeTag t="07/1 02:14" />
       </svg>
     </div>
@@ -276,15 +270,15 @@ const X4 = () => (
 
 const X5 = () => (
   <Phone header="Thư viện ảnh · Sang">
-    <div className="overflow-hidden rounded-md">
+    <div className="overflow-hidden rounded-xl">
       <svg viewBox="0 0 320 220" className="block w-full">
-        <rect width="320" height="220" fill="#3a2b22" />
-        <rect x="100" y="20" width="120" height="70" fill="#9e2b22" stroke={LINE} strokeWidth="2" />
-        <circle cx="160" cy="55" r="16" fill="#d9b04f" />
-        <rect x="0" y="150" width="320" height="70" fill="#7a4f32" />
-        <Guest x={70} y={170} shirt="#ece2cf" hair="#7d7a76" />
-        <Guest x={160} y={164} s={1.2} shirt="#2f4258" skin="#b9815a" />
-        <Guest x={250} y={170} shirt="#cf9a32" />
+        <rect width="320" height="220" fill="#c49a74" />
+        <Fb x={100} y={20} w={120} h={70} d={12} c="#b8443a" />
+        <Fb x={146} y={38} w={28} h={34} d={6} c="#f2c46d" />
+        <Guest x={70} y={160} look={{ hair: 'short', hairColor: 'gray', age: 'old', skin: 2 }} shirt="#ece2cf" />
+        <Guest x={160} y={156} s={1.15} who="sang" look={{ mood: 'smile' }} shirt="#2f4258" />
+        <Guest x={250} y={160} look={{ hair: 'long', hairColor: 'black', skin: 1 }} shirt="#cf9a32" />
+        <Fb x={10} y={180} w={300} h={40} d={24} c="#f6efe2" />
         <TimeTag t="10/1 19:10" />
       </svg>
     </div>
@@ -295,15 +289,15 @@ const X5 = () => (
 
 const X6 = () => (
   <Phone header="Thư viện ảnh · Thuận">
-    <div className="overflow-hidden rounded-md">
+    <div className="overflow-hidden rounded-xl">
       <svg viewBox="0 0 320 220" className="block w-full">
-        <rect width="320" height="220" fill="#d9c49a" />
-        <rect x="40" y="20" width="90" height="60" fill="#1f2730" stroke={LINE} strokeWidth="2" />
-        <rect x="0" y="150" width="320" height="70" fill="#7a4f32" />
-        <Guest x={90} y={166} shirt="#ece2cf" glasses />
-        <Guest x={170} y={168} shirt="#b23a2e" hair="#4a3426" />
-        <Guest x={240} y={178} s={0.8} shirt="#7a9fb0" />
-        <ellipse cx="170" cy="200" rx="40" ry="8" fill="#ece2cf" stroke={LINE} strokeWidth="1.5" />
+        <rect width="320" height="220" fill="#e9d6b4" />
+        <Fb x={40} y={20} w={90} h={60} d={10} c="#2e2a4a" />
+        <Guest x={90} y={156} who="thuan" look={{ mood: 'smile' }} />
+        <Guest x={170} y={158} look={{ hair: 'long', hairColor: 'brown', skin: 1 }} shirt="#b23a2e" />
+        <Guest x={244} y={170} s={0.8} look={{ hair: 'short', age: 'young', skin: 1 }} shirt="#7a9fb0" />
+        <Fb x={10} y={180} w={300} h={40} d={24} c="#b98a63" />
+        <Fb x={140} y={176} w={60} h={6} d={14} c="#ffffff" />
         <TimeTag t="10/1 20:05" />
       </svg>
     </div>
@@ -315,14 +309,13 @@ const X6 = () => (
 /** Mr Mạnh's video: the bulging bottle and a whole, unpierced cap. */
 const X7 = () => (
   <Phone header="Facebook · Video của Mạnh Tạ">
-    <div className="overflow-hidden rounded-md">
+    <div className="overflow-hidden rounded-xl">
       <svg viewBox="0 0 320 220" className="block w-full">
-        <rect width="320" height="220" fill="#c9b58e" />
-        <g transform="translate(110 200) scale(2)">
-          <Bottle x={0} y={0} sour />
-        </g>
-        <circle cx="230" cy="90" r="48" fill="#fbf4e4" stroke={LINE} strokeWidth="3" />
-        <ellipse cx="230" cy="90" rx="30" ry="14" fill={C.cap} stroke={LINE} strokeWidth="2" />
+        <rect width="320" height="220" fill="#e9d6b4" />
+        <Fb x={0} y={190} w={320} h={30} d={20} c="#b98a63" />
+        <BottleFb x={110} y={196} s={2.4} sour />
+        <circle cx="230" cy="90" r="48" fill="#fbf4e4" />
+        <Fb x={204} y={78} w={52} h={22} d={14} c="#e9d36a" />
         <text x="230" y="154" textAnchor="middle" fontSize="11" fill={LINE} fontFamily={mono}>nắp nguyên</text>
         <polygon points="150,100 170,110 150,120" fill="#fff" opacity="0.8" />
         <TimeTag t="09/1 08:30" />
@@ -335,25 +328,28 @@ const X7 = () => (
 
 /** Store camera: someone in a grey raincoat at the milk shelf. */
 const X8 = () => (
-  <div className="bg-[#1c130f] p-2 shadow-[0_6px_16px_rgb(0_0_0/0.45)]">
-    <svg viewBox="0 0 320 200" className="block w-full">
-      <rect width="320" height="200" fill="#d9d4c4" />
-      <g transform="translate(20 70) scale(0.3)">
-        <MilkShelf x={0} y={0} w={540} />
-      </g>
-      <g transform="translate(200 196)" stroke={LINE} strokeWidth="2" strokeLinejoin="round">
-        <path d="M-30,0 L-24,-90 Q0,-104 24,-90 L30,0 Z" fill={C.raincoat} />
-        <path d="M-24,-90 L-44,-50 L-34,-46 L-18,-74 Z" fill={C.raincoat} />
-        <ellipse cx="0" cy="-108" rx="14" ry="16" fill="#d9a47a" />
-        <path d="M-16,-114 Q0,-130 16,-114 L28,-112 L16,-108 L-16,-110 Z" fill="#3a332f" />
-        <circle cx="-5" cy="-106" r="4" fill="none" strokeWidth="1.2" />
-        <circle cx="5" cy="-106" r="4" fill="none" strokeWidth="1.2" />
-      </g>
-      <rect width="320" height="200" fill="#9ad0c0" opacity="0.08" />
-      <text x="8" y="14" fontSize="9" fill="#1c130f" fontFamily={mono}>CAM 02 · KỆ SỮA</text>
-      <text x="312" y="192" fontSize="9" fill="#1c130f" textAnchor="end" fontFamily={mono}>10/01/2026 19:08:41</text>
+  <div className="rounded-xl bg-[#2e2a4a] p-2 shadow-[0_6px_16px_rgb(46_42_74/0.35)]">
+    <svg viewBox="0 0 320 200" className="block w-full rounded-lg">
+      <rect width="320" height="200" fill="#f1e6d2" />
+      {/* the soy-milk shelf */}
+      <Fb x={10} y={40} w={200} h={150} d={14} c="#d8d0c0" />
+      {[0, 1, 2].map((l) => (
+        <g key={l}>
+          <rect x="10" y={84 + l * 46} width="200" height="5" fill="#b9b4a8" />
+          {Array.from({ length: 8 }, (_, i) => (
+            <BottleFb key={i} x={24 + i * 24} y={84 + l * 46} s={0.7} />
+          ))}
+        </g>
+      ))}
+      <Fb x={10} y={30} w={200} h={10} d={14} c="#5f9a5b" />
+      {/* the person in the grey raincoat, cap and glasses, hand up at eye level */}
+      <Guest x={240} y={120} s={1.3} look={{ hair: 'cap', hairColor: 'gray', accessory: ['glasses'], skin: 2, mood: 'neutral' }} shirt="#9a9da3" />
+      <Fb x={196} y={84} w={20} h={12} d={6} c="#9a9da3" />
+      <Fb x={206} y={160} w={70} h={40} d={10} c="#9a9da3" />
+      <text x="8" y="14" fontSize="9" fill="#2e2a4a" fontFamily={mono}>CAM 02 · KỆ SỮA</text>
+      <text x="312" y="192" fontSize="9" fill="#2e2a4a" textAnchor="end" fontFamily={mono}>10/01/2026 19:08:41</text>
     </svg>
-    <p className="px-1 pt-1 font-mono text-[10px] text-[#c4a27a]">
+    <p className="px-1 pt-1 font-mono text-[10px] text-[#e9d9c4]">
       19:05 tới 19:14: người áo mưa xám, nón lưỡi trai, đeo kính đứng trước kệ sữa, tay đưa lên hàng ngang tầm mắt. Không mua gì.
     </p>
   </div>

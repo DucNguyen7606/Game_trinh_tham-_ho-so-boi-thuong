@@ -1,43 +1,35 @@
-import { accent, clothColors, ink, shade } from '@/art/palette'
-import { P } from '@/art/primitives'
+import type { PortraitSpec } from '@/art/Portrait'
+import { IsoFigure } from '@/art/iso/figure'
+import { Box, Cyl, iso, type V3 } from '@/art/iso/iso'
 import caseData from './case.json'
-import { C, sceneArt } from './scenes'
+import { at, isoSceneArt as sceneArt } from './iso/scenes'
 import { documents } from './documents'
 import type { ReconstructionPanel } from '@/game/types'
 
 // "Dựng lại vụ án": the true sequence of events, shown after the player signs.
 
-/** Flat, faceless figure in the scene's 1600x900 space. (x, y) is where the feet touch the ground. */
-function Person({ x, y, h = 260, color, flip = false, raincoat, hold }: { x: number; y: number; h?: number; color: string; flip?: boolean; raincoat?: boolean; hold?: 'phone' | 'paper' }) {
-  const s = h / 260
-  const body = raincoat ? C.raincoat : color
-  const dark = shade(body, -0.35)
-  const skin = '#c58f63'
+const spec = (id: string) => caseData.suspects.find((x) => x.id === id)!.portrait as PortraitSpec
+const stranger: PortraitSpec = { skin: 2, hair: 'cap', hairColor: 'black', build: 'normal', outfit: 'shirt', outfitColor: 'charcoal', age: 'mid', mood: 'stern' }
+
+/** Someone as a block figure at a world point; `raincoat` puts them in the grey raincoat and cap from the store camera, `phone` puts a phone in their hand. */
+function Fig({ who, p, facing = 'y', raincoat, phone, mood }: { who?: string; p: V3; facing?: 'x' | 'y' | '-x' | '-y'; raincoat?: boolean; phone?: boolean; mood?: PortraitSpec['mood'] }) {
+  const base = who ? spec(who) : stranger
+  const sp = { ...base, mood: mood ?? base.mood, ...(raincoat ? { hair: 'cap' as const } : {}) }
+  const [x, y, z] = p
   return (
-    <g transform={`translate(${x} ${y}) scale(${flip ? -s : s} ${s})`}>
-      <ellipse cx="0" cy="2" rx="46" ry="10" fill={ink.night} opacity="0.45" />
-      <polygon points={P([[-22, -120], [-14, 0], [-2, 0], [0, -96], [2, 0], [14, 0], [22, -120]])} fill={raincoat ? body : dark} />
-      <polygon points={P([[-34, -200], [34, -200], [26, -116], [-26, -116]])} fill={body} />
-      <polygon points={P([[34, -196], [60, -170], [52, -160], [24, -180]])} fill={body} />
-      <polygon points={P([[-34, -196], [-48, -130], [-38, -128], [-24, -180]])} fill={dark} />
-      <rect x="-8" y="-218" width="16" height="20" fill={skin} />
-      <polygon points={P([[-20, -262], [20, -262], [22, -226], [0, -212], [-22, -226]])} fill={skin} />
-      {raincoat ? (
-        <path d="M-24,-258 Q0,-282 24,-258 L46,-254 L24,-248 L-24,-250 Z" fill="#3a332f" />
-      ) : (
-        <polygon points={P([[-22, -264], [22, -264], [20, -246], [-22, -244]])} fill={ink.night} />
-      )}
-      {hold === 'phone' && <rect x="54" y="-190" width="14" height="24" rx="3" fill={ink.night} />}
-      {hold === 'paper' && <rect x="50" y="-196" width="40" height="52" fill="#fbf4e4" stroke={ink.night} strokeWidth="3" />}
+    <g>
+      <IsoFigure at={[x - 13, y - 9, z]} spec={sp} facing={facing} size={1.15} cloth={raincoat ? '#9a9da3' : undefined} />
+      {phone && <Box at={[x + 10, y + 16, z + 60]} size={[4, 10, 16]} color={iso.ink} />}
     </g>
   )
 }
 
-function Staged({ zone, children }: { zone: string; children: React.ReactNode }) {
+/** A zone diorama with people added in, and markers drawn over it. */
+function Staged({ zone, extra, children }: { zone: string; extra?: React.ReactNode; children?: React.ReactNode }) {
   const Art = sceneArt[zone]
   return (
     <div className="absolute inset-0">
-      <Art />
+      <Art extra={extra} />
       <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" className="absolute inset-0 h-full w-full">
         {children}
       </svg>
@@ -47,7 +39,7 @@ function Staged({ zone, children }: { zone: string; children: React.ReactNode })
 
 function OnDesk({ ids }: { ids: string[] }) {
   return (
-    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[radial-gradient(circle_at_40%_30%,#5a3a24,#1c130f_75%)] p-6">
+    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[linear-gradient(180deg,#d9d2ee,#f6dccb)] p-6">
       {ids.map((id, i) => {
         const Doc = documents[id]
         return (
@@ -60,32 +52,25 @@ function OnDesk({ ids }: { ids: string[] }) {
   )
 }
 
-const Marker = ({ x, y, n }: { x: number; y: number; n: string }) => (
-  <g transform={`translate(${x} ${y})`}>
-    <circle r="26" fill={accent.amber} stroke={ink.night} strokeWidth="4" />
-    <text y="10" textAnchor="middle" fontSize="30" fontWeight="700" fill={ink.night} fontFamily="Barlow Condensed, sans-serif">
+/** A numbered marker over a hotspot, placed by its screen percentages. */
+const Marker = ({ px, py, n }: { px: number; py: number; n: string }) => (
+  <g transform={`translate(${px * 16} ${py * 9})`}>
+    <circle r="26" fill={iso.coral} stroke="#ffffff" strokeWidth="5" />
+    <text y="10" textAnchor="middle" fontSize="28" fontWeight="800" fill="#ffffff" fontFamily="'Be Vietnam Pro', sans-serif">
       {n}
     </text>
   </g>
 )
 
-const Night = () => <rect width="1600" height="900" fill="#141a2a" opacity="0.5" />
-const SANG = clothColors.sky
-const THUAN = clothColors.white
+/** Night: a soft violet wash over the diorama. */
+const Night = () => <rect width="1600" height="900" fill="#3b3a6a" opacity="0.22" />
 
-/** The tank display turned red at the drop. */
-const Alarm = () => (
-  <g>
-    <rect x="760" y="400" width="180" height="120" rx="10" fill={C.night} stroke={ink.night} strokeWidth="3" />
-    <text x="850" y="450" textAnchor="middle" fontSize="38" fontWeight="700" fill="#ff6b5a" fontFamily="IBM Plex Mono, monospace">
-      98°C
-    </text>
-    <text x="850" y="490" textAnchor="middle" fontSize="18" fill="#ff6b5a" fontFamily="IBM Plex Mono, monospace">
-      ALARM
-    </text>
-    <circle cx="850" cy="370" r="22" fill="#ff3b2e" stroke={ink.night} strokeWidth="3" />
-  </g>
-)
+const desk = at('xuong', 74, 62)
+const shelf = at('sieu-thi', 40, 46)
+/** The alarm beacon lit red on the UHT control box. */
+const Alarm = () => <Cyl at={[215, 335, 80]} r={9} len={12} axis="z" color="#ff3b2e" cap="#ff8a7a" />
+/** Whoever stands at the soy-milk shelf in the grey raincoat. */
+const AtShelf = ({ who }: { who?: string }) => <Fig who={who} p={[shelf[0] + 50, shelf[1] + 10, 0]} facing="-x" raincoat />
 
 export const reconstruction: ReconstructionPanel[] = (
   [
@@ -95,9 +80,8 @@ export const reconstruction: ReconstructionPanel[] = (
       text: 'Sang chỉnh kim nhiệt kế về mức chuẩn và bắt đầu ca đêm. Lô 0601-L2 chạy qua máy tiệt trùng ở 121°C như mọi đêm.',
       questionId: 'q1',
       Art: () => (
-        <Staged zone="xuong">
-          <Person x={560} y={720} h={300} color={SANG} />
-          <Marker x={448} y={200} n="1" />
+        <Staged zone="xuong" extra={<Fig who="sang" p={[desk[0] - 10, desk[1] + 70, 0]} />}>
+          <Marker px={28} py={40} n="1" />
         </Staged>
       ),
     },
@@ -107,12 +91,18 @@ export const reconstruction: ReconstructionPanel[] = (
       text: 'Van cấp hơi kẹt, nhiệt độ tụt xuống 97–101°C suốt một tiếng mười lăm phút. Lúc 02:14 Sang chụp màn hình báo động gửi Thuận. Thuận trả lời: "Cứ chạy tiếp, đừng ghi sổ", rồi tắt báo động từ xa. Sữa chạy qua máy lúc đó không được tiệt trùng đủ.',
       questionId: 'q3',
       Art: () => (
-        <Staged zone="xuong">
+        <Staged
+          zone="xuong"
+          extra={
+            <>
+              <Alarm />
+              <Fig who="sang" p={[desk[0] - 10, desk[1] + 70, 0]} phone mood="worried" />
+            </>
+          }
+        >
           <Night />
-          <Alarm />
-          <Person x={1180} y={720} h={300} color={SANG} hold="phone" flip />
-          <Marker x={448} y={200} n="2" />
-          <Marker x={1184} y={480} n="3" />
+          <Marker px={28} py={40} n="2" />
+          <Marker px={74} py={62} n="3" />
         </Staged>
       ),
     },
@@ -136,11 +126,10 @@ export const reconstruction: ReconstructionPanel[] = (
       text: 'Lô lỗi lọt ra thị trường thì Thuận mất chức và phải bồi hoàn. Anh mặc áo mưa xám, đội nón lưỡi trai, tới Hiệp Thành Mart, dùng kim bút tiêm insulin chích sáu chai ở hàng ngoài cùng. Bốn chai trong đó thuộc lô 0701-L1 còn tốt.',
       questionId: 'q4',
       Art: () => (
-        <Staged zone="sieu-thi">
+        <Staged zone="sieu-thi" extra={<AtShelf who="thuan" />}>
           <Night />
-          <Person x={760} y={790} h={330} color={THUAN} raincoat />
-          <Marker x={640} y={330} n="4" />
-          <Marker x={1344} y={540} n="5" />
+          <Marker px={40} py={38} n="4" />
+          <Marker px={84} py={62} n="5" />
         </Staged>
       ),
     },
@@ -166,7 +155,6 @@ export const reconstruction: ReconstructionPanel[] = (
 
 type Picks = Record<string, string>
 const suspect = (id: string) => caseData.suspects.find((s) => s.id === id)!
-const colorOf = (id: string) => clothColors[suspect(id).portrait.outfitColor as keyof typeof clothColors]
 
 const PanelStamp = ({ text, color }: { text: string; color: string }) => (
   <div
@@ -216,20 +204,18 @@ function WriterArt({ who }: { who: string }) {
   if (who === 'outsider')
     return (
       <>
-        <Staged zone="sieu-thi">
-          <rect width="1600" height="900" fill="#3b4a66" opacity="0.35" style={{ mixBlendMode: 'color' }} />
-          <Person x={760} y={790} h={330} color={ink.steel} raincoat />
-          <text x="1000" y="400" textAnchor="middle" fontSize="140" fontWeight="700" fill="#9fb4c8" opacity="0.5" fontFamily="Bitter, serif">?</text>
+        <Staged zone="sieu-thi" extra={<AtShelf />}>
+          <rect width="1600" height="900" fill="#3b3a6a" opacity="0.25" />
+          <text x="1000" y="400" textAnchor="middle" fontSize="140" fontWeight="700" fill="#ffffff" opacity="0.8" fontFamily="'Be Vietnam Pro', sans-serif">?</text>
         </Staged>
         <PanelStamp text="Giả thuyết" color="#9fb4c8" />
       </>
     )
   return (
     <>
-      <Staged zone="sieu-thi">
-        <rect width="1600" height="900" fill="#3b4a66" opacity="0.35" style={{ mixBlendMode: 'color' }} />
-        <Person x={760} y={790} h={330} color={colorOf(who)} />
-        <text x="1000" y="400" textAnchor="middle" fontSize="140" fontWeight="700" fill="#9fb4c8" opacity="0.5" fontFamily="Bitter, serif">?</text>
+      <Staged zone="sieu-thi" extra={<AtShelf who={who} />}>
+        <rect width="1600" height="900" fill="#3b3a6a" opacity="0.25" />
+        <text x="1000" y="400" textAnchor="middle" fontSize="140" fontWeight="700" fill="#ffffff" opacity="0.8" fontFamily="'Be Vietnam Pro', sans-serif">?</text>
       </Staged>
       <PanelStamp text="Giả thuyết" color="#9fb4c8" />
     </>

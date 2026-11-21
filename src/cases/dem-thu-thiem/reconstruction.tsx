@@ -1,47 +1,35 @@
-import { accent, clothColors, ink, shade } from '@/art/palette'
-import { P } from '@/art/primitives'
 import { Portrait, type PortraitSpec } from '@/art/Portrait'
+import { IsoFigure } from '@/art/iso/figure'
+import { iso, type V3 } from '@/art/iso/iso'
+import { Car } from '@/art/iso/street'
 import caseData from './case.json'
-import { Suv, Wave, sceneArt } from './scenes'
+import { at, isoSceneArt as sceneArt, mercedes } from './iso/scenes'
 import { documents } from './documents'
 import type { ReconstructionPanel } from '@/game/types'
 
 // "Dựng lại vụ án": the true sequence of events, shown after the player signs.
 
-/** Flat, faceless figure in the scene's 1600x900 space. (x, y) is where the feet touch the ground. */
-function Person({ x, y, h = 260, color, flip = false, push, hood }: { x: number; y: number; h?: number; color: string; flip?: boolean; push?: boolean; hood?: boolean }) {
-  const s = h / 260
-  const dark = shade(color, -0.35)
-  const skin = '#d9a47a'
-  return (
-    <g transform={`translate(${x} ${y}) scale(${flip ? -s : s} ${s})${push ? ' rotate(18)' : ''}`}>
-      <ellipse cx="0" cy="2" rx="46" ry="10" fill={ink.night} opacity="0.45" />
-      <polygon points={P([[-22, -120], [-14, 0], [-2, 0], [0, -96], [2, 0], [14, 0], [22, -120]])} fill={dark} />
-      <polygon points={P([[-34, -200], [34, -200], [26, -116], [-26, -116]])} fill={color} />
-      {push ? (
-        <>
-          <polygon points={P([[30, -196], [96, -170], [92, -158], [24, -178]])} fill={color} />
-          <polygon points={P([[-30, -190], [90, -150], [86, -138], [-24, -170]])} fill={dark} />
-        </>
-      ) : (
-        <>
-          <polygon points={P([[34, -196], [48, -130], [38, -128], [24, -180]])} fill={color} />
-          <polygon points={P([[-34, -196], [-48, -130], [-38, -128], [-24, -180]])} fill={dark} />
-        </>
-      )}
-      <rect x="-8" y="-218" width="16" height="20" fill={skin} />
-      <polygon points={P([[-20, -262], [20, -262], [22, -226], [0, -212], [-22, -226]])} fill={skin} />
-      <polygon points={P([[-22, -264], [22, -264], [20, -246], [-22, -244]])} fill={ink.night} />
-      {hood && <path d="M-28,-210 Q-30,-272 0,-276 Q30,-272 28,-210 L20,-212 Q22,-262 0,-264 Q-22,-262 -20,-212 Z" fill={color} />}
-    </g>
-  )
+const spec = (id: string) => caseData.suspects.find((x) => x.id === id)!.portrait as PortraitSpec
+
+/** A suspect as a block figure standing in a zone diorama, under a screen point in percent. */
+function Fig({ who, px, py, facing = 'y', mood }: { who: string; px: number; py: number; facing?: 'x' | 'y' | '-x' | '-y'; mood?: PortraitSpec['mood'] }) {
+  const [x, y] = at(px, py)
+  return <IsoFigure at={[x - 13, y - 9, 0]} spec={{ ...spec(who), mood: mood ?? spec(who).mood }} facing={facing} size={1.15} />
 }
 
-function Staged({ zone, children }: { zone: string; children: React.ReactNode }) {
+/** The Mercedes with its nose at a screen point in percent (headlights on, front right corner dented). */
+function Merc({ px, py, lights }: { px: number; py: number; lights?: boolean }) {
+  const [x, y] = at(px, py, 34)
+  const p: V3 = [x - 200, y - 42, 0]
+  return <Car at={p} color={mercedes} len={200} w={84} tall dent={['right']} lights={lights} />
+}
+
+/** A zone diorama with people and cars added in, and markers drawn over it. */
+function Staged({ zone, extra, noCar, children }: { zone: string; extra?: React.ReactNode; noCar?: boolean; children?: React.ReactNode }) {
   const Art = sceneArt[zone]
   return (
     <div className="absolute inset-0">
-      <Art />
+      <Art extra={extra} noCar={noCar} />
       <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" className="absolute inset-0 h-full w-full">
         {children}
       </svg>
@@ -51,7 +39,7 @@ function Staged({ zone, children }: { zone: string; children: React.ReactNode })
 
 function OnDesk({ ids }: { ids: string[] }) {
   return (
-    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[radial-gradient(circle_at_40%_30%,#5a3a24,#1c130f_75%)] p-6">
+    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[linear-gradient(180deg,#d9d2ee,#f6dccb)] p-6">
       {ids.map((id, i) => {
         const Doc = documents[id]
         return (
@@ -66,16 +54,15 @@ function OnDesk({ ids }: { ids: string[] }) {
 
 const Marker = ({ x, y, n }: { x: number; y: number; n: string }) => (
   <g transform={`translate(${x} ${y})`}>
-    <circle r="26" fill={accent.amber} stroke={ink.night} strokeWidth="4" />
-    <text y="10" textAnchor="middle" fontSize="30" fontWeight="700" fill={ink.night} fontFamily="Barlow Condensed, sans-serif">
+    <circle r="26" fill={iso.coral} stroke="#ffffff" strokeWidth="5" />
+    <text y="10" textAnchor="middle" fontSize="28" fontWeight="800" fill="#ffffff" fontFamily="'Be Vietnam Pro', sans-serif">
       {n}
     </text>
   </g>
 )
 
-const Night = () => <rect width="1600" height="900" fill="#141a2a" opacity="0.45" />
-const KHAI = clothColors.khaki
-const KHOA = clothColors.white
+/** Night: a soft violet wash over the diorama. */
+const Night = () => <rect width="1600" height="900" fill="#3b3a6a" opacity="0.22" />
 
 export const reconstruction: ReconstructionPanel[] = (
   [
@@ -92,11 +79,8 @@ export const reconstruction: ReconstructionPanel[] = (
       text: 'Chị Hoa chạy chiếc Wave đỏ về nhà sau ca bánh mì. Góc phải đầu chiếc Mercedes tông vào đuôi xe chị. Kính đèn sương mù phải vỡ, két nước nứt. Khoa mở cửa nhìn chị nằm trên đường, rồi đóng cửa chạy.',
       questionId: 'q3',
       Art: () => (
-        <Staged zone="nguyen-van-huong">
+        <Staged zone="nguyen-van-huong" extra={<><Merc px={66} py={58} lights /><Fig who="khoa" px={60} py={74} mood="worried" /></>}>
           <Night />
-          <Suv x={980} y={600} s={0.9} hit lights />
-          <Wave x={560} y={660} s={1.1} rot={-78} broken />
-          <Person x={1120} y={700} h={300} color={KHOA} hood />
           <Marker x={288} y={700} n="1" />
           <Marker x={1240} y={540} n="2" />
         </Staged>
@@ -108,9 +92,7 @@ export const reconstruction: ReconstructionPanel[] = (
       text: 'Chiếc xe nhỏ nước làm mát màu hồng suốt đường về khách sạn Sông Xanh. Chú Sơn ghi sổ: "cậu Khoa lái, đầu xe bể". Lúc đó ông Khải còn đang ở cổng tiếp đoàn khách Hà Nội.',
       questionId: 'q4',
       Art: () => (
-        <Staged zone="gara">
-          <Suv x={720} y={600} s={0.95} hit />
-          <Person x={1000} y={740} h={320} color={KHOA} hood />
+        <Staged zone="gara" extra={<><Merc px={50} py={70} /><Fig who="khoa" px={62} py={84} mood="worried" /></>}>
           <Marker x={672} y={700} n="3" />
           <Marker x={1290} y={690} n="4" />
         </Staged>
@@ -136,9 +118,8 @@ export const reconstruction: ReconstructionPanel[] = (
       text: 'Trên con đường vắng ở Thủ Thiêm, ông Khải về số N, mở cửa lái, xuống xe và đẩy. Chiếc Mercedes lăn thẳng xuống bờ kênh, đâm gốc cây dầu. Cú đâm cây đè lên vết tông người. Đôi giày tây cỡ 40 hằn lại trên bờ đất.',
       questionId: 'q1',
       Art: () => (
-        <Staged zone="bo-kenh">
+        <Staged zone="bo-kenh" extra={<Pusher who="khai" />}>
           <Night />
-          <Person x={520} y={560} h={300} color={KHAI} push />
           <Marker x={544} y={420} n="5" />
           <Marker x={352} y={640} n="6" />
           <Marker x={1250} y={560} n="7" />
@@ -167,11 +148,19 @@ export const reconstruction: ReconstructionPanel[] = (
 
 type Picks = Record<string, string>
 const suspect = (id: string) => caseData.suspects.find((s) => s.id === id)!
-const colorOf = (id: string) => clothColors[suspect(id).portrait.outfitColor as keyof typeof clothColors]
+
+/** Someone behind the Mercedes on the canal bank, facing the car as if pushing it. */
+function Pusher({ who }: { who: string }) {
+  const [nx, ny] = at(78, 68, 34)
+  const [, cy] = at(64, 52, 64)
+  const carX = nx - 200
+  const carY = Math.min(ny - 40, cy - 40)
+  return <IsoFigure at={[carX - 34, carY + 30, 0]} spec={{ ...spec(who), mood: 'stern' }} facing="x" size={1.15} />
+}
 
 function Pinned({ who, ids }: { who: string; ids: string[] }) {
   return (
-    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[radial-gradient(circle_at_40%_30%,#3b4250,#15161b_75%)] p-6">
+    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[linear-gradient(180deg,#d9d2ee,#f6dccb)] p-6">
       <div className="shrink-0 bg-[#f3e4c4] p-1.5 shadow-lg" style={{ rotate: '-3deg' }}>
         <Portrait spec={suspect(who).portrait as PortraitSpec} size={190} />
         <p className="pt-1 text-center font-mono text-xs text-[#2d1f18]">{suspect(who).name}</p>
@@ -237,10 +226,9 @@ function CrashArt({ who }: { who: string }) {
     )
   return (
     <>
-      <Staged zone="bo-kenh">
-        <rect width="1600" height="900" fill="#3b4a66" opacity="0.35" style={{ mixBlendMode: 'color' }} />
-        <Person x={520} y={560} h={300} color={colorOf(who)} push />
-        <text x="760" y="380" textAnchor="middle" fontSize="120" fontWeight="700" fill="#9fb4c8" opacity="0.5" fontFamily="Bitter, serif">?</text>
+      <Staged zone="bo-kenh" extra={<Pusher who={who} />}>
+        <rect width="1600" height="900" fill="#8f86c0" opacity="0.25" />
+        <text x="760" y="380" textAnchor="middle" fontSize="120" fontWeight="700" fill="#ffffff" opacity="0.7" fontFamily="'Be Vietnam Pro', sans-serif">?</text>
       </Staged>
       <PanelStamp text="Giả thuyết" color="#9fb4c8" />
     </>

@@ -1,10 +1,12 @@
 import { Mark, Phone, Row, Sheet, Signature, Stamp } from '@/art/docParts'
-import { ink } from '@/art/palette'
-import { Poncho, Ring, ShopFront } from './scenes'
+import type { PortraitSpec } from '@/art/Portrait'
+import { Fb, TimeStamp, makeGuest } from '@/art/iso/photo'
+import type { CaseData } from '@/game/types'
+import caseJson from './case.json'
+import { Ring } from './scenes'
 
 // What each document in the case-file envelopes looks like, keyed by clue id.
 
-const LINE = ink.night
 const mono = 'IBM Plex Mono, monospace'
 
 const P1 = () => (
@@ -85,24 +87,51 @@ const P5 = () => {
   )
 }
 
-/** A still from the pharmacy camera at 21:05. */
+/** A block person in a black raincoat, hood up, seen straight on; (x, y) is where the feet touch the ground. */
+const PonchoFb = ({ x, y, k = 1, bag = false }: { x: number; y: number; k?: number; bag?: boolean }) => (
+  <g transform={`translate(${x} ${y}) scale(${k})`}>
+    <Fb x={-8} y={-14} w={6} h={14} d={6} c="#2b2b30" />
+    <Fb x={2} y={-14} w={6} h={14} d={6} c="#2b2b30" />
+    <Fb x={-14} y={-48} w={28} h={36} d={12} c="#2f3138" />
+    <rect x="-10" y="-36" width="7" height="7" fill="#4f9a6b" opacity="0.6" />
+    <Fb x={-10} y={-68} w={20} h={20} d={12} c="#3a3f46" />
+    <rect x="-6" y="-60" width="12" height="7" fill="#2a2433" />
+    {bag && <Fb x={12} y={-40} w={12} h={16} d={8} c="#6b6a35" />}
+  </g>
+)
+
+/** A still from the pharmacy camera at 21:05: the gold shop across the street, shutter half down, two people in black raincoats coming out. */
 const P6 = () => (
-  <div className="bg-[#1c130f] p-2 shadow-[0_6px_16px_rgb(0_0_0/0.45)]">
-    <svg viewBox="0 0 320 180" className="block w-full">
-      <rect width="320" height="180" fill="#2a3036" />
-      <g transform="translate(-158 -26) scale(0.3)">
-        <ShopFront shutter={0.5} night />
-      </g>
-      <rect y="152" width="320" height="28" fill="#202326" />
-      <Poncho x={250} y={168} h={70} bag />
-      <Poncho x={276} y={170} h={66} />
+  <div className="rounded-xl bg-[#2e2a4a] p-2 shadow-[0_6px_16px_rgb(46_42_74/0.35)]">
+    <svg viewBox="0 0 320 180" className="block w-full rounded-lg">
+      <rect width="320" height="180" fill="#3b3f52" />
+      {/* neighbouring houses */}
+      <Fb x={0} y={30} w={74} h={124} d={12} c="#7d6a5a" />
+      <Fb x={244} y={40} w={76} h={114} d={12} c="#6f8079" />
+      {/* the gold shop: sign, half-closed shutter, lit inside */}
+      <Fb x={76} y={20} w={150} h={134} d={14} c="#d9ccb2" />
+      <Fb x={84} y={36} w={134} h={26} d={6} c="#b8443a" />
+      <text x="151" y="55" textAnchor="middle" fontSize="16" fontWeight="800" fill="#f2c46d" fontFamily="'Be Vietnam Pro', sans-serif">KIM THÀNH</text>
+      <text x="151" y="32" textAnchor="middle" fontSize="5.5" fill="#b8443a" fontFamily="'Be Vietnam Pro', sans-serif">TIỆM VÀNG · MUA BÁN TRAO ĐỔI</text>
+      <rect x="90" y="72" width="122" height="82" fill="#e9c97a" />
+      <rect x="90" y="72" width="122" height="42" fill="#8f8c86" />
+      {Array.from({ length: 4 }, (_, i) => (
+        <rect key={i} x="90" y={78 + i * 9} width="122" height="2" fill="#6f6c66" />
+      ))}
+      {/* the mouth of alley 514 */}
+      <rect x="228" y="72" width="14" height="82" fill="#1f1c2b" />
+      <Fb x={222} y={72} w={22} h={10} d={4} c="#3f5a78" />
+      <text x="233" y="80" textAnchor="middle" fontSize="6" fill="#fff" fontFamily={mono}>514</text>
+      <rect y="154" width="320" height="26" fill="#2c2f3b" />
+      <PonchoFb x={252} y={170} k={1.05} bag />
+      <PonchoFb x={276} y={172} k={0.98} />
       {Array.from({ length: 30 }, (_, i) => (
         <line key={i} x1={(i * 37) % 320} y1={(i * 23) % 160} x2={(i * 37) % 320 - 3} y2={((i * 23) % 160) + 10} stroke="#cfe0e8" strokeWidth="1" opacity="0.4" />
       ))}
       <text x="8" y="14" fontSize="9" fill="#e8e8e8" fontFamily={mono}>CAM NHÀ THUỐC NGỌC THẢO · CH1</text>
       <text x="312" y="172" fontSize="9" fill="#e8e8e8" textAnchor="end" fontFamily={mono}>02/12/2025 21:05:12</text>
     </svg>
-    <div className="space-y-0.5 px-1 pt-1 font-mono text-[10px] text-[#c4a27a]">
+    <div className="space-y-0.5 px-1 pt-1 font-mono text-[10px] text-[#e9d9c4]">
       <p>20:55 một xe máy hai người, đèn hậu đỏ, chạy vào hẻm 514.</p>
       <p>20:58 cửa cuốn tiệm Kim Thành kéo xuống còn một nửa.</p>
       <p>
@@ -251,40 +280,24 @@ const PhotoMeta = ({ when, where }: { when: string; where: string }) => (
   </p>
 )
 
-const TimeTag = ({ t }: { t: string }) => (
-  <>
-    <rect x="8" y="8" width="104" height="18" rx="4" fill="#000" opacity="0.45" />
-    <text x="14" y="21" fontSize="11" fill="#fff" fontFamily={mono}>
-      {t}
-    </text>
-  </>
-)
-
-const Guest = ({ x, y, s = 1, skin = '#efc39b', hair = '#1a1a1f', shirt }: { x: number; y: number; s?: number; skin?: string; hair?: string; shirt: string }) => (
-  <g transform={`translate(${x} ${y}) scale(${s})`} stroke={LINE} strokeWidth="1.6" strokeLinejoin="round">
-    <path d="M-26,40 Q-24,0 -8,-6 L8,-6 Q24,0 26,40 Z" fill={shirt} />
-    <rect x="-4" y="-14" width="8" height="10" fill={skin} />
-    <ellipse cx="0" cy="-30" rx="13" ry="16" fill={skin} />
-    <path d="M-14,-32 Q-14,-50 0,-48 Q14,-50 14,-32 Q8,-40 0,-40 Q-8,-40 -14,-32 Z" fill={hair} />
-    <circle cx="-5" cy="-30" r="1.6" fill={LINE} stroke="none" />
-    <circle cx="5" cy="-30" r="1.6" fill={LINE} stroke="none" />
-    <path d="M-5,-22 Q0,-18 5,-22" fill="none" strokeWidth="1.4" />
-  </g>
-)
+const TimeTag = TimeStamp
+const cast = Object.fromEntries((caseJson as CaseData).suspects.map((x) => [x.id, x.portrait])) as Record<string, PortraitSpec>
+const Guest = makeGuest(cast)
 
 /** Hùng holding his newborn in the maternity ward. */
 const X3 = () => (
   <Phone header="Thư viện ảnh · Hùng">
-    <div className="overflow-hidden rounded-md">
+    <div className="overflow-hidden rounded-xl">
       <svg viewBox="0 0 320 220" className="block w-full">
-        <rect width="320" height="220" fill="#dfe8e6" />
-        <rect x="200" y="30" width="100" height="70" fill="#f6f4ee" stroke={LINE} strokeWidth="2" />
+        <rect width="320" height="220" fill="#d8ecea" />
+        <Fb x={200} y={30} w={100} h={70} d={10} c="#fbfaf6" />
         <text x="250" y="60" textAnchor="middle" fontSize="9" fill="#2f6aa8" fontFamily={mono}>KHOA SẢN</text>
         <text x="250" y="76" textAnchor="middle" fontSize="9" fill="#2f6aa8" fontFamily={mono}>PHÒNG 412</text>
-        <rect x="20" y="150" width="200" height="70" fill="#f6f4ee" stroke={LINE} strokeWidth="2" />
-        <Guest x={130} y={150} s={1.5} skin="#b9815a" shirt="#b0925c" />
-        <ellipse cx="140" cy="182" rx="26" ry="14" fill="#f2c9d0" stroke={LINE} strokeWidth="2" />
-        <circle cx="122" cy="178" r="9" fill="#efc39b" stroke={LINE} strokeWidth="1.5" />
+        <Guest x={130} y={150} s={1.5} who="hung" look={{ mood: 'smile' }} />
+        {/* the newborn wrapped in pink in his arms */}
+        <Fb x={108} y={168} w={52} h={22} d={14} c="#f2c9d0" />
+        <Fb x={104} y={168} w={16} h={16} d={10} c="#efc39b" />
+        <Fb x={-4} y={190} w={240} h={34} d={20} c="#fbfaf6" />
         <TimeTag t="02/12 21:03" />
       </svg>
     </div>
@@ -296,17 +309,20 @@ const X3 = () => (
 /** Bà Ba Lành at a death-anniversary meal in Hóc Môn. */
 const X4 = () => (
   <Phone header="Zalo · Nhóm gia đình">
-    <div className="overflow-hidden rounded-md">
+    <div className="overflow-hidden rounded-xl">
       <svg viewBox="0 0 320 220" className="block w-full">
-        <rect width="320" height="220" fill="#7a4f32" />
-        <rect x="110" y="20" width="100" height="70" fill="#5a3a26" stroke={LINE} strokeWidth="2" />
-        <rect x="130" y="30" width="60" height="50" fill="#6b6a64" stroke={LINE} strokeWidth="1.5" />
-        <Guest x={70} y={160} shirt="#7a9fb0" hair="#7d7a76" skin="#d9a47a" />
-        <Guest x={160} y={160} shirt="#ece2cf" />
-        <Guest x={250} y={160} shirt="#cf9a32" hair="#4a3426" />
-        <rect x="20" y="180" width="280" height="40" fill="#e8dcc4" stroke={LINE} strokeWidth="2" />
-        {[60, 120, 180, 240].map((x) => (
-          <ellipse key={x} cx={x} cy="194" rx="20" ry="8" fill="#f6efe2" stroke={LINE} strokeWidth="1.5" />
+        <rect width="320" height="220" fill="#c49a74" />
+        {/* the family altar and the portrait */}
+        <Fb x={110} y={20} w={100} h={70} d={12} c="#8a5c38" />
+        <rect x="132" y="30" width="56" height="48" fill="#6c6787" />
+        <Fb x={118} y={80} w={10} h={10} d={6} c="#f2c46d" />
+        <Fb x={192} y={80} w={10} h={10} d={6} c="#7fae8a" />
+        <Guest x={70} y={160} who="lanh" look={{ mood: 'smile' }} />
+        <Guest x={160} y={160} look={{ hair: 'short', age: 'mid' }} shirt="#ece2cf" />
+        <Guest x={250} y={160} look={{ hair: 'long', hairColor: 'brown', build: 'thin', skin: 0 }} shirt="#e2a63b" />
+        <Fb x={20} y={180} w={280} h={40} d={24} c="#f6efe2" />
+        {[50, 112, 174, 236].map((x) => (
+          <Fb key={x} x={x} y={176} w={34} h={5} d={14} c="#ffffff" />
         ))}
         <TimeTag t="02/12 21:00" />
       </svg>

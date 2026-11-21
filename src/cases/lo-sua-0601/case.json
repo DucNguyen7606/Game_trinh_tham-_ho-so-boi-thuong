@@ -1,5 +1,6 @@
 {
   "id": "lo-sua-0601",
+  "artStyle": "sa-ban",
   "title": "Hồ sơ bồi thường số 1201",
   "intro": "Sáng 11/1, Công ty Sữa đậu nành Mộc An ở Khu công nghiệp Tân Thới Hiệp, Quận 12, nhận một lá thư tống tiền: có kẻ đã chích kim vào sữa của họ ngoài siêu thị. Công ty thu hồi hai lô hàng và đòi An Tín 3,2 tỷ đồng theo hợp đồng bảo hiểm thu hồi sản phẩm. Bạn có 10 ngày để đề xuất chi trả hay từ chối. Mỗi ngày khám được 1 khu hiện trường. Hỏi chuyện thì không giới hạn.",
   "player": {
@@ -17,7 +18,7 @@
     }
   },
   "photoDate": "13 01 '26",
-  "days": 10,
+  "days": 8,
   "limitsPerDay": {
     "talk": 2,
     "explore": 1
@@ -316,9 +317,9 @@
     { "id": "P2", "title": "Đơn yêu cầu bồi thường", "description": "Thu hồi hai lô 0601-L2 và 0701-L1, 240.000 chai, 3,2 tỷ đồng. Nguyên nhân: \"kẻ xấu chích kim và tống tiền\".", "source": "file" },
     { "id": "P3", "title": "Thư tống tiền", "description": "\"Tao đã chích kim vào 100 chai Mộc An. Chuẩn bị 500 triệu, tao sẽ liên lạc.\" Bỏ vào hộp thư cổng nhà máy, bảo vệ nhận 08:15 ngày 11/1. Sau đó không ai liên lạc.", "source": "file" },
     { "id": "P4", "title": "Biên bản tiếp nhận tin báo", "description": "Công an phường Tân Thới Hiệp: bà Hà trình báo lúc 09:30 ngày 11/1, nộp thư gốc, đề nghị điều tra.", "source": "file" },
-    { "id": "P5", "title": "Kết quả kiểm nghiệm", "description": "40 chai chua thu từ 14 điểm bán: 40/40 thuộc lô 0601-L2, không chai nào có lỗ kim. Vi khuẩn sinh bào tử chịu nhiệt, dấu hiệu tiệt trùng thiếu nhiệt.", "source": "file" },
-    { "id": "P6", "title": "Dữ liệu bộ ghi nhiệt line 2", "description": "Đêm 6–7/1: 02:05 đến 03:20 nhiệt độ 97–101°C. Báo động 02:10. 02:31 báo động được tắt từ xa bằng tài khoản QC-THUAN.", "source": "file" },
-    { "id": "P7", "title": "Danh sách khiếu nại", "description": "Khiếu nại đầu tiên 08:40 ngày 9/1 (ông Mạnh). Tới tối 10/1 đã có 22 khiếu nại ở 11 điểm bán, trước khi có lá thư.", "source": "file" },
+    { "id": "P5", "title": "Kết quả kiểm nghiệm", "description": "40 chai chua thu từ 14 điểm bán: 40/40 thuộc lô 0601-L2, không chai nào có lỗ kim. Vi khuẩn sinh bào tử chịu nhiệt, dấu hiệu tiệt trùng thiếu nhiệt.", "source": "file", "highlights": ["40/40 thuộc lô 0601-L2, không chai nào có lỗ kim"] },
+    { "id": "P6", "title": "Dữ liệu bộ ghi nhiệt line 2", "description": "Đêm 6–7/1: 02:05 đến 03:20 nhiệt độ 97–101°C. Báo động 02:10. 02:31 báo động được tắt từ xa bằng tài khoản QC-THUAN.", "source": "file", "highlights": ["tắt từ xa bằng tài khoản QC-THUAN"] },
+    { "id": "P7", "title": "Danh sách khiếu nại", "description": "Khiếu nại đầu tiên 08:40 ngày 9/1 (ông Mạnh). Tới tối 10/1 đã có 22 khiếu nại ở 11 điểm bán, trước khi có lá thư.", "source": "file", "highlights": ["22 khiếu nại ở 11 điểm bán, trước khi có lá thư"] },
     { "id": "P8", "title": "Đăng ký xe 59-V1 268.41", "description": "Xe tay ga màu bạc. Chủ xe: Lương Văn Thuận.", "source": "file" },
     { "id": "P9", "title": "Quyết định thôi việc của Sang", "description": "17:00 ngày 7/1. Lý do: \"ngủ gật trong ca đêm 6/1\". Người đề xuất: Lương Văn Thuận.", "source": "file" },
     { "id": "P10", "title": "Giám định lá thư tống tiền", "description": "In bằng máy in laser có vệt lỗi trống mực ở lề trái, trùng mẫu in của máy in phòng QC. Mặt sau là phiếu kiểm nghiệm cũ cắt đôi.", "source": "file" },
@@ -326,7 +327,7 @@
     { "id": "X1", "title": "Bài đăng của Sang", "description": "21:40 ngày 7/1: \"Đuổi tao à? Rồi tụi bây sẽ biết.\"", "source": "decoy" },
     { "id": "X2", "title": "Tin nhắn ông Mạnh đòi 50 triệu", "description": "Gửi trang của Mộc An 10:15 ngày 9/1: \"50 triệu, không thì tôi đưa clip lên báo.\"", "source": "decoy" },
     { "id": "X3", "title": "Hợp đồng hàng Tết", "description": "Mộc An giao 600.000 chai cho chuỗi siêu thị trước Tết. Thiếu hàng: phạt 2 tỷ đồng.", "source": "decoy" },
-    { "id": "X4", "title": "Ảnh màn hình máy lúc 02:14", "description": "Sang chụp màn hình line 2: 98°C, đèn báo đỏ. Kèm tin nhắn trả lời của Thuận.", "source": "testimony" },
+    { "id": "X4", "title": "Ảnh màn hình máy lúc 02:14", "description": "Sang chụp màn hình line 2: 98°C, đèn báo đỏ. Kèm tin nhắn trả lời của Thuận.", "source": "testimony", "audio": {"length": "0:18", "lines": [{"text": "[02:16 · Tin nhắn thoại của Sang. Nền là tiếng còi báo động line 2 kêu liên hồi.]"}, {"who": "Sang", "text": "Anh Thuận ơi, line 2 tụt còn 98 độ, báo động đỏ. Em dừng máy nha anh?"}, {"text": "[02:20 · Tin nhắn thoại trả lời.]"}, {"who": "Thuận", "text": "Cứ chạy tiếp, đừng ghi sổ. Sáng anh xử."}]} },
     { "id": "X5", "title": "Ảnh Sang ở đám giỗ Tây Ninh", "description": "Sang đưa ảnh đám giỗ ở quê, có giờ trên ảnh.", "source": "testimony" },
     { "id": "X6", "title": "Ảnh bữa cơm nhà Thuận", "description": "Thuận đưa ảnh bữa cơm tối 10/1 với vợ con, có giờ trên ảnh.", "source": "testimony" },
     { "id": "X7", "title": "Clip chai sữa của ông Mạnh", "description": "Sáng 9/1 ông Mạnh quay cảnh mở chai sữa phồng. Soi kỹ cái nắp.", "source": "testimony" },
@@ -552,5 +553,57 @@
     { "ending": "full", "correct": ["cause", "writer"] },
     { "ending": "half", "correct": ["cause"] },
     { "ending": "wrong" }
+  ],
+  "puzzles": [
+    {
+      "id": "z1",
+      "clueId": "H3",
+      "kind": "answer",
+      "title": "Mã lô trên nắp chai",
+      "prompt": "Dùng quy cách đánh mã dán ở xưởng để đọc mã in trên nắp chai: chai này được chiết lúc mấy giờ?",
+      "lockedText": "Mã in trên nắp chai: 0601-L2 · Đ255\n— Quy cách đánh mã (dán ở xưởng) —\nNNTT-Lx: ngày, tháng vào ca · line x\nChữ cái: ca S 06:00 · ca C 14:00 · ca Đ 22:00\nSố sau chữ: số phút tính từ đầu ca",
+      "answers": ["02:15", "2:15", "02h15", "2h15", "2g15", "2 giờ 15", "02:15 7/1", "2:15 7/1"],
+      "placeholder": "hh:mm",
+      "solvedText": "Ca Đ bắt đầu 22:00 ngày 6/1. 255 phút là 4 giờ 15 phút, nên chai được chiết lúc 02:15 ngày 7/1 trên line 2, giữa ca đêm. Pallet chưa từng rời nhà máy, nắp và màng seal nguyên, vậy mà vẫn hỏng: sữa hư từ trong dây chuyền.",
+      "hints": ["Chữ Đ là ca đêm, bắt đầu lúc 22:00. Số 255 là số phút kể từ lúc đó.", "255 phút = 4 giờ 15 phút. Lấy 22:00 cộng thêm 4 giờ 15."]
+    }
+  ],
+  "timeline": [
+    {
+      "time": "6/1 22:00",
+      "text": "Ca đêm line 2 bắt đầu. Nhiệt kế được chỉnh kim mức thấp nhất."
+    },
+    {
+      "time": "7/1 02:05–03:20",
+      "text": "Van hơi kẹt, nhiệt tiệt trùng tụt còn 97–101°C. Lô 0601-L2 chạy qua máy lúc này."
+    },
+    {
+      "time": "02:14",
+      "text": "Sang chụp màn hình báo động gửi Thuận. 02:20 Thuận trả lời \"Cứ chạy tiếp, đừng ghi sổ\"."
+    },
+    {
+      "time": "02:31",
+      "text": "Báo động được tắt từ xa bằng tài khoản QC-THUAN. Dòng 02:10 trong sổ vận hành bị tẩy."
+    },
+    {
+      "time": "08:00",
+      "text": "Thuận ký phiếu xuất xưởng lô 0601-L2: \"ĐẠT, cho phép giao hàng\"."
+    },
+    {
+      "time": "17:00",
+      "text": "Sang bị cho nghỉ việc vì \"ngủ gật\", do Thuận đề xuất."
+    },
+    {
+      "time": "9/1 08:40",
+      "text": "Khiếu nại đầu tiên: clip chai sữa phồng nắp của ông Mạnh, nắp còn nguyên."
+    },
+    {
+      "time": "10/1 19:02–19:20",
+      "text": "Thuận mặc áo mưa xám vào Hiệp Thành Mart, chích kim insulin vào sáu chai."
+    },
+    {
+      "time": "11/1 08:15",
+      "text": "Bảo vệ nhận lá thư tống tiền in bằng máy in phòng QC. 09:30 bà Hà trình báo công an."
+    }
   ]
 }

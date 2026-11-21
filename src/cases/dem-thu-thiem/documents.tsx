@@ -1,6 +1,11 @@
 import { Mark, Phone, Row, Sheet, Signature, Stamp } from '@/art/docParts'
 import { ink } from '@/art/palette'
-import { Suv, Wave } from './scenes'
+import { clueLocked, useGame } from '@/game/store'
+import type { PortraitSpec } from '@/art/Portrait'
+import { iso } from '@/art/iso/iso'
+import { Fb, TimeStamp, Wheel, makeGuest } from '@/art/iso/photo'
+import type { CaseData } from '@/game/types'
+import caseJson from './case.json'
 
 // What each document in the case-file envelopes looks like, keyed by clue id.
 
@@ -52,7 +57,7 @@ const P3 = () => (
   </Sheet>
 )
 
-const P4 = () => (
+const P4Decoded = () => (
   <Sheet org="Đại lý Mercedes-Benz · Trích xuất cho An Tín" title="Hộp ghi sự kiện túi khí (EDR)">
     <p className="text-[10px]">Xe 51K-686.68 · Sự kiện va chạm duy nhất được ghi nhận:</p>
     <Row k="Thời điểm" v="07/12/2025 02:34:11" strong />
@@ -74,6 +79,29 @@ const P4 = () => (
   </Sheet>
 )
 
+/** The raw printout the recorder gives before it is decoded with the maker's code table (puzzle z1). */
+const P4Raw = () => (
+  <Sheet org="Đại lý Mercedes-Benz · Trích xuất cho An Tín" title="Hộp ghi sự kiện túi khí (EDR) · bản in máy">
+    <pre className="whitespace-pre rounded bg-[#eef0ea] p-2 font-mono text-[10px] leading-snug">
+      {['EDR DUMP · 51K-686.68 · EVT 01', '2025-12-07 02:34:11', '', 'SPD     0x070', 'GEAR    2', 'BRK     0', 'THR     000', 'BELT_D  0', 'DOOR_D  1', 'AB_DEP  0'].join('\n')}
+    </pre>
+    <div className="mt-1 border-t border-dashed border-black/30 pt-1 text-[9px] leading-snug">
+      <p className="font-semibold">Bảng mã của hãng</p>
+      <p>SPD: số hệ mười sáu (0x…), chia 16 ra km/h</p>
+      <p>GEAR: 0 P · 1 R · 2 N · 3 D</p>
+      <p>BRK 1 = có đạp phanh · THR = % bàn đạp ga</p>
+      <p>BELT_D 1 = dây ghế lái đã cài · DOOR_D 1 = cửa ghế lái mở</p>
+      <p>AB_DEP 1 = túi khí bung</p>
+    </div>
+  </Sheet>
+)
+
+/** Shows the raw printout until the player decodes it, then the dealer's plain reading. */
+const P4 = () => {
+  const locked = useGame((s) => clueLocked(s, 'P4'))
+  return locked ? <P4Raw /> : <P4Decoded />
+}
+
 const P5 = () => (
   <Sheet org="Công an phường Thảo Điền" title="Biên bản vụ tai nạn, xe gây tai nạn bỏ chạy">
     <Row k="Thời điểm" v="22:47 ngày 06/12" strong />
@@ -91,28 +119,40 @@ const P5 = () => (
   </Sheet>
 )
 
+/** Pharmacy camera still: the black Mercedes stopped after the hit, the driver in a white hoodie at the open door, the Wave on the ground. Drawn in blocks, grey in the night camera. */
 const P6 = () => (
-  <div className="bg-[#1c130f] p-2 shadow-[0_6px_16px_rgb(0_0_0/0.45)]">
-    <svg viewBox="0 0 320 180" className="block w-full">
-      <rect width="320" height="180" fill="#252a2e" />
-      <rect y="110" width="320" height="70" fill="#3a3f44" />
-      <g transform="translate(110 112) scale(0.42)">
-        <Suv lights hit />
-      </g>
-      {/* Driver leaning out of the open door: white hoodie */}
-      <g transform="translate(118 72)">
-        <path d="M-14,30 Q-16,4 0,0 Q16,4 14,30 Z" fill="#ece2cf" stroke="#111" strokeWidth="1.5" />
-        <path d="M-10,4 Q0,-20 10,4" fill="#ece2cf" stroke="#111" strokeWidth="1.5" />
-        <circle cx="0" cy="-2" r="6" fill="#d9a47a" />
-      </g>
-      <g transform="translate(250 136)">
-        <Wave s={0.36} rot={-70} broken />
-      </g>
-      <rect width="320" height="180" fill="#c4a27a" opacity="0.05" />
+  <div className="rounded-xl bg-[#2e2a4a] p-2 shadow-[0_6px_16px_rgb(46_42_74/0.35)]">
+    <svg viewBox="0 0 320 180" className="block w-full rounded-lg">
+      <rect width="320" height="180" fill="#3b3f52" />
+      <rect y="112" width="320" height="68" fill="#4f5366" />
+      <rect y="112" width="320" height="3" fill="#6a6e80" />
+      {/* the shop fronts across the road */}
+      <Fb x={0} y={40} w={90} h={72} d={12} c="#55596c" />
+      <Fb x={210} y={30} w={110} h={82} d={12} c="#4b4f62" />
+      <rect x="14" y="56" width="22" height="18" fill="#c9b98a" opacity="0.6" />
+      <rect x="230" y="50" width="24" height="18" fill="#c9b98a" opacity="0.5" />
+      {/* the Mercedes, side-on, nose to the right: headlight on, right fog light dark */}
+      <Fb x={76} y={104} w={150} h={30} d={22} c="#26242f" />
+      <Fb x={108} y={80} w={84} h={24} d={20} c="#26242f" />
+      <rect x="114" y="84" width="34" height="16" fill="#6f7d8c" />
+      <rect x="154" y="84" width="32" height="16" fill="#6f7d8c" />
+      <rect x="218" y="108" width="8" height="7" fill="#fff6d6" />
+      <rect x="218" y="122" width="7" height="5" fill="#15141b" />
+      <polygon points="226,104 320,90 320,140 226,118" fill="#fff6d6" opacity="0.18" />
+      <Wheel cx={104} cy={136} r={11} />
+      <Wheel cx={198} cy={136} r={11} />
+      {/* the door open, the driver in a white hoodie looking back */}
+      <Fb x={112} y={84} w={6} h={40} d={14} c="#33313d" />
+      <Guest x={126} y={110} s={0.75} who="khoa" shirt="#e8e2d6" hood />
+      {/* the red Wave on its side on the road */}
+      <Fb x={244} y={140} w={50} h={10} d={16} c="#a4544c" />
+      <Wheel cx={248} cy={152} r={7} />
+      <Wheel cx={292} cy={152} r={7} />
+      <rect width="320" height="180" fill="#c4a27a" opacity="0.06" />
       <text x="8" y="14" fontSize="9" fill="#e8e8e8" fontFamily={mono}>NHÀ THUỐC AN PHÚC · CAM 2</text>
       <text x="312" y="172" fontSize="9" fill="#e8e8e8" textAnchor="end" fontFamily={mono}>06/12/2025 22:47:21</text>
     </svg>
-    <p className="px-1 pt-1 font-mono text-[10px] text-[#c4a27a]">
+    <p className="px-1 pt-1 font-mono text-[10px] text-[#e9d9c4]">
       SUV đen, logo ngôi sao ba cánh. Đèn sương mù phải tắt ngay sau va chạm. Người lái mở cửa nhìn ra: áo hoodie trắng trùm mũ. Biển số không đọc được vì chói đèn.
     </p>
   </div>
@@ -217,42 +257,42 @@ const PhotoMeta = ({ when, where }: { when: string; where: string }) => (
   </p>
 )
 
-const Guest = ({ x, y, s = 1, skin = '#efc39b', hair = '#1a1a1f', shirt, hairStyle = 'short', hood = false }: { x: number; y: number; s?: number; skin?: string; hair?: string; shirt: string; hairStyle?: 'short' | 'long'; hood?: boolean }) => (
-  <g transform={`translate(${x} ${y}) scale(${s})`} stroke={LINE} strokeWidth="1.6" strokeLinejoin="round">
-    {hairStyle === 'long' && <path d="M-14,-50 Q0,-66 14,-50 L18,-14 L-18,-14 Z" fill={hair} />}
-    {hood && <path d="M-22,-4 Q-24,-18 -16,-22 L16,-22 Q24,-18 22,-4 Z" fill={shirt} />}
-    <path d="M-26,40 Q-24,0 -8,-6 L8,-6 Q24,0 26,40 Z" fill={shirt} />
-    <rect x="-4" y="-14" width="8" height="10" fill={skin} />
-    <ellipse cx="0" cy="-30" rx="13" ry="16" fill={skin} />
-    <path d="M-14,-32 Q-14,-50 0,-48 Q14,-50 14,-32 Q8,-40 0,-40 Q-8,-40 -14,-32 Z" fill={hair} />
-    <circle cx="-5" cy="-30" r="1.6" fill={LINE} stroke="none" />
-    <circle cx="5" cy="-30" r="1.6" fill={LINE} stroke="none" />
-    <path d="M-5,-22 Q0,-18 5,-22" fill="none" strokeWidth="1.4" />
-  </g>
-)
+// Photos a suspect shows on their phone, drawn in the diorama style seen straight on.
+const cast = Object.fromEntries((caseJson as CaseData).suspects.map((x) => [x.id, x.portrait])) as Record<string, PortraitSpec>
+const Guest = makeGuest(cast)
+const TimeTag = TimeStamp
 
-const TimeTag = ({ t }: { t: string }) => (
-  <>
-    <rect x="8" y="8" width="104" height="18" rx="4" fill="#000" opacity="0.45" />
-    <text x="14" y="21" fontSize="11" fill="#fff" fontFamily={mono}>
-      {t}
-    </text>
-  </>
+/** String lights along the top of a photo, as small glowing blocks. */
+const Lights = () => (
+  <g>
+    <path d="M0,24 Q160,44 320,24" stroke={iso.ink} strokeWidth="1" fill="none" opacity="0.5" />
+    {Array.from({ length: 11 }, (_, i) => (
+      <Fb key={i} x={8 + i * 30} y={24 + Math.sin((i / 10) * Math.PI) * 14} w={5} h={5} d={6} c="#ffe1a0" />
+    ))}
+  </g>
 )
 
 /** Khải's "Vũng Tàu dinner": real, but taken the night before. */
 const X3 = () => (
   <Phone header="Thư viện ảnh · Quang Khải">
-    <div className="overflow-hidden rounded-md">
+    <div className="overflow-hidden rounded-xl">
       <svg viewBox="0 0 320 220" className="block w-full">
-        <rect width="320" height="220" fill="#1d2b44" />
-        <rect y="70" width="320" height="40" fill="#2f4a5a" />
-        <circle cx="270" cy="40" r="16" fill="#f3e4c4" opacity="0.8" />
-        <Guest x={90} y={150} s={1.3} shirt="#b0925c" hair="#7d7a76" />
-        <Guest x={220} y={150} s={1.2} shirt="#2f4258" />
-        <rect x="0" y="176" width="320" height="44" fill="#7a4f32" stroke={LINE} strokeWidth="1.5" />
-        <ellipse cx="160" cy="186" rx="60" ry="10" fill="#f6efe2" stroke={LINE} strokeWidth="1.5" />
-        <path d="M130,184 q10,-12 20,0 q10,-12 20,0 q10,-12 20,0" fill="#e0503a" stroke={LINE} strokeWidth="1" />
+        <rect width="320" height="220" fill="#5b6a9a" />
+        <rect y="70" width="320" height="40" fill="#6f93a6" />
+        <rect y="104" width="320" height="6" fill="#9fc2d6" />
+        <Fb x={258} y={30} w={20} h={20} d={8} c="#fbf0c8" />
+        {/* seafood restaurant awning posts */}
+        <Fb x={10} y={40} w={8} h={140} d={8} c="#b9875d" />
+        <Fb x={300} y={40} w={8} h={140} d={8} c="#b9875d" />
+        <Guest x={96} y={150} s={1.3} who="khai" look={{ mood: 'smile' }} />
+        <Guest x={220} y={150} s={1.2} look={{ hair: 'side-part', hairColor: 'black', age: 'mid', build: 'heavy' }} shirt="#2f4258" />
+        {/* table with a plate of crab */}
+        <Fb x={-4} y={178} w={330} h={44} d={26} c="#b9875d" />
+        <Fb x={110} y={174} w={100} h={6} d={20} c="#fbf4e8" />
+        {[124, 146, 168, 190].map((x) => (
+          <Fb key={x} x={x} y={166} w={14} h={8} d={10} c={iso.coral} />
+        ))}
+        <Fb x={60} y={160} w={10} h={18} d={6} c="#e8c25a" />
         <TimeTag t="05/12 20:14" />
       </svg>
     </div>
@@ -263,23 +303,20 @@ const X3 = () => (
 
 const X4 = () => (
   <Phone header="Story · han.vongoc">
-    <div className="overflow-hidden rounded-md">
+    <div className="overflow-hidden rounded-xl">
       <svg viewBox="0 0 320 220" className="block w-full">
-        <rect width="320" height="220" fill="#2a2a3a" />
-        {[40, 120, 200, 280].map((x) => (
-          <circle key={x} cx={x} cy="24" r="6" fill="#ffd98f" />
+        <rect width="320" height="220" fill="#4a4870" />
+        <Lights />
+        <rect y="80" width="320" height="40" fill="#3c4f78" opacity="0.8" />
+        {/* Khoa in his white hoodie, beer bottles in front of him */}
+        <Guest x={150} y={160} s={1.4} who="khoa" look={{ mood: 'smile' }} shirt="#f2ede4" hood />
+        <Fb x={-4} y={180} w={330} h={44} d={26} c="#b9875d" />
+        {[58, 82, 106].map((x) => (
+          <Fb key={x} x={x} y={150} w={14} h={32} d={8} c="#d9a441" />
         ))}
-        <path d="M0,24 Q160,40 320,24" stroke="#6f6c66" strokeWidth="1.5" fill="none" />
-        <rect y="80" width="320" height="40" fill="#1d2b44" opacity="0.7" />
-        <Guest x={150} y={160} s={1.4} shirt={'#ece2cf'} hood />
-        <rect x="0" y="180" width="320" height="40" fill="#7a4f32" stroke={LINE} strokeWidth="1.5" />
-        {[60, 90, 120].map((x) => (
-          <rect key={x} x={x} y="150" width="16" height="34" rx="3" fill="#cf9a32" stroke={LINE} strokeWidth="1.2" opacity="0.9" />
-        ))}
-        {/* Mercedes smart key on the table */}
-        <rect x="200" y="186" width="34" height="18" rx="7" fill="#17181c" stroke={LINE} strokeWidth="1.5" />
-        <circle cx="217" cy="195" r="5" fill="#c9cdd2" />
-        <path d="M217,191 v4 l-3,2 M217,195 l3,2" stroke="#17181c" strokeWidth="1" />
+        {/* the Mercedes smart key on the table */}
+        <Fb x={200} y={184} w={34} h={14} d={14} c="#26242f" />
+        <rect x="211" y="188" width="12" height="6" fill={iso.metal} />
         <TimeTag t="06/12 22:20" />
       </svg>
     </div>
@@ -290,18 +327,16 @@ const X4 = () => (
 
 const X5 = () => (
   <Phone header="Story · han.vongoc">
-    <div className="overflow-hidden rounded-md">
+    <div className="overflow-hidden rounded-xl">
       <svg viewBox="0 0 320 220" className="block w-full">
-        <rect width="320" height="220" fill="#2a2a3a" />
-        {[40, 120, 200, 280].map((x) => (
-          <circle key={x} cx={x} cy="24" r="6" fill="#ffd98f" />
-        ))}
-        <Guest x={70} y={168} shirt="#7a9fb0" hairStyle="long" hair="#4a3426" />
-        <Guest x={160} y={160} s={1.25} shirt="#cf9a32" hairStyle="long" hair="#4a3426" />
-        <Guest x={250} y={168} shirt="#6b6a35" />
+        <rect width="320" height="220" fill="#4a4870" />
+        <Lights />
+        <Guest x={70} y={168} look={{ hair: 'long', hairColor: 'brown', build: 'thin', skin: 0 }} shirt="#7a9fb0" />
+        <Guest x={160} y={160} s={1.25} who="han" look={{ mood: 'smile' }} />
+        <Guest x={240} y={168} look={{ hair: 'short', build: 'normal' }} shirt="#6b6a35" />
         {/* Khoa's empty chair */}
-        <rect x="282" y="140" width="34" height="44" fill="#573721" stroke={LINE} strokeWidth="1.5" />
-        <rect x="0" y="190" width="320" height="30" fill="#7a4f32" />
+        <Fb x={282} y={138} w={30} h={48} d={14} c="#7d5c41" />
+        <Fb x={-4} y={190} w={330} h={34} d={26} c="#b9875d" />
         <TimeTag t="06/12 22:52" />
       </svg>
     </div>
@@ -395,24 +430,23 @@ const X10 = () => (
 const X11 = () => (
   <Phone header="Facebook · Võ Ngọc Hân">
     <p>"Tài xế riêng của ai kia 🙄"</p>
-    <div className="overflow-hidden rounded-md">
+    <div className="overflow-hidden rounded-xl">
       <svg viewBox="0 0 320 220" className="block w-full">
-        <rect width="320" height="220" fill="#24262e" />
-        {/* windscreen, night street */}
-        <path d="M20,20 L300,20 L280,110 L40,110 Z" fill="#3a4a5e" stroke={LINE} strokeWidth="2" />
-        <circle cx="90" cy="70" r="6" fill="#f3d27a" opacity="0.8" />
-        <circle cx="230" cy="60" r="5" fill="#f3d27a" opacity="0.6" />
+        <rect width="320" height="220" fill="#3a3850" />
+        {/* windscreen onto the night street */}
+        <polygon points="20,20 300,20 280,110 40,110" fill="#5b6a9a" />
+        <Fb x={80} y={62} w={10} h={10} d={6} c="#ffe1a0" />
+        <Fb x={226} y={54} w={8} h={8} d={6} c="#ffe1a0" />
         {/* rear-view mirror with the plate reflected */}
-        <rect x="132" y="26" width="56" height="20" rx="4" fill="#cfd6dc" stroke={LINE} strokeWidth="1.6" />
-        <text x="160" y="40" textAnchor="middle" fontSize="8" fill="#1d2b44" fontFamily={mono}>51K-686.68</text>
-        {/* Hân driving (left seat), Khoa beside her */}
-        <Guest x={95} y={168} s={1.25} shirt="#c46b7a" hair="#2a1a14" hairStyle="long" />
-        <Guest x={225} y={168} s={1.2} shirt="#f4f1ea" hood />
+        <Fb x={132} y={26} w={56} h={20} d={8} c="#dfe5ea" />
+        <text x="160" y="40" textAnchor="middle" fontSize="8" fill={iso.ink} fontFamily={mono}>51K-686.68</text>
+        {/* Hân driving (left seat), Khoa beside her in his hoodie */}
+        <Guest x={95} y={168} s={1.25} who="han" />
+        <Guest x={225} y={168} s={1.2} who="khoa" shirt="#f2ede4" hood />
         {/* steering wheel with the star badge */}
-        <circle cx="95" cy="190" r="34" fill="none" stroke="#111" strokeWidth="7" />
-        <circle cx="95" cy="190" r="8" fill="#9aa3ad" stroke={LINE} strokeWidth="1.5" />
-        <path d="M95,183 L95,190 M95,190 L89,194 M95,190 L101,194" stroke="#1d2b44" strokeWidth="1.5" />
-        <rect x="0" y="200" width="320" height="20" fill="#16171c" />
+        <circle cx="95" cy="190" r="34" fill="none" stroke={iso.ink} strokeWidth="8" />
+        <Fb x={88} y={184} w={14} h={12} d={6} c={iso.metal} />
+        <rect x="0" y="204" width="320" height="16" fill="#26242f" />
         <TimeTag t="20/11 21:30" />
       </svg>
     </div>

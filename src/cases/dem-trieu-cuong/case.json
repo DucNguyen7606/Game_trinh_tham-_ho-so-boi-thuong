@@ -1,5 +1,6 @@
 {
   "id": "dem-trieu-cuong",
+  "artStyle": "sa-ban",
   "title": "Hồ sơ bồi thường số 1411",
   "intro": "Đêm 14/11, triều cường cộng mưa lớn tràn vào kho điện thoại của bà Trần Thị Mỹ Lệ bên kênh Đôi, gần Bến Bình Đông, Quận 8. Bà đòi bồi thường 4,5 tỷ đồng cho cả 1.500 máy trong kho. Bạn có 10 ngày để đề xuất chi trả bao nhiêu, hay từ chối. Mỗi ngày khám được 1 khu hiện trường. Hỏi chuyện thì không giới hạn.",
   "player": {
@@ -17,7 +18,7 @@
     }
   },
   "photoDate": "16 11 '25",
-  "days": 10,
+  "days": 9,
   "limitsPerDay": {
     "talk": 2,
     "explore": 1
@@ -383,7 +384,8 @@
       "id": "P1",
       "title": "Hợp đồng bảo hiểm hàng hóa trong kho",
       "description": "Bảo hiểm mọi rủi ro, gồm ngập nước. Loại trừ: hàng bị lấy đi không có dấu hiệu đột nhập, hoặc do nhân viên của người được bảo hiểm chiếm đoạt.",
-      "source": "file"
+      "source": "file",
+      "highlights": ["do nhân viên của người được bảo hiểm chiếm đoạt"]
     },
     {
       "id": "P2",
@@ -395,7 +397,8 @@
       "id": "P3",
       "title": "Bảng mực nước đêm 14/11",
       "description": "Nước vào kho 22:40. Sâu 0,4 m lúc 00:00, 0,8 m lúc 01:30, đỉnh 0,9 m lúc 02:30. Rút hết 07:30.",
-      "source": "file"
+      "source": "file",
+      "highlights": ["đỉnh 0,9 m lúc 02:30"]
     },
     {
       "id": "P4",
@@ -413,13 +416,35 @@
       "id": "P6",
       "title": "Biên bản kiểm đếm của An Tín",
       "description": "Còn 60 thùng ngập bùn ở tầng 1–2. Tầng 3–5 trống. Không tìm thấy thùng nào trôi dạt trên kênh hay ven bờ.",
-      "source": "file"
+      "source": "file",
+      "highlights": ["Không tìm thấy thùng nào trôi dạt"]
     },
     {
       "id": "P7",
       "title": "Camera quán nhậu bên kia kênh",
       "description": "01:52, một ghe máy đèn xanh cập cửa sổ kho. 02:41 rời đi, khoang ghe chất đầy hàng phủ bạt.",
-      "source": "file"
+      "source": "file",
+      "audio": {
+        "length": "0:28",
+        "lines": [
+          {
+            "who": "Giám định viên",
+            "text": "Chị Bông, chị kể lại giùm đêm 14/11 chị thấy gì bên kia kênh."
+          },
+          {
+            "who": "Chị Bông",
+            "text": "Gần 2 giờ, nghe máy ghe nổ rồi tắt ngay cửa sổ kho bà Lệ. Ghe đèn xanh, đứng yên, không nháy."
+          },
+          {
+            "who": "Chị Bông",
+            "text": "Có người trong kho đưa thùng ra, người trên ghe đỡ lấy. Tui tưởng người ta cứu hàng cho khỏi ngập."
+          },
+          {
+            "who": "Chị Bông",
+            "text": "Bốc gần một tiếng thì máy nổ lại. Ghe chở đầy, phủ bạt kín mít, chạy ra hướng kênh Tẻ."
+          }
+        ]
+      }
     },
     {
       "id": "P8",
@@ -888,6 +913,58 @@
     },
     {
       "ending": "wrong"
+    }
+  ],
+  "puzzles": [
+    {
+      "id": "z1",
+      "clueId": "P5",
+      "kind": "answer",
+      "title": "Bài tính mực nước",
+      "prompt": "Đặt mức nước cao nhất trong bảng mực nước (P03) lên sơ đồ kệ. Những tầng nào thật sự ngập, và số máy ở đó trị giá bao nhiêu?",
+      "lockedText": "Sơ đồ kệ kho số 7 (độ cao mặt kệ tính từ sàn)\nT1 0,2 m · T2 0,6 m · T3 1,1 m · T4 1,6 m · T5 2,1 m\nMỗi tầng: 30 thùng × 10 máy\nĐơn giá kê khai: 4,5 tỷ đồng cho 1.500 máy",
+      "answers": ["1,8 tỷ", "1,8", "1,8 tỷ đồng", "1.800.000.000", "1.800.000.000 đ", "1800000000", "1800 triệu", "1.800 triệu"],
+      "placeholder": "tỷ đồng",
+      "solvedText": "Nước đỉnh 0,9 m chỉ phủ tầng 1 (0,2 m) và tầng 2 (0,6 m). 2 tầng × 300 máy = 600 máy, nhân 3 triệu một máy = 1,8 tỷ đồng. 900 máy ở tầng 3 đến 5 nằm trên mặt nước, nước không thể làm hỏng.",
+      "hints": ["Mực nước cao nhất ghi trong bảng mực nước P03. Tầng nào có mặt kệ thấp hơn mức đó thì bị ngập.", "0,9 m phủ tầng 0,2 m và 0,6 m. Đơn giá một máy: 4,5 tỷ ÷ 1.500 = 3 triệu."]
+    }
+  ],
+  "timeline": [
+    {
+      "time": "12/9",
+      "text": "Bà Lệ nhập thêm 500 máy cho mùa Tết và nâng giá trị bảo hiểm lên 4,5 tỷ."
+    },
+    {
+      "time": "14/11 18:10",
+      "text": "Tư đổ đầy 60 lít dầu cho ghe SG-4417."
+    },
+    {
+      "time": "22:40",
+      "text": "Triều cường tràn vào kho bên kênh Đôi."
+    },
+    {
+      "time": "23:58",
+      "text": "Khải gửi bà Lệ ảnh \"Con kê xong rồi cô\". Ba tầng kệ trên vẫn đầy hàng, khô ráo."
+    },
+    {
+      "time": "15/11 01:52",
+      "text": "Khải mở chốt cửa sổ phía kênh từ bên trong. Ghe của Tư cập cửa."
+    },
+    {
+      "time": "02:30",
+      "text": "Nước đạt đỉnh 0,9 m, chỉ ngập tầng 1 và tầng 2."
+    },
+    {
+      "time": "02:41",
+      "text": "Ghe rời đi, chở 90 thùng (900 máy) của tầng 3 đến 5."
+    },
+    {
+      "time": "17/11",
+      "text": "Máy trong lô \"bị nước cuốn\" bắt đầu gắn sim. Khải nhận 1,1 tỷ từ Phùng Gia Hưng."
+    },
+    {
+      "time": "18/11",
+      "text": "Khải chuyển 60 triệu cho Tư."
     }
   ]
 }
