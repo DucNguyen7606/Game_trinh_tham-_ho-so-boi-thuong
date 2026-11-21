@@ -65,6 +65,9 @@ export function Watch({ x, y, r = 60, h = 10, m = 47, crownOut = true, cracked =
 }
 
 /** Weekly pill organiser: 7 days x 3 slots. `empty` lists slots already taken, as [day, slot]. */
+/** Filled on Sunday evening 12/4 for the new week: Monday morning and noon taken, the 21:00 dose still there. */
+export const PILLS_EMPTY: [number, number][] = [[0, 0], [0, 1]]
+
 export function PillBox({ x, y, s = 1, empty = [] }: { x: number; y: number; s?: number; empty?: [number, number][] }) {
   const isEmpty = (d: number, k: number) => empty.some(([a, b]) => a === d && b === k)
   return (
@@ -243,7 +246,7 @@ function Study() {
         <rect x="360" y="620" width="16" height="120" fill={C.limDark} />
         <rect x="604" y="620" width="16" height="120" fill={C.limDark} />
       </g>
-      <PillBox x={360} y={530} s={0.92} empty={[[0, 0], [0, 1]]} />
+      <PillBox x={360} y={530} s={0.92} empty={PILLS_EMPTY} />
 
       {/* Desk with the old landline phone (hotspot dien-thoai 1024,504) */}
       <g {...O}>

@@ -2,7 +2,7 @@
   "id": "ba-muoi-ba-do",
   "artStyle": "sa-ban",
   "title": "Hồ sơ bồi thường số 1511",
-  "intro": "Trưa 15/11, một pallet 1.200 lọ thuốc ung thư Herzena bay từ Frankfurt về kho hàng lạnh Tân Sơn Cargo, sân bay Tân Sơn Nhất. Hai ngày sau, dược sĩ của Công ty Dược phẩm Minh Tâm tới nhận thì chiếc nhiệt kế tự ghi trong thùng báo đỏ: thuốc đã nằm ở 33 độ gần ba tiếng, trong khi phải giữ từ 2 đến 8 độ. Minh Tâm đòi bồi thường 4,6 tỷ đồng, lô thuốc bị niêm phong chờ đem đi tiêu hủy ngày 28/11. Bạn có 10 ngày để đề xuất trước khi lò đốt nhận hàng. Mỗi ngày khám được 1 khu hiện trường. Hỏi chuyện thì không giới hạn.",
+  "intro": "Trưa 15/11, một pallet 1.200 lọ thuốc ung thư Herzena bay từ Frankfurt về kho hàng lạnh Tân Sơn Cargo, sân bay Tân Sơn Nhất. Hai ngày sau, dược sĩ của Công ty Dược phẩm Minh Tâm tới nhận thì chiếc nhiệt kế tự ghi trong thùng báo đỏ: thuốc đã nằm ở 33 độ gần ba tiếng, trong khi phải giữ từ 2 đến 8 độ. Minh Tâm đòi bồi thường 4,6 tỷ đồng, lô thuốc bị niêm phong chờ đem đi tiêu hủy ngày 28/11. Bạn có 8 ngày để đề xuất trước khi lò đốt nhận hàng. Mỗi ngày khám được 1 khu hiện trường. Hỏi chuyện thì không giới hạn.",
   "player": {
     "name": "Lê Thu Hạnh",
     "role": "Chuyên viên giám định bồi thường, Bảo hiểm An Tín",
@@ -18,7 +18,7 @@
     }
   },
   "photoDate": "18 11 '25",
-  "days": 10,
+  "days": 8,
   "limitsPerDay": {
     "talk": 2,
     "explore": 1
@@ -425,13 +425,20 @@
       "id": "P5",
       "title": "Nhật ký cửa phòng lạnh 3",
       "description": "Đêm 15–16/11: thẻ của Tùng mở 23:52, ra 23:58; mở 02:41, ra 02:47. Không thẻ nào khác.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "mở 23:52, ra 23:58; mở 02:41, ra 02:47",
+        "Không thẻ nào khác"
+      ]
     },
     {
       "id": "P6",
       "title": "Phiếu đóng gói của bên gửi hàng",
       "description": "Pallet có hai nhiệt kế: TL-A trên nắp thùng 1, TL-B giấu dưới lớp túi lạnh thùng 17.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "TL-B giấu dưới lớp túi lạnh thùng 17"
+      ]
     },
     {
       "id": "P7",
@@ -443,7 +450,10 @@
       "id": "P8",
       "title": "Hợp đồng thuê xe tải lạnh",
       "description": "Hưng Thịnh thuê xe lạnh 2–8 độ ngày 28/11, chở \"40 thùng hàng lạnh từ Tân Sơn Nhất\". Ký ngày 14/11, trước khi lô thuốc hạ cánh.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "Ký ngày 14/11, trước khi lô thuốc hạ cánh"
+      ]
     },
     {
       "id": "P9",
@@ -455,7 +465,10 @@
       "id": "P10",
       "title": "Phiếu kiểm nghiệm lại",
       "description": "Viện Kiểm nghiệm thuốc lấy mẫu thùng 1 và thùng 17: đạt toàn bộ chỉ tiêu.",
-      "source": "file"
+      "source": "file",
+      "highlights": [
+        "đạt toàn bộ chỉ tiêu"
+      ]
     },
     {
       "id": "P11",
@@ -485,7 +498,32 @@
       "id": "X4",
       "title": "Tin nhắn giữa Tùng và \"anh Hưng\"",
       "description": "Tùng cho xem tin nhắn từ 12/11 đến 17/11.",
-      "source": "testimony"
+      "source": "testimony",
+      "audio": {
+        "length": "0:26",
+        "lines": [
+          {
+            "who": "Anh Hưng · 12/11 21:40",
+            "text": "Lô Herzena của Minh Tâm về thứ bảy hả em? Một pallet?"
+          },
+          {
+            "who": "Tùng · 12/11 21:42",
+            "text": "Dạ, bốn chục thùng, chuyến Frankfurt trưa 15."
+          },
+          {
+            "who": "Anh Hưng · 12/11 21:45",
+            "text": "Chỉ cần cái nhiệt kế báo đỏ. Thuốc em đừng đụng, giữ lạnh cho anh."
+          },
+          {
+            "who": "Tùng · 16/11 03:02",
+            "text": "Xong rồi anh. Đỏ rồi."
+          },
+          {
+            "who": "Anh Hưng · 16/11 07:15",
+            "text": "Sáng nay anh gửi trước một trăm. Nhớ đề xuất bên anh đốt nha."
+          }
+        ]
+      }
     },
     {
       "id": "H10",
@@ -916,6 +954,76 @@
     },
     {
       "ending": "wrong"
+    }
+  ],
+  "puzzles": [
+    {
+      "id": "do-thi-tla",
+      "clueId": "P3",
+      "title": "Đọc bản in thô của nhiệt kế TL-A",
+      "kind": "answer",
+      "prompt": "Bản in thô chỉ có hai cột số T và L, không chú thích. Tìm lúc nhiệt kế bị lấy ra khỏi thùng và lúc nó được đặt lại. Gõ hai mốc giờ, ví dụ 01:00-03:00.",
+      "lockedText": "TL-A · dữ liệu thô đêm 15–16/11 (giờ · T · L)\n23:50 · 5,0 · 0\n23:54 · 5,0 · 0\n23:55 · 5,1 · 1\n23:56 · 9,7 · 0\n00:04 · 32,1 · 0\n01:30 · 32,8 · 0\n02:42 · 32,6 · 0\n02:43 · 32,4 · 1\n02:44 · 30,0 · 0\n02:54 · 6,0 · 0\nTrưa 15/11: T cao nhất 7,8 lúc 13:30, L = 0 suốt buổi trưa.",
+      "answers": [
+        "23:55-02:43",
+        "23:55–02:43",
+        "23:55 02:43",
+        "23:55 đến 02:43",
+        "từ 23:55 đến 02:43",
+        "23h55-02h43",
+        "23h55 02h43",
+        "2355-0243",
+        "23:55/02:43",
+        "23:55;02:43",
+        "23:55,02:43",
+        "23:55-2:43",
+        "23:55 đến 2:43"
+      ],
+      "placeholder": "giờ lấy ra - giờ đặt lại",
+      "solvedText": "Cột L là cảm biến ánh sáng. Nó chỉ bằng 1 hai lần, mỗi lần là nắp thùng mở ra ánh đèn: 23:55 nhiệt kế bị lấy ra, 02:43 được đặt lại. Ở giữa, nó nằm trong chỗ tối mà vẫn giữ 32–33 độ.",
+      "hints": [
+        "Cột L chỉ có 0 và 1. Trong một thùng kín, cảm biến nào lúc nào cũng bằng 0?",
+        "L = 1 đúng hai lần trong đêm. Mỗi lần là một lần nắp thùng bị mở.",
+        "Nhiệt kế ra khỏi thùng lúc 23:55 và trở lại lúc 02:43."
+      ]
+    }
+  ],
+  "timeline": [
+    {
+      "time": "12/11 21:45",
+      "text": "Hưng nhắn Tùng: \"Chỉ cần cái nhiệt kế báo đỏ.\""
+    },
+    {
+      "time": "14/11",
+      "text": "Hưng Thịnh ký thuê xe tải lạnh cho ngày 28/11, khi lô thuốc chưa hạ cánh."
+    },
+    {
+      "time": "15/11 13:10–13:55",
+      "text": "Pallet nằm ngoài sân đỗ 45 phút. TL-A cao nhất 7,8 độ, vẫn trong ngưỡng."
+    },
+    {
+      "time": "15/11 23:52",
+      "text": "Tùng quẹt thẻ vào phòng lạnh 3, ca đêm chỉ có một mình anh."
+    },
+    {
+      "time": "15/11 23:55",
+      "text": "Tùng rạch thùng 1, lấy TL-A ra, nhét vào túi trong áo phao."
+    },
+    {
+      "time": "16/11 02:43",
+      "text": "Tùng đặt TL-A lại, dán thùng bằng băng keo xanh lá của kho."
+    },
+    {
+      "time": "16/11",
+      "text": "Tùng nộp 100 triệu tiền mặt ở Bình Chánh, trả nợ 85 triệu cùng ngày."
+    },
+    {
+      "time": "17/11 09:05",
+      "text": "Dược sĩ Linh đọc TL-A báo đỏ, niêm phong cả lô. Tùng lập đề xuất giao Hưng Thịnh tiêu hủy."
+    },
+    {
+      "time": "28/11",
+      "text": "Ngày \"tiêu hủy\", trong khi lò đốt duy nhất của Hưng Thịnh bảo trì tới 10/12."
     }
   ]
 }
