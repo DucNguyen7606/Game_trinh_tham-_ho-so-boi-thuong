@@ -5,6 +5,7 @@ import { FrontBust } from '@/art/iso/figure'
 import { iso, tone } from '@/art/iso/iso'
 import type { CaseData } from '@/game/types'
 import caseJson from './case.json'
+import { useGame } from '@/game/store'
 
 // What each document in the case-file envelopes looks like, keyed by clue id.
 // Brands are generic on purpose: a ride app, a chat app, a social network.
@@ -143,22 +144,30 @@ const P7 = () => (
   </Phone>
 )
 
-const P8 = () => (
-  <div className="space-y-2">
-    <Sheet org="Hóa đơn giá trị gia tăng" title="Công ty TNHH Vải Sợi Hưng Long">
-      <Row k="Ký hiệu / Số" v="HL/24E · 0000137" />
-      <Row k="Hàng hóa" v="Vải kate 1.240 m" />
-      <Row k="Tổng thanh toán" v="98.500.000 đ" strong />
-      <p className="text-[10px] opacity-70">Một trong 7 hóa đơn, tổng cộng 620.000.000 đ</p>
-    </Sheet>
-    <div className="bg-[#f6efe2] p-2 font-sans text-[10px] text-[#2d1f18] shadow">
-      <p className="font-semibold">Tra cứu mã số thuế 0318xxxx27</p>
-      <p>Người đại diện: <Mark>Phan Thị Lựu</Mark></p>
-      <p>Địa chỉ: Ấp 3, xã Phước Mỹ Trung, huyện <Mark>Mỏ Cày Bắc</Mark>, Bến Tre</p>
-      <p>Trạng thái: đang hoạt động · 0 lao động</p>
+// The lookup result only shows once the tax-code puzzle is solved; before that the invoice
+// carries the bare code, so the picture doesn't give the answer away.
+const P8 = () => {
+  const solved = useGame((s) => s.solvedPuzzles.includes('z1'))
+  return (
+    <div className="space-y-2">
+      <Sheet org="Hóa đơn giá trị gia tăng" title="Công ty TNHH Vải Sợi Hưng Long">
+        <Row k="MST bên bán" v="0318 427 627" strong />
+        <Row k="Ký hiệu / Số" v="HL/24E · 0000137" />
+        <Row k="Hàng hóa" v="Vải kate 1.240 m" />
+        <Row k="Tổng thanh toán" v="98.500.000 đ" strong />
+        <p className="text-[10px] opacity-70">Một trong 7 hóa đơn, tổng cộng 620.000.000 đ</p>
+      </Sheet>
+      {solved && (
+        <div className="bg-[#f6efe2] p-2 font-sans text-[10px] text-[#2d1f18] shadow">
+          <p className="font-semibold">Tra cứu mã số thuế 0318 427 627</p>
+          <p>Người đại diện: <Mark>Phan Thị Lựu</Mark></p>
+          <p>Địa chỉ: Ấp 3, xã Phước Mỹ Trung, huyện <Mark>Mỏ Cày Bắc</Mark>, Bến Tre</p>
+          <p>Trạng thái: đang hoạt động · 0 lao động</p>
+        </div>
+      )}
     </div>
-  </div>
-)
+  )
+}
 
 const Bubble = ({ me, children, time }: { me?: boolean; children: React.ReactNode; time: string }) => (
   <div className={me ? 'ml-6 rounded-lg rounded-tr-none bg-[#3f8a7e] p-2 text-white' : 'mr-6 rounded-lg rounded-tl-none bg-white p-2'}>

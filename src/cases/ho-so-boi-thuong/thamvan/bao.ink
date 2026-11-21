@@ -90,7 +90,7 @@ Bảo chờ bạn nói tiếp, ngón tay miết mép tập giấy.
     -> hoi
 
 === doi_hl ===
-+ {has_H6} [Đại diện Hưng Long là bà Phan Thị Lựu, quê Mỏ Cày. Chai rượu trong chòi cũng rượu Mỏ Cày. Em cũng họ Phan.]
++ {has_H6} [Người đứng tên Hưng Long quê Mỏ Cày, cùng họ Phan với em. Chai rượu trong chòi cũng rượu Mỏ Cày.]
     Bảo cởi kính ra lau, lau rất lâu.
     "Mẹ em."
     "Mẹ em đứng tên giùm thôi. Hàng có giao thiệt mà {xchi}... có một phần."

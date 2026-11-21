@@ -1,4 +1,5 @@
 import { Mark, Phone, Row, Sheet, Signature, Stamp } from '@/art/docParts'
+import { useGame } from '@/game/store'
 import { LotusPainting } from './scenes'
 import type { PortraitSpec } from '@/art/Portrait'
 import type { CaseData } from '@/game/types'
@@ -10,23 +11,27 @@ import caseJson from './case.json'
 
 
 /** A photo of the painting with numbered call-outs. */
-function PaintingPhoto({ fake, caption, notes }: { fake?: boolean; caption: string; notes: string[] }) {
+function PaintingPhoto({ fake, caption, notes, plain }: { fake?: boolean; caption: string; notes: string[]; plain?: boolean }) {
   return (
     <div className="bg-[#f4ecdc] p-1.5 shadow">
       <svg viewBox="0 0 300 240" className="block w-full">
         <LotusPainting fake={fake} />
-        <g fill="none" stroke="#f2a93b" strokeWidth="2">
-          <circle cx="250" cy="46" r="22" />
-          <circle cx="262" cy="228" r="26" />
-          {!fake && <circle cx="22" cy="212" r="22" />}
-        </g>
+        {!plain && (
+          <g fill="none" stroke="#f2a93b" strokeWidth="2">
+            <circle cx="250" cy="46" r="22" />
+            <circle cx="262" cy="228" r="26" />
+            {!fake && <circle cx="22" cy="212" r="22" />}
+          </g>
+        )}
       </svg>
       <p className="pt-1 font-mono text-[9px] text-[#3a2a20]">{caption}</p>
-      <ul className="font-mono text-[9px] text-[#3a2a20]">
-        {notes.map((n) => (
-          <li key={n}>• {n}</li>
-        ))}
-      </ul>
+      {!plain && (
+        <ul className="font-mono text-[9px] text-[#3a2a20]">
+          {notes.map((n) => (
+            <li key={n}>• {n}</li>
+          ))}
+        </ul>
+      )}
     </div>
   )
 }
@@ -95,16 +100,22 @@ const P4 = () => (
   </Sheet>
 )
 
-const P5 = () => (
-  <div className="space-y-1">
-    <PaintingPhoto
-      fake
-      caption="Ảnh khai mạc triển lãm Sen Việt, Diệp Gallery, 05/07/2025"
-      notes={['Chuồn chuồn màu vàng', 'Chữ ký "Khuê 1962"', 'Góc dưới trái: không còn vết rạn']}
-    />
-    <p className="bg-[#f6efe2] p-1 font-mono text-[9px] text-[#3a2a20]">Nguồn: trang báo Mỹ Thuật Online. Tranh vừa phục chế xong.</p>
-  </div>
-)
+// Until the photo-comparison puzzle is solved the photo has no circles or notes: finding
+// the three changes is the player's job.
+const P5 = () => {
+  const solved = useGame((s) => s.solvedPuzzles.includes('z1'))
+  return (
+    <div className="space-y-1">
+      <PaintingPhoto
+        fake
+        plain={!solved}
+        caption="Ảnh khai mạc triển lãm Sen Việt, Diệp Gallery, 05/07/2025"
+        notes={['Chuồn chuồn màu vàng', 'Chữ ký "Khuê 1962"', 'Góc dưới trái: không còn vết rạn']}
+      />
+      <p className="bg-[#f6efe2] p-1 font-mono text-[9px] text-[#3a2a20]">Nguồn: trang báo Mỹ Thuật Online. Tranh vừa phục chế xong.</p>
+    </div>
+  )
+}
 
 const P6 = () => (
   <Sheet org="Diệp Gallery" title="Phiếu giao nhận tác phẩm">
