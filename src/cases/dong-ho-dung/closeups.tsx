@@ -179,7 +179,7 @@ function Tray() {
       <ellipse cx="170" cy="160" rx="70" ry="40" fill="#f4efe0" {...O} />
       <ellipse cx="170" cy="160" rx="50" ry="26" fill="#ece2cf" />
       <line x1="230" y1="150" x2="320" y2="130" stroke="#c9ccd0" strokeWidth="8" strokeLinecap="round" />
-      <Label x={280} y={262} t="chén cháo ăn hết" />
+      <Label x={280} y={262} t="bát cháo ăn hết" />
     </g>
   )
 }

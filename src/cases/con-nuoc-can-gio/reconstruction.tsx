@@ -75,7 +75,7 @@ export const reconstruction: ReconstructionPanel[] = (
     {
       time: '22:58 đến 23:00',
       title: 'Tự tay đánh chìm ghe',
-      text: 'Ra giữa sông, ông gọi cho vợ bằng sim mới. Bà alo mấy lần, ông không nói gì, 12 giây thì cúp. Rồi ông tắt máy, rút chìa và rút nút lù dưới đáy. Ghe ngập dần. Trời lặng, gió nhẹ, không có sóng nào đánh úp chiếc ghe cả.',
+      text: 'Ra giữa sông, ông gọi cho vợ bằng sim mới. Bà alo mấy lần, ông không nói gì, 12 giây thì tắt máy. Rồi ông tắt máy, rút chìa và rút nút lù dưới đáy. Ghe ngập dần. Trời lặng, gió nhẹ, không có sóng nào đánh úp chiếc ghe cả.',
       questionId: 'q1',
       Art: () => (
         <Staged zone="ben-ghe">
@@ -123,7 +123,7 @@ export const reconstruction: ReconstructionPanel[] = (
     {
       time: '02:16 đến 05:42',
       title: 'Thùng xốp qua phà',
-      text: 'Tâm về bến, chở thùng xốp đựng vàng qua phà Bình Khánh lên thành phố gửi giấu, 04:41 quay về. 05:30 ông chạy xuồng "đi kiếm", chụp ảnh chiếc ghe úp gửi bà Hồng. Ủng còn dính bùn đỏ của Rạch Đước.',
+      text: 'Tâm về bến, chở thùng xốp đựng vàng qua phà Bình Khánh lên thành phố gửi giấu, 04:41 quay về. 05:30 ông chạy xuồng "đi tìm", chụp ảnh chiếc ghe úp gửi bà Hồng. Ủng còn dính bùn đỏ của Rạch Đước.',
       questionId: 'q7',
       Art: () => <OnDesk ids={['P9', 'X4']} />,
     },

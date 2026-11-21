@@ -42,7 +42,7 @@ Bà Loan ngồi xuống ghế đẩu sau quầy, tay mân mê sợi dây chuyề
     "Cái đó... là hàng mẫu, tôi đặt làm để trưng cho đẹp tủ."
     "Hàng mẫu mà khắc chữ 9999 hả chị?"
     -> hoi
-* {has_X1} [Bà Ba Lành nhắn sẽ "cho người tới tiệm" nếu chị không trả hụi.]
+* {has_X1} [Bà Ba Lành nhắn sẽ "cho người đến tiệm" nếu chị không trả hụi.]
     "Đó! {Xco} thấy chưa. Bà đó dọa tôi hoài. {Xco} hỏi bà đó đi."
     -> hoi
 * {has_H7} [Sổ hụi ghi hai dây hụi bể từ 15/10, và chị trả đủ 5,5 tỷ trong tháng 11.]
@@ -56,7 +56,7 @@ Bà Loan ngồi xuống ghế đẩu sau quầy, tay mân mê sợi dây chuyề
 * {has_P9 && has_P10} [Chị bán 42 lượng vàng thật, rồi ngày 12/11 đặt 300 nhẫn mạ khắc "KT 9999". Vàng nhập lại chị không có hóa đơn nào.]
     Bà gỡ sợi dây chuyền ra, đặt lên quầy.
     "Tôi bán vàng trả hụi cho người ta, không thiếu ai một đồng. Còn cái tủ kính trống thì làm sao tôi mở tiệm."
-    "Tôi tính bảo hiểm đền lại thì tiệm sống. Thằng Tài nó chỉ làm theo lời tôi. Cô đừng làm khó nó."
+    "Tôi tính bảo hiểm đền lại thì tiệm sống. Thằng Tài nó chỉ làm theo lời tôi. {Xco} đừng làm khó nó."
     -> hoi
 * {has_X6} [Ngày 25/11 có thợ két tới cài lại két của chị.]
     "Đó! Ông thợ đó biết hết đường đi nước bước trong tiệm tôi. {Xco} điều tra ổng đi."

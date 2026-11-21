@@ -190,7 +190,7 @@
           "label": "Chì niêm phong ở cửa container",
           "x": 74,
           "y": 50,
-          "note": "Sợi chì kẹp đã bị cắt, còn lủng lẳng ở tay cửa. Số in trên chì: AT-55190. Biên bản đóng hàng ghi container được kẹp chì số AT-55120.",
+          "note": "Sợi chì kẹp đã bị cắt, còn lủng lẳng ở tay nắm cửa. Số in trên chì: AT-55190. Biên bản đóng hàng ghi container được kẹp chì số AT-55120.",
           "clueId": "H1"
         },
         {
@@ -206,7 +206,7 @@
           "label": "Ổ tẩu trong cabin",
           "x": 18,
           "y": 46,
-          "note": "Cắm ở ổ tẩu thuốc là một cục nhỏ có bốn râu ăng-ten: máy phá sóng định vị, loại bán trên mạng vài trăm nghìn. Nhét kín dưới hộc ghế phụ, phải cúi xuống mới thấy.",
+          "note": "Cắm ở ổ tẩu thuốc là một cục nhỏ có bốn râu ăng-ten: máy phá sóng định vị, loại bán trên mạng vài trăm nghìn. Nhét kín dưới gầm ghế phụ, phải cúi xuống mới thấy.",
           "clueId": "H3"
         },
         {
@@ -240,10 +240,10 @@
       "hotspots": [
         {
           "id": "ld-bang",
-          "label": "Băng keo trên cỏ",
+          "label": "Băng dính trên cỏ",
           "x": 44,
           "y": 76,
-          "note": "Mấy đoạn băng keo xám người ta gỡ ra khi cởi trói cho anh Đạt. Đầu băng keo nào cũng phẳng như cắt bằng kéo, không có chỗ nào xé vội. Quấn lỏng, chỉ ba vòng.",
+          "note": "Mấy đoạn băng dính xám người ta gỡ ra khi cởi trói cho anh Đạt. Đầu băng dính nào cũng phẳng như cắt bằng kéo, không có chỗ nào xé vội. Quấn lỏng, chỉ ba vòng.",
           "clueId": "H4"
         },
         {
@@ -281,7 +281,7 @@
           "label": "Vỏ hạt dưa",
           "x": 14,
           "y": 80,
-          "note": "Vỏ hạt dưa và mấy ly nhựa của quán nước, vương ở đây từ chiều. Không có gì đáng chú ý."
+          "note": "Vỏ hạt dưa và mấy cốc nhựa của quán nước, vương ở đây từ chiều. Không có gì đáng chú ý."
         }
       ]
     },
@@ -396,8 +396,8 @@
     },
     {
       "id": "H4",
-      "title": "Băng keo cắt bằng kéo",
-      "description": "Đầu băng keo phẳng, quấn lỏng ba vòng. Không giống trói vội bên đường.",
+      "title": "Băng dính cắt bằng kéo",
+      "description": "Đầu băng dính phẳng, quấn lỏng ba vòng. Không giống trói vội bên đường.",
       "source": "scene"
     },
     {
@@ -471,11 +471,11 @@
           },
           {
             "who": "Đạt",
-            "text": "Dạ khoảng hai giờ bốn mươi, tới Hàm Thuận Nam thì có chiếc xe bảy chỗ tạt đầu. Em phanh gấp, xe khựng lại."
+            "text": "Vâng, khoảng hai giờ bốn mươi, đến Hàm Thuận Nam thì có chiếc xe bảy chỗ tạt đầu. Em phanh gấp, xe khựng lại."
           },
           {
             "who": "Đạt",
-            "text": "Ba thằng bịt mặt nhảy lên cabin, quấn băng keo tay em rồi đẩy em xuống lề."
+            "text": "Ba thằng bịt mặt nhảy lên cabin, quấn băng dính tay em rồi đẩy em xuống lề."
           }
         ]
       }
@@ -526,11 +526,11 @@
     {
       "id": "P8",
       "title": "Giám định thương tích tài xế",
-      "description": "Cổ tay không hằn, không trầy. Băng keo quấn ngoài tay áo khoác. Không thương tích nào.",
+      "description": "Cổ tay không hằn, không trầy. Băng dính quấn ngoài tay áo khoác. Không thương tích nào.",
       "source": "file",
       "highlights": [
         "Cổ tay không hằn, không trầy",
-        "Băng keo quấn ngoài tay áo khoác"
+        "Băng dính quấn ngoài tay áo khoác"
       ]
     },
     {
@@ -699,7 +699,7 @@
       ],
       "hints": [
         "Ra Lề Quốc lộ 1A, chỗ anh Đạt bị trói. Bọn cướp vội vàng thì trói và lấy đồ ra sao?",
-        "Soi Băng keo trên cỏ và Đồ của tài xế. Cướp thật có ai cắt băng keo bằng kéo rồi chừa lại ví tiền?"
+        "Soi Băng dính trên cỏ và Đồ của tài xế. Cướp thật có ai cắt băng dính bằng kéo rồi chừa lại ví tiền?"
       ]
     },
     {
@@ -1070,7 +1070,7 @@
     },
     {
       "time": "02:40",
-      "text": "\"Vụ cướp\" ở Hàm Thuận Nam: không vệt phanh, băng keo quấn ngoài áo."
+      "text": "\"Vụ cướp\" ở Hàm Thuận Nam: không vệt phanh, băng dính quấn ngoài áo."
     },
     {
       "time": "03:22",

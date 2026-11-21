@@ -19,7 +19,7 @@ Chú Sơn đứng nghiêm bên chòi gác, cái mũ bảo vệ cầm trên tay.
 * [Đêm đó chiếc Mercedes có ra vào không?]
     "Tui... tui không để ý."
     -> hoi
-* {has_H9} [Nét chữ còn hằn ở trang sau: "22:58 Mercedes vào, cậu Khoa lái, đầu xe bể".]
+* {has_H9} [Nét chữ còn hằn ở trang sau: "22:58 Mercedes vào, cậu Khoa lái, đầu xe vỡ".]
     Chú Sơn xoay xoay cái mũ.
     "Tui ghi nháp rồi ghi lộn. Mắt tui kém, đêm tối xe nào cũng đen."
     -> hoi

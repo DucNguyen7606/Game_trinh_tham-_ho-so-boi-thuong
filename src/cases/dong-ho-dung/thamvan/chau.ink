@@ -21,7 +21,7 @@ Chị Châu ngồi thẳng lưng ở bàn nước dưới tán hoa sứ, tay c�
 * [Chị nghĩ gì về Khoa?]
     "Nó khéo miệng. Ba thương nó vì nó là con của chú út. Năm ngoái nó đưa ba ký giấy gì đó, ba nói giấy bảo hiểm, ký cho nó yên tâm."
     -> hoi
-* {has_X4} [Ba chị viết: "Con muốn nhà thì đợi ba chết."]
+* {has_X4} [Ba chị viết: "Con muốn nhà thì đợi bố chết."]
     Chị Châu đỏ mắt.
     "Tôi muốn ba bán nhà về ở với tôi, vì tim ba yếu, cầu thang thì dốc. Tôi không cần cái nhà. Tôi cần ba."
     -> hoi

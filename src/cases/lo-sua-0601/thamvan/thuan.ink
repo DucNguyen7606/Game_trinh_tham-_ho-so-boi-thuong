@@ -32,7 +32,7 @@ Thuận đẩy gọng kính, đặt cây bút tiêm insulin lên bàn cho ngay n
     "Tôi tưởng cảm biến báo sai. Sáng ra tôi kiểm mẫu, mẫu đạt."
     -> hoi
 * {has_H4} [Hộp kim của anh có hơn 30 cây kim, chỉ trong một tuần.]
-    "Tôi bị tiểu đường. Cô định đếm kim của người bệnh à?"
+    "Tôi bị tiểu đường. {Xco} định đếm kim của người bệnh à?"
     -> hoi
 * {has_P8} [Xe 59-V1 268.41 của anh vào bãi Hiệp Thành Mart lúc 19:02 tối 10/1.]
     "Ghé mua đồ thôi. Siêu thị đó gần nhà tôi."

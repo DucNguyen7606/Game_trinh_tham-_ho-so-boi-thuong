@@ -2,7 +2,7 @@ VAR has_P7 = false
 VAR has_H8 = false
 
 Chú Bảy Lộc gõ hai tiếng mõ, cười móm.
-"Hẻm này khuya ai qua tui cũng biết. Cô ăn tô hủ tiếu rồi hỏi."
+"Hẻm này khuya ai qua tui cũng biết. {Xco} ăn tô hủ tiếu rồi hỏi."
 -> hoi
 
 === hoi ===

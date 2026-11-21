@@ -36,7 +36,7 @@ VAR has_H9 = false
     Ông nhìn ra cửa sổ.
     "Xe đậu trong gara nhà tôi thì có nước nhỏ xuống là chuyện thường."
     -> hoi
-* {has_X6} [23:15 ông nhắn anh Toàn: "Xe anh bể đầu bên phải, sửa kín giúp anh trong đêm nay".]
+* {has_X6} [23:15 ông nhắn anh Toàn: "Xe anh vỡ đầu bên phải, sửa kín giúp anh trong đêm nay".]
     Ông Khải gỡ kính ra, lau.
     "Chiều đó tôi lùi xe quẹt cột cổng. Khách Hà Nội sắp tới, tôi muốn sửa cho kín, đỡ mất mặt."
     "Quẹt cột cổng mà sửa trong đêm, giá nào cũng được?" Ông không trả lời.

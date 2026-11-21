@@ -163,7 +163,7 @@ const P6 = () => (
   <Sheet org="Pharma-Logistik GmbH · Frankfurt" title="Phiếu đóng gói · Packing list">
     <Row k="Lô" v="HZ-2509 · 40 thùng × 30 lọ" />
     <Row k="Đóng gói" v="14/11/2025, túi lạnh 4 lớp" />
-    <Row k="Băng keo niêm" v="Xanh dương, in PHARMA-LOGISTIK" />
+    <Row k="Băng dính niêm" v="Xanh dương, in PHARMA-LOGISTIK" />
     <p className="pt-1 text-[10px] font-bold">Nhiệt kế tự ghi (2 cái)</p>
     <Row k="TL-A" v="gắn ngoài, nắp thùng 1" />
     <div className="flex justify-between gap-3 border-b border-dotted border-black/20">
@@ -318,7 +318,7 @@ const X3 = () => (
         <TimeTag t="17/11 09:03" />
       </svg>
     </div>
-    <p className="text-[10px]">"TL-A báo đỏ. Thùng 1 có đoạn băng keo xanh lá, Tùng nói hải quan mở kiểm tra."</p>
+    <p className="text-[10px]">"TL-A báo đỏ. Thùng 1 có đoạn băng dính xanh lá, Tùng nói hải quan mở kiểm tra."</p>
     <PhotoMeta when="17/11/2025 · 09:03" where="Tân Sơn Cargo, Tân Bình" />
   </Phone>
 )
@@ -326,11 +326,11 @@ const X3 = () => (
 const X4 = () => (
   <Phone header="anh Hưng HT">
     <p className="text-center text-[9px] opacity-50">Tin nhắn trên máy của Tùng</p>
-    <Bubble time="12/11 21:40">Lô Herzena của Minh Tâm về thứ bảy hả em. Một pallet?</Bubble>
+    <Bubble time="12/11 21:40">Lô Herzena của Minh Tâm về thứ bảy à em. Một pallet?</Bubble>
     <Bubble me time="12/11 21:42">Dạ 40 thùng, chuyến Frankfurt trưa 15</Bubble>
     <Bubble time="12/11 21:45">Chỉ cần cái nhiệt kế báo đỏ. Thuốc em đừng đụng, giữ lạnh cho anh.</Bubble>
     <Bubble me time="16/11 03:02">Xong rồi anh. Đỏ rồi</Bubble>
-    <Bubble time="16/11 07:15">Sáng nay anh gửi trước 100. Nhớ đề xuất bên anh đốt nha.</Bubble>
+    <Bubble time="16/11 07:15">Sáng nay anh gửi trước 100. Nhớ đề xuất bên anh đốt nhé.</Bubble>
   </Phone>
 )
 

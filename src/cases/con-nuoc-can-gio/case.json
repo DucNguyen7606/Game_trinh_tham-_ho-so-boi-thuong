@@ -50,7 +50,7 @@
           "Ít nói",
           "Giữ ý"
         ],
-        "habit": "Thức khuya xem phim bộ với con gái. Hay gửi hình cho em gái ở Bình Dương.",
+        "habit": "Thức khuya xem phim bộ với con gái. Hay gửi ảnh cho em gái ở Bình Dương.",
         "relation": "Vợ ông Lực 20 năm, cùng ông gầy dựng vựa. Đứng tên người thụ hưởng hợp đồng 5 tỷ.",
         "quote": "\"Chồng tôi chết rồi, {xco} còn muốn hỏi gì nữa?\"",
         "note": "Nhận dạng thi thể chỉ qua bộ đồ và chiếc nhẫn, rồi từ chối khám nghiệm. Người hưởng lợi rõ nhất."
@@ -111,7 +111,7 @@
           "Sòng phẳng theo kiểu của mình",
           "Thích khoe"
         ],
-        "habit": "Đêm nào cũng nhậu ở quán ốc đầu phà Bình Khánh, chụp hình đăng mạng.",
+        "habit": "Đêm nào cũng nhậu ở quán ốc đầu phà Bình Khánh, chụp ảnh đăng mạng.",
         "relation": "Cho ông Lực vay 1,8 tỷ từ đầu năm, lãi ngày. Hạn chót là 10/9.",
         "quote": "\"Nó chết rồi thì tui đòi ai?\"",
         "note": "Nhắn đe dọa ông Lực ba ngày trước vụ chìm ghe. Động cơ rõ nhất trên giấy."
@@ -243,7 +243,7 @@
           "label": "Két sắt",
           "x": 24,
           "y": 62,
-          "note": "Két sắt mở, bên trong chỉ có mấy xấp giấy nợ và một hộp nhung đỏ của tiệm vàng Kim Hưng. Hộp có 30 khe đựng vàng miếng, khe nào cũng trống.",
+          "note": "Két sắt mở, bên trong chỉ có mấy xấp giấy nợ và một hộp nhung đỏ của hiệu vàng Kim Hưng. Hộp có 30 khe đựng vàng miếng, khe nào cũng trống.",
           "clueId": "H4"
         },
         {
@@ -280,7 +280,7 @@
     {
       "id": "nha",
       "name": "Nhà ông Lực",
-      "description": "Căn nhà tường vàng sau vựa. Bàn thờ đã đặt di ảnh, nhang khói chưa tắt.",
+      "description": "Căn nhà tường vàng sau vựa. Bàn thờ đã đặt di ảnh, hương khói chưa tắt.",
       "hotspots": [
         {
           "id": "nha-thuoc",
@@ -302,7 +302,7 @@
           "label": "Bàn thờ",
           "x": 50,
           "y": 26,
-          "note": "Di ảnh ông Lực cười hiền. Nhang mới thắp, đĩa trái cây còn tươi."
+          "note": "Di ảnh ông Lực cười hiền. Hương mới thắp, đĩa hoa quả còn tươi."
         },
         {
           "id": "nha-tu",
@@ -495,7 +495,7 @@
     },
     {
       "id": "P6",
-      "title": "Hóa đơn tiệm vàng Kim Hưng",
+      "title": "Hóa đơn hiệu vàng Kim Hưng",
       "description": "8/9: ông Lực mua 30 lượng vàng miếng, 2,46 tỷ, số sê-ri KH-091201 đến KH-091230.",
       "source": "file",
       "highlights": [
@@ -532,11 +532,11 @@
     {
       "id": "P10",
       "title": "Tin Zalo khôi phục",
-      "description": "Lực nhắn Tâm 7/9: \"Mày chờ ở Rạch Đước. Đừng cho bả biết gì hết, bả không biết thì khóc mới thiệt.\" Bà Hồng tự giao nộp điện thoại của chồng.",
+      "description": "Lực nhắn Tâm 7/9: \"Mày chờ ở Rạch Đước. Đừng cho bà ấy biết gì cả, bà ấy không biết thì khóc mới thật.\" Bà Hồng tự giao nộp điện thoại của chồng.",
       "source": "file",
       "highlights": [
         "Mày chờ ở Rạch Đước",
-        "Đừng cho bả biết gì hết"
+        "Đừng cho bà ấy biết gì cả"
       ],
       "audio": {
         "length": "0:12",
@@ -546,14 +546,14 @@
           },
           {
             "who": "Lực",
-            "text": "Mày chờ ở Rạch Đước. Đừng cho bả biết gì hết, bả không biết thì khóc mới thiệt."
+            "text": "Mày chờ ở Rạch Đước. Đừng cho bà ấy biết gì cả, bà ấy không biết thì khóc mới thật."
           }
         ]
       }
     },
     {
       "id": "P11",
-      "title": "Biên nhận tiệm vàng Quận 8",
+      "title": "Biên nhận hiệu vàng Quận 8",
       "description": "15/9: Nguyễn Văn Tâm bán 3 lượng vàng miếng, sê-ri KH-091207 đến KH-091209.",
       "source": "file",
       "highlights": [
@@ -608,13 +608,13 @@
     {
       "id": "X8",
       "title": "Sổ hụi của bà Hồng",
-      "description": "Bà Hồng chụp sổ hụi cho bạn xem. Đọc kỹ ngày hốt hụi và kỳ đóng chót.",
+      "description": "Bà Hồng chụp sổ hụi cho bạn xem. Đọc kỹ ngày hốt hụi và kỳ đóng cuối.",
       "source": "testimony"
     },
     {
       "id": "X9",
       "title": "Tin nhắn bà Hồng gửi em gái 21:15",
-      "description": "Đêm 9/9: \"Ảnh đi rồi. Mai là xong hết rồi, em đừng lo cho chị nữa.\"",
+      "description": "Đêm 9/9: \"Anh ấy đi rồi. Mai là xong hết rồi, em đừng lo cho chị nữa.\"",
       "source": "decoy",
       "highlights": [
         "Mai là xong hết rồi"
@@ -756,7 +756,7 @@
       ],
       "hints": [
         "Người định chết không mang thuốc huyết áp cho cả tháng. Ra Nhà ông Lực xem Hộp thuốc.",
-        "Phong bì 2 có hóa đơn tiệm vàng ngày 8/9 và một vé xe đi Châu Đốc sáng 10/9. Ai mua, đặt từ số nào?"
+        "Phong bì 2 có hóa đơn hiệu vàng ngày 8/9 và một vé xe đi Châu Đốc sáng 10/9. Ai mua, đặt từ số nào?"
       ]
     },
     {

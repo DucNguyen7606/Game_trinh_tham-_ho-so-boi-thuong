@@ -122,7 +122,7 @@ const P5 = () => (
 )
 
 const P6 = () => (
-  <Sheet org="Tiệm vàng Kim Hưng · Bình Khánh" title="Hóa đơn bán lẻ">
+  <Sheet org="Hiệu vàng Kim Hưng · Bình Khánh" title="Hóa đơn bán lẻ">
     <Row k="Ngày" v="08/09/2025, 15:42" />
     <Row k="Khách hàng" v="Trương Văn Lực" strong />
     <Row k="Hàng" v="Vàng miếng 1 lượng × 30" />
@@ -198,16 +198,16 @@ const P10 = () => (
     </Bubble>
     <Bubble time="21:42">Còn chị Hai sao anh?</Bubble>
     <Bubble me time="21:44">
-      <Mark>Đừng cho bả biết gì hết. Bả không biết thì khóc mới thiệt</Mark>, bảo hiểm mới tin. Sáng ra mày báo ghe úp.
+      <Mark>Đừng cho bà ấy biết gì cả. Bà ấy không biết thì khóc mới thật</Mark>, bảo hiểm mới tin. Sáng ra mày báo ghe úp.
     </Bubble>
-    <Bubble time="21:45">Còn tám tháng lương của tui?</Bubble>
-    <Bubble me time="21:46">Bả nhận tiền rồi tao gửi mày. Vàng tao giữ.</Bubble>
+    <Bubble time="21:45">Còn tám tháng lương của tôi?</Bubble>
+    <Bubble me time="21:46">Bà ấy nhận tiền rồi tao gửi mày. Vàng tao giữ.</Bubble>
     <p className="text-right text-[8px] opacity-50">Tin đã bị xóa ngày 09/09 · bà Hồng giao nộp máy 17/09 · khôi phục 18/09</p>
   </Phone>
 )
 
 const P11 = () => (
-  <Sheet org="Tiệm vàng Ngọc Thẩm · Quận 8" title="Biên nhận mua vàng của khách">
+  <Sheet org="Hiệu vàng Ngọc Thẩm · Quận 8" title="Biên nhận mua vàng của khách">
     <Row k="Ngày" v="15/09/2025, 08:15" />
     <Row k="Người bán" v="Nguyễn Văn Tâm" strong />
     <Row k="CCCD" v="079 ••• 3318" />
@@ -230,7 +230,7 @@ const X1 = () => (
     <Phone header="Khang Bình Khánh">
       <p className="text-center text-[9px] opacity-50">06/09/2025</p>
       <Bubble time="23:12">Còn 4 ngày. Không trả thì đừng trách.</Bubble>
-      <Bubble me time="23:30">Ráng chờ tới tháng Chạp anh trả đủ.</Bubble>
+      <Bubble me time="23:30">Cố chờ đến tháng Chạp anh trả đủ.</Bubble>
     </Phone>
   </div>
 )
@@ -364,8 +364,8 @@ const X5 = () => (
       </svg>
     </div>
     <PhotoMeta when="10/09/2025 · 00:28" where="Nhà riêng, Long Hòa" />
-    <p className="text-[10px]">"Hai mẹ con coi hết tập 40 rồi nè Út" · gửi lúc 00:29</p>
-    <p className="text-[10px]">"Ảnh đi đáy chưa về, quên cả điện thoại. Sáng mai ảnh chở con Như lên Chợ Rẫy tái khám" · 00:31</p>
+    <p className="text-[10px]">"Hai mẹ con xem hết tập 40 rồi đây Út ơi" · gửi lúc 00:29</p>
+    <p className="text-[10px]">"Anh ấy đi đáy chưa về, quên cả điện thoại. Sáng mai anh ấy chở con Như lên Chợ Rẫy tái khám" · 00:31</p>
   </Phone>
 )
 
@@ -394,7 +394,7 @@ const X6 = () => (
       </svg>
     </div>
     <PhotoMeta when="10/09/2025 · 01:30" where="Chợ Bình Điền, Quận 8" />
-    <p className="text-[10px]">"Tôm sú loại 1 về rồi nha, ai lấy báo em" · gửi lúc 01:31</p>
+    <p className="text-[10px]">"Tôm sú loại 1 về rồi nhé, ai lấy báo em" · gửi lúc 01:31</p>
   </Phone>
 )
 
@@ -422,7 +422,7 @@ const X8 = () => (
         ['10/01', 'Kỳ 1', 'đóng'],
         ['18/05', 'Kỳ 5', 'HỐT 200tr'],
         ['10/08', 'Kỳ 8', 'đóng'],
-        ['10/09', 'Kỳ chót', 'đóng xong'],
+        ['10/09', 'Kỳ cuối', 'đóng xong'],
       ].map(([a, b, c]) => (
         <div key={a} className="grid grid-cols-[40px_1fr_auto] gap-1 border-b border-dotted border-black/25">
           <span>{a}</span>
@@ -439,8 +439,8 @@ const X8 = () => (
 /** Hồng's text to her sister at 21:15. Sounds like she knew. She meant the last savings-circle payment. */
 const X9 = () => (
   <Phone header="Tin nhắn · Út Lan (Bình Dương)">
-    <p className="rounded-md bg-white/70 p-2">"Ảnh đi rồi. Mai là xong hết rồi, em đừng lo cho chị nữa." · 21:15</p>
-    <p className="rounded-md bg-[#d7ecd9] p-2 text-right">"Dạ, xong rồi chị ngủ cho ngon nha. Lo hoài bạc tóc." · 21:17</p>
+    <p className="rounded-md bg-white/70 p-2">"Anh ấy đi rồi. Mai là xong hết rồi, em đừng lo cho chị nữa." · 21:15</p>
+    <p className="rounded-md bg-[#d7ecd9] p-2 text-right">"Vâng, xong rồi chị ngủ cho ngon nhé. Lo mãi bạc tóc." · 21:17</p>
     <p className="text-[10px] opacity-70">Trích từ điện thoại bà Hồng, đêm 9/9/2025.</p>
   </Phone>
 )

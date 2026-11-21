@@ -102,7 +102,7 @@ function Safe() {
       {Array.from({ length: 3 }, (_, r) =>
         Array.from({ length: 10 }, (_, c) => <rect key={`${r}-${c}`} x={86 + c * 23.5} y={86 + r * 42} width="18" height="34" rx="2" fill="#5a1611" />),
       )}
-      <text x="200" y="52" textAnchor="middle" fontSize="13" fontWeight="700" fill={accent.gold} fontFamily={mono}>TIỆM VÀNG KIM HƯNG</text>
+      <text x="200" y="52" textAnchor="middle" fontSize="13" fontWeight="700" fill={accent.gold} fontFamily={mono}>HIỆU VÀNG KIM HƯNG</text>
       <rect x="40" y="240" width="140" height="44" fill="#e7d2a8" {...O} />
       <text x="110" y="266" textAnchor="middle" fontSize="10" fill={ink.night} fontFamily={mono}>giấy nợ...</text>
     </g>

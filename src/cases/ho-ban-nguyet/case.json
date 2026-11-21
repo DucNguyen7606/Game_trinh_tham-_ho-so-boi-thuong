@@ -415,7 +415,7 @@
           },
           {
             "who": "Bảo vệ Lộc",
-            "text": "Chung cư Sen Hồng, tòa B, Phú Mỹ Hưng. Có người rơi từ trên lầu xuống vườn phía Đông."
+            "text": "Chung cư Sen Hồng, tòa B, Phú Mỹ Hưng. Có người rơi từ trên tầng cao xuống vườn phía Đông."
           },
           {
             "who": "Tổng đài 115",
@@ -431,7 +431,7 @@
           },
           {
             "who": "Bảo vệ Lộc",
-            "text": "Không... không thấy thở. Anh cho xe tới liền giùm."
+            "text": "Không... không thấy thở. Anh cho xe đến ngay giúp tôi."
           }
         ]
       }
@@ -561,7 +561,7 @@
     {
       "id": "X6",
       "title": "Tin nhắn Toàn gửi Phúc lúc 22:49",
-      "description": "\"Phúc, anh mượn xe đi mua đồ ăn khuya. Chìa móc ở bảng hả?\"",
+      "description": "\"Phúc, anh mượn xe đi mua đồ ăn khuya. Chìa móc ở bảng à?\"",
       "source": "testimony"
     },
     {
@@ -1020,7 +1020,7 @@
     },
     {
       "time": "14/3 21:28–22:16",
-      "text": "Ông Khả ghé đòi nợ rồi về, đi karaoke ở Quận 4."
+      "text": "Ông Khả đến đòi nợ rồi về, đi karaoke ở Quận 4."
     },
     {
       "time": "14/3 22:49",

@@ -106,8 +106,8 @@ export const reconstruction: ReconstructionPanel[] = (
     },
     {
       time: '02:40',
-      title: 'Vụ cướp ba vòng băng keo',
-      text: 'Ở Hàm Thuận Nam, anh Đạt dừng xe từ từ, không có vệt phanh nào. Người của bà Kiều quấn ba vòng băng keo ra ngoài tay áo khoác của anh, cắt bằng kéo, rồi lái chiếc xe đi. Ví tiền và điện thoại vẫn nằm yên trong túi áo.',
+      title: 'Vụ cướp ba vòng băng dính',
+      text: 'Ở Hàm Thuận Nam, anh Đạt dừng xe từ từ, không có vệt phanh nào. Người của bà Kiều quấn ba vòng băng dính ra ngoài tay áo khoác của anh, cắt bằng kéo, rồi lái chiếc xe đi. Ví tiền và điện thoại vẫn nằm yên trong túi áo.',
       questionId: 'q1',
       Art: () => (
         <Staged zone="le-duong">
@@ -206,7 +206,7 @@ const planRefute: Record<string, { text: string; docs: string[] }> = {
 
 const insideRefute: Record<string, { text: string; docs: string[] }> = {
   phuc: { text: 'Lúc 00:40 Phúc đang hát karaoke ở Phan Rang, cách Phan Rí 60 km. Chính anh Đạt tự cho cậu xuống xe, lần đầu tiên trong một năm.', docs: ['X4', 'P4'] },
-  none: { text: 'Lúc 01:58 xe chỉ còn nặng 14,5 tấn, gần một tiếng trước giờ "bị cướp". Cổ tay tài xế không hằn một vết, băng keo quấn ngoài áo khoác.', docs: ['P5', 'P8'] },
+  none: { text: 'Lúc 01:58 xe chỉ còn nặng 14,5 tấn, gần một tiếng trước giờ "bị cướp". Cổ tay tài xế không hằn một vết, băng dính quấn ngoài áo khoác.', docs: ['P5', 'P8'] },
 }
 
 function PlanArt({ who }: { who: string }) {

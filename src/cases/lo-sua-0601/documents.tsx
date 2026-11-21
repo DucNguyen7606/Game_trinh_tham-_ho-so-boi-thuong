@@ -195,7 +195,7 @@ const X1 = () => (
   <Phone header="Facebook · Sang Lý">
     <p className="text-center text-[9px] opacity-50">07/01/2026 · 21:40</p>
     <div className="rounded-md bg-white p-2">
-      <p>Làm ba năm, đuổi cái rụp. Đuổi tao à? Rồi tụi bây sẽ biết.</p>
+      <p>Làm ba năm, đuổi cái rụp. Đuổi tao à? Rồi chúng mày sẽ biết.</p>
       <p className="pt-1 text-[9px] opacity-60">😡 14 · 6 bình luận</p>
     </div>
   </Phone>
@@ -205,7 +205,7 @@ const X2 = () => (
   <Phone header="Messenger · Sữa đậu nành Mộc An">
     <p className="text-center text-[9px] opacity-50">09/01/2026</p>
     <Bubble time="10:15">Tôi uống sữa của mấy người đau bụng 2 ngày. 50 triệu, không thì tôi đưa clip lên báo.</Bubble>
-    <Bubble me time="10:40">Dạ Mộc An xin lỗi chú, bên con xin số điện thoại để liên hệ ạ.</Bubble>
+    <Bubble me time="10:40">Dạ, Mộc An xin lỗi chú, bên cháu xin số điện thoại để liên hệ ạ.</Bubble>
   </Phone>
 )
 
@@ -262,7 +262,7 @@ const X4 = () => (
         <TimeTag t="07/1 02:14" />
       </svg>
     </div>
-    <Bubble me time="02:16">Anh ơi L2 tụt còn 98 độ, báo động đỏ. Em dừng máy nha?</Bubble>
+    <Bubble me time="02:16">Anh ơi L2 tụt còn 98 độ, báo động đỏ. Em dừng máy nhé?</Bubble>
     <Bubble time="02:20">Cứ chạy tiếp, đừng ghi sổ. Sáng anh xử.</Bubble>
     <PhotoMeta when="07/01/2026 · 02:14" where="Mộc An, Q.12" />
   </Phone>
@@ -350,7 +350,7 @@ const X8 = () => (
       <text x="312" y="192" fontSize="9" fill="#2e2a4a" textAnchor="end" fontFamily={mono}>10/01/2026 19:08:41</text>
     </svg>
     <p className="px-1 pt-1 font-mono text-[10px] text-[#e9d9c4]">
-      19:05 tới 19:14: người áo mưa xám, nón lưỡi trai, đeo kính đứng trước kệ sữa, tay đưa lên hàng ngang tầm mắt. Không mua gì.
+      19:05 tới 19:14: người áo mưa xám, mũ lưỡi trai, đeo kính đứng trước kệ sữa, tay đưa lên hàng ngang tầm mắt. Không mua gì.
     </p>
   </div>
 )

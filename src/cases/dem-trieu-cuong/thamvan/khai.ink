@@ -9,7 +9,7 @@ VAR has_P7 = false
 VAR has_P10 = false
 
 Khải đứng dậy chào, hai tay để trước bụng, nói chậm rãi.
-"Em kê hàng tới tối mịt, nước lên nhanh quá chị ơi."
+"Em kê hàng tới tối mịt, nước lên nhanh quá {xchi} ơi."
 -> hoi
 
 === hoi ===

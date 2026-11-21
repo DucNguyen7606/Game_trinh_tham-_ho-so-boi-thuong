@@ -35,7 +35,7 @@ const P2 = () => (
   <Sheet org="Công an huyện Hàm Thuận Nam" title="Biên bản tiếp nhận tin báo">
     <Row k="Tiếp nhận" v="04:25 · 03/11/2025" />
     <p>
-      04:10, anh xe ôm Lê Văn Tỷ phát hiện <Mark>Hồ Văn Đạt</Mark> bị trói bằng băng keo bên lề QL1A, cách Phan Thiết 18 km.
+      04:10, anh xe ôm Lê Văn Tỷ phát hiện <Mark>Hồ Văn Đạt</Mark> bị trói bằng băng dính bên lề QL1A, cách Phan Thiết 18 km.
     </p>
     <p>
       Lời khai: <Mark>02:40</Mark> một xe 7 chỗ không biển số tạt đầu, anh phanh gấp. Ba người bịt mặt cầm dao trói anh, lái container đi về hướng Nam.
@@ -160,7 +160,7 @@ const P8 = () => (
     <Row k="Người khám" v="Hồ Văn Đạt, 41 tuổi" />
     <Row k="Thời gian" v="05:15 · 03/11/2025" />
     <p>
-      Cổ tay hai bên: <Mark>không hằn, không trầy xước</Mark>. Băng keo được gỡ khi đến, theo lời kể <Mark>quấn bên ngoài tay áo khoác</Mark>.
+      Cổ tay hai bên: <Mark>không hằn, không trầy xước</Mark>. Băng dính được gỡ khi đến, theo lời kể <Mark>quấn bên ngoài tay áo khoác</Mark>.
     </p>
     <p>Vùng cổ: không vết cắt, không vết đè. Không thương tích khác.</p>
     <p>Nồng độ cồn: 0. Tỉnh táo, mạch 76 lần/phút.</p>
@@ -337,7 +337,7 @@ const X5 = () => (
         <text x="312" y="15" textAnchor="end" fontSize="9" fill="#fff" fontFamily={mono}>00:31</text>
       </svg>
     </div>
-    <p className="ml-6 rounded-lg rounded-tr-none bg-[#3f8a7e] p-2 text-white">Sao xe mất sóng vậy Đạt? Gọi không bắt máy. <span className="text-[8px] opacity-70">00:31</span></p>
+    <p className="ml-6 rounded-lg rounded-tr-none bg-[#3f8a7e] p-2 text-white">Sao xe mất sóng thế Đạt? Gọi không bắt máy. <span className="text-[8px] opacity-70">00:31</span></p>
     <p className="mr-6 rounded-lg rounded-tl-none bg-white p-2">Chỗ này yếu sóng chị ơi <span className="text-[8px] opacity-60">01:06</span></p>
     <PhotoMeta when="03/11/2025 · 00:31" where="Nhà riêng, Buôn Ma Thuột" />
   </Phone>
@@ -372,7 +372,7 @@ const X6 = () => (
       </svg>
     </div>
     <PhotoMeta when="Đăng lúc 23:40 · 02/11/2025" where="Buôn Ma Thuột" />
-    <p className="text-[10px]">"Tiếp anh em đối tác tới khuya 🍷 Làm ăn là phải vậy" · 58 lượt thích</p>
+    <p className="text-[10px]">"Tiếp anh em đối tác đến khuya 🍷 Làm ăn là phải thế" · 58 lượt thích</p>
   </Phone>
 )
 

@@ -124,7 +124,7 @@
       "id": "huy",
       "name": "Lâm Gia Huy",
       "age": 40,
-      "role": "Chủ tiệm vật tư sát vách",
+      "role": "Chủ cửa hàng vật tư sát vách",
       "portrait": {
         "skin": 2,
         "hair": "buzz",
@@ -141,8 +141,8 @@
           "Kín đáo",
           "Sợ phiền phức"
         ],
-        "habit": "Ngủ trên gác tiệm, gắn camera khắp nơi vì từng bị trộm.",
-        "relation": "Hàng xóm sát vách. Muốn mua đất kho để mở rộng tiệm, bị ông Thịnh từ chối.",
+        "habit": "Ngủ trên gác cửa hàng, gắn camera khắp nơi vì từng bị trộm.",
+        "relation": "Hàng xóm sát vách. Muốn mua đất kho để mở rộng cửa hàng, bị ông Thịnh từ chối.",
         "quote": "\"Tui ngủ trên lầu, nghe la mới dậy.\"",
         "note": "Có camera nhìn ra hẻm nhưng chưa chịu đưa. Giấu vì sợ bị nghi, hay vì có gì khác?"
       },
@@ -174,10 +174,10 @@
           "Sợ mất việc",
           "Thích nhậu một mình"
         ],
-        "habit": "Đêm nào 22h cũng cúp cầu dao tổng cho đỡ tiền điện, rồi ghi vào sổ trực.",
-        "relation": "Làm bảo vệ cho ông Thịnh 9 năm. Quý Bảo vì Bảo hay ghé chơi, biếu rượu.",
+        "habit": "Đêm nào 22h cũng ngắt cầu dao tổng cho đỡ tiền điện, rồi ghi vào sổ trực.",
+        "relation": "Làm bảo vệ cho ông Thịnh 9 năm. Quý Bảo vì Bảo hay qua chơi, biếu rượu.",
         "quote": "\"Tui trực tỉnh táo. Không ai vô hết.\"",
-        "note": "Bị ngạt khói nhẹ. Khai là trực một mình, nhưng trong chòi có hai cái ly."
+        "note": "Bị ngạt khói nhẹ. Khai là trực một mình, nhưng trong chòi có hai cái chén."
       }
     }
   ],
@@ -189,10 +189,10 @@
       "hotspots": [
         {
           "id": "cong-ly",
-          "label": "Hai cái ly",
+          "label": "Hai cái chén",
           "x": 32,
           "y": 58,
-          "note": "Hai cái ly và chai rượu nếp nhãn \"Mỏ Cày\" gần hết. Ông Rô nói đêm đó ông trực một mình.",
+          "note": "Hai cái chén và chai rượu nếp nhãn \"Mỏ Cày\" gần hết. Ông Rô nói đêm đó ông trực một mình.",
           "clueId": "H6"
         },
         {
@@ -251,7 +251,7 @@
           "label": "Can nhựa",
           "x": 62,
           "y": 82,
-          "note": "Can nhựa 5 lít, nắp mở, bên trong rỗng. Miệng can còn mùi xăng. Hông can dán tem \"Vật tư Gia Huy\", tiệm sát vách.",
+          "note": "Can nhựa 5 lít, nắp mở, bên trong rỗng. Miệng can còn mùi xăng. Hông can dán tem \"Vật tư Gia Huy\", cửa hàng sát vách.",
           "clueId": "H10"
         }
       ]
@@ -274,7 +274,7 @@
           "label": "Vật kim loại dưới tủ",
           "x": 28,
           "y": 76,
-          "note": "Đế sắt của khoanh nhang muỗi, cạnh đó là vệt giẻ còn mùi xăng.",
+          "note": "Đế sắt của khoanh hương muỗi, cạnh đó là vệt giẻ còn mùi xăng.",
           "clueId": "H2"
         },
         {
@@ -349,8 +349,8 @@
     },
     {
       "id": "H2",
-      "title": "Đế nhang muỗi và giẻ tẩm xăng",
-      "description": "Ngòi hẹn giờ. Nhang muỗi cháy khoảng 1 đến 1,5 giờ trước khi chạm xăng.",
+      "title": "Đế hương muỗi và giẻ tẩm xăng",
+      "description": "Ngòi hẹn giờ. Hương muỗi cháy khoảng 1 đến 1,5 giờ trước khi chạm xăng.",
       "source": "scene"
     },
     {
@@ -373,14 +373,14 @@
     },
     {
       "id": "H6",
-      "title": "Hai cái ly, chai rượu Mỏ Cày",
+      "title": "Hai cái chén, chai rượu Mỏ Cày",
       "description": "Ông Rô có khách đêm đó. Khách mang rượu quê Bến Tre.",
       "source": "scene"
     },
     {
       "id": "H7",
       "title": "Cầu dao tổng đã tắt",
-      "description": "Điện bị cúp từ 22h. Không thể là chập điện.",
+      "description": "Điện bị ngắt từ 22h. Không thể là chập điện.",
       "source": "scene"
     },
     {
@@ -397,8 +397,8 @@
     },
     {
       "id": "H10",
-      "title": "Can xăng của tiệm Gia Huy",
-      "description": "Can nhựa 5 lít rỗng, còn mùi xăng, dán tem tiệm vật tư sát vách.",
+      "title": "Can xăng của cửa hàng Gia Huy",
+      "description": "Can nhựa 5 lít rỗng, còn mùi xăng, dán tem cửa hàng vật tư sát vách.",
       "source": "scene"
     },
     {
@@ -442,7 +442,7 @@
     },
     {
       "id": "P6",
-      "title": "Camera tiệm anh Huy",
+      "title": "Camera cửa hàng anh Huy",
       "description": "Xe Wave che biển số vào hẻm 01:02, ra 01:21.",
       "source": "file",
       "highlights": [
@@ -470,7 +470,7 @@
     {
       "id": "P9",
       "title": "Tin Zalo 13/7 22:14",
-      "description": "Thịnh nhắn Bảo: \"Hủy vụ 20. Ngân hàng không dời. Mai 15 kêu xe chở hàng về, kiểm kê cho đàng hoàng.\"",
+      "description": "Thịnh nhắn Bảo: \"Hủy vụ 20. Ngân hàng không dời. Mai 15 gọi xe chở hàng về, kiểm kê cho đàng hoàng.\"",
       "source": "file",
       "highlights": [
         "Hủy vụ 20",
@@ -481,7 +481,7 @@
         "lines": [
           {
             "who": "Thịnh",
-            "text": "Hủy vụ 20. Ngân hàng không dời. Mai 15 kêu xe chở hàng về, kiểm kê cho đàng hoàng."
+            "text": "Hủy vụ 20. Ngân hàng không dời. Mai 15 gọi xe chở hàng về, kiểm kê cho đàng hoàng."
           }
         ]
       }
@@ -555,7 +555,7 @@
     {
       "id": "X6",
       "title": "Ảnh đám cháy của anh Huy",
-      "description": "Anh Huy chụp từ gác tiệm lúc 02:40. Soi kỹ chỗ lửa bùng, cổng kho và chòi bảo vệ.",
+      "description": "Anh Huy chụp từ gác cửa hàng lúc 02:40. Soi kỹ chỗ lửa bùng, cổng kho và chòi bảo vệ.",
       "source": "testimony"
     },
     {
@@ -569,7 +569,7 @@
     },
     {
       "id": "X8",
-      "title": "Sổ bán hàng tiệm Gia Huy",
+      "title": "Sổ bán hàng cửa hàng Gia Huy",
       "description": "Anh Huy chụp trang sổ bán chịu tháng 7. Đọc kỹ ngày, món hàng và tên người lấy.",
       "source": "testimony"
     },
@@ -725,8 +725,8 @@
         "X4"
       ],
       "hints": [
-        "Đế nhang muỗi cháy 1 đến 1,5 giờ mới chạm xăng. Lửa bùng lúc 02:38, vậy nhang được châm khoảng mấy giờ?",
-        "Camera tiệm anh Huy (phong bì 2) ghi lại một chiếc xe ra vào hẻm. Nối nó với cái ngòi hẹn giờ."
+        "Đế hương muỗi cháy 1 đến 1,5 giờ mới chạm xăng. Lửa bùng lúc 02:38, vậy hương được châm khoảng mấy giờ?",
+        "Camera cửa hàng anh Huy (phong bì 2) ghi lại một chiếc xe ra vào hẻm. Nối nó với cái ngòi hẹn giờ."
       ]
     },
     {
@@ -759,7 +759,7 @@
       ],
       "hints": [
         "Ra Sân sau xem Ổ khóa cửa hông: có dấu phá không? Ai có chìa?",
-        "Ra Cổng và chòi bảo vệ xem Hai cái ly, rồi hỏi chuyện ông Tư Rô xem đêm đó ai ghé."
+        "Ra Cổng và chòi bảo vệ xem Hai cái chén, rồi hỏi chuyện ông Tư Rô xem đêm đó ai đến."
       ]
     },
     {
@@ -925,7 +925,7 @@
     {
       "id": "full",
       "title": "Trọn vẹn",
-      "text": "Bảo bị khởi tố tội hủy hoại tài sản và tham ô. Thịnh bị xử tội gian lận bảo hiểm. Ông Rô giữ được việc nhờ bạn nói giùm."
+      "text": "Bảo bị khởi tố tội hủy hoại tài sản và tham ô. Thịnh bị xử tội gian lận bảo hiểm. Ông Rô giữ được việc nhờ bạn nói đỡ."
     },
     {
       "id": "half",
@@ -1016,7 +1016,7 @@
     },
     {
       "time": "01:05 – 01:20",
-      "text": "Bảo tháo ổ cứng máy kế toán, đặt khoanh nhang muỗi lên giẻ tẩm xăng dưới tủ sổ sách."
+      "text": "Bảo tháo ổ cứng máy kế toán, đặt khoanh hương muỗi lên giẻ tẩm xăng dưới tủ sổ sách."
     },
     {
       "time": "01:21 – 01:34",
@@ -1024,7 +1024,7 @@
     },
     {
       "time": "02:38",
-      "text": "Nhang cháy tới giẻ xăng, lửa bùng ở góc văn phòng. 02:41 có người báo cháy."
+      "text": "Hương cháy tới giẻ xăng, lửa bùng ở góc văn phòng. 02:41 có người báo cháy."
     },
     {
       "time": "02:51",

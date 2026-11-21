@@ -52,7 +52,7 @@
           "Rất giữ thể diện"
         ],
         "habit": "Ban ngày chạy chiếc Vespa xanh ngọc, tối gửi xe ở phòng tranh rồi đi taxi về Thảo Điền. Cổ lúc nào cũng quấn khăn lụa, chân đi giày cao gót cỡ 38.",
-        "relation": "Mở Diệp Gallery 25 năm. Mua bức \"Thiếu nữ bên sen\" từ năm 2009, coi nó là \"linh hồn phòng tranh\".",
+        "relation": "Mở Diệp Gallery 25 năm. Mua bức \"Thiếu nữ bên sen\" từ năm 2009, xem nó là \"linh hồn phòng tranh\".",
         "quote": "\"Bức tranh đó là danh dự của tôi.\"",
         "note": "Bức tranh được bảo hiểm 8 tỷ từ tháng 3. Ba ngày trước phiên đấu giá thì mất. Mã báo động đêm đó là mã của chính bà."
       }
@@ -272,7 +272,7 @@
     {
       "id": "van-phong",
       "name": "Phòng làm việc bà Diệp",
-      "description": "Căn phòng nhỏ trên lầu lửng, kệ sách nghệ thuật và một chiếc bàn gỗ lim.",
+      "description": "Căn phòng nhỏ trên gác lửng, kệ sách nghệ thuật và một chiếc bàn gỗ lim.",
       "hotspots": [
         {
           "id": "may-huy",
@@ -547,15 +547,15 @@
           },
           {
             "who": "Quân",
-            "text": "Lớp này mài nước, nhẹ tay thôi. Mài mạnh là lủng lớp vỏ trứng."
+            "text": "Lớp này mài nước, nhẹ tay thôi. Mài mạnh là thủng lớp vỏ trứng."
           },
           {
             "who": "Học trò",
-            "text": "Thầy ơi, hai giờ kém hai mươi rồi. Mình mài tới chừng nào?"
+            "text": "Thầy ơi, hai giờ kém hai mươi rồi. Mình mài đến bao giờ ạ?"
           },
           {
             "who": "Quân",
-            "text": "Tới hai giờ hai mươi. Bà con còn coi thì mình còn mài."
+            "text": "Đến hai giờ hai mươi. Bà con còn xem thì mình còn mài."
           }
         ]
       }

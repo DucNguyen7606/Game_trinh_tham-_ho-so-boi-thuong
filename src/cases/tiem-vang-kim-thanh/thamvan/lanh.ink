@@ -13,7 +13,7 @@ Bà Ba Lành ngồi sau sạp tạp hóa đầu hẻm 514, quạt phành phạch
 * [Bà chơi hụi với bà Loan bao lâu?]
     "Mười mấy năm. Khu này ai cũng chơi với bả. Bả là đầu thảo, uy tín lắm, ít ra là tới tháng 10."
     -> hoi
-* {has_X1} [Bà nhắn sẽ "cho người tới tiệm" nếu bà Loan không trả hụi.]
+* {has_X1} [Bà nhắn sẽ "cho người đến tiệm" nếu bà Loan không trả hụi.]
     "Tui nói vậy cho bả sợ. Tui già rồi, cho người nào tới. Thằng con tui đi làm ở Bình Dương."
     "Mà nhắn xong chừng mười ngày thì bả trả tui đủ ba trăm triệu, tiền mặt. Tui còn ngạc nhiên."
     -> hoi

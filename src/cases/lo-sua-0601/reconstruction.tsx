@@ -123,7 +123,7 @@ export const reconstruction: ReconstructionPanel[] = (
     {
       time: '10/1, 19:02 đến 19:20',
       title: 'Áo mưa trong đêm khô',
-      text: 'Lô lỗi lọt ra thị trường thì Thuận mất chức và phải bồi hoàn. Anh mặc áo mưa xám, đội nón lưỡi trai, tới Hiệp Thành Mart, dùng kim bút tiêm insulin chích sáu chai ở hàng ngoài cùng. Bốn chai trong đó thuộc lô 0701-L1 còn tốt.',
+      text: 'Lô lỗi lọt ra thị trường thì Thuận mất chức và phải bồi hoàn. Anh mặc áo mưa xám, đội mũ lưỡi trai, tới Hiệp Thành Mart, dùng kim bút tiêm insulin chích sáu chai ở hàng ngoài cùng. Bốn chai trong đó thuộc lô 0701-L1 còn tốt.',
       questionId: 'q4',
       Art: () => (
         <Staged zone="sieu-thi" extra={<AtShelf who="thuan" />}>

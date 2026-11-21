@@ -263,7 +263,7 @@ const X3 = () => (
 const X4 = () => (
   <Phone header="Anh Hưng (GĐ)">
     <p className="text-center text-[9px] opacity-50">Thứ bảy, 14/03/2026</p>
-    <Bubble me time="21:05">Anh ơi em gửi lại file Thành Đạt rồi nha</Bubble>
+    <Bubble me time="21:05">Anh ơi em gửi lại file Thành Đạt rồi nhé</Bubble>
     <Bubble time="23:02">Mai 9h chị mang đủ chứng từ. Tối nay tôi nói chuyện với Toàn.</Bubble>
     <Bubble time="23:02">Xong vụ này tôi đưa Vy đi Đà Nẵng 😊</Bubble>
     <Bubble me time="23:15">Dạ anh. Anh nói chuyện cẩn thận</Bubble>
@@ -312,9 +312,9 @@ const X5 = () => (
 const X6 = () => (
   <Phone header="Anh Toàn">
     <p className="text-center text-[9px] opacity-50">14/03/2026</p>
-    <Bubble time="22:49">Phúc, anh mượn xe đi mua đồ ăn khuya. Chìa móc ở bảng hả?</Bubble>
-    <Bubble me time="22:50">Dạ chìa trên bảng đó anh, xe đầu dãy</Bubble>
-    <Bubble me time="22:51">Anh mua giùm em ổ bánh mì nha 😁</Bubble>
+    <Bubble time="22:49">Phúc, anh mượn xe đi mua đồ ăn khuya. Chìa móc ở bảng à?</Bubble>
+    <Bubble me time="22:50">Dạ chìa trên bảng đấy anh, xe đầu dãy</Bubble>
+    <Bubble me time="22:51">Anh mua hộ em cái bánh mì nhé 😁</Bubble>
     <p className="text-center text-[9px] opacity-50">Đã xem 22:51</p>
   </Phone>
 )

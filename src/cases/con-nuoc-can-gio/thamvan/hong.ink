@@ -22,7 +22,7 @@ Bà Hồng mặc áo tang trắng, mắt đỏ hoe, tay vân vê chiếc khăn m
     "Ảnh tự đi ký. Về nhà mới nói, nhà mình làm nghề sông nước, lỡ có chuyện thì vợ con còn cái mà sống."
     "Tôi còn rầy ảnh, tiền đâu mà đóng phí."
     -> hoi
-* {has_X9} [Tối 9/9 chị nhắn em gái "Ảnh đi rồi. Mai là xong hết rồi". Xong cái gì?]
+* {has_X9} [Tối 9/9 chị nhắn em gái "Anh ấy đi rồi. Mai là xong hết rồi". Xong cái gì?]
     Bà Hồng ngẩng lên, mặt đỏ bừng.
     "Mai là kỳ hụi chót. Tôi đóng hụi cả năm, Út nó sợ tôi bị giựt nên hỏi hoài."
     "{Xco} không tin thì coi sổ hụi nè." #photo:X8
