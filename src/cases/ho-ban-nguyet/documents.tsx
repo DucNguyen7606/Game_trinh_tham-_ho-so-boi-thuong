@@ -1,10 +1,14 @@
 import { Mark, Phone, Row, Sheet, Signature, Stamp } from '@/art/docParts'
-import { ink } from '@/art/palette'
-import { Bike, C, Jacket } from './scenes'
+import { iso } from '@/art/iso/iso'
+import { Fb, Person, TimeTag } from '@/art/iso/props-ch9-12'
+import type { PortraitSpec } from '@/art/Portrait'
+import type { CaseData } from '@/game/types'
+import caseJson from './case.json'
+
+const cast = Object.fromEntries((caseJson as CaseData).suspects.map((s) => [s.id, s.portrait])) as Record<string, PortraitSpec>
 
 // What each document in the case-file envelopes looks like, keyed by clue id.
 
-const LINE = ink.night
 const mono = 'IBM Plex Mono, monospace'
 
 const P1 = () => (
@@ -116,8 +120,9 @@ const P7 = () => (
     <Row k="Nơi làm việc" v="Hưng Toàn Logistics, cảng Tân Thuận" />
     <div className="mt-1 flex justify-center">
       <svg viewBox="0 0 260 110" className="w-52">
-        <rect width="260" height="110" fill="#e9e1cf" />
-        <Bike x={50} y={100} s={0.75} />
+        <rect width="260" height="110" rx="8" fill="#e6dfee" />
+        <rect y="88" width="260" height="22" fill="#cfc6bf" />
+        <WaveBike x={60} y={96} />
       </svg>
     </div>
     <Stamp text="Đã trích xuất" className="bottom-2 right-3" />
@@ -125,21 +130,41 @@ const P7 = () => (
 )
 
 const CamFrame = ({ t, gate }: { t: string; gate: string }) => (
-  <div className="overflow-hidden rounded-sm border border-black/40">
+  <div className="overflow-hidden rounded-lg">
     <svg viewBox="0 0 220 130" className="block w-full">
-      <rect width="220" height="130" fill="#2a2f35" />
-      <rect y="96" width="220" height="34" fill="#555" />
-      <rect x="150" y="20" width="12" height="80" fill="#d9b04f" />
-      <rect x="40" y="64" width="110" height="6" fill="#b23a2e" transform="rotate(-30 40 67)" />
-      <Bike x={60} y={118} s={0.42} />
-      {/* rider: white helmet, navy jacket */}
-      <path d="M86,72 L112,72 L116,46 L84,46 Z" fill={C.navy} stroke={LINE} strokeWidth="1.5" />
-      <circle cx="100" cy="36" r="12" fill="#f2f2ee" stroke={LINE} strokeWidth="1.5" />
-      <rect x="0" y="0" width="220" height="16" fill="#000" opacity="0.5" />
+      <rect width="220" height="130" fill="#4b4760" />
+      <rect y="96" width="220" height="34" fill="#6c6787" />
+      {/* the barrier post and its raised arm */}
+      <Fb x={150} y={20} w={12} h={80} d={8} c="#f2c46d" />
+      <rect x="40" y="64" width="110" height="6" fill={iso.coral} transform="rotate(-30 40 67)" />
+      <g transform="translate(14 22) scale(0.8)">
+        <WaveBike x={60} y={118} />
+      </g>
+      {/* rider: white helmet, navy office jacket */}
+      <Fb x={86} y={52} w={24} h={30} d={10} c="#2f4258" />
+      <Fb x={89} y={30} w={20} h={20} d={12} c="#f2f2ee" />
+      <rect x="92" y="40" width="14" height="6" fill="#3d3446" />
+      <rect x="0" y="0" width="220" height="16" fill={iso.ink} opacity="0.6" />
       <text x="6" y="12" fontSize="9" fill="#fff" fontFamily={mono}>{gate}</text>
       <text x="214" y="12" textAnchor="end" fontSize="9" fill="#ffd166" fontFamily={mono}>{t}</text>
     </svg>
   </div>
+)
+
+/** Phúc's red Wave, side on, as front-on blocks. (x, y) = rear wheel bottom. */
+const WaveBike = ({ x, y }: { x: number; y: number }) => (
+  <g>
+    <circle cx={x} cy={y - 14} r="14" fill={iso.ink} />
+    <circle cx={x} cy={y - 14} r="5" fill="#9aa3b5" />
+    <circle cx={x + 92} cy={y - 14} r="14" fill={iso.ink} />
+    <circle cx={x + 92} cy={y - 14} r="5" fill="#9aa3b5" />
+    <Fb x={x - 6} y={y - 40} w={64} h={20} d={10} c="#c0392b" />
+    <Fb x={x + 2} y={y - 50} w={42} h={10} d={10} c={iso.ink} />
+    <Fb x={x + 58} y={y - 46} w={22} h={14} d={8} c="#c0392b" />
+    <Fb x={x + 78} y={y - 70} w={8} h={48} d={6} c="#9aa3b5" />
+    <Fb x={x + 70} y={y - 76} w={24} h={6} d={6} c={iso.ink} />
+    <Fb x={x - 18} y={y - 36} w={12} h={8} d={4} c="#f6efe3" />
+  </g>
 )
 
 const P8 = () => (
@@ -227,14 +252,6 @@ const X4 = () => (
   </Phone>
 )
 
-const Singer = ({ x, s = 1, shirt, skin = '#d9a47a', bald }: { x: number; s?: number; shirt: string; skin?: string; bald?: boolean }) => (
-  <g transform={`translate(${x} 170) scale(${s})`} stroke={LINE} strokeWidth="1.6" strokeLinejoin="round">
-    <path d="M-28,40 Q-26,0 -8,-6 L8,-6 Q26,0 28,40 Z" fill={shirt} />
-    <ellipse cx="0" cy="-30" rx="14" ry="17" fill={skin} />
-    {!bald && <path d="M-14,-32 Q-14,-50 0,-48 Q14,-50 14,-32 Q8,-40 0,-40 Q-8,-40 -14,-32 Z" fill="#1a1a1f" />}
-    <path d="M-5,-22 Q0,-17 5,-22" fill="none" />
-  </g>
-)
 
 const P10 = () => (
   <Phone header="Điện thoại ông Hưng · công an trích xuất">
@@ -247,20 +264,23 @@ const P10 = () => (
 
 const X5 = () => (
   <Phone header="Ảnh · Lâm Khả">
-    <div className="overflow-hidden rounded-md">
+    <div className="overflow-hidden rounded-xl">
       <svg viewBox="0 0 320 220" className="block w-full">
-        <rect width="320" height="220" fill="#2a1a3a" />
-        <rect x="90" y="20" width="140" height="80" fill="#3f6aa8" stroke={LINE} strokeWidth="2" />
-        <text x="160" y="66" textAnchor="middle" fontSize="12" fill="#fff" fontFamily={mono}>♪ Duyên phận ♪</text>
+        <rect width="320" height="220" fill="#3b3156" />
+        {/* the karaoke screen and two disco lights */}
+        <Fb x={90} y={20} w={140} h={80} d={10} c="#3f6aa8" />
+        <text x="160" y="66" textAnchor="middle" fontSize="12" fontWeight="800" fill="#fff" fontFamily="'Be Vietnam Pro', sans-serif">♪ Duyên phận ♪</text>
         {[30, 290].map((x) => (
-          <circle key={x} cx={x} cy="30" r="12" fill="#e0245e" opacity="0.7" />
+          <Fb key={x} x={x - 10} y={20} w={20} h={16} d={8} c="#e0245e" />
         ))}
-        <Singer x={80} shirt="#ece2cf" />
-        <Singer x={160} s={1.3} shirt="#cf9a32" skin="#b9815a" bald />
-        <Singer x={240} shirt="#7d2f2a" />
-        <path d="M176,150 l18,-30" stroke="#333" strokeWidth="5" />
-        <rect x="8" y="8" width="104" height="18" rx="4" fill="#000" opacity="0.45" />
-        <text x="14" y="21" fontSize="11" fill="#fff" fontFamily={mono}>14/03 23:40</text>
+        <Person x={80} y={176} look={{ hair: 'short' }} shirt="#ece2cf" />
+        <Person x={160} y={170} s={1.25} spec={cast['kha']} look={{ mood: 'smile' }} />
+        <Person x={240} y={176} look={{ hair: 'side-part' }} shirt="#7d2f2a" />
+        {/* the microphone in Khả's hand */}
+        <Fb x={186} y={124} w={6} h={26} d={4} c="#333344" />
+        <Fb x={184} y={116} w={10} h={10} d={6} c="#9aa3b5" />
+        <Fb x={-4} y={200} w={330} h={22} d={14} c="#5b4a7c" />
+        <TimeTag t="14/03 23:40" />
       </svg>
     </div>
     <p className="flex justify-between text-[10px] opacity-70">
@@ -282,10 +302,22 @@ const X6 = () => (
 
 /** The torn navy jacket, drawn as a photo pinned in the file (used by the reconstruction). */
 export const JacketPhoto = () => (
-  <div className="bg-[#f3e4c4] p-1.5 shadow-lg">
-    <svg viewBox="0 0 200 220" className="block w-full">
-      <rect width="200" height="220" fill={C.woodDark} />
-      <Jacket x={100} y={10} s={0.7} />
+  <div className="rounded-2xl bg-white p-2 shadow-lg">
+    <svg viewBox="0 0 200 220" className="block w-full rounded-xl">
+      <rect width="200" height="220" fill="#d9d6e6" />
+      {/* the navy jacket on its hanger, right cuff torn */}
+      <rect x="98" y="10" width="4" height="20" fill="#9aa3b5" />
+      <polygon points="60,40 100,28 140,40" fill="none" stroke="#9aa3b5" strokeWidth="4" />
+      <Fb x={64} y={40} w={72} h={120} d={14} c="#2f4258" />
+      <Fb x={34} y={44} w={30} h={110} d={10} c="#2a3b50" />
+      <Fb x={136} y={44} w={30} h={110} d={10} c="#2a3b50" />
+      <polygon points="136,148 166,148 160,160 150,154 144,162" fill="#d9d6e6" />
+      {[150, 156, 162].map((x) => (
+        <rect key={x} x={x} y="150" width="1.5" height="12" fill="#e9eef2" />
+      ))}
+      <rect x="96" y="44" width="8" height="110" fill="#22324a" />
+      <rect x="72" y="60" width="18" height="8" fill="#f2f2ee" />
+      <circle cx="154" cy="152" r="22" fill="none" stroke={iso.coral} strokeWidth="3" />
     </svg>
   </div>
 )

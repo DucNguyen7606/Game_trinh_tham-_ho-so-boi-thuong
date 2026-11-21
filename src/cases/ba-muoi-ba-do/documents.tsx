@@ -1,6 +1,7 @@
 import { Mark, Phone, Row, Sheet, Signature, Stamp } from '@/art/docParts'
 import { accent, ink } from '@/art/palette'
-import { C, Carton, Logger } from './scenes'
+import { iso } from '@/art/iso/iso'
+import { Fb, TimeTag } from '@/art/iso/props-ch9-12'
 
 // What each document in the case-file envelopes looks like, keyed by clue id.
 
@@ -297,15 +298,19 @@ const PhotoMeta = ({ when, where }: { when: string; where: string }) => (
 
 const X3 = () => (
   <Phone header="Ảnh · Phan Thùy Linh">
-    <div className="overflow-hidden rounded-md">
+    <div className="overflow-hidden rounded-xl">
       <svg viewBox="0 0 320 220" className="block w-full">
-        <rect width="320" height="220" fill={C.frost} />
-        <Carton x={40} y={70} w={240} h={140} tape={C.tapeDE} />
-        <rect x="40" y="120" width="240" height="22" fill={C.tapeVN} stroke={LINE} strokeWidth="1.5" />
-        <Logger x={200} y={60} s={1.2} alarm />
-        <circle cx="96" cy="131" r="28" fill="none" stroke={accent.amber} strokeWidth="3" />
-        <rect x="8" y="8" width="104" height="18" rx="4" fill="#000" opacity="0.45" />
-        <text x="14" y="21" fontSize="11" fill="#fff" fontFamily={mono}>17/11 09:03</text>
+        <rect width="320" height="220" fill="#dfe8f0" />
+        <rect y="176" width="320" height="44" fill="#cfdbe4" />
+        {/* the top carton front-on: German blue tape, a strip of green local tape over the cut, the logger flashing red */}
+        <Fb x={40} y={70} w={240} h={130} d={26} c="#e6d3b3" />
+        <rect x="150" y="70" width="20" height="130" fill="#3f6aa8" />
+        <Fb x={40} y={118} w={240} h={22} d={4} c="#4f9e5c" />
+        <Fb x={196} y={40} w={46} h={26} d={30} c={iso.ink} />
+        <rect x="204" y="46" width="30" height="12" rx="2" fill="#ff5b4a" />
+        <text x="219" y="56" textAnchor="middle" fontSize="8" fontWeight="800" fill="#fff" fontFamily={mono}>TL-A</text>
+        <circle cx="96" cy="129" r="30" fill="none" stroke={iso.coral} strokeWidth="3.5" />
+        <TimeTag t="17/11 09:03" />
       </svg>
     </div>
     <p className="text-[10px]">"TL-A báo đỏ. Thùng 1 có đoạn băng keo xanh lá, Tùng nói hải quan mở kiểm tra."</p>

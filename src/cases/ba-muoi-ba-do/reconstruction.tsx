@@ -1,37 +1,16 @@
-import { accent, clothColors, ink, shade } from '@/art/palette'
-import { P } from '@/art/primitives'
+import { clothColors } from '@/art/palette'
 import { Portrait, type PortraitSpec } from '@/art/Portrait'
 import caseData from './case.json'
-import { C, Logger, sceneArt } from './scenes'
+import { isoSceneArt as sceneArt } from './iso/scenes'
 import { documents } from './documents'
 import type { ReconstructionPanel } from '@/game/types'
+import { Marker, Night, StandIn } from '@/art/iso/props-ch9-12'
 
 // "Dựng lại vụ án": the true sequence of events, shown after the player signs.
 
-/** Flat, faceless figure in the scene's 1600x900 space. (x, y) is where the feet touch the ground. */
+/** A block stand-in in the scene's 1600x900 space, coloured by who it stands for. (x, y) is where the feet touch the ground. */
 function Person({ x, y, h = 260, color, flip = false, hold }: { x: number; y: number; h?: number; color: string; flip?: boolean; hold?: 'logger' | 'phone' | 'box' }) {
-  const s = h / 260
-  const dark = shade(color, -0.35)
-  const skin = '#b9815a'
-  return (
-    <g transform={`translate(${x} ${y}) scale(${flip ? -s : s} ${s})`}>
-      <ellipse cx="0" cy="2" rx="46" ry="10" fill={ink.night} opacity="0.45" />
-      <polygon points={P([[-22, -120], [-14, 0], [-2, 0], [0, -96], [2, 0], [14, 0], [22, -120]])} fill={dark} />
-      <polygon points={P([[-38, -204], [38, -204], [30, -112], [-30, -112]])} fill={color} />
-      <polygon points={P([[38, -200], [52, -130], [40, -128], [26, -180]])} fill={color} />
-      <polygon points={P([[-38, -200], [-52, -130], [-40, -128], [-26, -180]])} fill={dark} />
-      <rect x="-8" y="-222" width="16" height="20" fill={skin} />
-      <polygon points={P([[-20, -266], [20, -266], [22, -230], [0, -216], [-22, -230]])} fill={skin} />
-      <polygon points={P([[-22, -268], [22, -268], [20, -250], [-22, -248]])} fill={ink.night} />
-      {hold === 'logger' && (
-        <g transform="translate(66 -150) scale(0.5)">
-          <Logger x={0} y={0} alarm />
-        </g>
-      )}
-      {hold === 'phone' && <rect x="40" y="-170" width="20" height="34" rx="4" fill={ink.night} />}
-      {hold === 'box' && <rect x="36" y="-176" width="80" height="52" fill={C.carton} stroke={ink.night} strokeWidth="3" />}
-    </g>
-  )
+  return <StandIn x={x} y={y} h={h} color={color} flip={flip} hold={hold} />
 }
 
 function Staged({ zone, children }: { zone: string; children: React.ReactNode }) {
@@ -48,7 +27,7 @@ function Staged({ zone, children }: { zone: string; children: React.ReactNode })
 
 function OnDesk({ ids }: { ids: string[] }) {
   return (
-    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[radial-gradient(circle_at_40%_30%,#5a3a24,#1c130f_75%)] p-6">
+    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[linear-gradient(180deg,#d9d2ee,#f6dccb)] p-6">
       {ids.map((id, i) => {
         const Doc = documents[id]
         return (
@@ -61,16 +40,7 @@ function OnDesk({ ids }: { ids: string[] }) {
   )
 }
 
-const Marker = ({ x, y, n }: { x: number; y: number; n: string }) => (
-  <g transform={`translate(${x} ${y})`}>
-    <circle r="26" fill={accent.amber} stroke={ink.night} strokeWidth="4" />
-    <text y="10" textAnchor="middle" fontSize="30" fontWeight="700" fill={ink.night} fontFamily="Barlow Condensed, sans-serif">
-      {n}
-    </text>
-  </g>
-)
 
-const Night = () => <rect width="1600" height="900" fill="#141a2a" opacity="0.5" />
 const TUNG = clothColors.olive
 const HUNG = clothColors.charcoal
 
@@ -90,7 +60,7 @@ export const reconstruction: ReconstructionPanel[] = (
       questionId: 'q1',
       Art: () => (
         <Staged zone="san-do">
-          <Marker x={480} y={300} n="1" />
+          <Marker x={480} y={340} n="1" />
         </Staged>
       ),
     },
@@ -159,8 +129,8 @@ const colorOf = (id: string) => clothColors[suspect(id).portrait.outfitColor as 
 
 function Pinned({ who, ids }: { who: string; ids: string[] }) {
   return (
-    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[radial-gradient(circle_at_40%_30%,#3b4250,#15161b_75%)] p-6">
-      <div className="shrink-0 bg-[#f3e4c4] p-1.5 shadow-lg" style={{ rotate: '-3deg' }}>
+    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[linear-gradient(180deg,#d9d2ee,#f6dccb)] p-6">
+      <div className="shrink-0 rounded-2xl bg-white p-2 shadow-lg" style={{ rotate: '-3deg' }}>
         <Portrait spec={suspect(who).portrait as PortraitSpec} size={190} />
         <p className="pt-1 text-center font-mono text-xs text-[#2d1f18]">{suspect(who).name}</p>
       </div>
@@ -178,7 +148,7 @@ function Pinned({ who, ids }: { who: string; ids: string[] }) {
 
 const PanelStamp = ({ text, color }: { text: string; color: string }) => (
   <div
-    className="display pointer-events-none absolute right-6 top-6 border-4 px-4 py-1 text-3xl opacity-85"
+    className="display pointer-events-none absolute right-6 top-6 rounded-xl border-4 bg-white/70 px-4 py-1 text-3xl opacity-90"
     style={{ color, borderColor: color, rotate: '-8deg' }}
   >
     {text}
@@ -217,13 +187,13 @@ function TamperArt({ who }: { who: string }) {
   return (
     <>
       <Staged zone="phong-lanh">
-        <rect width="1600" height="900" fill="#3b4a66" opacity="0.35" style={{ mixBlendMode: 'color' }} />
+        <Night opacity={0.25} />
         {who === 'none' ? (
           <Marker x={765} y={290} n="?" />
         ) : (
           <Person x={480} y={780} h={330} color={colorOf(who)} hold="logger" />
         )}
-        <text x="1000" y="240" textAnchor="middle" fontSize="120" fontWeight="700" fill="#9fb4c8" opacity="0.5" fontFamily="Bitter, serif">?</text>
+        <text x="1000" y="240" textAnchor="middle" fontSize="120" fontWeight="700" fill="#ffffff" opacity="0.7" fontFamily="'Be Vietnam Pro', sans-serif">?</text>
       </Staged>
       <PanelStamp text="Giả thuyết" color="#9fb4c8" />
     </>
