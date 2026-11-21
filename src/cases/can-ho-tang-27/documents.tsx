@@ -1,6 +1,10 @@
 import { Mark, Phone, Row, Sheet, Signature, Stamp } from '@/art/docParts'
 import { ink } from '@/art/palette'
-import { C } from './scenes'
+import { iso } from '@/art/iso/iso'
+import { Fb, Person, TimeTag } from '@/art/iso/props-ch9-12'
+import type { PortraitSpec } from '@/art/Portrait'
+import type { CaseData } from '@/game/types'
+import caseJson from './case.json'
 
 // What each document in the case-file envelopes looks like, keyed by clue id.
 
@@ -177,8 +181,8 @@ const P10 = () => (
     <div className="mt-1 flex gap-2">
       <svg viewBox="0 0 120 76" className="w-28 shrink-0">
         <rect width="120" height="76" rx="6" fill="#d9e6ec" stroke={LINE} strokeWidth="1.5" />
-        <rect x="8" y="14" width="34" height="44" fill="#b9815a" stroke={LINE} strokeWidth="1" />
-        <path d="M10,22 Q25,8 40,22 L40,26 L10,26 Z" fill="#1a1a1f" />
+        <rect x="8" y="14" width="34" height="44" rx="3" fill="#cfd8e6" />
+        <g transform="translate(25 30)"><Person x={0} y={20} s={0.34} spec={cast['vu']} look={{ hair: 'short' }} /></g>
         {[18, 30, 42, 54].map((y) => (
           <rect key={y} x="50" y={y} width={60 - (y % 3) * 6} height="4" fill="#7a8a94" />
         ))}
@@ -265,49 +269,63 @@ const PhotoMeta = ({ when, where }: { when: string; where: string }) => (
   </p>
 )
 
-const TimeTag = ({ t }: { t: string }) => (
-  <>
-    <rect x="8" y="8" width="104" height="18" rx="4" fill="#000" opacity="0.45" />
-    <text x="14" y="21" fontSize="11" fill="#fff" fontFamily={mono}>
-      {t}
-    </text>
-  </>
-)
-
 const LiveBadge = ({ viewers }: { viewers: string }) => (
-  <>
-    <rect x="232" y="8" width="38" height="16" rx="3" fill="#e0245e" />
-    <text x="251" y="20" textAnchor="middle" fontSize="10" fontWeight="700" fill="#fff" fontFamily={mono}>LIVE</text>
-    <text x="276" y="20" fontSize="10" fill="#fff" fontFamily={mono}>{viewers}</text>
-  </>
+  <g>
+    <rect x="226" y="8" width="40" height="18" rx="6" fill="#e0245e" />
+    <text x="246" y="21" textAnchor="middle" fontSize="10" fontWeight="800" fill="#fff" fontFamily="'Be Vietnam Pro', sans-serif">LIVE</text>
+    <text x="272" y="21" fontSize="10" fill="#fff" fontFamily={mono}>{viewers}</text>
+  </g>
 )
 
-/** The safe and keypad as seen by the livestream camera. */
-const SafeOnCam = ({ hand }: { hand?: boolean }) => (
+/** The safe and its keypad as the livestream camera sees it, drawn as front-on blocks. */
+const SafeOnCam = ({ hand, open }: { hand?: boolean; open?: boolean }) => (
   <g>
-    <rect width="320" height="220" fill={C.wood} />
-    <rect x="70" y="40" width="180" height="170" fill={C.safe} stroke={LINE} strokeWidth="2" />
-    {Array.from({ length: 12 }, (_, i) => (
-      <g key={i}>
-        <rect x={110 + (i % 3) * 36} y={80 + Math.floor(i / 3) * 28} width="28" height="22" rx="3" fill={C.silver} stroke={LINE} strokeWidth="1" />
-        <text x={124 + (i % 3) * 36} y={96 + Math.floor(i / 3) * 28} textAnchor="middle" fontSize="11" fill={LINE} fontFamily={mono}>
-          {['1', '2', '3', '4', '5', '6', '7', '8', '9', '*', '0', '#'][i]}
-        </text>
+    <rect width="320" height="220" fill="#e6d8e6" />
+    <rect y="150" width="320" height="70" fill="#d9bfa3" />
+    {/* the wooden cupboard and the safe in it */}
+    <Fb x={40} y={20} w={240} h={210} d={14} c="#c9a27e" />
+    <Fb x={78} y={44} w={164} h={166} d={12} c="#55506b" />
+    {open ? (
+      <g>
+        <rect x="86" y="52" width="148" height="150" fill="#2f2a3f" />
+        <Fb x={96} y={150} w={128} h={10} d={20} c="#6b3e2e" />
+        {[0, 1, 2].map((i) => (
+          <g key={i}>
+            <Fb x={104 + i * 40} y={128} w={26} h={22} d={8} c={i === 1 ? '#3f6aa8' : '#d9d9d9'} />
+            <rect x={110 + i * 40} y={134} width="14" height="10" fill="#fffaf0" />
+          </g>
+        ))}
       </g>
-    ))}
-    {hand && <path d="M200,200 Q180,150 196,120 L204,112 Q212,108 214,118 L212,140 Q240,150 250,200 Z" fill="#efc39b" stroke={LINE} strokeWidth="1.5" />}
+    ) : (
+      <g>
+        <Fb x={98} y={54} w={124} h={26} d={6} c={iso.ink} />
+        <rect x="104" y="59" width="112" height="16" fill="#7fe0c6" />
+        {Array.from({ length: 12 }, (_, i) => (
+          <g key={i}>
+            <Fb x={110 + (i % 3) * 36} y={88 + Math.floor(i / 3) * 28} w={28} h={22} d={6} c="#e9eef2" />
+            <text x={124 + (i % 3) * 36} y={104 + Math.floor(i / 3) * 28} textAnchor="middle" fontSize="11" fontWeight="800" fill={iso.ink} fontFamily={mono}>
+              {['1', '2', '3', '4', '5', '6', '7', '8', '9', '*', '0', '#'][i]}
+            </text>
+          </g>
+        ))}
+      </g>
+    )}
+    {hand && (
+      <g>
+        {/* Ngọc's hand on the keypad: a block forearm and a raised finger */}
+        <Fb x={186} y={150} w={34} h={80} d={12} c="#7a2a3a" />
+        <Fb x={190} y={124} w={28} h={28} d={10} c="#efc39b" />
+        <Fb x={192} y={104} w={8} h={22} d={6} c="#efc39b" />
+      </g>
+    )}
   </g>
 )
 
 const X3 = () => (
   <Phone header="Video đã lưu · ngoc.watch.live">
-    <div className="overflow-hidden rounded-md">
+    <div className="overflow-hidden rounded-xl">
       <svg viewBox="0 0 320 220" className="block w-full">
-        <SafeOnCam />
-        <rect x="70" y="40" width="180" height="170" fill="#151719" opacity="0.6" />
-        {[0, 1, 2].map((i) => (
-          <circle key={i} cx={110 + i * 50} cy="150" r="16" fill={i === 1 ? '#3f6aa8' : '#d9d9d9'} stroke={LINE} strokeWidth="2" />
-        ))}
+        <SafeOnCam open />
         <TimeTag t="20/12 11:05" />
         <LiveBadge viewers="1,2k" />
       </svg>
@@ -317,34 +335,28 @@ const X3 = () => (
   </Phone>
 )
 
-const Guest = ({ x, y, s = 1, skin = '#d9a47a', hair = '#1a1a1f', shirt }: { x: number; y: number; s?: number; skin?: string; hair?: string; shirt: string }) => (
-  <g transform={`translate(${x} ${y}) scale(${s})`} stroke={LINE} strokeWidth="1.6" strokeLinejoin="round">
-    <path d="M-26,40 Q-24,0 -8,-6 L8,-6 Q24,0 26,40 Z" fill={shirt} />
-    <rect x="-4" y="-14" width="8" height="10" fill={skin} />
-    <ellipse cx="0" cy="-30" rx="13" ry="16" fill={skin} />
-    <path d="M-14,-32 Q-14,-50 0,-48 Q14,-50 14,-32 Q8,-40 0,-40 Q-8,-40 -14,-32 Z" fill={hair} />
-    <circle cx="-5" cy="-30" r="1.6" fill={LINE} stroke="none" />
-    <circle cx="5" cy="-30" r="1.6" fill={LINE} stroke="none" />
-    <path d="M-5,-22 Q0,-18 5,-22" fill="none" strokeWidth="1.4" />
-  </g>
-)
+const cast = Object.fromEntries((caseJson as CaseData).suspects.map((s) => [s.id, s.portrait])) as Record<string, PortraitSpec>
 
 const X5 = () => (
   <Phone header="Ảnh · Bảo">
-    <div className="overflow-hidden rounded-md">
+    <div className="overflow-hidden rounded-xl">
       <svg viewBox="0 0 320 220" className="block w-full">
-        <rect width="320" height="220" fill="#1c1a2a" />
+        <rect width="320" height="220" fill="#3b3156" />
+        {/* coloured spotlights and the bar shelf */}
         {[40, 120, 200, 280].map((x, i) => (
-          <circle key={x} cx={x} cy="30" r="10" fill={['#e0245e', '#3f8a7e', '#d9b04f', '#7a9fb0'][i]} opacity="0.8" />
+          <Fb key={x} x={x - 8} y={22} w={16} h={12} d={8} c={['#e0245e', '#3f8a7e', '#d9b04f', '#7a9fb0'][i]} />
         ))}
-        <rect x="20" y="60" width="280" height="30" fill="#3a2a22" />
-        {[60, 100, 140].map((x) => (
-          <rect key={x} x={x} y="40" width="12" height="20" fill="#9fc2d0" opacity="0.7" />
+        <Fb x={20} y={56} w={280} h={10} d={12} c="#6b4a3a" />
+        {[50, 74, 98, 122, 230, 254].map((x, i) => (
+          <Fb key={x} x={x} y={36} w={10} h={20} d={6} c={['#9fc2d0', '#d9b04f', '#7fae8a', '#e8c25a', '#9fc2d0', '#e46b4f'][i]} />
         ))}
-        <Guest x={90} y={170} shirt="#ece2cf" />
-        <Guest x={160} y={164} s={1.25} shirt="#3a332f" skin="#d9a47a" />
-        <Guest x={230} y={170} shirt="#7d2f2a" hair="#4a3426" />
-        <rect y="196" width="320" height="24" fill="#3a2a22" />
+        <Person x={90} y={172} look={{ hair: 'short' }} shirt="#ece2cf" />
+        <Person x={160} y={168} s={1.2} spec={cast['bao']} look={{ mood: 'smile' }} />
+        <Person x={232} y={172} look={{ hair: 'long', build: 'thin', skin: 0 }} shirt="#b8372c" hair="#4a3426" />
+        <Fb x={-4} y={196} w={330} h={26} d={18} c="#6b4a3a" />
+        {[70, 150, 240].map((x) => (
+          <Fb key={x} x={x} y={182} w={10} h={16} d={6} c="#f2c46d" />
+        ))}
         <TimeTag t="21/12 02:10" />
       </svg>
     </div>
@@ -355,16 +367,16 @@ const X5 = () => (
 
 const X6 = () => (
   <Phone header="Ảnh chụp màn hình · chị Hai">
-    <div className="overflow-hidden rounded-md">
+    <div className="overflow-hidden rounded-xl">
       <svg viewBox="0 0 320 220" className="block w-full">
         <SafeOnCam hand />
         <TimeTag t="12/12 21:34" />
         <LiveBadge viewers="2,8k" />
-        <rect x="0" y="150" width="106" height="70" fill="#000" opacity="0.45" />
-        <text x="6" y="168" fontSize="9" fill="#fff" fontFamily={mono}>linh.89: đẹp quá</text>
-        <text x="6" y="184" fontSize="9" fill="#ffd166" fontFamily={mono}>Vũ KT Riverlight:</text>
-        <text x="6" y="196" fontSize="9" fill="#ffd166" fontFamily={mono}>  mở chậm thôi chị 😄</text>
-        <text x="6" y="212" fontSize="9" fill="#fff" fontFamily={mono}>tram.nguyen: chốt!</text>
+        <rect x="4" y="146" width="112" height="70" rx="10" fill={iso.ink} opacity="0.6" />
+        <text x="10" y="164" fontSize="9" fill="#fff" fontFamily={mono}>linh.89: đẹp quá</text>
+        <text x="10" y="180" fontSize="9" fill="#ffd166" fontFamily={mono}>Vũ KT Riverlight:</text>
+        <text x="10" y="192" fontSize="9" fill="#ffd166" fontFamily={mono}>  mở chậm thôi chị 😄</text>
+        <text x="10" y="208" fontSize="9" fill="#fff" fontFamily={mono}>tram.nguyen: chốt!</text>
       </svg>
     </div>
     <p className="text-[10px]">"Cô Ngọc mở két khoe chiếc đồng hồ mới nè con." Bàn tay, bàn phím két rõ từng nút.</p>

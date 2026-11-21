@@ -1,50 +1,15 @@
-import { accent, clothColors, ink, shade } from '@/art/palette'
-import { P } from '@/art/primitives'
+import { clothColors } from '@/art/palette'
 import caseData from './case.json'
-import { C, sceneArt, stepAt } from './scenes'
+import { isoSceneArt as sceneArt, stepAt } from './iso/scenes'
 import { documents } from './documents'
 import type { ReconstructionPanel } from '@/game/types'
+import { Marker, Night, StandIn } from '@/art/iso/props-ch9-12'
 
 // "Dựng lại vụ án": the true sequence of events, shown after the player signs.
 
-/** Flat, faceless figure in the scene's 1600x900 space. (x, y) is where the feet touch the ground. */
-function Person({ x, y, h = 260, color, flip = false, hair = ink.night, hold, arms }: { x: number; y: number; h?: number; color: string; flip?: boolean; hair?: string; hold?: 'screwdriver' | 'watch'; arms?: 'push' | 'up' | 'carry' }) {
-  const s = h / 260
-  const dark = shade(color, -0.35)
-  const skin = '#d9a47a'
-  return (
-    <g transform={`translate(${x} ${y}) scale(${flip ? -s : s} ${s})`}>
-      <ellipse cx="0" cy="2" rx="46" ry="10" fill={ink.night} opacity="0.45" />
-      <polygon points={P([[-22, -120], [-14, 0], [-2, 0], [0, -96], [2, 0], [14, 0], [22, -120]])} fill={dark} />
-      <polygon points={P([[-34, -200], [34, -200], [26, -116], [-26, -116]])} fill={color} />
-      {arms === 'push' ? (
-        <>
-          <polygon points={P([[30, -196], [96, -176], [94, -162], [24, -176]])} fill={color} />
-          <polygon points={P([[30, -150], [96, -168], [98, -154], [26, -134]])} fill={dark} />
-        </>
-      ) : arms === 'carry' ? (
-        <>
-          <polygon points={P([[30, -196], [80, -150], [72, -140], [24, -176]])} fill={color} />
-          <polygon points={P([[-30, -196], [20, -150], [12, -140], [-24, -176]])} fill={dark} />
-        </>
-      ) : arms === 'up' ? (
-        <>
-          <polygon points={P([[34, -196], [70, -250], [60, -256], [24, -200]])} fill={color} />
-          <polygon points={P([[-34, -196], [-70, -250], [-60, -256], [-24, -200]])} fill={dark} />
-        </>
-      ) : (
-        <>
-          <polygon points={P([[34, -196], [48, -130], [38, -128], [24, -180]])} fill={color} />
-          <polygon points={P([[-34, -196], [-48, -130], [-38, -128], [-24, -180]])} fill={dark} />
-        </>
-      )}
-      <rect x="-8" y="-218" width="16" height="20" fill={skin} />
-      <polygon points={P([[-20, -262], [20, -262], [22, -226], [0, -212], [-22, -226]])} fill={skin} />
-      <polygon points={P([[-22, -264], [22, -264], [20, -246], [-22, -244]])} fill={hair} />
-      {hold === 'screwdriver' && <path d="M44,-140 l40,-40" stroke={accent.amber} strokeWidth="8" strokeLinecap="round" />}
-      {hold === 'watch' && <circle cx="56" cy="-134" r="12" fill={C.watch} stroke={ink.night} strokeWidth="3" />}
-    </g>
-  )
+/** A block stand-in in the scene's 1600x900 space, coloured by who it stands for. (x, y) is where the feet touch the ground. */
+function Person({ x, y, h = 260, color, flip = false, hair, hold, arms, sit }: { x: number; y: number; h?: number; color: string; flip?: boolean; hair?: string; hold?: 'screwdriver' | 'watch'; arms?: 'push' | 'up' | 'carry'; sit?: boolean }) {
+  return <StandIn x={x} y={y} h={h} color={color} flip={flip} hairColor={hair ? 'gray' : 'black'} hair={hair ? 'bald' : 'short'} pose={sit ? 'sit' : 'stand'} hold={arms === 'carry' ? 'carry' : hold === 'screwdriver' ? 'tool' : hold} />
 }
 
 function Staged({ zone, children }: { zone: string; children: React.ReactNode }) {
@@ -61,7 +26,7 @@ function Staged({ zone, children }: { zone: string; children: React.ReactNode })
 
 function OnDesk({ ids }: { ids: string[] }) {
   return (
-    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[radial-gradient(circle_at_40%_30%,#5a3a24,#1c130f_75%)] p-6">
+    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[linear-gradient(180deg,#d9d2ee,#f6dccb)] p-6">
       {ids.map((id, i) => {
         const Doc = documents[id]
         return (
@@ -74,29 +39,14 @@ function OnDesk({ ids }: { ids: string[] }) {
   )
 }
 
-const Marker = ({ x, y, n }: { x: number; y: number; n: string }) => (
-  <g transform={`translate(${x} ${y})`}>
-    <circle r="26" fill={accent.amber} stroke={ink.night} strokeWidth="4" />
-    <text y="10" textAnchor="middle" fontSize="30" fontWeight="700" fill={ink.night} fontFamily="Barlow Condensed, sans-serif">
-      {n}
-    </text>
-  </g>
-)
 
-const Dusk = () => <rect width="1600" height="900" fill="#1e2440" opacity="0.4" />
-const Night = () => <rect width="1600" height="900" fill="#141a2a" opacity="0.55" />
+const Dusk = () => <Night opacity={0.25} />
 const KHOA = clothColors.white
 const HIEN = clothColors.khaki
 const third = stepAt(2)
 
-/** Ông Hiển slumped over the drafting table, drawn in the study's space. */
-const Slumped = () => (
-  <g transform="translate(760 560)">
-    <polygon points={P([[-40, -120], [40, -120], [70, -60], [-10, -40]])} fill={HIEN} stroke={ink.night} strokeWidth="3" />
-    <ellipse cx="66" cy="-128" rx="24" ry="20" fill="#efc39b" stroke={ink.night} strokeWidth="3" />
-    <path d="M48,-140 q18,-14 40,-2" fill="none" stroke="#cfccc6" strokeWidth="8" />
-  </g>
-)
+/** Ông Hiển slumped in the armchair at the drafting table. */
+const Slumped = () => <Person x={650} y={470} h={230} color={HIEN} hair="gray" sit flip />
 
 export const reconstruction: ReconstructionPanel[] = (
   [
@@ -115,8 +65,8 @@ export const reconstruction: ReconstructionPanel[] = (
       Art: () => (
         <Staged zone="san-cong">
           <Dusk />
-          <Person x={800} y={720} h={280} color={clothColors.olive} hair="#7d7a76" />
-          <Marker x={1002} y={110} n="1" />
+          <Person x={900} y={600} h={240} color={clothColors.olive} hair="gray" />
+          <Marker x={915} y={40} n="1" />
         </Staged>
       ),
     },
@@ -128,7 +78,7 @@ export const reconstruction: ReconstructionPanel[] = (
       Art: () => (
         <Staged zone="phong-lam-viec">
           <Slumped />
-          <Marker x={752} y={200} n="2" />
+          <Marker x={800} y={250} n="2" />
         </Staged>
       ),
     },
@@ -147,8 +97,8 @@ export const reconstruction: ReconstructionPanel[] = (
       Art: () => (
         <Staged zone="cau-thang">
           <Night />
-          <Person x={1330} y={196} h={180} color={KHOA} arms="carry" flip />
-          <Marker x={1460} y={70} n="3" />
+          <Person x={1060} y={210} h={190} color={KHOA} arms="carry" flip />
+          <Marker x={1150} y={90} n="3" />
         </Staged>
       ),
     },
@@ -160,9 +110,9 @@ export const reconstruction: ReconstructionPanel[] = (
       Art: () => (
         <Staged zone="cau-thang">
           <Night />
-          <Person x={third.x + 60} y={third.y + 80} h={250} color={KHOA} hold="screwdriver" flip />
-          <Marker x={third.x + 40} y={third.y - 40} n="4" />
-          <Marker x={740} y={660} n="5" />
+          <Person x={third.x + 70} y={third.y + 30} h={220} color={KHOA} hold="screwdriver" flip />
+          <Marker x={third.x - 70} y={third.y - 10} n="4" />
+          <Marker x={810} y={690} n="5" />
         </Staged>
       ),
     },
@@ -223,15 +173,15 @@ function CauseArt({ id }: { id: string }) {
     <>
       {id === 'heart' ? (
         <Staged zone="phong-lam-viec">
-          <rect width="1600" height="900" fill="#3b4a66" opacity="0.35" style={{ mixBlendMode: 'color' }} />
+          <Night opacity={0.25} />
           <Slumped />
         </Staged>
       ) : (
         <Staged zone="cau-thang">
-          <rect width="1600" height="900" fill="#3b4a66" opacity="0.35" style={{ mixBlendMode: 'color' }} />
-          {id === 'pushed' && <Person x={1265} y={196} h={180} color="#55606a" arms="push" flip />}
-          <Person x={1190} y={196} h={168} color={HIEN} hair="#cfccc6" arms="up" />
-          <text x="600" y="460" textAnchor="middle" fontSize="120" fontWeight="700" fill="#9fb4c8" opacity="0.5" fontFamily="Bitter, serif">?</text>
+          <Night opacity={0.25} />
+          {id === 'pushed' && <Person x={1130} y={200} h={190} color="#55606a" arms="push" flip />}
+          <Person x={1060} y={230} h={180} color={HIEN} hair="gray" arms="up" />
+          <text x="600" y="460" textAnchor="middle" fontSize="120" fontWeight="700" fill="#ffffff" opacity="0.7" fontFamily="Bitter, serif">?</text>
         </Staged>
       )}
       <PanelStamp text="Giả thuyết" color="#9fb4c8" />
@@ -243,9 +193,9 @@ function StagerArt({ who }: { who: string }) {
   return (
     <>
       <Staged zone="cau-thang">
-        <rect width="1600" height="900" fill="#3b4a66" opacity="0.35" style={{ mixBlendMode: 'color' }} />
-        {who !== 'none' && <Person x={third.x + 60} y={third.y + 80} h={250} color={colorOf(who)} hold="screwdriver" flip />}
-        <text x="1300" y="560" textAnchor="middle" fontSize="120" fontWeight="700" fill="#9fb4c8" opacity="0.5" fontFamily="Bitter, serif">?</text>
+        <Night opacity={0.25} />
+        {who !== 'none' && <Person x={third.x + 70} y={third.y + 30} h={220} color={colorOf(who)} hold="screwdriver" flip />}
+        <text x="1300" y="560" textAnchor="middle" fontSize="120" fontWeight="700" fill="#ffffff" opacity="0.7" fontFamily="Bitter, serif">?</text>
       </Staged>
       <PanelStamp text="Giả thuyết" color="#9fb4c8" />
     </>

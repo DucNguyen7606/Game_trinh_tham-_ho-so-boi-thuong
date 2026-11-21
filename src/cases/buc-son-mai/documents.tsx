@@ -1,11 +1,13 @@
 import { Mark, Phone, Row, Sheet, Signature, Stamp } from '@/art/docParts'
-import { ink } from '@/art/palette'
 import { LotusPainting } from './scenes'
+import type { PortraitSpec } from '@/art/Portrait'
+import type { CaseData } from '@/game/types'
+import { iso } from '@/art/iso/iso'
+import { FONT, Fb, MONO, PhotoPerson, PhotoStamp } from '@/art/iso/kit'
+import caseJson from './case.json'
 
 // What each document in the case-file envelopes looks like, keyed by clue id.
 
-const LINE = ink.night
-const mono = 'IBM Plex Mono, monospace'
 
 /** A photo of the painting with numbered call-outs. */
 function PaintingPhoto({ fake, caption, notes }: { fake?: boolean; caption: string; notes: string[] }) {
@@ -120,27 +122,27 @@ const P6 = () => (
 )
 
 const P7 = () => (
-  <div className="bg-[#1c130f] p-2 shadow-[0_6px_16px_rgb(0_0_0/0.45)]">
+  <div className="rounded-xl bg-[#2e2a4a] p-2 shadow-[0_6px_16px_rgb(46_42_74/0.35)]">
     <svg viewBox="0 0 320 180" className="block w-full">
-      <rect width="320" height="180" fill="#252a2e" />
-      <rect y="110" width="320" height="70" fill="#3a3f44" />
-      <rect x="230" y="20" width="60" height="140" fill="#1a1c20" />
-      <text x="260" y="40" textAnchor="middle" fontSize="7" fill="#c4c4c4" fontFamily={mono}>HẺM 14</text>
-      {/* A woman on a turquoise Vespa turning into the alley */}
-      <g transform="translate(160 120)">
-        <circle cx="-26" cy="26" r="11" fill="#111" />
-        <circle cx="30" cy="26" r="11" fill="#111" />
-        <path d="M-36,20 Q-30,-4 -6,-2 L24,-2 Q44,4 42,22 Z" fill="#4fa8a0" />
-        <rect x="-10" y="-34" width="18" height="34" fill="#3a3538" />
-        <circle cx="-1" cy="-42" r="9" fill="#e8e2d4" />
-        <path d="M-10,-32 Q0,-26 10,-32 L8,-22 Q0,-18 -8,-22 Z" fill="#efe6d4" />
-        <path d="M-8,-22 Q0,-18 8,-22" stroke="#9a3a2e" strokeWidth="1.5" fill="none" />
+      <rect width="320" height="180" fill="#5f6a86" />
+      <rect y="110" width="320" height="70" fill="#7a809a" />
+      <Fb x={230} y={20} w={60} h={90} d={14} c="#4b4760" />
+      <text x="260" y="40" textAnchor="middle" fontSize="7" fill="#f6efe3" fontFamily={MONO}>HẺM 14</text>
+      {/* A small woman on a turquoise Vespa turning into the alley, a light scarf with a dark edge over her head */}
+      <g>
+        <PhotoPerson x={150} y={96} s={0.7} look={{ hair: 'long', build: 'thin', mood: 'neutral' }} shirt="#3a3538" skin="#e0b48a" hair="#2e2a3a" />
+        <Fb x={136} y={60} w={30} h={12} d={14} c="#f6efe3" />
+        <rect x="136" y="70" width="32" height="2" fill="#9a3a2e" />
+        <Fb x={124} y={104} w={52} h={8} d={10} c="#4b4760" />
+        <Fb x={130} y={110} w={40} h={34} d={16} c="#4fa8a0" />
+        <Fb x={142} y={116} w={16} h={9} d={4} c="#fff6d6" />
+        <Fb x={144} y={144} w={12} h={26} d={8} c="#2e2a3a" />
       </g>
-      <rect width="320" height="180" fill="#c4a27a" opacity="0.05" />
-      <text x="8" y="14" fontSize="9" fill="#e8e8e8" fontFamily={mono}>CAM ĐỒNG KHỞI 03 · NGÃ RẼ HẺM 14</text>
-      <text x="312" y="172" fontSize="9" fill="#e8e8e8" textAnchor="end" fontFamily={mono}>20/11/2025 01:36:12</text>
+      <rect width="320" height="180" fill="#2e2a4a" opacity="0.15" />
+      <text x="8" y="14" fontSize="9" fill="#f6efe3" fontFamily={MONO}>CAM ĐỒNG KHỞI 03 · NGÃ RẼ HẺM 14</text>
+      <text x="312" y="172" fontSize="9" fill="#f6efe3" textAnchor="end" fontFamily={MONO}>20/11/2025 01:36:12</text>
     </svg>
-    <p className="px-1 pt-1 font-mono text-[10px] text-[#c4a27a]">
+    <p className="px-1 pt-1 font-mono text-[10px] text-[#d6cfee]">
       Xe Vespa xanh ngọc, người lái quấn khăn sáng màu viền sẫm, dáng nhỏ. 01:59:40 ra, chở một túi dẹt cỡ 1 m.
     </p>
   </div>
@@ -205,13 +207,17 @@ const P11 = () => (
     <p className="title text-sm text-[#2d1f18]">Nhà Đẹp · số tháng 9/2025</p>
     <p className="font-sans text-[10px] text-[#2d1f18]">"Căn biệt thự Phú Mỹ Hưng của nhà sưu tầm Hứa Vĩnh Thành: phòng khách được 'giữ hồn' bằng một bức sơn mài sen cổ."</p>
     <svg viewBox="0 0 300 200" className="block w-full">
-      <rect width="300" height="200" fill="#e9dfcc" />
-      <rect y="150" width="300" height="50" fill="#8a6448" />
-      <rect x="20" y="120" width="140" height="40" rx="10" fill="#c9a274" stroke={LINE} strokeWidth="1.5" />
+      <rect width="300" height="200" fill="#efe4d4" />
+      <rect y="150" width="300" height="50" fill="#c9a98a" />
+      <Fb x={20} y={112} w={140} h={44} d={22} c="#c9a274" />
+      <Fb x={28} y={98} w={30} h={20} d={10} c="#f6efe3" />
+      <Fb x={124} y={98} w={30} h={20} d={10} c="#e46b4f" />
+      <Fb x={134} y={14} w={142} h={116} d={8} c="#5a2f22" />
       <g transform="translate(140 20)">
-        <rect x="-6" y="-6" width="142" height="116" fill="#5a2f22" />
         <LotusPainting w={130} />
       </g>
+      <Fb x={190} y={160} w={70} h={16} d={20} c="#a07c5a" />
+      <Fb x={250} y={130} w={10} h={30} d={10} c="#7fae8a" />
       <circle cx="248" cy="40" r="10" fill="none" stroke="#f2a93b" strokeWidth="2" />
       <circle cx="150" cy="114" r="10" fill="none" stroke="#f2a93b" strokeWidth="2" />
     </svg>
@@ -253,59 +259,41 @@ const PhotoMeta = ({ when, where }: { when: string; where: string }) => (
   </p>
 )
 
-const Guest = ({ x, y, s = 1, skin = '#efc39b', hair = '#1a1a1f', shirt, hairStyle = 'short' }: { x: number; y: number; s?: number; skin?: string; hair?: string; shirt: string; hairStyle?: 'short' | 'long' | 'bun' }) => (
-  <g transform={`translate(${x} ${y}) scale(${s})`} stroke={LINE} strokeWidth="1.6" strokeLinejoin="round">
-    {hairStyle === 'long' && <path d="M-14,-50 Q0,-66 14,-50 L18,-14 L-18,-14 Z" fill={hair} />}
-    {hairStyle === 'bun' && <circle cx="0" cy="-50" r="8" fill={hair} />}
-    <path d="M-26,40 Q-24,0 -8,-6 L8,-6 Q24,0 26,40 Z" fill={shirt} />
-    <rect x="-4" y="-14" width="8" height="10" fill={skin} />
-    <ellipse cx="0" cy="-30" rx="13" ry="16" fill={skin} />
-    <path d="M-14,-32 Q-14,-50 0,-48 Q14,-50 14,-32 Q8,-40 0,-40 Q-8,-40 -14,-32 Z" fill={hair} />
-    <circle cx="-5" cy="-30" r="1.6" fill={LINE} stroke="none" />
-    <circle cx="5" cy="-30" r="1.6" fill={LINE} stroke="none" />
-    <path d="M-5,-22 Q0,-18 5,-22" fill="none" strokeWidth="1.4" />
-  </g>
-)
+const cast = Object.fromEntries((caseJson as CaseData).suspects.map((s) => [s.id, s.portrait])) as Record<string, PortraitSpec>
 
-const TimeTag = ({ t }: { t: string }) => (
-  <>
-    <rect x="8" y="8" width="104" height="18" rx="4" fill="#000" opacity="0.45" />
-    <text x="14" y="21" fontSize="11" fill="#fff" fontFamily={mono}>
-      {t}
-    </text>
-  </>
-)
+const TimeTag = ({ t }: { t: string }) => <PhotoStamp t={t} />
 
 /** Diệp's "can't sleep" post at 01:44: pyjamas, bare neck, the clock behind her. She is home while the gallery is entered. */
 const X3 = () => (
   <Phone header="Trang cá nhân · Ngọc Diệp Gallery">
-    <div className="overflow-hidden rounded-md">
+    <div className="overflow-hidden rounded-xl">
       <svg viewBox="0 0 320 220" className="block w-full">
-        <rect width="320" height="220" fill="#d8cdb6" />
-        <rect x="200" y="20" width="100" height="120" fill="#2a3448" stroke={LINE} strokeWidth="2" />
-        <path d="M250,20 V140 M200,80 H300" stroke="#e9dfcc" strokeWidth="4" />
+        <rect width="320" height="220" fill="#ece0cf" />
+        {/* Night window */}
+        <Fb x={200} y={20} w={100} h={120} d={10} c="#f6efe3" />
+        <rect x="206" y="26" width="88" height="108" fill="#4b4f7a" />
+        <rect x="248" y="26" width="4" height="108" fill="#f6efe3" />
+        <rect x="206" y="78" width="88" height="4" fill="#f6efe3" />
         {/* Wall clock at a quarter to two */}
-        <g stroke={LINE} strokeWidth="1.5">
-          <circle cx="60" cy="50" r="20" fill="#fff8e8" />
-          <path d="M60,50 L67,44.5 M60,50 L46.1,51.5" strokeLinecap="round" strokeWidth="2" />
-        </g>
+        <Fb x={40} y={30} w={40} h={40} d={6} c="#fffaf0" />
+        <rect x="59" y="38" width="2" height="12" fill={iso.ink} transform="rotate(45 60 50)" />
+        <rect x="48" y="49" width="12" height="2" fill={iso.ink} />
         {/* Diệp with the dog, in striped pyjamas, nothing round her neck */}
-        <Guest x={120} y={150} s={1.5} shirt="#9fb4c8" hair="#7d7a76" hairStyle="bun" />
-        {[100, 112, 124, 136].map((x) => (
-          <line key={x} x1={x} y1="146" x2={x} y2="196" stroke="#f6efe2" strokeWidth="2" />
+        <PhotoPerson x={124} y={150} s={1.45} spec={cast.diep} look={{ mood: 'neutral', accessory: ['glasses'] }} shirt="#9fb4c8" />
+        {[104, 116, 128, 140].map((x) => (
+          <rect key={x} x={x} y="146" width="3" height="40" fill="#f6efe3" opacity="0.8" />
         ))}
-        <g stroke={LINE} strokeWidth="1.4">
-          <ellipse cx="80" cy="170" rx="26" ry="18" fill="#f6efe2" />
-          <circle cx="62" cy="156" r="12" fill="#f6efe2" />
-          <circle cx="58" cy="154" r="1.6" fill={LINE} />
-        </g>
+        <Fb x={52} y={156} w={46} h={26} d={16} c="#fffaf0" />
+        <Fb x={44} y={140} w={22} h={20} d={12} c="#fffaf0" />
+        <rect x="49" y="147" width="3" height="3" fill={iso.ink} />
+        <rect x="58" y="147" width="3" height="3" fill={iso.ink} />
+        <rect x="40" y="141" width="5" height="12" fill="#e9dccb" />
         {/* Bedside table: a cup of tea and a strip of sleeping pills */}
-        <rect x="0" y="186" width="320" height="34" fill="#7a4f32" stroke={LINE} strokeWidth="1.5" />
-        <path d="M232,186 v-22 h24 v22 Z" fill="#f6efe2" stroke={LINE} strokeWidth="1.5" />
-        <path d="M256,170 q8,0 8,7 q0,6 -8,6" fill="none" stroke={LINE} strokeWidth="1.5" />
-        <rect x="270" y="176" width="34" height="10" rx="2" fill="#d8dde2" stroke={LINE} strokeWidth="1" />
-        {[276, 284, 292, 300].map((x) => (
-          <circle key={x} cx={x} cy="181" r="2.2" fill="#fff" stroke={LINE} strokeWidth="0.8" />
+        <Fb x={-4} y={186} w={330} h={34} d={24} c="#a07c5a" />
+        <Fb x={232} y={164} w={22} h={22} d={14} c="#f6efe3" />
+        <Fb x={268} y={180} w={36} h={6} d={14} c="#d8dde2" />
+        {[274, 282, 290, 298].map((x) => (
+          <rect key={x} x={x} y="181.5" width="3.5" height="3" fill="#fff" />
         ))}
         <TimeTag t="20/11 01:44" />
       </svg>
@@ -317,20 +305,20 @@ const X3 = () => (
 
 const X4 = () => (
   <Phone header="Story · ngoc.baotrinh">
-    <div className="overflow-hidden rounded-md">
+    <div className="overflow-hidden rounded-xl">
       <svg viewBox="0 0 320 220" className="block w-full">
-        <rect width="320" height="220" fill="#2a1d3a" />
-        <circle cx="60" cy="40" r="60" fill="#b04fa0" opacity="0.35" />
-        <circle cx="280" cy="50" r="70" fill="#3f8a7e" opacity="0.35" />
-        <rect x="90" y="24" width="140" height="30" rx="4" fill="#141020" stroke="#f2a93b" strokeWidth="2" />
-        <text x="160" y="44" textAnchor="middle" fontSize="13" fill="#f2a93b" fontFamily="Barlow Condensed, sans-serif">BÙI VIỆN · ĐÊM THỨ TƯ</text>
-        <Guest x={80} y={170} shirt="#cf9a32" hairStyle="long" />
-        <Guest x={160} y={164} s={1.25} shirt="#ece2cf" hair="#4a3426" hairStyle="long" />
-        <Guest x={240} y={170} shirt="#2f4258" />
+        <rect width="320" height="220" fill="#5b4a7c" />
+        <circle cx="60" cy="40" r="60" fill="#e46b9a" opacity="0.35" />
+        <circle cx="280" cy="50" r="70" fill="#5fb3a3" opacity="0.35" />
+        <Fb x={90} y={22} w={140} h={30} d={10} c={iso.ink} />
+        <text x="160" y="42" textAnchor="middle" fontSize="12" fontWeight="800" fill={iso.gold} fontFamily={FONT}>BÙI VIỆN · ĐÊM THỨ TƯ</text>
+        <PhotoPerson x={80} y={170} look={{ hair: 'long', build: 'thin', skin: 0 }} shirt="#e2a63b" />
+        <PhotoPerson x={160} y={162} s={1.25} spec={cast.ngoc} look={{ mood: 'smile' }} />
+        <PhotoPerson x={240} y={170} look={{ hair: 'short' }} shirt="#2f4258" />
         {/* LED clock above the bar: the photo was taken long before it was posted */}
-        <rect x="250" y="70" width="56" height="22" rx="3" fill="#0e0a14" stroke="#f2a93b" strokeWidth="1" />
-        <text x="278" y="86" textAnchor="middle" fontSize="13" fill="#ff5a3a" fontFamily={mono}>00:14</text>
-        <rect x="0" y="196" width="320" height="24" fill="#3a2a4a" />
+        <Fb x={250} y={70} w={56} h={22} d={8} c="#211a33" />
+        <text x="278" y="86" textAnchor="middle" fontSize="13" fill="#ff8a5c" fontFamily={MONO}>00:14</text>
+        <Fb x={-4} y={196} w={330} h={24} d={20} c="#3d2f5a" />
         <TimeTag t="Đăng 01:35" />
       </svg>
     </div>
@@ -341,18 +329,21 @@ const X4 = () => (
 
 const X5 = () => (
   <Phone header="Live · Xưởng Sơn Quân" dark>
-    <div className="overflow-hidden rounded-md">
+    <div className="overflow-hidden rounded-xl">
       <svg viewBox="0 0 320 220" className="block w-full">
-        <rect width="320" height="220" fill="#4a3a2e" />
-        <rect x="0" y="150" width="320" height="70" fill="#7a4f32" />
-        <rect x="90" y="120" width="140" height="40" fill="#1d1513" stroke={LINE} strokeWidth="1.5" />
-        <path d="M110,140 q20,-10 40,0" stroke="#d9b04f" strokeWidth="2" fill="none" />
-        <Guest x={120} y={170} s={1.2} shirt="#3a332f" skin="#b9815a" hairStyle="long" />
-        <Guest x={230} y={176} s={0.95} shirt="#7a9fb0" />
-        <rect x="8" y="8" width="58" height="16" rx="3" fill="#d23a2e" />
-        <text x="37" y="20" textAnchor="middle" fontSize="10" fill="#fff" fontFamily={mono}>● LIVE</text>
-        <rect x="200" y="8" width="112" height="16" rx="3" fill="#000" opacity="0.45" />
-        <text x="256" y="20" textAnchor="middle" fontSize="10" fill="#fff" fontFamily={mono}>01:00 → 02:20</text>
+        <rect width="320" height="220" fill="#e3d6c2" />
+        <Fb x={20} y={30} w={90} h={60} d={8} c="#c9a274" />
+        <rect x="26" y="36" width="78" height="48" fill="#fffaf0" opacity="0.85" />
+        <PhotoPerson x={120} y={160} s={1.2} spec={cast.quan} look={{ mood: 'neutral' }} />
+        <PhotoPerson x={234} y={168} s={0.95} look={{ hair: 'short', skin: 1 }} shirt="#7a9fb0" />
+        {/* the work table and the lacquer panel he is sanding */}
+        <Fb x={-4} y={184} w={330} h={36} d={30} c="#a07c5a" />
+        <Fb x={86} y={174} w={140} h={10} d={24} c="#1d1513" />
+        <rect x="104" y="176" width="40" height="3" fill={iso.gold} />
+        <rect x="8" y="8" width="58" height="16" rx="6" fill="#d6453a" />
+        <text x="37" y="20" textAnchor="middle" fontSize="10" fill="#fff" fontFamily={MONO}>● LIVE</text>
+        <rect x="200" y="8" width="112" height="16" rx="6" fill={iso.ink} opacity="0.55" />
+        <text x="256" y="20" textAnchor="middle" fontSize="10" fill="#fff" fontFamily={MONO}>01:00 → 02:20</text>
       </svg>
     </div>
     <div className="space-y-0.5 rounded bg-white/10 p-1.5 text-[10px]">
@@ -365,19 +356,22 @@ const X5 = () => (
 
 const X6 = () => (
   <Phone header="Thư viện ảnh · Hữu Phong">
-    <div className="overflow-hidden rounded-md">
+    <div className="overflow-hidden rounded-xl">
       <svg viewBox="0 0 320 220" className="block w-full">
-        <rect width="320" height="220" fill="#1d2b44" />
-        <path d="M0,110 Q80,90 160,104 T320,96 L320,130 L0,130 Z" fill="#2b4229" />
-        <rect y="128" width="320" height="92" fill="#2f4a5a" />
-        <ellipse cx="160" cy="132" rx="200" ry="14" fill="#e8e0d0" opacity="0.4" />
+        <rect width="320" height="220" fill="#4b4f7a" />
+        {[0, 40, 80, 120, 160, 200, 240, 280].map((x, i) => (
+          <Fb key={x} x={x} y={92 - (i % 3) * 10} w={40} h={38 + (i % 3) * 10} d={8} c="#3f6b5a" />
+        ))}
+        <rect y="128" width="320" height="92" fill="#5d7f9a" />
+        <rect x="40" y="140" width="240" height="3" fill="#ffe1a0" opacity="0.5" />
+        <rect x="80" y="160" width="160" height="3" fill="#ffe1a0" opacity="0.35" />
         {[40, 100, 260].map((x) => (
           <g key={x}>
-            <line x1={x} y1="100" x2={x} y2="60" stroke="#6f7477" strokeWidth="3" />
-            <circle cx={x} cy="58" r="6" fill="#ffd98f" />
+            <Fb x={x - 2} y={70} w={4} h={56} d={4} c="#9aa3b5" />
+            <Fb x={x - 6} y={62} w={12} h={8} d={8} c="#ffe1a0" />
           </g>
         ))}
-        <text x="160" y="80" textAnchor="middle" fontSize="10" fill="#e8e0d0" fontFamily={mono}>Hồ Xuân Hương</text>
+        <text x="160" y="56" textAnchor="middle" fontSize="11" fontWeight="800" fill="#f6efe3" fontFamily={FONT}>Hồ Xuân Hương</text>
         <TimeTag t="20/11 01:20" />
       </svg>
     </div>

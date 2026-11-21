@@ -1,37 +1,16 @@
-import { accent, clothColors, ink, shade } from '@/art/palette'
-import { P } from '@/art/primitives'
+import { clothColors } from '@/art/palette'
 import { Portrait, type PortraitSpec } from '@/art/Portrait'
 import caseData from './case.json'
-import { C, sceneArt } from './scenes'
+import { isoSceneArt as sceneArt } from './iso/scenes'
 import { documents } from './documents'
 import type { ReconstructionPanel } from '@/game/types'
+import { Marker, Night, StandIn } from '@/art/iso/props-ch9-12'
 
 // "Dựng lại vụ án": the true sequence of events, shown after the player signs.
 
-/** Flat, faceless figure in the scene's 1600x900 space. (x, y) is where the feet touch the ground. */
+/** A block stand-in in the scene's 1600x900 space, coloured by who it stands for. (x, y) is where the feet touch the ground. */
 function Person({ x, y, h = 260, color, flip = false, cap, hold }: { x: number; y: number; h?: number; color: string; flip?: boolean; cap?: boolean; hold?: 'box' | 'card' | 'screwdriver' }) {
-  const s = h / 260
-  const dark = shade(color, -0.35)
-  const skin = '#b9815a'
-  return (
-    <g transform={`translate(${x} ${y}) scale(${flip ? -s : s} ${s})`}>
-      <ellipse cx="0" cy="2" rx="46" ry="10" fill={ink.night} opacity="0.45" />
-      <polygon points={P([[-22, -120], [-14, 0], [-2, 0], [0, -96], [2, 0], [14, 0], [22, -120]])} fill={dark} />
-      <polygon points={P([[-34, -200], [34, -200], [26, -116], [-26, -116]])} fill={color} />
-      <polygon points={P([[34, -196], [48, -130], [38, -128], [24, -180]])} fill={color} />
-      <polygon points={P([[-34, -196], [-48, -130], [-38, -128], [-24, -180]])} fill={dark} />
-      <rect x="-8" y="-218" width="16" height="20" fill={skin} />
-      <polygon points={P([[-20, -262], [20, -262], [22, -226], [0, -212], [-22, -226]])} fill={skin} />
-      {cap ? (
-        <path d="M-24,-246 Q-24,-280 0,-280 Q24,-280 24,-246 L50,-244 L50,-238 L-24,-240 Z" fill={dark} />
-      ) : (
-        <polygon points={P([[-22, -264], [22, -264], [20, -246], [-22, -244]])} fill={ink.night} />
-      )}
-      {hold === 'box' && <rect x="36" y="-170" width="70" height="44" rx="6" fill={C.leather} stroke={ink.night} strokeWidth="3" />}
-      {hold === 'card' && <rect x="40" y="-150" width="34" height="22" rx="3" fill="#f2f2ee" stroke={ink.night} strokeWidth="3" />}
-      {hold === 'screwdriver' && <path d="M44,-140 l40,-40" stroke={accent.amber} strokeWidth="8" strokeLinecap="round" />}
-    </g>
-  )
+  return <StandIn x={x} y={y} h={h} color={color} flip={flip} hair={cap ? 'cap' : 'short'} hold={hold === 'screwdriver' ? 'tool' : hold} />
 }
 
 function Staged({ zone, children }: { zone: string; children: React.ReactNode }) {
@@ -48,7 +27,7 @@ function Staged({ zone, children }: { zone: string; children: React.ReactNode })
 
 function OnDesk({ ids }: { ids: string[] }) {
   return (
-    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[radial-gradient(circle_at_40%_30%,#5a3a24,#1c130f_75%)] p-6">
+    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[linear-gradient(180deg,#d9d2ee,#f6dccb)] p-6">
       {ids.map((id, i) => {
         const Doc = documents[id]
         return (
@@ -61,16 +40,7 @@ function OnDesk({ ids }: { ids: string[] }) {
   )
 }
 
-const Marker = ({ x, y, n }: { x: number; y: number; n: string }) => (
-  <g transform={`translate(${x} ${y})`}>
-    <circle r="26" fill={accent.amber} stroke={ink.night} strokeWidth="4" />
-    <text y="10" textAnchor="middle" fontSize="30" fontWeight="700" fill={ink.night} fontFamily="Barlow Condensed, sans-serif">
-      {n}
-    </text>
-  </g>
-)
 
-const Night = () => <rect width="1600" height="900" fill="#141a2a" opacity="0.55" />
 const VU = clothColors.navy
 
 export const reconstruction: ReconstructionPanel[] = (
@@ -83,7 +53,7 @@ export const reconstruction: ReconstructionPanel[] = (
       Art: () => (
         <Staged zone="phong-khach">
           <Person x={330} y={720} h={300} color={VU} cap hold="card" />
-          <Marker x={192} y={340} n="1" />
+          <Marker x={192} y={380} n="1" />
         </Staged>
       ),
     },
@@ -110,7 +80,7 @@ export const reconstruction: ReconstructionPanel[] = (
         <Staged zone="hanh-lang">
           <Night />
           <Person x={1060} y={640} h={240} color={VU} cap hold="screwdriver" />
-          <Marker x={1120} y={60} n="2" />
+          <Marker x={1160} y={80} n="2" />
           <Marker x={760} y={740} n="3" />
         </Staged>
       ),
@@ -154,8 +124,8 @@ const colorOf = (id: string) => clothColors[suspect(id).portrait.outfitColor as 
 
 function Pinned({ who, ids }: { who: string; ids: string[] }) {
   return (
-    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[radial-gradient(circle_at_40%_30%,#3b4250,#15161b_75%)] p-6">
-      <div className="shrink-0 bg-[#f3e4c4] p-1.5 shadow-lg" style={{ rotate: '-3deg' }}>
+    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[linear-gradient(180deg,#d9d2ee,#f6dccb)] p-6">
+      <div className="shrink-0 rounded-2xl bg-white p-2 shadow-lg" style={{ rotate: '-3deg' }}>
         <Portrait spec={suspect(who).portrait as PortraitSpec} size={190} />
         <p className="pt-1 text-center font-mono text-xs text-[#2d1f18]">{suspect(who).name}</p>
       </div>
@@ -173,7 +143,7 @@ function Pinned({ who, ids }: { who: string; ids: string[] }) {
 
 const PanelStamp = ({ text, color }: { text: string; color: string }) => (
   <div
-    className="display pointer-events-none absolute right-6 top-6 border-4 px-4 py-1 text-3xl opacity-85"
+    className="display pointer-events-none absolute right-6 top-6 rounded-xl border-4 bg-white/70 px-4 py-1 text-3xl opacity-90"
     style={{ color, borderColor: color, rotate: '-8deg' }}
   >
     {text}
@@ -212,9 +182,9 @@ function ThiefArt({ who }: { who: string }) {
   return (
     <>
       <Staged zone="phong-ngu">
-        <rect width="1600" height="900" fill="#3b4a66" opacity="0.35" style={{ mixBlendMode: 'color' }} />
+        <Night opacity={0.25} />
         <Person x={640} y={760} h={300} color={colorOf(who)} hold="box" flip />
-        <text x="1000" y="420" textAnchor="middle" fontSize="120" fontWeight="700" fill="#9fb4c8" opacity="0.5" fontFamily="Bitter, serif">?</text>
+        <text x="1000" y="420" textAnchor="middle" fontSize="120" fontWeight="700" fill="#ffffff" opacity="0.7" fontFamily="'Be Vietnam Pro', sans-serif">?</text>
       </Staged>
       <PanelStamp text="Giả thuyết" color="#9fb4c8" />
     </>

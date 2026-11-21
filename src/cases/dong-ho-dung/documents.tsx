@@ -1,6 +1,12 @@
 import { Mark, Phone, Row, Sheet, Signature, Stamp } from '@/art/docParts'
 import { ink } from '@/art/palette'
-import { C } from './scenes'
+import { Fb, Person, TimeTag } from '@/art/iso/props-ch9-12'
+import type { PortraitSpec } from '@/art/Portrait'
+import type { CaseData } from '@/game/types'
+import caseJson from './case.json'
+
+const C = { brass: '#d9b04f', lim: '#7a3f2a' }
+const cast = Object.fromEntries((caseJson as CaseData).suspects.map((s) => [s.id, s.portrait])) as Record<string, PortraitSpec>
 
 // What each document in the case-file envelopes looks like, keyed by clue id.
 
@@ -289,43 +295,27 @@ const PhotoMeta = ({ when, where }: { when: string; where: string }) => (
   </p>
 )
 
-const TimeTag = ({ t }: { t: string }) => (
-  <>
-    <rect x="8" y="8" width="104" height="18" rx="4" fill="#000" opacity="0.45" />
-    <text x="14" y="21" fontSize="11" fill="#fff" fontFamily={mono}>
-      {t}
-    </text>
-  </>
-)
 
-const Guest = ({ x, y, s = 1, skin = '#d9a47a', hair = '#1a1a1f', shirt, veil }: { x: number; y: number; s?: number; skin?: string; hair?: string; shirt: string; veil?: boolean }) => (
-  <g transform={`translate(${x} ${y}) scale(${s})`} stroke={LINE} strokeWidth="1.6" strokeLinejoin="round">
-    <path d="M-26,40 Q-24,0 -8,-6 L8,-6 Q24,0 26,40 Z" fill={shirt} />
-    <rect x="-4" y="-14" width="8" height="10" fill={skin} />
-    <ellipse cx="0" cy="-30" rx="13" ry="16" fill={skin} />
-    <path d="M-14,-32 Q-14,-50 0,-48 Q14,-50 14,-32 Q8,-40 0,-40 Q-8,-40 -14,-32 Z" fill={hair} />
-    {veil && <path d="M-16,-40 Q-30,0 -30,30 L-20,30 Q-18,-10 -10,-40 Z" fill="#fff" opacity="0.8" />}
-    <circle cx="-5" cy="-30" r="1.6" fill={LINE} stroke="none" />
-    <circle cx="5" cy="-30" r="1.6" fill={LINE} stroke="none" />
-    <path d="M-5,-22 Q0,-18 5,-22" fill="none" strokeWidth="1.4" />
-  </g>
-)
 
 const X3 = () => (
   <Phone header="Ảnh · Khoa">
-    <div className="overflow-hidden rounded-md">
+    <div className="overflow-hidden rounded-xl">
       <svg viewBox="0 0 320 220" className="block w-full">
-        <rect width="320" height="220" fill="#5a2a2a" />
-        <rect x="60" y="20" width="200" height="60" fill="#d9b04f" opacity="0.6" />
-        <text x="160" y="58" textAnchor="middle" fontSize="20" fill="#7d2f2a" fontFamily="Bitter, serif">Phát ♥ Uyên</text>
+        <rect width="320" height="220" fill="#d8695c" />
+        <rect y="150" width="320" height="70" fill="#c25549" />
+        {/* the wedding banner and a row of block lanterns */}
+        <Fb x={70} y={20} w={180} h={56} d={10} c="#f2c46d" />
+        <text x="160" y="56" textAnchor="middle" fontSize="20" fontWeight="800" fill="#b8372c" fontFamily="'Be Vietnam Pro', sans-serif">Phát ♥ Uyên</text>
         {Array.from({ length: 10 }, (_, i) => (
-          <circle key={i} cx={20 + i * 32} cy="100" r="5" fill="#ffd98f" opacity="0.8" />
+          <Fb key={i} x={16 + i * 32} y={94} w={8} h={8} d={6} c="#ffe1a0" />
         ))}
-        <Guest x={90} y={170} shirt="#2f2a2a" />
-        <Guest x={160} y={168} shirt="#fff" veil skin="#efc39b" />
-        <Guest x={230} y={164} s={1.2} shirt="#2f2a2a" skin="#d9a47a" />
-        <rect x="244" y="120" width="8" height="26" fill="#f2a93b" opacity="0.8" stroke={LINE} strokeWidth="1" />
-        <rect y="196" width="320" height="24" fill="#3a2a22" />
+        {/* the groom, the bride, and Khoa raising a glass on the right */}
+        <Person x={90} y={176} look={{ hair: 'side-part', accessory: ['tie'], outfit: 'suit' }} shirt="#2f2a2a" />
+        <Person x={160} y={174} look={{ hair: 'bun', build: 'thin', skin: 0, accessory: ['earrings'] }} shirt="#fbf4e8" />
+        <Person x={232} y={170} s={1.15} spec={cast['khoa']} look={{ mood: 'smile', outfit: 'suit' }} shirt="#2f2a2a" />
+        <Fb x={250} y={112} w={10} h={22} d={8} c="#fff6e2" />
+        <rect x="251" y="120" width="8" height="13" fill="#f1b34a" />
+        <Fb x={-4} y={198} w={330} h={24} d={20} c="#f6ead2" />
         <TimeTag t="13/04 22:46" />
       </svg>
     </div>
