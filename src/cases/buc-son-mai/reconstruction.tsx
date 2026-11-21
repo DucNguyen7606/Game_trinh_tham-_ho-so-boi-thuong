@@ -1,39 +1,29 @@
-import { accent, clothColors, ink, shade } from '@/art/palette'
-import { P } from '@/art/primitives'
+import { clothColors } from '@/art/palette'
+import { Box, iso } from '@/art/iso/iso'
+import { Marker, Night, StandIn } from '@/art/iso/kit'
 import { Portrait, type PortraitSpec } from '@/art/Portrait'
 import caseData from './case.json'
-import { LotusPainting, sceneArt } from './scenes'
+import { LotusPainting } from './scenes'
+import { isoSceneArt as sceneArt } from './iso/scenes'
 import { documents } from './documents'
 import type { ReconstructionPanel } from '@/game/types'
 
 // "Dựng lại vụ án": the true sequence of events, shown after the player signs.
 
-/** Flat, faceless figure in the scene's 1600x900 space. (x, y) is where the feet touch the ground. */
+/** A block stand-in in the scene's 1600x900 space. (x, y) is where the feet touch the ground. */
 function Person({ x, y, h = 260, color, flip = false, hold, scarf }: { x: number; y: number; h?: number; color: string; flip?: boolean; hold?: 'bag' | 'pry' | 'brush'; scarf?: boolean }) {
-  const s = h / 260
-  const dark = shade(color, -0.35)
-  const skin = '#d9a47a'
   return (
-    <g transform={`translate(${x} ${y}) scale(${flip ? -s : s} ${s})`}>
-      <ellipse cx="0" cy="2" rx="46" ry="10" fill={ink.night} opacity="0.45" />
-      <polygon points={P([[-22, -120], [-14, 0], [-2, 0], [0, -96], [2, 0], [14, 0], [22, -120]])} fill={dark} />
-      <polygon points={P([[-34, -200], [34, -200], [26, -116], [-26, -116]])} fill={color} />
-      <polygon points={P([[34, -196], [48, -130], [38, -128], [24, -180]])} fill={color} />
-      <polygon points={P([[-34, -196], [-48, -130], [-38, -128], [-24, -180]])} fill={dark} />
-      <rect x="-8" y="-218" width="16" height="20" fill={skin} />
-      <polygon points={P([[-20, -262], [20, -262], [22, -226], [0, -212], [-22, -226]])} fill={skin} />
-      <polygon points={P([[-22, -264], [22, -264], [20, -246], [-22, -244]])} fill={ink.night} />
+    <StandIn x={x} y={y} h={h} color={color} flip={flip} spec={scarf ? { hair: 'long', build: 'thin' } : { hair: 'long' }}>
       {scarf && (
         <>
-          <path d="M-20,-206 Q0,-190 20,-206 L16,-186 Q0,-180 -16,-186 Z" fill="#efe6d4" />
-          <path d="M-16,-186 Q0,-180 16,-186" stroke={accent.red} strokeWidth="4" fill="none" />
-          <path d="M10,-188 l8,50" stroke="#efe6d4" strokeWidth="10" strokeLinecap="round" />
+          <Box at={[-14, -9, 66]} size={[28, 18, 5]} color="#f6efe3" />
+          <Box at={[-14, 9, 66]} size={[28, 0.6, 2]} color="#c4342a" />
         </>
       )}
-      {hold === 'bag' && <rect x="40" y="-190" width="100" height="130" rx="6" fill="#2a2522" stroke={ink.night} strokeWidth="3" />}
-      {hold === 'pry' && <line x1="44" y1="-140" x2="90" y2="-200" stroke="#9a968f" strokeWidth="9" strokeLinecap="round" />}
-      {hold === 'brush' && <line x1="44" y1="-140" x2="80" y2="-120" stroke="#c9a274" strokeWidth="6" strokeLinecap="round" />}
-    </g>
+      {hold === 'bag' && <Box at={[16, 6, 14]} size={[6, 50, 60]} color="#2a2522" />}
+      {hold === 'pry' && <Box at={[18, 14, 40]} size={[3, 3, 46]} color={iso.metal} />}
+      {hold === 'brush' && <Box at={[18, 14, 44]} size={[2, 14, 2]} color="#c9a274" />}
+    </StandIn>
   )
 }
 
@@ -51,7 +41,7 @@ function Staged({ zone, children }: { zone: string; children: React.ReactNode })
 
 function OnDesk({ ids }: { ids: string[] }) {
   return (
-    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[radial-gradient(circle_at_40%_30%,#5a3a24,#1c130f_75%)] p-6">
+    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[linear-gradient(180deg,#d9d2ee,#f6dccb)] p-6">
       {ids.map((id, i) => {
         const Doc = documents[id]
         return (
@@ -64,16 +54,6 @@ function OnDesk({ ids }: { ids: string[] }) {
   )
 }
 
-const Marker = ({ x, y, n }: { x: number; y: number; n: string }) => (
-  <g transform={`translate(${x} ${y})`}>
-    <circle r="26" fill={accent.amber} stroke={ink.night} strokeWidth="4" />
-    <text y="10" textAnchor="middle" fontSize="30" fontWeight="700" fill={ink.night} fontFamily="Barlow Condensed, sans-serif">
-      {n}
-    </text>
-  </g>
-)
-
-const Night = () => <rect width="1600" height="900" fill="#141a2a" opacity="0.5" />
 const DIEP = clothColors.maroon
 const NGOC = clothColors.white
 const QUAN = clothColors.charcoal
@@ -81,7 +61,7 @@ const QUAN = clothColors.charcoal
 /** Two paintings side by side: the real one and the copy. */
 function TwoPaintings() {
   return (
-    <div className="absolute inset-0 flex items-center justify-center gap-10 bg-[radial-gradient(circle_at_40%_30%,#5a3a24,#1c130f_75%)] p-6">
+    <div className="absolute inset-0 flex items-center justify-center gap-10 bg-[linear-gradient(180deg,#d9d2ee,#f6dccb)] p-6">
       {[false, true].map((fake) => (
         <figure key={String(fake)} className="w-[340px] bg-[#5a2f22] p-3 shadow-xl" style={{ rotate: fake ? '2deg' : '-2deg' }}>
           <svg viewBox="0 0 300 240" className="block w-full">
@@ -182,7 +162,7 @@ const colorOf = (id: string) => clothColors[suspect(id).portrait.outfitColor as 
 
 function Pinned({ who, ids }: { who: string; ids: string[] }) {
   return (
-    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[radial-gradient(circle_at_40%_30%,#3b4250,#15161b_75%)] p-6">
+    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[linear-gradient(180deg,#d9d2ee,#f6dccb)] p-6">
       <div className="shrink-0 bg-[#f3e4c4] p-1.5 shadow-lg" style={{ rotate: '-3deg' }}>
         <Portrait spec={suspect(who).portrait as PortraitSpec} size={190} />
         <p className="pt-1 text-center font-mono text-xs text-[#2d1f18]">{suspect(who).name}</p>
@@ -240,7 +220,7 @@ function TheftArt({ who }: { who: string }) {
   return (
     <>
       <Staged zone="cua-sau">
-        <rect width="1600" height="900" fill="#3b4a66" opacity="0.35" style={{ mixBlendMode: 'color' }} />
+        <rect width="1600" height="900" fill="#8f7aa3" opacity="0.3" style={{ mixBlendMode: 'color' }} />
         <Person x={700} y={720} h={340} color={colorOf(who)} hold="bag" flip />
         <text x="1000" y="380" textAnchor="middle" fontSize="120" fontWeight="700" fill="#9fb4c8" opacity="0.5" fontFamily="Bitter, serif">?</text>
       </Staged>
