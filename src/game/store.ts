@@ -6,6 +6,16 @@ import { rulesFor } from '@/series/series'
 
 export type Screen = 'menu' | 'intro' | 'desk' | 'scene' | 'casefile' | 'board' | 'interrogation' | 'verdict' | 'gallery'
 
+/**
+ * An opened hint. After the case's own hints, the game writes more: one naming a key card
+ * still missing (clueId), and last of all the answer itself (answer).
+ */
+export interface ShownHint {
+  text: string
+  clueId?: string
+  answer?: boolean
+}
+
 export interface BoardAnswer {
   optionId?: string
   clueIds: string[]
@@ -32,8 +42,6 @@ interface GameState {
   /** What is left of today's limits: people to question and zones to search. */
   left: DayLimits
   reputation: number
-  /** Hints opened so far in this case, questions and puzzles together (see hintsLeft). */
-  hintsUsed: number
   visitedZones: string[]
   inspectedHotspots: string[]
   foundClues: string[]
@@ -43,8 +51,8 @@ interface GameState {
   /** Per question, the cards that were linked when the player last pressed Kiểm tra. Their strings turn green or red. */
   checkedLinks: Record<string, string[]>
   transcripts: Record<string, TranscriptSession[]>
-  /** How many hints of each question the player has seen. */
-  hintLevel: Record<string, number>
+  /** The hints of each question the player has opened, in order (see nextHint). */
+  shownHints: Record<string, ShownHint[]>
   /**
    * Per question, what the player had proven when they took their last hint: the cards
    * whose strings had turned green, and how many checks they had made. The next hint
@@ -123,7 +131,6 @@ const initial = (data: CaseData) => ({
   day: 1,
   left: { ...data.limitsPerDay },
   reputation: rulesFor(data.id).reputation,
-  hintsUsed: 0,
   visitedZones: [] as string[],
   inspectedHotspots: [] as string[],
   foundClues: [] as string[],
@@ -132,7 +139,7 @@ const initial = (data: CaseData) => ({
   answers: {} as Record<string, BoardAnswer>,
   checkedLinks: {} as Record<string, string[]>,
   transcripts: {} as Record<string, TranscriptSession[]>,
-  hintLevel: {} as Record<string, number>,
+  shownHints: {} as Record<string, ShownHint[]>,
   hintBasis: {} as Record<string, { matched: string[]; checks: number }>,
   checkCount: {} as Record<string, number>,
   boardLayout: {} as Record<string, { x: number; y: number }>,
@@ -176,53 +183,81 @@ export function questionOrder(data: CaseData, solvedInOrder: string[]) {
   return order
 }
 
-/** 'spent': the case's hint pool for its difficulty is used up. */
-export type HintGate = 'available' | 'locked' | 'none-left' | 'spent'
+export type HintGate = 'available' | 'locked' | 'none-left'
 
-/** Hints left in the case's pool for its difficulty; Infinity when the difficulty has no cap. */
-export function hintsLeft(st: Pick<GameState, 'data' | 'hintsUsed'>) {
-  const cap = rulesFor(st.data.id).hints
-  return cap === null ? Infinity : Math.max(0, cap - st.hintsUsed)
-}
-
-/** Cards on a question whose string turned green at the last check: required or supporting clues. */
-export function matchedClues(data: CaseData, checkedLinks: Record<string, string[]>, questionId: string) {
-  const q = data.questions.find((x) => x.id === questionId)
+/**
+ * Cards on a question whose string turned green at the last check: key or supporting clues.
+ * A card still locked by its puzzle proves nothing, so it doesn't count until the puzzle is solved.
+ */
+export function matchedClues(st: Pick<GameState, 'data' | 'checkedLinks' | 'solvedPuzzles'>, questionId: string) {
+  const q = st.data.questions.find((x) => x.id === questionId)
   if (!q) return []
   const relevant = [...q.requiredClues, ...(q.supportingClues ?? [])]
-  return (checkedLinks[questionId] ?? []).filter((c) => relevant.includes(c))
+  return (st.checkedLinks[questionId] ?? []).filter((c) => relevant.includes(c) && !clueLocked(st, c))
+}
+
+/** Where a clue is found, for the hints that name a missing card. */
+function whereToFind(data: CaseData, clueId: string) {
+  const env = data.envelopes.find((e) => e.documents.includes(clueId))
+  if (env) return `Thẻ này nằm trong phong bì «${env.title}» ở mục Hồ sơ.`
+  const zone = data.zones.find((z) => z.hotspots.some((h) => h.clueId === clueId))
+  if (zone) return `Thẻ này ở hiện trường, khu ${zone.name}.`
+  return 'Một người liên quan sẽ đưa ra thẻ này khi bạn hỏi đúng chuyện.'
+}
+
+type HintState = Pick<GameState, 'data' | 'shownHints' | 'checkedLinks' | 'solvedPuzzles' | 'foundClues'>
+
+/**
+ * The question's next hint, if any is left. First the case's own hints; then, one at a time,
+ * a hint naming a key ("Khớp") card that isn't proven yet and where to find it; and last the
+ * answer. So hints never run out while the question is unsolved, as long as the player keeps
+ * making progress (see hintGate).
+ */
+export function nextHint(st: HintState, questionId: string): ShownHint | undefined {
+  const q = st.data.questions.find((x) => x.id === questionId)
+  if (!q) return undefined
+  const shown = st.shownHints[questionId] ?? []
+  const authored = q.hints ?? []
+  if (shown.length < authored.length) return { text: authored[shown.length] }
+  if (shown.some((h) => h.answer)) return undefined
+  const proven = matchedClues(st, questionId)
+  const named = shown.map((h) => h.clueId)
+  const card = q.requiredClues.find((c) => !proven.includes(c) && !named.includes(c))
+  if (card) {
+    const clue = st.data.clues.find((c) => c.id === card)
+    const title = clue ? `${card} · ${clue.title}` : card
+    const text = !st.foundClues.includes(card)
+      ? `Còn thiếu một thẻ khớp mà bạn chưa tìm thấy: «${title}». ${whereToFind(st.data, card)}`
+      : clueLocked(st, card)
+        ? `Thẻ «${title}» là bằng chứng chính của câu này, nhưng phải giải mã tài liệu của nó trước thì mới tính.`
+        : `Nối thẻ «${title}» vào câu này: đây là bằng chứng chính (thẻ khớp).`
+    return { text, clueId: card }
+  }
+  const option = q.options.find((o) => o.id === q.correctOptionId)
+  return { text: `Đáp án đúng là: «${option?.text ?? q.correctOptionId}». Nối đủ các thẻ khớp rồi bấm Kiểm tra.`, answer: true }
 }
 
 /**
  * One hint per step of progress. The first hint of a question is free; each further one opens
  * only after a check shows a new green string (a card that matches or relates to the question)
- * since the last hint. If every such card was already proven when the hint was taken, there is
- * nothing left to find, so one more check (a new attempt at the answer) opens the next hint.
+ * since the last hint. There is no cap: as long as the player keeps finding new green strings,
+ * hints keep coming. If every key card was already proven when the hint was taken, the answer
+ * itself is what's wrong, so one more check (a new attempt at the answer) opens the next hint.
  */
 export function hintGate(
-  st: Pick<GameState, 'data' | 'hintLevel' | 'hintBasis' | 'checkedLinks' | 'checkCount' | 'hintsUsed'>,
+  st: HintState & Pick<GameState, 'hintBasis' | 'checkCount'>,
   questionId: string,
 ): HintGate {
   const q = st.data.questions.find((x) => x.id === questionId)
-  const level = st.hintLevel[questionId] ?? 0
-  if (!q || level >= (q.hints?.length ?? 0)) return 'none-left'
-  if (hintsLeft(st) <= 0) return 'spent'
+  if (!q || !nextHint(st, questionId)) return 'none-left'
+  const level = st.shownHints[questionId]?.length ?? 0
   const basis = st.hintBasis[questionId]
   if (level === 0 || !basis) return 'available'
-  const matched = matchedClues(st.data, st.checkedLinks, questionId)
+  const matched = matchedClues(st, questionId)
   if (matched.some((c) => !basis.matched.includes(c))) return 'available'
-  const relevant = [...q.requiredClues, ...(q.supportingClues ?? [])]
-  const nothingLeft = relevant.every((c) => basis.matched.includes(c))
-  if (nothingLeft && (st.checkCount[questionId] ?? 0) > basis.checks) return 'available'
+  const keysDone = q.requiredClues.every((c) => basis.matched.includes(c))
+  if (keysDone && (st.checkCount[questionId] ?? 0) > basis.checks) return 'available'
   return 'locked'
-}
-
-/**
- * How many supporting ("Liên quan") cards a question needs besides all its key ("Khớp") cards:
- * the difficulty's number, or the question's own if it asks for more, never more than it has.
- */
-export function supportingNeeded(data: CaseData, q: Question) {
-  return Math.min(Math.max(q.supportingNeeded ?? 0, rulesFor(data.id).related), q.supportingClues?.length ?? 0)
 }
 
 /** Lower case, no accents or spaces, "," read as ".": how puzzle answers and highlights are compared. */
@@ -262,29 +297,28 @@ export function phraseHit(phrases: string[], text: string) {
 }
 
 /** Puzzle hints: the first is free, each further one needs a new wrong attempt since the last. */
-export function puzzleHintGate(st: Pick<GameState, 'data' | 'puzzleHints' | 'puzzleAttempts' | 'hintsUsed'>, puzzleId: string): HintGate {
+export function puzzleHintGate(st: Pick<GameState, 'data' | 'puzzleHints' | 'puzzleAttempts'>, puzzleId: string): HintGate {
   const p = st.data.puzzles?.find((x) => x.id === puzzleId)
   const seen = st.puzzleHints[puzzleId]
   const level = seen?.level ?? 0
   if (!p || level >= (p.hints?.length ?? 0)) return 'none-left'
-  if (hintsLeft(st) <= 0) return 'spent'
   if (!seen || level === 0) return 'available'
   return (st.puzzleAttempts[puzzleId] ?? 0) > seen.attempts ? 'available' : 'locked'
 }
 
 /**
  * The hint count on the top bar: how many hints the player can open right now (one per
- * open question or puzzle whose gate allows it) and how many are left in the case in all.
+ * open question or puzzle whose gate allows it) and how many are still unread in the case.
  * Solved questions and puzzles, and questions not on the board yet, don't count.
  */
 export function hintSummary(
-  st: Pick<GameState, 'data' | 'solvedQuestions' | 'hintLevel' | 'hintBasis' | 'checkedLinks' | 'checkCount' | 'solvedPuzzles' | 'puzzleHints' | 'puzzleAttempts' | 'hintsUsed'>,
+  st: Pick<GameState, 'data' | 'solvedQuestions' | 'shownHints' | 'hintBasis' | 'checkedLinks' | 'checkCount' | 'solvedPuzzles' | 'puzzleHints' | 'puzzleAttempts' | 'foundClues'>,
 ) {
   let now = 0
   let left = 0
   for (const q of st.data.questions) {
     if (st.solvedQuestions.includes(q.id) || !questionOpen(st.data, q.id, st.solvedQuestions)) continue
-    left += Math.max(0, (q.hints?.length ?? 0) - (st.hintLevel[q.id] ?? 0))
+    left += hintsLeftFor(st, q)
     if (hintGate(st, q.id) === 'available') now++
   }
   for (const p of st.data.puzzles ?? []) {
@@ -292,9 +326,16 @@ export function hintSummary(
     left += Math.max(0, (p.hints?.length ?? 0) - (st.puzzleHints[p.id]?.level ?? 0))
     if (puzzleHintGate(st, p.id) === 'available') now++
   }
-  // The difficulty's pool caps both: no more can be opened than the pool holds.
-  const pool = hintsLeft(st)
-  return { now: Math.min(now, pool), left: Math.min(left, pool), capped: pool !== Infinity }
+  return { now, left }
+}
+
+/** Hints still unread on a question: its own, one per key card not proven or named yet, and the answer. */
+function hintsLeftFor(st: HintState, q: Question) {
+  const shown = st.shownHints[q.id] ?? []
+  if (shown.some((h) => h.answer)) return 0
+  const proven = matchedClues(st, q.id)
+  const cards = q.requiredClues.filter((c) => !proven.includes(c) && !shown.some((h) => h.clueId === c)).length
+  return Math.max(0, (q.hints?.length ?? 0) - shown.length) + cards + 1
 }
 
 const addUnique = (list: string[], id: string) => (list.includes(id) ? list : [...list, id])
@@ -371,9 +412,8 @@ export const useGame = create<GameState>((set, get) => ({
     }))
     // A card whose puzzle is unsolved is on the board but proves nothing yet.
     const usable = (c: string) => a.clueIds.includes(c) && !clueLocked(get(), c)
-    // All the key cards, and enough of the supporting ones.
-    const hasAllClues =
-      q.requiredClues.every(usable) && (q.supportingClues ?? []).filter(usable).length >= supportingNeeded(data, q)
+    // Only the key ("Khớp") cards are required; supporting ("Liên quan") cards are optional.
+    const hasAllClues = q.requiredClues.every(usable)
     if (a.optionId === q.correctOptionId && hasAllClues) {
       set({ solvedQuestions: addUnique(solvedQuestions, questionId) })
       return 'solved'
@@ -439,7 +479,6 @@ export const useGame = create<GameState>((set, get) => ({
     const st = get()
     if (puzzleHintGate(st, puzzleId) !== 'available') return false
     set((s) => ({
-      hintsUsed: s.hintsUsed + 1,
       puzzleHints: {
         ...s.puzzleHints,
         [puzzleId]: { level: (s.puzzleHints[puzzleId]?.level ?? 0) + 1, attempts: s.puzzleAttempts[puzzleId] ?? 0 },
@@ -453,13 +492,13 @@ export const useGame = create<GameState>((set, get) => ({
 
   showHint: (questionId) => {
     const st = get()
-    if (hintGate(st, questionId) !== 'available') return false
+    const hint = nextHint(st, questionId)
+    if (!hint || hintGate(st, questionId) !== 'available') return false
     set({
-      hintsUsed: st.hintsUsed + 1,
-      hintLevel: { ...st.hintLevel, [questionId]: (st.hintLevel[questionId] ?? 0) + 1 },
+      shownHints: { ...st.shownHints, [questionId]: [...(st.shownHints[questionId] ?? []), hint] },
       hintBasis: {
         ...st.hintBasis,
-        [questionId]: { matched: matchedClues(st.data, st.checkedLinks, questionId), checks: st.checkCount[questionId] ?? 0 },
+        [questionId]: { matched: matchedClues(st, questionId), checks: st.checkCount[questionId] ?? 0 },
       },
     })
     return true
