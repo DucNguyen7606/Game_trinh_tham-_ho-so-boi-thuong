@@ -16,7 +16,7 @@ import {
 } from '@/components/Cutscene'
 import { useGame } from '@/game/store'
 import type { CaseData } from '@/game/types'
-import { sceneArt } from './scenes'
+import { isoSceneArt as sceneArt } from './iso/scenes'
 import { documents } from './documents'
 import { epilogue } from './epilogue'
 
@@ -28,7 +28,7 @@ function ClaimDesk() {
   const P2 = documents['P2']
   const P4 = documents['P4']
   return (
-    <div className="absolute inset-0 overflow-hidden bg-[radial-gradient(circle_at_42%_30%,#6a4630,#1c130f_75%)]">
+    <div className="absolute inset-0 overflow-hidden bg-[linear-gradient(180deg,#d6cfee,#f7dccb)]">
       <div className="absolute left-[6%] top-[-30%] size-[70%] rounded-full bg-amber/15 blur-3xl" />
       <motion.div
         className="absolute left-[14%] top-[12%] w-[26%]"
@@ -62,7 +62,7 @@ function ClaimDesk() {
 function Lineup() {
   const suspects = useGame((s) => s.data.suspects)
   return (
-    <div className="absolute inset-0 flex items-center justify-center gap-[2%] bg-[radial-gradient(circle_at_50%_40%,#4a3326,#140d0a_75%)] px-[5%]">
+    <div className="absolute inset-0 flex items-center justify-center gap-[2%] bg-[linear-gradient(180deg,#d6cfee,#f7dccb)] px-[5%]">
       {suspects.map((s, i) => (
         <motion.figure
           key={s.id}
@@ -85,7 +85,7 @@ function Lineup() {
 function Investigator() {
   const player = useGame((s) => s.data.player)
   return (
-    <div className="absolute inset-0 overflow-hidden bg-[radial-gradient(circle_at_30%_25%,#7a5236,#1c130f_70%)]">
+    <div className="absolute inset-0 overflow-hidden bg-[linear-gradient(180deg,#d6cfee,#f7dccb)]">
       <div className="absolute left-[18%] top-[-20%] size-[60%] rounded-full bg-amber/20 blur-3xl" />
       {player.portrait && (
         <div className="absolute bottom-[-6%] left-[12%] w-[34%]">
@@ -286,7 +286,7 @@ export function outro(endingId: string): Cutscene | undefined {
         sfx: [{ id: 'stamp', at: 0.3 }],
         camera: { from: { zoom: 1 }, to: { zoom: 1.05 } },
         Art: () => (
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,#3a281c,#0d0907_70%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,#d6cfee,#f7dccb)]" />
         ),
       },
       ...epilogueShots(panels, notes[endingId]),

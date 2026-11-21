@@ -1,4 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useArtStyle } from '@/art/iso/style'
+import '@/art/iso/sa-ban.css'
 import { Home, Briefcase, FolderOpen, Network, Search, Gavel, Palette, CircleHelp, Lightbulb } from 'lucide-react'
 import { Guide, guideSeen } from '@/components/Guide'
 import { PenButton, usePenCursor } from '@/components/Highlighter'
@@ -35,6 +37,11 @@ export default function App() {
   // The guide opens by itself the first time a case is opened on this computer.
   const [guide, setGuide] = useState(() => !guideSeen())
   usePenCursor()
+  // A case drawn in another art style re-themes the whole interface (see src/art/iso/sa-ban.css).
+  const art = useArtStyle()
+  useEffect(() => {
+    document.documentElement.dataset.art = art
+  }, [art])
   const hints = useGame(useShallow(hintSummary))
 
   if (screen === 'menu') return <MainMenu />

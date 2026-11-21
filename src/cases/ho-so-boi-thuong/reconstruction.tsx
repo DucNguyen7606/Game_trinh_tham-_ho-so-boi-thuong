@@ -1,8 +1,10 @@
 import { P } from '@/art/primitives'
-import { accent, clothColors, ink, shade } from '@/art/palette'
+import { accent, clothColors, ink } from '@/art/palette'
 import { Portrait, type PortraitSpec } from '@/art/Portrait'
 import caseData from './case.json'
-import { sceneArt } from './scenes'
+import { isoSceneArt as sceneArt } from './iso/scenes'
+import { Box, Cyl, IsoGroup, iso } from '@/art/iso/iso'
+import { IsoFigure } from '@/art/iso/figure'
 import { documents } from './documents'
 import type { ReconstructionPanel } from '@/game/types'
 
@@ -11,61 +13,28 @@ import type { ReconstructionPanel } from '@/game/types'
 
 type Pose = 'stand' | 'crouch' | 'sit' | 'ride'
 
-/** Flat, faceless figure in the scene's 1600x900 space. (x, y) is where the feet touch the ground. */
+/** A block figure (diorama style) in the scene's 1600x900 space. (x, y) is where the feet touch the ground. */
 function Person({ x, y, h = 260, color, pose = 'stand', flip = false, hold }: { x: number; y: number; h?: number; color: string; pose?: Pose; flip?: boolean; hold?: 'bottle' | 'drive' | 'can' }) {
-  const s = h / 260
-  const dark = shade(color, -0.35)
-  const skin = '#b98a68'
-  const tf = `translate(${x} ${y}) scale(${flip ? -s : s} ${s})`
-  const body =
-    pose === 'stand' ? (
-      <>
-        <polygon points={P([[-22, -120], [-14, 0], [-2, 0], [0, -96], [2, 0], [14, 0], [22, -120]])} fill={dark} />
-        <polygon points={P([[-34, -200], [34, -200], [26, -116], [-26, -116]])} fill={color} />
-        <polygon points={P([[34, -196], [48, -130], [38, -128], [24, -180]])} fill={color} />
-        <polygon points={P([[-34, -196], [-48, -130], [-38, -128], [-24, -180]])} fill={dark} />
-        <rect x="-8" y="-218" width="16" height="20" fill={skin} />
-        <polygon points={P([[-20, -262], [20, -262], [22, -226], [0, -212], [-22, -226]])} fill={skin} />
-        <polygon points={P([[-22, -264], [22, -264], [20, -246], [-22, -244]])} fill={ink.night} />
-      </>
-    ) : pose === 'crouch' ? (
-      <>
-        <polygon points={P([[-30, -70], [30, -70], [44, -30], [40, 0], [26, 0], [24, -26], [-10, -36], [-20, 0], [-34, 0]])} fill={dark} />
-        <polygon points={P([[-36, -150], [26, -136], [34, -70], [-30, -66]])} fill={color} />
-        <polygon points={P([[24, -132], [70, -86], [62, -78], [18, -110]])} fill={color} />
-        <polygon points={P([[-12, -186], [26, -176], [24, -142], [0, -132], [-18, -146]])} fill={skin} />
-        <polygon points={P([[-14, -188], [28, -178], [24, -164], [-16, -170]])} fill={ink.night} />
-      </>
-    ) : pose === 'sit' ? (
-      <>
-        <polygon points={P([[-26, -90], [40, -90], [44, -76], [40, 0], [28, 0], [28, -72], [-26, -72]])} fill={dark} />
-        <polygon points={P([[-34, -170], [30, -170], [24, -86], [-28, -86]])} fill={color} />
-        <polygon points={P([[30, -166], [64, -120], [56, -112], [22, -146]])} fill={color} />
-        <rect x="-8" y="-188" width="16" height="20" fill={skin} />
-        <polygon points={P([[-20, -232], [20, -232], [22, -196], [0, -182], [-22, -196]])} fill={skin} />
-        <polygon points={P([[-22, -234], [22, -234], [20, -216], [-22, -214]])} fill="#d8d4cc" />
-      </>
-    ) : (
-      <>
-        {/* Rider on a small motorbike, plate covered with a rag */}
-        <circle cx="-70" cy="-34" r="34" fill="#151010" />
-        <circle cx="90" cy="-34" r="34" fill="#151010" />
-        <polygon points={P([[-104, -46], [-40, -96], [60, -92], [120, -50], [96, -34], [-80, -34]])} fill={accent.red} />
-        <rect x="-118" y="-74" width="26" height="18" fill="#e7d2a8" />
-        <polygon points={P([[-30, -110], [30, -110], [60, -60], [44, -56], [20, -90], [-20, -90]])} fill={dark} />
-        <polygon points={P([[-30, -196], [30, -196], [26, -106], [-30, -106]])} fill={color} />
-        <polygon points={P([[26, -190], [86, -140], [80, -130], [20, -164]])} fill={color} />
-        <circle cx="0" cy="-226" r="28" fill={ink.night} />
-        <rect x="-26" y="-224" width="40" height="10" fill={accent.amber} opacity="0.5" />
-      </>
-    )
+  // Faceless stand-ins: one generic build, coloured by the shirt of whoever they stand for.
+  const spec: PortraitSpec = { skin: 1, hair: 'short', hairColor: 'black', build: 'normal', outfit: 'shirt', outfitColor: 'charcoal', mood: 'neutral' }
+  const k = h / 105
+  const facing = flip ? 'x' : 'y'
   return (
-    <g transform={tf}>
-      <ellipse cx="0" cy="2" rx={pose === 'ride' ? 140 : 46} ry="10" fill={ink.night} opacity="0.45" />
-      {body}
-      {hold === 'bottle' && <polygon points={P([[46, -150], [56, -150], [58, -112], [44, -112]])} fill={accent.gold} />}
-      {hold === 'drive' && <rect x="56" y="-104" width="34" height="22" fill="#6e7378" stroke={ink.night} strokeWidth="3" />}
-      {hold === 'can' && <rect x="40" y="-136" width="28" height="36" fill={accent.rust} />}
+    <g>
+      <ellipse cx={x} cy={y + 4} rx={pose === 'ride' ? h * 0.5 : h * 0.22} ry={h * 0.07} fill={iso.ink} opacity="0.25" />
+      <IsoGroup origin={[x, y]} scale={k}>
+        {pose === 'ride' && (
+          <>
+            <Box at={[-40, -6, 10]} size={[90, 26, 22]} color={iso.coral} />
+            <Cyl at={[-30, -8, 12]} r={14} len={6} axis="y" color={iso.ink} />
+            <Cyl at={[40, -8, 12]} r={14} len={6} axis="y" color={iso.ink} />
+          </>
+        )}
+        <IsoFigure at={[-13, -9, pose === 'ride' ? 18 : 0]} spec={spec} cloth={color} facing={facing} pose={pose === 'stand' ? 'stand' : 'sit'} />
+        {hold === 'bottle' && <Cyl at={[22, 4, 40]} r={4} len={16} axis="z" color={iso.gold} />}
+        {hold === 'drive' && <Box at={[18, 6, 36]} size={[14, 4, 10]} color={iso.metal} />}
+        {hold === 'can' && <Box at={[18, 4, 22]} size={[14, 10, 18]} color={iso.coral} />}
+      </IsoGroup>
     </g>
   )
 }
@@ -86,7 +55,7 @@ function Staged({ zone, children }: { zone: string; children: React.ReactNode })
 /** A key document laid on the desk, for panels that are about paperwork. */
 function OnDesk({ ids }: { ids: string[] }) {
   return (
-    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[radial-gradient(circle_at_40%_30%,#5a3a24,#1c130f_75%)] p-6">
+    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[linear-gradient(180deg,#d9d2ee,#f6dccb)] p-6">
       {ids.map((id, i) => {
         const Doc = documents[id]
         return (
@@ -101,8 +70,8 @@ function OnDesk({ ids }: { ids: string[] }) {
 
 const Marker = ({ x, y, n }: { x: number; y: number; n: string }) => (
   <g transform={`translate(${x} ${y})`}>
-    <circle r="26" fill={accent.amber} stroke={ink.night} strokeWidth="4" />
-    <text y="10" textAnchor="middle" fontSize="30" fontWeight="700" fill={ink.night} fontFamily="Barlow Condensed, sans-serif">
+    <circle r="26" fill={iso.coral} stroke="#ffffff" strokeWidth="5" />
+    <text y="10" textAnchor="middle" fontSize="28" fontWeight="800" fill="#ffffff" fontFamily="'Be Vietnam Pro', sans-serif">
       {n}
     </text>
   </g>
@@ -246,7 +215,7 @@ const colorOf = (id: string) => clothColors[suspect(id).portrait.outfitColor as 
 /** A suspect's portrait pinned beside the documents the theory leans on. */
 function Pinned({ who, ids }: { who: string; ids: string[] }) {
   return (
-    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[radial-gradient(circle_at_40%_30%,#3b4250,#15161b_75%)] p-6">
+    <div className="absolute inset-0 flex items-center justify-center gap-8 bg-[linear-gradient(180deg,#d9d2ee,#f6dccb)] p-6">
       <div className="shrink-0 bg-[#f3e4c4] p-1.5 shadow-lg" style={{ rotate: '-3deg' }}>
         <Portrait spec={suspect(who).portrait as PortraitSpec} size={190} />
         <p className="pt-1 text-center font-mono text-xs text-[#2d1f18]">{suspect(who).name}</p>

@@ -1,0 +1,115 @@
+/* "Sa bàn" theme: the whole interface for a case drawn in the isometric diorama
+   style (src/art/iso). Switched on by <html data-art="sa-ban">, set in App.tsx
+   from src/art/iso/style.ts. Light lavender-to-peach sky, white rounded cards,
+   one coral accent, Be Vietnam Pro everywhere. */
+
+html[data-art='sa-ban'] {
+  --background: #efeaf6;
+  --foreground: #2e2a4a;
+  --card: #ffffff;
+  --card-foreground: #2e2a4a;
+  --primary: #e46b4f;
+  --primary-foreground: #ffffff;
+  --secondary: #e7e1f3;
+  --secondary-foreground: #2e2a4a;
+  --muted: #ece7f4;
+  --muted-foreground: #6c6787;
+  --accent: #ebe5f6;
+  --accent-foreground: #2e2a4a;
+  --destructive: #d2483a;
+  --border: #dcd4ea;
+  --ring: #e46b4f;
+  --paper: #fffaf3;
+  --paper-ink: #2e2a4a;
+  /* "amber" is the highlight colour for titles and active states. */
+  --amber: #d4583c;
+  --teal: #4f8ea5;
+  --match: #3f9e63;
+  --mismatch: #d2483a;
+  --string: #e46b4f;
+  --brass: #b9a9d6;
+  --grain: none;
+  --font-title: 'Be Vietnam Pro', 'Segoe UI', system-ui, sans-serif;
+  --font-display: 'Be Vietnam Pro', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'Be Vietnam Pro', 'Segoe UI', system-ui, sans-serif;
+  color-scheme: light;
+}
+
+html[data-art='sa-ban'] body {
+  background: linear-gradient(180deg, #e3def3 0%, #f1e6ee 55%, #f8e1d2 100%) fixed;
+}
+
+/* Labels: semibold sentence case instead of stencilled caps. */
+html[data-art='sa-ban'] .display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0.01em;
+}
+html[data-art='sa-ban'] .title {
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+/* Cards float on the sky: white, rounded, soft violet shadow. */
+html[data-art='sa-ban'] .panel {
+  background: var(--card);
+  border-radius: 22px;
+  box-shadow: 0 1px 0 rgb(255 255 255 / 0.8) inset, 0 12px 30px rgb(46 42 74 / 0.12);
+}
+
+/* Documents keep their paper but lose the dog-ear and the tilt. */
+html[data-art='sa-ban'] .document {
+  background: #fffaf3;
+  color: var(--paper-ink);
+  clip-path: none;
+  border-radius: 14px;
+  box-shadow: 0 10px 24px rgb(46 42 74 / 0.14);
+  rotate: none;
+}
+
+/* Buttons and badges become pills; cards get a larger radius. */
+html[data-art='sa-ban'] button.inline-flex,
+html[data-art='sa-ban'] .inline-flex.rounded-md {
+  border-radius: 999px;
+}
+html[data-art='sa-ban'] .rounded-md:not(.inline-flex),
+html[data-art='sa-ban'] .rounded-lg {
+  border-radius: 14px;
+}
+
+/* The top bar becomes a floating white strip. */
+html[data-art='sa-ban'] header {
+  background: rgb(255 255 255 / 0.82);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 6px 20px rgb(46 42 74 / 0.08);
+}
+
+/* Block figures: breathe, and switch mouths while talking. */
+.iso-breathe > g:last-of-type { animation: isoBreathe 3.6s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 100%; }
+@keyframes isoBreathe { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
+.iso-mouth-open { opacity: 0; }
+.iso-talking .iso-mouth-open { animation: isoTalk 0.36s steps(1, end) infinite; }
+.iso-talking .iso-mouth-shut { animation: isoTalk 0.36s steps(1, end) infinite reverse; }
+@keyframes isoTalk { 0% { opacity: 1; } 50% { opacity: 0; } }
+
+/* Floating markers bob gently above clues. */
+.iso-bob { animation: isoBob 2.4s ease-in-out infinite; }
+@keyframes isoBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+
+/* The deduction board: a pale pegboard instead of the dark canvas. */
+html[data-art='sa-ban'] .react-flow { --xy-background-color: transparent; --xy-controls-button-background-color: #ffffff; }
+
+/* Front-facing portraits blink now and then. */
+.iso-blink { animation: isoBlink 4.4s infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes isoBlink { 0%, 94%, 100% { transform: scaleY(1); } 96% { transform: scaleY(0.1); } }
+
+/* Gestures while a block figure talks: the right arm comes up now and then, the brows lift. */
+.iso-arm-up { opacity: 0; }
+.iso-talking .iso-arm-up { animation: isoArm 1.6s steps(1, end) infinite; }
+.iso-talking .iso-arm-down { animation: isoArmDown 1.6s steps(1, end) infinite; }
+@keyframes isoArm { 0% { opacity: 0; } 35% { opacity: 1; } 85% { opacity: 0; } }
+@keyframes isoArmDown { 0% { opacity: 1; } 35% { opacity: 0; } 85% { opacity: 1; } }
+.iso-talking .iso-brows { animation: isoBrows 1.2s ease-in-out infinite; }
+@keyframes isoBrows { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(-3px); } }

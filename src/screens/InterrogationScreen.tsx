@@ -6,6 +6,9 @@ import { PhotoLightbox, ShownPhoto } from '@/components/SuspectPhoto'
 import { Button } from '@/components/ui/button'
 import { Portrait } from '@/art/Portrait'
 import { addressInk, useProfile } from '@/series/profile'
+import { useArtStyle } from '@/art/iso/style'
+import { InterviewRoom } from '@/art/iso/rooms'
+import { cn } from '@/lib/utils'
 
 // A line can carry a photo the suspect shows (ink tag `#photo:X3`).
 type Line = TranscriptLine
@@ -18,6 +21,8 @@ export default function InterrogationScreen() {
     return new Set(sessions.slice(0, -1).flatMap((x) => x.lines.filter((l) => l.fromPlayer).map((l) => l.text.trim())))
   })
   const [zoomed, setZoomed] = useState<string | null>(null)
+  const style = useArtStyle()
+  const [asking, setAsking] = useState(false)
   const suspect = data.suspects.find((s) => s.id === activeSuspect)
 
   const story = useMemo(() => {
@@ -105,6 +110,74 @@ export default function InterrogationScreen() {
     return <p className="p-6 text-muted-foreground">Không có kịch bản thẩm vấn cho người này.</p>
   }
 
+  const choiceButtons = !typing && (
+    <>
+      {choices.map((c) => (
+        <Button
+          key={c.index}
+          variant="outline"
+          className={cn('h-auto justify-start whitespace-normal py-2 text-left', style === 'sa-ban' && 'bg-white px-5 shadow-sm hover:bg-[#fbe7dc]')}
+          onClick={() => {
+            story.ChooseChoiceIndex(c.index)
+            advance(story, [{ text: c.text, fromPlayer: true }])
+            // The investigator gestures while asking.
+            setAsking(true)
+            setTimeout(() => setAsking(false), 1600)
+          }}
+        >
+          <span className={askedBefore.has(c.text.trim()) ? 'opacity-55' : ''}>{c.text}</span>
+          {askedBefore.has(c.text.trim()) && <span className="ml-auto pl-2 text-[11px] text-muted-foreground">đã hỏi</span>}
+        </Button>
+      ))}
+      {choices.length === 0 && <Button onClick={() => go('desk')}>Về bàn làm việc</Button>}
+    </>
+  )
+
+  if (style === 'sa-ban') {
+    // Diorama style: the interview room fills the left, the conversation runs as chat bubbles on the right.
+    return (
+      <div className="grid h-full grid-cols-[1fr_min(560px,40%)] gap-4 p-4">
+        <div className="relative min-h-0 overflow-hidden rounded-[28px] shadow-[0_14px_40px_rgb(46_42_74/0.18)]">
+          {suspect.portrait && (
+            <InterviewRoom spec={suspect.portrait} talking={talking} interviewer={data.player.portrait} asking={asking} label={`Phòng hỏi chuyện với ${suspect.name}`} />
+          )}
+          <div className="absolute left-5 top-5 flex items-center gap-3 rounded-full bg-white/90 py-1.5 pl-1.5 pr-5 shadow-md">
+            <div className="size-12 overflow-hidden rounded-full">
+              {suspect.portrait && <Portrait spec={suspect.portrait} size={48} />}
+            </div>
+            <div>
+              <p className="title text-lg leading-tight">{suspect.name}</p>
+              <p className="text-xs text-muted-foreground">{suspect.role}</p>
+            </div>
+          </div>
+        </div>
+        <div className="flex min-h-0 flex-col">
+          <div ref={scrollRef} className="flex flex-1 cursor-default flex-col gap-2.5 overflow-auto pr-1 pt-1" onClick={skip}>
+            {lines.slice(0, shown + 1).map((l, i) => (
+              <div
+                key={i}
+                className={cn(
+                  'max-w-[88%] text-[15px] leading-relaxed',
+                  l.fromPlayer
+                    ? 'self-end rounded-[20px] rounded-br-md bg-primary px-4 py-2 text-primary-foreground shadow-sm'
+                    : isSpeech(l)
+                      ? 'self-start rounded-[20px] rounded-bl-md bg-white px-4 py-2 shadow-[0_4px_14px_rgb(46_42_74/0.1)]'
+                      : 'self-center px-2 text-center text-sm italic text-muted-foreground',
+                )}
+              >
+                {i === shown ? l.text.slice(0, l.fromPlayer ? undefined : chars) : l.text}
+                {i === shown && !l.fromPlayer && <span className="ml-0.5 inline-block w-2 animate-pulse text-primary">▍</span>}
+                {l.photo && i < shown && <ShownPhoto clueId={l.photo} onOpen={() => setZoomed(l.photo!)} />}
+              </div>
+            ))}
+          </div>
+          <div className="mt-3 flex flex-col gap-2">{choiceButtons}</div>
+        </div>
+        {zoomed && <PhotoLightbox clueId={zoomed} shownBy={suspect.name} onClose={() => setZoomed(null)} />}
+      </div>
+    )
+  }
+
   return (
     <div className="mx-auto grid h-full max-w-5xl grid-cols-[280px_1fr] gap-8 p-6">
       <div>
@@ -122,23 +195,7 @@ export default function InterrogationScreen() {
           </p>
         ))}
       </div>
-      <div className="mt-4 flex flex-col gap-2">
-        {!typing && choices.map((c) => (
-          <Button
-            key={c.index}
-            variant="outline"
-            className="h-auto justify-start whitespace-normal py-2 text-left"
-            onClick={() => {
-              story.ChooseChoiceIndex(c.index)
-              advance(story, [{ text: c.text, fromPlayer: true }])
-            }}
-          >
-            <span className={askedBefore.has(c.text.trim()) ? 'opacity-55' : ''}>{c.text}</span>
-            {askedBefore.has(c.text.trim()) && <span className="ml-auto pl-2 text-[11px] text-muted-foreground">đã hỏi</span>}
-          </Button>
-        ))}
-        {!typing && choices.length === 0 && <Button onClick={() => go('desk')}>Về bàn làm việc</Button>}
-      </div>
+      <div className="mt-4 flex flex-col gap-2">{choiceButtons}</div>
       </div>
       {zoomed && <PhotoLightbox clueId={zoomed} shownBy={suspect.name} onClose={() => setZoomed(null)} />}
     </div>
